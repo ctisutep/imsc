@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<NetworkLink id="SoilWebKML">
+	<name>SoilWeb Network Link</name>
+	<open>1</open>
+	
+	<description><![CDATA[	
+	SoilWeb is a streaming interface to <a href="http://soils.usda.gov/">USDA-NCSS</a> <a href="http://soils.usda.gov/survey/geography/ssurgo/">SSURGO</a> and <a href="http://soils.usda.gov/survey/geography/statsgo/">STATSGO</a> digital soil survey products. Streaming-KMZ interface was designed by <a href="http://casoilresource.lawr.ucdavis.edu">CA Soil Resource Lab</a>, as a collaborative effort with the <a href="http://soils.usda.gov/partnerships/ncss/">NCSS</a>.
+	<hr>
+	<div style="width:350px; padding: 2px; margin-left:auto; margin-right:auto; width:90%;">
+	<img src="http://casoilresource.lawr.ucdavis.edu/soil_web/images/casrl_logo_tiny.jpg" border="0" style="padding: 1px;"><img src="http://soils.usda.gov/common/header_nrcs.gif" border="0" style="padding: 1px;">
+	</div>
+	]]></description>
+	
+	<Link>
+		<href>http://casoilresource.lawr.ucdavis.edu/soil_web/export.php?format=kmz&amp;srid=4326&amp;</href>
+		<viewRefreshMode>onStop</viewRefreshMode>
+		<viewRefreshTime>2</viewRefreshTime>
+	</Link>
+	<atom:author>             
+	<atom:name>D.E. Beaudette and A.T. O'Geen</atom:name>         
+	</atom:author><atom:link href="http://casoilresource.lawr.ucdavis.edu/drupal/node/429"></atom:link>
+</NetworkLink>
+</kml>
+

@@ -9,7 +9,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<title>TX-IMSC</title>
+	<title>TX-IMSC, TESTING PRINT</title>
 	<!-- Interactive Map for Soil Categorization -->
 
 	<!-- Bootstrap Core CSS -->
@@ -184,25 +184,13 @@
 						<button type="button" class="map-print" id="print" onClick="printMaps()">Print</button> <!-- to print map -->
 					</div>
 				</div>
-				<!--<div id="legend"> -->
-					<!--<h3>Legend</h3> -->
-					<div id="legend" style='visibility: hidden'>
-						<h3>Legend</h3>
+				<div id="legend">
+					<h3>Legend</h3>
 					<div>
-						<!-- just for division -->
 					</div>
-				</div>
-			</div> <!-- end for class "col-md-3" -->
-			<div class="col-md-9">
-				<div id="description">
 				</div>
 			</div>
 		</div>
-	</div>
-	<p></p>
-	<!--Description text-->
-	<div class="row">
-
 	</div>
 
 	<!-- Bootstrap Core JavaScript -->
@@ -429,7 +417,6 @@
 								fillColor: shapecolor[colorSelector],
 								fillOpacity: 0.35
 							});
-							console.log("Testing description: "+app.payload.value); //the descriptor for the propierty, for example: "Gypsum"
 							polygon.setOptions({ zIndex: newzIndex });
 							polygon.addListener('click', polyInfo);
 
@@ -439,42 +426,11 @@
 					}
 				}
 			}).done(function(data){
-				if($('#autocomplete').val() == "Gypsum"){
-					var gypsum = "Description for Gypsum: ";
-					var gypsumText = "The content of gypsum is the percent, by weight, of hydrated calcium sulfates in the fraction of the soil less than 20 millimeters in size. "; // Gypsum is partially soluble in water. Soils high in content of gypsum, such as those with more than 10 percent gypsum, may collapse if the gypsum is removed by percolating water. Gypsum is corrosive to concrete.
-					//For each soil layer, this attribute is actually recorded as three separate values in the database. A low value and a high value indicate the range of this attribute for the soil component. A \"representative\" value indicates the expected value of this attribute for the component. For this soil property, only the representative value is used.";
-					var h3 = document.createElement('h3');
-					h3.innerHTML = gypsum;
-
-					var div = document.createElement('div');
-					div.innerHTML = "<br> <strong>" + gypsum + "</strong> <br>" + gypsumText + "<br> <br>";
-					var descriptor = document.getElementById('description');
-					descriptor.appendChild(div);
-				}
-				else{
-
-				}
-
-				/* //original to draw the legend
-				var div = document.createElement('div');
-				div.innerHTML = "<strong>" + $('#autocomplete').val() + "</strong><br>" + legendText;
-				var legend = document.createElement('div');
-				legend = document.getElementById('legend');
-				legend.appendChild(div);
-				*/ //original
-
-				//var g = document.createElement('div');
-				//g.id = 'someId';
 				//draw the legend
 				var div = document.createElement('div');
-				//div = document.getElementsByTagName("H3")[0].setAttribute("class", "col-md-3");
-				//div.attribute('class', 'col-md-3');
 				// div.innerHTML = '<img src="img/redsquare.png" height="10px"/> ' + $('#autocomplete').val();;
-				//div.id = 'legend';
 				div.innerHTML = "<strong>" + $('#autocomplete').val() + "</strong><br>" + legendText;
-				var legend = document.createElement('div');
-				legend = document.getElementById('legend');
-				document.getElementById('legend').style.visibility = "visible";
+				var legend = document.getElementById('legend');
 				legend.appendChild(div);
 			});
 		}
@@ -515,9 +471,7 @@
 			}
 		}
 		app.polygons = [];
-		document.getElementById('legend').style.visibility = "hidden";
 		$('#legend').find('*').not('h3').remove();
-		$('#description').find('*').not('h3').remove();
 	}
 
 	function printMaps() { //testing printing a map
@@ -539,6 +493,7 @@
         .not(printContainer)
         .detach();
 
+
       // Patch for some Bootstrap 3.3.x `@media print` styles. :|
       var patchedStyle = $('<style>')
         .attr('media', 'print')
@@ -554,11 +509,6 @@
       printContainer.remove();
       patchedStyle.remove();
     }
-
-		/*function descriptor(){
-
-
-		}*/
 
 	/*
 	function insertPolygon(objectId){
