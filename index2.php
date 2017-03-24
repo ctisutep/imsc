@@ -185,9 +185,9 @@
 					</div>
 				</div>
 				<!--<div id="legend"> -->
-					<!--<h3>Legend</h3> -->
-					<div id="legend" style='visibility: hidden'>
-						<h3>Legend</h3>
+				<!--<h3>Legend</h3> -->
+				<div id="legend" style='visibility: hidden'>
+					<h3>Legend</h3>
 					<div>
 						<!-- just for division -->
 					</div>
@@ -227,6 +227,7 @@
 			$('#autocomplete').autocomplete({
 				lookup: properties,
 				onSelect: function (suggestion) {
+					console.log(suggestion.data + "  " + suggestion.table + "  " + suggestion.value);
 					app.payload.property = suggestion.data;
 					app.payload.table = suggestion.table;
 					app.payload.value = suggestion.value;
@@ -258,161 +259,256 @@
 						if(data.coords.hasOwnProperty(key)){
 							var polyCoordis = [];
 							if(app.payload.table == "chorizon_r"){
-								legendText = "<img src='img/graysquare.png' height='10px'/> <= 0<br>\
-															<img src='img/redsquare.png' height='10px'/>  1 to 20<br>\
-															<img src='img/skybluesquare.png' height='10px'/> 21 to 40<br>\
-															<img src='img/brightgreensquare.png' height='10px'/> 41 to 60<br>\
-															<img src='img/purplesquare.png' height='10px'/> 61 to 80<br>\
-															<img src='img/orangesquare.png' height='10px'/> 81 to 100";
-								var amountIn = data.coords[key][app.payload.property];
-								switch (true) {
-									case (amountIn <= 0): // LESS THAN OR EQUAL TO 0
-										colorSelector = 0;
-										newzIndex = 0;
-										break;
-									case (amountIn > 0 && amountIn < 21): // BETWEEN 0 AND 21
-										colorSelector = 1;
+								console.log("Testing new legend: "+app.payload.property);
+								if(app.payload.property == "caco3_r"){ //Testing legend and logic for drawing for this specific property
+									console.log(app.payload.property);
+									//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
+									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
+									//colorSelector = 0;
+									//newzIndex = 0;
+									legendText = "<img src='img/graysquare.png' height='10px'/> <= 7<br>\
+									<img src='img/redsquare.png' height='10px'/>  > 7 and <= 17<br>\
+									<img src='img/skybluesquare.png' height='10px'/> > 17 and <= 36<br>\
+									<img src='img/brightgreensquare.png' height='10px'/> > 36 and <= 55<br>\
+									<img src='img/purplesquare.png' height='10px'/> > 55 and <= 65<br>\
+									<img src='img/whitesquare.png' height='10px'/> Not rated or not available";
+
+									var amountIn = parseFloat(data.coords[key][app.payload.property]);
+									console.log(amountIn);
+									//var amountIn = data.coords[key][app.payload.property];
+									//console.log(amountIn);
+									switch (true) {
+										case (amountIn <= 7): // LESS THAN OR EQUAL TO 0
+										colorSelector = 1; //not black or gray
 										newzIndex = 1;
 										break;
-									case (amountIn > 20 && amountIn < 41): // BETWEEN 21 AND 40
+										case (amountIn > 7 && amountIn <= 17): // BETWEEN 0 AND 21
 										colorSelector = 2;
 										newzIndex = 2;
 										break;
-									case (amountIn > 40 && amountIn < 61): // BETWEEN 41 AND 60
+										case (amountIn > 17 && amountIn <= 36): // BETWEEN 21 AND 40
 										colorSelector = 3;
 										newzIndex = 3;
 										break;
-									case (amountIn > 60 && amountIn < 81): // BETWEEN 61 AND 80
+										case (amountIn > 36 && amountIn <= 55): // BETWEEN 41 AND 60
 										colorSelector = 4;
 										newzIndex = 4;
 										break;
-									case (amountIn > 80 && amountIn < 101): // BETWEEN 81 AND 100
+										case (amountIn > 55 && amountIn <= 65): // BETWEEN 61 AND 80
 										colorSelector = 5;
 										newzIndex = 5;
 										break;
+										case (amountIn > 80 && amountIn < 101): // BETWEEN 81 AND 100
+										colorSelector = 6;
+										newzIndex = 6;
+										break;
+									}
 								}
-							}else if(app.payload.table == "chconsistence_r"){
+								else if(app.payload.property == "sandtotal_r"){ //Testing legend and logic for drawing for this specific property
+									console.log(app.payload.property);
+									//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
+									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
+									//colorSelector = 0;
+									//newzIndex = 0;
+									legendText = "<img src='img/graysquare.png' height='10px'/> <= 11.8<br>\
+									<img src='img/redsquare.png' height='10px'/>  > 11.8 and <= 26.1<br>\
+									<img src='img/skybluesquare.png' height='10px'/> > 26.1 and <= 39.3<br>\
+									<img src='img/purplesquare.png' height='10px'/> > 39.3 and <= 57.8<br>\
+									<img src='img/whitesquare.png' height='10px'/> > 57.8 and <= 90.2<br>\
+									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
+
+									var amountIn = parseFloat(data.coords[key][app.payload.property]);
+									console.log(amountIn);
+									//var amountIn = data.coords[key][app.payload.property];
+									//console.log(amountIn);
+									switch (true) {
+										case (amountIn <= 11.8): // LESS THAN OR EQUAL TO 0
+										colorSelector = 1; //not black or gray
+										newzIndex = 1;
+										break;
+										case (amountIn > 11.8 && amountIn <= 26.1): // BETWEEN 0 AND 21
+										colorSelector = 2;
+										newzIndex = 2;
+										break;
+										case (amountIn > 26.1 && amountIn <= 39.3): // BETWEEN 21 AND 40
+										colorSelector = 3;
+										newzIndex = 3;
+										break;
+										case (amountIn > 39.3 && amountIn <= 57.8): // BETWEEN 41 AND 60
+										colorSelector = 4;
+										newzIndex = 4;
+										break;
+										case (amountIn > 57.8 && amountIn <= 90.2): // BETWEEN 61 AND 80
+										colorSelector = 5;
+										newzIndex = 5;
+										break;
+										case (amountIn > 80 && amountIn < 101): // BETWEEN 81 AND 100
+										colorSelector = 6;
+										newzIndex = 6;
+										break;
+									}
+								}
+								/*else if{ //another property inside this table (chorizon_r) that handles its own colors and logic
+
+								}*/
+								else{ //General legend text for all unspecified propierty
+									legendText = "<img src='img/graysquare.png' height='10px'/> <= 0<br>\
+									<img src='img/redsquare.png' height='10px'/>  1 to 20<br>\
+									<img src='img/skybluesquare.png' height='10px'/> 21 to 40<br>\
+									<img src='img/brightgreensquare.png' height='10px'/> 41 to 60<br>\
+									<img src='img/purplesquare.png' height='10px'/> 61 to 80<br>\
+									<img src='img/orangesquare.png' height='10px'/> 81 to 100";
+									var amountIn = data.coords[key][app.payload.property];
+									switch (true) {
+										case (amountIn <= 0): // LESS THAN OR EQUAL TO 0
+										colorSelector = 0;
+										newzIndex = 0;
+										break;
+										case (amountIn > 0 && amountIn < 21): // BETWEEN 0 AND 21
+										colorSelector = 1;
+										newzIndex = 1;
+										break;
+										case (amountIn > 20 && amountIn < 41): // BETWEEN 21 AND 40
+										colorSelector = 2;
+										newzIndex = 2;
+										break;
+										case (amountIn > 40 && amountIn < 61): // BETWEEN 41 AND 60
+										colorSelector = 3;
+										newzIndex = 3;
+										break;
+										case (amountIn > 60 && amountIn < 81): // BETWEEN 61 AND 80
+										colorSelector = 4;
+										newzIndex = 4;
+										break;
+										case (amountIn > 80 && amountIn < 101): // BETWEEN 81 AND 100
+										colorSelector = 5;
+										newzIndex = 5;
+										break;
+									} //end switch
+								}//end else statement that handles the general legend for unspecified properties
+							}//end the else statement that identifies the table
+							else if(app.payload.table == "chconsistence_r"){
 								var description = data.coords[key][app.payload.property];
 
 								if(app.payload.property == "plasticity"){
 									legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
-																<img src='img/redsquare.png' height='10px'/>  Moderately Plastic<br>\
-																<img src='img/skybluesquare.png' height='10px'/> Nonplastic<br>\
-																<img src='img/brightgreensquare.png' height='10px'/> Slightly Plastic<br>\
-																<img src='img/purplesquare.png' height='10px'/> Very Plastic";
+									<img src='img/redsquare.png' height='10px'/>  Moderately Plastic<br>\
+									<img src='img/skybluesquare.png' height='10px'/> Nonplastic<br>\
+									<img src='img/brightgreensquare.png' height='10px'/> Slightly Plastic<br>\
+									<img src='img/purplesquare.png' height='10px'/> Very Plastic";
 								}
 
 								if(app.payload.property == "stickiness"){
 									legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
-																<img src='img/redsquare.png' height='10px'/>  Moderately Sticky<br>\
-																<img src='img/skybluesquare.png' height='10px'/> Non Sticky<br>\
-																<img src='img/brightgreensquare.png' height='10px'/> Slightly Sticky<br>\
-																<img src='img/purplesquare.png' height='10px'/> Very Sticky";
+									<img src='img/redsquare.png' height='10px'/>  Moderately Sticky<br>\
+									<img src='img/skybluesquare.png' height='10px'/> Non Sticky<br>\
+									<img src='img/brightgreensquare.png' height='10px'/> Slightly Sticky<br>\
+									<img src='img/purplesquare.png' height='10px'/> Very Sticky";
 								}
 
 								if(app.payload.property == "rupresplate"){
 									legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
-																<img src='img/redsquare.png' height='10px'/> Very Weak";
+									<img src='img/redsquare.png' height='10px'/> Very Weak";
 								}
 
 								if(app.payload.property == "rupresblkmst"){
 									legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
-																<img src='img/redsquare.png' height='10px'/>  Extremely Firm<br>\
-																<img src='img/skybluesquare.png' height='10px'/> Firm<br>\
-																<img src='img/brightgreensquare.png' height='10px'/> Friable<br>\
-																<img src='img/purplesquare.png' height='10px'/> Loose<br>\
-																<img src='img/orangesquare.png' height='10px'/> Very Firm<br>\
-																<img src='img/brightpinksquare.png' height='10px'/> Very Friable";
+									<img src='img/redsquare.png' height='10px'/>  Extremely Firm<br>\
+									<img src='img/skybluesquare.png' height='10px'/> Firm<br>\
+									<img src='img/brightgreensquare.png' height='10px'/> Friable<br>\
+									<img src='img/purplesquare.png' height='10px'/> Loose<br>\
+									<img src='img/orangesquare.png' height='10px'/> Very Firm<br>\
+									<img src='img/brightpinksquare.png' height='10px'/> Very Friable";
 								}
 
 								if(app.payload.property == "rupresblkdry"){
 									legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
-																<img src='img/redsquare.png' height='10px'/>  Extremely Hard<br>\
-																<img src='img/skybluesquare.png' height='10px'/> Hard<br>\
-																<img src='img/brightgreensquare.png' height='10px'/> Hard When Dry<br>\
-																<img src='img/purplesquare.png' height='10px'/> Loose<br>\
-																<img src='img/orangesquare.png' height='10px'/> Moderately Hard<br>\
-																<img src='img/brightpinksquare.png' height='10px'/> Rigid<br>\
-																<img src='img/navybluesquare.png' height='10px'/> Slightly Hard<br>\
-																<img src='img/lilacsquare.png' height='10px'/> Soft<br>\
-																<img src='img/yellowsquare.png' height='10px'/> Very Hard";
+									<img src='img/redsquare.png' height='10px'/>  Extremely Hard<br>\
+									<img src='img/skybluesquare.png' height='10px'/> Hard<br>\
+									<img src='img/brightgreensquare.png' height='10px'/> Hard When Dry<br>\
+									<img src='img/purplesquare.png' height='10px'/> Loose<br>\
+									<img src='img/orangesquare.png' height='10px'/> Moderately Hard<br>\
+									<img src='img/brightpinksquare.png' height='10px'/> Rigid<br>\
+									<img src='img/navybluesquare.png' height='10px'/> Slightly Hard<br>\
+									<img src='img/lilacsquare.png' height='10px'/> Soft<br>\
+									<img src='img/yellowsquare.png' height='10px'/> Very Hard";
 								}
 
 								if(app.payload.property == "rupresblkcem"){
 									legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
-																<img src='img/redsquare.png' height='10px'/>  Extremely Weakly Cemented<br>\
-																<img src='img/skybluesquare.png' height='10px'/> Indurated<br>\
-																<img src='img/brightgreensquare.png' height='10px'/> Moderately Cemented<br>\
-																<img src='img/purplesquare.png' height='10px'/> Noncemented<br>\
-																<img src='img/orangesquare.png' height='10px'/> Strongly Cemented<br>\
-																<img src='img/brightpinksquare.png' height='10px'/> Very Strongly Cemented<br>\
-																<img src='img/navybluesquare.png' height='10px'/> Weakly Cemented";
+									<img src='img/redsquare.png' height='10px'/>  Extremely Weakly Cemented<br>\
+									<img src='img/skybluesquare.png' height='10px'/> Indurated<br>\
+									<img src='img/brightgreensquare.png' height='10px'/> Moderately Cemented<br>\
+									<img src='img/purplesquare.png' height='10px'/> Noncemented<br>\
+									<img src='img/orangesquare.png' height='10px'/> Strongly Cemented<br>\
+									<img src='img/brightpinksquare.png' height='10px'/> Very Strongly Cemented<br>\
+									<img src='img/navybluesquare.png' height='10px'/> Weakly Cemented";
 								}
 
 								if(app.payload.property == "mannerfailure"){
 									legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
-																<img src='img/redsquare.png' height='10px'/>  Brittle<br>\
-																<img src='img/skybluesquare.png' height='10px'/> Deformable<br>\
-																<img src='img/brightgreensquare.png' height='10px'/> Moderately Fluid<br>\
-																<img src='img/purplesquare.png' height='10px'/> Nonfluid<br>\
-																<img src='img/orangesquare.png' height='10px'/> Semideformable<br>\
-																<img src='img/brightpinksquare.png' height='10px'/> Slightly Fluid<br>\
-																<img src='img/navybluesquare.png' height='10px'/> Very Fluid";
+									<img src='img/redsquare.png' height='10px'/>  Brittle<br>\
+									<img src='img/skybluesquare.png' height='10px'/> Deformable<br>\
+									<img src='img/brightgreensquare.png' height='10px'/> Moderately Fluid<br>\
+									<img src='img/purplesquare.png' height='10px'/> Nonfluid<br>\
+									<img src='img/orangesquare.png' height='10px'/> Semideformable<br>\
+									<img src='img/brightpinksquare.png' height='10px'/> Slightly Fluid<br>\
+									<img src='img/navybluesquare.png' height='10px'/> Very Fluid";
 								}
 
 
 								switch (true) {
 									// All properties in chconsistence_r have empty string values, in this case it will be colored and drew on the map
 									case (description == ""):
-										colorSelector = 0;
-										newzIndex = 0;
-										break;
+									colorSelector = 0;
+									newzIndex = 0;
+									break;
 									/* Since all properties in chconsistence_r have different descriptions we will group them by colors.
-										 For instance, property rupresblkmst hast the following possible values: "" (empty string), Extremely firm,
-										 Extremely firm*, Firm, Friable, Loose, Very firm, Very friable. Property rupresblkcem has "" (empty string),
-										 Extremely weakly cemented, Indurated, Moderately cemented, Noncemented, Strongly cemented, Very Strongly cemented,
-										 and Weakly cemented. So the first (after empty string) possible value for each property will be under the same color.
-										 Since we only draw one property at a time this allows us to automate this as much as possible.
-										 NOTE: property rupresblkmst has two repeated values with a slight variation (an asterisk); in this case or if it WHERE
-										 to occur in another possible value, then just group it within the same condition.
+									For instance, property rupresblkmst hast the following possible values: "" (empty string), Extremely firm,
+									Extremely firm*, Firm, Friable, Loose, Very firm, Very friable. Property rupresblkcem has "" (empty string),
+									Extremely weakly cemented, Indurated, Moderately cemented, Noncemented, Strongly cemented, Very Strongly cemented,
+									and Weakly cemented. So the first (after empty string) possible value for each property will be under the same color.
+									Since we only draw one property at a time this allows us to automate this as much as possible.
+									NOTE: property rupresblkmst has two repeated values with a slight variation (an asterisk); in this case or if it WHERE
+									to occur in another possible value, then just group it within the same condition.
 									*/
 
 									case (description == "Extremely firm" || description == "Extremely firm*" || description == "Extremely hard" || description == "Extremely weakly cemented" || description == "Very weak" || description == "Brittle" || description == "Moderately plastic" || description == "Moderately sticky"):
-										colorSelector = 1;
-										newzIndex = 1;
-										break;
+									colorSelector = 1;
+									newzIndex = 1;
+									break;
 									case (description == "Firm" || description == "Hard" || description == "Indurated" || description == "Nonsticky" || description == "Deformable" || description == "Nonplastic"):
-										colorSelector = 2;
-										newzIndex = 2;
-										break;
+									colorSelector = 2;
+									newzIndex = 2;
+									break;
 									case (description == "Friable" || description == "Hard when dry" || description == "Moderately cemented" || description == "Slightly sticky" || description == "Moderately fluid" || description == "Slightly plastic"):
-										colorSelector = 3;
-										newzIndex = 3;
-										break;
+									colorSelector = 3;
+									newzIndex = 3;
+									break;
 									case (description == "Loose" || description == "Loose" || description == "Noncemented" || description == "Very sticky" || description == "Nonfluid" || description == "Very plastic"):
-										colorSelector = 4;
-										newzIndex = 4;
-										break;
+									colorSelector = 4;
+									newzIndex = 4;
+									break;
 									case (description == "Very firm" || description == "Moderately hard" || description == "Strongly cemented" || description == "Semideformable"):
-										colorSelector = 5;
-										newzIndex = 5;
-										break;
+									colorSelector = 5;
+									newzIndex = 5;
+									break;
 									case (description == "Very friable" || description == "Rigid" || description == "Very strongly cemented" || description == "Slightly fluid"):
-										colorSelector = 6;
-										newzIndex = 6;
-										break;
+									colorSelector = 6;
+									newzIndex = 6;
+									break;
 									case (description == "Slightly hard" || description == "Weakly cemented" || description == "Very fluid"):
-										colorSelector = 7;
-										newzIndex = 7;
-										break;
+									colorSelector = 7;
+									newzIndex = 7;
+									break;
 									case (description == "Soft"):
-										colorSelector = 8;
-										newzIndex = 8;
-										break;
+									colorSelector = 8;
+									newzIndex = 8;
+									break;
 									case (description == "Very hard"):
-										colorSelector = 9;
-										newzIndex = 9;
-										break;
+									colorSelector = 9;
+									newzIndex = 9;
+									break;
 								}
 							}
 							temp = wktFormatter(data.coords[key]['POLYGON']);
@@ -451,126 +547,173 @@
 					var descriptor = document.getElementById('description');
 					descriptor.appendChild(div);
 				}
+				else if ($('#autocomplete').val() == "PI"){
+					var prprty = "Description for Plasticity Index: ";
+					var prprtyText = "Plasticity index (PI) is one of the standard Atterberg limits used to indicate the plasticity characteristics of a soil. It is defined as the numerical difference between the liquid limit and plastic limit of the soil. It is the range of water content in which a soil exhibits the characteristics of a plastic solid.";
+					var h3 = document.createElement('h3');
+					h3.innerHTML = prprty;
+
+					var div = document.createElement('div');
+					div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+					var descriptor = document.getElementById('description');
+					descriptor.appendChild(div);
+				}
+				else if ($('#autocomplete').val() == "CaCO3"){
+					var prprty = "Description for CaCO3: ";
+					var prprtyText = "Calcium carbonate equivalent is the percent of carbonates, by weight, in the fraction of the soil less than 2 millimeters in size. The availability of plant nutrients is influenced by the amount of carbonates in the soil.";
+					var h3 = document.createElement('h3');
+					h3.innerHTML = prprty;
+
+					var div = document.createElement('div');
+					div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+					var descriptor = document.getElementById('description');
+					descriptor.appendChild(div);
+				}
+				else if ($('#autocomplete').val() == "Total Sand"){
+					var prprty = "Description for Total Sand: ";
+					var prprtyText = "Sand as a soil separate consists of mineral soil particles that are 0.05 millimeter to 2 millimeters in diameter. In the database, the estimated sand content of each soil layer is given as a percentage, by weight, of the soil material that is less than 2 millimeters in diameter. The content of sand, silt, and clay affects the physical behavior of a soil. Particle size is important for engineering and agronomic interpretations, for determination of soil hydrologic qualities, and for soil classification.";
+					var h3 = document.createElement('h3');
+					h3.innerHTML = prprty;
+
+					var div = document.createElement('div');
+					div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+					var descriptor = document.getElementById('description');
+					descriptor.appendChild(div);
+				}
 				else{
 
 				}
 
-				/* //original to draw the legend
-				var div = document.createElement('div');
-				div.innerHTML = "<strong>" + $('#autocomplete').val() + "</strong><br>" + legendText;
-				var legend = document.createElement('div');
-				legend = document.getElementById('legend');
-				legend.appendChild(div);
-				*/ //original
+				/** Copy and paste to change properties.
+				else if ($('#autocomplete').val() == "<>"){
+				var prprty = "Description for <>: ";
+				var prprtyText = "<>";
+				var h3 = document.createElement('h3');
+				h3.innerHTML = prprty;
 
-				//var g = document.createElement('div');
-				//g.id = 'someId';
-				//draw the legend
 				var div = document.createElement('div');
-				//div = document.getElementsByTagName("H3")[0].setAttribute("class", "col-md-3");
-				//div.attribute('class', 'col-md-3');
-				// div.innerHTML = '<img src="img/redsquare.png" height="10px"/> ' + $('#autocomplete').val();;
-				//div.id = 'legend';
-				div.innerHTML = "<strong>" + $('#autocomplete').val() + "</strong><br>" + legendText;
-				var legend = document.createElement('div');
-				legend = document.getElementById('legend');
-				document.getElementById('legend').style.visibility = "visible";
-				legend.appendChild(div);
-			});
-		}
-		else{
-			alert("Please select a property and a district.");
-		}
-	}
-	function setDistrict(){
-		app.payload.district = $('#target').children("option:selected").data('district');
-		var pointStr = $('#target option:selected').val();
-		var coords = pointStr.split(" ");
-		panPoint = new google.maps.LatLng(parseFloat(coords[0]), parseFloat(coords[1]));
-		app.map.panTo(panPoint);
-		app.map.setZoom(10);
-	}
-	//this is the callback when the map loads
-	function initMap() {
-		app.map = new google.maps.Map(document.getElementById('map'), {
-			zoom: 5,
-			center: new google.maps.LatLng(31.31610138349565, -99.11865234375),
-			mapTypeId: 'terrain'
-		});
-		app.infoWindow = new google.maps.InfoWindow;
-		/*var testLayer = new google.maps.KmlLayer({ //var testLayer = new google.maps.KmlLayer({ //testing the kml layer, should draw colored lines for a transportation system route in chicago
-	  		url: 'https://casoilresource.lawr.ucdavis.edu/soil_web/kml/SoilWeb.kmz', //url: 'https://casoilresource.lawr.ucdavis.edu/soil_web/kml/SoilWeb.kmz', //url: 'http://googlemaps.github.io/js-v2-samples/ggeoxml/cta.kml',
-	      map: map
-	   });
-		testLayer.setMap(app.map); //testing layers 13/03/18*/
-		app.map.addListener('click', function(e) {
-			// console.log(e.latLng.toString());
-		});
-		//setDistrict();
-	}
-	function removePolygons(){
-		if(app.polygons){
-			for(var i = 0; i < app.polygons.length; i++){
-				app.polygons[i].setMap(null);
+				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+				var descriptor = document.getElementById('description');
+				descriptor.appendChild(div);
 			}
-		}
-		app.polygons = [];
-		document.getElementById('legend').style.visibility = "hidden";
-		$('#legend').find('*').not('h3').remove();
-		$('#description').find('*').not('h3').remove();
+			*/
+
+			/* //original to draw the legend
+			var div = document.createElement('div');
+			div.innerHTML = "<strong>" + $('#autocomplete').val() + "</strong><br>" + legendText;
+			var legend = document.createElement('div');
+			legend = document.getElementById('legend');
+			legend.appendChild(div);
+			*/ //original
+
+			//var g = document.createElement('div');
+			//g.id = 'someId';
+			//draw the legend
+			var div = document.createElement('div');
+			//div = document.getElementsByTagName("H3")[0].setAttribute("class", "col-md-3");
+			//div.attribute('class', 'col-md-3');
+			// div.innerHTML = '<img src="img/redsquare.png" height="10px"/> ' + $('#autocomplete').val();;
+			//div.id = 'legend';
+			div.innerHTML = "<strong>" + $('#autocomplete').val() + "</strong><br>" + legendText;
+			var legend = document.createElement('div');
+			legend = document.getElementById('legend');
+			document.getElementById('legend').style.visibility = "visible";
+			legend.appendChild(div);
+		});
 	}
+	else{
+		alert("Please select a property and a district.");
+	}
+}
+function setDistrict(){
+	app.payload.district = $('#target').children("option:selected").data('district');
+	var pointStr = $('#target option:selected').val();
+	var coords = pointStr.split(" ");
+	panPoint = new google.maps.LatLng(parseFloat(coords[0]), parseFloat(coords[1]));
+	app.map.panTo(panPoint);
+	app.map.setZoom(10);
+}
+//this is the callback when the map loads
+function initMap() {
+	app.map = new google.maps.Map(document.getElementById('map'), {
+		zoom: 5,
+		center: new google.maps.LatLng(31.31610138349565, -99.11865234375),
+		mapTypeId: 'terrain'
+	});
+	app.infoWindow = new google.maps.InfoWindow;
+	/*var testLayer = new google.maps.KmlLayer({ //var testLayer = new google.maps.KmlLayer({ //testing the kml layer, should draw colored lines for a transportation system route in chicago
+	url: 'https://casoilresource.lawr.ucdavis.edu/soil_web/kml/SoilWeb.kmz', //url: 'https://casoilresource.lawr.ucdavis.edu/soil_web/kml/SoilWeb.kmz', //url: 'http://googlemaps.github.io/js-v2-samples/ggeoxml/cta.kml',
+	map: map
+});
+testLayer.setMap(app.map); //testing layers 13/03/18*/
+app.map.addListener('click', function(e) {
+	// console.log(e.latLng.toString());
+});
+//setDistrict();
+}
+function removePolygons(){
+	if(app.polygons){
+		for(var i = 0; i < app.polygons.length; i++){
+			app.polygons[i].setMap(null);
+		}
+	}
+	app.polygons = [];
+	document.getElementById('legend').style.visibility = "hidden";
+	$('#legend').find('*').not('h3').remove();
+	$('#description').find('*').not('h3').remove();
+}
 
-	function printMaps() { //testing printing a map
-      var body               = $('body');
-      var mapContainer       = $('#map');
-      var mapContainerParent = mapContainer.parent();
-      var printContainer     = $('<div>');
+function printMaps() { //testing printing a map
+	var body               = $('body');
+	var mapContainer       = $('#map');
+	var mapContainerParent = mapContainer.parent();
+	var printContainer     = $('<div>');
 
-      printContainer
-        .addClass('print-container')
-        .css('position', 'relative')
-        .height(mapContainer.height())
-        .append(mapContainer)
-        .prependTo(body);
+	printContainer
+	.addClass('print-container')
+	.css('position', 'relative')
+	.height(mapContainer.height())
+	.append(mapContainer)
+	.prependTo(body);
 
-      var content = body
-        .children()
-        .not('script')
-        .not(printContainer)
-        .detach();
+	var content = body
+	.children()
+	.not('script')
+	.not(printContainer)
+	.detach();
 
-      // Patch for some Bootstrap 3.3.x `@media print` styles. :|
-      var patchedStyle = $('<style>')
-        .attr('media', 'print')
-        .text('img { max-width: none !important; }' +
-              'a[href]:after { content: ""; }')
-        .appendTo('head');
+	// Patch for some Bootstrap 3.3.x `@media print` styles. :|
+	var patchedStyle = $('<style>')
+	.attr('media', 'print')
+	.text('img { max-width: none !important; }' +
+	'a[href]:after { content: ""; }')
+	.appendTo('head');
 
-      window.print();
+	window.print();
 
-      body.prepend(content);
-      mapContainerParent.prepend(mapContainer);
+	body.prepend(content);
+	mapContainerParent.prepend(mapContainer);
 
-      printContainer.remove();
-      patchedStyle.remove();
-    }
+	printContainer.remove();
+	patchedStyle.remove();
+}
 
-		/*function descriptor(){
+/*function descriptor(){
 
 
-		}*/
+}*/
 
-	/*
-	function insertPolygon(objectId){
-	$.get('polygonHandler.php', {'district':objectId}).done(function(data){
-	if(data.hasOwnProperty('coords')){
-	var polygon = new google.maps.Polygon({
-	paths: toLatLngLiteral(data.coords),
-	strokeColor: '#FF0000',
-	strokeOpacity: 0.8,
-	strokeWeight: 2,
-	fillColor: '#FF0000',
-	fillOpacity: 0.35
+/*
+function insertPolygon(objectId){
+$.get('polygonHandler.php', {'district':objectId}).done(function(data){
+if(data.hasOwnProperty('coords')){
+var polygon = new google.maps.Polygon({
+paths: toLatLngLiteral(data.coords),
+strokeColor: '#FF0000',
+strokeOpacity: 0.8,
+strokeWeight: 2,
+fillColor: '#FF0000',
+fillOpacity: 0.35
 });
 polygon.setMap(app.map);
 google.maps.event.addListener(polygon, 'click', function(e){
