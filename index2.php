@@ -580,6 +580,31 @@
 					var descriptor = document.getElementById('description');
 					descriptor.appendChild(div);
 				}
+				else if ($('#autocomplete').val() == "pH H20"){
+				var prprty = "Description for pH H20: ";
+				var prprtyText = "Soil reaction is a measure of acidity or alkalinity. It is important in selecting crops and other plants, in evaluating soil amendments for fertility and stabilization, and in determining the risk of corrosion.";
+				var h3 = document.createElement('h3');
+				h3.innerHTML = prprty;
+
+				var div = document.createElement('div');
+				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+				var descriptor = document.getElementById('description');
+				descriptor.appendChild(div);
+				}
+				else if ($('#autocomplete').val() == "Ksat"){
+				var prprty = "Description for Ksat: ";
+				var prprtyText = "Saturated hydraulic conductivity (Ksat) refers to the ease with which pores in a saturated soil transmit water. The estimates are expressed in terms of micrometers per second. They are based on soil characteristics observed in the field, particularly structure, porosity, and texture. ";
+				var h3 = document.createElement('h3');
+				h3.innerHTML = prprty;
+
+				var div = document.createElement('div');
+				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+				var descriptor = document.getElementById('description');
+				descriptor.appendChild(div);
+				}
+
+
+
 				else{
 
 				}
