@@ -603,7 +603,43 @@
 				descriptor.appendChild(div);
 				}
 
+				/** paste prprtyText here
+				
+				*/
+				else if ($('#autocomplete').val() == "AASHTO Group Index"){
+				var prprty = "Description for AASHTO Group Index: ";
+				var prprtyText = "AASHTO group classification is a system that classifies soils specifically for geotechnical engineering purposes that are related to highway and airfield construction. It is based on particle-size distribution and Atterberg limits, such as liquid limit and plasticity index. This classification system is covered in AASHTO Standard No. M 145-82. The classification is based on that portion of the soil that is smaller than 3 inches in diameter.";
+				var h3 = document.createElement('h3');
+				h3.innerHTML = prprty;
 
+				var div = document.createElement('div');
+				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+				var descriptor = document.getElementById('description');
+				descriptor.appendChild(div);
+				}
+
+				else if ($('#autocomplete').val() == "pH H2O"){
+				var prprty = "Description for ph H2O: ";
+				var prprtyText = "Soil reaction is a measure of acidity or alkalinity. It is important in selecting crops and other plants, in evaluating soil amendments for fertility and stabilization, and in determining the risk of corrosion. In general, soils that are either highly alkaline or highly acid are likely to be very corrosive to steel. The most common soil laboratory measurement of pH is the 1:1 water method.";
+				var h3 = document.createElement('h3');
+				h3.innerHTML = prprty;
+
+				var div = document.createElement('div');
+				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+				var descriptor = document.getElementById('description');
+				descriptor.appendChild(div);
+				}
+				else if ($('#autocomplete').val() == "SAR"){
+				var prprty = "Description for Sodium Absortion Ratio (SAR): ";
+				var prprtyText = "Sodium adsorption ratio is a measure of the amount of sodium (Na) relative to calcium (Ca) and magnesium (Mg) in the water extract from saturated soil paste. It is the ratio of the Na concentration divided by the square root of one-half of the Ca + Mg concentration. Soils that have SAR values of 13 or more may be characterized by an increased dispersion of organic matter and clay particles, reduced saturated hydraulic conductivity (Ksat) and aeration, and a general degradation of soil structure.";
+				var h3 = document.createElement('h3');
+				h3.innerHTML = prprty;
+
+				var div = document.createElement('div');
+				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+				var descriptor = document.getElementById('description');
+				descriptor.appendChild(div);
+			}
 
 				else{
 
