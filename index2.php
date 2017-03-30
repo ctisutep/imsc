@@ -675,15 +675,47 @@
 				var descriptor = document.getElementById('description');
 				descriptor.appendChild(div);
 				}
+				else if ($('#autocomplete').val() == "OM"){
+				var prprty = "Description for Organic Matter (OM): ";
+				var prprtyText = "Organic matter is the plant and animal residue in the soil at various stages of decomposition. The estimated content of organic matter is expressed as a percentage, by weight, of the soil material that is less than 2 millimeters in diameter. <br> The content of organic matter in a soil can be maintained by returning crop residue to the soil. Organic matter has a positive effect on available water capacity, water infiltration, soil organism activity, and tilth. It is a source of nitrogen and other nutrients for crops and soil organisms. An irregular distribution of organic carbon with depth may indicate different episodes of soil deposition or soil formation. Soils that are very high in organic matter have poor engineering properties and subside upon drying.";
+				var h3 = document.createElement('h3');
+				h3.innerHTML = prprty;
 
-
-				else{
-
+				var div = document.createElement('div');
+				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+				var descriptor = document.getElementById('description');
+				descriptor.appendChild(div);
 				}
+				else if ($('#autocomplete').val() == "Total Clay"){
+				var prprty = "Description for " + $('#autocomplete').val() + ": ";
+				var prprtyText = "Clay as a soil separate consists of mineral soil particles that are less than 0.002 millimeter in diameter. The estimated clay content of each soil layer is given as a percentage, by weight, of the soil material that is less than 2 millimeters in diameter. The amount and kind of clay affect the fertility and physical condition of the soil and the ability of the soil to adsorb cations and to retain moisture. They influence shrink-swell potential, saturated hydraulic conductivity (Ksat), plasticity, the ease of soil dispersion, and other soil properties. The amount and kind of clay in a soil also affect tillage and earth-moving operations.";
+				var h3 = document.createElement('h3');
+				h3.innerHTML = prprty;
 
+				var div = document.createElement('div');
+				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+				var descriptor = document.getElementById('description');
+				descriptor.appendChild(div);
+				}
+				else if ($('#autocomplete').val() == "Total Silt"){
+				var prprty = "Description for " + $('#autocomplete').val() + ": ";
+				var prprtyText = "Silt as a soil separate consists of mineral soil particles that are 0.002 to 0.05 millimeter in diameter. In the database, the estimated silt content of each soil layer is given as a percentage, by weight, of the soil material that is less than 2 millimeters in diameter.";
+				var h3 = document.createElement('h3');
+				h3.innerHTML = prprty;
+
+				var div = document.createElement('div');
+				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+				var descriptor = document.getElementById('description');
+				descriptor.appendChild(div);
+				}
+				/* paste text here
+				Silt as a soil separate consists of mineral soil particles that are 0.002 to 0.05 millimeter in diameter. In the database, the estimated silt content of each soil layer is given as a percentage, by weight, of the soil material that is less than 2 millimeters in diameter.
+				*/
+				else{
+				}
 				/** Copy and paste to change properties.
 				else if ($('#autocomplete').val() == "<>"){
-				var prprty = "Description for <>: ";
+				var prprty = "Description for " + $('#autocomplete').val() + ": ";
 				var prprtyText = "<>";
 				var h3 = document.createElement('h3');
 				h3.innerHTML = prprty;
