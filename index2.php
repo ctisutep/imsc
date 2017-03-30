@@ -350,237 +350,237 @@
 								}
 								/*else if{ //another property inside this table (chorizon_r) that handles its own colors and logic
 
-								}*/
-								else{ //General legend text for all unspecified propierty
-									legendText = "<img src='img/graysquare.png' height='10px'/> <= 0<br>\
-									<img src='img/redsquare.png' height='10px'/>  1 to 20<br>\
-									<img src='img/skybluesquare.png' height='10px'/> 21 to 40<br>\
-									<img src='img/brightgreensquare.png' height='10px'/> 41 to 60<br>\
-									<img src='img/purplesquare.png' height='10px'/> 61 to 80<br>\
-									<img src='img/orangesquare.png' height='10px'/> 81 to 100";
-									var amountIn = data.coords[key][app.payload.property];
-									switch (true) {
-										case (amountIn <= 0): // LESS THAN OR EQUAL TO 0
-										colorSelector = 0;
-										newzIndex = 0;
-										break;
-										case (amountIn > 0 && amountIn < 21): // BETWEEN 0 AND 21
-										colorSelector = 1;
-										newzIndex = 1;
-										break;
-										case (amountIn > 20 && amountIn < 41): // BETWEEN 21 AND 40
-										colorSelector = 2;
-										newzIndex = 2;
-										break;
-										case (amountIn > 40 && amountIn < 61): // BETWEEN 41 AND 60
-										colorSelector = 3;
-										newzIndex = 3;
-										break;
-										case (amountIn > 60 && amountIn < 81): // BETWEEN 61 AND 80
-										colorSelector = 4;
-										newzIndex = 4;
-										break;
-										case (amountIn > 80 && amountIn < 101): // BETWEEN 81 AND 100
-										colorSelector = 5;
-										newzIndex = 5;
-										break;
-									} //end switch
-								}//end else statement that handles the general legend for unspecified properties
-							}//end the else statement that identifies the table
-							else if(app.payload.table == "chconsistence_r"){
-								var description = data.coords[key][app.payload.property];
-
-								if(app.payload.property == "plasticity"){
-									legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
-									<img src='img/redsquare.png' height='10px'/>  Moderately Plastic<br>\
-									<img src='img/skybluesquare.png' height='10px'/> Nonplastic<br>\
-									<img src='img/brightgreensquare.png' height='10px'/> Slightly Plastic<br>\
-									<img src='img/purplesquare.png' height='10px'/> Very Plastic";
-								}
-
-								if(app.payload.property == "stickiness"){
-									legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
-									<img src='img/redsquare.png' height='10px'/>  Moderately Sticky<br>\
-									<img src='img/skybluesquare.png' height='10px'/> Non Sticky<br>\
-									<img src='img/brightgreensquare.png' height='10px'/> Slightly Sticky<br>\
-									<img src='img/purplesquare.png' height='10px'/> Very Sticky";
-								}
-
-								if(app.payload.property == "rupresplate"){
-									legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
-									<img src='img/redsquare.png' height='10px'/> Very Weak";
-								}
-
-								if(app.payload.property == "rupresblkmst"){
-									legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
-									<img src='img/redsquare.png' height='10px'/>  Extremely Firm<br>\
-									<img src='img/skybluesquare.png' height='10px'/> Firm<br>\
-									<img src='img/brightgreensquare.png' height='10px'/> Friable<br>\
-									<img src='img/purplesquare.png' height='10px'/> Loose<br>\
-									<img src='img/orangesquare.png' height='10px'/> Very Firm<br>\
-									<img src='img/brightpinksquare.png' height='10px'/> Very Friable";
-								}
-
-								if(app.payload.property == "rupresblkdry"){
-									legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
-									<img src='img/redsquare.png' height='10px'/>  Extremely Hard<br>\
-									<img src='img/skybluesquare.png' height='10px'/> Hard<br>\
-									<img src='img/brightgreensquare.png' height='10px'/> Hard When Dry<br>\
-									<img src='img/purplesquare.png' height='10px'/> Loose<br>\
-									<img src='img/orangesquare.png' height='10px'/> Moderately Hard<br>\
-									<img src='img/brightpinksquare.png' height='10px'/> Rigid<br>\
-									<img src='img/navybluesquare.png' height='10px'/> Slightly Hard<br>\
-									<img src='img/lilacsquare.png' height='10px'/> Soft<br>\
-									<img src='img/yellowsquare.png' height='10px'/> Very Hard";
-								}
-
-								if(app.payload.property == "rupresblkcem"){
-									legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
-									<img src='img/redsquare.png' height='10px'/>  Extremely Weakly Cemented<br>\
-									<img src='img/skybluesquare.png' height='10px'/> Indurated<br>\
-									<img src='img/brightgreensquare.png' height='10px'/> Moderately Cemented<br>\
-									<img src='img/purplesquare.png' height='10px'/> Noncemented<br>\
-									<img src='img/orangesquare.png' height='10px'/> Strongly Cemented<br>\
-									<img src='img/brightpinksquare.png' height='10px'/> Very Strongly Cemented<br>\
-									<img src='img/navybluesquare.png' height='10px'/> Weakly Cemented";
-								}
-
-								if(app.payload.property == "mannerfailure"){
-									legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
-									<img src='img/redsquare.png' height='10px'/>  Brittle<br>\
-									<img src='img/skybluesquare.png' height='10px'/> Deformable<br>\
-									<img src='img/brightgreensquare.png' height='10px'/> Moderately Fluid<br>\
-									<img src='img/purplesquare.png' height='10px'/> Nonfluid<br>\
-									<img src='img/orangesquare.png' height='10px'/> Semideformable<br>\
-									<img src='img/brightpinksquare.png' height='10px'/> Slightly Fluid<br>\
-									<img src='img/navybluesquare.png' height='10px'/> Very Fluid";
-								}
-
-
+							}*/
+							else{ //General legend text for all unspecified propierty
+								legendText = "<img src='img/graysquare.png' height='10px'/> <= 0<br>\
+								<img src='img/redsquare.png' height='10px'/>  1 to 20<br>\
+								<img src='img/skybluesquare.png' height='10px'/> 21 to 40<br>\
+								<img src='img/brightgreensquare.png' height='10px'/> 41 to 60<br>\
+								<img src='img/purplesquare.png' height='10px'/> 61 to 80<br>\
+								<img src='img/orangesquare.png' height='10px'/> 81 to 100";
+								var amountIn = data.coords[key][app.payload.property];
 								switch (true) {
-									// All properties in chconsistence_r have empty string values, in this case it will be colored and drew on the map
-									case (description == ""):
+									case (amountIn <= 0): // LESS THAN OR EQUAL TO 0
 									colorSelector = 0;
 									newzIndex = 0;
 									break;
-									/* Since all properties in chconsistence_r have different descriptions we will group them by colors.
-									For instance, property rupresblkmst hast the following possible values: "" (empty string), Extremely firm,
-									Extremely firm*, Firm, Friable, Loose, Very firm, Very friable. Property rupresblkcem has "" (empty string),
-									Extremely weakly cemented, Indurated, Moderately cemented, Noncemented, Strongly cemented, Very Strongly cemented,
-									and Weakly cemented. So the first (after empty string) possible value for each property will be under the same color.
-									Since we only draw one property at a time this allows us to automate this as much as possible.
-									NOTE: property rupresblkmst has two repeated values with a slight variation (an asterisk); in this case or if it WHERE
-									to occur in another possible value, then just group it within the same condition.
-									*/
-
-									case (description == "Extremely firm" || description == "Extremely firm*" || description == "Extremely hard" || description == "Extremely weakly cemented" || description == "Very weak" || description == "Brittle" || description == "Moderately plastic" || description == "Moderately sticky"):
+									case (amountIn > 0 && amountIn < 21): // BETWEEN 0 AND 21
 									colorSelector = 1;
 									newzIndex = 1;
 									break;
-									case (description == "Firm" || description == "Hard" || description == "Indurated" || description == "Nonsticky" || description == "Deformable" || description == "Nonplastic"):
+									case (amountIn > 20 && amountIn < 41): // BETWEEN 21 AND 40
 									colorSelector = 2;
 									newzIndex = 2;
 									break;
-									case (description == "Friable" || description == "Hard when dry" || description == "Moderately cemented" || description == "Slightly sticky" || description == "Moderately fluid" || description == "Slightly plastic"):
+									case (amountIn > 40 && amountIn < 61): // BETWEEN 41 AND 60
 									colorSelector = 3;
 									newzIndex = 3;
 									break;
-									case (description == "Loose" || description == "Loose" || description == "Noncemented" || description == "Very sticky" || description == "Nonfluid" || description == "Very plastic"):
+									case (amountIn > 60 && amountIn < 81): // BETWEEN 61 AND 80
 									colorSelector = 4;
 									newzIndex = 4;
 									break;
-									case (description == "Very firm" || description == "Moderately hard" || description == "Strongly cemented" || description == "Semideformable"):
+									case (amountIn > 80 && amountIn < 101): // BETWEEN 81 AND 100
 									colorSelector = 5;
 									newzIndex = 5;
 									break;
-									case (description == "Very friable" || description == "Rigid" || description == "Very strongly cemented" || description == "Slightly fluid"):
-									colorSelector = 6;
-									newzIndex = 6;
-									break;
-									case (description == "Slightly hard" || description == "Weakly cemented" || description == "Very fluid"):
-									colorSelector = 7;
-									newzIndex = 7;
-									break;
-									case (description == "Soft"):
-									colorSelector = 8;
-									newzIndex = 8;
-									break;
-									case (description == "Very hard"):
-									colorSelector = 9;
-									newzIndex = 9;
-									break;
-								}
-							}
-							temp = wktFormatter(data.coords[key]['POLYGON']);
-							for (var i = 0; i < temp.length; i++) {
-								polyCoordis.push(temp[i]);
-							}
-							var polygon = new google.maps.Polygon({
-								description: app.payload.value,
-								description_value: data.coords[key][app.payload.property],
-								paths: polyCoordis,
-								strokeColor: shapeoutline[colorSelector],
-								strokeOpacity: 0.8,
-								strokeWeight: 2,
-								fillColor: shapecolor[colorSelector],
-								fillOpacity: 0.35
-							});
-							console.log("Testing description: "+app.payload.value); //the descriptor for the propierty, for example: "Gypsum"
-							polygon.setOptions({ zIndex: newzIndex });
-							polygon.addListener('click', polyInfo);
+								} //end switch
+							}//end else statement that handles the general legend for unspecified properties
+						}//end the else statement that identifies the table
+						else if(app.payload.table == "chconsistence_r"){
+							var description = data.coords[key][app.payload.property];
 
-							app.polygons.push(polygon);
-							polygon.setMap(app.map);
+							if(app.payload.property == "plasticity"){
+								legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
+								<img src='img/redsquare.png' height='10px'/>  Moderately Plastic<br>\
+								<img src='img/skybluesquare.png' height='10px'/> Nonplastic<br>\
+								<img src='img/brightgreensquare.png' height='10px'/> Slightly Plastic<br>\
+								<img src='img/purplesquare.png' height='10px'/> Very Plastic";
+							}
+
+							if(app.payload.property == "stickiness"){
+								legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
+								<img src='img/redsquare.png' height='10px'/>  Moderately Sticky<br>\
+								<img src='img/skybluesquare.png' height='10px'/> Non Sticky<br>\
+								<img src='img/brightgreensquare.png' height='10px'/> Slightly Sticky<br>\
+								<img src='img/purplesquare.png' height='10px'/> Very Sticky";
+							}
+
+							if(app.payload.property == "rupresplate"){
+								legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
+								<img src='img/redsquare.png' height='10px'/> Very Weak";
+							}
+
+							if(app.payload.property == "rupresblkmst"){
+								legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
+								<img src='img/redsquare.png' height='10px'/>  Extremely Firm<br>\
+								<img src='img/skybluesquare.png' height='10px'/> Firm<br>\
+								<img src='img/brightgreensquare.png' height='10px'/> Friable<br>\
+								<img src='img/purplesquare.png' height='10px'/> Loose<br>\
+								<img src='img/orangesquare.png' height='10px'/> Very Firm<br>\
+								<img src='img/brightpinksquare.png' height='10px'/> Very Friable";
+							}
+
+							if(app.payload.property == "rupresblkdry"){
+								legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
+								<img src='img/redsquare.png' height='10px'/>  Extremely Hard<br>\
+								<img src='img/skybluesquare.png' height='10px'/> Hard<br>\
+								<img src='img/brightgreensquare.png' height='10px'/> Hard When Dry<br>\
+								<img src='img/purplesquare.png' height='10px'/> Loose<br>\
+								<img src='img/orangesquare.png' height='10px'/> Moderately Hard<br>\
+								<img src='img/brightpinksquare.png' height='10px'/> Rigid<br>\
+								<img src='img/navybluesquare.png' height='10px'/> Slightly Hard<br>\
+								<img src='img/lilacsquare.png' height='10px'/> Soft<br>\
+								<img src='img/yellowsquare.png' height='10px'/> Very Hard";
+							}
+
+							if(app.payload.property == "rupresblkcem"){
+								legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
+								<img src='img/redsquare.png' height='10px'/>  Extremely Weakly Cemented<br>\
+								<img src='img/skybluesquare.png' height='10px'/> Indurated<br>\
+								<img src='img/brightgreensquare.png' height='10px'/> Moderately Cemented<br>\
+								<img src='img/purplesquare.png' height='10px'/> Noncemented<br>\
+								<img src='img/orangesquare.png' height='10px'/> Strongly Cemented<br>\
+								<img src='img/brightpinksquare.png' height='10px'/> Very Strongly Cemented<br>\
+								<img src='img/navybluesquare.png' height='10px'/> Weakly Cemented";
+							}
+
+							if(app.payload.property == "mannerfailure"){
+								legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
+								<img src='img/redsquare.png' height='10px'/>  Brittle<br>\
+								<img src='img/skybluesquare.png' height='10px'/> Deformable<br>\
+								<img src='img/brightgreensquare.png' height='10px'/> Moderately Fluid<br>\
+								<img src='img/purplesquare.png' height='10px'/> Nonfluid<br>\
+								<img src='img/orangesquare.png' height='10px'/> Semideformable<br>\
+								<img src='img/brightpinksquare.png' height='10px'/> Slightly Fluid<br>\
+								<img src='img/navybluesquare.png' height='10px'/> Very Fluid";
+							}
+
+
+							switch (true) {
+								// All properties in chconsistence_r have empty string values, in this case it will be colored and drew on the map
+								case (description == ""):
+								colorSelector = 0;
+								newzIndex = 0;
+								break;
+								/* Since all properties in chconsistence_r have different descriptions we will group them by colors.
+								For instance, property rupresblkmst hast the following possible values: "" (empty string), Extremely firm,
+								Extremely firm*, Firm, Friable, Loose, Very firm, Very friable. Property rupresblkcem has "" (empty string),
+								Extremely weakly cemented, Indurated, Moderately cemented, Noncemented, Strongly cemented, Very Strongly cemented,
+								and Weakly cemented. So the first (after empty string) possible value for each property will be under the same color.
+								Since we only draw one property at a time this allows us to automate this as much as possible.
+								NOTE: property rupresblkmst has two repeated values with a slight variation (an asterisk); in this case or if it WHERE
+								to occur in another possible value, then just group it within the same condition.
+								*/
+
+								case (description == "Extremely firm" || description == "Extremely firm*" || description == "Extremely hard" || description == "Extremely weakly cemented" || description == "Very weak" || description == "Brittle" || description == "Moderately plastic" || description == "Moderately sticky"):
+								colorSelector = 1;
+								newzIndex = 1;
+								break;
+								case (description == "Firm" || description == "Hard" || description == "Indurated" || description == "Nonsticky" || description == "Deformable" || description == "Nonplastic"):
+								colorSelector = 2;
+								newzIndex = 2;
+								break;
+								case (description == "Friable" || description == "Hard when dry" || description == "Moderately cemented" || description == "Slightly sticky" || description == "Moderately fluid" || description == "Slightly plastic"):
+								colorSelector = 3;
+								newzIndex = 3;
+								break;
+								case (description == "Loose" || description == "Loose" || description == "Noncemented" || description == "Very sticky" || description == "Nonfluid" || description == "Very plastic"):
+								colorSelector = 4;
+								newzIndex = 4;
+								break;
+								case (description == "Very firm" || description == "Moderately hard" || description == "Strongly cemented" || description == "Semideformable"):
+								colorSelector = 5;
+								newzIndex = 5;
+								break;
+								case (description == "Very friable" || description == "Rigid" || description == "Very strongly cemented" || description == "Slightly fluid"):
+								colorSelector = 6;
+								newzIndex = 6;
+								break;
+								case (description == "Slightly hard" || description == "Weakly cemented" || description == "Very fluid"):
+								colorSelector = 7;
+								newzIndex = 7;
+								break;
+								case (description == "Soft"):
+								colorSelector = 8;
+								newzIndex = 8;
+								break;
+								case (description == "Very hard"):
+								colorSelector = 9;
+								newzIndex = 9;
+								break;
+							}
 						}
+						temp = wktFormatter(data.coords[key]['POLYGON']);
+						for (var i = 0; i < temp.length; i++) {
+							polyCoordis.push(temp[i]);
+						}
+						var polygon = new google.maps.Polygon({
+							description: app.payload.value,
+							description_value: data.coords[key][app.payload.property],
+							paths: polyCoordis,
+							strokeColor: shapeoutline[colorSelector],
+							strokeOpacity: 0.8,
+							strokeWeight: 2,
+							fillColor: shapecolor[colorSelector],
+							fillOpacity: 0.35
+						});
+						console.log("Testing description: "+app.payload.value); //the descriptor for the propierty, for example: "Gypsum"
+						polygon.setOptions({ zIndex: newzIndex });
+						polygon.addListener('click', polyInfo);
+
+						app.polygons.push(polygon);
+						polygon.setMap(app.map);
 					}
 				}
-			}).done(function(data){
-				if($('#autocomplete').val() == "Gypsum"){
-					var gypsum = "Description for Gypsum: ";
-					var gypsumText = "The content of gypsum is the percent, by weight, of hydrated calcium sulfates in the fraction of the soil less than 20 millimeters in size. "; // Gypsum is partially soluble in water. Soils high in content of gypsum, such as those with more than 10 percent gypsum, may collapse if the gypsum is removed by percolating water. Gypsum is corrosive to concrete.
-					//For each soil layer, this attribute is actually recorded as three separate values in the database. A low value and a high value indicate the range of this attribute for the soil component. A \"representative\" value indicates the expected value of this attribute for the component. For this soil property, only the representative value is used.";
-					var h3 = document.createElement('h3');
-					h3.innerHTML = gypsum;
+			}
+		}).done(function(data){
+			if($('#autocomplete').val() == "Gypsum"){
+				var gypsum = "Description for Gypsum: ";
+				var gypsumText = "The content of gypsum is the percent, by weight, of hydrated calcium sulfates in the fraction of the soil less than 20 millimeters in size. "; // Gypsum is partially soluble in water. Soils high in content of gypsum, such as those with more than 10 percent gypsum, may collapse if the gypsum is removed by percolating water. Gypsum is corrosive to concrete.
+				//For each soil layer, this attribute is actually recorded as three separate values in the database. A low value and a high value indicate the range of this attribute for the soil component. A \"representative\" value indicates the expected value of this attribute for the component. For this soil property, only the representative value is used.";
+				var h3 = document.createElement('h3');
+				h3.innerHTML = gypsum;
 
-					var div = document.createElement('div');
-					div.innerHTML = "<br> <strong>" + gypsum + "</strong> <br>" + gypsumText + "<br> <br>";
-					var descriptor = document.getElementById('description');
-					descriptor.appendChild(div);
-				}
-				else if ($('#autocomplete').val() == "PI"){
-					var prprty = "Description for Plasticity Index: ";
-					var prprtyText = "Plasticity index (PI) is one of the standard Atterberg limits used to indicate the plasticity characteristics of a soil. It is defined as the numerical difference between the liquid limit and plastic limit of the soil. It is the range of water content in which a soil exhibits the characteristics of a plastic solid.";
-					var h3 = document.createElement('h3');
-					h3.innerHTML = prprty;
+				var div = document.createElement('div');
+				div.innerHTML = "<br> <strong>" + gypsum + "</strong> <br>" + gypsumText + "<br> <br>";
+				var descriptor = document.getElementById('description');
+				descriptor.appendChild(div);
+			}
+			else if ($('#autocomplete').val() == "PI"){
+				var prprty = "Description for Plasticity Index: ";
+				var prprtyText = "Plasticity index (PI) is one of the standard Atterberg limits used to indicate the plasticity characteristics of a soil. It is defined as the numerical difference between the liquid limit and plastic limit of the soil. It is the range of water content in which a soil exhibits the characteristics of a plastic solid.";
+				var h3 = document.createElement('h3');
+				h3.innerHTML = prprty;
 
-					var div = document.createElement('div');
-					div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-					var descriptor = document.getElementById('description');
-					descriptor.appendChild(div);
-				}
-				else if ($('#autocomplete').val() == "CaCO3"){
-					var prprty = "Description for CaCO3: ";
-					var prprtyText = "Calcium carbonate equivalent is the percent of carbonates, by weight, in the fraction of the soil less than 2 millimeters in size. The availability of plant nutrients is influenced by the amount of carbonates in the soil.";
-					var h3 = document.createElement('h3');
-					h3.innerHTML = prprty;
+				var div = document.createElement('div');
+				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+				var descriptor = document.getElementById('description');
+				descriptor.appendChild(div);
+			}
+			else if ($('#autocomplete').val() == "CaCO3"){
+				var prprty = "Description for CaCO3: ";
+				var prprtyText = "Calcium carbonate equivalent is the percent of carbonates, by weight, in the fraction of the soil less than 2 millimeters in size. The availability of plant nutrients is influenced by the amount of carbonates in the soil.";
+				var h3 = document.createElement('h3');
+				h3.innerHTML = prprty;
 
-					var div = document.createElement('div');
-					div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-					var descriptor = document.getElementById('description');
-					descriptor.appendChild(div);
-				}
-				else if ($('#autocomplete').val() == "Total Sand"){
-					var prprty = "Description for Total Sand: ";
-					var prprtyText = "Sand as a soil separate consists of mineral soil particles that are 0.05 millimeter to 2 millimeters in diameter. In the database, the estimated sand content of each soil layer is given as a percentage, by weight, of the soil material that is less than 2 millimeters in diameter. The content of sand, silt, and clay affects the physical behavior of a soil. Particle size is important for engineering and agronomic interpretations, for determination of soil hydrologic qualities, and for soil classification.";
-					var h3 = document.createElement('h3');
-					h3.innerHTML = prprty;
+				var div = document.createElement('div');
+				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+				var descriptor = document.getElementById('description');
+				descriptor.appendChild(div);
+			}
+			else if ($('#autocomplete').val() == "Total Sand"){
+				var prprty = "Description for Total Sand: ";
+				var prprtyText = "Sand as a soil separate consists of mineral soil particles that are 0.05 millimeter to 2 millimeters in diameter. In the database, the estimated sand content of each soil layer is given as a percentage, by weight, of the soil material that is less than 2 millimeters in diameter. The content of sand, silt, and clay affects the physical behavior of a soil. Particle size is important for engineering and agronomic interpretations, for determination of soil hydrologic qualities, and for soil classification.";
+				var h3 = document.createElement('h3');
+				h3.innerHTML = prprty;
 
-					var div = document.createElement('div');
-					div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-					var descriptor = document.getElementById('description');
-					descriptor.appendChild(div);
-				}
-				else if ($('#autocomplete').val() == "pH H20"){
+				var div = document.createElement('div');
+				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+				var descriptor = document.getElementById('description');
+				descriptor.appendChild(div);
+			}
+			else if ($('#autocomplete').val() == "pH H20"){
 				var prprty = "Description for pH H20: ";
 				var prprtyText = "Soil reaction is a measure of acidity or alkalinity. It is important in selecting crops and other plants, in evaluating soil amendments for fertility and stabilization, and in determining the risk of corrosion.";
 				var h3 = document.createElement('h3');
@@ -590,8 +590,8 @@
 				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
 				var descriptor = document.getElementById('description');
 				descriptor.appendChild(div);
-				}
-				else if ($('#autocomplete').val() == "Ksat"){
+			}
+			else if ($('#autocomplete').val() == "Ksat"){
 				var prprty = "Description for Ksat: ";
 				var prprtyText = "Saturated hydraulic conductivity (Ksat) refers to the ease with which pores in a saturated soil transmit water. The estimates are expressed in terms of micrometers per second. They are based on soil characteristics observed in the field, particularly structure, porosity, and texture. ";
 				var h3 = document.createElement('h3');
@@ -601,12 +601,12 @@
 				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
 				var descriptor = document.getElementById('description');
 				descriptor.appendChild(div);
-				}
+			}
 
-				/** paste prprtyText here
+			/** paste prprtyText here
 
-				*/
-				else if ($('#autocomplete').val() == "AASHTO Group Index"){
+			*/
+			else if ($('#autocomplete').val() == "AASHTO Group Index"){
 				var prprty = "Description for AASHTO Group Index: ";
 				var prprtyText = "AASHTO group classification is a system that classifies soils specifically for geotechnical engineering purposes that are related to highway and airfield construction. It is based on particle-size distribution and Atterberg limits, such as liquid limit and plasticity index. This classification system is covered in AASHTO Standard No. M 145-82. The classification is based on that portion of the soil that is smaller than 3 inches in diameter.";
 				var h3 = document.createElement('h3');
@@ -616,9 +616,9 @@
 				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
 				var descriptor = document.getElementById('description');
 				descriptor.appendChild(div);
-				}
+			}
 
-				else if ($('#autocomplete').val() == "pH H2O"){
+			else if ($('#autocomplete').val() == "pH H2O"){
 				var prprty = "Description for ph H2O: ";
 				var prprtyText = "Soil reaction is a measure of acidity or alkalinity. It is important in selecting crops and other plants, in evaluating soil amendments for fertility and stabilization, and in determining the risk of corrosion. In general, soils that are either highly alkaline or highly acid are likely to be very corrosive to steel. The most common soil laboratory measurement of pH is the 1:1 water method.";
 				var h3 = document.createElement('h3');
@@ -628,8 +628,8 @@
 				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
 				var descriptor = document.getElementById('description');
 				descriptor.appendChild(div);
-				}
-				else if ($('#autocomplete').val() == "SAR"){
+			}
+			else if ($('#autocomplete').val() == "SAR"){
 				var prprty = "Description for Sodium Absortion Ratio (SAR): ";
 				var prprtyText = "Sodium adsorption ratio is a measure of the amount of sodium (Na) relative to calcium (Ca) and magnesium (Mg) in the water extract from saturated soil paste. It is the ratio of the Na concentration divided by the square root of one-half of the Ca + Mg concentration. Soils that have SAR values of 13 or more may be characterized by an increased dispersion of organic matter and clay particles, reduced saturated hydraulic conductivity (Ksat) and aeration, and a general degradation of soil structure.";
 				var h3 = document.createElement('h3');
@@ -639,8 +639,8 @@
 				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
 				var descriptor = document.getElementById('description');
 				descriptor.appendChild(div);
-				}
-				else if ($('#autocomplete').val() == "Kf"){
+			}
+			else if ($('#autocomplete').val() == "Kf"){
 				var prprty = "Description for K Factor (Rock Free): ";
 				var prprtyText = "Erosion factor K indicates the susceptibility of a soil to sheet and rill erosion by water. Factor K is one of six factors used in the Universal Soil Loss Equation (USLE) and the Revised Universal Soil Loss Equation (RUSLE) to predict the average annual rate of soil loss by sheet and rill erosion in tons per acre per year. The estimates are based primarily on percentage of silt, sand, and organic matter and on soil structure and saturated hydraulic conductivity (Ksat)." + " Values of K range from 0.02 to 0.69. Other factors being equal, the higher the value, the more susceptible the soil is to sheet and rill erosion by water. "
 				+ "Erosion factor Kf (rock free) indicates the erodibility of the fine-earth fraction, or the material less than 2 millimeters in size.";
@@ -651,11 +651,11 @@
 				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
 				var descriptor = document.getElementById('description');
 				descriptor.appendChild(div);
-				}
-				else if ($('#autocomplete').val() == "Kw"){
+			}
+			else if ($('#autocomplete').val() == "Kw"){
 				var prprty = "Description for K Factor (Whole Soil): ";
 				var prprtyText = "Erosion factor K indicates the susceptibility of a soil to sheet and rill erosion by water. Factor K is one of six factors used in the Universal Soil Loss Equation (USLE) and the Revised Universal Soil Loss Equation (RUSLE) to predict the average annual rate of soil loss by sheet and rill erosion in tons per acre per year. The estimates are based primarily on percentage of silt, sand, and organic matter and on soil structure and saturated hydraulic conductivity (Ksat)."+" Values of K range from 0.02 to 0.69. Other factors being equal, the higher the value, the more susceptible the soil is to sheet and rill erosion by water."
-+ "'Erosion factor Kw (whole soil)' indicates the erodibility of the whole soil. The estimates are modified by the presence of rock fragments.";
+				+ "'Erosion factor Kw (whole soil)' indicates the erodibility of the whole soil. The estimates are modified by the presence of rock fragments.";
 				var h3 = document.createElement('h3');
 				h3.innerHTML = prprty;
 
@@ -663,8 +663,8 @@
 				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
 				var descriptor = document.getElementById('description');
 				descriptor.appendChild(div);
-				}
-				else if ($('#autocomplete').val() == "LL"){
+			}
+			else if ($('#autocomplete').val() == "LL"){
 				var prprty = "Description for Liquid Limit: ";
 				var prprtyText = "Liquid limit (LL) is one of the standard Atterberg limits used to indicate the plasticity characteristics of a soil. It is the water content, on a percent by weight basis, of the soil (passing #40 sieve) at which the soil changes from a plastic to a liquid state. Generally, the amount of clay- and silt-size particles, the organic matter content, and the type of minerals determine the liquid limit. Soils that have a high liquid limit have the capacity to hold a lot of water while maintaining a plastic or semisolid state. Liquid limit is used in classifying soils in the Unified and AASHTO classification systems. For each soil layer, this attribute is actually recorded as three separate values in the database. A low value and a high value indicate the range of this attribute for the soil component. A 'representative' value indicates the expected value of this attribute for the component. For this soil property, only the representative value is used.";
 				var h3 = document.createElement('h3');
@@ -674,8 +674,8 @@
 				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
 				var descriptor = document.getElementById('description');
 				descriptor.appendChild(div);
-				}
-				else if ($('#autocomplete').val() == "OM"){
+			}
+			else if ($('#autocomplete').val() == "OM"){
 				var prprty = "Description for Organic Matter (OM): ";
 				var prprtyText = "Organic matter is the plant and animal residue in the soil at various stages of decomposition. The estimated content of organic matter is expressed as a percentage, by weight, of the soil material that is less than 2 millimeters in diameter. <br> The content of organic matter in a soil can be maintained by returning crop residue to the soil. Organic matter has a positive effect on available water capacity, water infiltration, soil organism activity, and tilth. It is a source of nitrogen and other nutrients for crops and soil organisms. An irregular distribution of organic carbon with depth may indicate different episodes of soil deposition or soil formation. Soils that are very high in organic matter have poor engineering properties and subside upon drying.";
 				var h3 = document.createElement('h3');
@@ -685,8 +685,8 @@
 				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
 				var descriptor = document.getElementById('description');
 				descriptor.appendChild(div);
-				}
-				else if ($('#autocomplete').val() == "Total Clay"){
+			}
+			else if ($('#autocomplete').val() == "Total Clay"){
 				var prprty = "Description for " + $('#autocomplete').val() + ": ";
 				var prprtyText = "Clay as a soil separate consists of mineral soil particles that are less than 0.002 millimeter in diameter. The estimated clay content of each soil layer is given as a percentage, by weight, of the soil material that is less than 2 millimeters in diameter. The amount and kind of clay affect the fertility and physical condition of the soil and the ability of the soil to adsorb cations and to retain moisture. They influence shrink-swell potential, saturated hydraulic conductivity (Ksat), plasticity, the ease of soil dispersion, and other soil properties. The amount and kind of clay in a soil also affect tillage and earth-moving operations.";
 				var h3 = document.createElement('h3');
@@ -696,8 +696,8 @@
 				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
 				var descriptor = document.getElementById('description');
 				descriptor.appendChild(div);
-				}
-				else if ($('#autocomplete').val() == "Total Silt"){
+			}
+			else if ($('#autocomplete').val() == "Total Silt"){
 				var prprty = "Description for " + $('#autocomplete').val() + ": ";
 				var prprtyText = "Silt as a soil separate consists of mineral soil particles that are 0.002 to 0.05 millimeter in diameter. In the database, the estimated silt content of each soil layer is given as a percentage, by weight, of the soil material that is less than 2 millimeters in diameter.";
 				var h3 = document.createElement('h3');
@@ -707,52 +707,52 @@
 				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
 				var descriptor = document.getElementById('description');
 				descriptor.appendChild(div);
-				}
-				/* paste text here
-				Silt as a soil separate consists of mineral soil particles that are 0.002 to 0.05 millimeter in diameter. In the database, the estimated silt content of each soil layer is given as a percentage, by weight, of the soil material that is less than 2 millimeters in diameter.
-				*/
-				else{
-				}
-				/** Copy and paste to change properties.
-				else if ($('#autocomplete').val() == "<>"){
-				var prprty = "Description for " + $('#autocomplete').val() + ": ";
-				var prprtyText = "<>";
-				var h3 = document.createElement('h3');
-				h3.innerHTML = prprty;
-
-				var div = document.createElement('div');
-				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-				var descriptor = document.getElementById('description');
-				descriptor.appendChild(div);
-				}
+			}
+			/* paste text here
+			Silt as a soil separate consists of mineral soil particles that are 0.002 to 0.05 millimeter in diameter. In the database, the estimated silt content of each soil layer is given as a percentage, by weight, of the soil material that is less than 2 millimeters in diameter.
 			*/
+			else{
+			}
+			/** Copy and paste to change properties.
+			else if ($('#autocomplete').val() == "<>"){
+			var prprty = "Description for " + $('#autocomplete').val() + ": ";
+			var prprtyText = "<>";
+			var h3 = document.createElement('h3');
+			h3.innerHTML = prprty;
 
-			/* //original to draw the legend
 			var div = document.createElement('div');
-			div.innerHTML = "<strong>" + $('#autocomplete').val() + "</strong><br>" + legendText;
-			var legend = document.createElement('div');
-			legend = document.getElementById('legend');
-			legend.appendChild(div);
-			*/ //original
+			div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+			var descriptor = document.getElementById('description');
+			descriptor.appendChild(div);
+		}
+		*/
 
-			//var g = document.createElement('div');
-			//g.id = 'someId';
-			//draw the legend
-			var div = document.createElement('div');
-			//div = document.getElementsByTagName("H3")[0].setAttribute("class", "col-md-3");
-			//div.attribute('class', 'col-md-3');
-			// div.innerHTML = '<img src="img/redsquare.png" height="10px"/> ' + $('#autocomplete').val();;
-			//div.id = 'legend';
-			div.innerHTML = "<strong>" + $('#autocomplete').val() + "</strong><br>" + legendText;
-			var legend = document.createElement('div');
-			legend = document.getElementById('legend');
-			document.getElementById('legend').style.visibility = "visible";
-			legend.appendChild(div);
-		});
-	}
-	else{
-		alert("Please select a property and a district.");
-	}
+		/* //original to draw the legend
+		var div = document.createElement('div');
+		div.innerHTML = "<strong>" + $('#autocomplete').val() + "</strong><br>" + legendText;
+		var legend = document.createElement('div');
+		legend = document.getElementById('legend');
+		legend.appendChild(div);
+		*/ //original
+
+		//var g = document.createElement('div');
+		//g.id = 'someId';
+		//draw the legend
+		var div = document.createElement('div');
+		//div = document.getElementsByTagName("H3")[0].setAttribute("class", "col-md-3");
+		//div.attribute('class', 'col-md-3');
+		// div.innerHTML = '<img src="img/redsquare.png" height="10px"/> ' + $('#autocomplete').val();;
+		//div.id = 'legend';
+		div.innerHTML = "<strong>" + $('#autocomplete').val() + "</strong><br>" + legendText;
+		var legend = document.createElement('div');
+		legend = document.getElementById('legend');
+		document.getElementById('legend').style.visibility = "visible";
+		legend.appendChild(div);
+	});
+}
+else{
+	alert("Please select a property and a district.");
+}
 }
 function setDistrict(){
 	app.payload.district = $('#target').children("option:selected").data('district');
