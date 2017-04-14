@@ -42,7 +42,8 @@
 
 .autocomplete-suggestions {
 	background-color: white;
-	border-color: gray;
+	border-color: black;
+  border-style: solid;
 }
 .vert-offset-top-12 {
 	margin-top: 12em;

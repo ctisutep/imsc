@@ -18,13 +18,19 @@
 
 		if($table == "chorizon_r"){
 			$property = "ch." . $property;
+			//$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, 0.00005)) AS POLYGON, $property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN chorizon_r AS ch ON mu.chkey = ch.chkey WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
 			$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, 0.00005)) AS POLYGON, $property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN chorizon_r AS ch ON mu.chkey = ch.chkey WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
+			//$testquery = "SELECT mukey FROM polygon WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
+			//echo $testquery . " TEST LOL MINI";
 		}elseif ($table == "chconsistence_r") {
 			$property = "co." . $property;
 			$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, 0.00005)) AS POLYGON, $property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN chconsistence_r AS co ON mu.chconsistkey = co.chconsistkey WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
 		}
 
 		$toReturn['query2'] = $query;
+
+		//$toReturn['query3'] = $testquery;
+
 		$result = mysqli_query($conn, $query);
 
 		$temp = array();
@@ -32,6 +38,15 @@
 			$temp[] = $row;
 		}
 		$toReturn['coords'] = $temp;
+
+
+		/*$result2 = mysqli_query($conn, $testquery);
+
+		$temp2 = array();
+		while($row = mysqli_fetch_assoc($result2)){
+			$temp[] = $row;
+		}
+		$toReturn['coords'] = $temp2; */
 	}
 	else if(isset($_GET['district'])){
 		$district = $_GET['district'];
@@ -41,6 +56,12 @@
 			$toReturn['coords'] = $result->fetch_all();
 		}
 	}
+	/*else if(isset($_GET['mukey'])){ //for the mukey
+		$mu = $_GET['mukey'];
+		$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, 0.00005)) AS POLYGON, $mu FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN chorizon_r AS ch ON mu.chkey = ch.chkey WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
+		$toReturn['query2'] = $query;
+		$result = mysqli_query($conn, $query);
+	}*/
 	else if(isset($_POST['columns'])){
 		$sql = "SELECT * FROM properties WHERE property_table LIKE \"%chconsistence_r%\" OR property_table LIKE \"%chorizon_r%\" ";
 		$result = $conn->query($sql);
