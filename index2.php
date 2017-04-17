@@ -162,6 +162,7 @@
 							</select>
 						</div>
 						<p> </p> <!--sepator-->
+
 						<div class="row"> <!--search-->
 							<label> Search: </label>
 						</div>
@@ -210,6 +211,35 @@
 	<script src="js/jquery.autocomplete.min.js"></script>
 	<script src="js/properties.js"></script>
 	<script>
+	/* want to modify search method to dropdown
+	<div> <p> </p> </div> <!--separate-->
+	<div class="row"> <!--search-->
+		<label> Search: </label>
+	</div>
+	<div class="row"> <!--search-->
+		<div class="input-group">
+			<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+			<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="autocomplete" autocomplete="off">
+				<option value="gypsum_r">
+					Gypsum
+				</option>
+			</select>
+		</div>
+	</div>
+	<div> <p> </p> </div> <!--separate-->
+	*/
+
+	/* original search method
+	<div class="row"> <!--search-->
+		<label> Search: </label>
+	</div>
+	<div class="row"> <!--search-->
+		<div class="input-group">
+			<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+			<input type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="autocomplete" autocomplete="off">
+		</div>
+	</div>
+	*/
 	var app = {map:null, polygons:null, payload:{getMode:"polygons", property:null, district:null}};
 	//var suggested = all the aliases of the properties, note: not all properties have an alias
 
@@ -230,7 +260,7 @@
 			$('#autocomplete').autocomplete({
 				lookup: properties,
 				onSelect: function (suggestion) {
-					console.log(suggestion.data + "  " + suggestion.table + "  " + suggestion.value);
+					//console.log(suggestion.data + "  " + suggestion.table + "  " + suggestion.value);
 					app.payload.property = suggestion.data;
 					app.payload.table = suggestion.table;
 					app.payload.value = suggestion.value;
@@ -263,9 +293,9 @@
 						if(data.coords.hasOwnProperty(key)){
 							var polyCoordis = [];
 							if(app.payload.table == "chorizon_r"){
-								console.log("Testing new legend: "+app.payload.property);
+								//console.log("Testing new legend: "+app.payload.property);
 								if(app.payload.property == "caco3_r"){ //Testing legend and logic for drawing for this specific property
-									console.log(app.payload.property);
+									//console.log(app.payload.property);
 									//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
 									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 									//colorSelector = 0;
@@ -277,7 +307,7 @@
 									<img src='img/purplesquare.png' height='10px'/> > 55 and <= 65<br>\
 									<img src='img/whitesquare.png' height='10px'/> Not rated or not available";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
-									console.log(amountIn);
+									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
 									//console.log(amountIn);
 									switch (true) {
@@ -308,7 +338,7 @@
 									}
 								}
 								else if(app.payload.property == "sandtotal_r"){ //Testing legend and logic for drawing for this specific property
-									console.log(app.payload.property);
+									//console.log(app.payload.property);
 									//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
 									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 									//colorSelector = 0;
@@ -320,7 +350,7 @@
 									<img src='img/whitesquare.png' height='10px'/> > 57.8 and <= 90.2<br>\
 									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
-									console.log(amountIn);
+									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
 									//console.log(amountIn);
 									switch (true) {
@@ -351,7 +381,7 @@
 									}
 								}
 								else if(app.payload.property == "gypsum_r"){ //Testing legend and logic for drawing for this specific property
-									console.log(app.payload.property);
+									//console.log(app.payload.property);
 									//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
 									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 									//colorSelector = 0;
@@ -362,7 +392,7 @@
 									<img src='img/purplesquare.png' height='10px'/> > 2 and <= 3<br>\
 									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
-									console.log(amountIn);
+									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
 									//console.log(amountIn);
 									switch (true) {
@@ -389,7 +419,7 @@
 									}
 								}
 								else if(app.payload.property == "pi_r"){ //Testing legend and logic for drawing for this specific property
-									console.log(app.payload.property);
+									//console.log(app.payload.property);
 									//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
 									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 									//colorSelector = 0;
@@ -402,7 +432,8 @@
 									<img src='img/graysquare.png height='10px'/> Not rated or not available ";
 									// GRAY, RED, SKY BLUE, BRIGHT GREEN, PURPLE, ORANGE, BRIGHT PINK, NAVY BLUE, LILAC, YELLOW
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
-									console.log(amountIn);
+									//
+									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
 									//console.log(amountIn);
 									switch (true) {
@@ -433,7 +464,7 @@
 									}
 								}
 								else if(app.payload.property == "sar_r"){ //Testing legend and logic for drawing for this specific property
-									console.log(app.payload.property);
+									//console.log(app.payload.property);
 									//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
 									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 									//colorSelector = 0;
@@ -445,7 +476,7 @@
 									<img src='img/orangesquare.png' height='10px'/> > 5.9 and <= 17.5<br>\
 									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
-									console.log(amountIn);
+									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
 									//console.log(amountIn);
 									switch (true) {
@@ -472,7 +503,7 @@
 									}
 								}
 								else if(app.payload.property == "ksat_r"){ //Testing legend and logic for drawing for this specific property
-									console.log(app.payload.property);
+									//console.log(app.payload.property);
 									//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
 									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 									//colorSelector = 0;
@@ -485,7 +516,7 @@
 									<img src='img/whitesquare.png' height='10px'/> Very High (100 - 705)<br>\
 									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
-									console.log(amountIn);
+									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
 									//console.log(amountIn);
 									switch (true) {
@@ -520,7 +551,7 @@
 									}
 								}
 								else if(app.payload.property == "sandfine_r"){ //Testing legend and logic for drawing for this specific property
-									console.log(app.payload.property);
+									//console.log(app.payload.property);
 									//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
 									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 									//colorSelector = 0;
@@ -533,7 +564,7 @@
 									<img src='img/whitesquare.png' height='10px'/> <br>\
 									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
-									console.log(amountIn);
+									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
 									//console.log(amountIn);
 									switch (true) {
@@ -568,7 +599,7 @@
 									}
 								}
 								else if(app.payload.property == "ph1to1h2o_r"){ //Testing legend and logic for drawing for this specific property
-									console.log(app.payload.property);
+									//console.log(app.payload.property);
 									//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
 									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 									//colorSelector = 0;
@@ -586,7 +617,7 @@
 									<img src='img/bluesquare.png' height='10px'/> Very strongly alkaline (ph > 9.0)<br>\
 									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
-									console.log(amountIn);
+									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
 									//console.log(amountIn);
 									switch (true) {
@@ -641,7 +672,7 @@
 									}
 								}
 								else if(app.payload.property == "aashind_r"){ //Testing legend and logic for drawing for this specific property
-									console.log(app.payload.property);
+									//console.log(app.payload.property);
 									//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
 									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 									//colorSelector = 0;
@@ -665,7 +696,7 @@
 									<img src='img/bluesquare.png' height='10px'/> A-8<br>\
 									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
-									console.log(amountIn);
+									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
 									//console.log(amountIn);
 									switch (true) {
@@ -740,7 +771,7 @@
 									}
 								}
 								else if(app.payload.property == "ll_r"){ //Testing legend and logic for drawing for this specific property
-									console.log(app.payload.property);
+									//console.log(app.payload.property);
 									//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
 									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 									//colorSelector = 0;
@@ -752,7 +783,7 @@
 									<img src='img/orangesquare.png' height='10px'/> > 66.0 and <= 75.7<br>\
 									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
-									console.log(amountIn);
+									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
 									//console.log(amountIn);
 									switch (true) {
@@ -783,7 +814,7 @@
 									}
 								}
 								else if(app.payload.property == "kffact" || app.payload.property == "kwfact" ){ //Testing legend and logic for drawing for this specific property
-									console.log(app.payload.property);
+									//console.log(app.payload.property);
 									//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
 									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 									//colorSelector = 0;
@@ -804,7 +835,7 @@
 									<img src='img/bluesquare.png' height='10px'/> .64<br>\
 									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
-									console.log(amountIn);
+									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
 									//console.log(amountIn);
 									switch (true) {
@@ -871,7 +902,7 @@
 									}
 								}
 								else if(app.payload.property == "ph01mcacl2_r"){ //Testing legend and logic for drawing for this specific property
-									console.log(app.payload.property);
+									//console.log(app.payload.property);
 									//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
 									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 									//colorSelector = 0;
@@ -889,7 +920,7 @@
 									<img src='img/bluesquare.png' height='10px'/> Very strongly alkaline (ph > 9.0)<br>\
 									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
-									console.log(amountIn);
+									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
 									//console.log(amountIn);
 									switch (true) {
@@ -1100,8 +1131,12 @@
 						for (var i = 0; i < temp.length; i++) {
 							polyCoordis.push(temp[i]);
 						}
+<<<<<<< HEAD
 
 						var polygon = new google.maps.Polygon({
+=======
+						var polygon = new google.maps.Polygon({ //we need another value to determine the key
+>>>>>>> 1f6adef90e0c6caaf60b1e33015efdb91d915ef4
 							description: app.payload.value,
 							description_value: data.coords[key][app.payload.property],
 							paths: polyCoordis,
@@ -1111,8 +1146,12 @@
 							fillColor: shapecolor[colorSelector],
 							fillOpacity: 0.35
 						});
+<<<<<<< HEAD
 
 						console.log("Testing description: "+app.payload.value); //the descriptor for the propierty, for example: "Gypsum"
+=======
+						//console.log("Testing description: "+app.payload.value); //the descriptor for the propierty, for example: "Gypsum"
+>>>>>>> 1f6adef90e0c6caaf60b1e33015efdb91d915ef4
 						polygon.setOptions({ zIndex: newzIndex });
 						polygon.addListener('click', polyInfo);
 						app.polygons.push(polygon);
