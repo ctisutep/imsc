@@ -212,9 +212,13 @@
 	<script>
 	var app = {map:null, polygons:null, payload:{getMode:"polygons", property:null, district:null}};
 	//var suggested = all the aliases of the properties, note: not all properties have an alias
-	$(document).ready(function(){
+
+	$(document).ready(function(){//esto pasa recien cargada la pagina
 		//start here, get the properties
-		$.post('polygonHandler.php', {'columns': true}, function(result){
+
+
+		$.post('polygonHandler.php', {'columns': true}, function(result){//esto pasa recien cargada la pagina tambien
+
 			//do stuff with the result
 			var properties;
 			if(result.hasOwnProperty('columns')){
@@ -236,8 +240,8 @@
 		});
 		app.payload.district = $('#target').children("option:selected").data('district');
 	});
-	function getPolygons(){
-		if(app.payload.property && app.payload.district){
+	function getPolygons(){//this is run button
+		if(app.payload.property){//to make sure a property is selected
 			//get the polygons
 			// console.log(app.payload);
 			var getparams = app.payload;
@@ -248,7 +252,8 @@
 				//draw the stuff on the map
 				if(data.hasOwnProperty('coords')){
 					removePolygons();
-					// GRAY, RED, SKY BLUE, BRIGHT GREEN, PURPLE, ORANGE, BRIGHT PINK, NAVY BLUE, LILAC, YELLOW
+					//               0           1           2          3          4         5          6           7         8          9
+					//              GRAY,       RED,     SKY BLUE, BRIGHT GREEN, PURPLE,   ORANGE,  BRIGHT PINK,NAVY BLUE,  LILAC,     YELLOW
 					shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
 					shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 					colorSelector = 0;
@@ -356,7 +361,6 @@
 									<img src='img/skybluesquare.png' height='10px'/> > 1 and <= 2<br>\
 									<img src='img/purplesquare.png' height='10px'/> > 2 and <= 3<br>\
 									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
-
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
@@ -440,7 +444,6 @@
 									<img src='img/purplesquare.png' height='10px'/> > 1.8 and <= 5.9<br>\
 									<img src='img/orangesquare.png' height='10px'/> > 5.9 and <= 17.5<br>\
 									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
-
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
@@ -481,7 +484,6 @@
 									<img src='img/orangesquare.png' height='10px'/> High (10 - 100)<br>\
 									<img src='img/whitesquare.png' height='10px'/> Very High (100 - 705)<br>\
 									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
-
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
@@ -530,7 +532,6 @@
 									<img src='img/orangesquare.png' height='10px'/> <br>\
 									<img src='img/whitesquare.png' height='10px'/> <br>\
 									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
-
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
@@ -584,7 +585,6 @@
 									<img src='img/maroonsquare.png' height='10px'/> Strongly alkaline (ph 8.5 - 9.0)<br>\
 									<img src='img/bluesquare.png' height='10px'/> Very strongly alkaline (ph > 9.0)<br>\
 									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
-
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
@@ -664,7 +664,6 @@
 									<img src='img/bluesquare.png' height='10px'/> A-7-6<br>\
 									<img src='img/bluesquare.png' height='10px'/> A-8<br>\
 									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
-
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
@@ -752,7 +751,6 @@
 									<img src='img/purplesquare.png' height='10px'/> > 58.0 and <= 66.0<br>\
 									<img src='img/orangesquare.png' height='10px'/> > 66.0 and <= 75.7<br>\
 									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
-
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
@@ -805,7 +803,6 @@
 									<img src='img/bluesquare.png' height='10px'/> .55<br>\
 									<img src='img/bluesquare.png' height='10px'/> .64<br>\
 									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
-
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
@@ -891,7 +888,6 @@
 									<img src='img/maroonsquare.png' height='10px'/> Strongly alkaline (ph 8.5 - 9.0)<br>\
 									<img src='img/bluesquare.png' height='10px'/> Very strongly alkaline (ph > 9.0)<br>\
 									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
-
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
@@ -1047,7 +1043,7 @@
 								<img src='img/navybluesquare.png' height='10px'/> Very Fluid";
 							}
 							switch (true) {
-								// All properties in chconsistence_r have empty string values, in this case it will be colored and drew on the map
+								// All properties in chconsistence_r have empty string values, in this case it will be colored and drawn on the map
 								case (description == ""):
 								colorSelector = 0;
 								newzIndex = 0;
@@ -1099,10 +1095,12 @@
 								break;
 							}
 						}
+
 						temp = wktFormatter(data.coords[key]['POLYGON']);
 						for (var i = 0; i < temp.length; i++) {
 							polyCoordis.push(temp[i]);
 						}
+
 						var polygon = new google.maps.Polygon({
 							description: app.payload.value,
 							description_value: data.coords[key][app.payload.property],
@@ -1113,6 +1111,7 @@
 							fillColor: shapecolor[colorSelector],
 							fillOpacity: 0.35
 						});
+
 						console.log("Testing description: "+app.payload.value); //the descriptor for the propierty, for example: "Gypsum"
 						polygon.setOptions({ zIndex: newzIndex });
 						polygon.addListener('click', polyInfo);
@@ -1276,17 +1275,17 @@
 		//div.attribute('class', 'col-md-3');
 		// div.innerHTML = '<img src="img/redsquare.png" height="10px"/> ' + $('#autocomplete').val();;
 		//div.id = 'legend';
-		div.innerHTML = "<strong>" + $('#autocomplete').val() + "</strong><br>" + legendText;
+		div.innerHTML = "<strong>" + $('#autocomplete').val() + "</strong><br>" + legendText;//pinta a legend?
 		var legend = document.createElement('div');
 		legend = document.getElementById('legend');
-		document.getElementById('legend').style.visibility = "visible";
+		document.getElementById('legend').style.visibility = "visible";//o este?
 		legend.appendChild(div);
 	});
 }
-else{
-	alert("Please select a property and a district.");
+else{ alert("Please select a property and a district."); }
 }
-}
+//get polygons "run function" ends here
+
 function setDistrict(){
 	app.payload.district = $('#target').children("option:selected").data('district');
 	var pointStr = $('#target option:selected').val();
