@@ -1131,12 +1131,9 @@
 						for (var i = 0; i < temp.length; i++) {
 							polyCoordis.push(temp[i]);
 						}
-<<<<<<< HEAD
 
-						var polygon = new google.maps.Polygon({
-=======
 						var polygon = new google.maps.Polygon({ //we need another value to determine the key
->>>>>>> 1f6adef90e0c6caaf60b1e33015efdb91d915ef4
+
 							description: app.payload.value,
 							description_value: data.coords[key][app.payload.property],
 							paths: polyCoordis,
@@ -1146,12 +1143,7 @@
 							fillColor: shapecolor[colorSelector],
 							fillOpacity: 0.35
 						});
-<<<<<<< HEAD
 
-						console.log("Testing description: "+app.payload.value); //the descriptor for the propierty, for example: "Gypsum"
-=======
-						//console.log("Testing description: "+app.payload.value); //the descriptor for the propierty, for example: "Gypsum"
->>>>>>> 1f6adef90e0c6caaf60b1e33015efdb91d915ef4
 						polygon.setOptions({ zIndex: newzIndex });
 						polygon.addListener('click', polyInfo);
 						app.polygons.push(polygon);

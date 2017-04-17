@@ -31,7 +31,6 @@
 	echo json_encode($toReturn);
 	$conn->close();
 
-<<<<<<< HEAD
 	/****************************************************/
 	//functionality ends here. BELOW CONVINIENCE UTILITY
 	/***************************************************/
@@ -64,24 +63,6 @@
 		}
 
 	}
-=======
-		if($table == "chorizon_r"){
-			$property = "ch." . $property;
-			//$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, 0.00005)) AS POLYGON, $property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN chorizon_r AS ch ON mu.chkey = ch.chkey WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
-			$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, 0.00005)) AS POLYGON, $property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN chorizon_r AS ch ON mu.chkey = ch.chkey WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
-			//$testquery = "SELECT mukey FROM polygon WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
-			//echo $testquery . " TEST LOL MINI";
-		}elseif ($table == "chconsistence_r") {
-			$property = "co." . $property;
-			$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, 0.00005)) AS POLYGON, $property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN chconsistence_r AS co ON mu.chconsistkey = co.chconsistkey WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
-		}
-
-		$toReturn['query2'] = $query;
-
-		//$toReturn['query3'] = $testquery;
-
-		$result = mysqli_query($conn, $query);
->>>>>>> 1f6adef90e0c6caaf60b1e33015efdb91d915ef4
 
 	//depending on which table (for a given property) will be used in query, this will determine the appropriate key
 	function setKey($table){
@@ -95,7 +76,6 @@
 		while($row = mysqli_fetch_assoc($result)){
 			$temp[] = $row;
 		}
-<<<<<<< HEAD
 		return $temp;
 	}
 
@@ -109,18 +89,6 @@
 		$result = $conn->query($sql);
 
 		$toReturn['columns'] = $result->fetch_all();
-=======
-		$toReturn['coords'] = $temp;
-
-
-		/*$result2 = mysqli_query($conn, $testquery);
-
-		$temp2 = array();
-		while($row = mysqli_fetch_assoc($result2)){
-			$temp[] = $row;
-		}
-		$toReturn['coords'] = $temp2; */
->>>>>>> 1f6adef90e0c6caaf60b1e33015efdb91d915ef4
 	}
 
 	function districtNames(){
@@ -133,19 +101,6 @@
 			$toReturn['coords'] = $result->fetch_all();
 		}
 	}
-<<<<<<< HEAD
-=======
-	/*else if(isset($_GET['mukey'])){ //for the mukey
-		$mu = $_GET['mukey'];
-		$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, 0.00005)) AS POLYGON, $mu FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN chorizon_r AS ch ON mu.chkey = ch.chkey WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
-		$toReturn['query2'] = $query;
-		$result = mysqli_query($conn, $query);
-	}*/
-	else if(isset($_POST['columns'])){
-		$sql = "SELECT * FROM properties WHERE property_table LIKE \"%chconsistence_r%\" OR property_table LIKE \"%chorizon_r%\" ";
-		$result = $conn->query($sql);
-		$toReturn['columns'] = $result->fetch_all();
->>>>>>> 1f6adef90e0c6caaf60b1e33015efdb91d915ef4
 
 	function getPolygons(){
 		global $conn, $toReturn;
