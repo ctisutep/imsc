@@ -106,7 +106,7 @@
 		global $conn, $toReturn;
 
 		$data = new dataToQueryPolygons();//automatically gathers necessary data for query
-		$simplificaionFactor = 0.00005;//maybe it should be changing(be variable) in the future with  more given parameters($_GET)
+		$simplificaionFactor = polygonDefinition( $data );//maybe it should be changing(be variable) in the future with  more given parameters($_GET)
 
 		//create zoom area (AOI) polygon for further query
 		$query = "SET @geom1 = 'POLYGON(($data->lng1	$data->lat1,$data->lng1	$data->lat2,$data->lng2	$data->lat2,$data->lng2	$data->lat1,$data->lng1	$data->lat1))'";
@@ -123,9 +123,36 @@
 		$toReturn['coords'] = fetchAll($result);//fetch all
 	}
 
+	function polygonDefinition( $data ){
+		$zoom = haversine( $data );
 
+		//test wis choping off everything after the 4.
+		$factor = ($zoom * 0.0000000147540984 );
 
+		if( $factor > 0.5 ){ return 0.5; }
 
+		return $factor;
+
+	}
+
+	//google haversine
+	function haversine( $data ){
+		$earthRadius = 6371000;
+
+		$latFrom = deg2rad($data->lat2);
+		$lonFrom = deg2rad($data->lng2);
+		$latTo = deg2rad($data->lat1);
+		$lonTo = deg2rad($data->lng1);
+
+		$latDelta = ($latTo - $latFrom);
+		$lonDelta = ($lonTo - $lonFrom);
+
+		$angle = 2 * asin( sqrt( pow( sin( $latDelta / 2 ), 2 ) + cos($latFrom) * cos( $latTo ) * pow( sin( $lonDelta / 2 ), 2 ) ) );
+
+		$distance = $angle * $earthRadius;
+
+		return $distance;
+	}
 
 
 
