@@ -170,7 +170,10 @@
 							<div class="input-group">
 								<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
 								<input type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="autocomplete" autocomplete="off">
-							</div>
+							</div> <br>
+							<label> Depth: </label> <br>
+							<p> Top = <input type="text" value="" id="depth_top" placeholder="...inches" style="color: black;"></p>
+							<p> Bottom = <input type="text" value="" id="depth_bottom" placeholder="...inches" style="color: black;"></p>
 						</div>
 						<div> <p> </p> </div> <!--separate-->
 						<div class="row">
@@ -271,6 +274,15 @@
 		app.payload.district = $('#target').children("option:selected").data('district');
 	});
 	function getPolygons(){//this is run button
+
+		//Ricardo
+		//Valores de depth top y depth bottom
+		var depth_t = document.getElementById("depth_top").value;
+		console.log("Ricardo, esto da el valor de depth_top: " + depth_t);
+		var depth_b = document.getElementById("depth_bottom").value;
+		console.log("Ricardo, esto da el valor de depth_bottom: " + depth_b);
+
+
 		if(app.payload.property){//to make sure a property is selected
 			//get the polygons
 			// console.log(app.payload);
