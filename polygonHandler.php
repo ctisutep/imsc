@@ -14,7 +14,7 @@
 
 	//is the "isset()" to determine wether a property has been selected? YES! isset => has been set
 	if(isset($_GET['getMode']) AND $_GET['getMode'] == "polygons"){//**************The case in charge of retrieving polygon search (run)****************************(1)
-		getPolygons();
+		getPolygons(); //cambio de Ricardo
 	}
 	else if(isset($_GET['district'])){//*******************This is the case for retieving the districts from table**********************(2)
 		districtNames();

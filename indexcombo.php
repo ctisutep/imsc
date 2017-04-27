@@ -11,8 +11,9 @@
 
 	<title>TX-IMSC</title>
 	<!-- Interactive Map for Soil Categorization -->
+
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="/resources/demos/style.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
 
 
 	<!-- Bootstrap Core CSS -->
@@ -206,20 +207,25 @@
 		</div>
 	</div>
 	<p></p>
-	<!--Description text-->
+	<!--Description text, TESTING scrollable autocomplete-->
 	<div class="row">
-
+        <div class="ui-widget">
+          <label for="tags">Tags: </label>
+          <input id="tags">
+        </div>
 	</div>
 
 	<!-- Bootstrap Core JavaScript -->
-
-	<!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
-
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.js"></script>
-	<script src="js/jquery.autocomplete.min.js"></script>
+	<script src="js/jquery.autocomplete.min.js"></script> <!--este es el causante-->
 	<script src="js/properties.js"></script>
+
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+
 	<script>
 	/* want to modify search method to dropdown
 	<div> <p> </p> </div> <!--separate-->
@@ -253,9 +259,11 @@
 	var app = {map:null, polygons:null, payload:{getMode:"polygons", property:null, district:null}};
 	//var suggested = all the aliases of the properties, note: not all properties have an alias
 
+
+
+
 	$(document).ready(function(){//esto pasa recien cargada la pagina
 		//start here, get the properties
-
 
 		$.post('polygonHandler.php', {'columns': true}, function(result){//esto pasa recien cargada la pagina tambien
 
@@ -266,17 +274,69 @@
 					return {value: val[2], data: val[1], table: val[3]};
 				});
 			}
-			//create the autocomplete with the data
-			$('#autocomplete').autocomplete({
-				lookup: properties,
-				onSelect: function (suggestion) {
+
+      var test = [
+        "ActionScript",
+        "AppleScript",
+        "BabyScript",
+        "JesusScript",
+        "LolScript",
+        "Asp",
+        "BASIC",
+        "C",
+        "C++",
+        "Clojure",
+        "COBOL",
+        "ColdFusion",
+        "Erlang",
+        "Fortran",
+        "Groovy",
+        "Haskell",
+        "Java",
+        "JavaScript",
+        "Lisp",
+        "Perl",
+        "PHP",
+        "Python",
+        "Ruby",
+        "Scala",
+        "Scheme"
+      ];
+
+      $('#tags').autocomplete({
+				source: test,
+        autoFocus: true,
+        delay: 2,
+        minLength: 2
+				/*onSelect: function (suggestion) {
 					//console.log(suggestion.data + "  " + suggestion.table + "  " + suggestion.value);
 					app.payload.property = suggestion.data;
 					app.payload.table = suggestion.table;
 					app.payload.value = suggestion.value;
-				}
+				}*/
 			});
+
+
+			//create the autocomplete with the data
+			$('#autocomplete').autocomplete({
+				source: properties,
+				select: function(properties, ui){
+					console.log(properties.data + "  " + ui.table + "  " + event.value);
+					app.payload.property = suggestion.data;
+					app.payload.table = suggestion.table;
+					app.payload.value = suggestion.value;
+				}
+				/*
+				onSelect: function (suggestion) {
+					console.log(suggestion.data + "  " + suggestion.table + "  " + suggestion.value);
+					app.payload.property = suggestion.data;
+					app.payload.table = suggestion.table;
+					app.payload.value = suggestion.value;
+				}*/
+			});
+
 			$('#target').on('change', setDistrict);
+
 		});
 		app.payload.district = $('#target').children("option:selected").data('district');
 	});
@@ -285,9 +345,9 @@
 		//Ricardo
 		//Valores de depth top y depth bottom
 		var depth_t = document.getElementById("depth_top").value;
-		console.log("Ricardo, esto da el valor de depth_top: " + depth_t);
+
 		var depth_b = document.getElementById("depth_bottom").value;
-		console.log("Ricardo, esto da el valor de depth_bottom: " + depth_b);
+
 
 
 		if(app.payload.property){//to make sure a property is selected
