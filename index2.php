@@ -1353,7 +1353,7 @@ function initMap() {
 	});
 	app.infoWindow = new google.maps.InfoWindow;
 	var testLayer = new google.maps.KmlLayer({ //var testLayer = new google.maps.KmlLayer({ //testing the kml layer, should draw colored lines for a transportation system route in chicago
-	url: 'http://ctis.utep.edu/secretsanta/texas_districts.kml', //url: 'https://casoilresource.lawr.ucdavis.edu/soil_web/kml/SoilWeb.kmz', //url: 'http://googlemaps.github.io/js-v2-samples/ggeoxml/cta.kml',
+	url: 'http://ctis.utep.edu/secretsanta/texas_incomplete.kml', //url: 'https://casoilresource.lawr.ucdavis.edu/soil_web/kml/SoilWeb.kmz', //url: 'http://googlemaps.github.io/js-v2-samples/ggeoxml/cta.kml',
 	map: map
 });
 testLayer.setMap(app.map); //testing layers 13/03/18
