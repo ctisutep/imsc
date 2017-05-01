@@ -301,10 +301,14 @@
 				//draw the stuff on the map
 				if(data.hasOwnProperty('coords')){
 					removePolygons();
-					//               0           1           2          3          4         5          6           7         8          9
-					//              GRAY,       RED,     SKY BLUE, BRIGHT GREEN, PURPLE,   ORANGE,  BRIGHT PINK,NAVY BLUE,  LILAC,     YELLOW
-					shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
-					shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
+					//               0           1           2          3          4         5          6           7         8          9        10        11        12          13         14         15        16          17
+					//              GRAY,       RED,     SKY BLUE, BRIGHT GREEN, PURPLE,   ORANGE,  BRIGHT PINK,NAVY BLUE,  LILAC,     YELLOW    maroon    cyan     navygreen    peach      flesh      brown    neongreen   neonpurple
+ 					shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D", "#8C0909", "#07FDCA", "#008C35", "FFDBA5", "#B57777", "#6D3300", "#D0FF00", "#5900FF"];
+
+
+					shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a", "8c0909", "36c9bd", "#008c35", "#ffdba5", "#B57777", "#6D3300", "#D0FF00", "#5900FF"];
+
+
 					colorSelector = 0;
 					newzIndex = 0;
 					legendText = "";
@@ -319,12 +323,12 @@
 									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 									//colorSelector = 0;
 									//newzIndex = 0;
-									legendText = "<img src='img/graysquare.png' height='10px'/> <= 7<br>\
-									<img src='img/redsquare.png' height='10px'/>  > 7 and <= 17<br>\
-									<img src='img/skybluesquare.png' height='10px'/> > 17 and <= 36<br>\
-									<img src='img/brightgreensquare.png' height='10px'/> > 36 and <= 55<br>\
-									<img src='img/purplesquare.png' height='10px'/> > 55 and <= 65<br>\
-									<img src='img/whitesquare.png' height='10px'/> Not rated or not available";
+									legendText = "<img src='img/redsquare.png' height='10px'/> <= 7<br>\
+									<img src='img/skybluesquare.png' height='10px'/>  > 7 and <= 17<br>\
+									<img src='img/brightgreensquare.png' height='10px'/> > 17 and <= 36<br>\
+									<img src='img/purplesquare.png' height='10px'/> > 36 and <= 55<br>\
+									<img src='img/orangesquare.png' height='10px'/> > 55 and <= 65<br>\
+									<img src='img/graysquare.png' height='10px'/> Not rated or not available";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
@@ -366,8 +370,8 @@
 									<img src='img/redsquare.png' height='10px'/>  > 11.8 and <= 26.1<br>\
 									<img src='img/skybluesquare.png' height='10px'/> > 26.1 and <= 39.3<br>\
 									<img src='img/purplesquare.png' height='10px'/> > 39.3 and <= 57.8<br>\
-									<img src='img/whitesquare.png' height='10px'/> > 57.8 and <= 90.2<br>\
-									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
+									<img src='img/brightgreensquare.png' height='10px'/> > 57.8 and <= 90.2<br>\
+									<img src='img/graysquare.png height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
@@ -486,14 +490,16 @@
 									//console.log(app.payload.property);
 									//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
 									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
+									// 								GRAY, 			RED, 			SKY BLUE, BRIGHT GREEN, PURPLE, ORANGE, 	BRIGHT PINK, NAVY BLUE, LILAC, YELLOW
+
 									//colorSelector = 0;
 									//newzIndex = 0;
-									legendText = "<img src='img/graysquare.png' height='10px'/> <= 0.3<br>\
-									<img src='img/redsquare.png' height='10px'/>  > 0.3 and <= 0.9<br>\
-									<img src='img/skybluesquare.png' height='10px'/> > 0.9 and <= 1.8<br>\
+									legendText = "<img src='img/redsquare.png' height='10px'/> <= 0.3<br>\
+									<img src='img/skybluesquare.png' height='10px'/>  > 0.3 and <= 0.9<br>\
+									<img src='img/brightgreensquare.png' height='10px'/> > 0.9 and <= 1.8<br>\
 									<img src='img/purplesquare.png' height='10px'/> > 1.8 and <= 5.9<br>\
 									<img src='img/orangesquare.png' height='10px'/> > 5.9 and <= 17.5<br>\
-									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
+									<img src='img/graysquare.png height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
@@ -503,21 +509,25 @@
 										colorSelector = 1; //not black or gray
 										newzIndex = 1;
 										break;
-										case (amountIn > 0.9 && amountIn <= 1.8): // BETWEEN 0 AND 21
+										case (amountIn > 0.3 && amountIn <= 0.9): // BETWEEN 21 AND 40
 										colorSelector = 2;
 										newzIndex = 2;
 										break;
-										case (amountIn > 1.8 && amountIn <= 5.9): // BETWEEN 21 AND 40
+										case (amountIn > 0.9 && amountIn <= 1.8): // BETWEEN 0 AND 21
 										colorSelector = 3;
 										newzIndex = 3;
 										break;
-										case (amountIn > 5.9 && amountIn <= 17.5): // BETWEEN 41 AND 60
+										case (amountIn > 1.8 && amountIn <= 5.9): // BETWEEN 21 AND 40
 										colorSelector = 4;
 										newzIndex = 4;
 										break;
-										default: // Not rated
+										case (amountIn > 5.9 && amountIn <= 17.5): // BETWEEN 41 AND 60
 										colorSelector = 5;
 										newzIndex = 5;
+										break;
+										default: // Not rated
+										colorSelector = 0;
+										newzIndex = 0;
 										break;
 									}
 								}
@@ -527,45 +537,46 @@
 									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 									//colorSelector = 0;
 									//newzIndex = 0;
-									legendText = "<img src='img/graysquare.png' height='10px'/> Very Low (0.0 - 0.01)<br>\
-									<img src='img/redsquare.png' height='10px'/>  Low (0.01 - 0.1)<br>\
-									<img src='img/skybluesquare.png' height='10px'/> Moderately Low (0.1 - 1)<br>\
+
+									legendText = "<img src='img/redsquare.png' height='10px'/> Very Low (0.0 - 0.01)<br>\
+									<img src='img/skybluesquare.png' height='10px'/>  Low (0.01 - 0.1)<br>\
+									<img src='img/brightgreensquare.png' height='10px'/> Moderately Low (0.1 - 1)<br>\
 									<img src='img/purplesquare.png' height='10px'/> Moderately High (1 - 10)<br>\
 									<img src='img/orangesquare.png' height='10px'/> High (10 - 100)<br>\
-									<img src='img/whitesquare.png' height='10px'/> Very High (100 - 705)<br>\
-									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
+									<img src='img/brightpinksquare.png' height='10px'/> Very High (100 - 705)<br>\
+									<img src='img/graysquare.png height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
 									//console.log(amountIn);
 									switch (true) {
 										case (amountIn > 0.0 && amountIn <= 0.01): // LESS THAN OR EQUAL TO 0
-										colorSelect = 2;
-										newzIndex = 2;
+										colorSelect = 1;
+										newzIndex = 1;
 										break;
 										case (amountIn > 0.01 && amountIn <= 0.1): // BETWEEN 21 AND 40
+										colorSelector = 2;
+										newzIndex = 2;
+										break;
+										case (amountIn > 0.1 && amountIn <= 1): // BETWEEN 41 AND 60
 										colorSelector = 3;
 										newzIndex = 3;
 										break;
-										case (amountIn > 0.1 && amountIn <= 1): // BETWEEN 41 AND 60
+										case (amountIn > 1 && amountIn <= 10): // BETWEEN 41 AND 60
 										colorSelector = 4;
 										newzIndex = 4;
 										break;
-										case (amountIn > 1 && amountIn <= 10): // BETWEEN 41 AND 60
+										case (amountIn > 10 && amountIn <= 100): // BETWEEN 41 AND 60
 										colorSelector = 5;
 										newzIndex = 5;
 										break;
-										case (amountIn > 10 && amountIn <= 100): // BETWEEN 41 AND 60
+										case (amountIn > 100 && amountIn <= 705): // BETWEEN 41 AND 60
 										colorSelector = 6;
 										newzIndex = 6;
 										break;
-										case (amountIn > 100 && amountIn <= 705): // BETWEEN 41 AND 60
-										colorSelector = 7;
-										newzIndex = 7;
-										break;
 										default: // Not rated
-										colorSelector = 8;
-										newzIndex = 8;
+										colorSelector = 0;
+										newzIndex = 0;
 										break;
 									}
 								}
@@ -575,13 +586,13 @@
 									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 									//colorSelector = 0;
 									//newzIndex = 0;
-									legendText = "<img src='img/graysquare.png' height='10px'/> <br>\
+									legendText = "<img src='img/brightpinksquare.png' height='10px'/> <br>\
 									<img src='img/redsquare.png' height='10px'/> <br>\
 									<img src='img/skybluesquare.png' height='10px'/> <br>\
 									<img src='img/purplesquare.png' height='10px'/> <br>\
 									<img src='img/orangesquare.png' height='10px'/> <br>\
-									<img src='img/whitesquare.png' height='10px'/> <br>\
-									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
+									<img src='img/brightgreensquare.png' height='10px'/> <br>\
+									<img src='img/graysquare.png height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
@@ -618,75 +629,76 @@
 									}
 								}
 								else if(app.payload.property == "ph1to1h2o_r"){ //Testing legend and logic for drawing for this specific property
+									//not enough colors for this propierty
 									//console.log(app.payload.property);
 									//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
 									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 									//colorSelector = 0;
 									//newzIndex = 0;
-									legendText = "<img src='img/graysquare.png' height='10px'/> Ultra acid (ph < 3.5)<br>\
-									<img src='img/redsquare.png' height='10px'/> Extremely acid (ph 3.5 - 4.4)<br>\
-									<img src='img/skybluesquare.png' height='10px'/> Very strongly acid (ph 4.5 - 5.0)<br>\
+									legendText = "<img src='img/redsquare.png' height='10px'/> Ultra acid (ph < 3.5)<br>\
+									<img src='img/skybluesquare.png' height='10px'/> Extremely acid (ph 3.5 - 4.4)<br>\
+									<img src='img/brightgreensquare.png' height='10px'/> Very strongly acid (ph 4.5 - 5.0)<br>\
 									<img src='img/purplesquare.png' height='10px'/> Strongly acid (ph 5.1 - 5.5)<br>\
 									<img src='img/orangesquare.png' height='10px'/> Moderately acid (ph 5.6 - 6.0)<br>\
-									<img src='img/whitesquare.png' height='10px'/> Slightly acid (ph 6.1 - 6.5)<br>\
-									<img src='img/greensquare.png' height='10px'/> Neutral (ph 6.6 - 7.3)<br>\
-									<img src='img/yellowsquare.png' height='10px'/> Slightly alkaline (ph 7.4 - 7.8)<br>\
-									<img src='img/pinksquare.png' height='10px'/> Moderately alkaline (ph 7.9 - 8.4)<br>\
+									<img src='img/brightpinksquare.png' height='10px'/> Slightly acid (ph 6.1 - 6.5)<br>\
+									<img src='img/navybluesquare.png' height='10px'/> Neutral (ph 6.6 - 7.3)<br>\
+									<img src='img/lilacsquare.png' height='10px'/> Slightly alkaline (ph 7.4 - 7.8)<br>\
+									<img src='img/yellowsquare.png' height='10px'/> Moderately alkaline (ph 7.9 - 8.4)<br>\
 									<img src='img/maroonsquare.png' height='10px'/> Strongly alkaline (ph 8.5 - 9.0)<br>\
-									<img src='img/bluesquare.png' height='10px'/> Very strongly alkaline (ph > 9.0)<br>\
-									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
+									<img src='img/navygreen.png' height='10px'/> Very strongly alkaline (ph > 9.0)<br>\
+									<img src='img/graysquare.png height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
 									//console.log(amountIn);
 									switch (true) {
 										case (amountIn < 3.5): // LESS THAN OR EQUAL TO 0
-										colorSelect = 2;
-										newzIndex = 2;
+										colorSelect = 1;
+										newzIndex = 1;
 										break;
 										case (amountIn >= 3.5 && amountIn <= 4.4): // BETWEEN 21 AND 40
+										colorSelector = 2;
+										newzIndex = 2;
+										break;
+										case (amountIn >= 4.5 && amountIn <= 5.0): // BETWEEN 41 AND 60
 										colorSelector = 3;
 										newzIndex = 3;
 										break;
-										case (amountIn >= 4.5 && amountIn <= 5.0): // BETWEEN 41 AND 60
+										case (amountIn >= 5.1 && amountIn <= 5.5): // BETWEEN 41 AND 60
 										colorSelector = 4;
 										newzIndex = 4;
 										break;
-										case (amountIn >= 5.1 && amountIn <= 5.5): // BETWEEN 41 AND 60
+										case (amountIn >= 5.6 && amountIn <= 6.0): // BETWEEN 41 AND 60
 										colorSelector = 5;
 										newzIndex = 5;
 										break;
-										case (amountIn >= 5.6 && amountIn <= 6.0): // BETWEEN 41 AND 60
+										case (amountIn >= 6.1 && amountIn <= 6.5): // BETWEEN 41 AND 60
 										colorSelector = 6;
 										newzIndex = 6;
 										break;
-										case (amountIn >= 6.1 && amountIn <= 6.5): // BETWEEN 41 AND 60
+										case (amountIn >= 6.6 && amountIn <= 7.3): // BETWEEN 41 AND 60
 										colorSelector = 7;
 										newzIndex = 7;
 										break;
-										case (amountIn >= 6.6 && amountIn <= 7.3): // BETWEEN 41 AND 60
+										case (amountIn >= 7.4 && amountIn <= 7.8): // BETWEEN 41 AND 60
 										colorSelector = 8;
 										newzIndex = 8;
 										break;
-										case (amountIn >= 7.4 && amountIn <= 7.8): // BETWEEN 41 AND 60
+										case (amountIn >= 7.9 && amountIn <= 8.4): // BETWEEN 41 AND 60
 										colorSelector = 9;
 										newzIndex = 9;
 										break;
-										case (amountIn >= 7.9 && amountIn <= 8.4): // BETWEEN 41 AND 60
+										case (amountIn >= 8.5 && amountIn <= 9.0): // BETWEEN 41 AND 60
 										colorSelector = 10;
 										newzIndex = 10;
 										break;
-										case (amountIn >= 8.5 && amountIn <= 9.0): // BETWEEN 41 AND 60
+										case (amountIn > 9.0 ): // BETWEEN 41 AND 60
 										colorSelector = 11;
 										newzIndex = 11;
 										break;
-										case (amountIn > 9.0 ): // BETWEEN 41 AND 60
-										colorSelector = 12;
-										newzIndex = 12;
-										break;
 										default: // Not rated
-										colorSelector = 13;
-										newzIndex = 13;
+										colorSelector = 0;
+										newzIndex = 0;
 										break;
 									}
 								}
@@ -696,96 +708,96 @@
 									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 									//colorSelector = 0;
 									//newzIndex = 0;
-									legendText = "<img src='img/graysquare.png' height='10px'/> A-1<br>\
-									<img src='img/redsquare.png' height='10px'/> A-1-a<br>\
-									<img src='img/skybluesquare.png' height='10px'/> A-1-b<br>\
+									legendText = "<img src='img/redsquare.png' height='10px'/> A-1<br>\
+									<img src='img/skybluesquare.png' height='10px'/> A-1-a<br>\
+									<img src='img/brightgreensquare.png' height='10px'/> A-1-b<br>\
 									<img src='img/purplesquare.png' height='10px'/> A-b<br>\
 									<img src='img/orangesquare.png' height='10px'/> A-2<br>\
-									<img src='img/whitesquare.png' height='10px'/> A-2-4<br>\
-									<img src='img/greensquare.png' height='10px'/> A-2-5<br>\
-									<img src='img/yellowsquare.png' height='10px'/> A-2-6<br>\
-									<img src='img/pinksquare.png' height='10px'/> A-2-7<br>\
+									<img src='img/brightpinksquare.png' height='10px'/> A-2-4<br>\
+									<img src='img/navybluesquare.png' height='10px'/> A-2-5<br>\
+									<img src='img/lilacsquare.png' height='10px'/> A-2-6<br>\
+									<img src='img/yellowsquare.png' height='10px'/> A-2-7<br>\
 									<img src='img/maroonsquare.png' height='10px'/> A-3<br>\
-									<img src='img/bluesquare.png' height='10px'/> A-4<br>\
-									<img src='img/bluesquare.png' height='10px'/> A-5<br>\
-									<img src='img/bluesquare.png' height='10px'/> A-6<br>\
-									<img src='img/bluesquare.png' height='10px'/> A-7<br>\
-									<img src='img/bluesquare.png' height='10px'/> A-7-5<br>\
-									<img src='img/bluesquare.png' height='10px'/> A-7-6<br>\
-									<img src='img/bluesquare.png' height='10px'/> A-8<br>\
-									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
+									<img src='img/cyansquare.png' height='10px'/> A-4<br>\
+									<img src='img/navygreensquare.png' height='10px'/> A-5<br>\
+									<img src='img/peachsquare.png' height='10px'/> A-6<br>\
+									<img src='img/fleshsquare.png' height='10px'/> A-7<br>\
+									<img src='img/brownsquare.png' height='10px'/> A-7-5<br>\
+									<img src='img/neongreen.png' height='10px'/> A-7-6<br>\
+									<img src='img/neonpurple.png' height='10px'/> A-8<br>\
+									<img src='img/graysquare.png height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
 									//console.log(amountIn);
 									switch (true) {
 										case (amountIn == "A-1-a"): // LESS THAN OR EQUAL TO 0
-										colorSelect = 2;
-										newzIndex = 2;
+										colorSelect = 1;
+										newzIndex = 1;
 										break;
 										case (amountIn == "A-1-b"): // BETWEEN 21 AND 40
+										colorSelector = 2;
+										newzIndex = 2;
+										break;
+										case (amountIn == "A-b"): // BETWEEN 41 AND 60
 										colorSelector = 3;
 										newzIndex = 3;
 										break;
-										case (amountIn == "A-b"): // BETWEEN 41 AND 60
+										case (amountIn == "A-2"): // BETWEEN 41 AND 60
 										colorSelector = 4;
 										newzIndex = 4;
 										break;
-										case (amountIn == "A-2"): // BETWEEN 41 AND 60
+										case (amountIn == "A-2-4"): // BETWEEN 41 AND 60
 										colorSelector = 5;
 										newzIndex = 5;
 										break;
-										case (amountIn == "A-2-4"): // BETWEEN 41 AND 60
+										case (amountIn == "A-2-5"): // BETWEEN 41 AND 60
 										colorSelector = 6;
 										newzIndex = 6;
 										break;
-										case (amountIn == "A-2-5"): // BETWEEN 41 AND 60
+										case (amountIn == "A-2-6"): // BETWEEN 41 AND 60
 										colorSelector = 7;
 										newzIndex = 7;
 										break;
-										case (amountIn == "A-2-6"): // BETWEEN 41 AND 60
+										case (amountIn == "A-2-7"): // BETWEEN 41 AND 60
 										colorSelector = 8;
 										newzIndex = 8;
 										break;
-										case (amountIn == "A-2-7"): // BETWEEN 41 AND 60
+										case (amountIn == "A-3"): // BETWEEN 41 AND 60
 										colorSelector = 9;
 										newzIndex = 9;
 										break;
-										case (amountIn == "A-3"): // BETWEEN 41 AND 60
+										case (amountIn == "A-4"): // BETWEEN 41 AND 60
 										colorSelector = 10;
 										newzIndex = 10;
 										break;
-										case (amountIn == "A-4"): // BETWEEN 41 AND 60
+										case (amountIn == "A-5" ): // BETWEEN 41 AND 60
 										colorSelector = 11;
 										newzIndex = 11;
 										break;
-										case (amountIn == "A-5" ): // BETWEEN 41 AND 60
+										case (amountIn == "A-6" ): // BETWEEN 41 AND 60
 										colorSelector = 12;
 										newzIndex = 12;
 										break;
-										case (amountIn == "A-6" ): // BETWEEN 41 AND 60
+										case (amountIn == "A-7" ): // BETWEEN 41 AND 60
 										colorSelector = 13;
 										newzIndex = 13;
 										break;
-										case (amountIn == "A-7" ): // BETWEEN 41 AND 60
+										case (amountIn == "A-7-5" ): // BETWEEN 41 AND 60
 										colorSelector = 14;
 										newzIndex = 14;
 										break;
-										case (amountIn == "A-7-5" ): // BETWEEN 41 AND 60
+										case (amountIn == "A-7-6" ): // BETWEEN 41 AND 60
 										colorSelector = 15;
 										newzIndex = 15;
 										break;
-										case (amountIn == "A-7-6" ): // BETWEEN 41 AND 60
+										case (amountIn == "A-8" ): // BETWEEN 41 AND 60
 										colorSelector = 16;
 										newzIndex = 16;
 										break;
-										case (amountIn == "A-8" ): // BETWEEN 41 AND 60
-										colorSelector = 17;
-										newzIndex = 17;
-										break;
 										default: // Not rated
-										colorSelector = 18;
-										newzIndex = 18;
+										colorSelector = 0;
+										newzIndex = 0;
 										break;
 									}
 								}
@@ -795,40 +807,40 @@
 									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 									//colorSelector = 0;
 									//newzIndex = 0;
-									legendText = "<img src='img/graysquare.png' height='10px'/> <= 27.2<br>\
-									<img src='img/redsquare.png' height='10px'/> > 27.2 and <= 45.8<br>\
-									<img src='img/skybluesquare.png' height='10px'/> > 45.8 and <= 58.0<br>\
+									legendText = "<img src='img/redsquare.png' height='10px'/> <= 27.2<br>\
+									<img src='img/skybluesquare.png' height='10px'/> > 27.2 and <= 45.8<br>\
+									<img src='img/brightgreensquare.png' height='10px'/> > 45.8 and <= 58.0<br>\
 									<img src='img/purplesquare.png' height='10px'/> > 58.0 and <= 66.0<br>\
 									<img src='img/orangesquare.png' height='10px'/> > 66.0 and <= 75.7<br>\
-									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
+									<img src='img/graysquare.png height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
 									//console.log(amountIn);
 									switch (true) {
 										case (amountIn <= 27.2): // LESS THAN OR EQUAL TO 0
-										colorSelect = 2;
-										newzIndex = 2;
+										colorSelect = 1;
+										newzIndex = 1;
 										break;
 										case (amountIn > 27.2 && amountIn <= 45.8): // BETWEEN 21 AND 40
+										colorSelector = 2;
+										newzIndex = 2;
+										break;
+										case (amountIn > 45.8 && amountIn <= 58.0): // BETWEEN 41 AND 60
 										colorSelector = 3;
 										newzIndex = 3;
 										break;
-										case (amountIn > 45.8 && amountIn <= 58.0): // BETWEEN 41 AND 60
+										case (amountIn > 58.0 && amountIn <= 66.0): // BETWEEN 41 AND 60
 										colorSelector = 4;
 										newzIndex = 4;
 										break;
-										case (amountIn > 58.0 && amountIn <= 66.0): // BETWEEN 41 AND 60
+										case (amountIn > 66.0 && amountIn <= 75.7): // BETWEEN 41 AND 60
 										colorSelector = 5;
 										newzIndex = 5;
 										break;
-										case (amountIn > 66.0 && amountIn <= 75.7): // BETWEEN 41 AND 60
-										colorSelector = 6;
-										newzIndex = 6;
-										break;
 										default: // Not rated
-										colorSelector = 13;
-										newzIndex = 13;
+										colorSelector = 0;
+										newzIndex = 0;
 										break;
 									}
 								}
@@ -838,85 +850,85 @@
 									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 									//colorSelector = 0;
 									//newzIndex = 0;
-									legendText = "<img src='img/graysquare.png' height='10px'/> .02<br>\
-									<img src='img/redsquare.png' height='10px'/> .05<br>\
-									<img src='img/skybluesquare.png' height='10px'/> .10<br>\
+									legendText = "<img src='img/redsquare.png' height='10px'/> .02<br>\
+									<img src='img/skybluesquare.png' height='10px'/> .05<br>\
+									<img src='img/brightgreensquare.png' height='10px'/> .10<br>\
 									<img src='img/purplesquare.png' height='10px'/> .15<br>\
 									<img src='img/orangesquare.png' height='10px'/> .17<br>\
-									<img src='img/whitesquare.png' height='10px'/> .20<br>\
-									<img src='img/greensquare.png' height='10px'/> .24<br>\
-									<img src='img/yellowsquare.png' height='10px'/> .28<br>\
-									<img src='img/pinksquare.png' height='10px'/> .32<br>\
+									<img src='img/brightpinksquare.png' height='10px'/> .20<br>\
+									<img src='img/navybluesquare.png' height='10px'/> .24<br>\
+									<img src='img/lilacsquare.png' height='10px'/> .28<br>\
+									<img src='img/yellowsquare.png' height='10px'/> .32<br>\
 									<img src='img/maroonsquare.png' height='10px'/> .37<br>\
-									<img src='img/bluesquare.png' height='10px'/> .43<br>\
-									<img src='img/bluesquare.png' height='10px'/> .49<br>\
-									<img src='img/bluesquare.png' height='10px'/> .55<br>\
-									<img src='img/bluesquare.png' height='10px'/> .64<br>\
-									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
+									<img src='img/cyansquare.png' height='10px'/> .43<br>\
+									<img src='img/navygreensquare.png' height='10px'/> .49<br>\
+									<img src='img/peachsquare.png' height='10px'/> .55<br>\
+									<img src='img/fleshsquare.png' height='10px'/> .64<br>\
+									<img src='img/graysquare.png height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
 									//console.log(amountIn);
 									switch (true) {
 										case (amountIn <= 0.02): // LESS THAN OR EQUAL TO 0
-										colorSelect = 2;
-										newzIndex = 2;
+										colorSelect = 1;
+										newzIndex = 1;
 										break;
 										case (amountIn <= 0.05): // BETWEEN 21 AND 40
+										colorSelector = 2;
+										newzIndex = 2;
+										break;
+										case (amountIn <= .10): // BETWEEN 41 AND 60
 										colorSelector = 3;
 										newzIndex = 3;
 										break;
-										case (amountIn <= .10): // BETWEEN 41 AND 60
+										case (amountIn <= .15): // BETWEEN 41 AND 60
 										colorSelector = 4;
 										newzIndex = 4;
 										break;
-										case (amountIn <= .15): // BETWEEN 41 AND 60
+										case (amountIn <= .17): // BETWEEN 41 AND 60
 										colorSelector = 5;
 										newzIndex = 5;
 										break;
-										case (amountIn <= .17): // BETWEEN 41 AND 60
+										case (amountIn <= .20): // BETWEEN 41 AND 60
 										colorSelector = 6;
 										newzIndex = 6;
 										break;
-										case (amountIn <= .20): // BETWEEN 41 AND 60
+										case (amountIn <= .24): // BETWEEN 41 AND 60
 										colorSelector = 7;
 										newzIndex = 7;
 										break;
-										case (amountIn <= .24): // BETWEEN 41 AND 60
+										case (amountIn <= 0.28): // BETWEEN 41 AND 60
 										colorSelector = 8;
 										newzIndex = 8;
 										break;
-										case (amountIn <= 0.28): // BETWEEN 41 AND 60
+										case (amountIn <= 0.32): // BETWEEN 41 AND 60
 										colorSelector = 9;
 										newzIndex = 9;
 										break;
-										case (amountIn <= 0.32): // BETWEEN 41 AND 60
+										case (amountIn <= 0.37): // BETWEEN 41 AND 60
 										colorSelector = 10;
 										newzIndex = 10;
 										break;
-										case (amountIn <= 0.37): // BETWEEN 41 AND 60
+										case (amountIn <= 0.43): // BETWEEN 41 AND 60
 										colorSelector = 11;
 										newzIndex = 11;
 										break;
-										case (amountIn <= 0.43): // BETWEEN 41 AND 60
+										case (amountIn <= 0.49): // BETWEEN 41 AND 60
 										colorSelector = 12;
 										newzIndex = 12;
 										break;
-										case (amountIn <= 0.49): // BETWEEN 41 AND 60
+										case (amountIn <= 0.55): // BETWEEN 41 AND 60
 										colorSelector = 13;
 										newzIndex = 13;
 										break;
-										case (amountIn <= 0.55): // BETWEEN 41 AND 60
+										case (amountIn <= 0.64): // BETWEEN 41 AND 60
 										colorSelector = 14;
 										newzIndex = 14;
 										break;
-										case (amountIn <= 0.64): // BETWEEN 41 AND 60
-										colorSelector = 15;
-										newzIndex = 15;
-										break;
 										default: // Not rated
-										colorSelector = 16;
-										newzIndex = 16;
+										colorSelector = 0;
+										newzIndex = 0;
 										break;
 									}
 								}
@@ -926,70 +938,70 @@
 									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 									//colorSelector = 0;
 									//newzIndex = 0;
-									legendText = "<img src='img/graysquare.png' height='10px'/> Ultra acid (ph < 3.5)<br>\
-									<img src='img/redsquare.png' height='10px'/> Extremely acid (ph 3.5 - 4.4)<br>\
-									<img src='img/skybluesquare.png' height='10px'/> Very strongly acid (ph 4.5 - 5.0)<br>\
+									legendText = "<img src='img/redsquare.png' height='10px'/> Ultra acid (ph < 3.5)<br>\
+									<img src='img/skybluesquare.png' height='10px'/> Extremely acid (ph 3.5 - 4.4)<br>\
+									<img src='img/brightgreensquare.png' height='10px'/> Very strongly acid (ph 4.5 - 5.0)<br>\
 									<img src='img/purplesquare.png' height='10px'/> Strongly acid (ph 5.1 - 5.5)<br>\
 									<img src='img/orangesquare.png' height='10px'/> Moderately acid (ph 5.6 - 6.0)<br>\
-									<img src='img/whitesquare.png' height='10px'/> Slightly acid (ph 6.1 - 6.5)<br>\
-									<img src='img/greensquare.png' height='10px'/> Neutral (ph 6.6 - 7.3)<br>\
-									<img src='img/yellowsquare.png' height='10px'/> Slightly alkaline (ph 7.4 - 7.8)<br>\
-									<img src='img/pinksquare.png' height='10px'/> Moderately alkaline (ph 7.9 - 8.4)<br>\
+									<img src='img/brightpinksquare.png' height='10px'/> Slightly acid (ph 6.1 - 6.5)<br>\
+									<img src='img/navybluesquare.png' height='10px'/> Neutral (ph 6.6 - 7.3)<br>\
+									<img src='img/lilacsquare.png' height='10px'/> Slightly alkaline (ph 7.4 - 7.8)<br>\
+									<img src='img/yellowsquare.png' height='10px'/> Moderately alkaline (ph 7.9 - 8.4)<br>\
 									<img src='img/maroonsquare.png' height='10px'/> Strongly alkaline (ph 8.5 - 9.0)<br>\
-									<img src='img/bluesquare.png' height='10px'/> Very strongly alkaline (ph > 9.0)<br>\
-									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
+									<img src='img/navygreen.png' height='10px'/> Very strongly alkaline (ph > 9.0)<br>\
+									<img src='img/graysquare.png height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
 									//console.log(amountIn);
 									switch (true) {
 										case (amountIn < 3.5): // LESS THAN OR EQUAL TO 0
-										colorSelect = 2;
-										newzIndex = 2;
+										colorSelect = 1;
+										newzIndex = 1;
 										break;
 										case (amountIn >= 3.5 && amountIn <= 4.4): // BETWEEN 21 AND 40
+										colorSelector = 2;
+										newzIndex = 2;
+										break;
+										case (amountIn >= 4.5 && amountIn <= 5.0): // BETWEEN 41 AND 60
 										colorSelector = 3;
 										newzIndex = 3;
 										break;
-										case (amountIn >= 4.5 && amountIn <= 5.0): // BETWEEN 41 AND 60
+										case (amountIn >= 5.1 && amountIn <= 5.5): // BETWEEN 41 AND 60
 										colorSelector = 4;
 										newzIndex = 4;
 										break;
-										case (amountIn >= 5.1 && amountIn <= 5.5): // BETWEEN 41 AND 60
+										case (amountIn >= 5.6 && amountIn <= 6.0): // BETWEEN 41 AND 60
 										colorSelector = 5;
 										newzIndex = 5;
 										break;
-										case (amountIn >= 5.6 && amountIn <= 6.0): // BETWEEN 41 AND 60
+										case (amountIn >= 6.1 && amountIn <= 6.5): // BETWEEN 41 AND 60
 										colorSelector = 6;
 										newzIndex = 6;
 										break;
-										case (amountIn >= 6.1 && amountIn <= 6.5): // BETWEEN 41 AND 60
+										case (amountIn >= 6.6 && amountIn <= 7.3): // BETWEEN 41 AND 60
 										colorSelector = 7;
 										newzIndex = 7;
 										break;
-										case (amountIn >= 6.6 && amountIn <= 7.3): // BETWEEN 41 AND 60
+										case (amountIn >= 7.4 && amountIn <= 7.8): // BETWEEN 41 AND 60
 										colorSelector = 8;
 										newzIndex = 8;
 										break;
-										case (amountIn >= 7.4 && amountIn <= 7.8): // BETWEEN 41 AND 60
+										case (amountIn >= 7.9 && amountIn <= 8.4): // BETWEEN 41 AND 60
 										colorSelector = 9;
 										newzIndex = 9;
 										break;
-										case (amountIn >= 7.9 && amountIn <= 8.4): // BETWEEN 41 AND 60
+										case (amountIn >= 8.5 && amountIn <= 9.0): // BETWEEN 41 AND 60
 										colorSelector = 10;
 										newzIndex = 10;
 										break;
-										case (amountIn >= 8.5 && amountIn <= 9.0): // BETWEEN 41 AND 60
+										case (amountIn > 9.0 ): // BETWEEN 41 AND 60
 										colorSelector = 11;
 										newzIndex = 11;
 										break;
-										case (amountIn > 9.0 ): // BETWEEN 41 AND 60
-										colorSelector = 12;
-										newzIndex = 12;
-										break;
 										default: // Not rated
-										colorSelector = 13;
-										newzIndex = 13;
+										colorSelector = 0;
+										newzIndex = 0;
 										break;
 									}
 								}
