@@ -1352,11 +1352,16 @@ function initMap() {
 		mapTypeId: 'terrain'
 	});
 	app.infoWindow = new google.maps.InfoWindow;
-	var testLayer = new google.maps.KmlLayer({ //var testLayer = new google.maps.KmlLayer({ //testing the kml layer, should draw colored lines for a transportation system route in chicago
+	/*var testLayer = new google.maps.KmlLayer({ //var testLayer = new google.maps.KmlLayer({ //testing the kml layer, should draw colored lines for a transportation system route in chicago
 	url: 'http://ctis.utep.edu/secretsanta/texas_incomplete.kml', //url: 'https://casoilresource.lawr.ucdavis.edu/soil_web/kml/SoilWeb.kmz', //url: 'http://googlemaps.github.io/js-v2-samples/ggeoxml/cta.kml',
+	//url: 'http://ctis.utep.edu/secretsanta/county_texas.kml',
+	//url: 'http://ctis.utep.edu/secretsanta/elpaso.kmz',
+	//url: 'http://ctis.utep.edu/secretsanta/SoilWeb.kmz',
+	//url: 'http://ctis.utep.edu/secretsanta/texas_counties.kmz',
+	//url: 'http://ctis.utep.edu/secretsanta/texas_districts.kml',
 	map: map
 });
-testLayer.setMap(app.map); //testing layers 13/03/18
+testLayer.setMap(app.map);*/ //testing layers 13/03/18
 app.map.addListener('click', function(e) {
 	// console.log(e.latLng.toString());
 });
