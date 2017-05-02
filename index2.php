@@ -12,7 +12,7 @@
 	<title>TX-IMSC</title>
 	<!-- Interactive Map for Soil Categorization -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="/resources/demos/style.css">
+	<!--<link rel="stylesheet" href="/resources/demos/style.css">-->
 
 
 	<!-- Bootstrap Core CSS -->
@@ -75,6 +75,7 @@
 
 		<div class="row">
 			<div class="col-md-9">
+				<!--<h1> testing </h1>-->
 				<div id="map"></div>
 			</div>
 			<div class="col-md-3">
@@ -175,8 +176,9 @@
 								<input type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="autocomplete" autocomplete="off">
 							</div> <br>
 							<label> Depth: </label> <br>
-							<p> Top = <input type="text" value="" id="depth_top" placeholder="...inches" style="color: black;"></p>
-							<p> Bottom = <input type="text" value="" id="depth_bottom" placeholder="...inches" style="color: black;"></p>
+							<input type="text" value="" id="depth" placeholder=" ...inches" style="color: black;">
+							<!--<p> Top = <input type="text" value="" id="depth_top" placeholder="...inches" style="color: black;"></p>
+							<p> Bottom = <input type="text" value="" id="depth_bottom" placeholder="...inches" style="color: black;"></p>-->
 						</div>
 						<div> <p> </p> </div> <!--separate-->
 						<div class="row">
