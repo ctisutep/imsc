@@ -285,11 +285,12 @@
 	function getPolygons(){//this is run button
 
 		//Ricardo
+		var depth = document.getElementById("depth").value;
 		//Valores de depth top y depth bottom
-		var depth_t = document.getElementById("depth_top").value;
+		/*var depth_t = document.getElementById("depth_top").value;
 		console.log("Ricardo, esto da el valor de depth_top: " + depth_t);
 		var depth_b = document.getElementById("depth_bottom").value;
-		console.log("Ricardo, esto da el valor de depth_bottom: " + depth_b);
+		console.log("Ricardo, esto da el valor de depth_bottom: " + depth_b);*/
 
 
 		if(app.payload.property){//to make sure a property is selected
@@ -373,7 +374,7 @@
 									<img src='img/skybluesquare.png' height='10px'/> > 26.1 and <= 39.3<br>\
 									<img src='img/purplesquare.png' height='10px'/> > 39.3 and <= 57.8<br>\
 									<img src='img/brightgreensquare.png' height='10px'/> > 57.8 and <= 90.2<br>\
-									<img src='img/graysquare.png height='10px'/> Not rated or not available ";
+									<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
@@ -414,32 +415,32 @@
 									legendText = "<img src='img/graysquare.png' height='10px'/> <= 0<br>\
 									<img src='img/redsquare.png' height='10px'/>  > 0 and <= 1<br>\
 									<img src='img/skybluesquare.png' height='10px'/> > 1 and <= 2<br>\
-									<img src='img/purplesquare.png' height='10px'/> > 2 and <= 3<br>\
-									<img src='img/blacksquare.png height='10px'/> Not rated or not available ";
+									<img src='img/brightgreensquare.png' height='10px'/> > 2 and <= 3<br>\
+									<img src='img/purplesquare.png' height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
 									//console.log(amountIn);
 									switch (true) {
 										case (amountIn <= 0): // LESS THAN OR EQUAL TO 0
-										colorSelector = 1; //not black or gray
-										newzIndex = 1;
+										colorSelector = 0; //not black or gray
+										newzIndex = 0;
 										break;
 										case (amountIn > 0 && amountIn <= 1): // BETWEEN 0 AND 21
+										colorSelector = 1;
+										newzIndex = 1;
+										break;
+										case (amountIn > 1 && amountIn <= 2): // BETWEEN 21 AND 40
 										colorSelector = 2;
 										newzIndex = 2;
 										break;
-										case (amountIn > 1 && amountIn <= 2): // BETWEEN 21 AND 40
+										case (amountIn > 2 && amountIn <= 3): // BETWEEN 41 AND 60
 										colorSelector = 3;
 										newzIndex = 3;
 										break;
-										case (amountIn > 2 && amountIn <= 3): // BETWEEN 41 AND 60
+										default: // Not rated
 										colorSelector = 4;
 										newzIndex = 4;
-										break;
-										default: // Not rated
-										colorSelector = 5;
-										newzIndex = 5;
 										break;
 									}
 								}
@@ -454,7 +455,7 @@
 									<img src='img/brightgreensquare.png' height='10px'/> > 21.0 and <= 30.6<br>\
 									<img src='img/purplesquare.png' height='10px'/> > 30.6 and <= 37.5<br>\
 									<img src='img/orangesquare.png' height='10px'/> > 37.5 and <= 54.1<br>\
-									<img src='img/graysquare.png height='10px'/> Not rated or not available ";
+									<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
 									// GRAY, RED, SKY BLUE, BRIGHT GREEN, PURPLE, ORANGE, BRIGHT PINK, NAVY BLUE, LILAC, YELLOW
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									//
@@ -501,7 +502,7 @@
 									<img src='img/brightgreensquare.png' height='10px'/> > 0.9 and <= 1.8<br>\
 									<img src='img/purplesquare.png' height='10px'/> > 1.8 and <= 5.9<br>\
 									<img src='img/orangesquare.png' height='10px'/> > 5.9 and <= 17.5<br>\
-									<img src='img/graysquare.png height='10px'/> Not rated or not available ";
+									<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
@@ -546,7 +547,7 @@
 									<img src='img/purplesquare.png' height='10px'/> Moderately High (1 - 10)<br>\
 									<img src='img/orangesquare.png' height='10px'/> High (10 - 100)<br>\
 									<img src='img/brightpinksquare.png' height='10px'/> Very High (100 - 705)<br>\
-									<img src='img/graysquare.png height='10px'/> Not rated or not available ";
+									<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
@@ -594,7 +595,7 @@
 									<img src='img/purplesquare.png' height='10px'/> <br>\
 									<img src='img/orangesquare.png' height='10px'/> <br>\
 									<img src='img/brightgreensquare.png' height='10px'/> <br>\
-									<img src='img/graysquare.png height='10px'/> Not rated or not available ";
+									<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
@@ -648,7 +649,7 @@
 									<img src='img/yellowsquare.png' height='10px'/> Moderately alkaline (ph 7.9 - 8.4)<br>\
 									<img src='img/maroonsquare.png' height='10px'/> Strongly alkaline (ph 8.5 - 9.0)<br>\
 									<img src='img/navygreen.png' height='10px'/> Very strongly alkaline (ph > 9.0)<br>\
-									<img src='img/graysquare.png height='10px'/> Not rated or not available ";
+									<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
@@ -727,7 +728,7 @@
 									<img src='img/brownsquare.png' height='10px'/> A-7-5<br>\
 									<img src='img/neongreen.png' height='10px'/> A-7-6<br>\
 									<img src='img/neonpurple.png' height='10px'/> A-8<br>\
-									<img src='img/graysquare.png height='10px'/> Not rated or not available ";
+									<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
@@ -814,7 +815,7 @@
 									<img src='img/brightgreensquare.png' height='10px'/> > 45.8 and <= 58.0<br>\
 									<img src='img/purplesquare.png' height='10px'/> > 58.0 and <= 66.0<br>\
 									<img src='img/orangesquare.png' height='10px'/> > 66.0 and <= 75.7<br>\
-									<img src='img/graysquare.png height='10px'/> Not rated or not available ";
+									<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
@@ -866,7 +867,7 @@
 									<img src='img/navygreensquare.png' height='10px'/> .49<br>\
 									<img src='img/peachsquare.png' height='10px'/> .55<br>\
 									<img src='img/fleshsquare.png' height='10px'/> .64<br>\
-									<img src='img/graysquare.png height='10px'/> Not rated or not available ";
+									<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
@@ -951,7 +952,7 @@
 									<img src='img/yellowsquare.png' height='10px'/> Moderately alkaline (ph 7.9 - 8.4)<br>\
 									<img src='img/maroonsquare.png' height='10px'/> Strongly alkaline (ph 8.5 - 9.0)<br>\
 									<img src='img/navygreen.png' height='10px'/> Very strongly alkaline (ph > 9.0)<br>\
-									<img src='img/graysquare.png height='10px'/> Not rated or not available ";
+									<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
@@ -1000,6 +1001,49 @@
 										case (amountIn > 9.0 ): // BETWEEN 41 AND 60
 										colorSelector = 11;
 										newzIndex = 11;
+										break;
+										default: // Not rated
+										colorSelector = 0;
+										newzIndex = 0;
+										break;
+									}
+								}
+								else if(app.payload.property == "om_r"){ //Testing legend and logic for drawing for this specific property
+									//console.log(app.payload.property);
+									//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
+									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
+									//colorSelector = 0;
+									//newzIndex = 0;
+									legendText = "<img src='img/redsquare.png' height='10px'/> <= 0.73<br>\
+									<img src='img/skybluesquare.png' height='10px'/> > 0.73 and <= 1.14<br>\
+									<img src='img/brightgreensquare.png' height='10px'/> > 1.14 and <= 1.74<br>\
+									<img src='img/purplesquare.png' height='10px'/> > 1.74 and <= 2.50 <br>\
+									<img src='img/orangesquare.png' height='10px'/> > 2.50 and <= 4.50 <br>\
+									<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
+									var amountIn = parseFloat(data.coords[key][app.payload.property]);
+									//console.log(amountIn);
+									//var amountIn = data.coords[key][app.payload.property];
+									//console.log(amountIn);
+									switch (true) {
+										case (amountIn <= 0.73): // LESS THAN OR EQUAL TO 0
+										colorSelect = 1;
+										newzIndex = 1;
+										break;
+										case (amountIn > 0.73 && amountIn <= 1.14): // BETWEEN 21 AND 40
+										colorSelector = 2;
+										newzIndex = 2;
+										break;
+										case (amountIn > 1.14 && amountIn <= 1.74): // BETWEEN 41 AND 60
+										colorSelector = 3;
+										newzIndex = 3;
+										break;
+										case (amountIn > 1.74 && amountIn <= 2.50): // BETWEEN 41 AND 60
+										colorSelector = 4;
+										newzIndex = 4;
+										break;
+										case (amountIn > 2.50 && amountIn <= 4.50): // BETWEEN 41 AND 60
+										colorSelector = 5;
+										newzIndex = 5;
 										break;
 										default: // Not rated
 										colorSelector = 0;
