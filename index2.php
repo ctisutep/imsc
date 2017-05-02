@@ -412,35 +412,35 @@
 									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 									//colorSelector = 0;
 									//newzIndex = 0;
-									legendText = "<img src='img/graysquare.png' height='10px'/> <= 0<br>\
-									<img src='img/redsquare.png' height='10px'/>  > 0 and <= 1<br>\
-									<img src='img/skybluesquare.png' height='10px'/> > 1 and <= 2<br>\
-									<img src='img/brightgreensquare.png' height='10px'/> > 2 and <= 3<br>\
-									<img src='img/purplesquare.png' height='10px'/> Not rated or not available ";
+									legendText = "<img src='img/redsquare.png' height='10px'/> <= 0<br>\
+									<img src='img/skybluesquare.png' height='10px'/>  > 0 and <= 1<br>\
+									<img src='img/brightgreensquare.png' height='10px'/> > 1 and <= 2<br>\
+									<img src='img/purplesquare.png' height='10px'/> > 2 and <= 3<br>\
+									<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									//console.log(amountIn);
 									//var amountIn = data.coords[key][app.payload.property];
 									//console.log(amountIn);
 									switch (true) {
 										case (amountIn <= 0): // LESS THAN OR EQUAL TO 0
-										colorSelector = 0; //not black or gray
-										newzIndex = 0;
-										break;
-										case (amountIn > 0 && amountIn <= 1): // BETWEEN 0 AND 21
 										colorSelector = 1;
 										newzIndex = 1;
 										break;
-										case (amountIn > 1 && amountIn <= 2): // BETWEEN 21 AND 40
+										case (amountIn > 0 && amountIn <= 1): // BETWEEN 0 AND 21
 										colorSelector = 2;
 										newzIndex = 2;
 										break;
-										case (amountIn > 2 && amountIn <= 3): // BETWEEN 41 AND 60
+										case (amountIn > 1 && amountIn <= 2): // BETWEEN 21 AND 40
 										colorSelector = 3;
 										newzIndex = 3;
 										break;
-										default: // Not rated
+										case (amountIn > 2 && amountIn <= 3): // BETWEEN 41 AND 60
 										colorSelector = 4;
 										newzIndex = 4;
+										break;
+										default: // Not rated
+										colorSelector = 0;
+										newzIndex = 0;
 										break;
 									}
 								}
