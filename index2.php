@@ -1354,6 +1354,16 @@
 				var descriptor = document.getElementById('description');
 				descriptor.appendChild(div);
 			}
+			else if ($('#autocomplete').val() == "OM"){
+				var prprty = "Description for Organic Matter: ";
+				var prprtyText = "Organic matter percent is the weight of decomposed plant, animal, and microbial residues exclusive of non-decomposed plant and animal residues. It is expressed as a percentage, by weight, of the soil material that is less than 2 mm in diameter.";
+				var h3 = document.createElement('h3');
+				h3.innerHTML = prprty;
+				var div = document.createElement('div');
+				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+				var descriptor = document.getElementById('description');
+				descriptor.appendChild(div);
+			}
 			else{
 			}
 			/** Copy and paste to change properties.
