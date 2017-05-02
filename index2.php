@@ -240,7 +240,6 @@
 	</div>
 	<div> <p> </p> </div> <!--separate-->
 	*/
-
 	/* original search method
 	<div class="row"> <!--search-->
 		<label> Search: </label>
@@ -252,15 +251,11 @@
 		</div>
 	</div>
 	*/
-	var app = {map:null, polygons:null, payload:{getMode:"polygons", property:null, district:null}};
+	var app = {map:null, polygons:null, payload:{getMode:"polygons", property:null, district:null, depth:null}};
 	//var suggested = all the aliases of the properties, note: not all properties have an alias
-
 	$(document).ready(function(){//esto pasa recien cargada la pagina
 		//start here, get the properties
-
-
 		$.post('polygonHandler.php', {'columns': true}, function(result){//esto pasa recien cargada la pagina tambien
-
 			//do stuff with the result
 			var properties;
 			if(result.hasOwnProperty('columns')){
@@ -284,18 +279,17 @@
 	});
 	function getPolygons(){//this is run button
 
-		//Ricardo
 		var depth = document.getElementById("depth").value;
+
 		//Valores de depth top y depth bottom
 		/*var depth_t = document.getElementById("depth_top").value;
 		console.log("Ricardo, esto da el valor de depth_top: " + depth_t);
 		var depth_b = document.getElementById("depth_bottom").value;
 		console.log("Ricardo, esto da el valor de depth_bottom: " + depth_b);*/
-
-
-		if(app.payload.property){//to make sure a property is selected
+		else if(app.payload.property){//to make sure a property is selected
 			//get the polygons
 			// console.log(app.payload);
+			app.payload.depth = depth;
 			var getparams = app.payload;
 			var bounds = app.map.getBounds();
 			getparams.NE = bounds.getNorthEast().toJSON(); //north east corner
@@ -307,11 +301,7 @@
 					//               0           1           2          3          4         5          6           7         8          9        10        11        12          13         14         15        16          17
 					//              GRAY,       RED,     SKY BLUE, BRIGHT GREEN, PURPLE,   ORANGE,  BRIGHT PINK,NAVY BLUE,  LILAC,     YELLOW    maroon    cyan     navygreen    peach      flesh      brown    neongreen   neonpurple
  					shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#fe9253", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D", "#8C0909", "#07FDCA", "#008C35", "FFDBA5", "#B57777", "#6D3300", "#D0FF00", "#5900FF"];
-
-
 					shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a", "8c0909", "36c9bd", "#008c35", "#ffdba5", "#B57777", "#6D3300", "#D0FF00", "#5900FF"];
-
-
 					colorSelector = 0;
 					newzIndex = 0;
 					legendText = "";
@@ -494,7 +484,6 @@
 									//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
 									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 									// 								GRAY, 			RED, 			SKY BLUE, BRIGHT GREEN, PURPLE, ORANGE, 	BRIGHT PINK, NAVY BLUE, LILAC, YELLOW
-
 									//colorSelector = 0;
 									//newzIndex = 0;
 									legendText = "<img src='img/redsquare.png' height='10px'/> <= 0.3<br>\
@@ -540,7 +529,6 @@
 									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 									//colorSelector = 0;
 									//newzIndex = 0;
-
 									legendText = "<img src='img/redsquare.png' height='10px'/> Very Low (0.0 - 0.01)<br>\
 									<img src='img/skybluesquare.png' height='10px'/>  Low (0.01 - 0.1)<br>\
 									<img src='img/brightgreensquare.png' height='10px'/> Moderately Low (0.1 - 1)<br>\
@@ -1203,14 +1191,11 @@
 								break;
 							}
 						}
-
 						temp = wktFormatter(data.coords[key]['POLYGON']);
 						for (var i = 0; i < temp.length; i++) {
 							polyCoordis.push(temp[i]);
 						}
-
 						var polygon = new google.maps.Polygon({ //we need another value to determine the key
-
 							description: app.payload.value,
 							description_value: data.coords[key][app.payload.property],
 							paths: polyCoordis,
@@ -1220,7 +1205,6 @@
 							fillColor: shapecolor[colorSelector],
 							fillOpacity: 0.18
 						});
-
 						polygon.setOptions({ zIndex: newzIndex });
 						polygon.addListener('click', polyInfo);
 						app.polygons.push(polygon);
@@ -1403,7 +1387,6 @@
 else{ alert("Please select a property and a district."); }
 }
 //get polygons "run function" ends here
-
 function setDistrict(){
 	app.payload.district = $('#target').children("option:selected").data('district');
 	var pointStr = $('#target option:selected').val();

@@ -1,20 +1,16 @@
 <?php
-
 	//init specifications
 	ini_set('memory_limit', '-1');
 	ini_set('max_execution_time', 30000); //300 seconds = 5 minutes
-
 	//conection to utep database
 	$conn = mysqli_connect('ctis.utep.edu', 'ctis', '19691963', 'imsc');
-
 	//global array that will return requested data
 	$toReturn = array();
 
 	/**     -------------------------------------------         */
-
 	//is the "isset()" to determine wether a property has been selected? YES! isset => has been set
 	if(isset($_GET['getMode']) AND $_GET['getMode'] == "polygons"){//**************The case in charge of retrieving polygon search (run)****************************(1)
-		getPolygons(); //cambio de Ricardo
+		getPolygons();
 	}
 	else if(isset($_GET['district'])){//*******************This is the case for retieving the districts from table**********************(2)
 		districtNames();
@@ -22,26 +18,14 @@
 	else if(isset($_POST['columns'])){//**************** This is the case for retrieving table names ***********************(3)
 		tableNames();
 	}
-
 	/**     -------------------------------------------         */
-
-
 	//returns data back to javascript
 	header('Content-Type: application/json');
 	echo json_encode($toReturn);
 	$conn->close();
-
 	/****************************************************/
 	//functionality ends here. BELOW CONVINIENCE UTILITY
 	/***************************************************/
-
-
-
-
-
-
-
-
 	//no need to mess with this class, simply for refactoring( making code shorter and or modular )
 	class dataToQueryPolygons{
 		public $table;
@@ -51,6 +35,8 @@
 		public $lat1;
 		public $lng2;
 		public $lng1;
+		public $top;
+		public $bot;
 
 		public function __construct(){
 			$this->table = $_GET['table'];
@@ -60,8 +46,8 @@
 			$this->lat1 = $_GET['SW']['lat'];
 			$this->lng2 = $_GET['NE']['lng'];
 			$this->lng1 = $_GET['SW']['lng'];
+			$this->depth = ( $_GET['depth'] * 2.54 );
 		}
-
 	}
 
 	//depending on which table (for a given property) will be used in query, this will determine the appropriate key
@@ -81,13 +67,11 @@
 
 	function tableNames(){
 		global $conn, $toReturn;
-
 		//this query goes to a table in the database called "properties" and gets a set containing all records that
 		//are either(OR)  LIKE  chonsistency or choriszon for property_table column
 		$sql = "SELECT * FROM properties WHERE property_table LIKE \"%chconsistence_r%\" OR property_table LIKE \"%chorizon_r%\" ";
 		//conn.query(sql) -> from pre-established connection to data base make given query(sql)
 		$result = $conn->query($sql);
-
 		$toReturn['columns'] = $result->fetch_all();
 	}
 
@@ -106,7 +90,8 @@
 		global $conn, $toReturn;
 
 		$data = new dataToQueryPolygons();//automatically gathers necessary data for query
-		$simplificaionFactor = polygonDefinition( $data );//maybe it should be changing(be variable) in the future with  more given parameters($_GET)
+
+		$simplificaionFactor = polygonDefinition( $data );
 
 		//create zoom area (AOI) polygon for further query
 		$query = "SET @geom1 = 'POLYGON(($data->lng1	$data->lat1,$data->lng1	$data->lat2,$data->lng2	$data->lat2,$data->lng2	$data->lat1,$data->lng1	$data->lat1))'";
@@ -116,45 +101,32 @@
 		$key = setKey( $data->table );//appropriate key for given table
 
 		//actual query for retrieving desired polygons
-		$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
+		$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) AND $data->depth >= hzdept_r";
 		$toReturn['query2'] = $query;
 		$result = mysqli_query($conn, $query);
 
-		$toReturn['coords'] = fetchAll($result);//fetch all
+		$toReturn['coords'] = fetchAll( $result );
+
 	}
 
 	function polygonDefinition( $data ){
 		$zoom = haversine( $data );
-
 		//test wis choping off everything after the 4.
 		$factor = ($zoom * 0.0000000147540984 );
-
 		if( $factor > 0.5 ){ return 0.5; }
-
 		return $factor;
-
 	}
-
 	//google haversine
 	function haversine( $data ){
 		$earthRadius = 6371000;
-
 		$latFrom = deg2rad($data->lat2);
 		$lonFrom = deg2rad($data->lng2);
 		$latTo = deg2rad($data->lat1);
 		$lonTo = deg2rad($data->lng1);
-
 		$latDelta = ($latTo - $latFrom);
 		$lonDelta = ($lonTo - $lonFrom);
-
 		$angle = 2 * asin( sqrt( pow( sin( $latDelta / 2 ), 2 ) + cos($latFrom) * cos( $latTo ) * pow( sin( $lonDelta / 2 ), 2 ) ) );
-
 		$distance = $angle * $earthRadius;
-
 		return $distance;
 	}
-
-
-
-
 ?>
