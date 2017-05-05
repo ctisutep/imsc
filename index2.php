@@ -379,7 +379,7 @@
 			$.get('polygonHandler.php', app.payload, function(data){
 				//draw the stuff on the map
 				if(depth < 0 || depth * 2.54 > 244){
-					alert("Please make suer depth is between 0 and 96 inches.");
+					alert("Please make sure depth is between 0 and 96 inches.");
 				}
 				if(data.hasOwnProperty('coords')){
 					removePolygons();
