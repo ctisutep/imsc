@@ -172,11 +172,16 @@
 						</div>
 						<div class="row"> <!--search-->
 							<div class="input-group">
+								<!--<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+								<input type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="autocomplete" autocomplete="off">-->
+
 								<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
-								<input type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="autocomplete" autocomplete="off">
+								<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="selectProp">
+									<option value="" disabled selected>Select a ground property</option>
+								</select>
 							</div> <br>
-							<label> Depth: </label> <br>
-							<input type="text" value="" id="depth" placeholder=" ...inches" style="color: black;">
+							<label> Depth (in inches): </label> <br>
+							<input type="text" value="0" id="depth" placeholder=" ...inches" style="color: black;">
 							<!--<p> Top = <input type="text" value="" id="depth_top" placeholder="...inches" style="color: black;"></p>
 							<p> Bottom = <input type="text" value="" id="depth_bottom" placeholder="...inches" style="color: black;"></p>-->
 						</div>
@@ -263,11 +268,89 @@
 					return {value: val[2], data: val[1], table: val[3]};
 				});
 			}
+			var selectProp = document.getElementById("selectProp");
+			var prop = [{number: 0, value: null, data: null, table: null},
+				{number: 1, value: null, data: null, table: null},
+				{number: 2, value: null, data: null, table: null},
+				{number: 3, value: null, data: null, table: null},
+				{number: 4, value: null, data: null, table: null},
+				{number: 5, value: null, data: null, table: null},
+				{number: 6, value: null, data: null, table: null},
+				{number: 7, value: null, data: null, table: null},
+				{number: 8, value: null, data: null, table: null},
+				{number: 9, value: null, data: null, table: null},
+				{number: 10, value: null, data: null, table: null},
+				{number: 11, value: null, data: null, table: null},
+				{number: 12, value: null, data: null, table: null},
+				{number: 13, value: null, data: null, table: null},
+				{number: 14, value: null, data: null, table: null},
+				{number: 15, value: null, data: null, table: null},
+				{number: 16, value: null, data: null, table: null},
+				{number: 17, value: null, data: null, table: null},
+				{number: 18, value: null, data: null, table: null},
+				{number: 19, value: null, data: null, table: null},
+				{number: 20, value: null, data: null, table: null},
+				{number: 21, value: null, data: null, table: null},
+				{number: 22, value: null, data: null, table: null},
+				{number: 23, value: null, data: null, table: null},
+				{number: 24, value: null, data: null, table: null},
+				{number: 25, value: null, data: null, table: null},
+				{number: 26, value: null, data: null, table: null},
+				{number: 27, value: null, data: null, table: null},
+				{number: 28, value: null, data: null, table: null},
+				{number: 29, value: null, data: null, table: null},
+				{number: 30, value: null, data: null, table: null},
+				{number: 31, value: null, data: null, table: null},
+				{number: 32, value: null, data: null, table: null},
+				{number: 33, value: null, data: null, table: null},
+				{number: 34, value: null, data: null, table: null},
+				{number: 35, value: null, data: null, table: null},
+				{number: 36, value: null, data: null, table: null},
+				{number: 37, value: null, data: null, table: null}
+			];
+			/*for (var i = 0; i < 37; i++) {
+				prop[i].value = i;
+				prop[i].valor = null;
+				prop[i].data = null;
+				prop[i].table = null;
+			}*/
+			for (var i = 0; i < 37; i++) {
+				console.log(i + " "+ properties[i].value + " " + properties[i].valor +  " " + properties[i].data + " " + properties[i].table);
+			}
+			for (var i = 0; i < 37; i++) {
+				prop[i].number = i;
+				prop[i].value = properties[i].value;
+				prop[i].data = properties[i].data;
+				prop[i].table = properties[i].table;
+			}
+			for(var i = 0; i < prop.length-1; i++) {
+    		var propr = prop[i].number;
+				//console.log("En loop (value): " + propr);
+    		var elem = document.createElement("option");
+    		elem.textContent = prop[i].value;
+    		elem.value = propr;
+				//console.log("En loop (value): " + propr);
+				elem.data = prop[i].data;
+				//console.log("En loop (data): " + prop[i].data);
+				elem.table = prop[i].table;
+				//console.log("En loop (table): " + prop[i].table);
+    		selectProp.appendChild(elem);
+			}
+			$("#selectProp").change(function(){
+				//alert("You selected property: " + this.value);
+				//console.log(this);
+				//console.log(this.data);
+				//console.log(this.value);
+				//console.log(prop[this.value].value + " " + prop[this.value].table + " " +);
+				app.payload.property =  prop[this.value].data;
+				app.payload.table =  prop[this.value].table;
+				app.payload.value =  prop[this.value].value;
+			});
 			//create the autocomplete with the data
 			$('#autocomplete').autocomplete({
 				lookup: properties,
 				onSelect: function (suggestion) {
-					//console.log(suggestion.data + "  " + suggestion.table + "  " + suggestion.value);
+					console.log(suggestion.data + "  " + suggestion.table + "  " + suggestion.value);
 					app.payload.property = suggestion.data;
 					app.payload.table = suggestion.table;
 					app.payload.value = suggestion.value;
@@ -278,24 +361,26 @@
 		app.payload.district = $('#target').children("option:selected").data('district');
 	});
 	function getPolygons(){//this is run button
-
+		//Ricardo
 		var depth = document.getElementById("depth").value;
-
 		//Valores de depth top y depth bottom
 		/*var depth_t = document.getElementById("depth_top").value;
 		console.log("Ricardo, esto da el valor de depth_top: " + depth_t);
 		var depth_b = document.getElementById("depth_bottom").value;
 		console.log("Ricardo, esto da el valor de depth_bottom: " + depth_b);*/
-		else if(app.payload.property){//to make sure a property is selected
+		app.payload.depth = depth;
+		if(app.payload.property){//to make sure a property is selected
 			//get the polygons
 			// console.log(app.payload);
-			app.payload.depth = depth;
 			var getparams = app.payload;
 			var bounds = app.map.getBounds();
 			getparams.NE = bounds.getNorthEast().toJSON(); //north east corner
 			getparams.SW = bounds.getSouthWest().toJSON(); //north east corner
 			$.get('polygonHandler.php', app.payload, function(data){
 				//draw the stuff on the map
+				if(depth < 0 || depth * 2.54 > 244){
+					alert("Please make suer depth is between 0 and 96 inches.");
+				}
 				if(data.hasOwnProperty('coords')){
 					removePolygons();
 					//               0           1           2          3          4         5          6           7         8          9        10        11        12          13         14         15        16          17
@@ -1201,7 +1286,7 @@
 							paths: polyCoordis,
 							strokeColor: shapeoutline[colorSelector],
 							strokeOpacity: 0.18,
-							strokeWeight: 2,
+							strokeWeight: 0.70,
 							fillColor: shapecolor[colorSelector],
 							fillOpacity: 0.18
 						});
@@ -1213,7 +1298,7 @@
 				}
 			}
 		}).done(function(data){
-			if($('#autocomplete').val() == "Gypsum"){
+			if($('#selectProp').val() == 32){ //should have made it like this: if(app.payload.value == "gypsum"){ //but it's to late now
 				var gypsum = "Description for Gypsum: ";
 				var gypsumText = "The content of gypsum is the percent, by weight, of hydrated calcium sulfates in the fraction of the soil less than 20 millimeters in size. "; // Gypsum is partially soluble in water. Soils high in content of gypsum, such as those with more than 10 percent gypsum, may collapse if the gypsum is removed by percolating water. Gypsum is corrosive to concrete.
 				//For each soil layer, this attribute is actually recorded as three separate values in the database. A low value and a high value indicate the range of this attribute for the soil component. A \"representative\" value indicates the expected value of this attribute for the component. For this soil property, only the representative value is used.";
@@ -1224,7 +1309,7 @@
 				var descriptor = document.getElementById('description');
 				descriptor.appendChild(div);
 			}
-			else if ($('#autocomplete').val() == "PI"){
+			else if ($('#selectProp').val() == 27){
 				var prprty = "Description for Plasticity Index: ";
 				var prprtyText = "Plasticity index (PI) is one of the standard Atterberg limits used to indicate the plasticity characteristics of a soil. It is defined as the numerical difference between the liquid limit and plastic limit of the soil. It is the range of water content in which a soil exhibits the characteristics of a plastic solid.";
 				var h3 = document.createElement('h3');
@@ -1234,7 +1319,7 @@
 				var descriptor = document.getElementById('description');
 				descriptor.appendChild(div);
 			}
-			else if ($('#autocomplete').val() == "CaCO3"){
+			else if ($('#selectProp').val() == 22){
 				var prprty = "Description for CaCO3: ";
 				var prprtyText = "Calcium carbonate equivalent is the percent of carbonates, by weight, in the fraction of the soil less than 2 millimeters in size. The availability of plant nutrients is influenced by the amount of carbonates in the soil.";
 				var h3 = document.createElement('h3');
@@ -1244,7 +1329,7 @@
 				var descriptor = document.getElementById('description');
 				descriptor.appendChild(div);
 			}
-			else if ($('#autocomplete').val() == "Total Sand"){
+			else if ($('#selectProp').val() == 12){
 				var prprty = "Description for Total Sand: ";
 				var prprtyText = "Sand as a soil separate consists of mineral soil particles that are 0.05 millimeter to 2 millimeters in diameter. In the database, the estimated sand content of each soil layer is given as a percentage, by weight, of the soil material that is less than 2 millimeters in diameter. The content of sand, silt, and clay affects the physical behavior of a soil. Particle size is important for engineering and agronomic interpretations, for determination of soil hydrologic qualities, and for soil classification.";
 				var h3 = document.createElement('h3');
@@ -1254,7 +1339,7 @@
 				var descriptor = document.getElementById('description');
 				descriptor.appendChild(div);
 			}
-			else if ($('#autocomplete').val() == "pH H20"){
+			else if ($('#selectProp').val() == 34){
 				var prprty = "Description for pH H20: ";
 				var prprtyText = "Soil reaction is a measure of acidity or alkalinity. It is important in selecting crops and other plants, in evaluating soil amendments for fertility and stabilization, and in determining the risk of corrosion.";
 				var h3 = document.createElement('h3');
@@ -1264,7 +1349,7 @@
 				var descriptor = document.getElementById('description');
 				descriptor.appendChild(div);
 			}
-			else if ($('#autocomplete').val() == "Ksat"){
+			else if ($('#selectProp').val() == 25){
 				var prprty = "Description for Ksat: ";
 				var prprtyText = "Saturated hydraulic conductivity (Ksat) refers to the ease with which pores in a saturated soil transmit water. The estimates are expressed in terms of micrometers per second. They are based on soil characteristics observed in the field, particularly structure, porosity, and texture. ";
 				var h3 = document.createElement('h3');
@@ -1276,7 +1361,7 @@
 			}
 			/** paste prprtyText here
 			*/
-			else if ($('#autocomplete').val() == "AASHTO Group Index"){
+			else if ($('#selectProp').val() == 28){
 				var prprty = "Description for AASHTO Group Index: ";
 				var prprtyText = "AASHTO group classification is a system that classifies soils specifically for geotechnical engineering purposes that are related to highway and airfield construction. It is based on particle-size distribution and Atterberg limits, such as liquid limit and plasticity index. This classification system is covered in AASHTO Standard No. M 145-82. The classification is based on that portion of the soil that is smaller than 3 inches in diameter.";
 				var h3 = document.createElement('h3');
@@ -1286,7 +1371,7 @@
 				var descriptor = document.getElementById('description');
 				descriptor.appendChild(div);
 			}
-			else if ($('#autocomplete').val() == "pH H2O"){
+			else if ($('#selectProp').val() == 34){
 				var prprty = "Description for ph H2O: ";
 				var prprtyText = "Soil reaction is a measure of acidity or alkalinity. It is important in selecting crops and other plants, in evaluating soil amendments for fertility and stabilization, and in determining the risk of corrosion. In general, soils that are either highly alkaline or highly acid are likely to be very corrosive to steel. The most common soil laboratory measurement of pH is the 1:1 water method.";
 				var h3 = document.createElement('h3');
@@ -1296,7 +1381,7 @@
 				var descriptor = document.getElementById('description');
 				descriptor.appendChild(div);
 			}
-			else if ($('#autocomplete').val() == "SAR"){
+			else if ($('#selectProp').val() == 33){
 				var prprty = "Description for Sodium Absortion Ratio (SAR): ";
 				var prprtyText = "Sodium adsorption ratio is a measure of the amount of sodium (Na) relative to calcium (Ca) and magnesium (Mg) in the water extract from saturated soil paste. It is the ratio of the Na concentration divided by the square root of one-half of the Ca + Mg concentration. Soils that have SAR values of 13 or more may be characterized by an increased dispersion of organic matter and clay particles, reduced saturated hydraulic conductivity (Ksat) and aeration, and a general degradation of soil structure.";
 				var h3 = document.createElement('h3');
@@ -1306,7 +1391,7 @@
 				var descriptor = document.getElementById('description');
 				descriptor.appendChild(div);
 			}
-			else if ($('#autocomplete').val() == "Kf"){
+			else if ($('#selectProp').val() == 30){
 				var prprty = "Description for K Factor (Rock Free): ";
 				var prprtyText = "Erosion factor K indicates the susceptibility of a soil to sheet and rill erosion by water. Factor K is one of six factors used in the Universal Soil Loss Equation (USLE) and the Revised Universal Soil Loss Equation (RUSLE) to predict the average annual rate of soil loss by sheet and rill erosion in tons per acre per year. The estimates are based primarily on percentage of silt, sand, and organic matter and on soil structure and saturated hydraulic conductivity (Ksat)." + " Values of K range from 0.02 to 0.69. Other factors being equal, the higher the value, the more susceptible the soil is to sheet and rill erosion by water. "
 				+ "Erosion factor Kf (rock free) indicates the erodibility of the fine-earth fraction, or the material less than 2 millimeters in size.";
@@ -1317,7 +1402,7 @@
 				var descriptor = document.getElementById('description');
 				descriptor.appendChild(div);
 			}
-			else if ($('#autocomplete').val() == "Kw"){
+			else if ($('#selectProp').val() == 29){
 				var prprty = "Description for K Factor (Whole Soil): ";
 				var prprtyText = "Erosion factor K indicates the susceptibility of a soil to sheet and rill erosion by water. Factor K is one of six factors used in the Universal Soil Loss Equation (USLE) and the Revised Universal Soil Loss Equation (RUSLE) to predict the average annual rate of soil loss by sheet and rill erosion in tons per acre per year. The estimates are based primarily on percentage of silt, sand, and organic matter and on soil structure and saturated hydraulic conductivity (Ksat)."+" Values of K range from 0.02 to 0.69. Other factors being equal, the higher the value, the more susceptible the soil is to sheet and rill erosion by water."
 				+ "'Erosion factor Kw (whole soil)' indicates the erodibility of the whole soil. The estimates are modified by the presence of rock fragments.";
@@ -1328,8 +1413,8 @@
 				var descriptor = document.getElementById('description');
 				descriptor.appendChild(div);
 			}
-			else if ($('#autocomplete').val() == "LL"){
-				var prprty = "Description for Liquid Limit: ";
+			else if ($('#selectProp').val() == 26){
+				var prprty = "Description for Liquid Limit:  ";
 				var prprtyText = "Liquid limit (LL) is one of the standard Atterberg limits used to indicate the plasticity characteristics of a soil. It is the water content, on a percent by weight basis, of the soil (passing #40 sieve) at which the soil changes from a plastic to a liquid state. Generally, the amount of clay- and silt-size particles, the organic matter content, and the type of minerals determine the liquid limit. Soils that have a high liquid limit have the capacity to hold a lot of water while maintaining a plastic or semisolid state. Liquid limit is used in classifying soils in the Unified and AASHTO classification systems. For each soil layer, this attribute is actually recorded as three separate values in the database. A low value and a high value indicate the range of this attribute for the soil component. A 'representative' value indicates the expected value of this attribute for the component. For this soil property, only the representative value is used.";
 				var h3 = document.createElement('h3');
 				h3.innerHTML = prprty;
@@ -1338,7 +1423,7 @@
 				var descriptor = document.getElementById('description');
 				descriptor.appendChild(div);
 			}
-			else if ($('#autocomplete').val() == "OM"){
+			else if ($('#selectProp').val() == 23){
 				var prprty = "Description for Organic Matter: ";
 				var prprtyText = "Organic matter percent is the weight of decomposed plant, animal, and microbial residues exclusive of non-decomposed plant and animal residues. It is expressed as a percentage, by weight, of the soil material that is less than 2 mm in diameter.";
 				var h3 = document.createElement('h3');
@@ -1351,7 +1436,7 @@
 			else{
 			}
 			/** Copy and paste to change properties.
-			else if ($('#autocomplete').val() == "<>"){
+			else if ($('#selectProp').val() == "<>"){
 			var prprty = "Description for <>: ";
 			var prprtyText = "<>";
 			var h3 = document.createElement('h3');
@@ -1362,7 +1447,7 @@
 			descriptor.appendChild(div);
 		}
 		*/
-		/* //original to draw the legend
+		/* //original to draw the 0
 		var div = document.createElement('div');
 		div.innerHTML = "<strong>" + $('#autocomplete').val() + "</strong><br>" + legendText;
 		var legend = document.createElement('div');
@@ -1377,7 +1462,7 @@
 		//div.attribute('class', 'col-md-3');
 		// div.innerHTML = '<img src="img/redsquare.png" height="10px"/> ' + $('#autocomplete').val();;
 		//div.id = 'legend';
-		div.innerHTML = "<strong>" + $('#autocomplete').val() + "</strong><br>" + legendText;//pinta a legend?
+		div.innerHTML = "<strong>" + app.payload.value + "</strong><br>" + legendText;//pinta a legend?
 		var legend = document.createElement('div');
 		legend = document.getElementById('legend');
 		document.getElementById('legend').style.visibility = "visible";//o este?

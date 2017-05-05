@@ -6,16 +6,15 @@
 	$conn = mysqli_connect('ctis.utep.edu', 'ctis', '19691963', 'imsc');
 	//global array that will return requested data
 	$toReturn = array();
-
 	/**     -------------------------------------------         */
 	//is the "isset()" to determine wether a property has been selected? YES! isset => has been set
 	if(isset($_GET['getMode']) AND $_GET['getMode'] == "polygons"){//**************The case in charge of retrieving polygon search (run)****************************(1)
-		getPolygons();
+		getPolygons(); //cambio de Ricardo
 	}
 	else if(isset($_GET['district'])){//*******************This is the case for retieving the districts from table**********************(2)
 		districtNames();
 	}
-	else if(isset($_POST['columns'])){//**************** This is the case for retrieving table names ***********************(3)
+	else if(isset($_POST['columns'])){//**************** This is the case for retrieving table names  ***********************(3)
 		tableNames();
 	}
 	/**     -------------------------------------------         */
@@ -35,8 +34,7 @@
 		public $lat1;
 		public $lng2;
 		public $lng1;
-		public $top;
-		public $bot;
+		public $depth;
 
 		public function __construct(){
 			$this->table = $_GET['table'];
@@ -46,16 +44,14 @@
 			$this->lat1 = $_GET['SW']['lat'];
 			$this->lng2 = $_GET['NE']['lng'];
 			$this->lng1 = $_GET['SW']['lng'];
-			$this->depth = ( $_GET['depth'] * 2.54 );
+			$this->depth = ($_GET['depth'] * 2.54);
 		}
 	}
-
 	//depending on which table (for a given property) will be used in query, this will determine the appropriate key
 	function setKey($table){
 		if($table == "chorizon_r")          { return "chkey"; }
 		else if($table == "chconsistence_r"){ return "chconsistkey"; }
 	}
-
 	//I dont fully understand why this is needed or what it does
 	function fetchAll($result){
 		$temp = array();
@@ -64,7 +60,6 @@
 		}
 		return $temp;
 	}
-
 	function tableNames(){
 		global $conn, $toReturn;
 		//this query goes to a table in the database called "properties" and gets a set containing all records that
@@ -74,10 +69,8 @@
 		$result = $conn->query($sql);
 		$toReturn['columns'] = $result->fetch_all();
 	}
-
 	function districtNames(){
 		global $conn, $toReturn;
-
 		$district = $_GET['district'];
 		$sql = "CALL getCoordinates($district)";
 		$result = $conn->query($sql);
@@ -85,30 +78,33 @@
 			$toReturn['coords'] = $result->fetch_all();
 		}
 	}
-
 	function getPolygons(){
 		global $conn, $toReturn;
-
 		$data = new dataToQueryPolygons();//automatically gathers necessary data for query
-
-		$simplificaionFactor = polygonDefinition( $data );
-
+		$simplificaionFactor = polygonDefinition( $data );//maybe it should be changing(be variable) in the future with  more given parameters($_GET)
 		//create zoom area (AOI) polygon for further query
 		$query = "SET @geom1 = 'POLYGON(($data->lng1	$data->lat1,$data->lng1	$data->lat2,$data->lng2	$data->lat2,$data->lng2	$data->lat1,$data->lng1	$data->lat1))'";
 		$toReturn['query'] = $query;
 		$result = mysqli_query($conn, $query);
-
 		$key = setKey( $data->table );//appropriate key for given table
-
 		//actual query for retrieving desired polygons
-		$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) AND $data->depth >= hzdept_r";
+		//$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) AND hzdept_r <= $data->depth AND hzdepb_r >= $data->depth";
+		$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS t, hzdepb_r AS b, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
 		$toReturn['query2'] = $query;
 		$result = mysqli_query($conn, $query);
 
-		$toReturn['coords'] = fetchAll( $result );
+		$result = fetchAll($result);
 
+		$polygons = array();
+
+		for( $i = 0; $i<sizeof( $result ); $i++ ){
+			if( $data->depth >= $result[$i]['t'] && $data->depth <= $result[$i]['b'] ){
+				$polygons[] = $result[$i];
+			}
+		}
+
+		$toReturn['coords'] = $polygons;//fetch all
 	}
-
 	function polygonDefinition( $data ){
 		$zoom = haversine( $data );
 		//test wis choping off everything after the 4.
