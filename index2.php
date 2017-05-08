@@ -1480,7 +1480,7 @@
 		//var g = document.createElement('div');
 		//g.id = 'someId';
 		//draw the legend
-		if(!test){
+		if(!hecho){
 		var div = document.createElement('div');
 		//div = document.getElementsByTagName("H3")[0].setAttribute("class", "col-md-3");
 		//div.attribute('class', 'col-md-3');
@@ -1492,7 +1492,7 @@
 		document.getElementById('legend').style.visibility = "visible";//o este?
 		legend.appendChild(div);
 	}
-	else if(test){
+	else if(hecho){
 		removePolygons();
 	}
 	});
