@@ -89,6 +89,7 @@
 						<div class="row">
 							<label>District:</label>
 							<select id="target" class="form-control">
+								<option value="" disabled selected>Select a district</option>
 								<option value="32.43561304116276, -100.1953125" data-district="abeline">
 									Abilene
 								</option>
