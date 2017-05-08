@@ -77,6 +77,7 @@
 			<div class="col-md-9">
 				<!--<h1> testing </h1>-->
 				<div id="map"></div>
+				<div id="description"></div>
 			</div>
 			<div class="col-md-3">
 				<div class="panel panel-default">
@@ -206,10 +207,10 @@
 					</div>
 				</div>
 			</div> <!-- end for class "col-md-3" -->
-			<div class="col-md-9">
+			<!--<div class="col-md-9">
 				<div id="description">
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 	<p></p>
