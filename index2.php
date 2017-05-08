@@ -316,9 +316,9 @@
 				prop[i].data = null;
 				prop[i].table = null;
 			}*/
-			for (var i = 0; i < 37; i++) {
+			/*for (var i = 0; i < 37; i++) {
 				console.log(i + " "+ properties[i].value + " " + properties[i].valor +  " " + properties[i].data + " " + properties[i].table);
-			}
+			}*/
 			for (var i = 0; i < 37; i++) {
 				prop[i].number = i;
 				prop[i].value = properties[i].value;
@@ -365,13 +365,17 @@
 	function getPolygons(){//this is run button
 		//Ricardo
 		var depth = document.getElementById("depth").value;
+		//console.log(depth);
+		depth = parseInt(depth);
+		//console.log(depth);
+
 		//Valores de depth top y depth bottom
 		/*var depth_t = document.getElementById("depth_top").value;
 		console.log("Ricardo, esto da el valor de depth_top: " + depth_t);
 		var depth_b = document.getElementById("depth_bottom").value;
 		console.log("Ricardo, esto da el valor de depth_bottom: " + depth_b);*/
 		app.payload.depth = depth;
-		if(app.payload.property){//to make sure a property is selected
+		if(app.payload.property && app.payload.district && (isNaN(depth)==false)){//to make sure a property is selected
 			//get the polygons
 			// console.log(app.payload);
 			var getparams = app.payload;
@@ -380,8 +384,14 @@
 			getparams.SW = bounds.getSouthWest().toJSON(); //north east corner
 			$.get('polygonHandler.php', app.payload, function(data){
 				//draw the stuff on the map
-				if(depth < 0 || depth * 2.54 > 244){
-					alert("Please make sure depth is between 0 and 96 inches.");
+				//console.log("Testing typeof: " + typeof(depth));
+
+				/*if(isNaN(depth)){
+					console.log(depth + " is not a number");
+				}*/
+
+				if(depth < 0 || depth * 2.54 > 204 || isNaN(depth)){
+					alert("Please make sure depth is a numerical value and it is between 0 and 79 inches.");
 				}
 				if(data.hasOwnProperty('coords')){
 					removePolygons();
@@ -1471,7 +1481,7 @@
 		legend.appendChild(div);
 	});
 }
-else{ alert("Please select a property and a district."); }
+else{ alert("Please select a property and a district, and make sure depth is a numerical value."); }
 }
 //get polygons "run function" ends here
 function setDistrict(){
