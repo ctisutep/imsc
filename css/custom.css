@@ -40,10 +40,11 @@
 	border-color: #46b8da;
 }
 
-.autocomplete-suggestions {
-	background-color: white;
-	border-color: gray;
-}
+.autocomplete-suggestions { border: 1px solid #999; background: #fff; cursor: default; overflow: auto; }
+.autocomplete-suggestion { padding: 10px 5px; font-size: 1.2em; white-space: nowrap; overflow: hidden; }
+.autocomplete-selected { background: #f0f0f0; }
+.autocomplete-suggestions strong { font-weight: normal; color: #3399ff; }
+
 .vert-offset-top-12 {
 	margin-top: 12em;
 }
