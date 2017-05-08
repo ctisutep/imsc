@@ -463,11 +463,11 @@
 									//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 									//colorSelector = 0;
 									//newzIndex = 0;
-									legendText = "<img src='img/graysquare.png' height='10px'/> <= 11.8<br>\
-									<img src='img/redsquare.png' height='10px'/>  > 11.8 and <= 26.1<br>\
-									<img src='img/skybluesquare.png' height='10px'/> > 26.1 and <= 39.3<br>\
+									legendText = "<img src='img/redsquare.png' height='10px'/> <= 11.8<br>\
+									<img src='img/skybluesquare.png' height='10px'/>  > 11.8 and <= 26.1<br>\
+									<img src='img/brightgreensquare.png' height='10px'/> > 26.1 and <= 39.3<br>\
 									<img src='img/purplesquare.png' height='10px'/> > 39.3 and <= 57.8<br>\
-									<img src='img/brightgreensquare.png' height='10px'/> > 57.8 and <= 90.2<br>\
+									<img src='img/orangesquare.png' height='10px'/> > 57.8 and <= 90.2<br>\
 									<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
 									var amountIn = parseFloat(data.coords[key][app.payload.property]);
 									//console.log(amountIn);
@@ -495,8 +495,8 @@
 										newzIndex = 5;
 										break;
 										default: // BETWEEN 81 AND 100
-										colorSelector = 6;
-										newzIndex = 6;
+										colorSelector = 0;
+										newzIndex = 0;
 										break;
 									}
 								}
