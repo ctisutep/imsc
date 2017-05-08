@@ -259,6 +259,7 @@
 	</div>
 	*/
 	var app = {map:null, polygons:null, payload:{getMode:"polygons", property:null, district:null, depth:null}};
+	var hecho = false;
 	//var suggested = all the aliases of the properties, note: not all properties have an alias
 	$(document).ready(function(){//esto pasa recien cargada la pagina
 		//start here, get the properties
@@ -391,7 +392,13 @@
 				}*/
 
 				if(depth < 0 || depth * 2.54 > 204 || isNaN(depth)){
+					/*document.getElementById('legend').style.visibility = "hidden";
+					$('#legend').find('*').not('h3').remove();
+					$('#description').find('*').not('h3').remove();*/
 					alert("Please make sure depth is a numerical value and it is between 0 and 79 inches.");
+					hecho = true;
+					/*removePolygons();
+					return;*/
 				}
 				if(data.hasOwnProperty('coords')){
 					removePolygons();
@@ -1288,6 +1295,9 @@
 								break;
 							}
 						}
+						else{
+							removePolygons();
+						}
 						temp = wktFormatter(data.coords[key]['POLYGON']);
 						for (var i = 0; i < temp.length; i++) {
 							polyCoordis.push(temp[i]);
@@ -1446,6 +1456,7 @@
 				descriptor.appendChild(div);
 			}
 			else{
+				removePolygons();
 			}
 			/** Copy and paste to change properties.
 			else if ($('#selectProp').val() == "<>"){
@@ -1469,6 +1480,7 @@
 		//var g = document.createElement('div');
 		//g.id = 'someId';
 		//draw the legend
+		if(!test){
 		var div = document.createElement('div');
 		//div = document.getElementsByTagName("H3")[0].setAttribute("class", "col-md-3");
 		//div.attribute('class', 'col-md-3');
@@ -1479,9 +1491,19 @@
 		legend = document.getElementById('legend');
 		document.getElementById('legend').style.visibility = "visible";//o este?
 		legend.appendChild(div);
+	}
+	else if(test){
+		removePolygons();
+	}
 	});
 }
-else{ alert("Please select a property and a district, and make sure depth is a numerical value."); }
+else{
+	document.getElementById('legend').style.visibility = "hidden";
+	$('#legend').find('*').not('h3').remove();
+	$('#description').find('*').not('h3').remove();
+	alert("Please select a property and a district, and make sure depth is a numerical value.");
+	removePolygons();
+}
 }
 //get polygons "run function" ends here
 function setDistrict(){
