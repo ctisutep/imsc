@@ -365,6 +365,7 @@ app.payload.district = $('#target').children("option:selected").data('district')
 });
 function getPolygons(){//this is run button
 	//Ricardo
+	hecho = false;
 	var depth = document.getElementById("depth").value;
 	//console.log(depth);
 	depth = parseInt(depth);
@@ -1636,7 +1637,7 @@ else if ($('#selectProp').val() == 36){
 	descriptor.appendChild(div);
 }
 else{
-	removePolygons();
+	//removePolygons();
 }
 /** Copy and paste to change properties.
 else if ($('#selectProp').val() == "<>"){
@@ -1674,6 +1675,7 @@ if(!hecho){
 }
 else if(hecho){
 	removePolygons();
+	return;
 }
 });
 }
