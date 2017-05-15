@@ -89,6 +89,77 @@
 		$key = setKey( $data->table );//appropriate key for given table
 		//actual query for retrieving desired polygons
 		//$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) AND hzdept_r <= $data->depth AND hzdepb_r >= $data->depth";
+
+		$q_cokey = "SELECT mu.cokey FROM polygon, mujoins as mu WHERE mu.mukey = polygon.mukey AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), polygon.SHAPE)"; //assuming we have the 'ideal' cokey
+		$toReturn['q_cokey'] = $q_cokey;
+		$q_cokey = mysqli_query($conn, $q_cokey);
+		$row_q = fetchAll($q_cokey);
+		$rows_q = array();
+
+		for ($i=0; $i < sizeof($row_q); $i++) {
+			$rows_q[] = $row_q[$i];
+		}
+
+		$toReturn['TESTING cokey'] = $rows_q;
+		$el_cokey_ideal = $rows_q[0]['cokey'];
+
+		$q_cokey2 = "SELECT compkind, component_r.cokey FROM component_r, polygon WHERE component_r.mukey = polygon.mukey AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), polygon.SHAPE)"; //assuming we have the 'ideal' cokey
+		$toReturn['compkind'] = $q_cokey2;
+		$q_cokey2 = mysqli_query($conn, $q_cokey2);
+		$row_q2 = fetchAll($q_cokey2);
+		$rows_q2 = array();
+
+		for ($i=0; $i < sizeof($row_q2); $i++) {
+			$rows_q2[] = $row_q2[$i];
+			echo $i;
+			/*if($rows_q2[$i]['compkind'] == "Series"){
+				echo "Found the ideal cokey with series at index number: ";
+				echo $i;
+				$el_cokey_ideal = $rows_q2[$i]['cokey'];
+				echo "End";
+			}
+			echo "\r\n";*/
+		}
+
+		echo "Testing cokey ideal: ";
+		echo $el_cokey_ideal;
+		echo "\r\n";
+
+		$toReturn['TESTING compkind'] = $rows_q2;
+		//$el_cokey_ideal = $rows_q[0]['cokey'];
+
+		/*if($rows_q[0]['cokey'] == 13639075){
+			echo "TESTING: It entered the if-statement";
+		}*/
+
+		$q_mukey = "SELECT polygon.mukey FROM polygon WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), polygon.SHAPE) LIMIT 0, 1";
+		$toReturn['q_mukey'] = $q_mukey;
+		$q_mukey = mysqli_query($conn, $q_mukey);
+		$row_mu = fetchAll($q_mukey);
+		$rows_mu = array();
+		for ($i=0; $i < sizeof($row_mu); $i++) {
+			$rows_mu[] = $row_mu[$i];
+		}
+		$toReturn['TESTING mukey'] = $rows_mu;
+		/*if($rows_mu[0]['mukey'] = 393253){
+			echo "TESTING: It entered the if-statement for mu";
+		}*/
+
+
+		$q_ch = "SELECT hzdept_r, hzdepb_r, chorizon_r.cokey FROM polygon, chorizon_r WHERE chorizon_r.cokey = $el_cokey_ideal AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), polygon.SHAPE)";
+		$toReturn['q_ch'] = $q_ch;
+		$q_ch = mysqli_query($conn, $q_ch);
+		$row_ch = fetchAll($q_ch);
+		$rows_ch = array();
+		for ($i=0; $i < sizeof($row_ch); $i++) {
+			$rows_ch[] = $row_ch[$i];
+		}
+		$toReturn['TESTING ch'] = $rows_ch;
+		/*if($rows_mu[0]['mukey'] = 393253){
+			echo "TESTING: It entered the if-statement for mu";
+		}*/
+
+
 		$query = "SELECT x.cokey, p.mukey, OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS t, hzdepb_r AS b, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
 		$toReturn['query2'] = $query;
 		$result = mysqli_query($conn, $query);

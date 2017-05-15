@@ -822,7 +822,9 @@ function getPolygons(){//this is run button
 							<img src='img/neongreen.png' height='10px'/> A-7-6<br>\
 							<img src='img/neonpurple.png' height='10px'/> A-8<br>\
 							<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
+							console.log(amountIn);
 							var amountIn = parseFloat(data.coords[key][app.payload.property]);
+							console.log(amountIn);
 							//console.log(amountIn);
 							//var amountIn = data.coords[key][app.payload.property];
 							//console.log(amountIn);
