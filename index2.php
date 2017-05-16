@@ -170,7 +170,7 @@
 						<p> </p> <!--sepator-->
 
 						<div class="row"> <!--search-->
-							<label> Search: </label>
+							<label> Soil Property: </label>
 						</div>
 						<div class="row"> <!--search-->
 							<div class="input-group">
@@ -1310,10 +1310,10 @@ function getPolygons(){//this is run button
 					description_value: data.coords[key][app.payload.property],
 					paths: polyCoordis,
 					strokeColor: shapeoutline[colorSelector],
-					strokeOpacity: 0.18,
+					strokeOpacity: 0.60,
 					strokeWeight: 0.70,
 					fillColor: shapecolor[colorSelector],
-					fillOpacity: 0.18
+					fillOpacity: 0.60
 				});
 				polygon.setOptions({ zIndex: newzIndex });
 				polygon.addListener('click', polyInfo);
