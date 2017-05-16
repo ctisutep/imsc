@@ -101,29 +101,25 @@
 		}
 
 		$toReturn['TESTING cokey'] = $rows_q;
-		$el_cokey_ideal = $rows_q[0]['cokey'];
+		//$el_cokey_ideal = $rows_q[0]['cokey'];
 
 		$q_cokey2 = "SELECT compkind, component_r.cokey FROM component_r, polygon WHERE component_r.mukey = polygon.mukey AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), polygon.SHAPE)"; //assuming we have the 'ideal' cokey
 		$toReturn['compkind'] = $q_cokey2;
 		$q_cokey2 = mysqli_query($conn, $q_cokey2);
 		$row_q2 = fetchAll($q_cokey2);
 		$rows_q2 = array();
+		$index_ideal = 99;
 
 		for ($i=0; $i < sizeof($row_q2); $i++) {
 			$rows_q2[] = $row_q2[$i];
-			echo $i;
-			/*if($rows_q2[$i]['compkind'] == "Series"){
-				echo "Found the ideal cokey with series at index number: ";
-				echo $i;
-				$el_cokey_ideal = $rows_q2[$i]['cokey'];
-				echo "End";
+			if($rows_q2[$i]['compkind'] == "Series"){
+				$index_ideal = $i;
 			}
-			echo "\r\n";*/
 		}
 
-		echo "Testing cokey ideal: ";
-		echo $el_cokey_ideal;
-		echo "\r\n";
+		if($index_ideal != 99){
+			$el_cokey_ideal = $rows_q2[$index_ideal]['cokey'];
+		}
 
 		$toReturn['TESTING compkind'] = $rows_q2;
 		//$el_cokey_ideal = $rows_q[0]['cokey'];
