@@ -190,11 +190,18 @@
 
 		for ($i=0; $i < sizeof($result); $i++) {
 			if(array_key_exists($i, $unique)){
-				
-				echo $i;
-				echo " \r\n";
+				array_push($unique_index, $i);
+				//echo $i;
+				//echo " \r\n";
 			}
 		}
+
+		for ($i=0; $i < sizeof($unique_index); $i++) {
+			echo $unique_index[$i];
+			echo " \r\n";
+		}
+
+		var_dump($unique_index);
 
 		/*echo sizeof($result);
 		for($i = 0; $i<sizeof($result); $i++){
