@@ -173,8 +173,27 @@
 		$indexes_array = array();
 
 		for($i = 0; $i<sizeof($result); $i++){
-			$id_array[$i]['cokey'] = $result[$i]['cokey'];
+			//$id_array[$i]['cokey'] = $result[$i]['cokey'];
 			$id_array[$i]['OGR_FID'] = $result[$i]['OGR_FID'];
+		}
+
+		//var_dump($id_array);
+
+
+		$unique = array();
+		$unique = array_unique($id_array, SORT_REGULAR);
+
+		//var_dump($id_array);
+		//var_dump($unique);
+
+		$unique_index = array();
+
+		for ($i=0; $i < sizeof($result); $i++) {
+			if(array_key_exists($i, $unique)){
+				
+				echo $i;
+				echo " \r\n";
+			}
 		}
 
 		/*echo sizeof($result);
@@ -203,6 +222,7 @@
 			//echo sizeof($result);
 			$id = $result[$i]['OGR_FID'];
 			//if( $data->depth >= $result[$i]['t'] && $data->depth <= $result[$i]['b']){
+
 				/*if(sizeof($result)>2 && $id != $check_duplicate){
 					$polygons[] = $result[$i];
 				}*/
@@ -211,7 +231,8 @@
 				//}
 			//}
 			//echo $i;
-		}
+		//}
+	}
 
 		$toReturn['coords'] = $polygons;//fetch all
 	}
