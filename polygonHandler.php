@@ -196,12 +196,12 @@
 			}
 		}
 
-		for ($i=0; $i < sizeof($unique_index); $i++) {
+		/*for ($i=0; $i < sizeof($unique_index); $i++) {
 			echo $unique_index[$i];
 			echo " \r\n";
 		}
 
-		var_dump($unique_index);
+		var_dump($unique_index);*/
 
 		/*echo sizeof($result);
 		for($i = 0; $i<sizeof($result); $i++){
@@ -219,27 +219,31 @@
 
 		//var_dump($indexes_array);
 
-	  for( $i = 0; $i<sizeof( $result ); $i++ ){
+		for($i = 0; $i<sizeof($unique_index); $i++){
+				$polygons[] = $result[$unique_index[$i]];
+		}
+
+	  /*for( $i = 0; $i<sizeof( $result ); $i++ ){
 			if(($i + 1)<sizeof($result)){
 				/*echo $i;
 				echo ($i + 1);
 				echo "print";*/
-				$check_duplicate = $result[$i+1]['OGR_FID'];
-			}
+		//		$check_duplicate = $result[$i+1]['OGR_FID'];
+			//}
 			//echo sizeof($result);
-			$id = $result[$i]['OGR_FID'];
+			//$id = $result[$i]['OGR_FID'];
 			//if( $data->depth >= $result[$i]['t'] && $data->depth <= $result[$i]['b']){
 
 				/*if(sizeof($result)>2 && $id != $check_duplicate){
 					$polygons[] = $result[$i];
 				}*/
 				//else{
-					$polygons[] = $result[$i];
+					//$polygons[] = $result[$i];
 				//}
 			//}
 			//echo $i;
 		//}
-	}
+	//}
 
 		$toReturn['coords'] = $polygons;//fetch all
 	}
