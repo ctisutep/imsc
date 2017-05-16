@@ -220,7 +220,9 @@
 		//var_dump($indexes_array);
 
 		for($i = 0; $i<sizeof($unique_index); $i++){
+			if($data->depth >= $result[$unique_index[$i]]['t'] && $data->depth <= $result[$unique_index[$i]]['b']){
 				$polygons[] = $result[$unique_index[$i]];
+			}
 		}
 
 	  /*for( $i = 0; $i<sizeof( $result ); $i++ ){
