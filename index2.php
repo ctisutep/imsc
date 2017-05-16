@@ -1306,7 +1306,7 @@ function getPolygons(){//this is run button
 					polyCoordis.push(temp[i]);
 				}
 				var polygon = new google.maps.Polygon({ //we need another value to determine the key
-					description: app.payload.value,
+					description: app.payload.value, //value that appears when you click the map
 					description_value: data.coords[key][app.payload.property],
 					paths: polyCoordis,
 					strokeColor: shapeoutline[colorSelector],
@@ -1323,7 +1323,7 @@ function getPolygons(){//this is run button
 		}
 	}
 }).done(function(data){
-	if($('#selectProp').val() == 32){ //should have made it like this: if(app.payload.value == "gypsum"){ //but it's to late now
+	if($('#selectProp').val() == 32){ //should have made it like this: if(app.payload.value == "gypsum"){ //but it's too late now
 	var gypsum = "Description for Gypsum: ";
 	var gypsumText = "The content of gypsum is the percent, by weight, of hydrated calcium sulfates in the fraction of the soil less than 20 millimeters in size. "; // Gypsum is partially soluble in water. Soils high in content of gypsum, such as those with more than 10 percent gypsum, may collapse if the gypsum is removed by percolating water. Gypsum is corrosive to concrete.
 	//For each soil layer, this attribute is actually recorded as three separate values in the database. A low value and a high value indicate the range of this attribute for the soil component. A \"representative\" value indicates the expected value of this attribute for the component. For this soil property, only the representative value is used.";
