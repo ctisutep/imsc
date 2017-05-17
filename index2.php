@@ -553,34 +553,40 @@ function getPolygons(){//this is run button
 							<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
 							// GRAY, RED, SKY BLUE, BRIGHT GREEN, PURPLE, ORANGE, BRIGHT PINK, NAVY BLUE, LILAC, YELLOW
 							var amountIn = parseFloat(data.coords[key][app.payload.property]);
+							console.log(amountIn);
 							//
 							//console.log(amountIn);
 							//var amountIn = data.coords[key][app.payload.property];
 							//console.log(amountIn);
 							switch (true) {
 								case (amountIn <= 9.4): // LESS THAN OR EQUAL TO 0
+								console.log("hey, I'm supposed to be red");
 								colorSelector = 1; //red
 								newzIndex = 1;
 								break;
 								case (amountIn > 9.4 && amountIn <= 21.0): // BETWEEN 0 AND 21
 								colorSelector = 2; //skybluesquare
 								newzIndex = 2;
+								console.log("hey, I'm supposed to be skyblue");
 								break;
 								case (amountIn > 21.0 && amountIn <= 30.6): // BETWEEN 21 AND 40
 								colorSelector = 3; //brightgreensquare
 								newzIndex = 3;
+								console.log("hey, I'm supposed to be brightgreen");
 								break;
 								case (amountIn > 30.6 && amountIn <= 37.5): // BETWEEN 41 AND 60
 								colorSelector = 4; //purplesquare
 								newzIndex = 4;
 								break;
-								case (amountIn > 37.5 && amountIn <= 54.1): // BETWEEN 41 AND 60
+								case (amountIn > 37.5 && amountIn <= 60): // BETWEEN 41 AND 60
 								colorSelector = 5; //orangesquare
 								newzIndex = 5;
+								console.log("hey, I'm supposed to be orange");
 								break;
 								default: // Not rated
 								colorSelector = 0; //gray
 								newzIndex = 0;
+								console.log("hey, I'm supposed to be gray");
 								break;
 							}
 						}

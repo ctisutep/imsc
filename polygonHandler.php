@@ -91,7 +91,7 @@
 		//$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) AND hzdept_r <= $data->depth AND hzdepb_r >= $data->depth";
 
 		/*TESTING DIFFERENT QUERIES*****************************************************************************************************************************************************************/
-		/*$q_cokey = "SELECT mu.cokey FROM polygon, mujoins as mu WHERE mu.mukey = polygon.mukey AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), polygon.SHAPE)"; //assuming we have the 'ideal' cokey
+		$q_cokey = "SELECT mu.cokey FROM polygon, mujoins as mu WHERE mu.mukey = polygon.mukey AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), polygon.SHAPE)"; //assuming we have the 'ideal' cokey
 		$toReturn['q_cokey'] = $q_cokey;
 		$q_cokey = mysqli_query($conn, $q_cokey);
 		$row_q = fetchAll($q_cokey);
@@ -102,6 +102,7 @@
 		}
 
 		$toReturn['TESTING cokey'] = $rows_q;
+
 		//$el_cokey_ideal = $rows_q[0]['cokey'];
 
 		$q_cokey2 = "SELECT compkind, component_r.cokey FROM component_r, polygon WHERE component_r.mukey = polygon.mukey AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), polygon.SHAPE)"; //assuming we have the 'ideal' cokey
@@ -122,8 +123,8 @@
 			$el_cokey_ideal = $rows_q2[$index_ideal]['cokey'];
 		}
 
-		$toReturn['TESTING compkind'] = $rows_q2;*/
-		//$el_cokey_ideal = $rows_q[0]['cokey'];
+		$toReturn['TESTING compkind'] = $rows_q2;
+		$el_cokey_ideal = $rows_q[0]['cokey'];
 
 		/*if($rows_q[0]['cokey'] == 13639075){
 			echo "TESTING: It entered the if-statement";
@@ -142,8 +143,8 @@
 			echo "TESTING: It entered the if-statement for mu";
 		}*/
 
-		/*
-		$q_ch = "SELECT hzdept_r, hzdepb_r, chorizon_r.cokey FROM polygon, chorizon_r WHERE chorizon_r.cokey = $el_cokey_ideal AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), polygon.SHAPE)";
+
+		$q_ch = "SELECT hzdept_r, hzdepb_r, chorizon_r.cokey, chorizon_r.$data->property FROM polygon, chorizon_r WHERE chorizon_r.cokey = $el_cokey_ideal AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), polygon.SHAPE)";
 		$toReturn['q_ch'] = $q_ch;
 		$q_ch = mysqli_query($conn, $q_ch);
 		$row_ch = fetchAll($q_ch);
@@ -152,7 +153,7 @@
 			$rows_ch[] = $row_ch[$i];
 		}
 		$toReturn['TESTING ch'] = $rows_ch;
-		*/
+
 		/*if($rows_mu[0]['mukey'] = 393253){
 			echo "TESTING: It entered the if-statement for mu";
 		}*/
@@ -160,7 +161,7 @@
 		/*END OF 	TESTING DIFFERENT QUERIES*****************************************************************************************************************************************************************/
 		//$query = "SELECT x.cokey, p.mukey, OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS t, hzdepb_r AS b, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //for chorizon_r
 		//$query = "SELECT p.mukey, OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //for chconsistence_r e.g. Plasticity
-		$query = "SELECT x.cokey, p.mukey, OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS t, hzdepb_r AS b, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
+		$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE x.cokey = $el_cokey_ideal AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //just works for chorizon at the moment
 		$toReturn['query2'] = $query;
 		$result = mysqli_query($conn, $query);
 
@@ -221,10 +222,25 @@
 
 		//var_dump($indexes_array);
 
-		for($i = 0; $i<sizeof($unique_index); $i++){
-			//if($data->depth >= $result[$unique_index[$i]]['t'] && $data->depth <= $result[$unique_index[$i]]['b']){ //discrimanador de depth
-				$polygons[] = $result[$unique_index[$i]];
-			//}
+		//var_dump($result);
+
+		//echo $unique_index[0];
+		//echo sizeof($unique_index);
+
+		if(sizeof($unique_index) == 1){
+			for($i = 0; $i<sizeof($result); $i++){
+				//	echo $i;
+				if($data->depth >= $result[$i]['top'] && $data->depth <= $result[$i]['bottom']){ //discrimanador de depth
+					$polygons[] = $result[$i];
+				}
+			}
+		}
+		else{
+			for($i = 0; $i<sizeof($unique_index); $i++){
+				//if($data->depth >= $result[$unique_index[$i]]['top'] && $data->depth <= $result[$unique_index[$i]]['bottom']){ //discrimanador de depth
+					$polygons[] = $result[$unique_index[$i]];
+				//}
+			}
 		}
 
 	  /*for( $i = 0; $i<sizeof( $result ); $i++ ){
