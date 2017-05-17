@@ -158,6 +158,8 @@
 		}*/
 
 		/*END OF 	TESTING DIFFERENT QUERIES*****************************************************************************************************************************************************************/
+		//$query = "SELECT x.cokey, p.mukey, OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS t, hzdepb_r AS b, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //for chorizon_r
+		//$query = "SELECT p.mukey, OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //for chconsistence_r e.g. Plasticity
 		$query = "SELECT x.cokey, p.mukey, OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS t, hzdepb_r AS b, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
 		$toReturn['query2'] = $query;
 		$result = mysqli_query($conn, $query);
@@ -220,9 +222,9 @@
 		//var_dump($indexes_array);
 
 		for($i = 0; $i<sizeof($unique_index); $i++){
-			if($data->depth >= $result[$unique_index[$i]]['t'] && $data->depth <= $result[$unique_index[$i]]['b']){
+			//if($data->depth >= $result[$unique_index[$i]]['t'] && $data->depth <= $result[$unique_index[$i]]['b']){ //discrimanador de depth
 				$polygons[] = $result[$unique_index[$i]];
-			}
+			//}
 		}
 
 	  /*for( $i = 0; $i<sizeof( $result ); $i++ ){
