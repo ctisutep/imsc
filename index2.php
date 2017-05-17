@@ -553,7 +553,7 @@ function getPolygons(){//this is run button
 							<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
 							// GRAY, RED, SKY BLUE, BRIGHT GREEN, PURPLE, ORANGE, BRIGHT PINK, NAVY BLUE, LILAC, YELLOW
 							var amountIn = parseFloat(data.coords[key][app.payload.property]);
-							console.log(amountIn);
+							//console.log(amountIn);
 							//
 							//console.log(amountIn);
 							//var amountIn = data.coords[key][app.payload.property];
