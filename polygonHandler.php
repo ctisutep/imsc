@@ -229,7 +229,7 @@
 		//echo $unique_index[0];
 		//echo sizeof($unique_index);
 
-		if(sizeof($unique_index) == 1){ //there is only one unique_index: no need to extract the indexes from the unique_index array
+		/*if(sizeof($unique_index) == 1){ //there is only one unique_index: no need to extract the indexes from the unique_index array
 			for($i = 0; $i<sizeof($result); $i++){
 				//	echo $i;
 				if($data->depth >= $result[$i]['top'] && $data->depth <= $result[$i]['bottom']){ //discrimanador de depth
@@ -243,6 +243,12 @@
 					$polygons[] = $result[$unique_index[$i]];
 				//}
 			}
+		}*/
+
+		for($i = 0; $i<sizeof($unique_index); $i++){
+			//if($data->depth >= $result[$unique_index[$i]]['top'] && $data->depth <= $result[$unique_index[$i]]['bottom']){ //discrimanador de depth
+				$polygons[] = $result[$unique_index[$i]];
+			//}
 		}
 
 	  /*for( $i = 0; $i<sizeof( $result ); $i++ ){
