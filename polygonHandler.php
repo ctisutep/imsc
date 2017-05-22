@@ -90,7 +90,6 @@
 		//actual query for retrieving desired polygons
 		//$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) AND hzdept_r <= $data->depth AND hzdepb_r >= $data->depth";
 
-		/*******************************************************************************************************************************************************************************************/
 		/*TESTING DIFFERENT QUERIES*****************************************************************************************************************************************************************/
 		$q_cokey = "SELECT mu.cokey FROM polygon, mujoins as mu WHERE mu.mukey = polygon.mukey AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), polygon.SHAPE)"; //assuming we have the 'ideal' cokey
 		$toReturn['q_cokey'] = $q_cokey;
@@ -159,7 +158,6 @@
 			echo "TESTING: It entered the if-statement for mu";
 		}*/
 
-		/*******************************************************************************************************************************************************************************************/
 		/*END OF 	TESTING DIFFERENT QUERIES*****************************************************************************************************************************************************************/
 		//$query = "SELECT x.cokey, p.mukey, OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS t, hzdepb_r AS b, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //for chorizon_r
 		//$query = "SELECT p.mukey, OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //for chconsistence_r e.g. Plasticity
@@ -229,26 +227,19 @@
 		//echo $unique_index[0];
 		//echo sizeof($unique_index);
 
-		/*if(sizeof($unique_index) == 1){ //there is only one unique_index: no need to extract the indexes from the unique_index array
+		if(sizeof($unique_index) == 1){
 			for($i = 0; $i<sizeof($result); $i++){
-				//	echo $i;
-				if($data->depth >= $result[$i]['top'] && $data->depth <= $result[$i]['bottom']){ //discrimanador de depth
-					$polygons[] = $result[$i];
+				if($data->depth >= $result[$i]['top'] && $data->depth <= $result[$i]['bottom']){ //discriminador de depth
+						$polygons[] = $result[$i];
 				}
 			}
 		}
 		else{
 			for($i = 0; $i<sizeof($unique_index); $i++){
-				//if($data->depth >= $result[$unique_index[$i]]['top'] && $data->depth <= $result[$unique_index[$i]]['bottom']){ //discrimanador de depth
-					$polygons[] = $result[$unique_index[$i]];
-				//}
+				if($data->depth >= $result[$unique_index[$i]]['top'] && $data->depth <= $result[$unique_index[$i]]['bottom']){ //discriminador de depth
+						$polygons[] = $result[$unique_index[$i]];
+				}
 			}
-		}*/
-
-		for($i = 0; $i<sizeof($unique_index); $i++){
-			//if($data->depth >= $result[$unique_index[$i]]['top'] && $data->depth <= $result[$unique_index[$i]]['bottom']){ //discrimanador de depth
-				$polygons[] = $result[$unique_index[$i]];
-			//}
 		}
 
 	  /*for( $i = 0; $i<sizeof( $result ); $i++ ){
