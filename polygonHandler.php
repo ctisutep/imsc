@@ -166,8 +166,10 @@ $toReturn['TESTING ch'] = $rows_ch;
 echo "TESTING: It entered the if-statement for mu";
 }*/
 
-
+//$query = "SELECT x.cokey, p.mukey, OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //working on it
+//$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //no se
 $query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE x.cokey = $el_cokey_ideal AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //just works for chorizon at the moment
+
 $toReturn['query2'] = $query;
 $result = mysqli_query($conn, $query);
 
@@ -205,6 +207,8 @@ for ($i=0; $i < sizeof($result); $i++) {
 	}
 }
 
+//var_dump($unique_index);
+
 /*for ($i=0; $i < sizeof($unique_index); $i++) {
 echo $unique_index[$i];
 echo " \r\n";
@@ -230,8 +234,24 @@ echo " \r\n";
 
 //var_dump($result);
 
-//echo $unique_index[0];
-//echo sizeof($unique_index);
+//echo $unique_index[0]; //0 when testing one polygon
+//echo sizeof($unique_index); //1 when testing one polygon
+
+//var_dump($result);
+//echo "separate";
+//var_dump($unique_index);
+
+/*for($i = 0; $i < sizeof($result); $i++){
+	for($j = 0; $j < sizeof($unique_index); $j++){
+		//echo $i;
+		//echo " \r\n";
+		//echo $j;
+		//echo " \r\n";
+		if($unique_index[$j]['OGR_FID'] == $result[$i]['OGR_FID']){
+			var_dump($unique_index);
+		}
+	}
+}*/
 
 if(sizeof($unique_index) == 1){
 	for($i = 0; $i<sizeof($result); $i++){
@@ -247,6 +267,18 @@ else{
 		}
 	}
 }
+
+/*for($i = 0; $i<sizeof($unique_index); $i++){
+	if($data->depth >= $result[$unique_index[$i]]['top'] && $data->depth <= $result[$unique_index[$i]]['bottom']){ //discriminador de depth
+		$polygons[] = $result[$unique_index[$i]];
+	}
+}*/
+
+/*for($i = 0; $i<sizeof($result); $i++){
+	if($data->depth >= $result[$i]['top'] && $data->depth <= $result[$i]['bottom']){ //discriminador de depth
+		$polygons[] = $result[$i];
+	}
+}*/
 
 /*for( $i = 0; $i<sizeof( $result ); $i++ ){
 if(($i + 1)<sizeof($result)){
@@ -272,8 +304,9 @@ $polygons[] = $result[$i];
 
 $toReturn['coords'] = $polygons;//fetch all
 }
+
 else{
-	$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
+	$query = "SELECT OGR_FID, p.mukey, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
 	$toReturn['query2'] = $query;
 	$result = mysqli_query($conn, $query);
 
@@ -302,9 +335,9 @@ else{
 
 	if(sizeof($unique_index) == 1){
 		for($i = 0; $i<sizeof($result); $i++){
-			//if($data->depth >= $result[$i]['top'] && $data->depth <= $result[$i]['bottom']){ //discriminador de depth
+			if($data->depth >= $result[$i]['top'] && $data->depth <= $result[$i]['bottom']){ //discriminador de depth
 			$polygons[] = $result[$i];
-			//}
+			}
 		}
 	}
 	else{
