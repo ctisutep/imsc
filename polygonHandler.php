@@ -118,20 +118,30 @@ function getPolygons(){
 		$rows_q2 = array();
 		$index_ideal = 99;
 
+		//$indexes = array();
+
 		for ($i=0; $i < sizeof($row_q2); $i++) {
 			$rows_q2[] = $row_q2[$i];
 			if($rows_q2[$i]['compkind'] == "Series"){
 				$index_ideal = $i;
+				//$indexes[$i] = $i;
 			}
 		}
+
+		//var_dump($indexes);
+
+		//echo $el_cokey_ideal;
 
 		if($index_ideal != 99){
 			$el_cokey_ideal = $rows_q2[$index_ideal]['cokey'];
 		}
 
-		$toReturn['TESTING compkind'] = $rows_q2;
-		$el_cokey_ideal = $rows_q[0]['cokey'];
+		//echo $el_cokey_ideal;
 
+		$toReturn['TESTING compkind'] = $rows_q2;
+		//$el_cokey_ideal = $rows_q[0]['cokey'];
+
+		//echo $el_cokey_ideal;
 
 		/*if($rows_q[0]['cokey'] == 13639075){
 		echo "TESTING: It entered the if-statement";
@@ -151,7 +161,7 @@ echo "TESTING: It entered the if-statement for mu";
 }*/
 
 
-$q_ch = "SELECT hzdept_r, hzdepb_r, chorizon_r.cokey, chorizon_r.$data->property FROM polygon, chorizon_r WHERE chorizon_r.cokey = $el_cokey_ideal AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), polygon.SHAPE)";
+/*$q_ch = "SELECT hzdept_r, hzdepb_r, chorizon_r.cokey, chorizon_r.$data->property FROM polygon, chorizon_r WHERE chorizon_r.cokey = $el_cokey_ideal AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), polygon.SHAPE)";
 $toReturn['q_ch'] = $q_ch;
 $q_ch = mysqli_query($conn, $q_ch);
 $row_ch = fetchAll($q_ch);
@@ -160,15 +170,24 @@ for ($i=0; $i < sizeof($row_ch); $i++) {
 	$rows_ch[] = $row_ch[$i];
 }
 $toReturn['TESTING ch'] = $rows_ch;
-
+/*
 
 /*if($rows_mu[0]['mukey'] = 393253){
 echo "TESTING: It entered the if-statement for mu";
 }*/
 
-//$query = "SELECT x.cokey, p.mukey, OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //working on it
+/*if(isset($el_cokey_ideal)){
+	//echo "cokey series existe, por lo tanto $el_cokey_ideal existe";
+	$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE x.cokey = $el_cokey_ideal AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //just works for chorizon at the moment
+}
+else{
+	//echo "cokey series no existe";
+	$query = "SELECT x.cokey, p.mukey, OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //working on it
+}*/
+
+$query = "SELECT x.cokey, p.mukey, OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //working on it
 //$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //no se
-$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE x.cokey = $el_cokey_ideal AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //just works for chorizon at the moment
+//$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE x.cokey = $el_cokey_ideal AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //just works for chorizon at the moment
 
 $toReturn['query2'] = $query;
 $result = mysqli_query($conn, $query);
@@ -181,7 +200,7 @@ $check_duplicate;
 $id;
 
 $id_array = array();
-$indexes_array = array();
+//$indexes_array = array();
 
 for($i = 0; $i<sizeof($result); $i++){
 	//$id_array[$i]['cokey'] = $result[$i]['cokey'];
@@ -253,7 +272,45 @@ echo " \r\n";
 	}
 }*/
 
+/*for($i=0; $i < sizeof($result); $i++) {
+		for ($j=0; $j < sizeof($rows_q2); $j++) {
+			if($result[$i]['cokey'] == $rows_q2[$index_ideal]['cokey']){
+				echo $i;
+			}
+		}
+}*/
+
+/*for($i=0; $i < sizeof($result); $i++) {
+		$polygons[] = $result[$i];
+}*/
+
+/*
 if(sizeof($unique_index) == 1){
+	echo "hey";
+	for($i = 0; $i<sizeof($result); $i++){
+		//for($j = 0; $j < sizeof($unique_index); j++){
+		echo "hi";
+		if($data->depth >= $result[$i]['top'] && $data->depth <= $result[$i]['bottom'] && $result[$i]['cokey'] == $el_cokey_ideal){ //discriminador de depth
+			echo "Hello there";
+			echo $result[$i]['cokey'];
+			$polygons[] = $result[$i];
+		}
+	//}
+	}
+}
+else{
+	echo "test else";
+	for($i = 0; $i<sizeof($unique_index); $i++){
+		echo "Hello here";
+		if($data->depth >= $result[$unique_index[$i]]['top'] && $data->depth <= $result[$unique_index[$i]]['bottom']){ //discriminador de depth
+			echo "hellos";
+			$polygons[] = $result[$unique_index[$i]];
+		}
+	}
+}
+*/
+
+/*if(sizeof($unique_index) == 1){
 	for($i = 0; $i<sizeof($result); $i++){
 		if($data->depth >= $result[$i]['top'] && $data->depth <= $result[$i]['bottom']){ //discriminador de depth
 			$polygons[] = $result[$i];
@@ -265,6 +322,13 @@ else{
 		if($data->depth >= $result[$unique_index[$i]]['top'] && $data->depth <= $result[$unique_index[$i]]['bottom']){ //discriminador de depth
 			$polygons[] = $result[$unique_index[$i]];
 		}
+	}
+}*/
+
+
+for ($i=0; $i < sizeof($unique_index); $i++) {
+	if($data->depth >= $result[$unique_index[$i]]['top'] && $data->depth <= $result[$unique_index[$i]]['bottom']){ //discriminador de depth
+		$polygons[] = $result[$unique_index[$i]];
 	}
 }
 
