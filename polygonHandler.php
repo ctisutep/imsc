@@ -98,6 +98,25 @@ function getPolygons(){
 	//$query = "SELECT p.mukey, OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //for chconsistence_r e.g. Plasticity
 
 	if($data->table == "chorizon_r"){
+		/*
+		//This will be our new main query
+		SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, 1.7625422383727E-6)) AS POLYGON, polygon.mukey, mujoins2.cokey, mujoins2.chkey, mujoins2.chconsistkey FROM mujoins2 JOIN polygon ON polygon.mukey = mujoins2.mukey WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), polygon.SHAPE);
+		*/
+
+		/*Query for getting either the Series of Miscellaneous area from component"*/
+		$cokeys = "SELECT OGR_FID, component_r.cokey, component_r.compkind FROM polygon, component_r WHERE component_r.mukey = polygon.mukey AND (compkind = 'Miscellaneous area' AND majcompflag = 'Yes' OR compkind = 'Series' AND majcompflag = 'Yes') AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), polygon.SHAPE)";
+		//$cokeys = "SELECT * FROM mujoins2 WHERE cokey IN (SELECT cokey FROM component_r WHERE compkind = 'Miscellaneous area' AND majcompflag = 'Yes' OR compkind = 'Series' AND majcompflag = 'Yes')";
+		$toReturn['query para cokeys que tienen ya sea series || miscellaneous'] = $cokeys;
+		$cokeys = mysqli_query($conn, $cokeys);
+		$row_cokeys = fetchAll($cokeys);
+		$arr_cokeys = array();
+
+		for ($i=0; $i < sizeof($row_cokeys); $i++) {
+			$arr_cokeys[] = $row_cokeys[$i];
+		}
+
+		$toReturn['cokeys que tienen ya sea series || miscellaneous'] = $arr_cokeys;
+		/*
 		$q_cokey = "SELECT mu.cokey FROM polygon, mujoins as mu WHERE mu.mukey = polygon.mukey AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), polygon.SHAPE)"; //assuming we have the 'ideal' cokey
 		$toReturn['q_cokey'] = $q_cokey;
 		$q_cokey = mysqli_query($conn, $q_cokey);
@@ -109,6 +128,7 @@ function getPolygons(){
 		}
 
 		$toReturn['TESTING cokey'] = $rows_q;
+		*/
 		//$el_cokey_ideal = $rows_q[0]['cokey'];
 
 		$q_cokey2 = "SELECT compkind, component_r.cokey FROM component_r, polygon WHERE component_r.mukey = polygon.mukey AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), polygon.SHAPE)"; //assuming we have the 'ideal' cokey
@@ -195,9 +215,6 @@ $result = mysqli_query($conn, $query);
 $result = fetchAll($result);
 
 $polygons = array();
-
-$check_duplicate;
-$id;
 
 $id_array = array();
 //$indexes_array = array();
@@ -326,9 +343,9 @@ else{
 }*/
 
 
-for ($i=0; $i < sizeof($unique_index); $i++) {
+for ($i=0; $i < sizeof($unique_index); $i++) { //con unique index se sacan los OGR_FID unicos, mas no necesariamente los que poseen layers
 	if($data->depth >= $result[$unique_index[$i]]['top'] && $data->depth <= $result[$unique_index[$i]]['bottom']){ //discriminador de depth
-		$polygons[] = $result[$unique_index[$i]];
+		$polygons[] = $result[$unique_index[$i]]; //el indice es aquel que contendra el ID unico, sin embargo, necesitamos extraer el ID que use el cokey perteneciente a layers (compkind == 'Series')
 	}
 }
 
