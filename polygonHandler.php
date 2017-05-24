@@ -99,7 +99,7 @@ function getPolygons(){
 
 	if($data->table == "chorizon_r"){
 		/*
-		//This will be our new main query
+		//This will be one of our new main queries, as it does not go into chorizon
 		SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, 1.7625422383727E-6)) AS POLYGON, polygon.mukey, mujoins2.cokey, mujoins2.chkey, mujoins2.chconsistkey FROM mujoins2 JOIN polygon ON polygon.mukey = mujoins2.mukey WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), polygon.SHAPE);
 		*/
 
@@ -116,6 +116,7 @@ function getPolygons(){
 		}
 
 		$toReturn['cokeys que tienen ya sea series || miscellaneous'] = $arr_cokeys;
+
 		/*
 		$q_cokey = "SELECT mu.cokey FROM polygon, mujoins as mu WHERE mu.mukey = polygon.mukey AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), polygon.SHAPE)"; //assuming we have the 'ideal' cokey
 		$toReturn['q_cokey'] = $q_cokey;
@@ -131,6 +132,7 @@ function getPolygons(){
 		*/
 		//$el_cokey_ideal = $rows_q[0]['cokey'];
 
+		/*
 		$q_cokey2 = "SELECT compkind, component_r.cokey FROM component_r, polygon WHERE component_r.mukey = polygon.mukey AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), polygon.SHAPE)"; //assuming we have the 'ideal' cokey
 		$toReturn['compkind'] = $q_cokey2;
 		$q_cokey2 = mysqli_query($conn, $q_cokey2);
@@ -159,6 +161,7 @@ function getPolygons(){
 		//echo $el_cokey_ideal;
 
 		$toReturn['TESTING compkind'] = $rows_q2;
+		*/
 		//$el_cokey_ideal = $rows_q[0]['cokey'];
 
 		//echo $el_cokey_ideal;
@@ -238,12 +241,20 @@ $unique_index = array();
 for ($i=0; $i < sizeof($result); $i++) {
 	if(array_key_exists($i, $unique)){
 		array_push($unique_index, $i);
+		//array_push($unique_index, $result[$i]['OGR_FID']);
+		//$unique_index[$i]['OGR_FID'] = $result[$i]['OGR_FID'];
 		//echo $i;
 		//echo " \r\n";
 	}
 }
 
 //var_dump($unique_index);
+
+/*for ($i=0; $i < sizeof($unique_index); $i++) {
+	$printer = $result[$unique_index[$i]]['OGR_FID'];
+	echo $printer;
+	echo "\r\n";
+}
 
 /*for ($i=0; $i < sizeof($unique_index); $i++) {
 echo $unique_index[$i];
