@@ -97,7 +97,7 @@ function getPolygons(){
 	//$query = "SELECT x.cokey, p.mukey, OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS t, hzdepb_r AS b, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //for chorizon_r
 	//$query = "SELECT p.mukey, OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //for chconsistence_r e.g. Plasticity
 
-	if($data->table == "chorizon_r"){
+	if($data->table == "chorizon_r"){ //necesario (por ahora) para no usar layers si la propiedad no es de chorizon
 		/*
 		//This will be one of our new main queries, as it does not go into chorizon
 		SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, 1.7625422383727E-6)) AS POLYGON, polygon.mukey, mujoins2.cokey, mujoins2.chkey, mujoins2.chconsistkey FROM mujoins2 JOIN polygon ON polygon.mukey = mujoins2.mukey WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), polygon.SHAPE);
@@ -248,7 +248,124 @@ for ($i=0; $i < sizeof($result); $i++) {
 	}
 }
 
+$correctos_arr =  array();
+$found = false;
+
+/*for($i=0; $i < sizeof($unique_index); $i++){ //elegir los cokeys correctos
+	$found = false;
+	$temp = $result[$unique_index[$i]]['OGR_FID'];
+	//echo $temp;
+	//echo " ";
+	for($j=0; $j < sizeof($arr_cokeys); $j++){
+			if($temp == $arr_cokeys[$j]['OGR_FID'] && $found == false){
+				if($arr_cokeys[$j]['compkind'] == 'Series'){ //going inside but not stopping at found
+					array_push($correctos_arr, $j); //mete los indexes que usaremos al meter los resultados al polygon
+					echo $j;
+					echo " \r\n";
+					echo $arr_cokeys[$j]['OGR_FID'];
+					echo " \r\n";
+					echo $arr_cokeys[$j]['cokey'];
+					echo " \r\n";
+					echo $arr_cokeys[$j]['compkind'];
+					echo " \r\n";
+					$found = true;
+				}
+				/*else if($arr_cokeys[$j]['compkind'] == 'Miscellaneous area'){ //encuentra el indice del cokey correcto de series, mas no guarda si pertenece a miscellaneous area
+					array_push($correctos_arr, $j);
+					echo $j;
+					echo " \r\n";
+					echo $arr_cokeys[$j]['OGR_FID'];
+					echo " \r\n";
+					echo $arr_cokeys[$j]['cokey'];
+					echo " \r\n";
+					echo $arr_cokeys[$j]['compkind'];
+					echo " \r\n";
+					$found = true;
+				}*/
+			//}
+	//}
+//}
+
+$series_arr = array();
+$misc_arr = array();
+$correctos_test_arr = array();
+
+for($i=0; $i < sizeof($unique_index); $i++){ //elegir los cokeys correctos
+	$found = false;
+	$found_misc = false;
+	$temp = $result[$unique_index[$i]]['OGR_FID'];
+	//echo $temp;
+	//echo " ";
+	for($j=0; $j < sizeof($arr_cokeys); $j++){
+			if($temp == $arr_cokeys[$j]['OGR_FID'] && $found == false){
+				if($arr_cokeys[$j]['compkind'] == 'Series'){ //going inside but not stopping at found
+					array_push($series_arr, $j); //mete los indexes que usaremos al meter los resultados al polygon
+					echo $j;
+					echo " \r\n";
+					echo $arr_cokeys[$j]['OGR_FID'];
+					echo " \r\n";
+					echo $arr_cokeys[$j]['cokey'];
+					echo " \r\n";
+					echo $arr_cokeys[$j]['compkind'];
+					echo " \r\n";
+					$found = true;
+				}
+			}
+	}
+
+	for($h=0; $h < sizeof($arr_cokeys); $h++){
+			if($temp == $arr_cokeys[$h]['OGR_FID'] && $found_misc == false){
+				if($arr_cokeys[$h]['compkind'] == 'Miscellaneous area'){ //going inside but not stopping at found
+					array_push($misc_arr, $h); //mete los indexes que usaremos al meter los resultados al polygon
+					echo $h;
+					echo " \r\n";
+					echo $arr_cokeys[$h]['OGR_FID'];
+					echo " \r\n";
+					echo $arr_cokeys[$h]['cokey'];
+					echo " \r\n";
+					echo $arr_cokeys[$h]['compkind'];
+					echo " \r\n";
+					$found_misc = true;
+				}
+			}
+		}
+}
+
+$array_to_use = array();
+if(sizeof($series_arr) > sizeof($misc_arr)){
+	$array_to_use = $series_arr;
+}
+else{
+	$array_to_use = $misc_arr;
+}
+
+for($i=0; $i < sizeof($arr_cokeys); $i++){ //guardar los correctos en el array
+	if(array_key_exists($i, $series_arr)){
+		echo "para series: ";
+		echo $i;
+		echo " ";
+		echo $arr_cokeys[$series_arr[$i]]['cokey'];
+		echo " ";
+		echo $series_arr[$i];
+		echo "  ";
+	}
+
+	if(array_key_exists($i, $misc_arr)){
+		echo "para misc: ";
+		echo $i;
+		echo " ";
+		echo $arr_cokeys[$misc_arr[$i]]['cokey'];
+		echo " ";
+		echo $misc_arr[$i];
+		echo "  ";
+	}
+}
+
 //var_dump($unique_index);
+//var_dump($correctos_arr);
+//var_dump($array_to_use);
+//var_dump($series_arr);
+//var_dump($misc_arr);
 
 /*for ($i=0; $i < sizeof($unique_index); $i++) {
 	$printer = $result[$unique_index[$i]]['OGR_FID'];
@@ -355,7 +472,7 @@ else{
 
 
 for ($i=0; $i < sizeof($unique_index); $i++) { //con unique index se sacan los OGR_FID unicos, mas no necesariamente los que poseen layers
-	if($data->depth >= $result[$unique_index[$i]]['top'] && $data->depth <= $result[$unique_index[$i]]['bottom']){ //discriminador de depth
+		if($data->depth >= $result[$unique_index[$i]]['top'] && $data->depth <= $result[$unique_index[$i]]['bottom']){ //discriminador de depth
 		$polygons[] = $result[$unique_index[$i]]; //el indice es aquel que contendra el ID unico, sin embargo, necesitamos extraer el ID que use el cokey perteneciente a layers (compkind == 'Series')
 	}
 }
