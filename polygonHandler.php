@@ -248,7 +248,7 @@ for ($i=0; $i < sizeof($result); $i++) {
 	}
 }
 
-$correctos_arr =  array();
+$correctos_arr = array();
 $found = false;
 
 /*for($i=0; $i < sizeof($unique_index); $i++){ //elegir los cokeys correctos
@@ -339,26 +339,59 @@ else{
 	$array_to_use = $misc_arr;
 }
 
-for($i=0; $i < sizeof($arr_cokeys); $i++){ //guardar los correctos en el array
+for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
+
 	if(array_key_exists($i, $series_arr)){
 		echo "para series: ";
+		echo $arr_cokeys[$series_arr[$i]]['OGR_FID'];
+		echo ", ";
 		echo $i;
-		echo " ";
+		echo ", ";
 		echo $arr_cokeys[$series_arr[$i]]['cokey'];
-		echo " ";
+		echo ", ";
 		echo $series_arr[$i];
-		echo "  ";
+		echo ";  ";
 	}
 
 	if(array_key_exists($i, $misc_arr)){
 		echo "para misc: ";
+		echo $arr_cokeys[$misc_arr[$i]]['OGR_FID'];
+		echo ", ";
 		echo $i;
-		echo " ";
+		echo ", ";
 		echo $arr_cokeys[$misc_arr[$i]]['cokey'];
-		echo " ";
+		echo ", ";
 		echo $misc_arr[$i];
-		echo "  ";
+		echo ";	 ";
 	}
+
+/*
+	if(array_key_exists($i, $series_arr) && array_key_exists($i, $misc_arr)){
+		array_push($correctos_test_arr, $series_arr[$i]);
+		echo $arr_cokeys[$series_arr[$i]]['cokey'];
+		//echo $series_arr[$i];
+		//echo $i;
+		//ECHO "BOTH";
+	}
+	else if(array_key_exists($i, $series_arr)){
+		array_push($correctos_test_arr, $series_arr[$i]);
+		echo $arr_cokeys[$series_arr[$i]]['cokey'];
+		//echo $series_arr[$i];
+		//echo $i;
+		//echo "SERIES";
+	}
+	else if(array_key_exists($i, $misc_arr)){
+		array_push($correctos_test_arr, $misc_arr[$i]);
+		echo $arr_cokeys[$misc_arr[$i]]['cokey'];
+		//echo $i;
+		//echo "MISC";
+	}
+	*/
+}
+
+for($i=0; $i < sizeof($unique_index); $i++){
+	echo $i;
+	echo $result[$unique_index[$i]]['OGR_FID'];
 }
 
 //var_dump($unique_index);
@@ -409,10 +442,8 @@ echo " \r\n";
 	for($j = 0; $j < sizeof($unique_index); $j++){
 		//echo $i;
 		//echo " \r\n";
-		//echo $j;
-		//echo " \r\n";
-		if($unique_index[$j]['OGR_FID'] == $result[$i]['OGR_FID']){
-			var_dump($unique_index);
+		//echo $j;echo " ";
+		echo $$misc_arr[$i];
 		}
 	}
 }*/
