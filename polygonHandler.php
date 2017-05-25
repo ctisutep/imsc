@@ -300,14 +300,14 @@ for($i=0; $i < sizeof($unique_index); $i++){ //elegir los cokeys correctos
 			if($temp == $arr_cokeys[$j]['OGR_FID'] && $found == false){
 				if($arr_cokeys[$j]['compkind'] == 'Series'){ //going inside but not stopping at found
 					array_push($series_arr, $j); //mete los indexes que usaremos al meter los resultados al polygon
-					echo $j;
-					echo " \r\n";
-					echo $arr_cokeys[$j]['OGR_FID'];
-					echo " \r\n";
-					echo $arr_cokeys[$j]['cokey'];
-					echo " \r\n";
-					echo $arr_cokeys[$j]['compkind'];
-					echo " \r\n";
+					//echo $j;
+					//echo " \r\n";
+					//echo $arr_cokeys[$j]['OGR_FID'];
+					//echo " \r\n";
+					//echo $arr_cokeys[$j]['cokey'];
+					//echo " \r\n";
+					//echo $arr_cokeys[$j]['compkind'];
+					//echo " \r\n";
 					$found = true;
 				}
 			}
@@ -317,14 +317,14 @@ for($i=0; $i < sizeof($unique_index); $i++){ //elegir los cokeys correctos
 			if($temp == $arr_cokeys[$h]['OGR_FID'] && $found_misc == false){
 				if($arr_cokeys[$h]['compkind'] == 'Miscellaneous area'){ //going inside but not stopping at found
 					array_push($misc_arr, $h); //mete los indexes que usaremos al meter los resultados al polygon
-					echo $h;
-					echo " \r\n";
-					echo $arr_cokeys[$h]['OGR_FID'];
-					echo " \r\n";
-					echo $arr_cokeys[$h]['cokey'];
-					echo " \r\n";
-					echo $arr_cokeys[$h]['compkind'];
-					echo " \r\n";
+					//echo $h;
+					//echo " \r\n";
+					//echo $arr_cokeys[$h]['OGR_FID'];
+					//echo " \r\n";
+					//echo $arr_cokeys[$h]['cokey'];
+					//echo " \r\n";
+					//echo $arr_cokeys[$h]['compkind'];
+					//echo " \r\n";
 					$found_misc = true;
 				}
 			}
@@ -340,7 +340,10 @@ else{
 }
 
 for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
-
+	$find = false;
+	$ogr = $result[$unique_index[$i]]['OGR_FID'];
+	/*
+	echo $ogr;
 	if(array_key_exists($i, $series_arr)){
 		echo "para series: ";
 		echo $arr_cokeys[$series_arr[$i]]['OGR_FID'];
@@ -364,41 +367,66 @@ for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 		echo $misc_arr[$i];
 		echo ";	 ";
 	}
-
-/*
-	if(array_key_exists($i, $series_arr) && array_key_exists($i, $misc_arr)){
+*/
+	if(array_key_exists($i, $series_arr) && array_key_exists($i, $misc_arr) && $ogr == $arr_cokeys[$series_arr[$i]]['OGR_FID'] && $find == false){
 		array_push($correctos_test_arr, $series_arr[$i]);
 		echo $arr_cokeys[$series_arr[$i]]['cokey'];
+		$find = true;
 		//echo $series_arr[$i];
 		//echo $i;
 		//ECHO "BOTH";
 	}
-	else if(array_key_exists($i, $series_arr)){
+	else if(array_key_exists($i, $series_arr) && $ogr == $arr_cokeys[$series_arr[$i]]['OGR_FID'] && $find == false){
 		array_push($correctos_test_arr, $series_arr[$i]);
 		echo $arr_cokeys[$series_arr[$i]]['cokey'];
+		$find == true;
 		//echo $series_arr[$i];
 		//echo $i;
 		//echo "SERIES";
 	}
-	else if(array_key_exists($i, $misc_arr)){
+	else if(array_key_exists($i, $misc_arr) && $ogr == $arr_cokeys[$misc_arr[$i]]['OGR_FID'] && $find == false){
 		array_push($correctos_test_arr, $misc_arr[$i]);
 		echo $arr_cokeys[$misc_arr[$i]]['cokey'];
+		$find = true;
 		//echo $i;
 		//echo "MISC";
 	}
-	*/
+
 }
 
+
+/*$find = false;
 for($i=0; $i < sizeof($unique_index); $i++){
 	echo $i;
 	echo $result[$unique_index[$i]]['OGR_FID'];
-}
+	$find = false;
+	$ogr = $result[$unique_index[$i]]['OGR_FID'];
+	for($j=0; $j < sizeof($array_to_use); $j++){
+			if($ogr){
 
+			}
+
+	}
+}
+*/
+
+//var_dump($correctos_test_arr);
 //var_dump($unique_index);
 //var_dump($correctos_arr);
 //var_dump($array_to_use);
 //var_dump($series_arr);
 //var_dump($misc_arr);
+
+/*
+for ($i=0; $i < sizeof($correctos_test_arr); $i++) { //this works
+	echo " ";
+	echo $i;
+	echo " ";
+	//echo $result[$i]['cokey'];
+	echo " ";
+	echo $result[$unique_index[$i]]['cokey'];
+}
+*/
 
 /*for ($i=0; $i < sizeof($unique_index); $i++) {
 	$printer = $result[$unique_index[$i]]['OGR_FID'];
