@@ -567,7 +567,7 @@ $array_polygons = array();
 $cokey_usado = 0;
 for ($i=0; $i < sizeof($unique_index); $i++) {
 	$cokey_usado = $arr_cokeys[$correctos_test_arr[$i]]['cokey'];
-	//echo $cokey_usado;
+	echo $cokey_usado;
 	$query_test = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE x.cokey = $cokey_usado AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //just works for chorizon at the moment
 
 	$toReturn['query loop'] = $query_test;
