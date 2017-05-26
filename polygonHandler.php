@@ -563,19 +563,47 @@ else{
 }*/
 
 /*Pruebas de queries dentro de un loop */
+$array_polygons = array();
+$cokey_usado = 0;
+for ($i=0; $i < sizeof($unique_index); $i++) {
+	$cokey_usado = $arr_cokeys[$correctos_test_arr[$i]]['cokey'];
+	//echo $cokey_usado;
+	$query_test = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE x.cokey = $cokey_usado AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //just works for chorizon at the moment
 
-for ($i=0; $i < 1; $i++) {
-	# code...
+	$toReturn['query loop'] = $query_test;
+	$result_loop = mysqli_query($conn, $query_test);
+
+	$result_loop = fetchAll($result_loop);
+
+	$array_polygons[] = $result_loop;
+
+	/*for ($j=0; $j < sizeof($result_loop); $j++){
+		if($data->depth >= $result_loop[$unique_index[$j]]['top'] && $data->depth <= $result_loop[$unique_index[$j]]['bottom']){ //discriminador de depth
+			$polygons[] = $result_loop[$unique_index[$j]]; //el indice es aquel que contendra el ID unico, sin embargo, necesitamos extraer el ID que use el cokey perteneciente a layers (compkind == 'Series')
+			//$polygons[] = $;
+		}
+	}*/
 }
 
 /*Final de pruebas de queries dentro de un loop*/
 
-for ($i=0; $i < sizeof($unique_index); $i++) { //con unique index se sacan los OGR_FID unicos, mas no necesariamente los que poseen layers
-		if($data->depth >= $result[$unique_index[$i]]['top'] && $data->depth <= $result[$unique_index[$i]]['bottom']){ //discriminador de depth
-		$polygons[] = $result[$unique_index[$i]]; //el indice es aquel que contendra el ID unico, sin embargo, necesitamos extraer el ID que use el cokey perteneciente a layers (compkind == 'Series')
-	}
+//echo $array_polygons[0][0]['cokey'];
+//var_dump($array_polygons);
+
+for ($i=0; $i < sizeof($result_loop); $i++) { //con unique index se sacan los OGR_FID unicos, mas no necesariamente los que poseen layers
+		if($data->depth >= $array_polygons[0][$i]['top'] && $data->depth <= $array_polygons[0][$i]['bottom']){ //discriminador de depth
+			$polygons[] = $array_polygons[0][$i]; //el indice es aquel que contendra el ID unico, sin embargo, necesitamos extraer el ID que use el cokey perteneciente a layers (compkind == 'Series')
+		//$polygons[] = $;
+		}
 }
 
+/*for ($i=0; $i < sizeof($unique_index); $i++) { //con unique index se sacan los OGR_FID unicos, mas no necesariamente los que poseen layers
+		if($data->depth >= $result[$unique_index[$i]]['top'] && $data->depth <= $result[$unique_index[$i]]['bottom']){ //discriminador de depth
+		$polygons[] = $result[$unique_index[$i]]; //el indice es aquel que contendra el ID unico, sin embargo, necesitamos extraer el ID que use el cokey perteneciente a layers (compkind == 'Series')
+		//$polygons[] = $;
+	}
+}
+*/
 /*for($i = 0; $i<sizeof($unique_index); $i++){
 	if($data->depth >= $result[$unique_index[$i]]['top'] && $data->depth <= $result[$unique_index[$i]]['bottom']){ //discriminador de depth
 		$polygons[] = $result[$unique_index[$i]];
