@@ -565,10 +565,13 @@ else{
 /*Pruebas de queries dentro de un loop */
 $array_polygons = array();
 $cokey_usado = 0;
+//echo sizeof($unique_index);
 for ($i=0; $i < sizeof($unique_index); $i++) {
 	$cokey_usado = $arr_cokeys[$correctos_test_arr[$i]]['cokey'];
-	echo $cokey_usado;
-	$query_test = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE x.cokey = $cokey_usado AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //just works for chorizon at the moment
+	//echo $cokey_usado;
+	//$query_test = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, 1.7625422383727E-6)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE x.cokey = $cokey_usado AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //just works for chorizon at the moment
+	//"            SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, 1.7625422383727E-6)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.pi_r FROM polygon AS p, chorizon_r as x WHERE x.cokey = 13638933 AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
+	$query_test = "SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE x.cokey = $cokey_usado AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //just works for chorizon at the moment
 
 	$toReturn['query loop'] = $query_test;
 	$result_loop = mysqli_query($conn, $query_test);
@@ -576,6 +579,10 @@ for ($i=0; $i < sizeof($unique_index); $i++) {
 	$result_loop = fetchAll($result_loop);
 
 	$array_polygons[] = $result_loop;
+
+	unset($result_loop);
+
+	//$result_loop = 0;
 
 	/*for ($j=0; $j < sizeof($result_loop); $j++){
 		if($data->depth >= $result_loop[$unique_index[$j]]['top'] && $data->depth <= $result_loop[$unique_index[$j]]['bottom']){ //discriminador de depth
@@ -588,13 +595,20 @@ for ($i=0; $i < sizeof($unique_index); $i++) {
 /*Final de pruebas de queries dentro de un loop*/
 
 //echo $array_polygons[0][0]['cokey'];
-//var_dump($array_polygons);
+var_dump($array_polygons);
+//var_dump($result_loop);
 
-for ($i=0; $i < sizeof($result_loop); $i++) { //con unique index se sacan los OGR_FID unicos, mas no necesariamente los que poseen layers
+for ($i=0; $i < sizeof($array_polygons[0]); $i++) { //con unique index se sacan los OGR_FID unicos, mas no necesariamente los que poseen layers
+			//echo $array_polygons[0][$i]['pi_r'];
+			//echo $i;
+}
+
+//echo sizeof($array_polygons[0]);
+for ($i=0; $i < sizeof($array_polygons[0]); $i++) { //con unique index se sacan los OGR_FID unicos, mas no necesariamente los que poseen layers
 		if($data->depth >= $array_polygons[0][$i]['top'] && $data->depth <= $array_polygons[0][$i]['bottom']){ //discriminador de depth
 			$polygons[] = $array_polygons[0][$i]; //el indice es aquel que contendra el ID unico, sin embargo, necesitamos extraer el ID que use el cokey perteneciente a layers (compkind == 'Series')
 		//$polygons[] = $;
-		}
+			}
 }
 
 /*for ($i=0; $i < sizeof($unique_index); $i++) { //con unique index se sacan los OGR_FID unicos, mas no necesariamente los que poseen layers
