@@ -612,17 +612,28 @@ for ($i=0; $i < sizeof($unique_index); $i++) {
 //echo sizeof($result_loop[0]);
 //	echo sizeof($result_loop[0][0]);
 
-for ($i=0; $i < sizeof($array_polygons[0]); $i++) { //con unique index se sacan los OGR_FID unicos, mas no necesariamente los que poseen layers
+/*	for ($i=0; $i < sizeof($array_polygons[0]); $i++) { //con unique index se sacan los OGR_FID unicos, mas no necesariamente los que poseen layers
 			//echo $array_polygons[0][$i]['pi_r'];
 			//echo $i;
-}
+}*/
 
 //echo sizeof($array_polygons[0]);
-for ($i=0; $i < sizeof($array_polygons[0]); $i++) { //con unique index se sacan los OGR_FID unicos, mas no necesariamente los que poseen layers
+/*for ($i=0; $i < sizeof($array_polygons[0]); $i++) { //con unique index se sacan los OGR_FID unicos, mas no necesariamente los que poseen layers
+		echo sizeof($array_polygons);
+		echo sizeof($array_polygons[0]);
 		if($data->depth >= $array_polygons[0][$i]['top'] && $data->depth <= $array_polygons[0][$i]['bottom']){ //discriminador de depth
 			$polygons[] = $array_polygons[0][$i]; //el indice es aquel que contendra el ID unico, sin embargo, necesitamos extraer el ID que use el cokey perteneciente a layers (compkind == 'Series')
 		//$polygons[] = $;
 			}
+}*/
+
+for ($j=0; $j < sizeof($array_polygons); $j++) {
+	for ($i=0; $i < sizeof($array_polygons[$j]); $i++) { //con unique index se sacan los OGR_FID unicos, mas no necesariamente los que poseen layers
+			if($data->depth >= $array_polygons[$j][$i]['top'] && $data->depth <= $array_polygons[$j][$i]['bottom']){ //discriminador de depth
+				$polygons[] = $array_polygons[$j][$i]; //el indice es aquel que contendra el ID unico, sin embargo, necesitamos extraer el ID que use el cokey perteneciente a layers (compkind == 'Series')
+			//$polygons[] = $;
+			}
+	}
 }
 
 /*for ($i=0; $i < sizeof($unique_index); $i++) { //con unique index se sacan los OGR_FID unicos, mas no necesariamente los que poseen layers
