@@ -450,7 +450,7 @@ for($i=0; $i < sizeof($unique_index); $i++){
 //var_dump($series_arr);
 //var_dump($misc_arr);
 
-/*
+/*$correctos_test_arr[$i]]['cokey']
 for ($i=0; $i < sizeof($correctos_test_arr); $i++) { //this workd
 	echo " ";
 	echo $i;
@@ -565,13 +565,16 @@ else{
 /*Pruebas de queries dentro de un loop */
 $array_polygons = array();
 $cokey_usado = 0;
+$ogr_usado = 0;
 //echo sizeof($unique_index);
 for ($i=0; $i < sizeof($unique_index); $i++) {
 	$cokey_usado = $arr_cokeys[$correctos_test_arr[$i]]['cokey'];
+	$ogr_usado = $arr_cokeys[$correctos_test_arr[$i]]['OGR_FID'];
+	//echo $ogr_usado;
 	//echo $cokey_usado;
 	//$query_test = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, 1.7625422383727E-6)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE x.cokey = $cokey_usado AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //just works for chorizon at the moment
 	//"            SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, 1.7625422383727E-6)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.pi_r FROM polygon AS p, chorizon_r as x WHERE x.cokey = 13638933 AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
-	$query_test = "SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE x.cokey = $cokey_usado AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //just works for chorizon at the moment
+	$query_test = "SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE x.cokey = $cokey_usado AND OGR_FID = $ogr_usado AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //just works for chorizon at the moment
 
 	$toReturn['query loop'] = $query_test;
 	$result_loop = mysqli_query($conn, $query_test);
@@ -597,6 +600,9 @@ for ($i=0; $i < sizeof($unique_index); $i++) {
 //echo $array_polygons[0][0]['cokey'];
 var_dump($array_polygons);
 //var_dump($result_loop);
+echo sizeof($array_polygons);
+echo sizeof($array_polygons[0]);
+echo sizeof($array_polygons[0][0]);
 
 for ($i=0; $i < sizeof($array_polygons[0]); $i++) { //con unique index se sacan los OGR_FID unicos, mas no necesariamente los que poseen layers
 			//echo $array_polygons[0][$i]['pi_r'];
