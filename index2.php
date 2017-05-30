@@ -507,31 +507,26 @@ function getPolygons(){//this is run button
 							//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 							//colorSelector = 0;
 							//newzIndex = 0;
-							legendText = "<img src='img/redsquare.png' height='10px'/> <= 0<br>\
-							<img src='img/skybluesquare.png' height='10px'/>  > 0 and <= 1<br>\
-							<img src='img/brightgreensquare.png' height='10px'/> > 1 and <= 2<br>\
-							<img src='img/purplesquare.png' height='10px'/> > 2 and <= 3<br>\
+							legendText = "<img src='img/redsquare.png' height='10px'/> 0 to 3% <br>\
+							<img src='img/skybluesquare.png' height='10px'/> 3 to 8% <br>\
+							<img src='img/brightgreensquare.png' height='10px'/> Greater than 8% <br>\
 							<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
 							var amountIn = parseFloat(data.coords[key][app.payload.property]);
 							//console.log(amountIn);
 							//var amountIn = data.coords[key][app.payload.property];
 							//console.log(amountIn);
 							switch (true) {
-								case (amountIn <= 0): // LESS THAN OR EQUAL TO 0
+								case (amountIn >= 0 && amountIn <= 3): // LESS THAN OR EQUAL TO 0
 								colorSelector = 1;
 								newzIndex = 1;
 								break;
-								case (amountIn > 0 && amountIn <= 1): // BETWEEN 0 AND 21
+								case (amountIn > 3 && amountIn <= 8): // BETWEEN 0 AND 21
 								colorSelector = 2;
 								newzIndex = 2;
 								break;
-								case (amountIn > 1 && amountIn <= 2): // BETWEEN 21 AND 40
+								case (amountIn > 8): // BETWEEN 21 AND 40
 								colorSelector = 3;
 								newzIndex = 3;
-								break;
-								case (amountIn > 2 && amountIn <= 3): // BETWEEN 41 AND 60
-								colorSelector = 4;
-								newzIndex = 4;
 								break;
 								default: // Not rated
 								colorSelector = 0;
@@ -1110,36 +1105,46 @@ function getPolygons(){//this is run button
 							//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 							//colorSelector = 0;
 							//newzIndex = 0;
-							legendText = "<img src='img/redsquare.png' height='10px'/> <= 0.73<br>\
-							<img src='img/skybluesquare.png' height='10px'/> > 0.73 and <= 1.14<br>\
-							<img src='img/brightgreensquare.png' height='10px'/> > 1.14 and <= 1.74<br>\
-							<img src='img/purplesquare.png' height='10px'/> > 1.74 and <= 2.50 <br>\
-							<img src='img/orangesquare.png' height='10px'/> > 2.50 and <= 4.50 <br>\
+							legendText = "<img src='img/redsquare.png' height='10px'/> 0.5% <br>\
+							<img src='img/skybluesquare.png' height='10px'/> 1% <br>\
+							<img src='img/brightgreensquare.png' height='10px'/> 2% <br>\
+							<img src='img/purplesquare.png' height='10px'/> 3% <br>\
+							<img src='img/orangesquare.png' height='10px'/> 4% <br>\
+							<img src='img/brightpinksquare.png' height='10px'/> 5% <br>\
+							<img src='img/navybluesquare.png' height='10px'/> Greater than 5% <br>\
 							<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
 							var amountIn = parseFloat(data.coords[key][app.payload.property]);
 							//console.log(amountIn);
 							//var amountIn = data.coords[key][app.payload.property];
 							//console.log(amountIn);
 							switch (true) {
-								case (amountIn <= 0.73): // LESS THAN OR EQUAL TO 0
+								case (amountIn >= 0.5 && amountIn < 1): // LESS THAN OR EQUAL TO 0
 								colorSelect = 1;
 								newzIndex = 1;
 								break;
-								case (amountIn > 0.73 && amountIn <= 1.14): // BETWEEN 21 AND 40
+								case (amountIn >= 1 && amountIn < 2): // BETWEEN 21 AND 40
 								colorSelector = 2;
 								newzIndex = 2;
 								break;
-								case (amountIn > 1.14 && amountIn <= 1.74): // BETWEEN 41 AND 60
+								case (amountIn >= 2 && amountIn < 3): // BETWEEN 41 AND 60
 								colorSelector = 3;
 								newzIndex = 3;
 								break;
-								case (amountIn > 1.74 && amountIn <= 2.50): // BETWEEN 41 AND 60
+								case (amountIn >= 3 && amountIn < 4): // BETWEEN 41 AND 60
 								colorSelector = 4;
 								newzIndex = 4;
 								break;
-								case (amountIn > 2.50 && amountIn <= 4.50): // BETWEEN 41 AND 60
+								case (amountIn >= 4 && amountIn < 5): // BETWEEN 41 AND 60
 								colorSelector = 5;
 								newzIndex = 5;
+								break;
+								case (amountIn >= 5 && amountIn <= 5.99): // BETWEEN 41 AND 60
+								colorSelector = 6;
+								newzIndex = 6;
+								break;
+								case (amountIn > 5): // BETWEEN 41 AND 60
+								colorSelector = 7;
+								newzIndex = 7;
 								break;
 								default: // Not rated
 								colorSelector = 0;
