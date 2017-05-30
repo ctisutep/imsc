@@ -507,8 +507,8 @@ function getPolygons(){//this is run button
 							//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 							//colorSelector = 0;
 							//newzIndex = 0;
-							legendText = "<img src='img/redsquare.png' height='10px'/> 0 to 3% <br>\
-							<img src='img/skybluesquare.png' height='10px'/> 3 to 8% <br>\
+							legendText = "<img src='img/redsquare.png' height='10px'/> <= 0 <br>\
+							<img src='img/skybluesquare.png' height='10px'/> > 0 and <= 2 <br>\
 							<img src='img/brightgreensquare.png' height='10px'/> Greater than 8% <br>\
 							<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
 							var amountIn = parseFloat(data.coords[key][app.payload.property]);
@@ -516,18 +516,18 @@ function getPolygons(){//this is run button
 							//var amountIn = data.coords[key][app.payload.property];
 							//console.log(amountIn);
 							switch (true) {
-								case (amountIn >= 0 && amountIn <= 3): // LESS THAN OR EQUAL TO 0
+								case (amountIn <= 0): // LESS THAN OR EQUAL TO 0
 								colorSelector = 1;
 								newzIndex = 1;
 								break;
-								case (amountIn > 3 && amountIn <= 8): // BETWEEN 0 AND 21
+								case (amountIn > 0 && amountIn <=2): // BETWEEN 0 AND 21
 								colorSelector = 2;
 								newzIndex = 2;
 								break;
-								case (amountIn > 8): // BETWEEN 21 AND 40
+								/*case (amountIn > 8): // BETWEEN 21 AND 40
 								colorSelector = 3;
 								newzIndex = 3;
-								break;
+								break;*/
 								default: // Not rated
 								colorSelector = 0;
 								newzIndex = 0;
