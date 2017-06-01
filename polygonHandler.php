@@ -396,6 +396,7 @@ for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 }
 */
 $find = 0;
+$misc_find = 0;
 
 for($i=0; $i < sizeof($array_to_use); $i++){ //guardar los correctos en el array
 	$find = 0;
@@ -403,7 +404,18 @@ for($i=0; $i < sizeof($array_to_use); $i++){ //guardar los correctos en el array
 	//echo $ogr;
 	for ($j=0; $j < sizeof($unique_index); $j++) {
 		//echo $find;
-		if(array_key_exists($j, $series_arr) && $ogr == $arr_cokeys[$series_arr[$j]]['OGR_FID'] && $find == 0){
+		/*echo "global: ";
+		echo $ogr;
+		echo "\r\n";
+		echo "index inner: ";
+		echo $j;
+		echo "\r\n";
+		echo "cokey inner: ";
+		echo $arr_cokeys[$series_arr[$j]]['OGR_FID'];
+		echo "\r\n";*/
+		if(array_key_exists($j, $series_arr) && $ogr == $arr_cokeys[$series_arr[$j]]['OGR_FID'] && $find == 0 && $misc_find == 1 || $misc_find == 0){
+			//echo $ogr;
+			//echo $arr_cokeys[$series_arr[$j]]['OGR_FID'];
 			array_push($correctos_test_arr, $series_arr[$j]);
 			//echo $find;
 			//echo $arr_cokeys[$series_arr[$j]]['cokey'];
@@ -419,15 +431,15 @@ for($i=0; $i < sizeof($array_to_use); $i++){ //guardar los correctos en el array
 		echo "\r\n";
 		echo $j;
 		echo "\r\n";
-		*/ 
+		*/
 		if(array_key_exists($j, $misc_arr) && $ogr == $arr_cokeys[$misc_arr[$j]]['OGR_FID'] && $find == 0){
 			array_push($correctos_test_arr, $misc_arr[$j]);
 			//echo $find;
 			//echo $arr_cokeys[$misc_arr[$j]]['cokey'];
 			//ECHO $arr_cokeys[$misc_arr[$j]]['OGR_FID'];
-			$find = 1;
-			echo $i;
-			echo $j;
+			$misc_find = 1;
+			//echo $i;
+			//echo $j;
 			//echo "MISC";
 		}
 		//echo $find;
