@@ -397,6 +397,9 @@ for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 */
 $find = 0;
 $misc_find = 0;
+$absolute_find = 0;
+$traversed = 0;
+$index_to_store = 0;
 
 for($i=0; $i < sizeof($array_to_use); $i++){ //guardar los correctos en el array
 	$find = 0;
@@ -413,14 +416,27 @@ for($i=0; $i < sizeof($array_to_use); $i++){ //guardar los correctos en el array
 		echo "cokey inner: ";
 		echo $arr_cokeys[$series_arr[$j]]['OGR_FID'];
 		echo "\r\n";*/
-		if(array_key_exists($j, $series_arr) && $ogr == $arr_cokeys[$series_arr[$j]]['OGR_FID'] && $find == 0 && $misc_find == 1 || $misc_find == 0){
+
+		/*if($arr_cokeys[$series_arr[$j]]['compkind'] == 'Series'){ //check if key exists
+			echo "found series compkind at index: ";
+			echo $j;
+			echo "... ";
+		}*/
+
+		if($find ==0 && array_key_exists($j, $series_arr) && $ogr == $arr_cokeys[$series_arr[$j]]['OGR_FID'] && $arr_cokeys[$series_arr[$j]]['compkind'] == 'Series'){
+			echo "hello";
+		}
+
+		if(array_key_exists($j, $series_arr) && $ogr == $arr_cokeys[$series_arr[$j]]['OGR_FID'] && $find == 0 && ($misc_find == 1 || $misc_find == 0)){
 			//echo $ogr;
 			//echo $arr_cokeys[$series_arr[$j]]['OGR_FID'];
+		 	//echo "entered series";
 			array_push($correctos_test_arr, $series_arr[$j]);
 			//echo $find;
 			//echo $arr_cokeys[$series_arr[$j]]['cokey'];
 			//echo $arr_cokeys[$series_arr[$j]]['OGR_FID'];
 			$find = 1;
+			$absolute_find = 1;
 			//echo $find;
 			//echo $series_arr[$j];
 			//echo $j;
@@ -432,7 +448,9 @@ for($i=0; $i < sizeof($array_to_use); $i++){ //guardar los correctos en el array
 		echo $j;
 		echo "\r\n";
 		*/
-		if(array_key_exists($j, $misc_arr) && $ogr == $arr_cokeys[$misc_arr[$j]]['OGR_FID'] && $find == 0){
+		if(array_key_exists($j, $misc_arr) && $ogr == $arr_cokeys[$misc_arr[$j]]['OGR_FID'] && $find == 0 && $absolute_find == 0){
+			//echo "enterred misc";
+			$index_to_store = $j;
 			array_push($correctos_test_arr, $misc_arr[$j]);
 			//echo $find;
 			//echo $arr_cokeys[$misc_arr[$j]]['cokey'];
@@ -446,6 +464,22 @@ for($i=0; $i < sizeof($array_to_use); $i++){ //guardar los correctos en el array
 	}
 }
 
+/*for($i=0; $i < sizeof($array_to_use); $i++){
+	$find = 0;
+	$ogr2 = $result[$unique_index[$i]]['OGR_FID'];
+	if(array_key_exists($i, $series_arr) && $ogr2 == $arr_cokeys[$series_arr[$j]]['OGR_FID']){
+		echo "series";
+	}
+
+	if(){
+
+	}
+
+	if(){
+
+	}
+
+}*/
 
 /*$find = false;
 for($i=0; $i < sizeof($unique_index); $i++){
