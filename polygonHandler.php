@@ -423,8 +423,10 @@ for($i=0; $i < sizeof($array_to_use); $i++){ //guardar los correctos en el array
 			echo "... ";
 		}*/
 
-		if($find ==0 && array_key_exists($j, $series_arr) && $ogr == $arr_cokeys[$series_arr[$j]]['OGR_FID'] && $arr_cokeys[$series_arr[$j]]['compkind'] == 'Series'){
-			echo "hello";
+		if($find == 0 && array_key_exists($j, $series_arr) && $ogr == $arr_cokeys[$series_arr[$j]]['OGR_FID'] && $arr_cokeys[$series_arr[$j]]['compkind'] == 'Series'){
+			//echo "hello";
+			array_push($correctos_test_arr, $series_arr[$j]);
+			$find = 1;
 		}
 
 		if(array_key_exists($j, $series_arr) && $ogr == $arr_cokeys[$series_arr[$j]]['OGR_FID'] && $find == 0 && ($misc_find == 1 || $misc_find == 0)){
