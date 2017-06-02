@@ -334,14 +334,14 @@ for($i=0; $i < sizeof($unique_index); $i++){ //elegir los cokeys correctos
 			if($temp == $arr_cokeys[$h]['OGR_FID'] && $found_misc == false){
 				if($arr_cokeys[$h]['compkind'] == 'Miscellaneous area'){ //going inside but not stopping at found
 					array_push($misc_arr, $h); //mete los indexes que usaremos al meter los resultados al polygon
-					//echo $h;
-					//echo " \r\n";
-					//echo $arr_cokeys[$h]['OGR_FID'];
-					//echo " \r\n";
-					//echo $arr_cokeys[$h]['cokey'];
-					//echo " \r\n";
-					//echo $arr_cokeys[$h]['compkind'];
-					//echo " \r\n";
+					echo $h;
+					echo " \r\n";
+					echo $arr_cokeys[$h]['OGR_FID'];
+					echo " \r\n";
+					echo $arr_cokeys[$h]['cokey'];
+					echo " \r\n";
+					echo $arr_cokeys[$h]['compkind'];
+					echo " \r\n";
 					$found_misc = true;
 				}
 			}
@@ -483,10 +483,12 @@ for($i=0; $i < sizeof($array_to_use); $i++){ //guardar los correctos en el array
 			//echo $j;
 			if($counter < sizeof($unique_index)){
 				if($find == 0 && array_key_exists($j, $misc_arr) && $ogr == $arr_cokeys[$misc_arr[$j]]['OGR_FID'] && $arr_cokeys[$misc_arr[$j]]['compkind'] == 'Miscellaneous area'){
-					//echo " hello misc ";
+					//echo " hello misc, i: ";
 					//echo $i;
+					//echo ", j: ";
 					//echo $j;
-					//echo $arr_cokeys[$series_arr[$j]]['cokey'];
+					//echo ", cokey: ";
+					//echo $arr_cokeys[$misc_arr[$j]]['cokey'];
 					array_push($correctos_test_arr, $misc_arr[$j]);
 					$find = 1;
 					$counter += 1;
@@ -501,7 +503,7 @@ for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 		//echo $i;
 		//echo  " ";
 		$find = 0;
-		$ogr = $result[$unique_index[$i]]['OGR_FID'];
+		//$ogr = $result[$unique_index[$i]]['OGR_FID'];
 		//echo $ogr;
 		//	echo " ";
 	}
@@ -532,10 +534,10 @@ for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 //echo sizeof($array_to_use); //4
 //echo sizeof($unique_index); //5
 //echo sizeof($correctos_test_arr);//3
-var_dump($correctos_test_arr);
-var_dump($series_arr);
+//var_dump($correctos_test_arr);
+//var_dump($series_arr);
 var_dump($misc_arr);
-var_dump($tax_arr);
+//var_dump($tax_arr);
 //var_dump($checker);
 //echo $arr_cokeys[$misc_arr[0]]['cokey'];
 //var_dump($arr_cokeys);
