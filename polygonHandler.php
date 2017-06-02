@@ -452,7 +452,7 @@ for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 		//echo $ogr;
 		//echo " ";
 		if($find == 0 && array_key_exists($j, $series_arr) && $ogr == $arr_cokeys[$series_arr[$j]]['OGR_FID'] && $arr_cokeys[$series_arr[$j]]['compkind'] == 'Series'){
-			echo "hello series ";
+			//echo "hello series ";
 			//echo $i;
 			//echo $j;
 			//echo "; ";
@@ -515,7 +515,7 @@ for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 			//echo $j;
 			if($counter < sizeof($unique_index)){
 				if($find == 0 && array_key_exists($j, $tax_arr) && $ogr == $arr_cokeys[$tax_arr[$j]]['OGR_FID'] && $arr_cokeys[$tax_arr[$j]]['compkind'] == 'Taxadjunct'){
-					echo " hello tax ";
+					//echo " hello tax ";
 					//echo $i;
 					//echo $j;
 					//echo $arr_cokeys[$series_arr[$j]]['cokey'];
@@ -719,7 +719,8 @@ $cokey_usado = 0;
 $ogr_usado = 0;
 $total_size = 0;
 //echo sizeof($unique_index);
-/*
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 for ($i=0; $i < sizeof($unique_index); $i++) {
 	$cokey_usado = $arr_cokeys[$correctos_test_arr[$i]]['cokey'];
 	$ogr_usado = $arr_cokeys[$correctos_test_arr[$i]]['OGR_FID'];
@@ -740,12 +741,12 @@ for ($i=0; $i < sizeof($unique_index); $i++) {
 
 	unset($result_loop);
 }
-*/
+
 
 //echo $total_size;
 
 /*Final de pruebas de queries dentro de un loop*/
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //echo $array_polygons[0][0]['cokey'//];
 //var_dump($array_polygons);
 //var_dump($result_loop);
@@ -771,14 +772,14 @@ for ($i=0; $i < sizeof($unique_index); $i++) {
 			}
 }*/
 
-/*for ($j=0; $j < sizeof($array_polygons); $j++) {
+for ($j=0; $j < sizeof($array_polygons); $j++) {
 	for ($i=0; $i < sizeof($array_polygons[$j]); $i++) { //con unique index se sacan los OGR_FID unicos, mas no necesariamente los que poseen layers
 			if($data->depth >= $array_polygons[$j][$i]['top'] && $data->depth <= $array_polygons[$j][$i]['bottom']){ //discriminador de depth
 				$polygons[] = $array_polygons[$j][$i]; //el indice es aquel que contendra el ID unico, sin embargo, necesitamos extraer el ID que use el cokey perteneciente a layers (compkind == 'Series')
 			//$polygons[] = $;
 			}
 	}
-}*/
+}
 
 /*for ($i=0; $i < sizeof($unique_index); $i++) { //con unique index se sacan los OGR_FID unicos, mas no necesariamente los que poseen layers
 		if($data->depth >= $result[$unique_index[$i]]['top'] && $data->depth <= $result[$unique_index[$i]]['bottom']){ //discriminador de depth
@@ -787,12 +788,13 @@ for ($i=0; $i < sizeof($unique_index); $i++) {
 	}
 }
 */
+/*
 for($i = 0; $i<sizeof($unique_index); $i++){
 	if($data->depth >= $result[$unique_index[$i]]['top'] && $data->depth <= $result[$unique_index[$i]]['bottom']){ //discriminador de depth
 		$polygons[] = $result[$unique_index[$i]];
 	}
 }
-
+*/
 /*for($i = 0; $i<sizeof($result); $i++){
 	if($data->depth >= $result[$i]['top'] && $data->depth <= $result[$i]['bottom']){ //discriminador de depth
 		$polygons[] = $result[$i];
