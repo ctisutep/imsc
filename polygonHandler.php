@@ -334,6 +334,7 @@ for($i=0; $i < sizeof($unique_index); $i++){ //elegir los cokeys correctos
 			if($temp == $arr_cokeys[$h]['OGR_FID'] && $found_misc == false){
 				if($arr_cokeys[$h]['compkind'] == 'Miscellaneous area'){ //going inside but not stopping at found
 					array_push($misc_arr, $h); //mete los indexes que usaremos al meter los resultados al polygon
+					echo " \r\n";
 					echo $h;
 					echo " \r\n";
 					echo $arr_cokeys[$h]['OGR_FID'];
@@ -364,7 +365,7 @@ for($i=0; $i < sizeof($unique_index); $i++){ //elegir los cokeys correctos
 				}
 			}
 }
-
+var_dump($arr_cokeys);
 $array_to_use = array();
 if(sizeof($series_arr) > sizeof($misc_arr)){
 	$array_to_use = $series_arr;
