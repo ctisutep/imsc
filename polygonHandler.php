@@ -440,21 +440,26 @@ $find_global = 0;
 $counter = 0;
 
 $checker = array();
+//echo sizeof($unique_index);
+//echo sizeof($unique);
 
 for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 	$find = 0;
 	$ogr = $result[$unique_index[$i]]['OGR_FID'];
-	echo $ogr;
-	echo " ";
+	//echo $ogr;
+	//echo " ";
 	for ($j=0; $j < sizeof($unique_index); $j++) {
+		//echo $ogr;
+		//echo " ";
 		if($find == 0 && array_key_exists($j, $series_arr) && $ogr == $arr_cokeys[$series_arr[$j]]['OGR_FID'] && $arr_cokeys[$series_arr[$j]]['compkind'] == 'Series'){
-			echo "hello ";
+			echo "hello series ";
 			//echo $i;
-			echo $j;
-			echo "; ";
+			//echo $j;
+			//echo "; ";
+			//echo $series_arr[$j];
 			//echo $arr_cokeys[$series_arr[$j]]['cokey'];
 			array_push($correctos_test_arr, $series_arr[$j]);
-			array_push($checker, $j);
+			array_push($checker, $series_arr[$j]);
 			//$checker[$j] = $j;
 			//$checker[$i] = 78;
 			$find = 1;
@@ -510,7 +515,7 @@ for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 			//echo $j;
 			if($counter < sizeof($unique_index)){
 				if($find == 0 && array_key_exists($j, $tax_arr) && $ogr == $arr_cokeys[$tax_arr[$j]]['OGR_FID'] && $arr_cokeys[$tax_arr[$j]]['compkind'] == 'Taxadjunct'){
-					//echo " hello tax ";
+					echo " hello tax ";
 					//echo $i;
 					//echo $j;
 					//echo $arr_cokeys[$series_arr[$j]]['cokey'];
@@ -530,7 +535,7 @@ for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 //var_dump($correctos_test_arr);
 //var_dump($series_arr);
 //var_dump($misc_arr);
-var_dump($checker);
+//var_dump($checker);
 //echo $arr_cokeys[$misc_arr[0]]['cokey'];
 //var_dump($arr_cokeys);
 
