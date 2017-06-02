@@ -404,31 +404,40 @@ $find_global = 0;
 
 $counter = 0;
 
-for($i=0; $i < sizeof($array_to_use); $i++){ //guardar los correctos en el array
-	$find = 0;
-	$ogr = $result[$unique_index[$i]]['OGR_FID'];
-	//echo $ogr;
-	for ($j=0; $j < sizeof($unique_index); $j++) {
-		if($find == 0 && array_key_exists($j, $series_arr) && $ogr == $arr_cokeys[$series_arr[$j]]['OGR_FID'] && $arr_cokeys[$series_arr[$j]]['compkind'] == 'Series'){
-			//echo "hello";
-			//echo $i;
-			//echo $j;
-			//echo $arr_cokeys[$series_arr[$j]]['cokey'];
-			array_push($correctos_test_arr, $series_arr[$j]);
-			$find = 1;
-			$counter += 1;
-		}
-	}
-}
+$checker = array();
 
 for($i=0; $i < sizeof($array_to_use); $i++){ //guardar los correctos en el array
 	$find = 0;
 	$ogr = $result[$unique_index[$i]]['OGR_FID'];
 	//echo $ogr;
 	for ($j=0; $j < sizeof($unique_index); $j++) {
+		if($find == 0 && array_key_exists($j, $series_arr) && $ogr == $arr_cokeys[$series_arr[$j]]['OGR_FID'] && $arr_cokeys[$series_arr[$j]]['compkind'] == 'Series'){
+			//echo "hello ";
+			//echo $i;
+			//echo $j;
+			//echo $arr_cokeys[$series_arr[$j]]['cokey'];
+			array_push($correctos_test_arr, $series_arr[$j]);
+			array_push($checker, $j);
+			//$checker[$j] = $j;
+			//$checker[$i] = 78;
+			$find = 1;
+			$counter += 1;
+		}
+	}
+}
+//var_dump($checker);
+for($i=0; $i < sizeof($array_to_use); $i++){ //guardar los correctos en el array
+	if(array_key_exists($i, $checker) && $checker[$i] == $i){
+	$find = 0;
+}
+else{
+	$find = 0;
+	$ogr = $result[$unique_index[$i]]['OGR_FID'];
+	//echo $ogr;
+	for ($j=0; $j < sizeof($unique_index); $j++) {
 		if($counter < sizeof($unique_index)){
 			if($find == 0 && array_key_exists($j, $misc_arr) && $ogr == $arr_cokeys[$misc_arr[$j]]['OGR_FID'] && $arr_cokeys[$misc_arr[$j]]['compkind'] == 'Miscellaneous area'){
-				//echo "hello";
+				//echo " hello misc ";
 				//echo $i;
 				//echo $j;
 				//echo $arr_cokeys[$series_arr[$j]]['cokey'];
@@ -438,6 +447,7 @@ for($i=0; $i < sizeof($array_to_use); $i++){ //guardar los correctos en el array
 			}
 		}
 	}
+}
 }
 
 /*
