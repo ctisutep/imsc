@@ -532,9 +532,10 @@ for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 //echo sizeof($array_to_use); //4
 //echo sizeof($unique_index); //5
 //echo sizeof($correctos_test_arr);//3
-//var_dump($correctos_test_arr);
-//var_dump($series_arr);
-//var_dump($misc_arr);
+var_dump($correctos_test_arr);
+var_dump($series_arr);
+var_dump($misc_arr);
+var_dump($tax_arr);
 //var_dump($checker);
 //echo $arr_cokeys[$misc_arr[0]]['cokey'];
 //var_dump($arr_cokeys);
