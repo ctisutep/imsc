@@ -452,8 +452,8 @@ $checker = array();
 for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 	$find = 0;
 	$ogr = $result[$unique_index[$i]]['OGR_FID'];
-	//echo $ogr;
-	//echo " ";
+	echo $ogr;
+	echo " ";
 	for ($j=0; $j < sizeof($unique_index); $j++) {
 		//echo $ogr;
 		//echo " ";
@@ -463,7 +463,10 @@ for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 			//echo $j;
 			//echo "; ";
 			//echo $series_arr[$j];
+			//echo $arr_cokeys[$series_arr[$j]]['OGR_FID'];
+			//echo " ";
 			//echo $arr_cokeys[$series_arr[$j]]['cokey'];
+			//echo " ";
 			array_push($correctos_test_arr, $series_arr[$j]);
 			array_push($checker, $series_arr[$j]);
 			//$checker[$j] = $j;
@@ -474,7 +477,7 @@ for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 	}
 }
 //var_dump($checker);
-for($i=0; $i < sizeof($array_to_use); $i++){ //guardar los correctos en el array
+for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 //	if(array_key_exists($i, $checker) && $checker[$i] == $i){
 	//if(1 == 0){
 		//echo $i;
@@ -489,6 +492,7 @@ for($i=0; $i < sizeof($array_to_use); $i++){ //guardar los correctos en el array
 	  //echo ", ";
 		$ogr = $result[$unique_index[$i]]['OGR_FID'];
 		//echo $ogr;
+		//echo " ";
 		for ($j=0; $j < sizeof($unique_index); $j++) {
 			//echo $j;
 			if(array_key_exists($j, $misc_arr) && $revisar != $arr_cokeys[$misc_arr[$j]]['cokey'] ){
@@ -500,6 +504,12 @@ for($i=0; $i < sizeof($array_to_use); $i++){ //guardar los correctos en el array
 					//echo $j;
 					//echo ", cokey: ";
 					//echo $arr_cokeys[$misc_arr[$j]]['cokey'];
+					//echo $revisar;
+					//echo " ";
+					//echo $arr_cokeys[$misc_arr[$j]]['OGR_FID'];
+					//echo " ";
+					//echo $arr_cokeys[$misc_arr[$j]]['cokey'];
+					//echo " ";
 					array_push($correctos_test_arr, $misc_arr[$j]);
 					$find = 1;
 					$counter += 1;
