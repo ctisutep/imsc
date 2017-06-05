@@ -334,15 +334,15 @@ for($i=0; $i < sizeof($unique_index); $i++){ //elegir los cokeys correctos
 			if($temp == $arr_cokeys[$h]['OGR_FID'] && $found_misc == false){
 				if($arr_cokeys[$h]['compkind'] == 'Miscellaneous area'){ //going inside but not stopping at found
 					array_push($misc_arr, $h); //mete los indexes que usaremos al meter los resultados al polygon
-					echo " \r\n";
-					echo $h;
-					echo " \r\n";
-					echo $arr_cokeys[$h]['OGR_FID'];
-					echo " \r\n";
-					echo $arr_cokeys[$h]['cokey'];
-					echo " \r\n";
-					echo $arr_cokeys[$h]['compkind'];
-					echo " \r\n";
+					//echo " \r\n";
+					//echo $h;
+					//echo " \r\n";
+					//echo $arr_cokeys[$h]['OGR_FID'];
+					//echo " \r\n";
+					//echo " \r\n";
+					//echo $arr_cokeys[$h]['compkind'];
+					//echo " \r\n";
+					//echo $arr_cokeys[$h]['cokey'];
 					$found_misc = true;
 				}
 			}
@@ -365,7 +365,7 @@ for($i=0; $i < sizeof($unique_index); $i++){ //elegir los cokeys correctos
 				}
 			}
 }
-var_dump($arr_cokeys);
+//var_dump($arr_cokeys);
 $array_to_use = array();
 if(sizeof($series_arr) > sizeof($misc_arr)){
 	$array_to_use = $series_arr;
@@ -470,14 +470,18 @@ for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 }
 //var_dump($checker);
 for($i=0; $i < sizeof($array_to_use); $i++){ //guardar los correctos en el array
-	if(array_key_exists($i, $checker) && $checker[$i] == $i){
+//	if(array_key_exists($i, $checker) && $checker[$i] == $i){
+	//if(1 == 0){
 		//echo $i;
 		//echo  " ";
-		$find = 0;
-	}
-	else{
+		//$find = 0;
+	//}
+	//else{
 		//echo $i;
 		$find = 0;
+		$revisar = $arr_cokeys[$checker[$i]]['cokey'];
+		echo $revisar;
+	  echo ", ";
 		$ogr = $result[$unique_index[$i]]['OGR_FID'];
 		//echo $ogr;
 		for ($j=0; $j < sizeof($unique_index); $j++) {
@@ -496,12 +500,12 @@ for($i=0; $i < sizeof($array_to_use); $i++){ //guardar los correctos en el array
 				}
 			}
 		}
-	}
+	//}
 }
 
 for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 	if(array_key_exists($i, $checker) && $checker[$i] == $i){
-		//echo $i;
+		////echo $i;
 		//echo  " ";
 		$find = 0;
 		//$ogr = $result[$unique_index[$i]]['OGR_FID'];
@@ -537,7 +541,7 @@ for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 //echo sizeof($correctos_test_arr);//3
 //var_dump($correctos_test_arr);
 //var_dump($series_arr);
-var_dump($misc_arr);
+//var_dump($misc_arr);
 //var_dump($tax_arr);
 //var_dump($checker);
 //echo $arr_cokeys[$misc_arr[0]]['cokey'];
