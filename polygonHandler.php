@@ -531,6 +531,9 @@ for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 	}
 }
 
+//var_dump($result);
+var_dump($unique);
+var_dump($unique_index);
 //echo $counter; //3
 //echo sizeof($array_to_use); //4
 //echo sizeof($unique_index); //5
