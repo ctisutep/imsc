@@ -489,7 +489,7 @@ for($i=0; $i < sizeof($unique_index); $i++){
 		//echo " ";
 		}
 
-		if(array_key_exists($i, $misc_arr) && ($ogr == $arr_cokeys[$misc_arr[$i]]['OGR_FID'])){
+		if(array_key_exists($i, $misc_arr) && ($ogr == $arr_cokeys[$misc_arr[$i]]['OGR_FID'])){ //aqui es el problema, cuzzz compara con inexistente
 				if($find == 0 && array_key_exists($i, $misc_arr) && $ogr != $arr_cokeys[$misc_arr[$i]]['OGR_FID'] && $arr_cokeys[$misc_arr[$i]]['compkind'] == 'Miscellaneous area'){
 					echo "TEST";
 					array_push($correctos_test_arr, $misc_arr[$i]);
