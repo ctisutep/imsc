@@ -477,60 +477,26 @@ for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 	}
 }
 //var_dump($checker);
-for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
-//	if(array_key_exists($i, $checker) && $checker[$i] == $i){
-	//if(1 == 0){
-		//echo $i;
-		//echo  " ";
-		//$find = 0;
-	//}
-	//else{
-		//echo $i;
+for($i=0; $i < sizeof($unique_index); $i++){
 		$find = 0;
-		//$revisar = 0;
-		//$ogr = 0;
-		echo "Afuera de exists: ";
-		echo "$i";
 
 		if(array_key_exists($i, $checker)){
 		$revisar = $arr_cokeys[$checker[$i]]['cokey'];
-		$ogr = $arr_cokeys[$checker[$i]]['OGR_FID'];
-		//echo ". Adentro de exists: ";
-		//echo $i;
-		//echo " END ";
+		//echo $revisar;
 		//echo " ";
-		//echo $revisar;
-		//ECHO " ";
-		}
-		//echo $revisar;
-	  //echo " ";
-		//$ogr = $result[$unique_index[$i]]['OGR_FID'];
+		$ogr = $arr_cokeys[$checker[$i]]['OGR_FID'];
 		//echo $ogr;
 		//echo " ";
-		for ($j=0; $j < sizeof($unique_index); $j++) {
-			//echo $j;
-			if(array_key_exists($j, $misc_arr) && $revisar != $arr_cokeys[$misc_arr[$j]]['cokey'] ){
-			//echo $arr_cokeys[$misc_arr[$j]]['cokey'];
-				if($find == 0 && array_key_exists($j, $misc_arr) && $ogr != $arr_cokeys[$misc_arr[$j]]['OGR_FID'] && $arr_cokeys[$misc_arr[$j]]['compkind'] == 'Miscellaneous area'){
-					//echo " hello misc, i: ";
-					//echo $i;
-					//echo ", j: ";
-					//echo $j;
-					//echo ", cokey: ";
-					//echo $arr_cokeys[$misc_arr[$j]]['cokey'];
-					//echo $revisar;
-					//echo " ";
-					//echo $arr_cokeys[$misc_arr[$j]]['OGR_FID'];
-					//echo " ";
-					//echo $arr_cokeys[$misc_arr[$j]]['cokey'];
-					//echo " ";
-					array_push($correctos_test_arr, $misc_arr[$j]);
+		}
+
+		if(array_key_exists($i, $misc_arr) && ($ogr == $arr_cokeys[$misc_arr[$i]]['OGR_FID'])){
+				if($find == 0 && array_key_exists($i, $misc_arr) && $ogr != $arr_cokeys[$misc_arr[$i]]['OGR_FID'] && $arr_cokeys[$misc_arr[$i]]['compkind'] == 'Miscellaneous area'){
+					echo "TEST";
+					array_push($correctos_test_arr, $misc_arr[$i]);
 					$find = 1;
 					$counter += 1;
 				}
 			}
-		}
-	//}
 }
 
 for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
