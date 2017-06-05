@@ -222,11 +222,12 @@ $polygons = array();
 
 $id_array = array();
 //$indexes_array = array();
-
+//echo sizeof($result);
 for($i = 0; $i<sizeof($result); $i++){
+	//echo $i;
 	//echo " ";
 	//echo $result[$i]['OGR_FID'];
-	//	echo " ";
+	//echo " ";
 	//$id_array[$i]['cokey'] = $result[$i]['cokey'];
 	$id_array[$i]['OGR_FID'] = $result[$i]['OGR_FID'];
 }
@@ -304,7 +305,7 @@ $correctos_test_arr = array();
 	echo $arr_cokeys[$i]['OGR_FID'];
 	echo " / ";
 }*/
-
+//var_dump($unique_index);
 for($i=0; $i < sizeof($unique_index); $i++){ //elegir los cokeys correctos
 	$found = false;
 	$found_misc = false;
@@ -329,7 +330,9 @@ for($i=0; $i < sizeof($unique_index); $i++){ //elegir los cokeys correctos
 				}
 			}
 	}
-
+	//echo " ";
+	//echo $temp;
+	//echo " ";
 	for($h=0; $h < sizeof($arr_cokeys); $h++){
 			if($temp == $arr_cokeys[$h]['OGR_FID'] && $found_misc == false){
 				if($arr_cokeys[$h]['compkind'] == 'Miscellaneous area'){ //going inside but not stopping at found
@@ -480,13 +483,14 @@ for($i=0; $i < sizeof($array_to_use); $i++){ //guardar los correctos en el array
 		//echo $i;
 		$find = 0;
 		$revisar = $arr_cokeys[$checker[$i]]['cokey'];
-		echo $revisar;
-	  echo ", ";
+		//echo $revisar;
+	  //echo ", ";
 		$ogr = $result[$unique_index[$i]]['OGR_FID'];
 		//echo $ogr;
 		for ($j=0; $j < sizeof($unique_index); $j++) {
 			//echo $j;
-			if($counter < sizeof($unique_index)){
+			if(array_key_exists($j, $misc_arr) && $revisar != $arr_cokeys[$misc_arr[$j]]['cokey'] ){
+			//echo $arr_cokeys[$misc_arr[$j]]['cokey'];
 				if($find == 0 && array_key_exists($j, $misc_arr) && $ogr == $arr_cokeys[$misc_arr[$j]]['OGR_FID'] && $arr_cokeys[$misc_arr[$j]]['compkind'] == 'Miscellaneous area'){
 					//echo " hello misc, i: ";
 					//echo $i;
