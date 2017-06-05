@@ -452,8 +452,8 @@ $checker = array();
 for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 	$find = 0;
 	$ogr = $result[$unique_index[$i]]['OGR_FID'];
-	echo $ogr;
-	echo " ";
+	//echo $ogr;
+	//echo " ";
 	for ($j=0; $j < sizeof($unique_index); $j++) {
 		//echo $ogr;
 		//echo " ";
@@ -487,17 +487,31 @@ for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 	//else{
 		//echo $i;
 		$find = 0;
+		//$revisar = 0;
+		//$ogr = 0;
+		echo "Afuera de exists: ";
+		echo "$i";
+
+		if(array_key_exists($i, $checker)){
 		$revisar = $arr_cokeys[$checker[$i]]['cokey'];
+		$ogr = $arr_cokeys[$checker[$i]]['OGR_FID'];
+		//echo ". Adentro de exists: ";
+		//echo $i;
+		//echo " END ";
+		//echo " ";
 		//echo $revisar;
-	  //echo ", ";
-		$ogr = $result[$unique_index[$i]]['OGR_FID'];
+		//ECHO " ";
+		}
+		//echo $revisar;
+	  //echo " ";
+		//$ogr = $result[$unique_index[$i]]['OGR_FID'];
 		//echo $ogr;
 		//echo " ";
 		for ($j=0; $j < sizeof($unique_index); $j++) {
 			//echo $j;
 			if(array_key_exists($j, $misc_arr) && $revisar != $arr_cokeys[$misc_arr[$j]]['cokey'] ){
 			//echo $arr_cokeys[$misc_arr[$j]]['cokey'];
-				if($find == 0 && array_key_exists($j, $misc_arr) && $ogr == $arr_cokeys[$misc_arr[$j]]['OGR_FID'] && $arr_cokeys[$misc_arr[$j]]['compkind'] == 'Miscellaneous area'){
+				if($find == 0 && array_key_exists($j, $misc_arr) && $ogr != $arr_cokeys[$misc_arr[$j]]['OGR_FID'] && $arr_cokeys[$misc_arr[$j]]['compkind'] == 'Miscellaneous area'){
 					//echo " hello misc, i: ";
 					//echo $i;
 					//echo ", j: ";
