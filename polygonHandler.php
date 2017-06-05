@@ -341,11 +341,13 @@ for($i=0; $i < sizeof($unique_index); $i++){ //elegir los cokeys correctos
 					//echo $h;
 					//echo " \r\n";
 					//echo $arr_cokeys[$h]['OGR_FID'];
+					//echo " ";
 					//echo " \r\n";
 					//echo " \r\n";
 					//echo $arr_cokeys[$h]['compkind'];
 					//echo " \r\n";
 					//echo $arr_cokeys[$h]['cokey'];
+					//echo " ; ";
 					$found_misc = true;
 				}
 			}
