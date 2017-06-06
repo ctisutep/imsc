@@ -197,6 +197,7 @@
 						</div>
 						<p>  </p> <!--separator-->
 						<button type="button" class="map-print" id="print" onClick="printMaps()">Print</button> <!-- to print map -->
+						<div id="load"> </div>
 					</div>
 				</div>
 				<!--<div id="legend"> -->
@@ -362,7 +363,23 @@ $('#autocomplete').autocomplete({
 $('#target').on('change', setDistrict);
 });
 app.payload.district = $('#target').children("option:selected").data('district');
+
+/*
+$(document).ajaxStart(function(){
+	$(document.body).css({'cursor': 'wait'});
 });
+$(document).ajaxComplete(function(){
+	$(document.body).css({'cursor': 'wait'});
+});
+$("#run").click(function(){
+	load("polygonHandler.php");
+	$(document.body).css({'cursor': 'wait'});
+});
+*/
+
+});
+
+
 function getPolygons(){//this is run button
 	//Ricardo
 	hecho = false;
