@@ -446,8 +446,10 @@ $find_global = 0;
 $counter = 0;
 
 $checker = array();
+//echo sizeof($misc_arr);
 //echo sizeof($unique_index);
 //echo sizeof($unique);
+//echo sizeof($series_arr);
 
 for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 	$find = 0;
@@ -477,10 +479,12 @@ for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 	}
 }
 //var_dump($checker);
+//echo sizeof($series_arr);
+if(sizeof($series_arr) != 0){
 for($i=0; $i < sizeof($unique_index); $i++){
 		$find = 0;
 
-		if(array_key_exists($i, $checker)){
+		if(array_key_exists($i, $checker)){ //aqui
 		$revisar = $arr_cokeys[$checker[$i]]['cokey'];
 		//echo $revisar;
 		//echo " ";
@@ -489,7 +493,7 @@ for($i=0; $i < sizeof($unique_index); $i++){
 		//echo " ";
 		}
 
-		if(array_key_exists($i, $misc_arr) && ($ogr == $arr_cokeys[$misc_arr[$i]]['OGR_FID'])){ //aqui es el problema, cuzzz compara con inexistente
+		if(array_key_exists($i, $misc_arr) && ($ogr == $arr_cokeys[$misc_arr[$i]]['OGR_FID'])){ //aqui es el problema, cuzzz compara con inexistente que agarra de arriba*
 				if($find == 0 && array_key_exists($i, $misc_arr) && $ogr != $arr_cokeys[$misc_arr[$i]]['OGR_FID'] && $arr_cokeys[$misc_arr[$i]]['compkind'] == 'Miscellaneous area'){
 					echo "TEST";
 					array_push($correctos_test_arr, $misc_arr[$i]);
@@ -497,6 +501,33 @@ for($i=0; $i < sizeof($unique_index); $i++){
 					$counter += 1;
 				}
 			}
+}
+}
+else{
+	for($i=0; $i < sizeof($unique_index); $i++){
+			$find = 0;
+			/*
+			if(array_key_exists($i, $checker)){ //aqui
+			//$revisar = $arr_cokeys[$checker[$i]]['cokey'];
+			//echo $revisar;
+			//echo " ";
+			$ogr = $arr_cokeys[$checker[$i]]['OGR_FID'];
+			//echo $ogr;
+			//echo " ";
+			}
+			*/
+			$ogr = $arr_cokeys[$unique_index[$i]]['OGR_FID'];
+			for ($j=0; $j < sizeof($unique_index); $j++) {
+				//if(array_key_exists($j, $misc_arr) && ($ogr == $arr_cokeys[$misc_arr[$j]]['OGR_FID'])){ //aqui es el problema, cuzzz compara con inexistente que agarra de arriba*
+						if($find == 0 && array_key_exists($j, $misc_arr) && $ogr == $arr_cokeys[$misc_arr[$j]]['OGR_FID'] && $arr_cokeys[$misc_arr[$j]]['compkind'] == 'Miscellaneous area'){
+							array_push($correctos_test_arr, $misc_arr[$j]);
+							$find = 1;
+							$counter += 1;
+						}
+					//}
+			}
+
+	}
 }
 
 for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
@@ -532,8 +563,8 @@ for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 }
 
 //var_dump($result);
-var_dump($unique);
-var_dump($unique_index);
+//var_dump($unique);
+//var_dump($unique_index);
 //echo $counter; //3
 //echo sizeof($array_to_use); //4
 //echo sizeof($unique_index); //5
