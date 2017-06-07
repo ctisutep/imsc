@@ -441,6 +441,7 @@ $absolute_find = 0;
 $traversed = 0;
 $index_to_store = 0;
 $find_global = 0;
+$checker_ids = array();
 
 
 $counter = 0;
@@ -478,60 +479,27 @@ for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 		}
 	}
 }
+
 //var_dump($checker);
 //echo sizeof($series_arr);
+
 if(sizeof($series_arr) != 0){
-	for($i=0; $i < sizeof($unique_index); $i++){
 
-		$find = 0;
-
+	for ($i=0; $i < sizeof($unique_index); $i++) {
 		if(array_key_exists($i, $checker)){
-			$ogr = $arr_cokeys[$checker[$i]]['OGR_FID'];
-			$in_checker = $checker[$i];
+			$checker_ids[$i] = $arr_cokeys[$checker[$i]]['OGR_FID'];
 		}
+	}
 
-		if(in_array($in_checker, $misc_arr)){
-			//echo "same ";
+	for ($i=0; $i < sizeof($unique_index); $i++){
+		if(array_key_exists($i, $misc_arr)){
+			$ogr_val = $arr_cokeys[$misc_arr[$i]]['OGR_FID'];
+		}
+		if(in_array($ogr_val, $checker_ids)){
+			//do nothing; we want the other values
 		}
 		else{
-			$ogr_misc = $arr_cokeys[$misc_arr[$i]]['OGR_FID'];
-			//echo $misc_arr[$i];
-			//echo " ";
-			//echo $ogr_misc;
-			//echo " ";
-		}
-
-		for ($j=0; $j < sizeof($unique_index); $j++){
-			//if($find == 0 && array_key_exists($j, $checker) && ($ogr != $arr_cokeys[$checker[$j]]['OGR_FID']) && $arr_cokeys[$checker[$j]]['compkind'] == 'Miscellaneous area'){ //aqui es el problema, cuzzz compara con inexistente que agarra de arriba*
-			//if(array_key_exists($j, $checker)){
-			//echo $arr_cokeys[$checker[$j]]['OGR_FID'];
-			//echo " ";
-			//}
-			if($find == 0 && array_key_exists($j, $checker) && ($ogr_misc == $arr_cokeys[$checker[$j]]['OGR_FID'])){
-				//echo $arr_cokeys[$misc_arr[$j]]['OGR_FID'];
-				//echo " ";
-				//echo $j;
-				//echo $ogr;
-				//echo " ";
-				//echo $ogr_misc;
-				//echo " ";
-				//echo $arr_cokeys[$checker[$j]]['OGR_FID'];
-				//echo " ";
-				//echo " in if \r\n";
-				//if($find == 0 && array_key_exists($j, $misc_arr) && $ogr != $arr_cokeys[$misc_arr[$j]]['OGR_FID'] && $arr_cokeys[$misc_arr[$j]]['compkind'] == 'Miscellaneous area'){
-				//echo "TEST";
-				//array_push($correctos_test_arr, $misc_arr[$j]);
-				$find = 1;
-				//$counter += 1;
-				//}
-			}
-			else if($find == 0 && ($ogr_misc != $arr_cokeys[$checker[$j]]['OGR_FID'])){
-				//echo $ogr_misc;
-				//echo " out if ";
-				//echo $arr_cokeys[$checker[$j]]['OGR_FID'];
-				//echo " ";
-				$find = 1;
-			}
+			array_push($correctos_test_arr, $misc_arr[$i]);
 		}
 	}
 }
@@ -603,9 +571,9 @@ for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 //echo sizeof($correctos_test_arr);//3
 //var_dump($correctos_test_arr);
 //var_dump($series_arr);
-var_dump($misc_arr);
+//var_dump($misc_arr);
 //var_dump($tax_arr);
-var_dump($checker);
+//var_dump($checker);
 //echo $arr_cokeys[$misc_arr[0]]['cokey'];
 //var_dump($arr_cokeys);
 
@@ -791,7 +759,7 @@ $total_size = 0;
 //echo sizeof($unique_index);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/*
+
 for ($i=0; $i < sizeof($unique_index); $i++) {
 	$cokey_usado = $arr_cokeys[$correctos_test_arr[$i]]['cokey'];
 	$ogr_usado = $arr_cokeys[$correctos_test_arr[$i]]['OGR_FID'];
