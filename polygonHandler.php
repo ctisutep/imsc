@@ -481,27 +481,27 @@ for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 //var_dump($checker);
 //echo sizeof($series_arr);
 if(sizeof($series_arr) != 0){
-for($i=0; $i < sizeof($unique_index); $i++){
+	for($i=0; $i < sizeof($unique_index); $i++){
 		$find = 0;
 
 		if(array_key_exists($i, $checker)){ //aqui
-		$revisar = $arr_cokeys[$checker[$i]]['cokey'];
-		//echo $revisar;
-		//echo " ";
-		$ogr = $arr_cokeys[$checker[$i]]['OGR_FID'];
-		//echo $ogr;
-		//echo " ";
+			$revisar = $arr_cokeys[$checker[$i]]['cokey'];
+			//echo $revisar;
+			//echo " ";
+			$ogr = $arr_cokeys[$checker[$i]]['OGR_FID'];
+			//echo $ogr;
+			//echo " ";
 		}
 
 		if(array_key_exists($i, $misc_arr) && ($ogr == $arr_cokeys[$misc_arr[$i]]['OGR_FID'])){ //aqui es el problema, cuzzz compara con inexistente que agarra de arriba*
-				if($find == 0 && array_key_exists($i, $misc_arr) && $ogr != $arr_cokeys[$misc_arr[$i]]['OGR_FID'] && $arr_cokeys[$misc_arr[$i]]['compkind'] == 'Miscellaneous area'){
-					echo "TEST";
-					array_push($correctos_test_arr, $misc_arr[$i]);
-					$find = 1;
-					$counter += 1;
-				}
+			if($find == 0 && array_key_exists($i, $misc_arr) && $ogr != $arr_cokeys[$misc_arr[$i]]['OGR_FID'] && $arr_cokeys[$misc_arr[$i]]['compkind'] == 'Miscellaneous area'){
+				echo "TEST";
+				array_push($correctos_test_arr, $misc_arr[$i]);
+				$find = 1;
+				$counter += 1;
 			}
-}
+		}
+	}
 }
 else{
 	for($i=0; $i < sizeof($unique_index); $i++){
@@ -759,6 +759,7 @@ $total_size = 0;
 //echo sizeof($unique_index);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/*
 for ($i=0; $i < sizeof($unique_index); $i++) {
 	$cokey_usado = $arr_cokeys[$correctos_test_arr[$i]]['cokey'];
 	$ogr_usado = $arr_cokeys[$correctos_test_arr[$i]]['OGR_FID'];
