@@ -482,23 +482,43 @@ for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 //echo sizeof($series_arr);
 if(sizeof($series_arr) != 0){
 	for($i=0; $i < sizeof($unique_index); $i++){
+
 		$find = 0;
 
-		if(array_key_exists($i, $checker)){ //aqui
-			$revisar = $arr_cokeys[$checker[$i]]['cokey'];
-			//echo $revisar;
-			//echo " ";
+		if(array_key_exists($i, $checker)){
 			$ogr = $arr_cokeys[$checker[$i]]['OGR_FID'];
-			//echo $ogr;
-			//echo " ";
+			$in_checker = $checker[$i];
 		}
 
-		if(array_key_exists($i, $misc_arr) && ($ogr == $arr_cokeys[$misc_arr[$i]]['OGR_FID'])){ //aqui es el problema, cuzzz compara con inexistente que agarra de arriba*
-			if($find == 0 && array_key_exists($i, $misc_arr) && $ogr != $arr_cokeys[$misc_arr[$i]]['OGR_FID'] && $arr_cokeys[$misc_arr[$i]]['compkind'] == 'Miscellaneous area'){
-				echo "TEST";
-				array_push($correctos_test_arr, $misc_arr[$i]);
-				$find = 1;
-				$counter += 1;
+		if(in_array($in_checker, $misc_arr)){
+			//echo "same ";
+		}
+		else{
+			$ogr_misc = $arr_cokeys[$misc_arr[$i]]['OGR_FID'];
+			//echo $misc_arr[$i];
+			//echo " ";
+			echo $ogr_misc;
+			echo " ";
+		}
+
+		for ($j=0; $j < sizeof($unique_index); $j++){
+			//if($find == 0 && array_key_exists($j, $checker) && ($ogr != $arr_cokeys[$checker[$j]]['OGR_FID']) && $arr_cokeys[$checker[$j]]['compkind'] == 'Miscellaneous area'){ //aqui es el problema, cuzzz compara con inexistente que agarra de arriba*
+			//if(array_key_exists($j, $checker)){
+			//echo $arr_cokeys[$checker[$j]]['OGR_FID'];
+			//echo " ";
+			//}
+			if($find == 0 && array_key_exists($j, $checker) && ($ogr_misc != $arr_cokeys[$checker[$j]]['OGR_FID'])){
+				//echo $arr_cokeys[$misc_arr[$j]]['OGR_FID'];
+				//echo " ";
+				//echo $j;
+				//echo $ogr;
+				//echo " ";
+				//if($find == 0 && array_key_exists($j, $misc_arr) && $ogr != $arr_cokeys[$misc_arr[$j]]['OGR_FID'] && $arr_cokeys[$misc_arr[$j]]['compkind'] == 'Miscellaneous area'){
+				//echo "TEST";
+				//array_push($correctos_test_arr, $misc_arr[$j]);
+				//$find = 1;
+				//$counter += 1;
+				//}
 			}
 		}
 	}
@@ -571,9 +591,9 @@ for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
 //echo sizeof($correctos_test_arr);//3
 //var_dump($correctos_test_arr);
 //var_dump($series_arr);
-//var_dump($misc_arr);
+var_dump($misc_arr);
 //var_dump($tax_arr);
-//var_dump($checker);
+var_dump($checker);
 //echo $arr_cokeys[$misc_arr[0]]['cokey'];
 //var_dump($arr_cokeys);
 
