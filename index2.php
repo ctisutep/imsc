@@ -176,16 +176,26 @@
 							<div class="input-group">
 								<!--<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
 								<input type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="autocomplete" autocomplete="off">-->
-
 								<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
 								<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="selectProp">
 									<option value="" disabled selected>Select a ground property</option>
 								</select>
 							</div> <br>
-							<label> Depth (in inches): </label> <br>
-							<input type="text" value="0" id="depth" placeholder=" ...inches" style="color: black;">
-							<!--<p> Top = <input type="text" value="" id="depth_top" placeholder="...inches" style="color: black;"></p>
-							<p> Bottom = <input type="text" value="" id="depth_bottom" placeholder="...inches" style="color: black;"></p>-->
+
+
+							<div class="row">
+								<label> Depth:</label> <br>
+								<div class="input-group">
+									<!-- <label> Depth:</label> <br> -->
+									<span class="input-group-addon" id="basic-addon3">(in inches)</span>
+									<input type="text" class="form-control" value="0" placeholder="...inches" id="depth" aria-describedby="basic-addon3">
+									<!-- <input type="text" value="0" id="depth" placeholder=" ...inches" style="color: black;"> -->
+									<!--<p> Top = <input type="text" value="" id="depth_top" placeholder="...inches" style="color: black;"></p>
+									<p> Bottom = <input type="text" value="" id="depth_bottom" placeholder="...inches" style="color: black;"></p>-->
+								</div>
+							</div>
+
+
 						</div>
 						<div> <p> </p> </div> <!--separate-->
 						<div class="row">
