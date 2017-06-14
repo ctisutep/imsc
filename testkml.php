@@ -1,6 +1,16 @@
 <body>
 <div class="map_canvas"></div>
 <!--<button id="printer" onClick="printMap()">PRINT TESTING</map>-->
+<div class="container">
+  <div class="row">
+    <div class="col">
+      1 of 2
+    </div>
+    <div class="col">
+      2 of 2
+    </div>
+  </div>
+</div>
 </body>
 <style>
    .map_canvas {
@@ -26,6 +36,8 @@
 <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCY0B3_Fr1vRpgJDdbvNmrVyXmoOOtiq64"></script>
 <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCY0B3_Fr1vRpgJDdbvNmrVyXmoOOtiq64&callback=initMap"></script>-->
 <script src="js/jquery.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 <!--<script src="js/ProjectedOverlay.js"></script>-->
 <!--<script src="js/ZipFile.complete.js"></script>-->
 <!--<script src="js/geoxml3.js"></script>-->
