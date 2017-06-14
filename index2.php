@@ -203,9 +203,9 @@
 									<select id="methods" class="form-control">
 										<option value="" disabled selected>Select method</option>
 										<option value="0" id="max_method">Max</option>
-										<option value="1" id="max_method">Min</option>
-										<option value="2" id="max_method">Medium</option>
-										<option value="3" id="max_method">Weighted average</option>
+										<option value="1" id="min_method">Min</option>
+										<option value="2" id="med_method">Medium</option>
+										<option value="3" id="weight_method">Weighted average</option>
 									</select>
 								</div>
 							</div>
@@ -283,7 +283,7 @@ Gypsum
 </div>
 </div>
 */
-var app = {map:null, polygons:null, payload:{getMode:"polygons", property:null, district:null, depth:null}};
+var app = {map:null, polygons:null, payload:{getMode:"polygons", property:null, district:null, depth:null, depth_method:null}}; //added value for depth method
 var hecho = false;
 //var suggested = all the aliases of the properties, note: not all properties have an alias
 $(document).ready(function(){//esto pasa recien cargada la pagina
@@ -387,6 +387,10 @@ $('#autocomplete').autocomplete({
 $('#target').on('change', setDistrict);
 });
 app.payload.district = $('#target').children("option:selected").data('district');
+
+$("#methods").change(function(){ //0: max / 1: min / 2: medium / 3: weight/
+	app.payload.value = this.value;
+});
 
 /*
 $(document).ajaxStart(function(){
