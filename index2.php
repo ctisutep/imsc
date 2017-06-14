@@ -183,9 +183,7 @@
 								</select>
 							</div> <br>
 							</div>
-
-
-
+							<!-- Depth methods-->
 							<div class="row">
 								<div class="col-md-5 col-md-offset-0">
 									<label> Depth:</label> <br>
@@ -209,9 +207,7 @@
 									</select>
 								</div>
 							</div>
-
-
-
+							<!-- End depth methods -->
 						<div> <p> </p> </div> <!--separate-->
 						<div class="row">
 							<button class="btn btn-success form-control" type="button" id="run" onClick="getPolygons()">Run</button>
@@ -389,10 +385,10 @@ $('#target').on('change', setDistrict);
 app.payload.district = $('#target').children("option:selected").data('district');
 
 $("#methods").change(function(){ //0: max / 1: min / 2: medium / 3: weight/
-	app.payload.value = this.value;
+	app.payload.depth_method = this.value;
 });
 
-/*
+/* for the loading cursor
 $(document).ajaxStart(function(){
 	$(document.body).css({'cursor': 'wait'});
 });
