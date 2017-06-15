@@ -335,7 +335,27 @@ function getPolygons(){
 		//echo $method_selected;
 		switch ($method_selected) {
 			case 'Maximum':
-				echo "Maximum method selected";
+				$max_value = 0;
+				//echo $max_value;
+				$max_index_i;
+				$max_index_j;
+				for ($j=0; $j < sizeof($array_polygons); $j++) {
+					//$max_value = max($array_polygons[$i]);
+					//$max_index_i = $i;
+					//break;
+					for ($i=0; $i < sizeof($array_polygons[$j]); $i++) {
+						//if($data->depth >= $array_polygons[$j][$i]['top'] && $data->depth <= $array_polygons[$j][$i]['bottom']){ //discriminador de depth
+							//$max_value = $array_polygons[$j][$i][$data->property];
+							if($max_value < $array_polygons[$j][$i][$data->property]){
+								$max_value = $array_polygons[$j][$i][$data->property];
+								$max_index_i = $i;
+								$max_index_j = $j;
+							}
+						//}
+					}
+				}
+				$polygons[] = $array_polygons[$max_index_j][$max_index_i];
+				//echo $max_value;
 				break;
 
 			case 'Minimum':
@@ -355,13 +375,13 @@ function getPolygons(){
 				break;
 		}
 
-		for ($j=0; $j < sizeof($array_polygons); $j++) {
-			for ($i=0; $i < sizeof($array_polygons[$j]); $i++) { //con unique index se sacan los OGR_FID unicos, mas no necesariamente los que poseen layers
+		/*for ($j=0; $j < sizeof($array_polygons); $j++) {
+			for ($i=0; $i < sizeof($array_polygons[$j]); $i++) {
 				if($data->depth >= $array_polygons[$j][$i]['top'] && $data->depth <= $array_polygons[$j][$i]['bottom']){ //discriminador de depth
-					$polygons[] = $array_polygons[$j][$i]; //el indice es aquel que contendra el ID unico, sin embargo, necesitamos extraer el ID que use el cokey perteneciente a layers (compkind == 'Series')
+					$polygons[] = $array_polygons[$j][$i];
 				}
 			}
-		}
+		}*/
 
 		$toReturn['coords'] = $polygons;//fetch all
 	}
