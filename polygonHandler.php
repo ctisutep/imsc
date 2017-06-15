@@ -35,6 +35,7 @@ class dataToQueryPolygons{
 	public $lng2;
 	public $lng1;
 	public $depth;
+	public $depth_method;
 
 	public function __construct(){
 		$this->table = $_GET['table'];
@@ -45,6 +46,7 @@ class dataToQueryPolygons{
 		$this->lng2 = $_GET['NE']['lng'];
 		$this->lng1 = $_GET['SW']['lng'];
 		$this->depth = ($_GET['depth'] * 2.54);
+		$this->depth_method = $_GET['depth_method'];
 	}
 }
 //depending on which table (for a given property) will be used in query, this will determine the appropriate key
@@ -279,6 +281,27 @@ function getPolygons(){
 		$cokey_usado = 0;
 		$ogr_usado = 0;
 		$total_size = 0;
+		$method_selected;
+
+		if($data->depth_method == 0){
+			//echo " On maximum ";
+			$method_selected = "Maximum";
+		}
+		elseif ($data->depth_method == 1) {
+			//echo " On minimum ";
+			$method_selected = "Minimum";
+		}
+		elseif ($data->depth_method == 2) {
+			//echo " On median ";
+			$method_selected = "Median";
+		}
+		elseif ($data->depth_method == 3) {
+			//echo " On weighted ";
+			$method_selected = "Weighted";
+		}
+		else{
+			//echo " Nothing selected ";
+		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

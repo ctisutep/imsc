@@ -251,34 +251,7 @@
 <script src="js/jquery.autocomplete.min.js"></script>
 <script src="js/properties.js"></script>
 <script>
-/* want to modify search method to dropdown
-<div> <p> </p> </div> <!--separate-->
-<div class="row"> <!--search-->
-<label> Search: </label>
-</div>
-<div class="row"> <!--search-->
-<div class="input-group">
-<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
-<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="autocomplete" autocomplete="off">
-<option value="gypsum_r">
-Gypsum
-</option>
-</select>
-</div>
-</div>
-<div> <p> </p> </div> <!--separate-->
-*/
-/* original search method
-<div class="row"> <!--search-->
-<label> Search: </label>
-</div>
-<div class="row"> <!--search-->
-<div class="input-group">
-<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
-<input type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="autocomplete" autocomplete="off">
-</div>
-</div>
-*/
+
 var app = {map:null, polygons:null, payload:{getMode:"polygons", property:null, district:null, depth:null, depth_method:null}}; //added value for depth method
 var hecho = false;
 //var suggested = all the aliases of the properties, note: not all properties have an alias
@@ -1806,30 +1779,7 @@ function printMaps() { //testing printing a map
 	printContainer.remove();
 	patchedStyle.remove();
 }
-/*function descriptor(){
-}*/
-/*
-function insertPolygon(objectId){
-$.get('polygonHandler.php', {'district':objectId}).done(function(data){
-if(data.hasOwnProperty('coords')){
-var polygon = new google.maps.Polygon({
-paths: toLatLngLiteral(data.coords),
-strokeColor: '#FF0000',
-strokeOpacity: 0.8,
-strokeWeight: 2,
-fillColor: '#FF0000',
-fillOpacity: 0.35
-});
-polygon.setMap(app.map);
-google.maps.event.addListener(polygon, 'click', function(e){
-app.map.panTo(e.latLng);
-app.map.setZoom(15);
-});
-}
-});
-}
-*/
-// ***********
+
 function polyInfo(event){
 	text = this.description + ": " + this.description_value;
 	app.infoWindow.setContent(text);
