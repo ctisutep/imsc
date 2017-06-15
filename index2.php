@@ -202,7 +202,7 @@
 										<option value="" disabled selected>Select method</option>
 										<option value="0" id="max_method">Max</option>
 										<option value="1" id="min_method">Min</option>
-										<option value="2" id="med_method">Medium</option>
+										<option value="2" id="med_method">Median</option>
 										<option value="3" id="weight_method">Weighted average</option>
 									</select>
 								</div>
@@ -384,7 +384,11 @@ $('#target').on('change', setDistrict);
 });
 app.payload.district = $('#target').children("option:selected").data('district');
 
-$("#methods").change(function(){ //0: max / 1: min / 2: medium / 3: weight/
+/*
+Si es minimo o maximo, necesitamos depth a ese punto. Si es weighted average
+no necesitamos considerar o saber depth. Tambien para median necesitamos saber.
+*/
+$("#methods").change(function(){ //0: max / 1: min / 2: median / 3: weight/
 	app.payload.depth_method = this.value;
 });
 
@@ -412,11 +416,6 @@ function getPolygons(){//this is run button
 	depth = parseInt(depth);
 	//console.log(depth);
 
-	//Valores de depth top y depth bottom
-	/*var depth_t = document.getElementById("depth_top").value;
-	console.log("Ricardo, esto da el valor de depth_top: " + depth_t);
-	var depth_b = document.getElementById("depth_bottom").value;
-	console.log("Ricardo, esto da el valor de depth_bottom: " + depth_b);*/
 	app.payload.depth = depth;
 	if(app.payload.property && app.payload.district && (isNaN(depth)==false)){//to make sure a property is selected
 		//get the polygons
