@@ -281,7 +281,7 @@ function getPolygons(){
 		$cokey_usado = 0;
 		$ogr_usado = 0;
 		$total_size = 0;
-		$method_selected;
+		$method_selected = 5;
 
 		if($data->depth_method == 0){
 			//echo " On maximum ";
@@ -305,7 +305,6 @@ function getPolygons(){
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 		for ($i=0; $i < sizeof($unique_index); $i++) {
 			$cokey_usado = $arr_cokeys[$correctos_test_arr[$i]]['cokey'];
 			$ogr_usado = $arr_cokeys[$correctos_test_arr[$i]]['OGR_FID'];
@@ -317,7 +316,7 @@ function getPolygons(){
 			$result_loop = mysqli_query($conn, $query_test);
 
 			$result_loop = fetchAll($result_loop);
-
+			//$toReturn['testing methods'] = $result_loop;
 			$array_polygons[] = $result_loop;
 
 			$total_size += sizeof($result_loop);
@@ -327,6 +326,31 @@ function getPolygons(){
 
 		/*Final de pruebas de queries dentro de un loop*/
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		/*
+		En este punto vamos a determinar como vamos a meter nuestros poligonos a
+		colorear. Dependenera de methodos, en un case statement.
+		*/
+		switch ($method_selected) {
+			case 'Maximum':
+				echo "Maximum method selected";
+				break;
+
+			case 'Minimum':
+				echo "Minimum method selected";
+				break;
+
+			case 'Median':
+				echo "Median method selected";
+				break;
+
+			case 'Weighted':
+				echo "Weighted method selected";
+				break;
+
+			default:
+				echo "lo demas";
+				break;
+		}
 
 		for ($j=0; $j < sizeof($array_polygons); $j++) {
 			for ($i=0; $i < sizeof($array_polygons[$j]); $i++) { //con unique index se sacan los OGR_FID unicos, mas no necesariamente los que poseen layers
