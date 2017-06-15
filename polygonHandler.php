@@ -283,19 +283,21 @@ function getPolygons(){
 		$total_size = 0;
 		$method_selected = 5;
 
-		if($data->depth_method == 0){
+		//echo $method_selected;
+
+		if($data->depth_method == 1){
 			//echo " On maximum ";
 			$method_selected = "Maximum";
 		}
-		elseif ($data->depth_method == 1) {
+		elseif ($data->depth_method == 2) {
 			//echo " On minimum ";
 			$method_selected = "Minimum";
 		}
-		elseif ($data->depth_method == 2) {
+		elseif ($data->depth_method == 3) {
 			//echo " On median ";
 			$method_selected = "Median";
 		}
-		elseif ($data->depth_method == 3) {
+		elseif ($data->depth_method == 4) {
 			//echo " On weighted ";
 			$method_selected = "Weighted";
 		}
@@ -330,6 +332,7 @@ function getPolygons(){
 		En este punto vamos a determinar como vamos a meter nuestros poligonos a
 		colorear. Dependenera de methodos, en un case statement.
 		*/
+		//echo $method_selected;
 		switch ($method_selected) {
 			case 'Maximum':
 				echo "Maximum method selected";

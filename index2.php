@@ -200,10 +200,10 @@
 									<label> Method:</label> <br>
 									<select id="methods" class="form-control">
 										<option value="" disabled selected>Select method</option>
-										<option value="0" id="max_method">Max</option>
-										<option value="1" id="min_method">Min</option>
-										<option value="2" id="med_method">Median</option>
-										<option value="3" id="weight_method">Weighted average</option>
+										<option value="1" id="max_method">Max</option>
+										<option value="2" id="min_method">Min</option>
+										<option value="3" id="med_method">Median</option>
+										<option value="4" id="weight_method">Weighted average</option>
 									</select>
 								</div>
 							</div>
