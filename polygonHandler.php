@@ -364,7 +364,7 @@ function getPolygons(){
 						}
 						$polygons[] = $array_polygons[$max_index_j][$max_index_i];
 					}
-					//$polygons[] = $array_polygons[$max_index_j][$max_index_i];
+					//	$polygons[] = $array_polygons[$max_index_j][$max_index_i];
 				//}
 				//echo $max_value;
 				break;
