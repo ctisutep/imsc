@@ -219,7 +219,7 @@ function getPolygons(){
 		//var_dump($checker);
 		//echo sizeof($series_arr);
 
-		if(sizeof($series_arr) != 0){
+		if(sizeof($series_arr) != 0 && sizeof($series_arr) > 1 && sizeof($misc_arr) != 0){
 
 			for ($i=0; $i < sizeof($unique_index); $i++) {
 				if(array_key_exists($i, $checker)){
