@@ -355,11 +355,31 @@ function getPolygons(){
 				break;
 
 			case 'Minimum':
-				echo "Minimum method selected";
+			/* Busca el valor minimo de la lista de los polignos, independientemente de el depth que el usuario le otorgue*/
+				$min_value;
+				$min_index_i;
+				$min_index_j;
+					for ($j=0; $j < sizeof($array_polygons); $j++) {
+						$min_value = PHP_INT_MAX;
+						$min_index_i = 0;
+						$min_index_j = 0;
+						for ($i=0; $i < sizeof($array_polygons[$j]); $i++) {
+							if($min_value > $array_polygons[$j][$i][$data->property]){
+								$min_value = $array_polygons[$j][$i][$data->property];
+								$min_index_i = $i;
+								$min_index_j = $j;
+							}
+						}
+						$polygons[] = $array_polygons[$min_index_j][$min_index_i];
+					}
 				break;
 
 			case 'Median':
-				echo "Median method selected";
+
+				/*echo(ceil(5/2) . "<br>");
+				echo(ceil(3/2) . "<br>");
+				echo(ceil(1/2) . "<br>");
+				echo "Median method selected";*/
 				break;
 
 			case 'Weighted':
