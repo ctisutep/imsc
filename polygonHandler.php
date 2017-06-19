@@ -109,8 +109,8 @@ function getPolygons(){
 
 		$toReturn['cokeys que tienen ya sea series || miscellaneous || taxadjunct'] = $arr_cokeys;
 
-		//$query = "SELECT x.cokey, p.mukey, OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //working on it
-		$query = "SELECT x.cokey, p.mukey, OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //working on it
+		$query = "SELECT x.cokey, p.mukey, OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //working on it
+		//$query = "SELECT x.cokey, p.mukey, OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //working on it
 		//$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //no se
 		//$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE x.cokey = $el_cokey_ideal AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //just works for chorizon at the moment
 
@@ -377,19 +377,38 @@ function getPolygons(){
 				case 'Median':
 				/**/
 				$med_index_i;
+				$med_value = 0;
 				$done_med;
+				//$arr_med = array_fill(0, sizeof($array_polygons), 0);
+				//print_r($arr_med);
+				$arr_med = array();
 				$size_arr = sizeof($array_polygons);
+				/*
+				for ($i=0; $i < sizeof($array_polygons); $i++) {
+					for ($j=0; $j < sizeof($array_polygons[$i]); $j++) {
+						$arr_med[$i] = $array_polygons[$j][$i];
+					}
+				}
+				var_dump($arr_med);
+				*/
+
+				//$arr_med = array_multisort($array_polygons, SORT_ASC);
+				//print_r($arr_med);
+				//var_dump($arr_med);
+
 				for ($j=0; $j < sizeof($array_polygons); $j++) {
 					$med_index_i = 0;
 					$done_med = 0;
 					for ($i=0; $i < sizeof($array_polygons[$j]); $i++) {
+						echo ($array_polygons[$j][$i][$data->property]." ");
 						if($size_arr%2 == 1 && $done_med == 0){//odd
-							$med_index_i = ceil(sizeof($array_polygons[$j][$i])/2); //have to subtract one from this value to get the index correctly
+							$med_index_i = ceil(sizeof($array_polygons[$j])/2); //have to subtract one from this value to get the index correctly
+							//echo $med_index_i;
 							$done_med = 1;
 							$polygons[] = $array_polygons[$j][$med_index_i - 1];
 						}
 						elseif($size_arr%2 == 0 && $done_med == 0){ //even
-							//echo "even ";
+							ceil(sizeof($array_polygons[$j])/2);
 							$done_med = 1;
 						}
 
@@ -399,7 +418,11 @@ function getPolygons(){
 				break;
 
 			case 'Weighted':
-				echo "Weighted method selected";
+				echo "Weighted method selected ";
+				echo (ceil(2/2) . " ");
+				echo (ceil(4/2) . " ");
+				echo (ceil(6/2) . " ");
+				echo (ceil(5/2) . " ");
 				break;
 
 			default:
