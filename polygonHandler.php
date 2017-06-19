@@ -374,12 +374,28 @@ function getPolygons(){
 					}
 				break;
 
-			case 'Median':
+				case 'Median':
+				/**/
+				$med_index_i;
+				$done_med;
+				$size_arr = sizeof($array_polygons);
+				for ($j=0; $j < sizeof($array_polygons); $j++) {
+					$med_index_i = 0;
+					$done_med = 0;
+					for ($i=0; $i < sizeof($array_polygons[$j]); $i++) {
+						if($size_arr%2 == 1 && $done_med == 0){//odd
+							$med_index_i = ceil(sizeof($array_polygons[$j][$i])/2); //have to subtract one from this value to get the index correctly
+							$done_med = 1;
+							$polygons[] = $array_polygons[$j][$med_index_i - 1];
+						}
+						elseif($size_arr%2 == 0 && $done_med == 0){ //even
+							//echo "even ";
+							$done_med = 1;
+						}
 
-				/*echo(ceil(5/2) . "<br>");
-				echo(ceil(3/2) . "<br>");
-				echo(ceil(1/2) . "<br>");
-				echo "Median method selected";*/
+					}
+					//$polygons[] = $array_polygons[$med_index_j][$med_index_i];
+				}
 				break;
 
 			case 'Weighted':
