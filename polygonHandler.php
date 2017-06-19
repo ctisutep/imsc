@@ -337,36 +337,21 @@ function getPolygons(){
 			case 'Maximum':
 			/* Busca el valor maximo de la lista de los polignos, independientemente de el depth que el usuario le otorgue*/
 				$max_value;
-				//echo $max_value;
 				$max_index_i;
 				$max_index_j;
-				/*for ($h=0; $h < sizeof($unique_index); $h++) {
-					$max_value = 0;
-					$max_index_i = 0;
-					$max_index_j = 0;*/
 					for ($j=0; $j < sizeof($array_polygons); $j++) {
 						$max_value = 0;
 						$max_index_i = 0;
 						$max_index_j = 0;
-						//echo $j;
-						//$max_value = max($array_polygons[$i]);
-						//$max_index_i = $i;
-						//break;
 						for ($i=0; $i < sizeof($array_polygons[$j]); $i++) {
-							//if($data->depth >= $array_polygons[$j][$i]['top'] && $data->depth <= $array_polygons[$j][$i]['bottom']){ //discriminador de depth
-							//$max_value = $array_polygons[$j][$i][$data->property];
 							if($max_value < $array_polygons[$j][$i][$data->property]){
 								$max_value = $array_polygons[$j][$i][$data->property];
 								$max_index_i = $i;
 								$max_index_j = $j;
 							}
-							//}
 						}
 						$polygons[] = $array_polygons[$max_index_j][$max_index_i];
 					}
-					//	$polygons[] = $array_polygons[$max_index_j][$max_index_i];
-				//}
-				//echo $max_value;
 				break;
 
 			case 'Minimum':
