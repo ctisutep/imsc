@@ -404,11 +404,11 @@ function getPolygons(){
 						elseif(sizeof($array_polygons[$j])%2 == 0 && $done_med == 0){ //even
 							$med_value = ($array_polygons[$j][(ceil(sizeof($array_polygons[$j])/2)) - 1][$data->property] + $array_polygons[$j][(ceil(sizeof($array_polygons[$j])/2))][$data->property]) / 2;
 							$array_polygons[$j][(ceil(sizeof($array_polygons[$j])/2)) - 1][$data->property] = $med_value;
-							echo $med_value;
+							//echo $med_value;
 							$polygons[] = $array_polygons[$j][(ceil(sizeof($array_polygons[$j])/2)) - 1];
 							$done_med = 1;
 						}
-						echo ($array_polygons[$j][$i][$data->property]." ".$array_polygons[$j][$i]['top']." ");
+						//echo ($array_polygons[$j][$i][$data->property]." ".$array_polygons[$j][$i]['top']." ");
 					}
 					//$polygons[] = $array_polygons[$med_index_j][$med_index_i];
 				}
