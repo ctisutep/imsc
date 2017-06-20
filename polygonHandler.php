@@ -375,7 +375,7 @@ function getPolygons(){
 				break;
 
 				case 'Median':
-				/**/
+				/*Busca el valor medio para poligonos con n layers seasen pares o impares.*/
 				$med_index_i;
 				$med_value = 0;
 				$done_med;
@@ -390,27 +390,18 @@ function getPolygons(){
 					$med_index_i = 0;
 					$done_med = 0;
 					for ($i=0; $i < sizeof($array_polygons[$j]); $i++) {
-
 						if(sizeof($array_polygons[$j])%2 == 1 && $done_med == 0){//odd
-							//echo (sizeof($array_polygons[$j])/2)." ";
-							//echo (sizeof($array_polygons[$j]))." ";
-							//echo (ceil(sizeof($array_polygons[$j])/2))." ";
 							$med_index_i = ceil(sizeof($array_polygons[$j])/2); //have to subtract one from this value to get the index correctly
-							//echo $med_index_i." index ";
-							//echo (($med_index_i)-1)." index -1 ";
 							$done_med = 1;
 							$polygons[] = $array_polygons[$j][$med_index_i - 1];
 						}
 						elseif(sizeof($array_polygons[$j])%2 == 0 && $done_med == 0){ //even
 							$med_value = ($array_polygons[$j][(ceil(sizeof($array_polygons[$j])/2)) - 1][$data->property] + $array_polygons[$j][(ceil(sizeof($array_polygons[$j])/2))][$data->property]) / 2;
 							$array_polygons[$j][(ceil(sizeof($array_polygons[$j])/2)) - 1][$data->property] = $med_value;
-							//echo $med_value;
 							$polygons[] = $array_polygons[$j][(ceil(sizeof($array_polygons[$j])/2)) - 1];
 							$done_med = 1;
 						}
-						//echo ($array_polygons[$j][$i][$data->property]." ".$array_polygons[$j][$i]['top']." ");
 					}
-					//$polygons[] = $array_polygons[$med_index_j][$med_index_i];
 				}
 				break;
 
