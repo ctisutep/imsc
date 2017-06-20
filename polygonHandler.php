@@ -406,11 +406,25 @@ function getPolygons(){
 				break;
 
 			case 'Weighted':
-				echo "Weighted method selected ";
+				/**/
+				$profundo = $data->depth;
+
+				for ($i=0; $i < sizeof($array_polygons); $i++) {
+					for ($j=0; $j < sizeof($array_polygons[$i]); $j++) {
+						if(sizeof($array_polygons[$j]) > 1 && $array_polygons[$i][sizeof($array_polygons[$i])-1][$data->property] == 0){
+							//use the penultimate index
+						}
+						else{
+							//permissible to use the last index
+						}
+					}
+				}
+
+				/*echo "Weighted method selected ";
 				echo (ceil(2/2) . " ");
 				echo (ceil(4/2) . " ");
 				echo (ceil(6/2) . " ");
-				echo (ceil(5/2) . " ");
+				echo (ceil(5/2) . " ");*/
 				break;
 
 			default:
