@@ -189,7 +189,7 @@
 									<label> Depth:</label> <br>
 									<div class="input-group">
 										<!-- <label> Depth:</label> <br> -->
-										<span class="input-group-addon" id="basic-addon3">(inches)</span>
+										<span class="input-group-addon" id="basic-addon3">inch</span>
 										<input type="text" class="form-control" value="0" placeholder="...inches" id="depth" aria-describedby="basic-addon3">
 										<!-- <input type="text" value="0" id="depth" placeholder=" ...inches" style="color: black;"> -->
 										<!--<p> Top = <input type="text" value="" id="depth_top" placeholder="...inches" style="color: black;"></p>
