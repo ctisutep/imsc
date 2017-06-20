@@ -437,18 +437,24 @@ function getPolygons(){
 				$delta_depth;
 				$valor;
 				$just_one;
-				$result;
+				$result_weighted;
 
 				for ($i=0; $i < sizeof($array_polygons); $i++) { //sorting by property values ascending; had to modify query
 					array_multisort($array_polygons[$i], SORT_ASC);
 				}
 
 				for ($i=0; $i < sizeof($array_polygons); $i++) {
+					$profundo = $data->depth;
+					$limite = 0;
 					$n_operaciones = 0;
 					$counter = 0;
-					$result_weighted = 0;
+					$top = 0;
+					$bottom = 0;
+					$delta = 0;
 					$delta_depth = 0;
+					$valor = 0;
 					$just_one = 0;
+					$result_weighted = 0;
 
 					if(sizeof($array_polygons[$i]) > 1 && $array_polygons[$i][sizeof($array_polygons[$i])-1][$data->property] == 0){ //use the penultimate index
 
@@ -491,6 +497,7 @@ function getPolygons(){
 						}
 						$array_polygons[$i][0][$data->property] = round($result_weighted,1);
 						$polygons[] = $array_polygons[$i][0];
+						//echo $i . " ";
 					} //end if for using penultimate index
 					else{
 						//permissible to use the last index
