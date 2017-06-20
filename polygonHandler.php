@@ -306,26 +306,46 @@ function getPolygons(){
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		if($data->depth_method == 4){
+			for ($i=0; $i < sizeof($unique_index); $i++) {
+				$cokey_usado = $arr_cokeys[$correctos_test_arr[$i]]['cokey'];
+				$ogr_usado = $arr_cokeys[$correctos_test_arr[$i]]['OGR_FID'];
+				$query_test = "SELECT hzdepb_r AS bottom, OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, 1.7625422383727E-6)) AS POLYGON, hzdept_r AS top, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE x.cokey = $cokey_usado AND OGR_FID = $ogr_usado AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //just works for chorizon at the moment
+				//"            SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, 1.7625422383727E-6)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.pi_r FROM polygon AS p, chorizon_r as x WHERE x.cokey = 13638933 AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
+				//$query_test = "SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE x.cokey = $cokey_usado AND OGR_FID = $ogr_usado AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //just works for chorizon at the moment
 
-		for ($i=0; $i < sizeof($unique_index); $i++) {
-			$cokey_usado = $arr_cokeys[$correctos_test_arr[$i]]['cokey'];
-			$ogr_usado = $arr_cokeys[$correctos_test_arr[$i]]['OGR_FID'];
-			$query_test = "SELECT x.$data->property, OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, 1.7625422383727E-6)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE x.cokey = $cokey_usado AND OGR_FID = $ogr_usado AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //just works for chorizon at the moment
-			//"            SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, 1.7625422383727E-6)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.pi_r FROM polygon AS p, chorizon_r as x WHERE x.cokey = 13638933 AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
-			//$query_test = "SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE x.cokey = $cokey_usado AND OGR_FID = $ogr_usado AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //just works for chorizon at the moment
+				$toReturn['query loop'] = $query_test;
+				$result_loop = mysqli_query($conn, $query_test);
 
-			$toReturn['query loop'] = $query_test;
-			$result_loop = mysqli_query($conn, $query_test);
+				$result_loop = fetchAll($result_loop);
+				//$toReturn['testing methods'] = $result_loop;
+				$array_polygons[] = $result_loop;
 
-			$result_loop = fetchAll($result_loop);
-			//$toReturn['testing methods'] = $result_loop;
-			$array_polygons[] = $result_loop;
+				$total_size += sizeof($result_loop);
 
-			$total_size += sizeof($result_loop);
-
-			unset($result_loop);
+				unset($result_loop);
+			}
 		}
+		else{
+			for ($i=0; $i < sizeof($unique_index); $i++) {
+				$cokey_usado = $arr_cokeys[$correctos_test_arr[$i]]['cokey'];
+				$ogr_usado = $arr_cokeys[$correctos_test_arr[$i]]['OGR_FID'];
+				$query_test = "SELECT x.$data->property, OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, 1.7625422383727E-6)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE x.cokey = $cokey_usado AND OGR_FID = $ogr_usado AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //just works for chorizon at the moment
+				//"            SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, 1.7625422383727E-6)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.pi_r FROM polygon AS p, chorizon_r as x WHERE x.cokey = 13638933 AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
+				//$query_test = "SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE x.cokey = $cokey_usado AND OGR_FID = $ogr_usado AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //just works for chorizon at the moment
 
+				$toReturn['query loop'] = $query_test;
+				$result_loop = mysqli_query($conn, $query_test);
+
+				$result_loop = fetchAll($result_loop);
+				//$toReturn['testing methods'] = $result_loop;
+				$array_polygons[] = $result_loop;
+
+				$total_size += sizeof($result_loop);
+
+				unset($result_loop);
+			}
+		}
 		/*Final de pruebas de queries dentro de un loop*/
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/*
@@ -408,16 +428,29 @@ function getPolygons(){
 			case 'Weighted':
 				/**/
 				$profundo = $data->depth;
+				$limite;
+
+				for ($i=0; $i < sizeof($array_polygons); $i++) { //sorting by property values ascending; had to modify query
+					array_multisort($array_polygons[$i], SORT_ASC);
+				}
 
 				for ($i=0; $i < sizeof($array_polygons); $i++) {
-					for ($j=0; $j < sizeof($array_polygons[$i]); $j++) {
-						if(sizeof($array_polygons[$j]) > 1 && $array_polygons[$i][sizeof($array_polygons[$i])-1][$data->property] == 0){
+					//for ($j=0; $j < sizeof($array_polygons[$i]); $j++) { //Maybe it is not necessary to use this for-loop
+						//echo ($array_polygons[$i][$j]['bottom']." ");
+						if(sizeof($array_polygons[$i]) > 1 && $array_polygons[$i][sizeof($array_polygons[$i])-1][$data->property] == 0){
 							//use the penultimate index
+							$limite = $array_polygons[$i][sizeof($array_polygons[$i])-2]['bottom'];
+							//echo $limite;
+							for ($k=0; $k < sizeof($array_polygons[$i])-1; $k++) {
+								if($profundo >= $array_polygons[$i][$k]['bottom']){ //we need a limit/ceiling for the bottom of this
+
+								}
+							}
 						}
 						else{
 							//permissible to use the last index
 						}
-					}
+					//}
 				}
 
 				/*echo "Weighted method selected ";
