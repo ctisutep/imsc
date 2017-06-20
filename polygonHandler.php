@@ -45,7 +45,7 @@ class dataToQueryPolygons{
 		$this->lat1 = $_GET['SW']['lat'];
 		$this->lng2 = $_GET['NE']['lng'];
 		$this->lng1 = $_GET['SW']['lng'];
-		$this->depth = ($_GET['depth'] * 2.54);
+		$this->depth = ($_GET['depth'] * 2.5400);
 		$this->depth_method = $_GET['depth_method'];
 	}
 }
@@ -451,8 +451,12 @@ function getPolygons(){
 					$just_one = 0;
 
 					if(sizeof($array_polygons[$i]) > 1 && $array_polygons[$i][sizeof($array_polygons[$i])-1][$data->property] == 0){ //use the penultimate index
+
 						$limite = $array_polygons[$i][sizeof($array_polygons[$i])-2]['bottom'];//si lo $profundo es mayor que el limite, ignorar y usar el limite como lo profundo
-						echo "string" . $profundo . " / ";
+						if($profundo > $limite){
+							$profundo = $limite;
+						}
+						//echo "string" . $profundo . " / ";
 						for ($k=0; $k < sizeof($array_polygons[$i])-1; $k++) {
 							if($profundo >= $array_polygons[$i][$k]['top'] && $profundo >= $array_polygons[$i][$k]['bottom'] && $profundo <= $limite){ //we need a limit/ceiling for the bottom of this
 								$n_operaciones += 1;
@@ -462,7 +466,7 @@ function getPolygons(){
 							}
 						}
 
-						echo ("n operations: " . $n_operaciones . " end n operations ");
+						//echo ("n operations: " . $n_operaciones . " end n operations ");
 						for ($j=0; $j < (sizeof($array_polygons[$i])-1); $j++) {
 							$top = $array_polygons[$i][$j]['top'];
 							$bottom = $array_polygons[$i][$j]['bottom'];
@@ -483,15 +487,16 @@ function getPolygons(){
 									$result_weighted += $valor;
 									//echo "2";
 								}
-							}
+							} //end if n_operations
 						}
-
+						$array_polygons[$i][0][$data->property] = round($result_weighted,1);
+						$polygons[] = $array_polygons[$i][0];
 					} //end if for using penultimate index
 					else{
 						//permissible to use the last index
 					}
 				} //end main for loop
-				//echo $result_weighted;
+				//echo round($result_weighted, 1);
 				/*echo "Weighted method selected ";
 				echo (ceil(2/2) . " ");
 				echo (ceil(4/2) . " ");

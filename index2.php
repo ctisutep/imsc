@@ -386,7 +386,7 @@ function getPolygons(){//this is run button
 	hecho = false;
 	var depth = document.getElementById("depth").value;
 	//console.log(depth);
-	depth = parseInt(depth);
+	depth = parseFloat(depth);
 	//console.log(depth);
 
 	app.payload.depth = depth;
