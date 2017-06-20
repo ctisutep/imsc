@@ -429,28 +429,30 @@ function getPolygons(){
 				/**/
 				$profundo = $data->depth;
 				$limite;
+				$n_operaciones = 0;
 
 				for ($i=0; $i < sizeof($array_polygons); $i++) { //sorting by property values ascending; had to modify query
 					array_multisort($array_polygons[$i], SORT_ASC);
 				}
 
 				for ($i=0; $i < sizeof($array_polygons); $i++) {
-					//for ($j=0; $j < sizeof($array_polygons[$i]); $j++) { //Maybe it is not necessary to use this for-loop
-						//echo ($array_polygons[$i][$j]['bottom']." ");
-						if(sizeof($array_polygons[$i]) > 1 && $array_polygons[$i][sizeof($array_polygons[$i])-1][$data->property] == 0){
-							//use the penultimate index
-							$limite = $array_polygons[$i][sizeof($array_polygons[$i])-2]['bottom'];
-							//echo $limite;
-							for ($k=0; $k < sizeof($array_polygons[$i])-1; $k++) {
-								if($profundo >= $array_polygons[$i][$k]['bottom']){ //we need a limit/ceiling for the bottom of this
+					$n_operaciones = 0;
+					if(sizeof($array_polygons[$i]) > 1 && $array_polygons[$i][sizeof($array_polygons[$i])-1][$data->property] == 0){ //use the penultimate index
+						$limite = $array_polygons[$i][sizeof($array_polygons[$i])-2]['bottom'];//si lo $profundo es mayor que el limite, ignorar y usar el limite como lo profundo
 
-								}
+						for ($k=0; $k < sizeof($array_polygons[$i])-1; $k++) {
+							if($profundo >= $array_polygons[$i][$k]['top'] && $profundo >= $array_polygons[$i][$k]['bottom'] && $profundo <= $limite){ //we need a limit/ceiling for the bottom of this
+								$n_operaciones += 1;
+							}
+							elseif($profundo >= $array_polygons[$i][$k]['top'] && $profundo <= $array_polygons[$i][$k]['bottom'] && $profundo <= $limite){
+								$n_operaciones += 1;
 							}
 						}
-						else{
-							//permissible to use the last index
-						}
-					//}
+
+					} //end if
+					else{
+						//permissible to use the last index
+					}
 				}
 
 				/*echo "Weighted method selected ";
