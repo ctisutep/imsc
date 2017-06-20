@@ -460,22 +460,22 @@ function getPolygons(){
 							}
 						}
 
-						for ($j=0; $j < sizeof($array_polygons[$i])-1); $j++) {
+						for ($j=0; $j < (sizeof($array_polygons[$i])-1); $j++) {
 							$top = $array_polygons[$i][$j]['top'];
 							$bottom = $array_polygons[$i][$j]['bottom'];
 							$delta = $bottom - $top;
 							$valor = $array_polygons[$i][$j][$data->property];
 
-								if($profundo >= $delta && $profundo >= $bottom){
-									$result_weighted += (($delta/$profundo)*$valor);
-								}
-								elseif($profundo >= $delta && $profundo <= $bottom){
-									$delta_depth = $profundo - $top;
-									$result_weighted += (($delta_depth/$profundo)*$valor);
-								}
-								elseif($profundo <= $delta) {
-									$result_weighted += $valor;
-								}
+							if($profundo >= $delta && $profundo >= $bottom){
+								$result_weighted += (($delta/$profundo)*$valor);
+							}
+							elseif($profundo >= $delta && $profundo <= $bottom){
+								$delta_depth = $profundo - $top;
+								$result_weighted += (($delta_depth/$profundo)*$valor);
+							}
+							elseif($profundo <= $delta) {
+								$result_weighted += $valor;
+							}
 						}
 
 					} //end if for using penultimate index
