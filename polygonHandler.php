@@ -466,14 +466,15 @@ function getPolygons(){
 							$delta = $bottom - $top;
 							$valor = $array_polygons[$i][$j][$data->property];
 
-							//while($counter < $n_operaciones){
 								if($profundo >= $delta && $profundo >= $bottom){
 									$result_weighted += (($delta/$profundo)*$valor);
 								}
 								elseif($profundo >= $delta && $profundo <= $bottom){
-									//do something different with delta_depth
 									$delta_depth = $profundo - $top;
-									$result_weighted += ((/)*);
+									$result_weighted += (($delta_depth/$profundo)*$valor);
+								}
+								elseif($profundo <= $delta) {
+									$result_weighted += $valor;
 								}
 						}
 
