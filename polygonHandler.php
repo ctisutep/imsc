@@ -425,8 +425,8 @@ function getPolygons(){
 				}
 				break;
 
-			case 'Weighted':
-				/**/
+				case 'Weighted':
+				/*Depending on the depth, this method will get the average value for all the layers until that depth. */
 				$profundo = $data->depth;
 				$limite;
 				$n_operaciones = 0;
@@ -457,12 +457,11 @@ function getPolygons(){
 					$result_weighted = 0;
 
 					if(sizeof($array_polygons[$i]) > 1 && $array_polygons[$i][sizeof($array_polygons[$i])-1][$data->property] == 0){ //use the penultimate index
-
 						$limite = $array_polygons[$i][sizeof($array_polygons[$i])-2]['bottom'];//si lo $profundo es mayor que el limite, ignorar y usar el limite como lo profundo
 						if($profundo > $limite){
 							$profundo = $limite;
 						}
-						//echo "string" . $profundo . " / ";
+
 						for ($k=0; $k < sizeof($array_polygons[$i])-1; $k++) {
 							if($profundo >= $array_polygons[$i][$k]['top'] && $profundo >= $array_polygons[$i][$k]['bottom'] && $profundo <= $limite){ //we need a limit/ceiling for the bottom of this
 								$n_operaciones += 1;
@@ -472,7 +471,6 @@ function getPolygons(){
 							}
 						}
 
-						//echo ("n operations: " . $n_operaciones . " end n operations ");
 						for ($j=0; $j < (sizeof($array_polygons[$i])-1); $j++) {
 							$top = $array_polygons[$i][$j]['top'];
 							$bottom = $array_polygons[$i][$j]['bottom'];
@@ -499,16 +497,44 @@ function getPolygons(){
 						$polygons[] = $array_polygons[$i][0];
 						//echo $i . " ";
 					} //end if for using penultimate index
-					else{
-						//permissible to use the last index
+					else{ //permissible to use the last index
+						$limite = $array_polygons[$i][sizeof($array_polygons[$i])-1]['bottom'];
+						if($profundo > $limite){
+							$profundo = $limite;
+						}
+
+						for ($k=0; $k < sizeof($array_polygons[$i]); $k++) {
+							if($profundo >= $array_polygons[$i][$k]['top'] && $profundo >= $array_polygons[$i][$k]['bottom'] && $profundo <= $limite){ //we need a limit/ceiling for the bottom of this
+								$n_operaciones += 1;
+							}
+							elseif($profundo >= $array_polygons[$i][$k]['top'] && $profundo <= $array_polygons[$i][$k]['bottom'] && $profundo <= $limite){
+								$n_operaciones += 1;
+							}
+						}
+
+						for ($j=0; $j < (sizeof($array_polygons[$i])); $j++) {
+							$top = $array_polygons[$i][$j]['top'];
+							$bottom = $array_polygons[$i][$j]['bottom'];
+							$delta = $bottom - $top;
+							$valor = $array_polygons[$i][$j][$data->property];
+							if($n_operaciones > $j){
+								if($profundo >= $delta && $profundo >= $bottom){
+									$result_weighted += (($delta/$profundo)*$valor);
+								}
+								elseif($profundo >= $delta && $profundo <= $bottom){
+									$delta_depth = $profundo - $top;
+									$result_weighted += (($delta_depth/$profundo)*$valor);
+								}
+								elseif($profundo <= $delta && $profundo <= $bottom && $just_one == 0) {
+									$just_one = 1;
+									$result_weighted += $valor;
+								}
+							}
+						}
+						$array_polygons[$i][0][$data->property] = round($result_weighted,1);
+						$polygons[] = $array_polygons[$i][0];
 					}
 				} //end main for loop
-				//echo round($result_weighted, 1);
-				/*echo "Weighted method selected ";
-				echo (ceil(2/2) . " ");
-				echo (ceil(4/2) . " ");
-				echo (ceil(6/2) . " ");
-				echo (ceil(5/2) . " ");*/
 				break;
 
 			default:
