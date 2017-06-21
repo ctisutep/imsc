@@ -190,7 +190,7 @@
 									<div class="input-group">
 										<!-- <label> Depth:</label> <br> -->
 										<span class="input-group-addon" id="basic-addon3">inch</span>
-										<input type="text" class="form-control" value="0" placeholder="...inches" id="depth" aria-describedby="basic-addon3">
+										<input type="number" class="form-control" value="0" placeholder="...inches" id="depth" aria-describedby="basic-addon3">
 										<!-- <input type="text" value="0" id="depth" placeholder=" ...inches" style="color: black;"> -->
 										<!--<p> Top = <input type="text" value="" id="depth_top" placeholder="...inches" style="color: black;"></p>
 										<p> Bottom = <input type="text" value="" id="depth_bottom" placeholder="...inches" style="color: black;"></p>-->
@@ -397,13 +397,10 @@ function getPolygons(){//this is run button
 		var bounds = app.map.getBounds();
 		getparams.NE = bounds.getNorthEast().toJSON(); //north east corner
 		getparams.SW = bounds.getSouthWest().toJSON(); //north east corner
-		$.get('polygonHandler.php', app.payload, function(data){
-			//draw the stuff on the map
-			//console.log("Testing typeof: " + typeof(depth));
 
-			/*if(isNaN(depth)){
-			console.log(depth + " is not a number");
-		}*/
+		$(document.body).css({'cursor': 'wait'});
+		$.get('polygonHandler.php', app.payload, function(data){
+
 
 		if(depth < 0 || depth * 2.54 > 204 || isNaN(depth)){
 			/*document.getElementById('legend').style.visibility = "hidden";
@@ -1342,6 +1339,8 @@ function getPolygons(){//this is run button
 		}
 	}
 }).done(function(data){
+	$(document.body).css({'cursor': 'auto'});
+
 	if($('#selectProp').val() == 32){ //should have made it like this: if(app.payload.value == "gypsum"){ //but it's too late now
 	var gypsum = "Description for Gypsum: ";
 	var gypsumText = "The content of gypsum is the percent, by weight, of hydrated calcium sulfates in the fraction of the soil less than 20 millimeters in size. "; // Gypsum is partially soluble in water. Soils high in content of gypsum, such as those with more than 10 percent gypsum, may collapse if the gypsum is removed by percolating water. Gypsum is corrosive to concrete.
