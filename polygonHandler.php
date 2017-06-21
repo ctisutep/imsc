@@ -306,7 +306,7 @@ function getPolygons(){
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		if($data->depth_method == 4){
+		if($data->depth_method == 4 || $data->depth_method == 2){
 			for ($i=0; $i < sizeof($unique_index); $i++) {
 				$cokey_usado = $arr_cokeys[$correctos_test_arr[$i]]['cokey'];
 				$ogr_usado = $arr_cokeys[$correctos_test_arr[$i]]['OGR_FID'];
@@ -374,15 +374,30 @@ function getPolygons(){
 					}
 				break;
 
-			case 'Minimum':
-			/* Busca el valor minimo de la lista de los polignos, independientemente de el depth que el usuario le otorgue*/
+				case 'Minimum':
+				/* Busca el valor minimo de la lista de los polignos, independientemente de el depth que el usuario le otorgue*/
 				$min_value;
 				$min_index_i;
 				$min_index_j;
-					for ($j=0; $j < sizeof($array_polygons); $j++) {
-						$min_value = PHP_INT_MAX;
-						$min_index_i = 0;
-						$min_index_j = 0;
+
+				for ($i=0; $i < sizeof($array_polygons); $i++) { //sorting by property values ascending; had to modify query
+					array_multisort($array_polygons[$i], SORT_ASC);
+				}
+
+				for ($j=0; $j < sizeof($array_polygons); $j++) {
+					$min_value = PHP_INT_MAX;
+					$min_index_i = 0;
+					$min_index_j = 0;
+					if(sizeof($array_polygons[$j]) > 1 && $array_polygons[$j][sizeof($array_polygons[$j])-1][$data->property] == 0){
+						for ($i=0; $i < sizeof($array_polygons[$j])-1; $i++) {
+							if($min_value > $array_polygons[$j][$i][$data->property]){
+								$min_value = $array_polygons[$j][$i][$data->property];
+								$min_index_i = $i;
+								$min_index_j = $j;
+							}
+						}
+					}
+					else{
 						for ($i=0; $i < sizeof($array_polygons[$j]); $i++) {
 							if($min_value > $array_polygons[$j][$i][$data->property]){
 								$min_value = $array_polygons[$j][$i][$data->property];
@@ -390,8 +405,9 @@ function getPolygons(){
 								$min_index_j = $j;
 							}
 						}
-						$polygons[] = $array_polygons[$min_index_j][$min_index_i];
 					}
+					$polygons[] = $array_polygons[$min_index_j][$min_index_i];
+				}
 				break;
 
 				case 'Median':
