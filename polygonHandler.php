@@ -379,6 +379,7 @@ function getPolygons(){
 				$min_value;
 				$min_index_i;
 				$min_index_j;
+				$lo_profundo = $data->depth;
 
 				for ($i=0; $i < sizeof($array_polygons); $i++) { //sorting by property values ascending; had to modify query
 					array_multisort($array_polygons[$i], SORT_ASC);
@@ -388,9 +389,13 @@ function getPolygons(){
 					$min_value = PHP_INT_MAX;
 					$min_index_i = 0;
 					$min_index_j = 0;
+
 					if(sizeof($array_polygons[$j]) > 1 && $array_polygons[$j][sizeof($array_polygons[$j])-1][$data->property] == 0){
+						if($array_polygons[$j][0]['bottom'] > $lo_profundo){
+							$lo_profundo = $array_polygons[$j][0]['bottom'];
+						}
 						for ($i=0; $i < sizeof($array_polygons[$j])-1; $i++) {
-							if($min_value > $array_polygons[$j][$i][$data->property]){
+							if($min_value > $array_polygons[$j][$i][$data->property] && $array_polygons[$j][$i]['bottom'] <= $lo_profundo){
 								$min_value = $array_polygons[$j][$i][$data->property];
 								$min_index_i = $i;
 								$min_index_j = $j;
@@ -398,8 +403,11 @@ function getPolygons(){
 						}
 					}
 					else{
+						if($array_polygons[$j][0]['bottom'] > $lo_profundo){
+							$lo_profundo = $array_polygons[$j][0]['bottom'];
+						}
 						for ($i=0; $i < sizeof($array_polygons[$j]); $i++) {
-							if($min_value > $array_polygons[$j][$i][$data->property]){
+							if($min_value > $array_polygons[$j][$i][$data->property] && $array_polygons[$j][$i]['bottom'] <= $lo_profundo){
 								$min_value = $array_polygons[$j][$i][$data->property];
 								$min_index_i = $i;
 								$min_index_j = $j;

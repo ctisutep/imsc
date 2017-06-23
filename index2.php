@@ -236,6 +236,41 @@
 	</div> -->
 </div>
 </div>
+<br> <br>
+<!--
+<div class="row">
+	<div class = "col-md-5">
+
+		<div class="col-md-4">
+			<label> Legend Definition </label>
+			<br>
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon3"># of labels</span>
+				<input type="number" class="form-control" value="0" placeholder="...inches" id="labels" aria-describedby="basic-addon3">
+			</div>
+			<br>
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon3">value</span>
+				<input type="number" class="form-control" value="0" placeholder="...inches" id="value" aria-describedby="basic-addon3">
+			</div>
+		</div>
+		<div class="col-md-3">
+			<br> <br>
+			<button class="btn btn-default" onClick="spawn()">Get the legend</button>
+		</div>
+	</div>
+	<div class = "col-md-5">
+		<label> Legend Testing</label>
+		<div class="col-md-3">
+			<br>
+			<div id="legendSpawner">
+
+			</div>
+
+		</div>
+	</div>
+</div>
+-->
 <p></p>
 <!--Description text-->
 
@@ -305,15 +340,7 @@ $(document).ready(function(){//esto pasa recien cargada la pagina
 			{number: 36, value: null, data: null, table: null},
 			{number: 37, value: null, data: null, table: null}
 		];
-		/*for (var i = 0; i < 37; i++) {
-		prop[i].value = i;
-		prop[i].valor = null;
-		prop[i].data = null;
-		prop[i].table = null;
-	}*/
-	/*for (var i = 0; i < 37; i++) {
-	console.log(i + " "+ properties[i].value + " " + properties[i].valor +  " " + properties[i].data + " " + properties[i].table);
-}*/
+
 for (var i = 0; i < 37; i++) {
 	prop[i].number = i;
 	prop[i].value = properties[i].value;
@@ -334,11 +361,6 @@ for(var i = 0; i < prop.length-1; i++) {
 	selectProp.appendChild(elem);
 }
 $("#selectProp").change(function(){
-	//alert("You selected property: " + this.value);
-	//console.log(this);
-	//console.log(this.data);
-	//console.log(this.value);
-	//console.log(prop[this.value].value + " " + prop[this.value].table + " " +);
 	app.payload.property =  prop[this.value].data;
 	app.payload.table =  prop[this.value].table;
 	app.payload.value =  prop[this.value].value;
@@ -365,19 +387,6 @@ $("#methods").change(function(){ //0: max / 1: min / 2: median / 3: weight/
 	app.payload.depth_method = this.value;
 });
 
-/* for the loading cursor
-$(document).ajaxStart(function(){
-	$(document.body).css({'cursor': 'wait'});
-});
-$(document).ajaxComplete(function(){
-	$(document.body).css({'cursor': 'wait'});
-});
-$("#run").click(function(){
-	load("polygonHandler.php");
-	$(document.body).css({'cursor': 'wait'});
-});
-*/
-
 });
 
 
@@ -403,13 +412,8 @@ function getPolygons(){//this is run button
 
 
 		if(depth < 0 || depth * 2.54 > 204 || isNaN(depth)){
-			/*document.getElementById('legend').style.visibility = "hidden";
-			$('#legend').find('*').not('h3').remove();
-			$('#description').find('*').not('h3').remove();*/
 			alert("Please make sure depth is a numerical value and it is between 0 and 79 inches.");
 			hecho = true;
-			/*removePolygons();
-			return;*/
 		}
 		if(data.hasOwnProperty('coords')){
 			removePolygons();
@@ -424,13 +428,7 @@ function getPolygons(){//this is run button
 				if(data.coords.hasOwnProperty(key)){
 					var polyCoordis = [];
 					if(app.payload.table == "chorizon_r"){
-						//console.log("Testing new legend: "+app.payload.property);
 						if(app.payload.property == "caco3_r"){ //Testing legend and logic for drawing for this specific property
-							//console.log(app.payload.property);
-							//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
-							//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
-							//colorSelector = 0;
-							//newzIndex = 0;
 							legendText = "<img src='img/redsquare.png' height='10px'/> <= 7<br>\
 							<img src='img/skybluesquare.png' height='10px'/>  > 7 and <= 17<br>\
 							<img src='img/brightgreensquare.png' height='10px'/> > 17 and <= 36<br>\
@@ -1659,38 +1657,13 @@ else if ($('#selectProp').val() == 36){
 else{
 	//removePolygons();
 }
-/** Copy and paste to change properties.
-else if ($('#selectProp').val() == "<>"){
-var prprty = "Description for <>: ";
-var prprtyText = "<>";
-var h3 = document.createElement('h3');
-h3.innerHTML = prprty;
-var div = document.createElement('div');
-div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-var descriptor = document.getElementById('description');
-descriptor.appendChild(div);
-}
-*/
-/* //original to draw the 0
-var div = document.createElement('div');
-div.innerHTML = "<strong>" + $('#autocomplete').val() + "</strong><br>" + legendText;
-var legend = document.createElement('div');
-legend = document.getElementById('legend');
-legend.appendChild(div);
-*/ //original
-//var g = document.createElement('div');
-//g.id = 'someId';
 //draw the legend
 if(!hecho){
 	var div = document.createElement('div');
-	//div = document.getElementsByTagName("H3")[0].setAttribute("class", "col-md-3");
-	//div.attribute('class', 'col-md-3');
-	// div.innerHTML = '<img src="img/redsquare.png" height="10px"/> ' + $('#autocomplete').val();;
-	//div.id = 'legend';
-	div.innerHTML = "<strong>" + app.payload.value + "</strong><br>" + legendText;//pinta a legend?
+	div.innerHTML = "<strong>" + app.payload.value + "</strong><br>" + legendText;
 	var legend = document.createElement('div');
 	legend = document.getElementById('legend');
-	document.getElementById('legend').style.visibility = "visible";//o este?
+	document.getElementById('legend').style.visibility = "visible";
 	legend.appendChild(div);
 }
 else if(hecho){
@@ -1785,6 +1758,7 @@ function polyInfo(event){
 	app.infoWindow.setPosition(event.latLng);
 	app.infoWindow.open(app.map);
 }
+
 function wktFormatter(poly){
 	new_poly = poly.slice(9,-2);
 	new_poly = new_poly.split("),(");
@@ -1801,6 +1775,22 @@ function wktFormatter(poly){
 	}
 	return shape_s;
 }
+
+/*function spawn(){
+	//document.getElementById('legend').style.visibility = "visible";
+	labels = document.getElementById('labels').value;
+	value = document.getElementById('value').value;
+	//console.log(labels);
+	//console.log(value);
+	range = (value/labels);
+	count = 0;
+	while(count<=value){
+		console.log(count);
+		count+=range;
+	}
+
+}
+*/
 // ***********
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCY0B3_Fr1vRpgJDdbvNmrVyXmoOOtiq64&callback=initMap"></script>
