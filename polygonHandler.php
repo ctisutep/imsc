@@ -93,8 +93,6 @@ function getPolygons(){
 	//$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) AND hzdept_r <= $data->depth AND hzdepb_r >= $data->depth";
 
 	if($data->table == "chorizon_r"){ //necesario (por ahora) para no usar layers si la propiedad no es de chorizon
-
-
 		/*Query for getting either the Series of Miscellaneous area from component"*/
 		$cokeys = "SELECT OGR_FID, component_r.cokey, component_r.compkind FROM polygon, component_r WHERE component_r.mukey = polygon.mukey AND (compkind = 'Miscellaneous area' AND majcompflag = 'Yes' OR compkind = 'Series' AND majcompflag = 'Yes' OR compkind = 'Taxadjunct' AND majcompflag = 'Yes') AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), polygon.SHAPE)";
 		//$cokeys = "SELECT * FROM mujoins2 WHERE cokey IN (SELECT cokey FROM component_r WHERE compkind = 'Miscellaneous area' AND majcompflag = 'Yes' OR compkind = 'Series' AND majcompflag = 'Yes')";
@@ -306,7 +304,7 @@ function getPolygons(){
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		if($data->depth_method == 4 || $data->depth_method == 2){
+		if($data->depth_method == 4 || $data->depth_method == 2 || $data->depth_method == 1){
 			for ($i=0; $i < sizeof($unique_index); $i++) {
 				$cokey_usado = $arr_cokeys[$correctos_test_arr[$i]]['cokey'];
 				$ogr_usado = $arr_cokeys[$correctos_test_arr[$i]]['OGR_FID'];
@@ -355,24 +353,101 @@ function getPolygons(){
 		//echo $method_selected;
 		switch ($method_selected) {
 			case 'Maximum':
-			/* Busca el valor maximo de la lista de los polignos, independientemente de el depth que el usuario le otorgue*/
-				$max_value;
-				$max_index_i;
-				$max_index_j;
-					for ($j=0; $j < sizeof($array_polygons); $j++) {
-						$max_value = 0;
-						$max_index_i = 0;
+			/* Busca el valor maximo de la lista de los polignos, dependientemente de el depth que el usuario le otorgue*/
+			$max_value;
+			$max_index_i;
+			$max_index_j;
+			$lo_profundo = $data->depth;
+			$top;
+			$bottom;
+
+			for ($i=0; $i < sizeof($array_polygons); $i++) { //sorting by property values ascending; had to modify query
+				array_multisort($array_polygons[$i], SORT_ASC);
+			}
+
+			for ($i=0; $i < sizeof($array_polygons); $i++) {
+				$max_value = 0;
+				$max_index_i = 0;
+				$max_index_j = 0;
+				$lo_profundo = $data->depth;
+
+				if(sizeof($array_polygons[$i]) > 1 && $array_polygons[$i][sizeof($array_polygons[$i])-1][$data->property] == 0){
+					$limite =  $array_polygons[$i][sizeof($array_polygons[$i])-2]['bottom'];
+
+					if($lo_profundo <= $array_polygons[$i][0]['bottom']){
+						$max_index_i = $i;
 						$max_index_j = 0;
-						for ($i=0; $i < sizeof($array_polygons[$j]); $i++) {
-							if($max_value < $array_polygons[$j][$i][$data->property]){
-								$max_value = $array_polygons[$j][$i][$data->property];
+					}
+					elseif($lo_profundo >= $limite){
+						$lo_profundo = $limite;
+						for ($j=0; $j < sizeof($array_polygons[$i])-1; $j++) {
+							$top = $array_polygons[$i][$j]['top'];
+							$bottom = $array_polygons[$i][$j]['bottom'];
+							if($max_value < $array_polygons[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
+								$max_value = $array_polygons[$i][$j][$data->property];
 								$max_index_i = $i;
 								$max_index_j = $j;
 							}
 						}
-						$polygons[] = $array_polygons[$max_index_j][$max_index_i];
 					}
-				break;
+					else{
+						for ($j=0; $j < sizeof($array_polygons[$i])-1; $j++) {
+							$top = $array_polygons[$i][$j]['top'];
+							$bottom = $array_polygons[$i][$j]['bottom'];
+
+							if($max_value < $array_polygons[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
+								$max_value = $array_polygons[$i][$j][$data->property];
+								$max_index_i = $i;
+								$max_index_j = $j;
+							}
+							elseif($max_value < $array_polygons[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo <= $bottom){
+								$max_value = $array_polygons[$i][$j][$data->property];
+								$max_index_i = $i;
+								$max_index_j = $j;
+							}
+						}
+					}
+/*
+					for ($j=0; $j < sizeof($array_polygons[$i])-1; $j++) {
+						$top = $array_polygons[$i][$j]['top'];
+						$bottom = $array_polygons[$i][$j]['bottom'];
+
+						if($max_value < $array_polygons[$i][$j][$data->property] && $lo_profundo >= $top && $lo_profundo <= $bottom){
+							$max_value = $array_polygons[$i][$j][$data->property];
+							$max_index_i = $i;
+							$max_index_j = $j;
+						}
+					}
+*/
+				}
+				else{
+					$limite =  $array_polygons[$i][sizeof($array_polygons[$i])-1]['bottom'];
+
+					if($lo_profundo <= $array_polygons[$i][0]['bottom']){
+						$lo_profundo = $array_polygons[$i][0]['bottom'];
+					}
+
+					for ($j=0; $j < sizeof($array_polygons[$i]); $j++) {
+						if($max_value < $array_polygons[$i][$j][$data->property] && $lo_profundo >= $top && $lo_profundo <= $bottom){
+							$max_value = $array_polygons[$i][$j][$data->property];
+							$max_index_i = $i;
+							$max_index_j = $j;
+						}
+					}
+
+				}
+				/*
+				for ($i=0; $i < sizeof($array_polygons[$j]); $i++) {
+					if($max_value < $array_polygons[$j][$i][$data->property]){
+						$max_value = $array_polygons[$j][$i][$data->property];
+						$max_index_i = $i;
+						$max_index_j = $j;
+					}
+				}
+				*/
+				$polygons[] = $array_polygons[$max_index_i][$max_index_j];
+			}
+			break;
 
 				case 'Minimum':
 				/* Busca el valor minimo de la lista de los polignos, independientemente de el depth que el usuario le otorgue*/
