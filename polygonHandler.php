@@ -474,7 +474,7 @@ function getPolygons(){
 					}
 					elseif($lo_profundo >= $limite){
 						$lo_profundo = $limite;
-						for ($j=0; $j < sizeof($array_polygons[$i]-1); $j++) {
+						for ($j=0; $j < sizeof($array_polygons[$i])-1; $j++) {
 							$top = $array_polygons[$i][$j]['top'];
 							$bottom = $array_polygons[$i][$j]['bottom'];
 							if($min_value > $array_polygons[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
