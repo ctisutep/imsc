@@ -92,196 +92,16 @@ function getPolygons(){
 	//actual query for retrieving desired polygons
 	//$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) AND hzdept_r <= $data->depth AND hzdepb_r >= $data->depth";
 
-	if($data->table == "chorizon_r"){ //necesario (por ahora) para no usar layers si la propiedad no es de chorizon
-		/*Query for getting either the Series of Miscellaneous area from component"*/
-		$cokeys = "SELECT OGR_FID, component_r.cokey, component_r.compkind FROM polygon, component_r WHERE component_r.mukey = polygon.mukey AND (compkind = 'Miscellaneous area' AND majcompflag = 'Yes' OR compkind = 'Series' AND majcompflag = 'Yes' OR compkind = 'Taxadjunct' AND majcompflag = 'Yes') AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), polygon.SHAPE)";
-		//$cokeys = "SELECT * FROM mujoins2 WHERE cokey IN (SELECT cokey FROM component_r WHERE compkind = 'Miscellaneous area' AND majcompflag = 'Yes' OR compkind = 'Series' AND majcompflag = 'Yes')";
-		$toReturn['query para cokeys que tienen ya sea series || miscellaneous'] = $cokeys;
-		$cokeys = mysqli_query($conn, $cokeys);
-		$row_cokeys = fetchAll($cokeys);
-		$arr_cokeys = array();
 
-		for ($i=0; $i < sizeof($row_cokeys); $i++) {
-			$arr_cokeys[] = $row_cokeys[$i];
-		}
-
-		$toReturn['cokeys que tienen ya sea series || miscellaneous || taxadjunct'] = $arr_cokeys;
-
-		$query = "SELECT x.cokey, p.mukey, OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //working on it
-		//$query = "SELECT x.cokey, p.mukey, OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //working on it
-		//$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //no se
-		//$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE x.cokey = $el_cokey_ideal AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //just works for chorizon at the moment
-
+	if($data->table == "chorizon_r"){
+		$query="SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM mujoins3 NATURAL JOIN polygon AS p NATURAL JOIN chorizon_r as x WHERE x.cokey = mujoins3.cokey AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
+		//$query="SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM mujoins3 NATURAL JOIN polygon AS p NATURAL JOIN chorizon_r as x WHERE x.cokey = mujoins3.cokey AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
 		$toReturn['query2'] = $query;
 		$result = mysqli_query($conn, $query);
-
 		$result = fetchAll($result);
-
 		$polygons = array();
 
-		$id_array = array();
-		//$indexes_array = array();
-		//echo sizeof($result);
-		for($i = 0; $i<sizeof($result); $i++){
-			$id_array[$i]['OGR_FID'] = $result[$i]['OGR_FID'];
-		}
-
-		$unique = array();
-		$unique = array_unique($id_array, SORT_REGULAR);
-
-		$unique_index = array();
-
-		for ($i=0; $i < sizeof($result); $i++) {
-			if(array_key_exists($i, $unique)){
-				array_push($unique_index, $i);
-			}
-		}
-
-		$correctos_arr = array();
-		$found = false;
-
-		$series_arr = array();
-		$misc_arr = array();
-		$tax_arr = array();
-		$correctos_test_arr = array();
-
-
-		for($i=0; $i < sizeof($unique_index); $i++){ //elegir los cokeys correctos
-			$found = false;
-			$found_misc = false;
-			$found_tax = false;
-			$temp = $result[$unique_index[$i]]['OGR_FID'];
-
-			for($j=0; $j < sizeof($arr_cokeys); $j++){
-				if($temp == $arr_cokeys[$j]['OGR_FID'] && $found == false){
-					if($arr_cokeys[$j]['compkind'] == 'Series'){ //going inside but not stopping at found
-						array_push($series_arr, $j); //mete los indexes que usaremos al meter los resultados al polygon
-
-						$found = true;
-					}
-				}
-			}
-
-			for($h=0; $h < sizeof($arr_cokeys); $h++){
-				if($temp == $arr_cokeys[$h]['OGR_FID'] && $found_misc == false){
-					if($arr_cokeys[$h]['compkind'] == 'Miscellaneous area'){ //going inside but not stopping at found
-						array_push($misc_arr, $h); //mete los indexes que usaremos al meter los resultados al polygon
-						$found_misc = true;
-					}
-				}
-			}
-
-			for($k=0; $k < sizeof($arr_cokeys); $k++){
-				if($temp == $arr_cokeys[$k]['OGR_FID'] && $found_tax == false){
-					if($arr_cokeys[$k]['compkind'] == 'Taxadjunct'){ //going inside but not stopping at found
-						array_push($tax_arr, $k); //mete los indexes que usaremos al meter los resultados al polygon
-						$found_tax = true;
-					}
-				}
-			}
-		}
-		//var_dump($arr_cokeys);
-		$array_to_use = array();
-		if(sizeof($series_arr) > sizeof($misc_arr)){
-			$array_to_use = $series_arr;
-		}
-		else{
-			$array_to_use = $misc_arr;
-		}
-
-		$find = 0;
-		$misc_find = 0;
-		$absolute_find = 0;
-		$traversed = 0;
-		$index_to_store = 0;
-		$find_global = 0;
-		$checker_ids = array();
-
-		$counter = 0;
-
-		$checker = array();
-
-		for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
-			$find = 0;
-			$ogr = $result[$unique_index[$i]]['OGR_FID'];
-			for ($j=0; $j < sizeof($unique_index); $j++) {
-				if($find == 0 && array_key_exists($j, $series_arr) && $ogr == $arr_cokeys[$series_arr[$j]]['OGR_FID'] && $arr_cokeys[$series_arr[$j]]['compkind'] == 'Series'){
-					array_push($correctos_test_arr, $series_arr[$j]);
-					array_push($checker, $series_arr[$j]);
-					$find = 1;
-					$counter += 1;
-				}
-			}
-		}
-
-		//var_dump($checker);
-		//echo sizeof($series_arr);
-
-		if(sizeof($series_arr) != 0 && sizeof($series_arr) > 1 && sizeof($misc_arr) != 0){
-
-			for ($i=0; $i < sizeof($unique_index); $i++) {
-				if(array_key_exists($i, $checker)){
-					$checker_ids[$i] = $arr_cokeys[$checker[$i]]['OGR_FID'];
-				}
-			}
-
-			for ($i=0; $i < sizeof($unique_index); $i++){
-				if(array_key_exists($i, $misc_arr)){
-					$ogr_val = $arr_cokeys[$misc_arr[$i]]['OGR_FID'];
-				}
-				if(in_array($ogr_val, $checker_ids)){
-					//do nothing; we want the other values
-				}
-				else{
-					array_push($correctos_test_arr, $misc_arr[$i]);
-				}
-			}
-		}
-		else{
-			for($i=0; $i < sizeof($unique_index); $i++){
-				$find = 0;
-
-				$ogr = $arr_cokeys[$unique_index[$i]]['OGR_FID'];
-				for ($j=0; $j < sizeof($unique_index); $j++) {
-					//if(array_key_exists($j, $misc_arr) && ($ogr == $arr_cokeys[$misc_arr[$j]]['OGR_FID'])){ //aqui es el problema, cuzzz compara con inexistente que agarra de arriba*
-					if($find == 0 && array_key_exists($j, $misc_arr) && $ogr == $arr_cokeys[$misc_arr[$j]]['OGR_FID'] && $arr_cokeys[$misc_arr[$j]]['compkind'] == 'Miscellaneous area'){
-						array_push($correctos_test_arr, $misc_arr[$j]);
-						$find = 1;
-						$counter += 1;
-					}
-
-				}
-
-			}
-		}
-
-		for($i=0; $i < sizeof($unique_index); $i++){ //guardar los correctos en el array
-			if(array_key_exists($i, $checker) && $checker[$i] == $i){
-				$find = 0;
-			}
-			else{
-				$find = 0;
-				$ogr = $result[$unique_index[$i]]['OGR_FID'];
-				for ($j=0; $j < sizeof($unique_index); $j++) {
-					if($counter < sizeof($unique_index)){
-						if($find == 0 && array_key_exists($j, $tax_arr) && $ogr == $arr_cokeys[$tax_arr[$j]]['OGR_FID'] && $arr_cokeys[$tax_arr[$j]]['compkind'] == 'Taxadjunct'){
-							array_push($correctos_test_arr, $tax_arr[$j]);
-							$find = 1;
-							$counter += 1;
-						}
-					}
-				}
-			}
-		}
-
-		/*Pruebas de queries dentro de un loop */
-		$array_polygons = array();
-		$cokey_usado = 0;
-		$ogr_usado = 0;
-		$total_size = 0;
-		$method_selected = 5;
-
-		//echo $method_selected;
+		$method_selected = 0;
 
 		if($data->depth_method == 1){
 			//echo " On maximum ";
@@ -299,61 +119,54 @@ function getPolygons(){
 			//echo " On weighted ";
 			$method_selected = "Weighted";
 		}
+		elseif ($data->depth_method == 5) {
+			//echo " On weighted ";
+			$method_selected = "At";
+		}
 		else{
 			//echo " Nothing selected ";
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		if($data->depth_method == 4 || $data->depth_method == 2 || $data->depth_method == 1){
-			for ($i=0; $i < sizeof($unique_index); $i++) {
-				$cokey_usado = $arr_cokeys[$correctos_test_arr[$i]]['cokey'];
-				$ogr_usado = $arr_cokeys[$correctos_test_arr[$i]]['OGR_FID'];
-				$query_test = "SELECT hzdepb_r AS bottom, OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, 1.7625422383727E-6)) AS POLYGON, hzdept_r AS top, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE x.cokey = $cokey_usado AND OGR_FID = $ogr_usado AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //just works for chorizon at the moment
-				//"            SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, 1.7625422383727E-6)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.pi_r FROM polygon AS p, chorizon_r as x WHERE x.cokey = 13638933 AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
-				//$query_test = "SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE x.cokey = $cokey_usado AND OGR_FID = $ogr_usado AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //just works for chorizon at the moment
+		$poly_arr = array();
+		$ogr;
+		$past_ogr = 0;
+		$skip;
+		$counter_i = 0;
+		$counter_j;
+		$entered = 0;
 
-				$toReturn['query loop'] = $query_test;
-				$result_loop = mysqli_query($conn, $query_test);
+		for ($i=0; $i < sizeof($result); $i++){
+			$counter_j = 0;
+			$ogr = $result[$i]['OGR_FID'];
+			$skip = 0;
 
-				$result_loop = fetchAll($result_loop);
-				//$toReturn['testing methods'] = $result_loop;
-				$array_polygons[] = $result_loop;
+			if($entered == 1){
+				$counter_i++;
+			}
 
-				$total_size += sizeof($result_loop);
-
-				unset($result_loop);
+			if($past_ogr == $ogr){
+				$ogr = 1;
+				$skip = 1;
+				$entered = 0;
+			}
+			else{
+				$ogr = $result[$i]['OGR_FID'];
+				$skip = 0;
+				$entered = 0;
+			}
+			for ($j=0; $j < sizeof($result); $j++) {
+				if($ogr == $result[$j]['OGR_FID'] && $skip == 0){
+					$poly_arr[$counter_i][$counter_j] = $result[$j];
+					$past_ogr = $ogr;
+					$counter_j++;
+					$entered = 1;
+				}
 			}
 		}
-		else{
-			for ($i=0; $i < sizeof($unique_index); $i++) {
-				$cokey_usado = $arr_cokeys[$correctos_test_arr[$i]]['cokey'];
-				$ogr_usado = $arr_cokeys[$correctos_test_arr[$i]]['OGR_FID'];
-				$query_test = "SELECT x.$data->property, OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, 1.7625422383727E-6)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE x.cokey = $cokey_usado AND OGR_FID = $ogr_usado AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //just works for chorizon at the moment
-				//"            SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, 1.7625422383727E-6)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.pi_r FROM polygon AS p, chorizon_r as x WHERE x.cokey = 13638933 AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
-				//$query_test = "SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p, chorizon_r as x WHERE x.cokey = $cokey_usado AND OGR_FID = $ogr_usado AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)"; //just works for chorizon at the moment
 
-				$toReturn['query loop'] = $query_test;
-				$result_loop = mysqli_query($conn, $query_test);
-
-				$result_loop = fetchAll($result_loop);
-				//$toReturn['testing methods'] = $result_loop;
-				$array_polygons[] = $result_loop;
-
-				$total_size += sizeof($result_loop);
-
-				unset($result_loop);
-			}
-		}
-		/*Final de pruebas de queries dentro de un loop*/
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		/*
-		En este punto vamos a determinar como vamos a meter nuestros poligonos a
-		colorear. Dependenera de methodos, en un case statement.
-		*/
-		//echo $method_selected;
 		switch ($method_selected) {
 			case 'Maximum':
-			/* Busca el valor maximo de la lista de los polignos, dependientemente de el depth que el usuario le otorgue*/
+			/* Busca el valor maximo de la lista de los polignos, dependientemente del depth que el usuario le otorgue*/
 			$max_value;
 			$max_index_i;
 			$max_index_j;
@@ -361,47 +174,47 @@ function getPolygons(){
 			$top;
 			$bottom;
 
-			for ($i=0; $i < sizeof($array_polygons); $i++) { //sorting by property values ascending; had to modify query
-				array_multisort($array_polygons[$i], SORT_ASC);
+			for ($i=0; $i < sizeof($poly_arr); $i++) { //sorting by property values ascending; had to modify query
+				array_multisort($poly_arr[$i], SORT_ASC);
 			}
 
-			for ($i=0; $i < sizeof($array_polygons); $i++) {
+			for ($i=0; $i < sizeof($poly_arr); $i++) {
 				$max_value = 0;
 				$max_index_i = 0;
 				$max_index_j = 0;
 				$lo_profundo = $data->depth;
 
-				if(sizeof($array_polygons[$i]) > 1 && $array_polygons[$i][sizeof($array_polygons[$i])-1][$data->property] == 0){
-					$limite =  $array_polygons[$i][sizeof($array_polygons[$i])-2]['bottom'];
+				if(sizeof($poly_arr[$i]) > 1 && $poly_arr[$i][sizeof($poly_arr[$i])-1][$data->property] == 0){
+					$limite =  $poly_arr[$i][sizeof($poly_arr[$i])-2]['bottom'];
 
-					if($lo_profundo <= $array_polygons[$i][0]['bottom']){
+					if($lo_profundo <= $poly_arr[$i][0]['bottom']){
 						$max_index_i = $i;
 						$max_index_j = 0;
 					}
 					elseif($lo_profundo >= $limite){
 						$lo_profundo = $limite;
-						for ($j=0; $j < sizeof($array_polygons[$i])-1; $j++) {
-							$top = $array_polygons[$i][$j]['top'];
-							$bottom = $array_polygons[$i][$j]['bottom'];
-							if($max_value < $array_polygons[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
-								$max_value = $array_polygons[$i][$j][$data->property];
+						for ($j=0; $j < sizeof($poly_arr[$i])-1; $j++) {
+							$top = $poly_arr[$i][$j]['top'];
+							$bottom = $poly_arr[$i][$j]['bottom'];
+							if($max_value < $poly_arr[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
+								$max_value = $poly_arr[$i][$j][$data->property];
 								$max_index_i = $i;
 								$max_index_j = $j;
 							}
 						}
 					}
 					else{
-						for ($j=0; $j < sizeof($array_polygons[$i])-1; $j++) {
-							$top = $array_polygons[$i][$j]['top'];
-							$bottom = $array_polygons[$i][$j]['bottom'];
+						for ($j=0; $j < sizeof($poly_arr[$i])-1; $j++) {
+							$top = $poly_arr[$i][$j]['top'];
+							$bottom = $poly_arr[$i][$j]['bottom'];
 
-							if($max_value < $array_polygons[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
-								$max_value = $array_polygons[$i][$j][$data->property];
+							if($max_value < $poly_arr[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
+								$max_value = $poly_arr[$i][$j][$data->property];
 								$max_index_i = $i;
 								$max_index_j = $j;
 							}
-							elseif($max_value < $array_polygons[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo <= $bottom){
-								$max_value = $array_polygons[$i][$j][$data->property];
+							elseif($max_value < $poly_arr[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo <= $bottom){
+								$max_value = $poly_arr[$i][$j][$data->property];
 								$max_index_i = $i;
 								$max_index_j = $j;
 							}
@@ -409,42 +222,42 @@ function getPolygons(){
 					}
 				}
 				else{
-					$limite =  $array_polygons[$i][sizeof($array_polygons[$i])-1]['bottom'];
+					$limite =  $poly_arr[$i][sizeof($poly_arr[$i])-1]['bottom'];
 
-					if($lo_profundo <= $array_polygons[$i][0]['bottom']){
+					if($lo_profundo <= $poly_arr[$i][0]['bottom']){
 						$max_index_i = $i;
 						$max_index_j = 0;
 					}
 					elseif($lo_profundo >= $limite){
 						$lo_profundo = $limite;
-						for ($j=0; $j < sizeof($array_polygons[$i]); $j++) {
-							$top = $array_polygons[$i][$j]['top'];
-							$bottom = $array_polygons[$i][$j]['bottom'];
-							if($max_value < $array_polygons[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
-								$max_value = $array_polygons[$i][$j][$data->property];
+						for ($j=0; $j < sizeof($poly_arr[$i]); $j++) {
+							$top = $poly_arr[$i][$j]['top'];
+							$bottom = $poly_arr[$i][$j]['bottom'];
+							if($max_value < $poly_arr[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
+								$max_value = $poly_arr[$i][$j][$data->property];
 								$max_index_i = $i;
 								$max_index_j = $j;
 							}
 						}
 					}
 					else{
-						for ($j=0; $j < sizeof($array_polygons[$i]); $j++) {
-							$top = $array_polygons[$i][$j]['top'];
-							$bottom = $array_polygons[$i][$j]['bottom'];
-							if($max_value < $array_polygons[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
-								$max_value = $array_polygons[$i][$j][$data->property];
+						for ($j=0; $j < sizeof($poly_arr[$i]); $j++) {
+							$top = $poly_arr[$i][$j]['top'];
+							$bottom = $poly_arr[$i][$j]['bottom'];
+							if($max_value < $poly_arr[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
+								$max_value = $poly_arr[$i][$j][$data->property];
 								$max_index_i = $i;
 								$max_index_j = $j;
 							}
-							elseif($max_value < $array_polygons[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo <= $bottom){
-								$max_value = $array_polygons[$i][$j][$data->property];
+							elseif($max_value < $poly_arr[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo <= $bottom){
+								$max_value = $poly_arr[$i][$j][$data->property];
 								$max_index_i = $i;
 								$max_index_j = $j;
 							}
 						}
 					}
 				}
-				$polygons[] = $array_polygons[$max_index_i][$max_index_j];
+				$polygons[] = $poly_arr[$max_index_i][$max_index_j];
 			}
 			break;
 
@@ -455,47 +268,47 @@ function getPolygons(){
 			$min_index_j;
 			$lo_profundo = $data->depth;
 
-			for ($i=0; $i < sizeof($array_polygons); $i++) { //sorting by property values ascending; had to modify query
-				array_multisort($array_polygons[$i], SORT_ASC);
+			for ($i=0; $i < sizeof($poly_arr); $i++) { //sorting by property values ascending; had to modify query
+				array_multisort($poly_arr[$i], SORT_ASC);
 			}
 
-			for ($i=0; $i < sizeof($array_polygons); $i++) {
+			for ($i=0; $i < sizeof($poly_arr); $i++) {
 				$min_value = PHP_INT_MAX;
 				$min_index_i = 0;
 				$min_index_j = 0;
 				$lo_profundo = $data->depth;
 
-				if(sizeof($array_polygons[$i]) > 1 && $array_polygons[$i][sizeof($array_polygons[$i])-1][$data->property] == 0){
-					$limite = $array_polygons[$i][sizeof($array_polygons[$i])-2]['bottom'];
+				if(sizeof($poly_arr[$i]) > 1 && $poly_arr[$i][sizeof($poly_arr[$i])-1][$data->property] == 0){
+					$limite = $poly_arr[$i][sizeof($poly_arr[$i])-2]['bottom'];
 
-					if($lo_profundo <= $array_polygons[$i][0]['bottom']){
+					if($lo_profundo <= $poly_arr[$i][0]['bottom']){
 						$min_index_i = $i;
 						$min_index_j = 0;
 					}
 					elseif($lo_profundo >= $limite){
 						$lo_profundo = $limite;
-						for ($j=0; $j < sizeof($array_polygons[$i])-1; $j++) {
-							$top = $array_polygons[$i][$j]['top'];
-							$bottom = $array_polygons[$i][$j]['bottom'];
-							if($min_value > $array_polygons[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
-								$min_value = $array_polygons[$i][$j][$data->property];
+						for ($j=0; $j < sizeof($poly_arr[$i])-1; $j++) {
+							$top = $poly_arr[$i][$j]['top'];
+							$bottom = $poly_arr[$i][$j]['bottom'];
+							if($min_value > $poly_arr[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
+								$min_value = $poly_arr[$i][$j][$data->property];
 								$min_index_i =  $i;
 								$min_index_j = $j;
 							}
 						}
 					}
 					else{
-						for ($j=0; $j < sizeof($array_polygons[$i])-1; $j++) {
-							$top = $array_polygons[$i][$j]['top'];
-							$bottom = $array_polygons[$i][$j]['bottom'];
+						for ($j=0; $j < sizeof($poly_arr[$i])-1; $j++) {
+							$top = $poly_arr[$i][$j]['top'];
+							$bottom = $poly_arr[$i][$j]['bottom'];
 
-							if($min_value > $array_polygons[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
-								$min_value = $array_polygons[$i][$j][$data->property];
+							if($min_value > $poly_arr[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
+								$min_value = $poly_arr[$i][$j][$data->property];
 								$min_index_i = $i;
 								$min_index_j = $j;
 							}
-							elseif($min_value > $array_polygons[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo <= $bottom){
-								$min_value = $array_polygons[$i][$j][$data->property];
+							elseif($min_value > $poly_arr[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo <= $bottom){
+								$min_value = $poly_arr[$i][$j][$data->property];
 								$min_index_i = $i;
 								$min_index_j = $j;
 							}
@@ -503,43 +316,43 @@ function getPolygons(){
 					}
 				}
 				else{
-					$limite = $array_polygons[$i][sizeof($array_polygons[$i])-1]['bottom'];
+					$limite = $poly_arr[$i][sizeof($poly_arr[$i])-1]['bottom'];
 
-					if($lo_profundo <= $array_polygons[$i][0]['bottom']){
+					if($lo_profundo <= $poly_arr[$i][0]['bottom']){
 						$min_index_i = $i;
 						$min_index_j = 0;
 					}
 					elseif($lo_profundo >= $limite){
 						$lo_profundo = $limite;
-						for ($j=0; $j < sizeof($array_polygons[$i]); $j++) {
-							$top = $array_polygons[$i][$j]['top'];
-							$bottom = $array_polygons[$i][$j]['bottom'];
-							if($min_value > $array_polygons[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
-								$min_value = $array_polygons[$i][$j][$data->property];
+						for ($j=0; $j < sizeof($poly_arr[$i]); $j++) {
+							$top = $poly_arr[$i][$j]['top'];
+							$bottom = $poly_arr[$i][$j]['bottom'];
+							if($min_value > $poly_arr[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
+								$min_value = $poly_arr[$i][$j][$data->property];
 								$min_index_i =  $i;
 								$min_index_j = $j;
 							}
 						}
 					}
 					else{
-						for ($j=0; $j < sizeof($array_polygons[$i]); $j++) {
-							$top = $array_polygons[$i][$j]['top'];
-							$bottom = $array_polygons[$i][$j]['bottom'];
+						for ($j=0; $j < sizeof($poly_arr[$i]); $j++) {
+							$top = $poly_arr[$i][$j]['top'];
+							$bottom = $poly_arr[$i][$j]['bottom'];
 
-							if($min_value > $array_polygons[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
-								$min_value = $array_polygons[$i][$j][$data->property];
+							if($min_value > $poly_arr[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
+								$min_value = $poly_arr[$i][$j][$data->property];
 								$min_index_i = $i;
 								$min_index_j = $j;
 							}
-							elseif($min_value > $array_polygons[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo <= $bottom){
-								$min_value = $array_polygons[$i][$j][$data->property];
+							elseif($min_value > $poly_arr[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo <= $bottom){
+								$min_value = $poly_arr[$i][$j][$data->property];
 								$min_index_i = $i;
 								$min_index_j = $j;
 							}
 						}
 					}
 				}
-				$polygons[] = $array_polygons[$min_index_i][$min_index_j];
+				$polygons[] = $poly_arr[$min_index_i][$min_index_j];
 			}
 			break;
 
@@ -549,25 +362,25 @@ function getPolygons(){
 			$med_value = 0;
 			$done_med;
 			$arr_med = array();
-			$size_arr = sizeof($array_polygons);
+			$size_arr = sizeof($poly_arr);
 
-			for ($i=0; $i < sizeof($array_polygons); $i++) { //sorting by property values ascending; had to modify query
-				array_multisort($array_polygons[$i], SORT_ASC);
+			for ($i=0; $i < sizeof($poly_arr); $i++) { //sorting by property values ascending; had to modify query
+				array_multisort($poly_arr[$i], SORT_ASC);
 			}
 
-			for ($j=0; $j < sizeof($array_polygons); $j++) {
+			for ($j=0; $j < sizeof($poly_arr); $j++) {
 				$med_index_i = 0;
 				$done_med = 0;
-				for ($i=0; $i < sizeof($array_polygons[$j]); $i++) {
-					if(sizeof($array_polygons[$j])%2 == 1 && $done_med == 0){//odd
-						$med_index_i = ceil(sizeof($array_polygons[$j])/2); //have to subtract one from this value to get the index correctly
+				for ($i=0; $i < sizeof($poly_arr[$j]); $i++) {
+					if(sizeof($poly_arr[$j])%2 == 1 && $done_med == 0){//odd
+						$med_index_i = ceil(sizeof($poly_arr[$j])/2); //have to subtract one from this value to get the index correctly
 						$done_med = 1;
-						$polygons[] = $array_polygons[$j][$med_index_i - 1];
+						$polygons[] = $poly_arr[$j][$med_index_i - 1];
 					}
-					elseif(sizeof($array_polygons[$j])%2 == 0 && $done_med == 0){ //even
-						$med_value = ($array_polygons[$j][(ceil(sizeof($array_polygons[$j])/2)) - 1][$data->property] + $array_polygons[$j][(ceil(sizeof($array_polygons[$j])/2))][$data->property]) / 2;
-						$array_polygons[$j][(ceil(sizeof($array_polygons[$j])/2)) - 1][$data->property] = $med_value;
-						$polygons[] = $array_polygons[$j][(ceil(sizeof($array_polygons[$j])/2)) - 1];
+					elseif(sizeof($poly_arr[$j])%2 == 0 && $done_med == 0){ //even
+						$med_value = ($poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1][$data->property] + $poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2))][$data->property]) / 2;
+						$poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1][$data->property] = $med_value;
+						$polygons[] = $poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1];
 						$done_med = 1;
 					}
 				}
@@ -588,11 +401,11 @@ function getPolygons(){
 			$just_one;
 			$result_weighted;
 
-			for ($i=0; $i < sizeof($array_polygons); $i++) { //sorting by property values ascending; had to modify query
-				array_multisort($array_polygons[$i], SORT_ASC);
+			for ($i=0; $i < sizeof($poly_arr); $i++) { //sorting by property values ascending; had to modify query
+				array_multisort($poly_arr[$i], SORT_ASC);
 			}
 
-			for ($i=0; $i < sizeof($array_polygons); $i++) {
+			for ($i=0; $i < sizeof($poly_arr); $i++) {
 				$profundo = $data->depth;
 				$limite = 0;
 				$n_operaciones = 0;
@@ -605,67 +418,63 @@ function getPolygons(){
 				$just_one = 0;
 				$result_weighted = 0;
 
-				if(sizeof($array_polygons[$i]) > 1 && $array_polygons[$i][sizeof($array_polygons[$i])-1][$data->property] == 0){ //use the penultimate index
-					$limite = $array_polygons[$i][sizeof($array_polygons[$i])-2]['bottom'];//si lo $profundo es mayor que el limite, ignorar y usar el limite como lo profundo
+				if(sizeof($poly_arr[$i]) > 1 && $poly_arr[$i][sizeof($poly_arr[$i])-1][$data->property] == 0){ //use the penultimate index
+					$limite = $poly_arr[$i][sizeof($poly_arr[$i])-2]['bottom'];//si lo $profundo es mayor que el limite, ignorar y usar el limite como lo profundo
 					if($profundo > $limite){
 						$profundo = $limite;
 					}
 
-					for ($k=0; $k < sizeof($array_polygons[$i])-1; $k++) {
-						if($profundo >= $array_polygons[$i][$k]['top'] && $profundo >= $array_polygons[$i][$k]['bottom'] && $profundo <= $limite){ //we need a limit/ceiling for the bottom of this
+					for ($k=0; $k < sizeof($poly_arr[$i])-1; $k++) {
+						if($profundo >= $poly_arr[$i][$k]['top'] && $profundo >= $poly_arr[$i][$k]['bottom'] && $profundo <= $limite){ //we need a limit/ceiling for the bottom of this
 							$n_operaciones += 1;
 						}
-						elseif($profundo >= $array_polygons[$i][$k]['top'] && $profundo <= $array_polygons[$i][$k]['bottom'] && $profundo <= $limite){
+						elseif($profundo >= $poly_arr[$i][$k]['top'] && $profundo <= $poly_arr[$i][$k]['bottom'] && $profundo <= $limite){
 							$n_operaciones += 1;
 						}
 					}
 
-					for ($j=0; $j < (sizeof($array_polygons[$i])-1); $j++) {
-						$top = $array_polygons[$i][$j]['top'];
-						$bottom = $array_polygons[$i][$j]['bottom'];
+					for ($j=0; $j < (sizeof($poly_arr[$i])-1); $j++) {
+						$top = $poly_arr[$i][$j]['top'];
+						$bottom = $poly_arr[$i][$j]['bottom'];
 						$delta = $bottom - $top;
-						$valor = $array_polygons[$i][$j][$data->property];
+						$valor = $poly_arr[$i][$j][$data->property];
 						if($n_operaciones > $j){
 							if($profundo >= $delta && $profundo >= $bottom){
 								$result_weighted += (($delta/$profundo)*$valor);
-								//echo "0";
 							}
 							elseif($profundo >= $delta && $profundo <= $bottom){
 								$delta_depth = $profundo - $top;
 								$result_weighted += (($delta_depth/$profundo)*$valor);
-								//echo "1";
 							}
 							elseif($profundo <= $delta && $profundo <= $bottom && $just_one == 0) {
 								$just_one = 1;
 								$result_weighted += $valor;
-								//echo "2";
 							}
 						} //end if n_operations
 					}
-					$array_polygons[$i][0][$data->property] = round($result_weighted,1);
-					$polygons[] = $array_polygons[$i][0];
-					//echo $i . " ";
+					$poly_arr[$i][0][$data->property] = round($result_weighted,1);
+					$polygons[] = $poly_arr[$i][0];
 				} //end if for using penultimate index
 				else{ //permissible to use the last index
-					$limite = $array_polygons[$i][sizeof($array_polygons[$i])-1]['bottom'];
+					$limite = $poly_arr[$i][sizeof($poly_arr[$i])-1]['bottom'];
 					if($profundo > $limite){
 						$profundo = $limite;
 					}
 
-					for ($k=0; $k < sizeof($array_polygons[$i]); $k++) {
-						if($profundo >= $array_polygons[$i][$k]['top'] && $profundo >= $array_polygons[$i][$k]['bottom'] && $profundo <= $limite){ //we need a limit/ceiling for the bottom of this
+					for ($k=0; $k < sizeof($poly_arr[$i]); $k++) {
+						if($profundo >= $poly_arr[$i][$k]['top'] && $profundo >= $poly_arr[$i][$k]['bottom'] && $profundo <= $limite){ //we need a limit/ceiling for the bottom of this
 							$n_operaciones += 1;
 						}
-						elseif($profundo >= $array_polygons[$i][$k]['top'] && $profundo <= $array_polygons[$i][$k]['bottom'] && $profundo <= $limite){
+						elseif($profundo >= $poly_arr[$i][$k]['top'] && $profundo <= $poly_arr[$i][$k]['bottom'] && $profundo <= $limite){
 							$n_operaciones += 1;
 						}
 					}
 
-					for ($j=0; $j < (sizeof($array_polygons[$i])); $j++) {
-						$top = $array_polygons[$i][$j]['top'];
-						$bottom = $array_polygons[$i][$j]['bottom'];
+					for ($j=0; $j < (sizeof($poly_arr[$i])); $j++) {
+						$top = $poly_arr[$i][$j]['top'];
+						$bottom = $poly_arr[$i][$j]['bottom'];
 						$delta = $bottom - $top;
-						$valor = $array_polygons[$i][$j][$data->property];
+						$valor = $poly_arr[$i][$j][$data->property];
 						if($n_operaciones > $j){
 							if($profundo >= $delta && $profundo >= $bottom){
 								$result_weighted += (($delta/$profundo)*$valor);
@@ -680,26 +489,35 @@ function getPolygons(){
 							}
 						}
 					}
-					$array_polygons[$i][0][$data->property] = round($result_weighted,1);
-					$polygons[] = $array_polygons[$i][0];
+					$poly_arr[$i][0][$data->property] = round($result_weighted,1);
+					$polygons[] = $poly_arr[$i][0];
 				}
 			} //end main for loop
 			break;
 
+			case 'At':
+			for ($i=0; $i < sizeof($poly_arr); $i++) { //This was the method used before. It searches, goes to the depth specified, and gives the value AT that depth.
+				for ($j=0; $j < sizeof($poly_arr[$i]); $j++) {
+					if($data->depth >= $poly_arr[$i][$j]['top'] && $data->depth <= $poly_arr[$i][$j]['bottom']){ //discriminador de depth
+						$polygons[] = $poly_arr[$i][$j];
+					}
+				}
+			}
+			break;
+
 			default:
-			for ($j=0; $j < sizeof($array_polygons); $j++) { //This was the method used before. It searches, goes to the depth specified, and gives the value AT that depth.
-				for ($i=0; $i < sizeof($array_polygons[$j]); $i++) {
-					if($data->depth >= $array_polygons[$j][$i]['top'] && $data->depth <= $array_polygons[$j][$i]['bottom']){ //discriminador de depth
-						$polygons[] = $array_polygons[$j][$i];
+			for ($i=0; $i < sizeof($poly_arr); $i++) { //This was the method used before. It searches, goes to the depth specified, and gives the value AT that depth.
+				for ($j=0; $j < sizeof($poly_arr[$i]); $j++) {
+					if($data->depth >= $poly_arr[$i][$j]['top'] && $data->depth <= $poly_arr[$i][$j]['bottom']){ //discriminador de depth
+						$polygons[] = $poly_arr[$i][$j];
 					}
 				}
 			}
 			break;
 		}
 
-		$toReturn['coords'] = $polygons;//fetch all
+		$toReturn['coords'] = $polygons;
 	}
-
 	else{
 		$query = "SELECT OGR_FID, p.mukey, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificaionFactor)) AS POLYGON, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
 		$toReturn['query2'] = $query;

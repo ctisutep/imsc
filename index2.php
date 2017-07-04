@@ -204,6 +204,7 @@
 										<option value="2" id="min_method">Min</option>
 										<option value="3" id="med_method">Median</option>
 										<option value="4" id="weight_method">Weighted average</option>
+										<option value="5" id="specific_method">At Specific Depth</option>
 									</select>
 								</div>
 							</div>
@@ -1696,21 +1697,21 @@ function initMap() {
 		center: new google.maps.LatLng(31.31610138349565, -99.11865234375),
 		mapTypeId: 'terrain'
 	});
+
 	app.infoWindow = new google.maps.InfoWindow;
-	/*var testLayer = new google.maps.KmlLayer({ //var testLayer = new google.maps.KmlLayer({ //testing the kml layer, should draw colored lines for a transportation system route in chicago
-	url: 'http://ctis.utep.edu/secretsanta/texas_incomplete.kml', //url: 'https://casoilresource.lawr.ucdavis.edu/soil_web/kml/SoilWeb.kmz', //url: 'http://googlemaps.github.io/js-v2-samples/ggeoxml/cta.kml',
-	//url: 'http://ctis.utep.edu/secretsanta/county_texas.kml',
-	//url: 'http://ctis.utep.edu/secretsanta/elpaso.kmz',
-	//url: 'http://ctis.utep.edu/secretsanta/SoilWeb.kmz',
-	//url: 'http://ctis.utep.edu/secretsanta/texas_counties.kmz',
-	//url: 'http://ctis.utep.edu/secretsanta/texas_districts.kml',
-	map: map
-});
-testLayer.setMap(app.map);*/ //testing layers 13/03/18
-app.map.addListener('click', function(e) {
+
+	app.map.addListener('click', function(e) {
 	// console.log(e.latLng.toString());
 });
-//setDistrict();
+
+var drawingManager = new google.maps.drawing.DrawingManager({
+    drawingControl: true,
+    drawingControlOptions: {
+      position: google.maps.ControlPosition.TOP_CENTER,
+      drawingModes: ['rectangle']
+    }
+  });
+  drawingManager.setMap(app.map);
 }
 function removePolygons(){
 	if(app.polygons){
@@ -1793,6 +1794,7 @@ function wktFormatter(poly){
 */
 // ***********
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCY0B3_Fr1vRpgJDdbvNmrVyXmoOOtiq64&callback=initMap"></script>
+<!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCY0B3_Fr1vRpgJDdbvNmrVyXmoOOtiq64&callback=initMap"></script>-->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCY0B3_Fr1vRpgJDdbvNmrVyXmoOOtiq64&libraries=drawing&callback=initMap"async defer></script>
 </body>
 </html>
