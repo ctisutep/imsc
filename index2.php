@@ -1704,7 +1704,7 @@ function initMap() {
 	// console.log(e.latLng.toString());
 });
 
-var drawingManager = new google.maps.drawing.DrawingManager({
+var drawingManager = new google.maps.drawing.DrawingManager({	
     drawingControl: true,
     drawingControlOptions: {
       position: google.maps.ControlPosition.TOP_CENTER,
