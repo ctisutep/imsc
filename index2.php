@@ -122,7 +122,8 @@
 								<option value="32.54681317351514, -96.85546875" data-district="dallas">
 									Dallas
 								</option>
-								<option value="30.694611546632302, -104.52392578125" data-district="elPaso">
+								<!--<option value="30.694611546632302, -104.52392578125" data-district="elPaso">-->
+								<option value="31.770546, -106.504874" data-district="elPaso">
 									El Paso
 								</option>
 								<option value="32.62087018318113, -97.75634765625" data-district="fortWorth">
@@ -1704,7 +1705,7 @@ function initMap() {
 	// console.log(e.latLng.toString());
 });
 
-var drawingManager = new google.maps.drawing.DrawingManager({	
+var drawingManager = new google.maps.drawing.DrawingManager({
     drawingControl: true,
     drawingControlOptions: {
       position: google.maps.ControlPosition.TOP_CENTER,
