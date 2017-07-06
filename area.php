@@ -18,8 +18,8 @@ body {
 
 #floating-panel {
   position: absolute;
-  top: 10px;
-  left: 25%;
+  top: 8px;
+  left: 6%;
   z-index: 5;
   background-color: #fff;
   padding: 5px;
@@ -111,6 +111,7 @@ function clickRect(event) {
   var northWest = new google.maps.LatLng(ne.lat(), sw.lng());
   var area = google.maps.geometry.spherical.computeArea([northEast, northWest, southWest, southEast]);
   area = parseInt(area);
+  area = area.toLocaleString();
   var contentString = '<b>Rectangle clicked.</b><br>' + 'Area is: ' + area + ' m^2';
 
   // Set the info window's content and position.
