@@ -51,6 +51,9 @@ body {
 var rectangle;
 var map;
 var infoWindow;
+var rec;
+var selectedRec;
+var drawingManager;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -60,7 +63,7 @@ function initMap() {
     zoom: 13
   });
 
-  var drawingManager = new google.maps.drawing.DrawingManager({
+  drawingManager = new google.maps.drawing.DrawingManager({
     drawingControl: true,
     drawingControlOptions: {
       position: google.maps.ControlPosition.TOP_CENTER,
@@ -75,7 +78,7 @@ function initMap() {
 
   drawingManager.setMap(map);
 
-  google.maps.event.addListener(drawingManager, 'rectanglecomplete', function(e) {
+  google.maps.event.addListener(drawingManager, 'overlaycomplete', function(e) {
     drawingManager.setDrawingMode(null);
     drawingManager.setOptions({
       drawingControl: true,
@@ -84,10 +87,16 @@ function initMap() {
         drawingModes: ['']
       }
     });
+
+    var newShape = e.overlay;
+    newShape.type = e.type;
+    google.maps.event.addListener(newShape, 'click', function() {
+      setSelection(newShape);
+    });
+    setSelection(newShape);
   });
 
-  //google.maps.event.addDomListener(document.getElementById('draw'), 'click', drawAnotherRectangle(drawingManager));
-
+  google.maps.event.addDomListener(document.getElementById('draw'), 'click', drawAnotherRectangle);
 
   var bounds = {
     north: 31.7783,
@@ -155,17 +164,47 @@ function removeRectangle() {
   rectangle.setMap(null);
 }
 
-function drawAnotherRectangle(e){
-  /*e.setDrawingMode(null);
-  e.setOptions({
-    drawingControl: true,
-    drawingControlOptions: {
-      position: google.maps.ControlPosition.TOP_CENTER,
-      drawingModes: ['rectangle']
-    }
-  });
-  e.setMap(map);
-*/
+function drawAnotherRectangle(){
+  if (selectedRec) {
+    selectedRec.setMap(null);
+    // To show:
+    drawingManager.setOptions({
+      drawingControl: true,
+      drawingControlOptions: {
+        position: google.maps.ControlPosition.TOP_CENTER,
+        drawingModes: ['rectangle']
+      },
+      rectangleOptions: {
+        draggable: true,
+        clickable: true,
+        editable: true
+      }
+    });
+  }
+}
+
+function deleteSelectedShape() {
+  if (selectedShape) {
+    selectedShape.setMap(null);
+    // To show:
+    drawingManager.setOptions({
+      drawingControl: true
+    });
+  }
+}
+
+function clearSelection() {
+  if (selectedRec) {
+    selectedRec.setEditable(false);
+    selectedRec = null;
+  }
+}
+
+function setSelection(shape) {
+  clearSelection();
+  selectedRec = shape;
+  shape.setEditable(true);
+  //selectColor(shape.get('fillColor') || shape.get('strokeColor'));
 }
 
 </script>
