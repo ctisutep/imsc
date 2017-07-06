@@ -18,8 +18,8 @@ body {
 
 #floating-panel {
   position: absolute;
-  top: 8px;
-  left: 6%;
+  top: 600px;
+  left: 20%;
   z-index: 5;
   background-color: #fff;
   padding: 5px;
@@ -33,8 +33,8 @@ body {
 </style>
 <div id="map"></div>
 <div id="floating-panel">
-  <input onclick="removeRectangle();" type=button value="Remove rectangle">
-  <input id="draw" onclick="drawAnotherRectangle();" type=button value="Draw another rectangle">
+  <input onclick="removeRectangle();" type=button value="Remove the rectangle that was already on the map (click on the rectangle and move it first)">
+  <input id="draw" onclick="drawAnotherRectangle();" type=button value="Draw more rectangles / delete previous drawn rectangle (use the tools on the top center)">
 </div>
 <!-- Replace the value of the key parameter with your own API key. -->
 <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap"> -->
