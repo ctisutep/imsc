@@ -34,6 +34,7 @@ body {
 <div id="map"></div>
 <div id="floating-panel">
   <input onclick="removeRectangle();" type=button value="Remove rectangle">
+  <input id="draw" onclick="drawAnotherRectangle();" type=button value="Draw another rectangle">
 </div>
 <!-- Replace the value of the key parameter with your own API key. -->
 <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap"> -->
@@ -84,6 +85,9 @@ function initMap() {
       }
     });
   });
+
+  //google.maps.event.addDomListener(document.getElementById('draw'), 'click', drawAnotherRectangle(drawingManager));
+
 
   var bounds = {
     north: 31.7783,
@@ -149,6 +153,19 @@ function clickRect(event) {
 
 function removeRectangle() {
   rectangle.setMap(null);
+}
+
+function drawAnotherRectangle(e){
+  /*e.setDrawingMode(null);
+  e.setOptions({
+    drawingControl: true,
+    drawingControlOptions: {
+      position: google.maps.ControlPosition.TOP_CENTER,
+      drawingModes: ['rectangle']
+    }
+  });
+  e.setMap(map);
+*/
 }
 
 </script>
