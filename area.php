@@ -59,6 +59,32 @@ function initMap() {
     zoom: 13
   });
 
+  var drawingManager = new google.maps.drawing.DrawingManager({
+    drawingControl: true,
+    drawingControlOptions: {
+      position: google.maps.ControlPosition.TOP_CENTER,
+      drawingModes: ['rectangle']
+    },
+    rectangleOptions: {
+      draggable: true,
+      clickable: true,
+      editable: true
+    }
+  });
+
+  drawingManager.setMap(map);
+
+  google.maps.event.addListener(drawingManager, 'rectanglecomplete', function(e) {
+    drawingManager.setDrawingMode(null);
+    drawingManager.setOptions({
+      drawingControl: true,
+      drawingControlOptions: {
+        position: google.maps.ControlPosition.TOP_CENTER,
+        drawingModes: ['']
+      }
+    });
+  });
+
   var bounds = {
     north: 31.7783,
     south: 31.7720,
