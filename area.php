@@ -54,17 +54,16 @@ var infoWindow;
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {
-      lat: 44.5452,
-      lng: -78.5389
+      lat: 31.770849, lng: -106.504583
     },
-    zoom: 9
+    zoom: 13
   });
 
   var bounds = {
-    north: 44.599,
-    south: 44.490,
-    east: -78.443,
-    west: -78.649
+    north: 31.7783,
+    south: 31.7720,
+    east: -106.4955,
+    west: -106.5127
   };
 
   // Define the rectangle and set its editable property to true.
@@ -106,8 +105,13 @@ function clickRect(event) {
   var ne = rectangle.getBounds().getNorthEast();
   var sw = rectangle.getBounds().getSouthWest();
   var center = rectangle.getBounds().getCenter();
-
-  var contentString = '<b>Rectangle clicked.</b><br>';
+  var southWest = new google.maps.LatLng(sw.lat(), sw.lng());
+  var northEast = new google.maps.LatLng(ne.lat(), ne.lng());
+  var southEast = new google.maps.LatLng(sw.lat(), ne.lng());
+  var northWest = new google.maps.LatLng(ne.lat(), sw.lng());
+  var area = google.maps.geometry.spherical.computeArea([northEast, northWest, southWest, southEast]);
+  area = parseInt(area);
+  var contentString = '<b>Rectangle clicked.</b><br>' + 'Area is: ' + area + ' m^2';
 
   // Set the info window's content and position.
   infoWindow.setContent(contentString);
