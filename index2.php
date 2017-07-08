@@ -1810,7 +1810,17 @@ function setSelection(shape) {
   //selectColor(shape.get('fillColor') || shape.get('strokeColor'));
 }
 function clickRec(shape){
-  var contentString = '<b>Rectangle clicked.</b><br>';
+	var ne = shape.getBounds().getNorthEast();
+	var sw = shape.getBounds().getSouthWest();
+	var center = shape.getBounds().getCenter();
+	var southWest = new google.maps.LatLng(sw.lat(), sw.lng());
+	var northEast = new google.maps.LatLng(ne.lat(), ne.lng());
+	var southEast = new google.maps.LatLng(sw.lat(), ne.lng());
+	var northWest = new google.maps.LatLng(ne.lat(), sw.lng());
+	var area = google.maps.geometry.spherical.computeArea([northEast, northWest, southWest, southEast]);
+	area = parseInt(area);
+	area = area.toLocaleString();
+  var contentString = '<b>Rectangle clicked.</b><br>' + 'Area is: ' + area + ' m^2';
   var center = shape.getBounds().getCenter();
 
   // Set the info window's content and position.
