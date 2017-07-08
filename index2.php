@@ -1706,7 +1706,22 @@ function setDistrict(){
 google.charts.load('current', {'packages':['corechart']});
 
 // Set a callback to run when the Google Visualization API is loaded.
-google.charts.setOnLoadCallback(drawChart);
+google.charts.setOnLoadCallback(initialize);
+
+function initialize () {
+    //$(rec).onReady(function() {
+      //  drawChart();
+    //});
+		//if(rec.type == 'rectangle'){
+		//google.maps.event.addListener(rec, 'click', function() {
+			//clickRec(rec);
+		//});
+	//}
+}
+
+function dead(){
+	//nothing
+}
 
 //this is the callback when the map loads
 var rec;
@@ -1762,6 +1777,7 @@ function initMap() {
 
     google.maps.event.addListener(rec, 'click', function() {
       clickRec(rec);
+			drawChart();
     });
 
     google.maps.event.addListener(rec, 'bounds_changed', function() {
