@@ -47,19 +47,16 @@ body {
 // This example adds a user-editable rectangle to the map.
 // When the user changes the bounds of the rectangle,
 // an info window pops up displaying the new bounds.
-
+var rec;
 var rectangle;
 var map;
 var infoWindow;
-var rec;
 var selectedRec;
 var drawingManager;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {
-      lat: 31.770849, lng: -106.504583
-    },
+    center: { lat: 31.770849, lng: -106.504583 },
     zoom: 13
   });
 
@@ -88,12 +85,19 @@ function initMap() {
       }
     });
 
-    var newShape = e.overlay;
-    newShape.type = e.type;
-    google.maps.event.addListener(newShape, 'click', function() {
-      setSelection(newShape);
+    rec = e.overlay;
+    rec.type = e.type;
+
+    setSelection(rec);
+
+    google.maps.event.addListener(rec, 'click', function() {
+      clickRec(rec);
     });
-    setSelection(newShape);
+
+    google.maps.event.addListener(rec, 'bounds_changed', function() {
+      showNewRect2(rec);
+    });
+
   });
 
   google.maps.event.addDomListener(document.getElementById('draw'), 'click', drawAnotherRectangle);
@@ -119,6 +123,7 @@ function initMap() {
   rectangle.addListener('bounds_changed', showNewRect);
   rectangle.addListener('click', clickRect);
 
+
   // Define an info window on the map.
   infoWindow = new google.maps.InfoWindow();
 }
@@ -130,6 +135,21 @@ function showNewRect(event) {
   var sw = rectangle.getBounds().getSouthWest();
 
   var contentString = '<b>Rectangle moved.</b><br>' +
+  'New north-east corner: ' + ne.lat() + ', ' + ne.lng() + '<br>' +
+  'New south-west corner: ' + sw.lat() + ', ' + sw.lng();
+
+  // Set the info window's content and position.
+  infoWindow.setContent(contentString);
+  infoWindow.setPosition(ne);
+
+  infoWindow.open(map);
+}
+
+function showNewRect2(shape) {
+  var ne = shape.getBounds().getNorthEast();
+  var sw = shape.getBounds().getSouthWest();
+
+  var contentString = '<b>New rectangle moved.</b><br>' +
   'New north-east corner: ' + ne.lat() + ', ' + ne.lng() + '<br>' +
   'New south-west corner: ' + sw.lat() + ', ' + sw.lng();
 
@@ -205,6 +225,16 @@ function setSelection(shape) {
   selectedRec = shape;
   shape.setEditable(true);
   //selectColor(shape.get('fillColor') || shape.get('strokeColor'));
+}
+function clickRec(shape){
+  var contentString = '<b>New rectangle clicked.</b><br>';
+  var center = shape.getBounds().getCenter();
+
+  // Set the info window's content and position.
+  infoWindow.setContent(contentString);
+  infoWindow.setPosition(center);
+
+  infoWindow.open(map);
 }
 
 </script>

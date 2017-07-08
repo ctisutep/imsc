@@ -219,7 +219,15 @@
 							<button class="btn btn-warning form-control" type="button" id="clear" onClick="removePolygons()">Clear</button>
 						</div>
 						<p>  </p> <!--separator-->
-						<button type="button" class="map-print" id="print" onClick="printMaps()">Print</button> <!-- to print map -->
+
+						<div class="row">
+							<button type="button" class="map-print" id="print" onClick="printMaps()">Print</button> <!-- to print map -->
+							<p> </p>
+						</div>
+						<div class="row">
+							  <button type="button" class="btn btn-default form-control" id="draw" onclick="drawAnotherRectangle();">Delete drawn area of interest</button>
+						</div>
+
 						<div id="load"> </div>
 					</div>
 				</div>
@@ -1329,7 +1337,8 @@ function getPolygons(){//this is run button
 					strokeOpacity: 0.60,
 					strokeWeight: 0.70,
 					fillColor: shapecolor[colorSelector],
-					fillOpacity: 0.60
+					fillOpacity: 0.60,
+					zIndex: -1
 				});
 				polygon.setOptions({ zIndex: newzIndex });
 				polygon.addListener('click', polyInfo);
@@ -1691,7 +1700,15 @@ function setDistrict(){
 	app.map.panTo(panPoint);
 	app.map.setZoom(10);
 }
+/******************************************************************************/
 //this is the callback when the map loads
+var rec;
+var rectangle;
+var map;
+var infoWindow;
+var selectedRec;
+var drawingManager;
+
 function initMap() {
 	app.map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 5,
@@ -1703,17 +1720,122 @@ function initMap() {
 
 	app.map.addListener('click', function(e) {
 	// console.log(e.latLng.toString());
-});
+	});
 
-var drawingManager = new google.maps.drawing.DrawingManager({
+	drawingManager = new google.maps.drawing.DrawingManager({
     drawingControl: true,
     drawingControlOptions: {
       position: google.maps.ControlPosition.TOP_CENTER,
       drawingModes: ['rectangle']
+    },
+    rectangleOptions: {
+      draggable: true,
+      clickable: true,
+      editable: true
     }
   });
+
   drawingManager.setMap(app.map);
+
+	google.maps.event.addListener(drawingManager, 'overlaycomplete', function(e) {
+    drawingManager.setDrawingMode(null);
+    drawingManager.setOptions({
+      drawingControl: true,
+      drawingControlOptions: {
+        position: google.maps.ControlPosition.TOP_CENTER,
+        drawingModes: ['']
+      }
+    });
+
+    rec = e.overlay;
+    rec.type = e.type;
+
+    setSelection(rec);
+
+    google.maps.event.addListener(rec, 'click', function() {
+      clickRec(rec);
+    });
+
+    google.maps.event.addListener(rec, 'bounds_changed', function() {
+      showNewRect2(rec);
+    });
+
+  });
+
+  google.maps.event.addDomListener(document.getElementById('draw'), 'click', drawAnotherRectangle);
+
+	infoWindow = new google.maps.InfoWindow();
 }
+
+function drawAnotherRectangle(){
+  if (selectedRec) {
+    selectedRec.setMap(null);
+    // To show:
+    drawingManager.setOptions({
+      drawingControl: true,
+      drawingControlOptions: {
+        position: google.maps.ControlPosition.TOP_CENTER,
+        drawingModes: ['rectangle']
+      },
+      rectangleOptions: {
+        draggable: true,
+        clickable: true,
+        editable: true
+      }
+    });
+  }
+}
+
+function deleteSelectedShape() {
+  if (selectedShape) {
+    selectedShape.setMap(null);
+    // To show:
+    drawingManager.setOptions({
+      drawingControl: true
+    });
+  }
+}
+
+function clearSelection() {
+  if (selectedRec) {
+    selectedRec.setEditable(false);
+    selectedRec = null;
+  }
+}
+
+function setSelection(shape) {
+  clearSelection();
+  selectedRec = shape;
+  shape.setEditable(true);
+  //selectColor(shape.get('fillColor') || shape.get('strokeColor'));
+}
+function clickRec(shape){
+  var contentString = '<b>Rectangle clicked.</b><br>';
+  var center = shape.getBounds().getCenter();
+
+  // Set the info window's content and position.
+  infoWindow.setContent(contentString);
+  infoWindow.setPosition(center);
+
+  infoWindow.open(app.map);
+}
+
+function showNewRect2(shape) {
+  var ne = shape.getBounds().getNorthEast();
+  var sw = shape.getBounds().getSouthWest();
+
+  var contentString = '<b>Rectangle moved.</b><br>' +
+  'New north-east corner: ' + ne.lat() + ', ' + ne.lng() + '<br>' +
+  'New south-west corner: ' + sw.lat() + ', ' + sw.lng();
+
+  // Set the info window's content and position.
+  infoWindow.setContent(contentString);
+  infoWindow.setPosition(ne);
+
+  infoWindow.open(app.map);
+}
+
+/******************************************************************************/
 function removePolygons(){
 	if(app.polygons){
 		for(var i = 0; i < app.polygons.length; i++){
