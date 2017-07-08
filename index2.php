@@ -247,6 +247,7 @@
 </div>
 </div>
 <br> <br>
+<div id="chart_area"> </div>
 <!--
 <div class="row">
 	<div class = "col-md-5">
@@ -291,6 +292,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
 
 <script src="js/jquery.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="js/bootstrap.js"></script>
 
 <script src="js/jquery.autocomplete.min.js"></script>
@@ -1701,6 +1703,11 @@ function setDistrict(){
 	app.map.setZoom(10);
 }
 /******************************************************************************/
+google.charts.load('current', {'packages':['corechart']});
+
+// Set a callback to run when the Google Visualization API is loaded.
+google.charts.setOnLoadCallback(drawChart);
+
 //this is the callback when the map loads
 var rec;
 var rectangle;
@@ -1845,6 +1852,38 @@ function showNewRect2(shape) {
   infoWindow.setPosition(ne);
 
   infoWindow.open(app.map);
+}
+
+function drawChart() {
+
+	//var center = shape.getBounds().getCenter();
+	// Create the data table.
+	var data = new google.visualization.DataTable();
+	data.addColumn('string', 'Topping');
+	data.addColumn('number', 'Slices');
+	data.addRows([
+		['Mushrooms', 3],
+		['Onions', 1],
+		['Olives', 1],
+		['Zucchini', 1],
+		['Pepperoni', 2]
+	]);
+
+	// Set chart options
+	var options = {'title':'Pizza consumed here',
+	//'width':600,
+	//'height':600,
+	'is3D': true
+	};
+
+	//var node        = document.createElement('div'),
+	//infoWindow  = new google.maps.InfoWindow(),
+	var chart = new google.visualization.PieChart(document.getElementById('chart_area'));
+
+	chart.draw(data, options);
+	//infoWindow.setContent(node);
+	//infoWindow.setPosition(center);
+	//infoWindow.open(map);
 }
 
 /******************************************************************************/
