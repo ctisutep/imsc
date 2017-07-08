@@ -1845,7 +1845,7 @@ function clickRec(shape){
 	var area = google.maps.geometry.spherical.computeArea([northEast, northWest, southWest, southEast]);
 	area = parseInt(area);
 	area = area.toLocaleString();
-  var contentString = '<b>Rectangle clicked.</b><br>' + 'Area is: ' + area + ' m^2';
+  var contentString = '<b>Rectangle clicked.</b><br><br>' + 'Area is: ' + area + ' m^2';
   var center = shape.getBounds().getCenter();
 
   // Set the info window's content and position.
