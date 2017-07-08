@@ -178,8 +178,10 @@
 
     // Set chart options
     var options = {'title':'Pizza consumed here',
-    'width':400,
-    'height':150};
+    //'width':600,
+    //'height':600,
+    'is3D': true
+    };
 
     var node        = document.createElement('div'),
     //infoWindow  = new google.maps.InfoWindow(),
