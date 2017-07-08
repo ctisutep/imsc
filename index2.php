@@ -1731,7 +1731,8 @@ function initMap() {
     rectangleOptions: {
       draggable: true,
       clickable: true,
-      editable: true
+      editable: true,
+			zIndex: 10
     }
   });
 
@@ -1780,7 +1781,8 @@ function drawAnotherRectangle(){
       rectangleOptions: {
         draggable: true,
         clickable: true,
-        editable: true
+        editable: true,
+				zIndex: 10
       }
     });
   }
