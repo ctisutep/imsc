@@ -11,6 +11,9 @@ $toReturn = array();
 if(isset($_GET['getMode']) AND $_GET['getMode'] == "polygons"){//**************The case in charge of retrieving polygon search (run)****************************(1)
 	getPolygons(); //cambio de Ricardo
 }
+if(isset($_GET['getMode']) AND $_GET['getMode'] == "AOI"){//**************The case in charge of retrieving polygon search (run)****************************(1)
+	getAOI(); //cambio de Ricardo
+}
 else if(isset($_GET['district'])){//*******************This is the case for retieving the districts from table**********************(2)
 	districtNames();
 }
@@ -79,6 +82,14 @@ function districtNames(){
 	if($result AND $result->num_rows < 400){
 		$toReturn['coords'] = $result->fetch_all();
 	}
+}
+function getAOI(){
+	global $conn, $toReturn;
+	$data_aoi = new dataToQueryPolygons();
+	$query = "SET @geom1 = 'POLYGON(($data_aoi->lng1	$data_aoi->lat1,$data_aoi->lng1	$data_aoi->lat2,$data_aoi->lng2	$data_aoi->lat2,$data_aoi->lng2	$data_aoi->lat1,$data_aoi->lng1	$data_aoi->lat1))'";
+	$toReturn['query'] = $query;
+	$result = mysqli_query($conn, $query);
+	$key = setKey( $data_aoi->table );
 }
 function getPolygons(){
 	global $conn, $toReturn;

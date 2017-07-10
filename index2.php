@@ -299,7 +299,7 @@
 <script src="js/properties.js"></script>
 <script>
 
-var app = {map:null, polygons:null, payload:{getMode:"polygons", property:null, district:null, depth:null, depth_method:null}}; //added value for depth method
+var app = {map:null, polygons:null, payload:{getMode:"polygons", property:null, district:null, depth:null, depth_method:null, AoI:null}}; //added value for depth method
 var hecho = false;
 //var suggested = all the aliases of the properties, note: not all properties have an alias
 $(document).ready(function(){//esto pasa recien cargada la pagina
@@ -403,7 +403,7 @@ $("#methods").change(function(){ //0: max / 1: min / 2: median / 3: weight/
 
 
 function getPolygons(){//this is run button
-	//Ricardo
+	app.payload.getMode="polygons";
 	hecho = false;
 	var depth = document.getElementById("depth").value;
 	//console.log(depth);
@@ -417,7 +417,9 @@ function getPolygons(){//this is run button
 		var getparams = app.payload;
 		var bounds = app.map.getBounds();
 		getparams.NE = bounds.getNorthEast().toJSON(); //north east corner
-		getparams.SW = bounds.getSouthWest().toJSON(); //north east corner
+		getparams.SW = bounds.getSouthWest().toJSON(); //south-west corner
+		//console.log(getparams.NE);
+		//console.log(getparams.SW);
 
 		$(document.body).css({'cursor': 'wait'});
 		$.get('polygonHandler.php', app.payload, function(data){
@@ -1772,7 +1774,7 @@ function initMap() {
 
     rec = e.overlay;
     rec.type = e.type;
-
+		app.payload.AoI = 1;
     setSelection(rec);
 
     google.maps.event.addListener(rec, 'click', function() {
@@ -1813,6 +1815,7 @@ function drawAnotherRectangle(){
 
 function deleteSelectedShape() {
   if (selectedShape) {
+		app.payload.AoI = 0;
     selectedShape.setMap(null);
     // To show:
     drawingManager.setOptions({
@@ -1871,9 +1874,15 @@ function showNewRect2(shape) {
 }
 
 function drawChart() {
+	app.payload.getMode = "AOI";
+	getparams = app.payload;
+	bounds = rec.getBounds();
+	getparams.NE = bounds.getNorthEast().toJSON();
+	getparams.SW = bounds.getSouthWest().toJSON();
+	$.get('polygonHandler.php', app.payload, function(data){
 
-	//var center = shape.getBounds().getCenter();
-	// Create the data table.
+	});
+
 	var data = new google.visualization.DataTable();
 	data.addColumn('string', 'Method');
 	data.addColumn('number', 'Value');
