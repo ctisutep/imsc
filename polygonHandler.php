@@ -94,7 +94,7 @@ function getAOI(){
 	$key = setKey($data_aoi->table);
 
 	if($data_aoi->table == "chorizon_r"){
-		$query="SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data_aoi->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
+		$query="SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data_aoi->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
 		//$query="SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM mujoins3 NATURAL JOIN polygon AS p NATURAL JOIN chorizon_r as x WHERE x.cokey = mujoins3.cokey AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
 		$toReturn['query2'] = $query;
 		$result = mysqli_query($conn, $query);
@@ -263,12 +263,8 @@ function getAOI(){
 		break;
 	}
 
-	for ($i=0; $i < sizeof($poly_arr); $i++) { //sorting by property values ascending; had to modify query
-		array_multisort($poly_arr[$i], SORT_ASC);
-	}
-
-	//echo sizeof($poly_arr); //number of polygons intersected by the Area Of Interest
-
+	//var_dump($polygons);
+	$toReturn['coords'] = sizeof($poly_arr);
 }
 
 function getPolygons(){
@@ -282,7 +278,6 @@ function getPolygons(){
 	$key = setKey( $data->table );//appropriate key for given table
 	//actual query for retrieving desired polygons
 	//$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) AND hzdept_r <= $data->depth AND hzdepb_r >= $data->depth";
-
 
 	if($data->table == "chorizon_r"){
 		$query="SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";

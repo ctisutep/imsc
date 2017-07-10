@@ -1880,6 +1880,7 @@ function drawChart() {
 	getparams.NE = bounds.getNorthEast().toJSON();
 	getparams.SW = bounds.getSouthWest().toJSON();
 	$.get('polygonHandler.php', app.payload, function(data){
+		console.log(data);
 
 	});
 
