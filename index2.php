@@ -1875,20 +1875,19 @@ function drawChart() {
 	//var center = shape.getBounds().getCenter();
 	// Create the data table.
 	var data = new google.visualization.DataTable();
-	data.addColumn('string', 'Topping');
-	data.addColumn('number', 'Slices');
+	data.addColumn('string', 'Method');
+	data.addColumn('number', 'Value');
 	data.addRows([
-		['Mushrooms', 3],
-		['Onions', 1],
-		['Olives', 1],
-		['Zucchini', 1],
-		['Pepperoni', 2]
+		['Maximum ' + app.payload.value + ' for AOI', 3],
+		['Minimum '+ app.payload.value + ' for AOI', 1],
+		['Median '+ app.payload.value + ' for AOI', 1],
+		['Weighted Average '+ app.payload.value + ' for AOI', 1]
 	]);
 
 	// Set chart options
-	var options = {'title':'Pizza consumed here',
-	//'width':600,
-	//'height':600,
+	var options = {'title':'Area of Interest Data',
+	'width':1300,
+	'height':600,
 	'is3D': true
 	};
 
