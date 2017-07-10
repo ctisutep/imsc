@@ -83,14 +83,194 @@ function districtNames(){
 		$toReturn['coords'] = $result->fetch_all();
 	}
 }
+
 function getAOI(){
 	global $conn, $toReturn;
 	$data_aoi = new dataToQueryPolygons();
+	$simplificationFactor = polygonDefinition($data_aoi);
 	$query = "SET @geom1 = 'POLYGON(($data_aoi->lng1	$data_aoi->lat1,$data_aoi->lng1	$data_aoi->lat2,$data_aoi->lng2	$data_aoi->lat2,$data_aoi->lng2	$data_aoi->lat1,$data_aoi->lng1	$data_aoi->lat1))'";
 	$toReturn['query'] = $query;
 	$result = mysqli_query($conn, $query);
-	$key = setKey( $data_aoi->table );
+	$key = setKey($data_aoi->table);
+
+	if($data_aoi->table == "chorizon_r"){
+		$query="SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data_aoi->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
+		//$query="SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM mujoins3 NATURAL JOIN polygon AS p NATURAL JOIN chorizon_r as x WHERE x.cokey = mujoins3.cokey AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
+		$toReturn['query2'] = $query;
+		$result = mysqli_query($conn, $query);
+		$result = fetchAll($result);
+		$polygons = array();
+
+		$method_selected = 0;
+
+		if($data_aoi->depth_method == 1){
+			//echo " On maximum ";
+			$method_selected = "Maximum";
+		}
+		elseif ($data_aoi->depth_method == 2) {
+			//echo " On minimum ";
+			$method_selected = "Minimum";
+		}
+		elseif ($data_aoi->depth_method == 3) {
+			//echo " On median ";
+			$method_selected = "Median";
+		}
+		elseif ($data_aoi->depth_method == 4) {
+			//echo " On weighted ";
+			$method_selected = "Weighted";
+		}
+		elseif ($data_aoi->depth_method == 5) {
+			//echo " On weighted ";
+			$method_selected = "At";
+		}
+		else{
+			//echo " Nothing selected ";
+		}
+
+		$poly_arr = array();
+		$ogr;
+		$past_ogr = 0;
+		$skip;
+		$counter_i = 0;
+		$counter_j;
+		$entered = 0;
+
+		for ($i=0; $i < sizeof($result); $i++){
+			$counter_j = 0;
+			$ogr = $result[$i]['OGR_FID'];
+			$skip = 0;
+
+			if($entered == 1){
+				$counter_i++;
+			}
+
+			if($past_ogr == $ogr){
+				$ogr = 1;
+				$skip = 1;
+				$entered = 0;
+			}
+			else{
+				$ogr = $result[$i]['OGR_FID'];
+				$skip = 0;
+				$entered = 0;
+			}
+			for ($j=0; $j < sizeof($result); $j++) {
+				if($ogr == $result[$j]['OGR_FID'] && $skip == 0){
+					$poly_arr[$counter_i][$counter_j] = $result[$j];
+					$past_ogr = $ogr;
+					$counter_j++;
+					$entered = 1;
+				}
+			}
+		}
+	}
+
+	switch ($method_selected) {
+		case 'Maximum':
+		/* Busca el valor maximo de la lista de los polignos, dependientemente del depth que el usuario le otorgue*/
+		$max_value;
+		$max_index_i;
+		$max_index_j;
+		$lo_profundo = $data_aoi->depth;
+		$top;
+		$bottom;
+
+		for ($i=0; $i < sizeof($poly_arr); $i++) { //sorting by property values ascending; had to modify query
+			array_multisort($poly_arr[$i], SORT_ASC);
+		}
+
+		for ($i=0; $i < sizeof($poly_arr); $i++) {
+			$max_value = 0;
+			$max_index_i = 0;
+			$max_index_j = 0;
+			$lo_profundo = $data_aoi->depth;
+
+			if(sizeof($poly_arr[$i]) > 1 && $poly_arr[$i][sizeof($poly_arr[$i])-1][$data_aoi->property] == 0){
+				$limite =  $poly_arr[$i][sizeof($poly_arr[$i])-2]['bottom'];
+
+				if($lo_profundo <= $poly_arr[$i][0]['bottom']){
+					$max_index_i = $i;
+					$max_index_j = 0;
+				}
+				elseif($lo_profundo >= $limite){
+					$lo_profundo = $limite;
+					for ($j=0; $j < sizeof($poly_arr[$i])-1; $j++) {
+						$top = $poly_arr[$i][$j]['top'];
+						$bottom = $poly_arr[$i][$j]['bottom'];
+						if($max_value < $poly_arr[$i][$j][$data_aoi->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
+							$max_value = $poly_arr[$i][$j][$data_aoi->property];
+							$max_index_i = $i;
+							$max_index_j = $j;
+						}
+					}
+				}
+				else{
+					for ($j=0; $j < sizeof($poly_arr[$i])-1; $j++) {
+						$top = $poly_arr[$i][$j]['top'];
+						$bottom = $poly_arr[$i][$j]['bottom'];
+
+						if($max_value < $poly_arr[$i][$j][$data_aoi->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
+							$max_value = $poly_arr[$i][$j][$data_aoi->property];
+							$max_index_i = $i;
+							$max_index_j = $j;
+						}
+						elseif($max_value < $poly_arr[$i][$j][$data_aoi->property] && $lo_profundo > $top && $lo_profundo <= $bottom){
+							$max_value = $poly_arr[$i][$j][$data_aoi->property];
+							$max_index_i = $i;
+							$max_index_j = $j;
+						}
+					}
+				}
+			}
+			else{
+				$limite =  $poly_arr[$i][sizeof($poly_arr[$i])-1]['bottom'];
+
+				if($lo_profundo <= $poly_arr[$i][0]['bottom']){
+					$max_index_i = $i;
+					$max_index_j = 0;
+				}
+				elseif($lo_profundo >= $limite){
+					$lo_profundo = $limite;
+					for ($j=0; $j < sizeof($poly_arr[$i]); $j++) {
+						$top = $poly_arr[$i][$j]['top'];
+						$bottom = $poly_arr[$i][$j]['bottom'];
+						if($max_value < $poly_arr[$i][$j][$data_aoi->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
+							$max_value = $poly_arr[$i][$j][$data_aoi->property];
+							$max_index_i = $i;
+							$max_index_j = $j;
+						}
+					}
+				}
+				else{
+					for ($j=0; $j < sizeof($poly_arr[$i]); $j++) {
+						$top = $poly_arr[$i][$j]['top'];
+						$bottom = $poly_arr[$i][$j]['bottom'];
+						if($max_value < $poly_arr[$i][$j][$data_aoi->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
+							$max_value = $poly_arr[$i][$j][$data_aoi->property];
+							$max_index_i = $i;
+							$max_index_j = $j;
+						}
+						elseif($max_value < $poly_arr[$i][$j][$data_aoi->property] && $lo_profundo > $top && $lo_profundo <= $bottom){
+							$max_value = $poly_arr[$i][$j][$data_aoi->property];
+							$max_index_i = $i;
+							$max_index_j = $j;
+						}
+					}
+				}
+			}
+			$polygons[] = $poly_arr[$max_index_i][$max_index_j];
+		}
+		break;
+	}
+
+	for ($i=0; $i < sizeof($poly_arr); $i++) { //sorting by property values ascending; had to modify query
+		array_multisort($poly_arr[$i], SORT_ASC);
+	}
+
+	//echo sizeof($poly_arr); //number of polygons intersected by the Area Of Interest
+
 }
+
 function getPolygons(){
 	global $conn, $toReturn;
 	$data = new dataToQueryPolygons();//automatically gathers necessary data for query
