@@ -264,7 +264,8 @@ function getAOI(){
 	}
 
 	//var_dump($polygons);
-	$toReturn['coords'] = sizeof($poly_arr);
+	$toReturn['key'] = $key;
+	$toReturn['poly_num'] = sizeof($poly_arr);
 }
 
 function getPolygons(){
