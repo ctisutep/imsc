@@ -137,13 +137,13 @@ function getAOI(){
 				}
 			}
 		}
-	}
+
 
 		/* Busca el valor maximo de la lista de los polignos, dependientemente del depth que el usuario le otorgue*/
 		$max_value;
 		$max_index_i;
 		$max_index_j;
-		$lo_profundo = $data_aoi->depth;
+		$lo_profundo = 203;
 		$top;
 		$bottom;
 
@@ -155,7 +155,7 @@ function getAOI(){
 			$max_value = 0;
 			$max_index_i = 0;
 			$max_index_j = 0;
-			$lo_profundo = $data_aoi->depth;
+			$lo_profundo = 203;
 
 			if(sizeof($poly_arr[$i]) > 1 && $poly_arr[$i][sizeof($poly_arr[$i])-1][$data_aoi->property] == 0){
 				$limite =  $poly_arr[$i][sizeof($poly_arr[$i])-2]['bottom'];
@@ -239,10 +239,109 @@ function getAOI(){
 			}
 		}
 
-	//var_dump($polygons);
-	$toReturn['key'] = $key;
-	$toReturn['poly_num'] = sizeof($poly_arr);
-	$toReturn['maxAOI'] = $maximo;
+		//MINIMUN
+		$polygons = array();
+		$min_value;
+		$min_index_i;
+		$min_index_j;
+		$lo_profundo = 203;
+
+		for ($i=0; $i < sizeof($poly_arr); $i++) {
+			$min_value = PHP_INT_MAX;
+			$min_index_i = 0;
+			$min_index_j = 0;
+			$lo_profundo = 203;
+
+			if(sizeof($poly_arr[$i]) > 1 && $poly_arr[$i][sizeof($poly_arr[$i])-1][$data_aoi->property] == 0){
+				$limite = $poly_arr[$i][sizeof($poly_arr[$i])-2]['bottom'];
+
+				if($lo_profundo <= $poly_arr[$i][0]['bottom']){
+					$min_index_i = $i;
+					$min_index_j = 0;
+				}
+				elseif($lo_profundo >= $limite){
+					$lo_profundo = $limite;
+					for ($j=0; $j < sizeof($poly_arr[$i])-1; $j++) {
+						$top = $poly_arr[$i][$j]['top'];
+						$bottom = $poly_arr[$i][$j]['bottom'];
+						if($min_value > $poly_arr[$i][$j][$data_aoi->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
+							$min_value = $poly_arr[$i][$j][$data_aoi->property];
+							$min_index_i =  $i;
+							$min_index_j = $j;
+						}
+					}
+				}
+				else{
+					for ($j=0; $j < sizeof($poly_arr[$i])-1; $j++) {
+						$top = $poly_arr[$i][$j]['top'];
+						$bottom = $poly_arr[$i][$j]['bottom'];
+
+						if($min_value > $poly_arr[$i][$j][$data_aoi->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
+							$min_value = $poly_arr[$i][$j][$data_aoi->property];
+							$min_index_i = $i;
+							$min_index_j = $j;
+						}
+						elseif($min_value > $poly_arr[$i][$j][$data_aoi->property] && $lo_profundo > $top && $lo_profundo <= $bottom){
+							$min_value = $poly_arr[$i][$j][$data_aoi->property];
+							$min_index_i = $i;
+							$min_index_j = $j;
+						}
+					}
+				}
+			}
+			else{
+				$limite = $poly_arr[$i][sizeof($poly_arr[$i])-1]['bottom'];
+
+				if($lo_profundo <= $poly_arr[$i][0]['bottom']){
+					$min_index_i = $i;
+					$min_index_j = 0;
+				}
+				elseif($lo_profundo >= $limite){
+					$lo_profundo = $limite;
+					for ($j=0; $j < sizeof($poly_arr[$i]); $j++) {
+						$top = $poly_arr[$i][$j]['top'];
+						$bottom = $poly_arr[$i][$j]['bottom'];
+						if($min_value > $poly_arr[$i][$j][$data_aoi->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
+							$min_value = $poly_arr[$i][$j][$data_aoi->property];
+							$min_index_i =  $i;
+							$min_index_j = $j;
+						}
+					}
+				}
+				else{
+					for ($j=0; $j < sizeof($poly_arr[$i]); $j++) {
+						$top = $poly_arr[$i][$j]['top'];
+						$bottom = $poly_arr[$i][$j]['bottom'];
+
+						if($min_value > $poly_arr[$i][$j][$data_aoi->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
+							$min_value = $poly_arr[$i][$j][$data_aoi->property];
+							$min_index_i = $i;
+							$min_index_j = $j;
+						}
+						elseif($min_value > $poly_arr[$i][$j][$data_aoi->property] && $lo_profundo > $top && $lo_profundo <= $bottom){
+							$min_value = $poly_arr[$i][$j][$data_aoi->property];
+							$min_index_i = $i;
+							$min_index_j = $j;
+						}
+					}
+				}
+			}
+			$polygons[] = $poly_arr[$min_index_i][$min_index_j];
+		}
+		$minimo = $polygons[0][$data_aoi->property];
+		for ($i=0; $i < sizeof($polygons); $i++) {
+			if($minimo > $polygons[$i][$data_aoi->property]){
+				$minimo = $polygons[$i][$data_aoi->property];
+			}
+		}
+
+
+		//var_dump($polygons);
+		$toReturn['key'] = $key;
+		$toReturn['poly_num'] = sizeof($poly_arr);
+		$toReturn['maxAOI'] = $maximo;
+		$toReturn['minAOI']= $minimo;
+	}
 }
 
 function getPolygons(){

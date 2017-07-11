@@ -1875,6 +1875,10 @@ function showNewRect2(shape) {
 
 function drawChart() {
 	var maxaoi;
+	var minaoi;
+	var medaoi;
+	var weightedaoi;
+
 	app.payload.getMode = "AOI";
 	getparams = app.payload;
 	bounds = rec.getBounds();
@@ -1884,6 +1888,7 @@ function drawChart() {
 		//console.log(data);
 		//console.log(data.maxAOI);
 		maxaoi = parseFloat(data.maxAOI);
+		minaoi = parseFloat(data.minAOI);
 		//console.log(maxaoi);
 		//loadMax(maxaoi);
 
@@ -1892,7 +1897,7 @@ function drawChart() {
 		data.addColumn('number', 'Value');
 		data.addRows([
 			['Maximum ' + app.payload.value + ' for AOI', maxaoi],
-			['Minimum '+ app.payload.value + ' for AOI', 1],
+			['Minimum '+ app.payload.value + ' for AOI', minaoi],
 			['Median '+ app.payload.value + ' for AOI', 1],
 			['Weighted Average '+ app.payload.value + ' for AOI', 1]
 		]);
