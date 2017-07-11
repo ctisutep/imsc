@@ -101,32 +101,6 @@ function getAOI(){
 		$result = fetchAll($result);
 		$polygons = array();
 
-		$method_selected = 0;
-
-		if($data_aoi->depth_method == 1){
-			//echo " On maximum ";
-			$method_selected = "Maximum";
-		}
-		elseif ($data_aoi->depth_method == 2) {
-			//echo " On minimum ";
-			$method_selected = "Minimum";
-		}
-		elseif ($data_aoi->depth_method == 3) {
-			//echo " On median ";
-			$method_selected = "Median";
-		}
-		elseif ($data_aoi->depth_method == 4) {
-			//echo " On weighted ";
-			$method_selected = "Weighted";
-		}
-		elseif ($data_aoi->depth_method == 5) {
-			//echo " On weighted ";
-			$method_selected = "At";
-		}
-		else{
-			//echo " Nothing selected ";
-		}
-
 		$poly_arr = array();
 		$ogr;
 		$past_ogr = 0;
@@ -165,8 +139,6 @@ function getAOI(){
 		}
 	}
 
-	switch ($method_selected) {
-		case 'Maximum':
 		/* Busca el valor maximo de la lista de los polignos, dependientemente del depth que el usuario le otorgue*/
 		$max_value;
 		$max_index_i;
@@ -260,12 +232,17 @@ function getAOI(){
 			}
 			$polygons[] = $poly_arr[$max_index_i][$max_index_j];
 		}
-		break;
-	}
+		$maximo = $polygons[0][$data_aoi->property];
+		for ($i=0; $i < sizeof($polygons); $i++) {
+			if($maximo < $polygons[$i][$data_aoi->property]){
+				$maximo = $polygons[$i][$data_aoi->property];
+			}
+		}
 
 	//var_dump($polygons);
 	$toReturn['key'] = $key;
 	$toReturn['poly_num'] = sizeof($poly_arr);
+	$toReturn['maxAOI'] = $maximo;
 }
 
 function getPolygons(){
