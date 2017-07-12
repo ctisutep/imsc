@@ -138,8 +138,7 @@ function getAOI(){
 			}
 		}
 
-
-		/* Busca el valor maximo de la lista de los polignos, dependientemente del depth que el usuario le otorgue*/
+		/* Busca el valor MAXIMO de la lista de los polignos, dependientemente del depth que el usuario le otorgue*/
 		$max_value;
 		$max_index_i;
 		$max_index_j;
@@ -390,14 +389,119 @@ function getAOI(){
 			$mediano = ($medianos[ceil(sizeof($medianos)/2)-1] + $medianos[ceil(sizeof($medianos)/2)]) / 2;
 		}
 
+		//WEIGHTED
+		$polygons = array();
+		$profundo = 203;
+		$limite;
+		$n_operaciones = 0;
+		$counter = 0;
+		$top;
+		$bottom;
+		$delta;
+		$delta_depth;
+		$valor;
+		$just_one;
+		$result_weighted;
 
+		for ($i=0; $i < sizeof($poly_arr); $i++) {
+			$profundo = 203;
+			$limite = 0;
+			$n_operaciones = 0;
+			$counter = 0;
+			$top = 0;
+			$bottom = 0;
+			$delta = 0;
+			$delta_depth = 0;
+			$valor = 0;
+			$just_one = 0;
+			$result_weighted = 0;
 
+			if(sizeof($poly_arr[$i]) > 1 && $poly_arr[$i][sizeof($poly_arr[$i])-1][$data_aoi->property] == 0){ //use the penultimate index
+				$limite = $poly_arr[$i][sizeof($poly_arr[$i])-2]['bottom'];//si lo $profundo es mayor que el limite, ignorar y usar el limite como lo profundo
+				if($profundo > $limite){
+					$profundo = $limite;
+				}
+
+				for ($k=0; $k < sizeof($poly_arr[$i])-1; $k++) {
+					if($profundo >= $poly_arr[$i][$k]['top'] && $profundo >= $poly_arr[$i][$k]['bottom'] && $profundo <= $limite){
+						$n_operaciones += 1;
+					}
+					elseif($profundo >= $poly_arr[$i][$k]['top'] && $profundo <= $poly_arr[$i][$k]['bottom'] && $profundo <= $limite){
+						$n_operaciones += 1;
+					}
+				}
+
+				for ($j=0; $j < (sizeof($poly_arr[$i])-1); $j++) {
+					$top = $poly_arr[$i][$j]['top'];
+					$bottom = $poly_arr[$i][$j]['bottom'];
+					$delta = $bottom - $top;
+					$valor = $poly_arr[$i][$j][$data_aoi->property];
+					if($n_operaciones > $j){
+						if($profundo >= $delta && $profundo >= $bottom){
+							$result_weighted += (($delta/$profundo)*$valor);
+						}
+						elseif($profundo >= $delta && $profundo <= $bottom){
+							$delta_depth = $profundo - $top;
+							$result_weighted += (($delta_depth/$profundo)*$valor);
+						}
+						elseif($profundo <= $delta && $profundo <= $bottom && $just_one == 0) {
+							$just_one = 1;
+							$result_weighted += $valor;
+						}
+					} //end if n_operations
+				}
+				$poly_arr[$i][0][$data_aoi->property] = round($result_weighted,1);
+				$polygons[] = $poly_arr[$i][0];
+			} //end if for using penultimate index
+			else{ //permissible to use the last index
+				$limite = $poly_arr[$i][sizeof($poly_arr[$i])-1]['bottom'];
+				if($profundo > $limite){
+					$profundo = $limite;
+				}
+
+				for ($k=0; $k < sizeof($poly_arr[$i]); $k++) {
+					if($profundo >= $poly_arr[$i][$k]['top'] && $profundo >= $poly_arr[$i][$k]['bottom'] && $profundo <= $limite){ //we need a limit/ceiling for the bottom of this
+						$n_operaciones += 1;
+					}
+					elseif($profundo >= $poly_arr[$i][$k]['top'] && $profundo <= $poly_arr[$i][$k]['bottom'] && $profundo <= $limite){
+						$n_operaciones += 1;
+					}
+				}
+
+				for ($j=0; $j < (sizeof($poly_arr[$i])); $j++) {
+					$top = $poly_arr[$i][$j]['top'];
+					$bottom = $poly_arr[$i][$j]['bottom'];
+					$delta = $bottom - $top;
+					$valor = $poly_arr[$i][$j][$data_aoi->property];
+					if($n_operaciones > $j){
+						if($profundo >= $delta && $profundo >= $bottom){
+							$result_weighted += (($delta/$profundo)*$valor);
+						}
+						elseif($profundo >= $delta && $profundo <= $bottom){
+							$delta_depth = $profundo - $top;
+							$result_weighted += (($delta_depth/$profundo)*$valor);
+						}
+						elseif($profundo <= $delta && $profundo <= $bottom && $just_one == 0) {
+							$just_one = 1;
+							$result_weighted += $valor;
+						}
+					}
+				}
+				$poly_arr[$i][0][$data_aoi->property] = round($result_weighted,1);
+				$polygons[] = $poly_arr[$i][0];
+			}
+		} //end main for loop
 		//var_dump($polygons);
+		$promedio = $polygons[0][$data_aoi->property];
+
+
+
 		$toReturn['key'] = $key;
 		$toReturn['poly_num'] = sizeof($poly_arr);
 		$toReturn['maxAOI'] = $maximo;
 		$toReturn['minAOI']= $minimo;
 		$toReturn['medAOI']= $mediano;
+		$toReturn['weightedAOI']= $promedio;
 	}
 }
 

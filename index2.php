@@ -246,7 +246,7 @@
 	</div> -->
 </div>
 </div>
-<br> <br>
+<br>
 <div id="chart_area"> </div>
 <!--
 <div class="row">
@@ -1890,6 +1890,7 @@ function drawChart() {
 		maxaoi = parseFloat(data.maxAOI);
 		minaoi = parseFloat(data.minAOI);
 		medaoi = parseFloat(data.medAOI);
+		weightedaoi = parseFloat(data.weightedAOI);
 		//console.log(maxaoi);
 		//loadMax(maxaoi);
 
@@ -1900,7 +1901,7 @@ function drawChart() {
 			['Maximum ' + app.payload.value + ' for AOI', maxaoi],
 			['Minimum '+ app.payload.value + ' for AOI', minaoi],
 			['Median '+ app.payload.value + ' for AOI', medaoi],
-			['Weighted Average '+ app.payload.value + ' for AOI', 1]
+			['Weighted Average '+ app.payload.value + ' for AOI', weightedaoi]
 		]);
 
 		// Set chart options
