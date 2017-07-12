@@ -491,9 +491,11 @@ function getAOI(){
 				$polygons[] = $poly_arr[$i][0];
 			}
 		} //end main for loop
-		//var_dump($polygons);
-		$promedio = $polygons[0][$data_aoi->property];
-
+		$promedio = 0;
+		for ($i=0; $i < sizeof($polygons); $i++) {
+			$promedio += $polygons[$i][$data_aoi->property];
+		}
+		$promedio = ($promedio)/sizeof($polygons);
 
 
 		$toReturn['key'] = $key;

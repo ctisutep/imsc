@@ -1873,7 +1873,7 @@ function showNewRect2(shape) {
 
   infoWindow.open(app.map);
 }
-
+var chart;
 function drawChart() {
 	var maxaoi;
 	var minaoi;
@@ -1886,70 +1886,35 @@ function drawChart() {
 	getparams.NE = bounds.getNorthEast().toJSON();
 	getparams.SW = bounds.getSouthWest().toJSON();
 	$.get('polygonHandler.php', app.payload, function(data){
-		//console.log(data);
-		//console.log(data.maxAOI);
 		maxaoi = parseFloat(data.maxAOI);
 		minaoi = parseFloat(data.minAOI);
 		medaoi = parseFloat(data.medAOI);
 		weightedaoi = parseFloat(data.weightedAOI);
-		//console.log(maxaoi);
-		//loadMax(maxaoi);
+		weightedaoi = parseFloat(weightedaoi).toFixed(2);
+		weightedaoi = parseFloat(weightedaoi);
 
 		var data = new google.visualization.DataTable();
 		data.addColumn('string', 'Method');
 		data.addColumn('number', 'Value');
 		data.addRows([
-			['Maximum ' + app.payload.value + ' for AOI', maxaoi],
-			['Minimum '+ app.payload.value + ' for AOI', minaoi],
-			['Median '+ app.payload.value + ' for AOI', medaoi],
-			['Weighted Average '+ app.payload.value + ' for AOI', weightedaoi]
+			['Maximum ' + app.payload.value + ' for AOI: ' + weightedaoi, maxaoi],
+			['Minimum '+ app.payload.value + ' for AOI: ' + minaoi, minaoi],
+			['Median '+ app.payload.value + ' for AOI: ' + medaoi, medaoi],
+			['Weighted Average '+ app.payload.value + ' for AOI: ' + weightedaoi, weightedaoi]
 		]);
 
 		// Set chart options
 		var options = {'title':'Area of Interest Data',
 		'width':1300,
 		'height':600,
-		'is3D': true
+		'is3D': true,
+		sliceVisibilityThreshold:0
 		};
 
-		//var node        = document.createElement('div'),
-		//infoWindow  = new google.maps.InfoWindow(),
-		var chart = new google.visualization.PieChart(document.getElementById('chart_area'));
+		chart = new google.visualization.PieChart(document.getElementById('chart_area'));
 
 		chart.draw(data, options);
 	});
-	//function loadMax(max){
-	//	maxaoi = max;
-		//console.log(maxaoi);
-	//}
-	//console.log(maxaoi);
-	/*
-	var data = new google.visualization.DataTable();
-	data.addColumn('string', 'Method');
-	data.addColumn('number', 'Value');
-	data.addRows([
-		['Maximum ' + app.payload.value + ' for AOI', maxaoi],
-		['Minimum '+ app.payload.value + ' for AOI', 1],
-		['Median '+ app.payload.value + ' for AOI', 1],
-		['Weighted Average '+ app.payload.value + ' for AOI', 1]
-	]);
-
-	// Set chart options
-	var options = {'title':'Area of Interest Data',
-	'width':1300,
-	'height':600,
-	'is3D': true
-	};
-
-	//var node        = document.createElement('div'),
-	//infoWindow  = new google.maps.InfoWindow(),
-	var chart = new google.visualization.PieChart(document.getElementById('chart_area'));
-
-	chart.draw(data, options);
-	//infoWindow.setContent(node);
-	//infoWindow.setPosition(center);
-	//infoWindow.open(map);
-	*/
 }
 
 /******************************************************************************/
@@ -1960,9 +1925,15 @@ function removePolygons(){
 		}
 	}
 	app.polygons = [];
+	app.infoWindow.close();
 	document.getElementById('legend').style.visibility = "hidden";
 	$('#legend').find('*').not('h3').remove();
 	$('#description').find('*').not('h3').remove();
+	if(typeof chart === 'undefined'){
+
+	}else{
+		chart.clearChart();
+	}
 }
 function printMaps() { //testing printing a map
 	var body               = $('body');
