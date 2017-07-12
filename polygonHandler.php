@@ -375,28 +375,29 @@ function getAOI(){
 				}
 			}
 		}
-		for ($i=0; $i < sizeof($polygons); $i++) { //sorting by property values ascending; had to modify query
-			array_multisort($polygons[$i][$data_aoi->property], SORT_DESC);
+		$medianos = array();
+		for ($i=0; $i < sizeof($polygons); $i++) {
+			$medianos[$i] = $polygons[$i][$data_aoi->property];
 		}
+		array_multisort($medianos, SORT_ASC);
 		$mediano;
-
 		if(sizeof($polygons)%2 == 1){ //odd
-			echo "odd";
-			echo ceil(sizeof($polygons)/2)-1;
+			//echo "odd";
+			//echo ceil(sizeof($medianos)/2)-1;
+			$mediano = $medianos[ceil(sizeof($medianos)/2)-1];
 		}
 		else{ //even
-			echo "even";
-			echo ceil(sizeof($polygons)/2)-1;
-			echo ceil(sizeof($polygons)/2);
+			$mediano = ($medianos[ceil(sizeof($medianos)/2)-1] + $medianos[ceil(sizeof($medianos)/2)]) / 2;
 		}
 
 
 
-		var_dump($polygons);
+		//var_dump($polygons);
 		$toReturn['key'] = $key;
 		$toReturn['poly_num'] = sizeof($poly_arr);
 		$toReturn['maxAOI'] = $maximo;
 		$toReturn['minAOI']= $minimo;
+		$toReturn['medAOI']= $mediano;
 	}
 }
 
