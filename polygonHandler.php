@@ -649,6 +649,21 @@ function getPolygons(){
 						}
 					}
 				}
+				else{
+					for ($i=0; $i < sizeof($poly_arr[$j]); $i++) {
+						if((sizeof($poly_arr[$j])-1)%2 == 1 && $done_med == 0){//odd
+							$med_index_i = ceil(sizeof($poly_arr[$j])/2); //have to subtract one from this value to get the index correctly
+							$done_med = 1;
+							$polygons[] = $poly_arr[$j][$med_index_i - 1];
+						}
+						elseif(sizeof($poly_arr[$j])%2 == 0 && $done_med == 0){ //even
+							$med_value = ($poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1][$data->property] + $poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2))][$data->property]) / 2;
+							$poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1][$data->property] = $med_value;
+							$polygons[] = $poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1];
+							$done_med = 1;
+						}
+					}
+				}
 			}
 			break;
 
