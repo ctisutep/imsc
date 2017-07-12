@@ -1796,6 +1796,7 @@ function initMap() {
 function drawAnotherRectangle(){
   if (selectedRec) {
     selectedRec.setMap(null);
+		infoWindow.close();
     // To show:
     drawingManager.setOptions({
       drawingControl: true,
@@ -1817,7 +1818,7 @@ function deleteSelectedShape() {
   if (selectedShape) {
 		app.payload.AoI = 0;
     selectedShape.setMap(null);
-    // To show:
+    // To show
     drawingManager.setOptions({
       drawingControl: true
     });
