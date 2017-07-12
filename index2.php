@@ -1889,6 +1889,7 @@ function drawChart() {
 		//console.log(data.maxAOI);
 		maxaoi = parseFloat(data.maxAOI);
 		minaoi = parseFloat(data.minAOI);
+		medaoi = parseFloat(data.medAOI);
 		//console.log(maxaoi);
 		//loadMax(maxaoi);
 
@@ -1898,7 +1899,7 @@ function drawChart() {
 		data.addRows([
 			['Maximum ' + app.payload.value + ' for AOI', maxaoi],
 			['Minimum '+ app.payload.value + ' for AOI', minaoi],
-			['Median '+ app.payload.value + ' for AOI', 1],
+			['Median '+ app.payload.value + ' for AOI', medaoi],
 			['Weighted Average '+ app.payload.value + ' for AOI', 1]
 		]);
 
