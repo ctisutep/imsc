@@ -231,7 +231,6 @@ function getAOI(){
 			}
 			$polygons[] = $poly_arr[$max_index_i][$max_index_j];
 		}
-		var_dump($polygons);
 		$maximo = $polygons[0][$data_aoi->property];
 		for ($i=0; $i < sizeof($polygons); $i++) {
 			if($maximo < $polygons[$i][$data_aoi->property]){
