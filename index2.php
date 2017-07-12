@@ -1897,7 +1897,7 @@ function drawChart() {
 		data.addColumn('string', 'Method');
 		data.addColumn('number', 'Value');
 		data.addRows([
-			['Maximum ' + app.payload.value + ' for AOI: ' + weightedaoi, maxaoi],
+			['Maximum ' + app.payload.value + ' for AOI: ' + maxaoi, maxaoi],
 			['Minimum '+ app.payload.value + ' for AOI: ' + minaoi, minaoi],
 			['Median '+ app.payload.value + ' for AOI: ' + medaoi, medaoi],
 			['Weighted Average '+ app.payload.value + ' for AOI: ' + weightedaoi, weightedaoi]
