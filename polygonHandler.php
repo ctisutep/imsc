@@ -239,7 +239,7 @@ function getAOI(){
 			}
 		}
 
-		//MINIMUN
+		//MINIMUM
 		$polygons = array();
 		$min_value;
 		$min_index_i;
@@ -335,8 +335,64 @@ function getAOI(){
 			}
 		}
 
+		//MEDIAN
+		$polygons = array();
+		$med_index_i;
+		$med_value = 0;
+		$done_med;
 
-		//var_dump($polygons);
+		for ($j=0; $j < sizeof($poly_arr); $j++) {
+			$med_index_i = 0;
+			$done_med = 0;
+			if(sizeof($poly_arr[$j]) > 1 && $poly_arr[$j][sizeof($poly_arr[$j])-1][$data_aoi->property] == 0){
+				for ($i=0; $i < sizeof($poly_arr[$j])-1; $i++) {
+					if((sizeof($poly_arr[$j])-1)%2 == 1 && $done_med == 0){//odd
+						$med_index_i = ceil(sizeof($poly_arr[$j])/2); //have to subtract one from this value to get the index correctly
+						$done_med = 1;
+						$polygons[] = $poly_arr[$j][$med_index_i - 1];
+					}
+					elseif((sizeof($poly_arr[$j])-1)%2 == 0 && $done_med == 0){ //even
+						$med_value = ($poly_arr[$j][(ceil((sizeof($poly_arr[$j])-1)/2)) - 1][$data_aoi->property] + $poly_arr[$j][(ceil((sizeof($poly_arr[$j])-1)/2))][$data_aoi->property]) / 2;
+						$poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1][$data_aoi->property] = $med_value;
+						$polygons[] = $poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1];
+						$done_med = 1;
+					}
+				}
+			}
+			else{
+				for ($i=0; $i < sizeof($poly_arr[$j]); $i++) {
+					if((sizeof($poly_arr[$j])-1)%2 == 1 && $done_med == 0){//odd
+						$med_index_i = ceil(sizeof($poly_arr[$j])/2); //have to subtract one from this value to get the index correctly
+						$done_med = 1;
+						$polygons[] = $poly_arr[$j][$med_index_i - 1];
+					}
+					elseif(sizeof($poly_arr[$j])%2 == 0 && $done_med == 0){ //even
+						$med_value = ($poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1][$data_aoi->property] + $poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2))][$data_aoi->property]) / 2;
+						$poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1][$data_aoi->property] = $med_value;
+						$polygons[] = $poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1];
+						$done_med = 1;
+					}
+				}
+			}
+		}
+		for ($i=0; $i < sizeof($polygons); $i++) { //sorting by property values ascending; had to modify query
+			array_multisort($polygons[$i][$data_aoi->property], SORT_DESC);
+		}
+		$mediano;
+
+		if(sizeof($polygons)%2 == 1){ //odd
+			echo "odd";
+			echo ceil(sizeof($polygons)/2)-1;
+		}
+		else{ //even
+			echo "even";
+			echo ceil(sizeof($polygons)/2)-1;
+			echo ceil(sizeof($polygons)/2);
+		}
+
+
+
+		var_dump($polygons);
 		$toReturn['key'] = $key;
 		$toReturn['poly_num'] = sizeof($poly_arr);
 		$toReturn['maxAOI'] = $maximo;
@@ -347,7 +403,7 @@ function getAOI(){
 function getPolygons(){
 	global $conn, $toReturn;
 	$data = new dataToQueryPolygons();//automatically gathers necessary data for query
-	$simplificationFactor = polygonDefinition( $data );//maybe it should be changing(be variable) in the future with  more given parameters($_GET)
+	$simplificationFactor = polygonDefinition($data);//maybe it should be changing(be variable) in the future with  more given parameters($_GET)
 	//create zoom area (AOI) polygon for further query
 	$query = "SET @geom1 = 'POLYGON(($data->lng1	$data->lat1,$data->lng1	$data->lat2,$data->lng2	$data->lat2,$data->lng2	$data->lat1,$data->lng1	$data->lat1))'";
 	$toReturn['query'] = $query;
