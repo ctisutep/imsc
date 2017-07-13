@@ -1750,7 +1750,7 @@ function initMap() {
     drawingControl: true,
     drawingControlOptions: {
       position: google.maps.ControlPosition.TOP_CENTER,
-      drawingModes: ['rectangle']
+      drawingModes: ['rectangle', 'polyline']
     },
     rectangleOptions: {
       draggable: true,
@@ -1776,8 +1776,14 @@ function initMap() {
     rec.type = e.type;
 		app.payload.AoI = 1;
     setSelection(rec);
-
+		var paths;
     google.maps.event.addListener(rec, 'click', function() {
+			paths = rec.getPath();
+			paths = paths.getArray();
+			for (var i = 0; i < paths.length; i++) {
+				console.log(paths[i].lat());
+				console.log(paths[i].lng());
+			}
       clickRec(rec);
 			drawChart();
     });
@@ -1802,7 +1808,7 @@ function drawAnotherRectangle(){
       drawingControl: true,
       drawingControlOptions: {
         position: google.maps.ControlPosition.TOP_CENTER,
-        drawingModes: ['rectangle']
+        drawingModes: ['rectangle','polyline']
       },
       rectangleOptions: {
         draggable: true,
