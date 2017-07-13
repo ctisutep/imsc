@@ -1705,7 +1705,7 @@ function setDistrict(){
 	app.map.setZoom(10);
 }
 /******************************************************************************/
-google.charts.load('current', {'packages':['corechart']});
+google.charts.load('current', {'packages':['corechart', 'bar']});
 
 // Set a callback to run when the Google Visualization API is loaded.
 google.charts.setOnLoadCallback(initialize);
@@ -1893,28 +1893,54 @@ function drawChart() {
 		weightedaoi = parseFloat(weightedaoi).toFixed(2);
 		weightedaoi = parseFloat(weightedaoi);
 
-		var data = new google.visualization.DataTable();
+		var data = google.visualization.arrayToDataTable([
+			['Method', 'Value',],
+			['Maximum ' + app.payload.value + ' for AOI', maxaoi],
+			['Minimum '+ app.payload.value + ' for AOI', minaoi],
+			['Median '+ app.payload.value + ' for AOI', medaoi],
+			['Weighted Average '+ app.payload.value + ' for AOI', weightedaoi]
+		]);
+
+		var options = {
+			title: 'Data for Area Of Interest',
+			chartArea: {
+				width: '40%'
+			},
+			hAxis: {
+				title: 'Values',
+				minValue: 0
+			},
+			vAxis: {
+				title: 'Methods'
+			}
+		};
+
+		chart = new google.visualization.BarChart(document.getElementById('chart_area'));
+		chart.draw(data, options);
+
+		/*var data = new google.visualization.DataTable();
 		data.addColumn('string', 'Method');
 		data.addColumn('number', 'Value');
 		data.addRows([
-			['Maximum ' + app.payload.value + ' for AOI: ' + maxaoi, maxaoi],
-			['Minimum '+ app.payload.value + ' for AOI: ' + minaoi, minaoi],
-			['Median '+ app.payload.value + ' for AOI: ' + medaoi, medaoi],
-			['Weighted Average '+ app.payload.value + ' for AOI: ' + weightedaoi, weightedaoi]
-		]);
+		['Maximum ' + app.payload.value + ' for AOI: ' + maxaoi, maxaoi],
+		['Minimum '+ app.payload.value + ' for AOI: ' + minaoi, minaoi],
+		['Median '+ app.payload.value + ' for AOI: ' + medaoi, medaoi],
+		['Weighted Average '+ app.payload.value + ' for AOI: ' + weightedaoi, weightedaoi]
+	]);
 
-		// Set chart options
-		var options = {'title':'Area of Interest Data',
-		'width':1300,
-		'height':600,
-		'is3D': true,
-		sliceVisibilityThreshold:0
-		};
+	// Set chart options
+	var options = {'title':'Area of Interest Data',
+	'width':1300,
+	'height':600,
+	'is3D': true,
+	sliceVisibilityThreshold:0
+};
 
-		chart = new google.visualization.PieChart(document.getElementById('chart_area'));
-
-		chart.draw(data, options);
-	});
+//chart = new google.visualization.PieChart(document.getElementById('chart_area'));
+chart = new google.visualization.Bar(document.getElementById('chart_area'));
+chart.draw(data, options);
+});*/
+});
 }
 
 /******************************************************************************/
