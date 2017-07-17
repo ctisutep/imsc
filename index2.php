@@ -1757,7 +1757,14 @@ function initMap() {
       clickable: true,
       editable: true,
 			zIndex: 10
-    }
+    },
+		polylineOptions: {
+			clickable: true,
+			draggable: true,
+			editable: false,
+			zIndex: 10,
+			strokeWeight: 4
+		}
   });
 
   drawingManager.setMap(app.map);
@@ -1778,12 +1785,14 @@ function initMap() {
     setSelection(rec);
 		var paths;
     google.maps.event.addListener(rec, 'click', function() {
-			paths = rec.getPath();
-			paths = paths.getArray();
-			for (var i = 0; i < paths.length; i++) {
-				console.log(paths[i].lat());
-				console.log(paths[i].lng());
-			}
+			if(rec.type == 'polyline'){
+				paths = rec.getPath();
+				paths = paths.getArray();
+				for (var i = 0; i < paths.length; i++) {
+					console.log(paths[i].lat());
+					console.log(paths[i].lng());
+				}
+		  }
       clickRec(rec);
 			drawChart();
     });
@@ -1815,7 +1824,14 @@ function drawAnotherRectangle(){
         clickable: true,
         editable: true,
 				zIndex: 10
-      }
+      },
+			polylineOptions: {
+				clickable: true,
+				draggable: true,
+				editable: false,
+				zIndex: 10,
+				strokeWeight: 4
+			}
     });
   }
 }
@@ -1845,24 +1861,26 @@ function setSelection(shape) {
   //selectColor(shape.get('fillColor') || shape.get('strokeColor'));
 }
 function clickRec(shape){
-	var ne = shape.getBounds().getNorthEast();
-	var sw = shape.getBounds().getSouthWest();
-	var center = shape.getBounds().getCenter();
-	var southWest = new google.maps.LatLng(sw.lat(), sw.lng());
-	var northEast = new google.maps.LatLng(ne.lat(), ne.lng());
-	var southEast = new google.maps.LatLng(sw.lat(), ne.lng());
-	var northWest = new google.maps.LatLng(ne.lat(), sw.lng());
-	var area = google.maps.geometry.spherical.computeArea([northEast, northWest, southWest, southEast]);
-	area = parseInt(area);
-	area = area.toLocaleString();
-  var contentString = '<b>Rectangle clicked.</b><br><br>' + 'Area is: ' + area + ' m^2';
-  var center = shape.getBounds().getCenter();
+	if(shape.type == 'rectangle'){
+		var ne = shape.getBounds().getNorthEast();
+		var sw = shape.getBounds().getSouthWest();
+		var center = shape.getBounds().getCenter();
+		var southWest = new google.maps.LatLng(sw.lat(), sw.lng());
+		var northEast = new google.maps.LatLng(ne.lat(), ne.lng());
+		var southEast = new google.maps.LatLng(sw.lat(), ne.lng());
+		var northWest = new google.maps.LatLng(ne.lat(), sw.lng());
+		var area = google.maps.geometry.spherical.computeArea([northEast, northWest, southWest, southEast]);
+		area = parseInt(area);
+		area = area.toLocaleString();
+		var contentString = '<b>Rectangle clicked.</b><br><br>' + 'Area is: ' + area + ' m^2';
+		var center = shape.getBounds().getCenter();
 
-  // Set the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(center);
+		// Set the info window's content and position.
+		infoWindow.setContent(contentString);
+		infoWindow.setPosition(center);
 
-  infoWindow.open(app.map);
+		infoWindow.open(app.map);
+	}
 }
 
 function showNewRect2(shape) {
@@ -1881,72 +1899,51 @@ function showNewRect2(shape) {
 }
 var chart;
 function drawChart() {
-	var maxaoi;
-	var minaoi;
-	var medaoi;
-	var weightedaoi;
+	if(rec.type == 'rectangle'){
+		var maxaoi;
+		var minaoi;
+		var medaoi;
+		var weightedaoi;
 
-	app.payload.getMode = "AOI";
-	getparams = app.payload;
-	bounds = rec.getBounds();
-	getparams.NE = bounds.getNorthEast().toJSON();
-	getparams.SW = bounds.getSouthWest().toJSON();
-	$.get('polygonHandler.php', app.payload, function(data){
-		maxaoi = parseFloat(data.maxAOI);
-		minaoi = parseFloat(data.minAOI);
-		medaoi = parseFloat(data.medAOI);
-		weightedaoi = parseFloat(data.weightedAOI);
-		weightedaoi = parseFloat(weightedaoi).toFixed(2);
-		weightedaoi = parseFloat(weightedaoi);
+		app.payload.getMode = "AOI";
+		getparams = app.payload;
+		bounds = rec.getBounds();
+		getparams.NE = bounds.getNorthEast().toJSON();
+		getparams.SW = bounds.getSouthWest().toJSON();
+		$.get('polygonHandler.php', app.payload, function(data){
+			maxaoi = parseFloat(data.maxAOI);
+			minaoi = parseFloat(data.minAOI);
+			medaoi = parseFloat(data.medAOI);
+			weightedaoi = parseFloat(data.weightedAOI);
+			weightedaoi = parseFloat(weightedaoi).toFixed(2);
+			weightedaoi = parseFloat(weightedaoi);
 
-		var data = google.visualization.arrayToDataTable([
-			['Method', 'Value',],
-			['Maximum ' + app.payload.value + ' for AOI', maxaoi],
-			['Minimum '+ app.payload.value + ' for AOI', minaoi],
-			['Median '+ app.payload.value + ' for AOI', medaoi],
-			['Weighted Average '+ app.payload.value + ' for AOI', weightedaoi]
-		]);
+			var data = google.visualization.arrayToDataTable([
+				['Method', 'Value',],
+				['Maximum ' + app.payload.value + ' for AOI', maxaoi],
+				['Minimum '+ app.payload.value + ' for AOI', minaoi],
+				['Median '+ app.payload.value + ' for AOI', medaoi],
+				['Weighted Average '+ app.payload.value + ' for AOI', weightedaoi]
+			]);
 
-		var options = {
-			title: 'Data for Area Of Interest',
-			chartArea: {
-				width: '40%'
-			},
-			hAxis: {
-				title: 'Values',
-				minValue: 0
-			},
-			vAxis: {
-				title: 'Methods'
-			}
-		};
+			var options = {
+				title: 'Data for Area Of Interest',
+				chartArea: {
+					width: '40%'
+				},
+				hAxis: {
+					title: 'Values',
+					minValue: 0
+				},
+				vAxis: {
+					title: 'Methods'
+				}
+			};
 
-		chart = new google.visualization.BarChart(document.getElementById('chart_area'));
-		chart.draw(data, options);
-
-		/*var data = new google.visualization.DataTable();
-		data.addColumn('string', 'Method');
-		data.addColumn('number', 'Value');
-		data.addRows([
-		['Maximum ' + app.payload.value + ' for AOI: ' + maxaoi, maxaoi],
-		['Minimum '+ app.payload.value + ' for AOI: ' + minaoi, minaoi],
-		['Median '+ app.payload.value + ' for AOI: ' + medaoi, medaoi],
-		['Weighted Average '+ app.payload.value + ' for AOI: ' + weightedaoi, weightedaoi]
-	]);
-
-	// Set chart options
-	var options = {'title':'Area of Interest Data',
-	'width':1300,
-	'height':600,
-	'is3D': true,
-	sliceVisibilityThreshold:0
-};
-
-//chart = new google.visualization.PieChart(document.getElementById('chart_area'));
-chart = new google.visualization.Bar(document.getElementById('chart_area'));
-chart.draw(data, options);
-});*/
-});
+			chart = new google.visualization.BarChart(document.getElementById('chart_area'));
+			chart.draw(data, options);
+		});
+	}
 }
 
 /******************************************************************************/
