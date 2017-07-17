@@ -12,7 +12,10 @@ if(isset($_GET['getMode']) AND $_GET['getMode'] == "polygons"){//**************T
 	getPolygons(); //cambio de Ricardo
 }
 if(isset($_GET['getMode']) AND $_GET['getMode'] == "AOI"){//**************The case in charge of retrieving polygon search (run)****************************(1)
-	getAOI(); //cambio de Ricardo
+	getAOI();
+}
+if(isset($_GET['getMode']) AND isset($_GET['lineString']) AND $_GET['lineString'] != null AND $_GET['getMode'] == "line"){//**************The case in charge of retrieving polygon search (run)****************************(1)
+	getLine();
 }
 else if(isset($_GET['district'])){//*******************This is the case for retieving the districts from table**********************(2)
 	districtNames();
@@ -39,6 +42,7 @@ class dataToQueryPolygons{
 	public $lng1;
 	public $depth;
 	public $depth_method;
+	public $lineString;
 
 	public function __construct(){
 		$this->table = $_GET['table'];
@@ -50,6 +54,7 @@ class dataToQueryPolygons{
 		$this->lng1 = $_GET['SW']['lng'];
 		$this->depth = ($_GET['depth'] * 2.5400);
 		$this->depth_method = $_GET['depth_method'];
+		$this->lineString = $_GET['lineString'];
 	}
 }
 //depending on which table (for a given property) will be used in query, this will determine the appropriate key
@@ -83,7 +88,22 @@ function districtNames(){
 		$toReturn['coords'] = $result->fetch_all();
 	}
 }
+function getLine(){
+	global $conn, $toReturn;
+	$data_line = new dataToQueryPolygons();
+	$simplificationFactor = polygonDefinition($data_line);
+	$query = "SET @geomline = LineString($data_line->lineString)";
+	$toReturn['query'] = $query;
+	$result = mysqli_query($conn, $query);
+	$key = setKey($data_line->table);
 
+	$query2 = "SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data_line->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geomline, 1), p.SHAPE) ORDER BY OGR_FID DESC, top DESC";
+	$toReturn['query2'] = $query2;
+	$result = mysqli_query($conn, $query2);
+	$result = fetchAll($result);
+	$polygons = array();
+
+}
 function getAOI(){
 	global $conn, $toReturn;
 	$data_aoi = new dataToQueryPolygons();

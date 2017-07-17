@@ -299,7 +299,7 @@
 <script src="js/properties.js"></script>
 <script>
 
-var app = {map:null, polygons:null, payload:{getMode:"polygons", property:null, district:null, depth:null, depth_method:null, AoI:null}}; //added value for depth method
+var app = {map:null, polygons:null, payload:{getMode:"polygons", property:null, district:null, depth:null, depth_method:null, AoI:null, lineString:null}}; //added value for depth method
 var hecho = false;
 //var suggested = all the aliases of the properties, note: not all properties have an alias
 $(document).ready(function(){//esto pasa recien cargada la pagina
@@ -1763,6 +1763,7 @@ function initMap() {
 			clickable: true,
 			draggable: true,
 			editable: false,
+			geodesic: true,
 			zIndex: 10,
 			strokeWeight: 4
 		}
@@ -1787,12 +1788,6 @@ function initMap() {
     google.maps.event.addListener(rec, 'click', function() {
 			if(rec.type == 'polyline'){
 				lineParser();
-				/*paths = rec.getPath();
-				paths = paths.getArray();
-				for (var i = 0; i < paths.length; i++) {
-					console.log(paths[i].lng());
-					console.log(paths[i].lat());
-				}*/
 		  }
       clickRec(rec);
 			drawChart();
@@ -1811,6 +1806,7 @@ function initMap() {
 
 function drawAnotherRectangle(){
   if (selectedRec) {
+		app.payload.lineString = null;
     selectedRec.setMap(null);
 		infoWindow.close();
     // To show:
@@ -1830,6 +1826,7 @@ function drawAnotherRectangle(){
 				clickable: true,
 				draggable: true,
 				editable: false,
+				geodesic: true,
 				zIndex: 10,
 				strokeWeight: 4
 			}
@@ -1948,6 +1945,7 @@ function drawChart() {
 }
 
 function lineParser(){
+	app.payload.getMode = "line";
 	var lineString = "";
 	paths = rec.getPath();
 	paths = paths.getArray();
@@ -1962,6 +1960,8 @@ function lineParser(){
 		}
 	}
 	console.log(lineString);
+	app.payload.lineString = lineString;
+	$.get('polygonHandler.php', app.payload, function(data){});
 }
 
 /******************************************************************************/
