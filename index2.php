@@ -1732,6 +1732,7 @@ var map;
 var infoWindow;
 var selectedRec;
 var drawingManager;
+var paths;
 
 function initMap() {
 	app.map = new google.maps.Map(document.getElementById('map'), {
@@ -1783,15 +1784,15 @@ function initMap() {
     rec.type = e.type;
 		app.payload.AoI = 1;
     setSelection(rec);
-		var paths;
     google.maps.event.addListener(rec, 'click', function() {
 			if(rec.type == 'polyline'){
-				paths = rec.getPath();
+				lineParser();
+				/*paths = rec.getPath();
 				paths = paths.getArray();
 				for (var i = 0; i < paths.length; i++) {
-					console.log(paths[i].lat());
 					console.log(paths[i].lng());
-				}
+					console.log(paths[i].lat());
+				}*/
 		  }
       clickRec(rec);
 			drawChart();
@@ -1944,6 +1945,23 @@ function drawChart() {
 			chart.draw(data, options);
 		});
 	}
+}
+
+function lineParser(){
+	var lineString = "";
+	paths = rec.getPath();
+	paths = paths.getArray();
+
+	for (var i = 0; i < paths.length; i++) {
+		console.log(paths[i].lng() + ' ' + paths[i].lat());
+		if(paths.length > 1 && i < paths.length - 1){
+			lineString += paths[i].lng() + ' ' + paths[i].lat() + ',';
+		}
+		else{
+			lineString += paths[i].lng() + ' ' + paths[i].lat();
+		}
+	}
+	console.log(lineString);
 }
 
 /******************************************************************************/
