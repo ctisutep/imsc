@@ -63,7 +63,7 @@
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="text-center" style='font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;'>
 				<h3 style="color:#FF8000;margin-right:8%;padding-top:1%;">CENTER FOR TRANSPORTATION INFRASTRUCTURE SYSTEMS</h3>
-				<h6><i style="color:white;margin-right:8%">"The Only Research Center in the Nation that is Designated as a Member of both National and Regional University Transportation Center"</i></h6>
+				<h6><i style="color:white;margin-right:8%">"Designated as a Member of National, Regional, and Tier 1 University Transportation Center."</i></h6>
 			</div>
 
 		</div>
@@ -183,33 +183,33 @@
 									<option value="" disabled selected>Select a ground property</option>
 								</select>
 							</div> <br>
-							</div>
-							<!-- Depth methods-->
-							<div class="row">
-								<div class="col-md-5 col-md-offset-0">
-									<label> Depth:</label> <br>
-									<div class="input-group">
-										<!-- <label> Depth:</label> <br> -->
-										<span class="input-group-addon" id="basic-addon3">inch</span>
-										<input type="number" class="form-control" value="0" placeholder="...inches" id="depth" aria-describedby="basic-addon3">
-										<!-- <input type="text" value="0" id="depth" placeholder=" ...inches" style="color: black;"> -->
-										<!--<p> Top = <input type="text" value="" id="depth_top" placeholder="...inches" style="color: black;"></p>
-										<p> Bottom = <input type="text" value="" id="depth_bottom" placeholder="...inches" style="color: black;"></p>-->
-									</div>
-								</div>
-								<div class="col-md-5 col-md-offset-2">
-									<label> Method:</label> <br>
-									<select id="methods" class="form-control">
-										<option value="" disabled selected>Select method</option>
-										<option value="1" id="max_method">Max</option>
-										<option value="2" id="min_method">Min</option>
-										<option value="3" id="med_method">Median</option>
-										<option value="4" id="weight_method">Weighted average</option>
-										<option value="5" id="specific_method">At Specific Depth</option>
-									</select>
+						</div>
+						<!-- Depth methods-->
+						<div class="row">
+							<div class="col-md-5 col-md-offset-0">
+								<label> Depth:</label> <br>
+								<div class="input-group">
+									<!-- <label> Depth:</label> <br> -->
+									<span class="input-group-addon" id="basic-addon3">inch</span>
+									<input type="number" class="form-control" value="0" placeholder="...inches" id="depth" aria-describedby="basic-addon3">
+									<!-- <input type="text" value="0" id="depth" placeholder=" ...inches" style="color: black;"> -->
+									<!--<p> Top = <input type="text" value="" id="depth_top" placeholder="...inches" style="color: black;"></p>
+									<p> Bottom = <input type="text" value="" id="depth_bottom" placeholder="...inches" style="color: black;"></p>-->
 								</div>
 							</div>
-							<!-- End depth methods -->
+							<div class="col-md-5 col-md-offset-2">
+								<label> Method:</label> <br>
+								<select id="methods" class="form-control">
+									<option value="" disabled selected>Select method</option>
+									<option value="1" id="max_method">Max</option>
+									<option value="2" id="min_method">Min</option>
+									<option value="3" id="med_method">Median</option>
+									<option value="4" id="weight_method">Weighted average</option>
+									<option value="5" id="specific_method">At Specific Depth</option>
+								</select>
+							</div>
+						</div>
+						<!-- End depth methods -->
 						<div> <p> </p> </div> <!--separate-->
 						<div class="row">
 							<button class="btn btn-success form-control" type="button" id="run" onClick="getPolygons()">Run</button>
@@ -225,7 +225,7 @@
 							<p> </p>
 						</div>
 						<div class="row">
-							  <button type="button" class="btn btn-default form-control" id="draw" onclick="drawAnotherRectangle();">Delete drawn area of interest</button>
+							<button type="button" class="btn btn-default form-control" id="draw" onclick="drawAnotherRectangle();">Delete drawn area of interest</button>
 						</div>
 
 						<div id="load"> </div>
@@ -249,6 +249,7 @@
 <br>
 <div id="chart_area"> </div>
 
+<!--
 <div class="row">
 	<div class = "col-md-5">
 
@@ -282,7 +283,7 @@
 	</div>
 </div>
 
-<p></p>
+<p></p> -->
 <!--Description text-->
 
 
@@ -2063,7 +2064,8 @@ function wktFormatter(poly){
 	return shape_s;
 }
 
-function spawn(){
+/*
+function spawn(){ //Experimental super secret stuff
 	//document.getElementById('legend').style.visibility = "visible";
 	var labels = document.getElementById('labels').value;
 	var value = document.getElementById('value').value;
@@ -2077,7 +2079,7 @@ function spawn(){
 	div.innerHTML = "<br> <strong>" + gypsum + "</strong> <br>" + gypsumText + "<br> <br>";
 	var descriptor = document.getElementById('description');
 	descriptor.appendChild(div);
-	*/
+
 	//console.log(labels);
 	//console.log(value);
 	if(labels == 0 || value == 0){
@@ -2099,7 +2101,7 @@ function spawn(){
 	//console.log(count);
 	console.log(separations);
 }
-
+*/
 // ***********
 </script>
 <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCY0B3_Fr1vRpgJDdbvNmrVyXmoOOtiq64&callback=initMap"></script>-->
