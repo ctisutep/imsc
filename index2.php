@@ -73,181 +73,208 @@
 	<!-- Page Content -->
 
 	<!-- Content Row -->
+
+
+
 	<div>
 
-		<div class="row">
-			<div class="col-md-9">
-				<!--<h1> testing </h1>-->
-				<div id="map"></div>
-				<div id="description"></div>
-			</div>
-			<div class="col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<center><h3 class="panel-title">Toolbar</h3></center>
-					</div>
-					<div class="panel-body">
 
+		<div class="row">
+			<div class="col-md-9	">
+				<div class="row">
+					<div id="map"></div>
+					<div id="description"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-5">
 						<div class="row">
-							<label>District:</label>
-							<select id="target" class="form-control">
-								<option value="" disabled selected>Select a district</option>
-								<option value="32.43561304116276, -100.1953125" data-district="abeline">
-									Abilene
-								</option>
-								<option value="35.764343479667176, -101.49169921875" data-district="amarillo">
-									Amarillo
-								</option>
-								<option value="32.69651010951669, -94.691162109375" data-district="atlanta">
-									Atlanta
-								</option>
-								<option value="30.25391637229704, -98.23212890625" data-district="austin">
-									Austin
-								</option>
-								<option value="30.40211367909724, -94.39453125" data-district="beaumont">
-									Beaumont
-								</option>
-								<option value="31.765537409484374, -99.140625" data-district="brownwood">
-									Brownwood
-								</option>
-								<option value="30.894611546632302, -96.30615234375" data-district="bryan">
-									Bryan
-								</option>
-								<option value="34.397844946449865, -100.37109375" data-district="childress">
-									Childress
-								</option>
-								<option value="28.110748760633534, -97.71240234375" data-district="corpus">
-									Corpus Christi
-								</option>
-								<option value="32.54681317351514, -96.85546875" data-district="dallas">
-									Dallas
-								</option>
-								<!--<option value="30.694611546632302, -104.52392578125" data-district="elPaso">-->
-								<option value="31.770546, -106.504874" data-district="elPaso">
-									El Paso
-								</option>
-								<option value="32.62087018318113, -97.75634765625" data-district="fortWorth">
-									Fort Worth
-								</option>
-								<option value="29.661670115197377, -95.33935546875" data-district="houston">
-									Houston
-								</option>
-								<option value="28.613459424004418, -99.90966796875" data-district="laredo">
-									Laredo
-								</option>
-								<option value="33.43144133557529, -101.93115234375" data-district="lubbock">
-									Lubbock
-								</option>
-								<option value="31.203404950917395, -94.7021484375" data-district="lufkin">
-									Lufkin
-								</option>
-								<option value="31.203404950917395, -102.568359375" data-district="odessa">
-									Odessa
-								</option>
-								<option value="33.43144133557529, -95.625" data-district="paris">
-									Paris
-								</option>
-								<option value="26.951453083498258, -98.32763671875" data-district="pharr">
-									Pharr
-								</option>
-								<option value="31.10819929911196, -100.48095703125" data-district="sanAngelo">
-									San Angelo
-								</option>
-								<option value="29.13297013087864, -98.89892578125" data-district="sanAntonio">
-									San Antonio
-								</option>
-								<option value="32.222095840502334, -95.33935546875" data-district="tyler">
-									Tyler
-								</option>
-								<option value="31.403404950917395, -97.119140625" data-district="waco">
-									Waco
-								</option>
-								<option value="33.77914733128647, -98.37158203125" data-district="wichitaFalls">
-									Wichita Falls
-								</option>
-								<option value="29.05616970274342, -96.8115234375" data-district="yoakum">
-									Yoakum
-								</option>
-							</select>
+							<!--<img src="http://netgemein.de/kino.1JPG2.jpg" alt="Mountain View" style="width:100%;height:100%;">-->
+							<div id="chart_area_1"> </div>
 						</div>
-						<p> </p> <!--sepator-->
-						<div class="row"> <!--search-->
-							<label> Soil Property: </label>
+						<div class="row">
+							<!-- <img src="http://netgemein.de/kino.1JPG2.jpg" alt="Mountain View" style="width:100%;height:100%;"> -->
+							<div id="chart_area_2"> </div>
 						</div>
-						<div class="row"> <!--search-->
-							<div class="input-group">
-								<!--<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
-								<input type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="autocomplete" autocomplete="off">-->
-								<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
-								<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="selectProp">
-									<option value="" disabled selected>Select a ground property</option>
+					</div>
+					<div class="col-md-5">
+						<div class="row">
+							<!-- <img src="http://netgemein.de/kino.1JPG2.jpg" alt="Mountain View" style="width:100%;height:100%;">-->
+							<div id="chart_area_3"> </div>
+						</div>
+						<div class="row">
+							<!--<img src="http://netgemein.de/kino.1JPG2.jpg" alt="Mountain View" style="width:100%;height:100%;">-->
+							<div id="chart_area_4"> </div>
+						</div>
+					</div>
+				</div>
+			</div> <!-- End main column 1 -->
+			<div class="col-md-3">
+				<div class="col-md-11">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<center><h3 class="panel-title">Toolbar</h3></center>
+						</div>
+						<div class="panel-body">
+
+							<div class="row">
+								<label>District:</label>
+								<select id="target" class="form-control">
+									<option value="" disabled selected>Select a district</option>
+									<option value="32.43561304116276, -100.1953125" data-district="abeline">
+										Abilene
+									</option>
+									<option value="35.764343479667176, -101.49169921875" data-district="amarillo">
+										Amarillo
+									</option>
+									<option value="32.69651010951669, -94.691162109375" data-district="atlanta">
+										Atlanta
+									</option>
+									<option value="30.25391637229704, -98.23212890625" data-district="austin">
+										Austin
+									</option>
+									<option value="30.40211367909724, -94.39453125" data-district="beaumont">
+										Beaumont
+									</option>
+									<option value="31.765537409484374, -99.140625" data-district="brownwood">
+										Brownwood
+									</option>
+									<option value="30.894611546632302, -96.30615234375" data-district="bryan">
+										Bryan
+									</option>
+									<option value="34.397844946449865, -100.37109375" data-district="childress">
+										Childress
+									</option>
+									<option value="28.110748760633534, -97.71240234375" data-district="corpus">
+										Corpus Christi
+									</option>
+									<option value="32.54681317351514, -96.85546875" data-district="dallas">
+										Dallas
+									</option>
+									<!--<option value="30.694611546632302, -104.52392578125" data-district="elPaso">-->
+									<option value="31.770546, -106.504874" data-district="elPaso">
+										El Paso
+									</option>
+									<option value="32.62087018318113, -97.75634765625" data-district="fortWorth">
+										Fort Worth
+									</option>
+									<option value="29.661670115197377, -95.33935546875" data-district="houston">
+										Houston
+									</option>
+									<option value="28.613459424004418, -99.90966796875" data-district="laredo">
+										Laredo
+									</option>
+									<option value="33.43144133557529, -101.93115234375" data-district="lubbock">
+										Lubbock
+									</option>
+									<option value="31.203404950917395, -94.7021484375" data-district="lufkin">
+										Lufkin
+									</option>
+									<option value="31.203404950917395, -102.568359375" data-district="odessa">
+										Odessa
+									</option>
+									<option value="33.43144133557529, -95.625" data-district="paris">
+										Paris
+									</option>
+									<option value="26.951453083498258, -98.32763671875" data-district="pharr">
+										Pharr
+									</option>
+									<option value="31.10819929911196, -100.48095703125" data-district="sanAngelo">
+										San Angelo
+									</option>
+									<option value="29.13297013087864, -98.89892578125" data-district="sanAntonio">
+										San Antonio
+									</option>
+									<option value="32.222095840502334, -95.33935546875" data-district="tyler">
+										Tyler
+									</option>
+									<option value="31.403404950917395, -97.119140625" data-district="waco">
+										Waco
+									</option>
+									<option value="33.77914733128647, -98.37158203125" data-district="wichitaFalls">
+										Wichita Falls
+									</option>
+									<option value="29.05616970274342, -96.8115234375" data-district="yoakum">
+										Yoakum
+									</option>
 								</select>
-							</div> <br>
-						</div>
-						<!-- Depth methods-->
-						<div class="row">
-							<div class="col-md-5 col-md-offset-0">
-								<label> Depth:</label> <br>
+							</div>
+							<p> </p> <!--sepator-->
+							<div class="row"> <!--search-->
+								<label> Soil Property: </label>
+							</div>
+							<div class="row"> <!--search-->
 								<div class="input-group">
-									<!-- <label> Depth:</label> <br> -->
-									<span class="input-group-addon" id="basic-addon3">inch</span>
-									<input type="number" class="form-control" value="0" placeholder="...inches" id="depth" aria-describedby="basic-addon3">
-									<!-- <input type="text" value="0" id="depth" placeholder=" ...inches" style="color: black;"> -->
-									<!--<p> Top = <input type="text" value="" id="depth_top" placeholder="...inches" style="color: black;"></p>
-									<p> Bottom = <input type="text" value="" id="depth_bottom" placeholder="...inches" style="color: black;"></p>-->
+									<!--<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+									<input type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="autocomplete" autocomplete="off">-->
+									<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+									<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="selectProp">
+										<option value="" disabled selected>Select a ground property</option>
+									</select>
+								</div> <br>
+							</div>
+							<!-- Depth methods-->
+							<div class="row">
+								<div class="col-md-5 col-md-offset-0">
+									<label> Depth:</label> <br>
+									<div class="input-group">
+										<!-- <label> Depth:</label> <br> -->
+										<span class="input-group-addon" id="basic-addon3">inch</span>
+										<input type="number" class="form-control" value="0" placeholder="...inches" id="depth" aria-describedby="basic-addon3">
+										<!-- <input type="text" value="0" id="depth" placeholder=" ...inches" style="color: black;"> -->
+										<!--<p> Top = <input type="text" value="" id="depth_top" placeholder="...inches" style="color: black;"></p>
+										<p> Bottom = <input type="text" value="" id="depth_bottom" placeholder="...inches" style="color: black;"></p>-->
+									</div>
+								</div>
+								<div class="col-md-5 col-md-offset-2">
+									<label> Method:</label> <br>
+									<select id="methods" class="form-control">
+										<option value="" disabled selected>Select method</option>
+										<option value="1" id="max_method">Max</option>
+										<option value="2" id="min_method">Min</option>
+										<option value="3" id="med_method">Median</option>
+										<option value="4" id="weight_method">Weighted average</option>
+										<option value="5" id="specific_method">At Specific Depth</option>
+									</select>
 								</div>
 							</div>
-							<div class="col-md-5 col-md-offset-2">
-								<label> Method:</label> <br>
-								<select id="methods" class="form-control">
-									<option value="" disabled selected>Select method</option>
-									<option value="1" id="max_method">Max</option>
-									<option value="2" id="min_method">Min</option>
-									<option value="3" id="med_method">Median</option>
-									<option value="4" id="weight_method">Weighted average</option>
-									<option value="5" id="specific_method">At Specific Depth</option>
-								</select>
+							<!-- End depth methods -->
+							<div> <p> </p> </div> <!--separate-->
+							<div class="row">
+								<button class="btn btn-success form-control" type="button" id="run" onClick="getPolygons()">Run</button>
 							</div>
-						</div>
-						<!-- End depth methods -->
-						<div> <p> </p> </div> <!--separate-->
-						<div class="row">
-							<button class="btn btn-success form-control" type="button" id="run" onClick="getPolygons()">Run</button>
-						</div>
-						<p>  </p> <!--separator-->
-						<div class="row">
-							<button class="btn btn-warning form-control" type="button" id="clear" onClick="removePolygons()">Clear</button>
-						</div>
-						<p>  </p> <!--separator-->
+							<p>  </p> <!--separator-->
+							<div class="row">
+								<button class="btn btn-warning form-control" type="button" id="clear" onClick="removePolygons()">Clear</button>
+							</div>
+							<p>  </p> <!--separator-->
 
-						<div class="row">
-							<button type="button" class="map-print" id="print" onClick="printMaps()">Print</button> <!-- to print map -->
-							<p> </p>
-						</div>
-						<div class="row">
-							<button type="button" class="btn btn-default form-control" id="draw" onclick="drawAnotherRectangle();">Delete drawn area of interest</button>
-						</div>
+							<div class="row">
+								<button type="button" class="map-print" id="print" onClick="printMaps()">Print</button> <!-- to print map -->
+								<p> </p>
+							</div>
+							<div class="row">
+								<button type="button" class="btn btn-default form-control" id="draw" onclick="drawAnotherRectangle();">Delete drawn area of interest</button>
+							</div>
 
-						<div id="load"> </div>
+							<div id="load"> </div>
+						</div>
 					</div>
-				</div>
-				<!--<div id="legend"> -->
-				<!--<h3>Legend</h3> -->
-				<div id="legend" style='visibility: hidden'>
-					<h3 style="text-align: center;">Legend: </h3>
-					<div>
-						<!-- just for division -->
+					<!--<div id="legend"> -->
+					<!--<h3>Legend</h3> -->
+					<div id="legend" style='visibility: hidden'>
+						<h3 style="text-align: center;">Legend: </h3>
+						<div>
+							<!-- just for division -->
+						</div>
 					</div>
-				</div>
-			</div> <!-- end for class "col-md-3" -->
-			<!--<div class="col-md-9">
-			<div id="description">
+				</div> <!-- end for class "col-md-3" -->
+			</div> <!-- End main column 2 -->
+
+
 		</div>
-	</div> -->
-</div>
-</div>
-<br>
-<div id="chart_area"> </div>
+
+
+
 
 <!--
 <div class="row">
@@ -1884,6 +1911,9 @@ function showNewRect2(shape) {
   infoWindow.open(app.map);
 }
 var chart;
+var chart_2;
+var chart_3;
+var chart_4;
 function drawChart() {
 	if(rec.type == 'rectangle'){
 		var maxaoi;
@@ -1913,21 +1943,28 @@ function drawChart() {
 			]);
 
 			var options = {
-				title: 'Data for Area Of Interest',
+				title: app.payload.value,
 				chartArea: {
 					width: '40%'
 				},
 				hAxis: {
-					title: 'Values',
+					title: 'b',
 					minValue: 0
 				},
 				vAxis: {
-					title: 'Methods'
+					title: 'a'
 				}
 			};
 
-			chart = new google.visualization.BarChart(document.getElementById('chart_area'));
+			chart = new google.visualization.BarChart(document.getElementById('chart_area_1'));
+			chart_2 = new google.visualization.BarChart(document.getElementById('chart_area_4'));
+			chart_3 = new google.visualization.BarChart(document.getElementById('chart_area_2'));
+			chart_4 = new google.visualization.BarChart(document.getElementById('chart_area_3'));
+
 			chart.draw(data, options);
+			chart_2.draw(data, options);
+			chart_3.draw(data, options);
+			chart_4.draw(data, options);
 		});
 	}
 	else{
@@ -1937,6 +1974,11 @@ function drawChart() {
 		var weightedaoi;
 
 		app.payload.getMode = "line";
+		var getparams = app.payload;
+		var bounds = app.map.getBounds();
+		getparams.NE = bounds.getNorthEast().toJSON(); //north east corner
+		getparams.SW = bounds.getSouthWest().toJSON(); //south-west corner
+
 		$.get('polygonHandler.php', app.payload, function(data){
 			maxaoi = parseFloat(data.maxAOI);
 			minaoi = parseFloat(data.minAOI);
@@ -1947,28 +1989,38 @@ function drawChart() {
 
 			var data = google.visualization.arrayToDataTable([
 				['Method', 'Value',],
-				['Maximum ' + app.payload.value + ' for AOI', maxaoi],
-				['Minimum '+ app.payload.value + ' for AOI', minaoi],
-				['Median '+ app.payload.value + ' for AOI', medaoi],
-				['Weighted Average '+ app.payload.value + ' for AOI', weightedaoi]
+				['Maximum ', maxaoi],
+				['Minimum ', minaoi],
+				['Median ', medaoi],
+				['Weighted Average ', weightedaoi]
 			]);
 
 			var options = {
-				title: 'Data for Areas Intersecting with Line',
+				title: app.payload.value,
+				legend: {
+					position: 'none'
+				},
 				chartArea: {
-					width: '40%'
+					width: '60%'
 				},
 				hAxis: {
-					title: 'Values',
+					//title: 'a',
 					minValue: 0
 				},
 				vAxis: {
-					title: 'Methods'
+					//title: 'b'
 				}
 			};
 
-			chart = new google.visualization.BarChart(document.getElementById('chart_area'));
+			chart = new google.visualization.BarChart(document.getElementById('chart_area_1'));
+			chart_2 = new google.visualization.BarChart(document.getElementById('chart_area_4'));
+			chart_3 = new google.visualization.BarChart(document.getElementById('chart_area_2'));
+			chart_4 = new google.visualization.BarChart(document.getElementById('chart_area_3'));
+
 			chart.draw(data, options);
+			chart_2.draw(data, options);
+			chart_3.draw(data, options);
+			chart_4.draw(data, options);
 		});
 	}
 }
@@ -2009,6 +2061,9 @@ function removePolygons(){
 
 	}else{
 		chart.clearChart();
+		chart_2.clearChart();
+		chart_3.clearChart();
+		chart_4.clearChart();
 	}
 }
 function printMaps() { //testing printing a map
