@@ -86,7 +86,7 @@
 					<div id="description"></div>
 				</div>
 				<div class="row">
-					<div class="col-md-5">
+					<div class="col-lg-6">
 						<div class="row">
 							<!--<img src="http://netgemein.de/kino.1JPG2.jpg" alt="Mountain View" style="width:100%;height:100%;">-->
 							<div id="chart_area_1"> </div>
@@ -96,7 +96,7 @@
 							<div id="chart_area_2"> </div>
 						</div>
 					</div>
-					<div class="col-md-5">
+					<div class="col-lg-6">
 						<div class="row">
 							<!-- <img src="http://netgemein.de/kino.1JPG2.jpg" alt="Mountain View" style="width:100%;height:100%;">-->
 							<div id="chart_area_3"> </div>
@@ -2032,7 +2032,6 @@ function lineParser(){
 	paths = paths.getArray();
 
 	for (var i = 0; i < paths.length; i++) {
-		//console.log(paths[i].lng() + ' ' + paths[i].lat());
 		if(paths.length > 1 && i < paths.length - 1){
 			lineString += paths[i].lng() + ' ' + paths[i].lat() + ',';
 		}
@@ -2040,9 +2039,8 @@ function lineParser(){
 			lineString += paths[i].lng() + ' ' + paths[i].lat();
 		}
 	}
-	//console.log(lineString);
+
 	app.payload.lineString = lineString;
-	//$.get('polygonHandler.php', app.payload, function(data){});
 }
 
 /******************************************************************************/
