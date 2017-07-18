@@ -1765,7 +1765,7 @@ function initMap() {
 			editable: false,
 			geodesic: true,
 			zIndex: 10,
-			strokeWeight: 4
+			strokeWeight: 6
 		}
   });
 
@@ -1828,7 +1828,7 @@ function drawAnotherRectangle(){
 				editable: false,
 				geodesic: true,
 				zIndex: 10,
-				strokeWeight: 4
+				strokeWeight: 6
 			}
     });
   }
@@ -1942,6 +1942,47 @@ function drawChart() {
 			chart.draw(data, options);
 		});
 	}
+	else{
+		var maxaoi;
+		var minaoi;
+		var medaoi;
+		var weightedaoi;
+
+		app.payload.getMode = "line";
+		$.get('polygonHandler.php', app.payload, function(data){
+			maxaoi = parseFloat(data.maxAOI);
+			minaoi = parseFloat(data.minAOI);
+			medaoi = parseFloat(data.medAOI);
+			weightedaoi = parseFloat(data.weightedAOI);
+			weightedaoi = parseFloat(weightedaoi).toFixed(2);
+			weightedaoi = parseFloat(weightedaoi);
+
+			var data = google.visualization.arrayToDataTable([
+				['Method', 'Value',],
+				['Maximum ' + app.payload.value + ' for AOI', maxaoi],
+				['Minimum '+ app.payload.value + ' for AOI', minaoi],
+				['Median '+ app.payload.value + ' for AOI', medaoi],
+				['Weighted Average '+ app.payload.value + ' for AOI', weightedaoi]
+			]);
+
+			var options = {
+				title: 'Data for Areas Intersecting with Line',
+				chartArea: {
+					width: '40%'
+				},
+				hAxis: {
+					title: 'Values',
+					minValue: 0
+				},
+				vAxis: {
+					title: 'Methods'
+				}
+			};
+
+			chart = new google.visualization.BarChart(document.getElementById('chart_area'));
+			chart.draw(data, options);
+		});
+	}
 }
 
 function lineParser(){
@@ -1951,7 +1992,7 @@ function lineParser(){
 	paths = paths.getArray();
 
 	for (var i = 0; i < paths.length; i++) {
-		console.log(paths[i].lng() + ' ' + paths[i].lat());
+		//console.log(paths[i].lng() + ' ' + paths[i].lat());
 		if(paths.length > 1 && i < paths.length - 1){
 			lineString += paths[i].lng() + ' ' + paths[i].lat() + ',';
 		}
@@ -1959,9 +2000,9 @@ function lineParser(){
 			lineString += paths[i].lng() + ' ' + paths[i].lat();
 		}
 	}
-	console.log(lineString);
+	//console.log(lineString);
 	app.payload.lineString = lineString;
-	$.get('polygonHandler.php', app.payload, function(data){});
+	//$.get('polygonHandler.php', app.payload, function(data){});
 }
 
 /******************************************************************************/
