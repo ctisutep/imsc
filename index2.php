@@ -1915,6 +1915,13 @@ var chart_2;
 var chart_3;
 var chart_4;
 function drawChart() {
+	if(typeof chart === 'undefined'){
+	}else{
+		chart.clearChart();
+		chart_2.clearChart();
+		chart_3.clearChart();
+		chart_4.clearChart();
+	}
 	if(rec.type == 'rectangle'){
 		var maxaoi;
 		var minaoi;
@@ -1936,23 +1943,26 @@ function drawChart() {
 
 			var data = google.visualization.arrayToDataTable([
 				['Method', 'Value',],
-				['Maximum ' + app.payload.value + ' for AOI', maxaoi],
-				['Minimum '+ app.payload.value + ' for AOI', minaoi],
-				['Median '+ app.payload.value + ' for AOI', medaoi],
-				['Weighted Average '+ app.payload.value + ' for AOI', weightedaoi]
+				['Maximum ', maxaoi],
+				['Minimum ', minaoi],
+				['Median ', medaoi],
+				['Weighted Average ', weightedaoi]
 			]);
 
 			var options = {
 				title: app.payload.value,
+				legend: {
+					position: 'none'
+				},
 				chartArea: {
-					width: '40%'
+					width: '70%'
 				},
 				hAxis: {
-					title: 'b',
+					//title: 'a',
 					minValue: 0
 				},
 				vAxis: {
-					title: 'a'
+					//title: 'b'
 				}
 			};
 
@@ -2039,7 +2049,6 @@ function lineParser(){
 			lineString += paths[i].lng() + ' ' + paths[i].lat();
 		}
 	}
-
 	app.payload.lineString = lineString;
 }
 
@@ -2056,7 +2065,6 @@ function removePolygons(){
 	$('#legend').find('*').not('h3').remove();
 	$('#description').find('*').not('h3').remove();
 	if(typeof chart === 'undefined'){
-
 	}else{
 		chart.clearChart();
 		chart_2.clearChart();
