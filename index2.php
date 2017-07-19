@@ -81,21 +81,17 @@
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="row">
-							<!--<img src="http://netgemein.de/kino.1JPG2.jpg" alt="Mountain View" style="width:100%;height:100%;">-->
 							<div id="chart_area_1"> </div>
 						</div>
 						<div class="row">
-							<!-- <img src="http://netgemein.de/kino.1JPG2.jpg" alt="Mountain View" style="width:100%;height:100%;"> -->
 							<div id="chart_area_2"> </div>
 						</div>
 					</div>
 					<div class="col-lg-6">
 						<div class="row">
-							<!-- <img src="http://netgemein.de/kino.1JPG2.jpg" alt="Mountain View" style="width:100%;height:100%;">-->
 							<div id="chart_area_3"> </div>
 						</div>
 						<div class="row">
-							<!--<img src="http://netgemein.de/kino.1JPG2.jpg" alt="Mountain View" style="width:100%;height:100%;">-->
 							<div id="chart_area_4"> </div>
 						</div>
 					</div>
@@ -190,34 +186,75 @@
 								</select>
 							</div>
 							<div class="row panel panel-default">
-								//Soil Mapping
+								<center><label>Soil Mapping</label></center>
 								<div class="row">
-									<div class="col-md-3">
-										//Soil property
-										//Depth
-										//Method
+									<div class="col-md-5 col-sm-11 col-lg-7">
+										<label> Soil Property:</label>
+										<div class="input-group">
+											<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+											<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="selectProp">
+												<option value="" disabled selected>Select a ground property</option>
+											</select>
+										</div> <br>
+										<label> Depth:</label>
+										<div class="input-group">
+											<span class="input-group-addon" id="basic-addon3">inches</span>
+											<input type="number" class="form-control" value="0" placeholder="...inches" id="depth" aria-describedby="basic-addon3">
+										</div><br>
+										<label> Method:</label>
+										<select id="methods" class="form-control">
+											<option value="" disabled selected>Select method</option>
+											<option value="1" id="max_method">Max</option>
+											<option value="2" id="min_method">Min</option>
+											<option value="3" id="med_method">Median</option>
+											<option value="4" id="weight_method">Weighted average</option>
+											<option value="5" id="specific_method">At Specific Depth</option>
+										</select>
 									</div>
-									<div class="col-md-3">
-										//Run button
-										//Clear button
-										//Print button
+									<div class="col-md-5"><br><br>
+											<button class="btn btn-success form-control" type="button" id="run" onClick="getPolygons()">Run</button><br><br>
+											<button class="btn btn-warning form-control" type="button" id="clear" onClick="removePolygons()">Clear</button><br><br>
+											<button type="button" class="map-print" id="print" onClick="printMaps()">Print</button>
 									</div>
 								</div>
 								<div class="row">
-									//Legend appears here
+									<div id="legend" style='visibility: hidden'>
+
+									</div>
 								</div>
 							</div>
 							<div class="row panel panel-default">
-								//Statistics <br>
-								//Select parameters
-								<div class="col-md-3">
-									//1
-									//2
-									//3
-									//4
+								<center><label>Statistics</label></center>
+
+								<div class="col-lg-6">
+									<label>Select parameters:</label>
+									<div class="input-group">
+										<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+										<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_1">
+											<option value="" disabled selected>Select a ground property</option>
+										</select>
+									</div> <br>
+									<div class="input-group">
+										<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+										<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_2">
+											<option value="" disabled selected>Select a ground property</option>
+										</select>
+									</div> <br>
+									<div class="input-group">
+										<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+										<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_3">
+											<option value="" disabled selected>Select a ground property</option>
+										</select>
+									</div> <br>
+									<div class="input-group">
+										<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+										<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_4">
+											<option value="" disabled selected>Select a ground property</option>
+										</select>
+									</div> <br>
 								</div>
-								<div class="col-md-3">
-									<button type="button" class="btn btn-default form-control" id="draw" onclick="drawAnotherRectangle();">Delete drawn area of interest</button>
+								<div class="col-md-5"><br><br><br><br>
+									<button type="button" class="btn btn-default form-control" id="draw" onclick="drawAnotherRectangle();">Clear AOI</button>
 								</div>
 							</div>
 						</div>
