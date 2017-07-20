@@ -73,7 +73,7 @@
 	<!-- Content Row -->
 	<div>
 		<div class="row">
-			<div class="col-md-9	">
+			<div class="col-md-9">
 				<div class="row">
 					<div id="map"></div>
 					<div id="description"></div>
@@ -93,6 +93,24 @@
 						</div>
 						<div class="row">
 							<div id="chart_area_4"> </div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="row">
+							<div id="chart_histogram_1"> </div>
+						</div>
+						<div class="row">
+							<div id="chart_histogram_2"> </div>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="row">
+							<div id="chart_histogram_3"> </div>
+						</div>
+						<div class="row">
+							<div id="chart_histogram_4"> </div>
 						</div>
 					</div>
 				</div>
@@ -2078,6 +2096,36 @@ function drawChart(x) {
 					chart = new google.visualization.BarChart(document.getElementById('chart_area_1'));
 					chart.draw(data, options);
 				});
+
+				app.payload.getMode = "histogram";
+				$.get('polygonHandler.php', app.payload, function(data){
+
+					var data = google.visualization.arrayToDataTable([
+						['MyData', 'Value'],
+						['x', .57],
+						['y', .57],
+						['z', .57],
+						['v', .8]
+					]);
+					var options = {
+						title: app.payload.chart1n,
+						legend: {
+							position: 'none'
+						},
+						histogram: {
+							bucketSize: .1
+						},
+						// bar: { width: 5 },
+						hAxis: {
+							type: 'category'
+							// , viewWindow: { min: 0, max: 6 } // note min and max values are indices when type is category.
+						}
+					};
+
+					chart = new google.visualization.Histogram(document.getElementById('chart_histogram_1'));
+					chart.draw(data, options);
+				});
+				app.payload.getMode = "AOI";
 				app.payload.chart1 = previous1;
 				app.payload.chart2 = previous2;
 				app.payload.chart3 = previous3;
