@@ -382,20 +382,20 @@ function getLine($x){
 		$done_med;
 
 		for ($j=0; $j < sizeof($poly_arr); $j++) {
-			echo "hello5";
+			//echo "hello5";
 			$med_index_i = 0;
 			$done_med = 0;
 			if(sizeof($poly_arr[$j]) > 1 && $poly_arr[$j][sizeof($poly_arr[$j])-1][$data_line->property] == 0){
-				echo "hello6";
+				//echo "hello6";
 				for ($i=0; $i < sizeof($poly_arr[$j])-1; $i++) {
 					if((sizeof($poly_arr[$j])-1)%2 == 1 && $done_med == 0){//odd
-						echo "hello3";
+						//echo "hello3";
 						$med_index_i = ceil(sizeof($poly_arr[$j])/2); //have to subtract one from this value to get the index correctly
 						$done_med = 1;
 						$polygons[] = $poly_arr[$j][$med_index_i - 1];
 					}
 					elseif((sizeof($poly_arr[$j])-1)%2 == 0 && $done_med == 0){ //even
-						echo "hello4";
+						//cho "hello4";
 						$med_value = ($poly_arr[$j][(ceil((sizeof($poly_arr[$j])-1)/2)) - 1][$data_line->property] + $poly_arr[$j][(ceil((sizeof($poly_arr[$j])-1)/2))][$data_line->property]) / 2;
 						$poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1][$data_line->property] = $med_value;
 						$polygons[] = $poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1];
@@ -404,16 +404,16 @@ function getLine($x){
 				}
 			}
 			else{
-				echo "hello7";
+				//echo "hello7";
 				for ($i=0; $i < sizeof($poly_arr[$j]); $i++) {
 					if((sizeof($poly_arr[$j])-1)%2 == 1 && $done_med == 0){//odd
-						echo "hello";
+						//echo "hello";
 						$med_index_i = ceil(sizeof($poly_arr[$j])/2); //have to subtract one from this value to get the index correctly
 						$done_med = 1;
 						$polygons[] = $poly_arr[$j][$med_index_i - 1];
 					}
 					elseif(sizeof($poly_arr[$j])%2 == 0 && $done_med == 0){ //even
-						echo "hello2";
+						//echo "hello2";
 						$med_value = ($poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1][$data_line->property] + $poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2))][$data_line->property]) / 2;
 						$poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1][$data_line->property] = $med_value;
 						$polygons[] = $poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1];
@@ -423,7 +423,7 @@ function getLine($x){
 			}
 		}
 		//var_dump($poly_arr);
-		var_dump($polygons);
+		//var_dump($polygons);
 		$medianos = array();
 		for ($i=0; $i < sizeof($polygons); $i++) {
 			$medianos[$i] = $polygons[$i][$data_line->property];
