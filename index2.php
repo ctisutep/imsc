@@ -2074,7 +2074,7 @@ function drawChart(x) {
 						['Maximum ', maxaoi],
 						['Minimum ', minaoi],
 						['Median ', medaoi],
-						['Weighted Average ', weightedaoi]
+						['Weighted Avg ', weightedaoi]
 					]);
 
 					var options = {
@@ -2104,13 +2104,25 @@ function drawChart(x) {
 					for (var i = 0; i < histo_array.length; i++) {
 						console.log(histo_array[i]);
 					}
-					var data = google.visualization.arrayToDataTable([
+					var data = new google.visualization.DataTable();
+					data.addColumn('string', 'Property');
+					data.addColumn('number', 'Value');
+					data.addRows(4);
+					data.setCell(0, 0, ".57");
+					data.setCell(0, 1, .57);
+					data.setCell(1, 0, ".57");
+					data.setCell(1, 1, .57);
+					data.setCell(2, 0, ".57");
+					data.setCell(2, 1, .57);
+					data.setCell(3, 0, ".8");
+					data.setCell(3, 1, .8);
+					/*var data = google.visualization.arrayToDataTable([
 						['MyData', 'Value'],
 						['x', .57],
 						['y', .57],
 						['z', .57],
 						['v', .8]
-					]);
+					]);*/
 					var options = {
 						title: app.payload.chart1n,
 						legend: {
@@ -2157,7 +2169,7 @@ function drawChart(x) {
 						['Maximum ', maxaoi],
 						['Minimum ', minaoi],
 						['Median ', medaoi],
-						['Weighted Average ', weightedaoi]
+						['Weighted Avg ', weightedaoi]
 					]);
 
 					var options = {
@@ -2206,7 +2218,7 @@ function drawChart(x) {
 						['Maximum ', maxaoi],
 						['Minimum ', minaoi],
 						['Median ', medaoi],
-						['Weighted Average ', weightedaoi]
+						['Weighted Avg ', weightedaoi]
 					]);
 
 					var options = {
@@ -2255,7 +2267,7 @@ function drawChart(x) {
 						['Maximum ', maxaoi],
 						['Minimum ', minaoi],
 						['Median ', medaoi],
-						['Weighted Average ', weightedaoi]
+						['Weighted Avg ', weightedaoi]
 					]);
 
 					var options = {
@@ -2317,7 +2329,7 @@ function drawChart(x) {
 					['Maximum ', maxaoi],
 					['Minimum ', minaoi],
 					['Median ', medaoi],
-					['Weighted Average ', weightedaoi]
+					['Weighted Avg ', weightedaoi]
 				]);
 
 				var options = {
@@ -2366,7 +2378,7 @@ function drawChart(x) {
 					['Maximum ', maxaoi],
 					['Minimum ', minaoi],
 					['Median ', medaoi],
-					['Weighted Average ', weightedaoi]
+					['Weighted Avg ', weightedaoi]
 				]);
 
 				var options = {
@@ -2415,7 +2427,7 @@ function drawChart(x) {
 					['Maximum ', maxaoi],
 					['Minimum ', minaoi],
 					['Median ', medaoi],
-					['Weighted Average ', weightedaoi]
+					['Weighted Avg ', weightedaoi]
 				]);
 
 				var options = {
@@ -2464,7 +2476,7 @@ function drawChart(x) {
 					['Maximum ', maxaoi],
 					['Minimum ', minaoi],
 					['Median ', medaoi],
-					['Weighted Average ', weightedaoi]
+					['Weighted Avg ', weightedaoi]
 				]);
 
 				var options = {
