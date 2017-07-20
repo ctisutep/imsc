@@ -209,7 +209,7 @@
 											<option value="3" id="med_method">Median</option>
 											<option value="4" id="weight_method">Weighted average</option>
 											<option value="5" id="specific_method">At Specific Depth</option>
-										</select>
+										</select><br>
 									</div>
 									<div class="col-md-5"><br><br>
 											<button class="btn btn-success form-control" type="button" id="run" onClick="getPolygons()">Run</button><br><br>
@@ -313,12 +313,12 @@
 <script src="js/properties.js"></script>
 <script>
 
-var app = {map:null, polygons:null, payload:{getMode:"polygons", property:null, district:null, depth:null, depth_method:null, AoI:null, lineString:null}}; //added value for depth method
+var app = {map:null, polygons:null, payload:{getMode:"polygons", property:null, district:null, depth:null, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null}}; //added value for depth method
 var hecho = false;
 //var suggested = all the aliases of the properties, note: not all properties have an alias
 $(document).ready(function(){//esto pasa recien cargada la pagina
 	//start here, get the properties
-	$.post('polygonHandler.php', {'columns': true}, function(result){//esto pasa recien cargada la pagina tambien
+	$.post('polygonHandler.php', {'columns': true}, function(result){
 		//do stuff with the result
 		var properties;
 		if(result.hasOwnProperty('columns')){
@@ -327,6 +327,11 @@ $(document).ready(function(){//esto pasa recien cargada la pagina
 			});
 		}
 		var selectProp = document.getElementById("selectProp");
+		var ch1 = document.getElementById("select_chart_1");
+		var ch2 = document.getElementById("select_chart_2");
+		var ch3 = document.getElementById("select_chart_3");
+		var ch4 = document.getElementById("select_chart_4");
+
 		var prop = [{number: 0, value: null, data: null, table: null},
 			{number: 1, value: null, data: null, table: null},
 			{number: 2, value: null, data: null, table: null},
@@ -375,22 +380,100 @@ for (var i = 0; i < 37; i++) {
 }
 for(var i = 0; i < prop.length-1; i++) {
 	var propr = prop[i].number;
-	//console.log("En loop (value): " + propr);
 	var elem = document.createElement("option");
 	elem.textContent = prop[i].value;
 	elem.value = propr;
-	//console.log("En loop (value): " + propr);
 	elem.data = prop[i].data;
-	//console.log("En loop (data): " + prop[i].data);
 	elem.table = prop[i].table;
-	//console.log("En loop (table): " + prop[i].table);
 	selectProp.appendChild(elem);
+	//ch1.appendChild(elem);
+	//ch2.appendChild(elem);
+	//ch3.appendChild(elem);
+	//ch4.appendChild(elem);
 }
+for(var i = 0; i < prop.length-1; i++) {
+	var propr = prop[i].number;
+	var elem = document.createElement("option");
+	elem.textContent = prop[i].value;
+	elem.value = propr;
+	elem.data = prop[i].data;
+	elem.table = prop[i].table;
+	//selectProp.appendChild(elem);
+	ch1.appendChild(elem);
+	//ch2.appendChild(elem);
+	//ch3.appendChild(elem);
+	//ch4.appendChild(elem);
+}
+for(var i = 0; i < prop.length-1; i++) {
+	var propr = prop[i].number;
+	var elem = document.createElement("option");
+	elem.textContent = prop[i].value;
+	elem.value = propr;
+	elem.data = prop[i].data;
+	elem.table = prop[i].table;
+	//selectProp.appendChild(elem);
+	//ch1.appendChild(elem);
+	ch2.appendChild(elem);
+	//ch3.appendChild(elem);
+	//ch4.appendChild(elem);
+}
+for(var i = 0; i < prop.length-1; i++) {
+	var propr = prop[i].number;
+	var elem = document.createElement("option");
+	elem.textContent = prop[i].value;
+	elem.value = propr;
+	elem.data = prop[i].data;
+	elem.table = prop[i].table;
+	//selectProp.appendChild(elem);
+	//ch1.appendChild(elem);
+	//ch2.appendChild(elem);
+	ch3.appendChild(elem);
+	//ch4.appendChild(elem);
+}
+for(var i = 0; i < prop.length-1; i++) {
+	var propr = prop[i].number;
+	var elem = document.createElement("option");
+	elem.textContent = prop[i].value;
+	elem.value = propr;
+	elem.data = prop[i].data;
+	elem.table = prop[i].table;
+	//selectProp.appendChild(elem);
+	//ch1.appendChild(elem);
+	//ch2.appendChild(elem);
+	//ch3.appendChild(elem);
+	ch4.appendChild(elem);
+}
+
 $("#selectProp").change(function(){
-	app.payload.property =  prop[this.value].data;
+	app.payload.property =  prop[this.value].data; //ex. pi_r
 	app.payload.table =  prop[this.value].table;
 	app.payload.value =  prop[this.value].value;
 });
+//change select_chart_1
+$("#select_chart_1").change(function(){
+	app.payload.chart1 =  prop[this.value].data;
+	app.payload.chart1n = prop[this.value].value;
+	//console.log("chart1: " + app.payload.chart1);
+});
+//change select_chart_2
+$("#select_chart_2").change(function(){
+	app.payload.chart2 =  prop[this.value].data;
+	app.payload.chart2n = prop[this.value].value;
+	//console.log("chart2: " + app.payload.chart2);
+});
+//change select_chart_3
+$("#select_chart_3").change(function(){
+	app.payload.chart3 =  prop[this.value].data;
+	app.payload.chart3n = prop[this.value].value;
+	//console.log("chart3: " + app.payload.chart3);
+});
+//change select_chart_4
+$("#select_chart_4").change(function(){
+	app.payload.chart4 =  prop[this.value].data;
+	app.payload.chart4n = prop[this.value].value;
+	//console.log("chart4: " + app.payload.chart4);
+});
+
 //create the autocomplete with the data
 $('#autocomplete').autocomplete({
 	lookup: properties,
@@ -415,7 +498,6 @@ $("#methods").change(function(){ //0: max / 1: min / 2: median / 3: weight/
 
 });
 
-
 function getPolygons(){//this is run button
 	app.payload.getMode="polygons";
 	hecho = false;
@@ -426,18 +508,13 @@ function getPolygons(){//this is run button
 
 	app.payload.depth = depth;
 	if(app.payload.property && app.payload.district && (isNaN(depth)==false)){//to make sure a property is selected
-		//get the polygons
-		// console.log(app.payload);
 		var getparams = app.payload;
 		var bounds = app.map.getBounds();
 		getparams.NE = bounds.getNorthEast().toJSON(); //north east corner
 		getparams.SW = bounds.getSouthWest().toJSON(); //south-west corner
-		//console.log(getparams.NE);
-		//console.log(getparams.SW);
 
 		$(document.body).css({'cursor': 'wait'});
 		$.get('polygonHandler.php', app.payload, function(data){
-
 
 		if(depth < 0 || depth * 2.54 > 204 || isNaN(depth)){
 			alert("Please make sure depth is a numerical value and it is between 0 and 79 inches.");
@@ -1791,7 +1868,8 @@ function initMap() {
 				lineParser();
 		  }
       clickRec(rec);
-			drawChart();
+			chartChecker();
+			//drawChart();
     });
 
     google.maps.event.addListener(rec, 'bounds_changed', function() {
@@ -1896,11 +1974,30 @@ function showNewRect2(shape) {
 
   infoWindow.open(app.map);
 }
+
 var chart;
 var chart_2;
 var chart_3;
 var chart_4;
-function drawChart() {
+function chartChecker(){
+	if(app.payload.chart1 != null){
+		drawChart(1);
+	}
+
+	if(app.payload.chart2 != null){
+		drawChart(2);
+	}
+
+	if(app.payload.chart3 != null){
+		drawChart(3);
+	}
+
+	if(app.payload.chart4 != null){
+		drawChart(4);
+	}
+}
+
+function drawChart(x) {
 	if(typeof chart === 'undefined'){
 	}else{
 		chart.clearChart();
@@ -1913,55 +2010,213 @@ function drawChart() {
 		var minaoi;
 		var medaoi;
 		var weightedaoi;
+		var previous1;
+		var previous2;
+		var previous3;
+		var previous4;
 
 		app.payload.getMode = "AOI";
 		getparams = app.payload;
 		bounds = rec.getBounds();
 		getparams.NE = bounds.getNorthEast().toJSON();
 		getparams.SW = bounds.getSouthWest().toJSON();
-		$.get('polygonHandler.php', app.payload, function(data){
-			maxaoi = parseFloat(data.maxAOI);
-			minaoi = parseFloat(data.minAOI);
-			medaoi = parseFloat(data.medAOI);
-			weightedaoi = parseFloat(data.weightedAOI);
-			weightedaoi = parseFloat(weightedaoi).toFixed(2);
-			weightedaoi = parseFloat(weightedaoi);
+			if(x == 1){
+				previous1 = app.payload.chart1;
+				previous2 = app.payload.chart2;
+				previous3 = app.payload.chart3;
+				previous4 = app.payload.chart4;
+				app.payload.chart1;
+				app.payload.chart2 = null;
+				app.payload.chart3 = null;
+				app.payload.chart4 = null;
 
-			var data = google.visualization.arrayToDataTable([
-				['Method', 'Value',],
-				['Maximum ', maxaoi],
-				['Minimum ', minaoi],
-				['Median ', medaoi],
-				['Weighted Average ', weightedaoi]
-			]);
+				$.get('polygonHandler.php', app.payload, function(data){
+					maxaoi = parseFloat(data.maxAOIch1);
+					minaoi = parseFloat(data.minAOIch1);
+					medaoi = parseFloat(data.medAOIch1);
+					weightedaoi = parseFloat(data.weightedAOIch1);
+					weightedaoi = parseFloat(weightedaoi).toFixed(2);
+					weightedaoi = parseFloat(weightedaoi);
 
-			var options = {
-				title: app.payload.value,
-				legend: {
-					position: 'none'
-				},
-				chartArea: {
-					width: '70%'
-				},
-				hAxis: {
-					//title: 'a',
-					minValue: 0
-				},
-				vAxis: {
-					//title: 'b'
-				}
-			};
+					var data = google.visualization.arrayToDataTable([
+						['Method', 'Value',],
+						['Maximum ', maxaoi],
+						['Minimum ', minaoi],
+						['Median ', medaoi],
+						['Weighted Average ', weightedaoi]
+					]);
 
-			chart = new google.visualization.BarChart(document.getElementById('chart_area_1'));
-			chart_2 = new google.visualization.BarChart(document.getElementById('chart_area_4'));
-			chart_3 = new google.visualization.BarChart(document.getElementById('chart_area_2'));
-			chart_4 = new google.visualization.BarChart(document.getElementById('chart_area_3'));
+					var options = {
+						title: app.payload.chart1n,
+						legend: {
+							position: 'none'
+						},
+						chartArea: {
+							width: '70%'
+						},
+						hAxis: {
+							//title: 'a',
+							minValue: 0
+						},
+						vAxis: {
+							//title: 'b'
+						}
+					};
+					chart = new google.visualization.BarChart(document.getElementById('chart_area_1'));
+					chart.draw(data, options);
+				});
+				app.payload.chart1 = previous1;
+				app.payload.chart2 = previous2;
+				app.payload.chart3 = previous3;
+				app.payload.chart4 = previous4;
+			}
+			else if (x == 2) {
+				previous1 = app.payload.chart1;
+				previous2 = app.payload.chart2;
+				previous3 = app.payload.chart3;
+				previous4 = app.payload.chart4;
+				app.payload.chart1 = null;
+				app.payload.chart2;
+				app.payload.chart3 = null;
+				app.payload.chart4 = null;
+				$.get('polygonHandler.php', app.payload, function(data){
+					maxaoi = parseFloat(data.maxAOIch2);
+					minaoi = parseFloat(data.minAOIch2);
+					medaoi = parseFloat(data.medAOIch2);
+					weightedaoi = parseFloat(data.weightedAOIch2);
+					weightedaoi = parseFloat(weightedaoi).toFixed(2);
+					weightedaoi = parseFloat(weightedaoi);
 
-			chart.draw(data, options);
-			chart_2.draw(data, options);
-			chart_3.draw(data, options);
-			chart_4.draw(data, options);
-		});
+					var data = google.visualization.arrayToDataTable([
+						['Method', 'Value',],
+						['Maximum ', maxaoi],
+						['Minimum ', minaoi],
+						['Median ', medaoi],
+						['Weighted Average ', weightedaoi]
+					]);
+
+					var options = {
+						title: app.payload.chart2n,
+						legend: {
+							position: 'none'
+						},
+						chartArea: {
+							width: '70%'
+						},
+						hAxis: {
+							//title: 'a',
+							minValue: 0
+						},
+						vAxis: {
+							//title: 'b'
+						}
+					};
+					chart_2 = new google.visualization.BarChart(document.getElementById('chart_area_2'));
+					chart_2.draw(data, options);
+				});
+				app.payload.chart1 = previous1;
+				app.payload.chart2 = previous2;
+				app.payload.chart3 = previous3;
+				app.payload.chart4 = previous4;
+			}
+			else if(x == 3){
+				previous1 = app.payload.chart1;
+				previous2 = app.payload.chart2;
+				previous3 = app.payload.chart3;
+				previous4 = app.payload.chart4;
+				app.payload.chart1 = null;
+				app.payload.chart2 = null;
+				app.payload.chart3;
+				app.payload.chart4 = null;
+				$.get('polygonHandler.php', app.payload, function(data){
+					maxaoi = parseFloat(data.maxAOIch3);
+					minaoi = parseFloat(data.minAOIch3);
+					medaoi = parseFloat(data.medAOIch3);
+					weightedaoi = parseFloat(data.weightedAOIch3);
+					weightedaoi = parseFloat(weightedaoi).toFixed(2);
+					weightedaoi = parseFloat(weightedaoi);
+
+					var data = google.visualization.arrayToDataTable([
+						['Method', 'Value',],
+						['Maximum ', maxaoi],
+						['Minimum ', minaoi],
+						['Median ', medaoi],
+						['Weighted Average ', weightedaoi]
+					]);
+
+					var options = {
+						title: app.payload.chart3n,
+						legend: {
+							position: 'none'
+						},
+						chartArea: {
+							width: '70%'
+						},
+						hAxis: {
+							//title: 'a',
+							minValue: 0
+						},
+						vAxis: {
+							//title: 'b'
+						}
+					};
+					chart_3 = new google.visualization.BarChart(document.getElementById('chart_area_3'));
+					chart_3.draw(data, options);
+				});
+				app.payload.chart1 = previous1;
+				app.payload.chart2 = previous2;
+				app.payload.chart3 = previous3;
+				app.payload.chart4 = previous4;
+			}
+			else if(x == 4){
+				previous1 = app.payload.chart1;
+				previous2 = app.payload.chart2;
+				previous3 = app.payload.chart3;
+				previous4 = app.payload.chart4;
+				app.payload.chart1 = null;
+				app.payload.chart2 = null;
+				app.payload.chart3 = null;
+				app.payload.chart4;
+				$.get('polygonHandler.php', app.payload, function(data){
+					maxaoi = parseFloat(data.maxAOIch4);
+					minaoi = parseFloat(data.minAOIch4);
+					medaoi = parseFloat(data.medAOIch4);
+					weightedaoi = parseFloat(data.weightedAOIch4);
+					weightedaoi = parseFloat(weightedaoi).toFixed(2);
+					weightedaoi = parseFloat(weightedaoi);
+
+					var data = google.visualization.arrayToDataTable([
+						['Method', 'Value',],
+						['Maximum ', maxaoi],
+						['Minimum ', minaoi],
+						['Median ', medaoi],
+						['Weighted Average ', weightedaoi]
+					]);
+
+					var options = {
+						title: app.payload.chart4n,
+						legend: {
+							position: 'none'
+						},
+						chartArea: {
+							width: '70%'
+						},
+						hAxis: {
+							//title: 'a',
+							minValue: 0
+						},
+						vAxis: {
+							//title: 'b'
+						}
+					};
+					chart_4 = new google.visualization.BarChart(document.getElementById('chart_area_4'));
+					chart_4.draw(data, options);
+				});
+				app.payload.chart1 = previous1;
+				app.payload.chart2 = previous2;
+				app.payload.chart3 = previous3;
+				app.payload.chart4 = previous4;
+			}
 	}
 	else{
 		var maxaoi;
@@ -1974,50 +2229,154 @@ function drawChart() {
 		var bounds = app.map.getBounds();
 		getparams.NE = bounds.getNorthEast().toJSON(); //north east corner
 		getparams.SW = bounds.getSouthWest().toJSON(); //south-west corner
+		if(x == 1){
+			$.get('polygonHandler.php', app.payload, function(data){
+				maxaoi = parseFloat(data.maxAOIch1);
+				minaoi = parseFloat(data.minAOIch1);
+				medaoi = parseFloat(data.medAOIch1);
+				weightedaoi = parseFloat(data.weightedAOIch1);
+				weightedaoi = parseFloat(weightedaoi).toFixed(2);
+				weightedaoi = parseFloat(weightedaoi);
 
-		$.get('polygonHandler.php', app.payload, function(data){
-			maxaoi = parseFloat(data.maxAOI);
-			minaoi = parseFloat(data.minAOI);
-			medaoi = parseFloat(data.medAOI);
-			weightedaoi = parseFloat(data.weightedAOI);
-			weightedaoi = parseFloat(weightedaoi).toFixed(2);
-			weightedaoi = parseFloat(weightedaoi);
+				var data = google.visualization.arrayToDataTable([
+					['Method', 'Value',],
+					['Maximum ', maxaoi],
+					['Minimum ', minaoi],
+					['Median ', medaoi],
+					['Weighted Average ', weightedaoi]
+				]);
 
-			var data = google.visualization.arrayToDataTable([
-				['Method', 'Value',],
-				['Maximum ', maxaoi],
-				['Minimum ', minaoi],
-				['Median ', medaoi],
-				['Weighted Average ', weightedaoi]
-			]);
+				var options = {
+					title: app.payload.chart1n,
+					legend: {
+						position: 'none'
+					},
+					chartArea: {
+						width: '70%'
+					},
+					hAxis: {
+						//title: 'a',
+						minValue: 0
+					},
+					vAxis: {
+						//title: 'b'
+					}
+				};
+				chart = new google.visualization.BarChart(document.getElementById('chart_area_1'));
+				chart.draw(data, options);
+			});
+		}
+		else if (x == 2) {
+			$.get('polygonHandler.php', app.payload, function(data){
+				maxaoi = parseFloat(data.maxAOIch2);
+				minaoi = parseFloat(data.minAOIch2);
+				medaoi = parseFloat(data.medAOIch2);
+				weightedaoi = parseFloat(data.weightedAOIch2);
+				weightedaoi = parseFloat(weightedaoi).toFixed(2);
+				weightedaoi = parseFloat(weightedaoi);
 
-			var options = {
-				title: app.payload.value,
-				legend: {
-					position: 'none'
-				},
-				chartArea: {
-					width: '60%'
-				},
-				hAxis: {
-					//title: 'a',
-					minValue: 0
-				},
-				vAxis: {
-					//title: 'b'
-				}
-			};
+				var data = google.visualization.arrayToDataTable([
+					['Method', 'Value',],
+					['Maximum ', maxaoi],
+					['Minimum ', minaoi],
+					['Median ', medaoi],
+					['Weighted Average ', weightedaoi]
+				]);
 
-			chart = new google.visualization.BarChart(document.getElementById('chart_area_1'));
-			chart_2 = new google.visualization.BarChart(document.getElementById('chart_area_4'));
-			chart_3 = new google.visualization.BarChart(document.getElementById('chart_area_2'));
-			chart_4 = new google.visualization.BarChart(document.getElementById('chart_area_3'));
+				var options = {
+					title: app.payload.chart2n,
+					legend: {
+						position: 'none'
+					},
+					chartArea: {
+						width: '70%'
+					},
+					hAxis: {
+						//title: 'a',
+						minValue: 0
+					},
+					vAxis: {
+						//title: 'b'
+					}
+				};
+				chart_2 = new google.visualization.BarChart(document.getElementById('chart_area_2'));
+				chart_2.draw(data, options);
+			});
+		}
+		else if(x == 3){
+			$.get('polygonHandler.php', app.payload, function(data){
+				maxaoi = parseFloat(data.maxAOIch3);
+				minaoi = parseFloat(data.minAOIch3);
+				medaoi = parseFloat(data.medAOIch3);
+				weightedaoi = parseFloat(data.weightedAOIch3);
+				weightedaoi = parseFloat(weightedaoi).toFixed(2);
+				weightedaoi = parseFloat(weightedaoi);
 
-			chart.draw(data, options);
-			chart_2.draw(data, options);
-			chart_3.draw(data, options);
-			chart_4.draw(data, options);
-		});
+				var data = google.visualization.arrayToDataTable([
+					['Method', 'Value',],
+					['Maximum ', maxaoi],
+					['Minimum ', minaoi],
+					['Median ', medaoi],
+					['Weighted Average ', weightedaoi]
+				]);
+
+				var options = {
+					title: app.payload.chart3n,
+					legend: {
+						position: 'none'
+					},
+					chartArea: {
+						width: '70%'
+					},
+					hAxis: {
+						//title: 'a',
+						minValue: 0
+					},
+					vAxis: {
+						//title: 'b'
+					}
+				};
+				chart_3 = new google.visualization.BarChart(document.getElementById('chart_area_3'));
+				chart_3.draw(data, options);
+			});
+		}
+		else if(x == 4){
+			$.get('polygonHandler.php', app.payload, function(data){
+				maxaoi = parseFloat(data.maxAOIch4);
+				minaoi = parseFloat(data.minAOIch4);
+				medaoi = parseFloat(data.medAOIch4);
+				weightedaoi = parseFloat(data.weightedAOIch4);
+				weightedaoi = parseFloat(weightedaoi).toFixed(2);
+				weightedaoi = parseFloat(weightedaoi);
+
+				var data = google.visualization.arrayToDataTable([
+					['Method', 'Value',],
+					['Maximum ', maxaoi],
+					['Minimum ', minaoi],
+					['Median ', medaoi],
+					['Weighted Average ', weightedaoi]
+				]);
+
+				var options = {
+					title: app.payload.chart4n,
+					legend: {
+						position: 'none'
+					},
+					chartArea: {
+						width: '70%'
+					},
+					hAxis: {
+						//title: 'a',
+						minValue: 0
+					},
+					vAxis: {
+						//title: 'b'
+					}
+				};
+				chart_4 = new google.visualization.BarChart(document.getElementById('chart_area_4'));
+				chart_4.draw(data, options);
+			});
+		}
 	}
 }
 

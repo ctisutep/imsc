@@ -12,10 +12,10 @@ if(isset($_GET['getMode']) AND $_GET['getMode'] == "polygons"){//**************T
 	getPolygons(); //cambio de Ricardo
 }
 if(isset($_GET['getMode']) AND $_GET['getMode'] == "AOI"){//**************The case in charge of retrieving polygon search (run)****************************(1)
-	getAOI();
+	getHelperAOI();
 }
 if(isset($_GET['getMode']) AND isset($_GET['lineString']) AND $_GET['lineString'] != null AND $_GET['getMode'] == "line"){//**************The case in charge of retrieving polygon search (run)****************************(1)
-	getLine();
+	getHelperLine();
 }
 else if(isset($_GET['district'])){//*******************This is the case for retieving the districts from table**********************(2)
 	districtNames();
@@ -43,6 +43,10 @@ class dataToQueryPolygons{
 	public $depth;
 	public $depth_method;
 	public $lineString;
+	public $chart1;
+	public $chart2;
+	public $chart3;
+	public $chart4;
 
 	public function __construct(){
 		$this->table = $_GET['table'];
@@ -55,6 +59,10 @@ class dataToQueryPolygons{
 		$this->depth = ($_GET['depth'] * 2.5400);
 		$this->depth_method = $_GET['depth_method'];
 		$this->lineString = $_GET['lineString'];
+		$this->chart1 =  $_GET['chart1'];
+		$this->chart2 =  $_GET['chart2'];
+		$this->chart3 =  $_GET['chart3'];
+		$this->chart4 =  $_GET['chart4'];
 	}
 }
 //depending on which table (for a given property) will be used in query, this will determine the appropriate key
@@ -88,7 +96,22 @@ function districtNames(){
 		$toReturn['coords'] = $result->fetch_all();
 	}
 }
-function getLine(){
+function getHelperLine(){
+	$data_line = new dataToQueryPolygons();
+	if($data_line->chart1 != null){
+		getLine(1);
+	}
+	else if($data_line->chart2 != null){
+		getLine(2);
+	}
+	else if($data_line->chart3 != null){
+		getLine(3);
+	}
+	else if($data_line->chart4 != null){
+		getLine(4);
+	}
+}
+function getLine($x){
 	global $conn, $toReturn;
 	$data_line = new dataToQueryPolygons();
 	$simplificationFactor = polygonDefinition($data_line);
@@ -96,6 +119,19 @@ function getLine(){
 	$toReturn['query'] = $query;
 	$result = mysqli_query($conn, $query);
 	$key = setKey($data_line->table);
+
+	if($x == 1){
+		$data_line->property = $data_line->chart1;
+	}
+	else if ($x == 2) {
+		$data_line->property = $data_line->chart2;
+	}
+	else if ($x == 3) {
+		$data_line->property = $data_line->chart3;
+	}
+	else if ($x == 4) {
+		$data_line->property = $data_line->chart4;
+	}
 
 	if($data_line->table == "chorizon_r"){
 		$query="SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data_line->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geomline, 1), p.SHAPE) ORDER BY OGR_FID DESC, top DESC";
@@ -501,16 +537,61 @@ function getLine(){
 		}
 		$promedio = ($promedio)/sizeof($polygons);
 
-		$toReturn['key'] = $key;
-		$toReturn['poly_num'] = sizeof($poly_arr);
-		$toReturn['maxAOI'] = $maximo;
-		$toReturn['minAOI']= $minimo;
-		$toReturn['medAOI']= $mediano;
-		$toReturn['weightedAOI']= $promedio;
+		if($x == 1){
+			$toReturn['key'] = $key;
+			$toReturn['poly_num'] = sizeof($poly_arr);
+			$toReturn['maxAOIch1'] = $maximo;
+			$toReturn['minAOIch1']= $minimo;
+			$toReturn['medAOIch1']= $mediano;
+			$toReturn['weightedAOIch1']= $promedio;
+		}
+		elseif ($x == 2) {
+			$toReturn['key'] = $key;
+			$toReturn['poly_num'] = sizeof($poly_arr);
+			$toReturn['maxAOIch2'] = $maximo;
+			$toReturn['minAOIch2']= $minimo;
+			$toReturn['medAOIch2']= $mediano;
+			$toReturn['weightedAOIch2']= $promedio;
+		}
+		elseif ($x == 3) {
+			$toReturn['key'] = $key;
+			$toReturn['poly_num'] = sizeof($poly_arr);
+			$toReturn['maxAOIch3'] = $maximo;
+			$toReturn['minAOIch3']= $minimo;
+			$toReturn['medAOIch3']= $mediano;
+			$toReturn['weightedAOIch3']= $promedio;
+		}
+		elseif ($x == 4) {
+			$toReturn['key'] = $key;
+			$toReturn['poly_num'] = sizeof($poly_arr);
+			$toReturn['maxAOIch4'] = $maximo;
+			$toReturn['minAOIch4']= $minimo;
+			$toReturn['medAOIch4']= $mediano;
+			$toReturn['weightedAOIch4']= $promedio;
+		}
 	}
 }
-
-function getAOI(){
+$x = 0;
+function getHelperAOI(){
+	$data_aoi = new dataToQueryPolygons();
+	if($data_aoi->chart1 != null){
+		$x=1;
+		getAOI($x);
+	}
+	else if($data_aoi->chart2 != null){
+		$x=2;
+		getAOI($x);
+	}
+	else if($data_aoi->chart3 != null){
+		$x=3;
+		getAOI($x);
+	}
+	else if($data_aoi->chart4 != null){
+		$x=4;
+		getAOI($x);
+	}
+}
+function getAOI($x){
 	global $conn, $toReturn;
 	$data_aoi = new dataToQueryPolygons();
 	$simplificationFactor = polygonDefinition($data_aoi);
@@ -518,6 +599,18 @@ function getAOI(){
 	$toReturn['query'] = $query;
 	$result = mysqli_query($conn, $query);
 	$key = setKey($data_aoi->table);
+	if($x == 1){
+		$data_aoi->property = $data_aoi->chart1;
+	}
+	else if ($x == 2) {
+		$data_aoi->property = $data_aoi->chart2;
+	}
+	else if ($x == 3) {
+		$data_aoi->property = $data_aoi->chart3;
+	}
+	else if ($x == 4) {
+		$data_aoi->property = $data_aoi->chart4;
+	}
 
 	if($data_aoi->table == "chorizon_r"){
 		$query="SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data_aoi->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
@@ -923,16 +1016,40 @@ function getAOI(){
 		}
 		$promedio = ($promedio)/sizeof($polygons);
 
-
-		$toReturn['key'] = $key;
-		$toReturn['poly_num'] = sizeof($poly_arr);
-		$toReturn['maxAOI'] = $maximo;
-		$toReturn['minAOI']= $minimo;
-		$toReturn['medAOI']= $mediano;
-		$toReturn['weightedAOI']= $promedio;
+		if($x == 1){
+			$toReturn['key'] = $key;
+			$toReturn['poly_num'] = sizeof($poly_arr);
+			$toReturn['maxAOIch1'] = $maximo;
+			$toReturn['minAOIch1']= $minimo;
+			$toReturn['medAOIch1']= $mediano;
+			$toReturn['weightedAOIch1']= $promedio;
+		}
+		elseif ($x == 2) {
+			$toReturn['key'] = $key;
+			$toReturn['poly_num'] = sizeof($poly_arr);
+			$toReturn['maxAOIch2'] = $maximo;
+			$toReturn['minAOIch2']= $minimo;
+			$toReturn['medAOIch2']= $mediano;
+			$toReturn['weightedAOIch2']= $promedio;
+		}
+		elseif ($x == 3) {
+			$toReturn['key'] = $key;
+			$toReturn['poly_num'] = sizeof($poly_arr);
+			$toReturn['maxAOIch3'] = $maximo;
+			$toReturn['minAOIch3']= $minimo;
+			$toReturn['medAOIch3']= $mediano;
+			$toReturn['weightedAOIch3']= $promedio;
+		}
+		elseif ($x == 4) {
+			$toReturn['key'] = $key;
+			$toReturn['poly_num'] = sizeof($poly_arr);
+			$toReturn['maxAOIch4'] = $maximo;
+			$toReturn['minAOIch4']= $minimo;
+			$toReturn['medAOIch4']= $mediano;
+			$toReturn['weightedAOIch4']= $promedio;
+		}
 	}
 }
-
 function getPolygons(){
 	global $conn, $toReturn;
 	$data = new dataToQueryPolygons();//automatically gathers necessary data for query
