@@ -1435,7 +1435,7 @@ function getPolygons(){//this is run button
 					fillOpacity: 0.60,
 					zIndex: -1
 				});
-				polygon.setOptions({ zIndex: newzIndex });
+				polygon.setOptions({ zIndex: -1 });
 				polygon.addListener('click', polyInfo);
 				app.polygons.push(polygon);
 				polygon.setMap(app.map);
