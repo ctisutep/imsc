@@ -2230,6 +2230,15 @@ function drawChart(x) {
 		getparams.NE = bounds.getNorthEast().toJSON(); //north east corner
 		getparams.SW = bounds.getSouthWest().toJSON(); //south-west corner
 		if(x == 1){
+			previous1 = app.payload.chart1;
+			previous2 = app.payload.chart2;
+			previous3 = app.payload.chart3;
+			previous4 = app.payload.chart4;
+			app.payload.chart1;
+			app.payload.chart2 = null;
+			app.payload.chart3 = null;
+			app.payload.chart4 = null;
+
 			$.get('polygonHandler.php', app.payload, function(data){
 				maxaoi = parseFloat(data.maxAOIch1);
 				minaoi = parseFloat(data.minAOIch1);
@@ -2265,8 +2274,20 @@ function drawChart(x) {
 				chart = new google.visualization.BarChart(document.getElementById('chart_area_1'));
 				chart.draw(data, options);
 			});
+			app.payload.chart1 = previous1;
+			app.payload.chart2 = previous2;
+			app.payload.chart3 = previous3;
+			app.payload.chart4 = previous4;
 		}
 		else if (x == 2) {
+			previous1 = app.payload.chart1;
+			previous2 = app.payload.chart2;
+			previous3 = app.payload.chart3;
+			previous4 = app.payload.chart4;
+			app.payload.chart1 = null;
+			app.payload.chart2;
+			app.payload.chart3 = null;
+			app.payload.chart4 = null;
 			$.get('polygonHandler.php', app.payload, function(data){
 				maxaoi = parseFloat(data.maxAOIch2);
 				minaoi = parseFloat(data.minAOIch2);
@@ -2302,8 +2323,20 @@ function drawChart(x) {
 				chart_2 = new google.visualization.BarChart(document.getElementById('chart_area_2'));
 				chart_2.draw(data, options);
 			});
+			app.payload.chart1 = previous1;
+			app.payload.chart2 = previous2;
+			app.payload.chart3 = previous3;
+			app.payload.chart4 = previous4;
 		}
 		else if(x == 3){
+			previous1 = app.payload.chart1;
+			previous2 = app.payload.chart2;
+			previous3 = app.payload.chart3;
+			previous4 = app.payload.chart4;
+			app.payload.chart1 = null;
+			app.payload.chart2 = null;
+			app.payload.chart3;
+			app.payload.chart4 = null;
 			$.get('polygonHandler.php', app.payload, function(data){
 				maxaoi = parseFloat(data.maxAOIch3);
 				minaoi = parseFloat(data.minAOIch3);
@@ -2339,8 +2372,20 @@ function drawChart(x) {
 				chart_3 = new google.visualization.BarChart(document.getElementById('chart_area_3'));
 				chart_3.draw(data, options);
 			});
+			app.payload.chart1 = previous1;
+			app.payload.chart2 = previous2;
+			app.payload.chart3 = previous3;
+			app.payload.chart4 = previous4;
 		}
 		else if(x == 4){
+			previous1 = app.payload.chart1;
+			previous2 = app.payload.chart2;
+			previous3 = app.payload.chart3;
+			previous4 = app.payload.chart4;
+			app.payload.chart1 = null;
+			app.payload.chart2 = null;
+			app.payload.chart3 = null;
+			app.payload.chart4;
 			$.get('polygonHandler.php', app.payload, function(data){
 				maxaoi = parseFloat(data.maxAOIch4);
 				minaoi = parseFloat(data.minAOIch4);
@@ -2376,6 +2421,10 @@ function drawChart(x) {
 				chart_4 = new google.visualization.BarChart(document.getElementById('chart_area_4'));
 				chart_4.draw(data, options);
 			});
+			app.payload.chart1 = previous1;
+			app.payload.chart2 = previous2;
+			app.payload.chart3 = previous3;
+			app.payload.chart4 = previous4;
 		}
 	}
 }
