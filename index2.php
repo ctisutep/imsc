@@ -2097,9 +2097,13 @@ function drawChart(x) {
 					chart.draw(data, options);
 				});
 
+				var histo_array;
 				app.payload.getMode = "histogram";
 				$.get('polygonHandler.php', app.payload, function(data){
-
+					histo_array = data.values;
+					for (var i = 0; i < histo_array.length; i++) {
+						console.log(histo_array[i]);
+					}
 					var data = google.visualization.arrayToDataTable([
 						['MyData', 'Value'],
 						['x', .57],
