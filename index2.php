@@ -1997,6 +1997,10 @@ var chart;
 var chart_2;
 var chart_3;
 var chart_4;
+var chart_histo;
+var chart_histo_2;
+var chart_histo_3;
+var chart_histo_4;
 function chartChecker(){
 	if(app.payload.chart1 != null){
 		drawChart(1);
@@ -2019,21 +2023,25 @@ function drawChart(x) {
 	if(typeof chart === 'undefined'){
 	}else{
 		chart.clearChart();
+		chart_histo.clearChart();
 	}
 
 	if(typeof chart_2 === 'undefined'){
 	}else{
 		chart_2.clearChart();
+		chart_histo_2.clearChart();
 	}
 
 	if(typeof chart_3 === 'undefined'){
 	}else{
 		chart_3.clearChart();
+		chart_histo_3.clearChart();
 	}
 
 	if(typeof chart_4 === 'undefined'){
 	}else{
 		chart_4.clearChart();
+		chart_histo_4.clearChart();
 	}
 
 	if(rec.type == 'rectangle'){
@@ -2101,28 +2109,14 @@ function drawChart(x) {
 				app.payload.getMode = "histogram";
 				$.get('polygonHandler.php', app.payload, function(data){
 					histo_array = data.values;
-					for (var i = 0; i < histo_array.length; i++) {
-						console.log(histo_array[i]);
-					}
 					var data = new google.visualization.DataTable();
 					data.addColumn('string', 'Property');
 					data.addColumn('number', 'Value');
-					data.addRows(4);
-					data.setCell(0, 0, ".57");
-					data.setCell(0, 1, .57);
-					data.setCell(1, 0, ".57");
-					data.setCell(1, 1, .57);
-					data.setCell(2, 0, ".57");
-					data.setCell(2, 1, .57);
-					data.setCell(3, 0, ".8");
-					data.setCell(3, 1, .8);
-					/*var data = google.visualization.arrayToDataTable([
-						['MyData', 'Value'],
-						['x', .57],
-						['y', .57],
-						['z', .57],
-						['v', .8]
-					]);*/
+					data.addRows(histo_array.length);
+					for (var i = 0; i < histo_array.length; i++) {
+						data.setCell(i, 1, histo_array[i]);
+					}
+
 					var options = {
 						title: app.payload.chart1n,
 						legend: {
@@ -2138,8 +2132,8 @@ function drawChart(x) {
 						}
 					};
 
-					chart = new google.visualization.Histogram(document.getElementById('chart_histogram_1'));
-					chart.draw(data, options);
+					chart_histo = new google.visualization.Histogram(document.getElementById('chart_histogram_1'));
+					chart_histo.draw(data, options);
 				});
 				app.payload.getMode = "AOI";
 				app.payload.chart1 = previous1;
@@ -2538,21 +2532,25 @@ function removePolygons(){
 	if(typeof chart === 'undefined'){
 	}else{
 		chart.clearChart();
+		chart_histo.clearChart();
 	}
 
 	if(typeof chart_2 === 'undefined'){
 	}else{
 		chart_2.clearChart();
+		chart_histo_2.clearChart();
 	}
 
 	if(typeof chart_3 === 'undefined'){
 	}else{
 		chart_3.clearChart();
+		chart_histo_3.clearChart();
 	}
 
 	if(typeof chart_4 === 'undefined'){
 	}else{
 		chart_4.clearChart();
+		chart_histo_4.clearChart();
 	}
 
 	}
