@@ -313,7 +313,7 @@
 <script src="js/properties.js"></script>
 <script>
 
-var app = {map:null, polygons:null, payload:{getMode:"polygons", property:null, district:null, depth:null, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null}}; //added value for depth method
+var app = {map:null, polygons:null, payload:{getMode:"polygons", property:null, district:null, depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null}}; //added value for depth method
 var hecho = false;
 //var suggested = all the aliases of the properties, note: not all properties have an alias
 $(document).ready(function(){//esto pasa recien cargada la pagina
@@ -2001,10 +2001,23 @@ function drawChart(x) {
 	if(typeof chart === 'undefined'){
 	}else{
 		chart.clearChart();
+	}
+
+	if(typeof chart_2 === 'undefined'){
+	}else{
 		chart_2.clearChart();
+	}
+
+	if(typeof chart_3 === 'undefined'){
+	}else{
 		chart_3.clearChart();
+	}
+
+	if(typeof chart_4 === 'undefined'){
+	}else{
 		chart_4.clearChart();
 	}
+
 	if(rec.type == 'rectangle'){
 		var maxaoi;
 		var minaoi;
@@ -2461,11 +2474,24 @@ function removePolygons(){
 	if(typeof chart === 'undefined'){
 	}else{
 		chart.clearChart();
+	}
+
+	if(typeof chart_2 === 'undefined'){
+	}else{
 		chart_2.clearChart();
+	}
+
+	if(typeof chart_3 === 'undefined'){
+	}else{
 		chart_3.clearChart();
+	}
+
+	if(typeof chart_4 === 'undefined'){
+	}else{
 		chart_4.clearChart();
 	}
-}
+
+	}
 function printMaps() { //testing printing a map
 	var body               = $('body');
 	var mapContainer       = $('#map');

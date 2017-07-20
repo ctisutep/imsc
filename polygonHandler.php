@@ -49,7 +49,7 @@ class dataToQueryPolygons{
 	public $chart4;
 
 	public function __construct(){
-		$this->table = $_GET['table'];
+		$this->table = 'chorizon_r'; //hardcoded
 		$this->property = $_GET['property'];
 		$this->district = $_GET['district'];
 		$this->lat2 = $_GET['NE']['lat'];
@@ -118,6 +118,7 @@ function getLine($x){
 	$query = "SET @geomline = 'LineString($data_line->lineString)'";
 	$toReturn['query'] = $query;
 	$result = mysqli_query($conn, $query);
+	$data_line->table = 'chorizon_r';
 	$key = setKey($data_line->table);
 
 	if($x == 1){
@@ -381,16 +382,20 @@ function getLine($x){
 		$done_med;
 
 		for ($j=0; $j < sizeof($poly_arr); $j++) {
+			echo "hello5";
 			$med_index_i = 0;
 			$done_med = 0;
 			if(sizeof($poly_arr[$j]) > 1 && $poly_arr[$j][sizeof($poly_arr[$j])-1][$data_line->property] == 0){
+				echo "hello6";
 				for ($i=0; $i < sizeof($poly_arr[$j])-1; $i++) {
 					if((sizeof($poly_arr[$j])-1)%2 == 1 && $done_med == 0){//odd
+						echo "hello3";
 						$med_index_i = ceil(sizeof($poly_arr[$j])/2); //have to subtract one from this value to get the index correctly
 						$done_med = 1;
 						$polygons[] = $poly_arr[$j][$med_index_i - 1];
 					}
 					elseif((sizeof($poly_arr[$j])-1)%2 == 0 && $done_med == 0){ //even
+						echo "hello4";
 						$med_value = ($poly_arr[$j][(ceil((sizeof($poly_arr[$j])-1)/2)) - 1][$data_line->property] + $poly_arr[$j][(ceil((sizeof($poly_arr[$j])-1)/2))][$data_line->property]) / 2;
 						$poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1][$data_line->property] = $med_value;
 						$polygons[] = $poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1];
@@ -399,13 +404,16 @@ function getLine($x){
 				}
 			}
 			else{
+				echo "hello7";
 				for ($i=0; $i < sizeof($poly_arr[$j]); $i++) {
 					if((sizeof($poly_arr[$j])-1)%2 == 1 && $done_med == 0){//odd
+						echo "hello";
 						$med_index_i = ceil(sizeof($poly_arr[$j])/2); //have to subtract one from this value to get the index correctly
 						$done_med = 1;
 						$polygons[] = $poly_arr[$j][$med_index_i - 1];
 					}
 					elseif(sizeof($poly_arr[$j])%2 == 0 && $done_med == 0){ //even
+						echo "hello2";
 						$med_value = ($poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1][$data_line->property] + $poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2))][$data_line->property]) / 2;
 						$poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1][$data_line->property] = $med_value;
 						$polygons[] = $poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1];
@@ -414,6 +422,8 @@ function getLine($x){
 				}
 			}
 		}
+		//var_dump($poly_arr);
+		var_dump($polygons);
 		$medianos = array();
 		for ($i=0; $i < sizeof($polygons); $i++) {
 			$medianos[$i] = $polygons[$i][$data_line->property];
@@ -426,6 +436,7 @@ function getLine($x){
 			$mediano = $medianos[ceil(sizeof($medianos)/2)-1];
 		}
 		else{ //even
+			var_dump($medianos);
 			$mediano = ($medianos[ceil(sizeof($medianos)/2)-1] + $medianos[ceil(sizeof($medianos)/2)]) / 2;
 		}
 
@@ -598,6 +609,7 @@ function getAOI($x){
 	$query = "SET @geom1 = 'POLYGON(($data_aoi->lng1	$data_aoi->lat1,$data_aoi->lng1	$data_aoi->lat2,$data_aoi->lng2	$data_aoi->lat2,$data_aoi->lng2	$data_aoi->lat1,$data_aoi->lng1	$data_aoi->lat1))'";
 	$toReturn['query'] = $query;
 	$result = mysqli_query($conn, $query);
+	$data_aoi->table = 'chorizon_r';
 	$key = setKey($data_aoi->table);
 	if($x == 1){
 		$data_aoi->property = $data_aoi->chart1;
