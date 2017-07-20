@@ -436,7 +436,7 @@ function getLine($x){
 			$mediano = $medianos[ceil(sizeof($medianos)/2)-1];
 		}
 		else{ //even
-			var_dump($medianos);
+			//var_dump($medianos);
 			$mediano = ($medianos[ceil(sizeof($medianos)/2)-1] + $medianos[ceil(sizeof($medianos)/2)]) / 2;
 		}
 
