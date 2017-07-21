@@ -2185,6 +2185,36 @@ function drawChart(x) {
 					chart_2 = new google.visualization.BarChart(document.getElementById('chart_area_2'));
 					chart_2.draw(data, options);
 				});
+				var histo_array;
+				app.payload.getMode = "histogram";
+				$.get('polygonHandler.php', app.payload, function(data){
+					histo_array = data.values;
+					var data = new google.visualization.DataTable();
+					data.addColumn('string', 'Property');
+					data.addColumn('number', 'Value');
+					data.addRows(histo_array.length);
+					for (var i = 0; i < histo_array.length; i++) {
+						data.setCell(i, 1, histo_array[i]);
+					}
+
+					var options = {
+						title: app.payload.chart2n,
+						legend: {
+							position: 'none'
+						},
+						histogram: {
+							bucketSize: .1
+						},
+						// bar: { width: 5 },
+						hAxis: {
+							type: 'category'
+							// , viewWindow: { min: 0, max: 6 } // note min and max values are indices when type is category.
+						}
+					};
+
+					chart_histo_2 = new google.visualization.Histogram(document.getElementById('chart_histogram_2'));
+					chart_histo_2.draw(data, options);
+				});
 				app.payload.chart1 = previous1;
 				app.payload.chart2 = previous2;
 				app.payload.chart3 = previous3;
@@ -2234,6 +2264,36 @@ function drawChart(x) {
 					chart_3 = new google.visualization.BarChart(document.getElementById('chart_area_3'));
 					chart_3.draw(data, options);
 				});
+				var histo_array;
+				app.payload.getMode = "histogram";
+				$.get('polygonHandler.php', app.payload, function(data){
+					histo_array = data.values;
+					var data = new google.visualization.DataTable();
+					data.addColumn('string', 'Property');
+					data.addColumn('number', 'Value');
+					data.addRows(histo_array.length);
+					for (var i = 0; i < histo_array.length; i++) {
+						data.setCell(i, 1, histo_array[i]);
+					}
+
+					var options = {
+						title: app.payload.chart3n,
+						legend: {
+							position: 'none'
+						},
+						histogram: {
+							bucketSize: .1
+						},
+						// bar: { width: 5 },
+						hAxis: {
+							type: 'category'
+							// , viewWindow: { min: 0, max: 6 } // note min and max values are indices when type is category.
+						}
+					};
+
+					chart_histo_3 = new google.visualization.Histogram(document.getElementById('chart_histogram_3'));
+					chart_histo_3.draw(data, options);
+				});
 				app.payload.chart1 = previous1;
 				app.payload.chart2 = previous2;
 				app.payload.chart3 = previous3;
@@ -2282,6 +2342,36 @@ function drawChart(x) {
 					};
 					chart_4 = new google.visualization.BarChart(document.getElementById('chart_area_4'));
 					chart_4.draw(data, options);
+				});
+				var histo_array;
+				app.payload.getMode = "histogram";
+				$.get('polygonHandler.php', app.payload, function(data){
+					histo_array = data.values;
+					var data = new google.visualization.DataTable();
+					data.addColumn('string', 'Property');
+					data.addColumn('number', 'Value');
+					data.addRows(histo_array.length);
+					for (var i = 0; i < histo_array.length; i++) {
+						data.setCell(i, 1, histo_array[i]);
+					}
+
+					var options = {
+						title: app.payload.chart4n,
+						legend: {
+							position: 'none'
+						},
+						histogram: {
+							bucketSize: .1
+						},
+						// bar: { width: 5 },
+						hAxis: {
+							type: 'category'
+							// , viewWindow: { min: 0, max: 6 } // note min and max values are indices when type is category.
+						}
+					};
+
+					chart_histo_4 = new google.visualization.Histogram(document.getElementById('chart_histogram_4'));
+					chart_histo_4.draw(data, options);
 				});
 				app.payload.chart1 = previous1;
 				app.payload.chart2 = previous2;
@@ -2345,6 +2435,36 @@ function drawChart(x) {
 				chart = new google.visualization.BarChart(document.getElementById('chart_area_1'));
 				chart.draw(data, options);
 			});
+			var histo_array;
+			app.payload.getMode = "histogram";
+			$.get('polygonHandler.php', app.payload, function(data){
+				histo_array = data.values;
+				var data = new google.visualization.DataTable();
+				data.addColumn('string', 'Property');
+				data.addColumn('number', 'Value');
+				data.addRows(histo_array.length);
+				for (var i = 0; i < histo_array.length; i++) {
+					data.setCell(i, 1, histo_array[i]);
+				}
+
+				var options = {
+					title: app.payload.chart1n,
+					legend: {
+						position: 'none'
+					},
+					histogram: {
+						bucketSize: .1
+					},
+					// bar: { width: 5 },
+					hAxis: {
+						type: 'category'
+						// , viewWindow: { min: 0, max: 6 } // note min and max values are indices when type is category.
+					}
+				};
+
+				chart_histo = new google.visualization.Histogram(document.getElementById('chart_histogram_1'));
+				chart_histo.draw(data, options);
+			});
 			app.payload.chart1 = previous1;
 			app.payload.chart2 = previous2;
 			app.payload.chart3 = previous3;
@@ -2393,6 +2513,36 @@ function drawChart(x) {
 				};
 				chart_2 = new google.visualization.BarChart(document.getElementById('chart_area_2'));
 				chart_2.draw(data, options);
+			});
+			var histo_array;
+			app.payload.getMode = "histogram";
+			$.get('polygonHandler.php', app.payload, function(data){
+				histo_array = data.values;
+				var data = new google.visualization.DataTable();
+				data.addColumn('string', 'Property');
+				data.addColumn('number', 'Value');
+				data.addRows(histo_array.length);
+				for (var i = 0; i < histo_array.length; i++) {
+					data.setCell(i, 1, histo_array[i]);
+				}
+
+				var options = {
+					title: app.payload.chart2n,
+					legend: {
+						position: 'none'
+					},
+					histogram: {
+						bucketSize: .1
+					},
+					// bar: { width: 5 },
+					hAxis: {
+						type: 'category'
+						// , viewWindow: { min: 0, max: 6 } // note min and max values are indices when type is category.
+					}
+				};
+
+				chart_histo_2 = new google.visualization.Histogram(document.getElementById('chart_histogram_2'));
+				chart_histo_2.draw(data, options);
 			});
 			app.payload.chart1 = previous1;
 			app.payload.chart2 = previous2;
@@ -2443,6 +2593,36 @@ function drawChart(x) {
 				chart_3 = new google.visualization.BarChart(document.getElementById('chart_area_3'));
 				chart_3.draw(data, options);
 			});
+			var histo_array;
+			app.payload.getMode = "histogram";
+			$.get('polygonHandler.php', app.payload, function(data){
+				histo_array = data.values;
+				var data = new google.visualization.DataTable();
+				data.addColumn('string', 'Property');
+				data.addColumn('number', 'Value');
+				data.addRows(histo_array.length);
+				for (var i = 0; i < histo_array.length; i++) {
+					data.setCell(i, 1, histo_array[i]);
+				}
+
+				var options = {
+					title: app.payload.chart3n,
+					legend: {
+						position: 'none'
+					},
+					histogram: {
+						bucketSize: .1
+					},
+					// bar: { width: 5 },
+					hAxis: {
+						type: 'category'
+						// , viewWindow: { min: 0, max: 6 } // note min and max values are indices when type is category.
+					}
+				};
+
+				chart_histo_3 = new google.visualization.Histogram(document.getElementById('chart_histogram_3'));
+				chart_histo_3.draw(data, options);
+			});
 			app.payload.chart1 = previous1;
 			app.payload.chart2 = previous2;
 			app.payload.chart3 = previous3;
@@ -2491,6 +2671,36 @@ function drawChart(x) {
 				};
 				chart_4 = new google.visualization.BarChart(document.getElementById('chart_area_4'));
 				chart_4.draw(data, options);
+			});
+			var histo_array;
+			app.payload.getMode = "histogram";
+			$.get('polygonHandler.php', app.payload, function(data){
+				histo_array = data.values;
+				var data = new google.visualization.DataTable();
+				data.addColumn('string', 'Property');
+				data.addColumn('number', 'Value');
+				data.addRows(histo_array.length);
+				for (var i = 0; i < histo_array.length; i++) {
+					data.setCell(i, 1, histo_array[i]);
+				}
+
+				var options = {
+					title: app.payload.chart4n,
+					legend: {
+						position: 'none'
+					},
+					histogram: {
+						bucketSize: .1
+					},
+					// bar: { width: 5 },
+					hAxis: {
+						type: 'category'
+						// , viewWindow: { min: 0, max: 6 } // note min and max values are indices when type is category.
+					}
+				};
+
+				chart_histo_4 = new google.visualization.Histogram(document.getElementById('chart_histogram_4'));
+				chart_histo_4.draw(data, options);
 			});
 			app.payload.chart1 = previous1;
 			app.payload.chart2 = previous2;

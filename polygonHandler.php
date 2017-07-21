@@ -198,7 +198,99 @@ function getHistogramAOI($x){ //maybe I do not need a helper
 	$toReturn['values'] = $values;
 }
 function getHelperHistogramLine(){
+	$data_line = new dataToQueryPolygons();
+	if($data_line->chart1 != null){
+		getHistogramLine(1);
+	}
+	else if($data_line->chart2 != null){
+		getHistogramLine(2);
+	}
+	else if($data_line->chart3 != null){
+		getHistogramLine(3);
+	}
+	else if($data_line->chart4 != null){
+		getHistogramLine(4);
+	}
+}
+function getHistogramLine($x){
+	global $conn, $toReturn;
+	$data_line = new dataToQueryPolygons();
+	$simplificationFactor = polygonDefinition($data_line);
+	$query = "SET @geomline = 'LineString($data_line->lineString)'";
+	$toReturn['query'] = $query;
+	$result = mysqli_query($conn, $query);
+	$data_line->table = 'chorizon_r';
+	$key = setKey($data_line->table);
 
+	if($x == 1){
+		$data_line->property = $data_line->chart1;
+	}
+	else if ($x == 2) {
+		$data_line->property = $data_line->chart2;
+	}
+	else if ($x == 3) {
+		$data_line->property = $data_line->chart3;
+	}
+	else if ($x == 4) {
+		$data_line->property = $data_line->chart4;
+	}
+
+	if($data_line->table == "chorizon_r"){
+		$query="SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data_line->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geomline, 1), p.SHAPE) ORDER BY OGR_FID DESC, top DESC";
+		//$query="SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM mujoins3 NATURAL JOIN polygon AS p NATURAL JOIN chorizon_r as x WHERE x.cokey = mujoins3.cokey AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
+		$toReturn['query2'] = $query;
+		$result = mysqli_query($conn, $query);
+		$result = fetchAll($result);
+		$polygons = array();
+
+		$poly_arr = array();
+		$ogr;
+		$past_ogr = 0;
+		$skip;
+		$counter_i = 0;
+		$counter_j;
+		$entered = 0;
+
+		for ($i=0; $i < sizeof($result); $i++){
+			$counter_j = 0;
+			$ogr = $result[$i]['OGR_FID'];
+			$skip = 0;
+
+			if($entered == 1){
+				$counter_i++;
+			}
+
+			if($past_ogr == $ogr){
+				$ogr = 1;
+				$skip = 1;
+				$entered = 0;
+			}
+			else{
+				$ogr = $result[$i]['OGR_FID'];
+				$skip = 0;
+				$entered = 0;
+			}
+			for ($j=0; $j < sizeof($result); $j++) {
+				if($ogr == $result[$j]['OGR_FID'] && $skip == 0){
+					$poly_arr[$counter_i][$counter_j] = $result[$j];
+					$past_ogr = $ogr;
+					$counter_j++;
+					$entered = 1;
+				}
+			}
+		}
+	}
+	$values = array();
+	$placeholder;
+	for ($i=0; $i < sizeof($poly_arr); $i++) {
+		for ($j=0; $j < sizeof($poly_arr[$i]); $j++) {
+			$placeholder = $poly_arr[$i][$j][$data_line->property];
+			//$values += "$poly_arr[$i][$j][$data_aoi->property], ";
+			array_push($values, $placeholder);
+		}
+	}
+	//var_dump($values);
+	$toReturn['values'] = $values;
 }
 function getHelperLine(){
 	$data_line = new dataToQueryPolygons();
@@ -214,9 +306,6 @@ function getHelperLine(){
 	else if($data_line->chart4 != null){
 		getLine(4);
 	}
-}
-function getLineHistogram($x){
-
 }
 function getLine($x){
 	global $conn, $toReturn;
@@ -966,6 +1055,7 @@ function getAOI($x){
 			$polygons[] = $poly_arr[$min_index_i][$min_index_j];
 		}
 		$minimo = $polygons[0][$data_aoi->property];
+		//var_dump($polygons);
 		for ($i=0; $i < sizeof($polygons); $i++) {
 			if($minimo > $polygons[$i][$data_aoi->property]){
 				$minimo = $polygons[$i][$data_aoi->property];
