@@ -102,7 +102,23 @@ function districtNames(){
 		$toReturn['coords'] = $result->fetch_all();
 	}
 }
-function getHelperHistogramAOI(){ //maybe I do not need a helper
+function getHelperHistogramAOI(){
+	$data_aoi = new dataToQueryPolygons();
+	if($data_aoi->chart1 != null){
+		getHistogramAOI(1);
+	}
+	else if($data_aoi->chart2 != null){
+		getHistogramAOI(2);
+	}
+	else if($data_aoi->chart3 != null){
+		getHistogramAOI(3);
+	}
+	else if($data_aoi->chart4 != null){
+		getHistogramAOI(4);
+	}
+}
+
+function getHistogramAOI($x){ //maybe I do not need a helper
 	global $conn, $toReturn;
 	$data_aoi = new dataToQueryPolygons();
 	$simplificationFactor = polygonDefinition($data_aoi);
@@ -111,8 +127,7 @@ function getHelperHistogramAOI(){ //maybe I do not need a helper
 	$result = mysqli_query($conn, $query);
 	$data_aoi->table = 'chorizon_r';
 	$key = setKey($data_aoi->table);
-	$data_aoi->property = $data_aoi->chart1;
-	/*if($x == 1){
+	if($x == 1){
 		$data_aoi->property = $data_aoi->chart1;
 	}
 	else if ($x == 2) {
@@ -123,7 +138,7 @@ function getHelperHistogramAOI(){ //maybe I do not need a helper
 	}
 	else if ($x == 4) {
 		$data_aoi->property = $data_aoi->chart4;
-	}*/
+	}
 
 	if($data_aoi->table == "chorizon_r"){
 		$query="SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data_aoi->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
@@ -199,6 +214,9 @@ function getHelperLine(){
 	else if($data_line->chart4 != null){
 		getLine(4);
 	}
+}
+function getLineHistogram($x){
+
 }
 function getLine($x){
 	global $conn, $toReturn;
