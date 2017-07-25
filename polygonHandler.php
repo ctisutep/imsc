@@ -682,7 +682,7 @@ function getLine($x){
 					$top = $poly_arr[$i][$j]['top'];
 					$bottom = $poly_arr[$i][$j]['bottom'];
 					$delta = $bottom - $top;
-					$valor = $poly_arr[$i][$j][$data_line->property];
+					$valor = floatval($poly_arr[$i][$j][$data_line->property]);
 					if($n_operaciones > $j){
 						if($profundo >= $delta && $profundo >= $bottom){
 							$result_weighted += (($delta/$profundo)*$valor);
@@ -719,7 +719,7 @@ function getLine($x){
 					$top = $poly_arr[$i][$j]['top'];
 					$bottom = $poly_arr[$i][$j]['bottom'];
 					$delta = $bottom - $top;
-					$valor = $poly_arr[$i][$j][$data_line->property];
+					$valor = floatval($poly_arr[$i][$j][$data_line->property]);
 					if($n_operaciones > $j){
 						if($profundo >= $delta && $profundo >= $bottom){
 							$result_weighted += (($delta/$profundo)*$valor);
@@ -1163,7 +1163,7 @@ function getAOI($x){
 					$top = $poly_arr[$i][$j]['top'];
 					$bottom = $poly_arr[$i][$j]['bottom'];
 					$delta = $bottom - $top;
-					$valor = $poly_arr[$i][$j][$data_aoi->property];
+					$valor = floatval($poly_arr[$i][$j][$data_aoi->property]);
 					if($n_operaciones > $j){
 						if($profundo >= $delta && $profundo >= $bottom){
 							$result_weighted += (($delta/$profundo)*$valor);
@@ -1200,10 +1200,10 @@ function getAOI($x){
 					$top = $poly_arr[$i][$j]['top'];
 					$bottom = $poly_arr[$i][$j]['bottom'];
 					$delta = $bottom - $top;
-					$valor = $poly_arr[$i][$j][$data_aoi->property];
+					$valor = floatval($poly_arr[$i][$j][$data_aoi->property]);
 					if($n_operaciones > $j){
 						if($profundo >= $delta && $profundo >= $bottom){
-							$result_weighted += (($delta/$profundo)*$valor);
+							$result_weighted += round((($delta/$profundo)*$valor), 2);
 						}
 						elseif($profundo >= $delta && $profundo <= $bottom){
 							$delta_depth = $profundo - $top;

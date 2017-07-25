@@ -89,20 +89,20 @@
 					</div>
 					<div class="col-lg-6">
 						<div class="row">
-							<div id="chart_area_3"> </div>
+							<div id="chart_histogram_1"> </div>
 						</div>
 						<div class="row">
-							<div id="chart_area_4"> </div>
+							<div id="chart_histogram_2"> </div>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="row">
-							<div id="chart_histogram_1"> </div>
+							<div id="chart_area_3"> </div>
 						</div>
 						<div class="row">
-							<div id="chart_histogram_2"> </div>
+							<div id="chart_area_4"> </div>
 						</div>
 					</div>
 					<div class="col-lg-6">
@@ -350,6 +350,7 @@ $(document).ready(function(){//esto pasa recien cargada la pagina
 		var ch3 = document.getElementById("select_chart_3");
 		var ch4 = document.getElementById("select_chart_4");
 
+		//console.log(properties);
 		var prop = [{number: 0, value: null, data: null, table: null},
 			{number: 1, value: null, data: null, table: null},
 			{number: 2, value: null, data: null, table: null},
@@ -386,17 +387,21 @@ $(document).ready(function(){//esto pasa recien cargada la pagina
 			{number: 33, value: null, data: null, table: null},
 			{number: 34, value: null, data: null, table: null},
 			{number: 35, value: null, data: null, table: null},
-			{number: 36, value: null, data: null, table: null},
-			{number: 37, value: null, data: null, table: null}
+			{number: 36, value: null, data: null, table: null}
+			//{number: 37, value: null, data: null, table: null}
 		];
-
-for (var i = 0; i < 37; i++) {
-	prop[i].number = i;
-	prop[i].value = properties[i].value;
-	prop[i].data = properties[i].data;
-	prop[i].table = properties[i].table;
+//console.log(properties);
+for (var i = 6; i < properties.length; i++) {
+	if(i > 6 && i <= 36){
+		//console.log(i);
+		//console.log(prop[i].number);
+		prop[i].number = i;
+		prop[i].value = properties[i].value;
+		prop[i].data = properties[i].data;
+		prop[i].table = properties[i].table;
+	}
 }
-for(var i = 0; i < prop.length-1; i++) {
+for(var i = 7; i < prop.length-1; i++) {
 	var propr = prop[i].number;
 	var elem = document.createElement("option");
 	elem.textContent = prop[i].value;
@@ -409,7 +414,7 @@ for(var i = 0; i < prop.length-1; i++) {
 	//ch3.appendChild(elem);
 	//ch4.appendChild(elem);
 }
-for(var i = 0; i < prop.length-1; i++) {
+for(var i = 7; i < prop.length-1; i++) {
 	var propr = prop[i].number;
 	var elem = document.createElement("option");
 	elem.textContent = prop[i].value;
@@ -422,7 +427,7 @@ for(var i = 0; i < prop.length-1; i++) {
 	//ch3.appendChild(elem);
 	//ch4.appendChild(elem);
 }
-for(var i = 0; i < prop.length-1; i++) {
+for(var i = 7; i < prop.length-1; i++) {
 	var propr = prop[i].number;
 	var elem = document.createElement("option");
 	elem.textContent = prop[i].value;
@@ -435,7 +440,7 @@ for(var i = 0; i < prop.length-1; i++) {
 	//ch3.appendChild(elem);
 	//ch4.appendChild(elem);
 }
-for(var i = 0; i < prop.length-1; i++) {
+for(var i = 7; i < prop.length-1; i++) {
 	var propr = prop[i].number;
 	var elem = document.createElement("option");
 	elem.textContent = prop[i].value;
@@ -448,7 +453,7 @@ for(var i = 0; i < prop.length-1; i++) {
 	ch3.appendChild(elem);
 	//ch4.appendChild(elem);
 }
-for(var i = 0; i < prop.length-1; i++) {
+for(var i = 7; i < prop.length-1; i++) {
 	var propr = prop[i].number;
 	var elem = document.createElement("option");
 	elem.textContent = prop[i].value;
