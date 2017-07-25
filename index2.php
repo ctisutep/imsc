@@ -955,10 +955,9 @@ function getPolygons(){//this is run button
 							<img src='img/neonpurplesquare.png' height='10px'/> A-8 (80 to 85)<br>\
 							<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
 							var a = parseFloat(data.coords[key][app.payload.property]);
-							console.log(a);
+
 							switch (true) {
 								case (a >= 0 && a < 5): // LESS THAN OR EQUAL TO 0
-								console.log('hey');
 								colorSelector = 1;
 								newzIndex = 1;
 								break;
