@@ -954,74 +954,69 @@ function getPolygons(){//this is run button
 							<img src='img/neongreen.png' height='10px'/> A-7-6<br>\
 							<img src='img/neonpurple.png' height='10px'/> A-8<br>\
 							<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
-							console.log(amountIn);
-							var amountIn = parseFloat(data.coords[key][app.payload.property]);
-							console.log(amountIn);
-							//console.log(amountIn);
-							//var amountIn = data.coords[key][app.payload.property];
-							//console.log(amountIn);
+							var a = parseFloat(data.coords[key][app.payload.property]);
 							switch (true) {
-								case (amountIn == "A-1-a"): // LESS THAN OR EQUAL TO 0
+								case (a >= 0 &&  a < 5): // LESS THAN OR EQUAL TO 0
 								colorSelect = 1;
 								newzIndex = 1;
 								break;
-								case (amountIn == "A-1-b"): // BETWEEN 21 AND 40
+								case (a >= 5 && a < 10): // BETWEEN 21 AND 40
 								colorSelector = 2;
 								newzIndex = 2;
 								break;
-								case (amountIn == "A-b"): // BETWEEN 41 AND 60
+								case (a >= 10 && a < 15): // BETWEEN 41 AND 60
 								colorSelector = 3;
 								newzIndex = 3;
 								break;
-								case (amountIn == "A-2"): // BETWEEN 41 AND 60
+								case (a >= 15 && a < 20): // BETWEEN 41 AND 60
 								colorSelector = 4;
 								newzIndex = 4;
 								break;
-								case (amountIn == "A-2-4"): // BETWEEN 41 AND 60
+								case (a >= 20 && a < 25): // BETWEEN 41 AND 60
 								colorSelector = 5;
 								newzIndex = 5;
 								break;
-								case (amountIn == "A-2-5"): // BETWEEN 41 AND 60
+								case (a >= 25 && a < 30): // BETWEEN 41 AND 60
 								colorSelector = 6;
 								newzIndex = 6;
 								break;
-								case (amountIn == "A-2-6"): // BETWEEN 41 AND 60
+								case (a >= 30 && a < 35): // BETWEEN 41 AND 60
 								colorSelector = 7;
 								newzIndex = 7;
 								break;
-								case (amountIn == "A-2-7"): // BETWEEN 41 AND 60
+								case (a >= 35 && a < 40): // BETWEEN 41 AND 60
 								colorSelector = 8;
 								newzIndex = 8;
 								break;
-								case (amountIn == "A-3"): // BETWEEN 41 AND 60
+								case (a >= 40 && a < 45): // BETWEEN 41 AND 60
 								colorSelector = 9;
 								newzIndex = 9;
 								break;
-								case (amountIn == "A-4"): // BETWEEN 41 AND 60
+								case (a >= 45 && a < 50): // BETWEEN 41 AND 60
 								colorSelector = 10;
 								newzIndex = 10;
 								break;
-								case (amountIn == "A-5" ): // BETWEEN 41 AND 60
+								case (a >= 50 && a < 55): // BETWEEN 41 AND 60
 								colorSelector = 11;
 								newzIndex = 11;
 								break;
-								case (amountIn == "A-6" ): // BETWEEN 41 AND 60
+								case (a >= 55 && a < 60): // BETWEEN 41 AND 60
 								colorSelector = 12;
 								newzIndex = 12;
 								break;
-								case (amountIn == "A-7" ): // BETWEEN 41 AND 60
+								case (a >= 60 && a < 65): // BETWEEN 41 AND 60
 								colorSelector = 13;
 								newzIndex = 13;
 								break;
-								case (amountIn == "A-7-5" ): // BETWEEN 41 AND 60
+								case (a >= 65 && a < 70): // BETWEEN 41 AND 60
 								colorSelector = 14;
 								newzIndex = 14;
 								break;
-								case (amountIn == "A-7-6" ): // BETWEEN 41 AND 60
+								case (a >= 70 && a < 75): // BETWEEN 41 AND 60
 								colorSelector = 15;
 								newzIndex = 15;
 								break;
-								case (amountIn == "A-8" ): // BETWEEN 41 AND 60
+								case (a >= 75 && a <= 80): // BETWEEN 41 AND 60
 								colorSelector = 16;
 								newzIndex = 16;
 								break;
@@ -1232,6 +1227,41 @@ function getPolygons(){//this is run button
 								default: // Not rated
 								colorSelector = 0;
 								newzIndex = 0;
+								break;
+							}
+						}
+						else if(app.payload.property == 'frag3to10_r'){
+							legendText = "<img src='img/redsquare.png' height='10px'/> 0 to 12.5<br>\
+							<img src='img/skybluesquare.png' height='10px'/>  12.5 to 25<br>\
+							<img src='img/brightgreensquare.png' height='10px'/> 25 to 37.5<br>\
+							<img src='img/purplesquare.png' height='10px'/> 37.5 to 50<br>\
+							<img src='img/orangesquare.png' height='10px'/> 50 to 62.5<br>\
+							<img src='img/brightpinksquare.png' height='10px'/> 62.5 to 75";
+							var a = data.coords[key][app.payload.property];
+							switch (true) {
+								case (a >= 0 && a < 12.5):
+								colorSelector = 0;
+								newzIndex = 0;
+								break;
+								case (a >= 12.5 && a < 25):
+								colorSelector = 1;
+								newzIndex = 1;
+								break;
+								case (a >= 25 && a < 37.5):
+								colorSelector = 2;
+								newzIndex = 2;
+								break;
+								case (a >= 37.5 && a < 50):
+								colorSelector = 3;
+								newzIndex = 3;
+								break;
+								case (a >= 50 && a < 62.5):
+								colorSelector = 4;
+								newzIndex = 4;
+								break;
+								case (a >= 62.5 && a <= 75):
+								colorSelector = 5;
+								newzIndex = 5;
 								break;
 							}
 						}
