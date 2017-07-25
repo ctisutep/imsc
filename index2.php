@@ -936,23 +936,23 @@ function getPolygons(){//this is run button
 							//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
 							//colorSelector = 0;
 							//newzIndex = 0;
-							legendText = "<img src='img/redsquare.png' height='10px'/> A-1<br>\
-							<img src='img/skybluesquare.png' height='10px'/> A-1-a<br>\
-							<img src='img/brightgreensquare.png' height='10px'/> A-1-b<br>\
-							<img src='img/purplesquare.png' height='10px'/> A-b<br>\
-							<img src='img/orangesquare.png' height='10px'/> A-2<br>\
-							<img src='img/brightpinksquare.png' height='10px'/> A-2-4<br>\
-							<img src='img/navybluesquare.png' height='10px'/> A-2-5<br>\
-							<img src='img/lilacsquare.png' height='10px'/> A-2-6<br>\
-							<img src='img/yellowsquare.png' height='10px'/> A-2-7<br>\
-							<img src='img/maroonsquare.png' height='10px'/> A-3<br>\
-							<img src='img/cyansquare.png' height='10px'/> A-4<br>\
-							<img src='img/navygreensquare.png' height='10px'/> A-5<br>\
-							<img src='img/peachsquare.png' height='10px'/> A-6<br>\
-							<img src='img/fleshsquare.png' height='10px'/> A-7<br>\
-							<img src='img/brownsquare.png' height='10px'/> A-7-5<br>\
-							<img src='img/neongreensquare.png' height='10px'/> A-7-6<br>\
-							<img src='img/neonpurplesquare.png' height='10px'/> A-8<br>\
+							legendText = "<img src='img/redsquare.png' height='10px'/> A-1 (0 to 5)<br>\
+							<img src='img/skybluesquare.png' height='10px'/> A-1-a (5 to 10)<br>\
+							<img src='img/brightgreensquare.png' height='10px'/> A-1-b (10 to 15)<br>\
+							<img src='img/purplesquare.png' height='10px'/> A-b (15 to 20)<br>\
+							<img src='img/orangesquare.png' height='10px'/> A-2 (20 to 25)<br>\
+							<img src='img/brightpinksquare.png' height='10px'/> A-2-4 (25 to 30)<br>\
+							<img src='img/navybluesquare.png' height='10px'/> A-2-5 (30 to 35)<br>\
+							<img src='img/lilacsquare.png' height='10px'/> A-2-6 (35 to 40)<br>\
+							<img src='img/yellowsquare.png' height='10px'/> A-2-7 (40 to 45)<br>\
+							<img src='img/maroonsquare.png' height='10px'/> A-3 (45 to 50)<br>\
+							<img src='img/cyansquare.png' height='10px'/> A-4 (50 to 55)<br>\
+							<img src='img/navygreensquare.png' height='10px'/> A-5 (55 to 60)<br>\
+							<img src='img/peachsquare.png' height='10px'/> A-6 (60 to 65)<br>\
+							<img src='img/fleshsquare.png' height='10px'/> A-7 (65 to 70)<br>\
+							<img src='img/brownsquare.png' height='10px'/> A-7-5 (70 to 75)<br>\
+							<img src='img/neongreensquare.png' height='10px'/> A-7-6 (75 to 80)<br>\
+							<img src='img/neonpurplesquare.png' height='10px'/> A-8 (80 to 85)<br>\
 							<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
 							var a = parseFloat(data.coords[key][app.payload.property]);
 							switch (true) {
