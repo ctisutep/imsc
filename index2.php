@@ -784,7 +784,7 @@ function getPolygons(){//this is run button
 							//console.log(amountIn);
 							switch (true) {
 								case (amountIn > 0.0 && amountIn <= 0.01): // LESS THAN OR EQUAL TO 0
-								colorSelect = 1;
+								colorSelector = 1;
 								newzIndex = 1;
 								break;
 								case (amountIn > 0.01 && amountIn <= 0.1): // BETWEEN 21 AND 40
@@ -813,51 +813,95 @@ function getPolygons(){//this is run button
 								break;
 							}
 						}
-						else if(app.payload.property == "sandfine_r"){ //Testing legend and logic for drawing for this specific property
-							//console.log(app.payload.property);
-							//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
-							//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
-							//colorSelector = 0;
-							//newzIndex = 0;
-							legendText = "<img src='img/brightpinksquare.png' height='10px'/> <br>\
-							<img src='img/redsquare.png' height='10px'/> <br>\
-							<img src='img/skybluesquare.png' height='10px'/> <br>\
-							<img src='img/purplesquare.png' height='10px'/> <br>\
-							<img src='img/orangesquare.png' height='10px'/> <br>\
-							<img src='img/brightgreensquare.png' height='10px'/> <br>\
+						else if(app.payload.property == "sandfine_r" || app.payload.property == "sandvc_r" || app.payload.property == "sandco_r" || app.payload.property == "sandmed_r" || app.payload.property == "sandvf_r"){
+							legendText = "<img src='img/redsquare.png' height='10px'/> (0 to 5)<br>\
+							<img src='img/skybluesquare.png' height='10px'/>  (5 to 10)<br>\
+							<img src='img/brightgreensquare.png' height='10px'/>  (10 to 15)<br>\
+							<img src='img/purplesquare.png' height='10px'/> (15 to 20)<br>\
+							<img src='img/orangesquare.png' height='10px'/> (20 to 25)<br>\
+							<img src='img/brightpinksquare.png' height='10px'/>  (25 to 30)<br>\
+							<img src='img/navybluesquare.png' height='10px'/>  (30 to 35)<br>\
+							<img src='img/lilacsquare.png' height='10px'/>  (35 to 40)<br>\
+							<img src='img/yellowsquare.png' height='10px'/>  (40 to 45)<br>\
+							<img src='img/maroonsquare.png' height='10px'/> (45 to 50)<br>\
+							<img src='img/cyansquare.png' height='10px'/> (50 to 55)<br>\
+							<img src='img/navygreensquare.png' height='10px'/> (55 to 60)<br>\
+							<img src='img/peachsquare.png' height='10px'/> (60 to 65)<br>\
+							<img src='img/fleshsquare.png' height='10px'/> (65 to 70)<br>\
+							<img src='img/brownsquare.png' height='10px'/>  (70 to 75)<br>\
+							<img src='img/neongreensquare.png' height='10px'/>  (75 to 80)<br>\
+							<img src='img/neonpurplesquare.png' height='10px'/> (80 to 85)<br>\
 							<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
-							var amountIn = parseFloat(data.coords[key][app.payload.property]);
-							//console.log(amountIn);
-							//var amountIn = data.coords[key][app.payload.property];
-							//console.log(amountIn);
+							var a = parseFloat(data.coords[key][app.payload.property]);
+
 							switch (true) {
-								case (amountIn > 0.0 && amountIn <= 0.01): // LESS THAN OR EQUAL TO 0
-								colorSelect = 2;
+								case (a >= 0 && a < 5): // LESS THAN OR EQUAL TO 0
+								colorSelector = 1;
+								newzIndex = 1;
+								break;
+								case (a >= 5 && a < 10): // BETWEEN 21 AND 40
+								colorSelector = 2;
 								newzIndex = 2;
 								break;
-								case (amountIn > 0.01 && amountIn <= 0.1): // BETWEEN 21 AND 40
+								case (a >= 10 && a < 15): // BETWEEN 41 AND 60
 								colorSelector = 3;
 								newzIndex = 3;
 								break;
-								case (amountIn > 0.1 && amountIn <= 1): // BETWEEN 41 AND 60
+								case (a >= 15 && a < 20): // BETWEEN 41 AND 60
 								colorSelector = 4;
 								newzIndex = 4;
 								break;
-								case (amountIn > 1 && amountIn <= 10): // BETWEEN 41 AND 60
+								case (a >= 20 && a < 25): // BETWEEN 41 AND 60
 								colorSelector = 5;
 								newzIndex = 5;
 								break;
-								case (amountIn > 10 && amountIn <= 100): // BETWEEN 41 AND 60
+								case (a >= 25 && a < 30): // BETWEEN 41 AND 60
 								colorSelector = 6;
 								newzIndex = 6;
 								break;
-								case (amountIn > 100 && amountIn <= 705): // BETWEEN 41 AND 60
+								case (a >= 30 && a < 35): // BETWEEN 41 AND 60
 								colorSelector = 7;
 								newzIndex = 7;
 								break;
-								default: // Not rated
+								case (a >= 35 && a < 40): // BETWEEN 41 AND 60
 								colorSelector = 8;
 								newzIndex = 8;
+								break;
+								case (a >= 40 && a < 45): // BETWEEN 41 AND 60
+								colorSelector = 9;
+								newzIndex = 9;
+								break;
+								case (a >= 45 && a < 50): // BETWEEN 41 AND 60
+								colorSelector = 10;
+								newzIndex = 10;
+								break;
+								case (a >= 50 && a < 55): // BETWEEN 41 AND 60
+								colorSelector = 11;
+								newzIndex = 11;
+								break;
+								case (a >= 55 && a < 60): // BETWEEN 41 AND 60
+								colorSelector = 12;
+								newzIndex = 12;
+								break;
+								case (a >= 60 && a < 65): // BETWEEN 41 AND 60
+								colorSelector = 13;
+								newzIndex = 13;
+								break;
+								case (a >= 65 && a < 70): // BETWEEN 41 AND 60
+								colorSelector = 14;
+								newzIndex = 14;
+								break;
+								case (a >= 70 && a < 75): // BETWEEN 41 AND 60
+								colorSelector = 15;
+								newzIndex = 15;
+								break;
+								case (a >= 75 && a <= 80): // BETWEEN 41 AND 60
+								colorSelector = 16;
+								newzIndex = 16;
+								break;
+								default: // Not rated
+								colorSelector = 0;
+								newzIndex = 0;
 								break;
 							}
 						}
@@ -1102,7 +1146,7 @@ function getPolygons(){//this is run button
 							//console.log(amountIn);
 							switch (true) {
 								case (amountIn <= 0.02): // LESS THAN OR EQUAL TO 0
-								colorSelect = 1;
+								colorSelector = 1;
 								newzIndex = 1;
 								break;
 								case (amountIn <= 0.05): // BETWEEN 21 AND 40
