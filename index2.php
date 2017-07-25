@@ -951,8 +951,8 @@ function getPolygons(){//this is run button
 							<img src='img/peachsquare.png' height='10px'/> A-6<br>\
 							<img src='img/fleshsquare.png' height='10px'/> A-7<br>\
 							<img src='img/brownsquare.png' height='10px'/> A-7-5<br>\
-							<img src='img/neongreen.png' height='10px'/> A-7-6<br>\
-							<img src='img/neonpurple.png' height='10px'/> A-8<br>\
+							<img src='img/neongreensquare.png' height='10px'/> A-7-6<br>\
+							<img src='img/neonpurplesquare.png' height='10px'/> A-8<br>\
 							<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
 							var a = parseFloat(data.coords[key][app.payload.property]);
 							switch (true) {
