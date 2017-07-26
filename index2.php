@@ -536,10 +536,18 @@ function getPolygons(){//this is run button
 
 	app.payload.depth = depth;
 	if(app.payload.property && app.payload.district && (isNaN(depth)==false)){//to make sure a property is selected
-		var getparams = app.payload;
-		var bounds = app.map.getBounds();
-		getparams.NE = bounds.getNorthEast().toJSON(); //north east corner
-		getparams.SW = bounds.getSouthWest().toJSON(); //south-west corner
+		if(app.payload.runAOI == true && typeof rec != 'undefined' && rec.type == 'rectangle'){
+			var getparams = app.payload;
+			var bounds = rec.getBounds();
+			getparams.NE = bounds.getNorthEast().toJSON(); //north east corner
+			getparams.SW = bounds.getSouthWest().toJSON();
+		}
+		else{
+			var getparams = app.payload;
+			var bounds = app.map.getBounds();
+			getparams.NE = bounds.getNorthEast().toJSON(); //north east corner
+			getparams.SW = bounds.getSouthWest().toJSON(); //south-west corner
+		}
 
 		$(document.body).css({'cursor': 'wait'});
 		$.get('polygonHandler.php', app.payload, function(data){
