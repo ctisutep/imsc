@@ -230,10 +230,10 @@
 										</select><br>
 									</div>
 									<div class="col-md-5"><br>
-											<button class="btn btn-success form-control" type="button" id="run" onClick="getPolygons()">Run</button><br><br>
-											<button class="btn btn-success form-control" type="button" id="runAOI" onClick="runAOI()">Run AOI</button><br><br>
-											<button class="btn btn-warning form-control" type="button" id="clear" onClick="removePolygons()">Clear</button><br><br>
-											<button type="button" class="map-print" id="print" onClick="printMaps()">Print</button>
+										<button class="btn btn-success form-control" type="button" id="run" onClick="getPolygons()">Run</button><br><br>
+										<button class="btn btn-success form-control" type="button" id="runAOI" onClick="runAOI()">Run AOI</button><br><br>
+										<button class="btn btn-warning form-control" type="button" id="clear" onClick="removePolygons()">Clear</button><br><br>
+										<button type="button" class="map-print" id="print" onClick="printMaps()">Print</button>
 									</div>
 								</div>
 								<div class="row">
@@ -281,38 +281,38 @@
 				</div>
 			</div> <!-- End main column 2 -->
 		</div>
-<!--
-<div class="row">
-	<div class = "col-md-5">
+		<!--
+		<div class="row">
+		<div class = "col-md-5">
 
 		<div class="col-md-4">
-			<label> Legend Definition </label>
-			<br>
-			<div class="input-group">
-				<span class="input-group-addon" id="basic-addon3"># of labels</span>
-				<input type="number" class="form-control" value="1" placeholder="...inches" id="labels" aria-describedby="basic-addon3">
-			</div>
-			<br>
-			<div class="input-group">
-				<span class="input-group-addon" id="basic-addon3">value</span>
-				<input type="number" class="form-control" value="1" placeholder="...inches" id="value" aria-describedby="basic-addon3">
-			</div>
-		</div>
-		<div class="col-md-3">
-			<br> <br>
-			<button class="btn btn-default" onClick="spawn()">Get the legend</button>
-		</div>
+		<label> Legend Definition </label>
+		<br>
+		<div class="input-group">
+		<span class="input-group-addon" id="basic-addon3"># of labels</span>
+		<input type="number" class="form-control" value="1" placeholder="...inches" id="labels" aria-describedby="basic-addon3">
 	</div>
-	<div class = "col-md-5">
-		<label> Legend Testing</label>
-		<div class="col-md-3">
-			<br>
-			<div id="legendSpawner">
+	<br>
+	<div class="input-group">
+	<span class="input-group-addon" id="basic-addon3">value</span>
+	<input type="number" class="form-control" value="1" placeholder="...inches" id="value" aria-describedby="basic-addon3">
+</div>
+</div>
+<div class="col-md-3">
+<br> <br>
+<button class="btn btn-default" onClick="spawn()">Get the legend</button>
+</div>
+</div>
+<div class = "col-md-5">
+<label> Legend Testing</label>
+<div class="col-md-3">
+<br>
+<div id="legendSpawner">
 
-			</div>
+</div>
 
-		</div>
-	</div>
+</div>
+</div>
 </div>
 
 <p></p> -->
@@ -391,134 +391,134 @@ $(document).ready(function(){//esto pasa recien cargada la pagina
 			{number: 36, value: null, data: null, table: null}
 			//{number: 37, value: null, data: null, table: null}
 		];
-//console.log(properties);
-for (var i = 6; i < properties.length; i++) {
-	if(i > 6 && i <= 36){
-		//console.log(i);
-		//console.log(prop[i].number);
-		prop[i].number = i;
-		prop[i].value = properties[i].value;
-		prop[i].data = properties[i].data;
-		prop[i].table = properties[i].table;
-	}
-}
-for(var i = 7; i < prop.length-1; i++) {
-	var propr = prop[i].number;
-	var elem = document.createElement("option");
-	elem.textContent = prop[i].value;
-	elem.value = propr;
-	elem.data = prop[i].data;
-	elem.table = prop[i].table;
-	selectProp.appendChild(elem);
-	//ch1.appendChild(elem);
-	//ch2.appendChild(elem);
-	//ch3.appendChild(elem);
-	//ch4.appendChild(elem);
-}
-for(var i = 7; i < prop.length-1; i++) {
-	var propr = prop[i].number;
-	var elem = document.createElement("option");
-	elem.textContent = prop[i].value;
-	elem.value = propr;
-	elem.data = prop[i].data;
-	elem.table = prop[i].table;
-	//selectProp.appendChild(elem);
-	ch1.appendChild(elem);
-	//ch2.appendChild(elem);
-	//ch3.appendChild(elem);
-	//ch4.appendChild(elem);
-}
-for(var i = 7; i < prop.length-1; i++) {
-	var propr = prop[i].number;
-	var elem = document.createElement("option");
-	elem.textContent = prop[i].value;
-	elem.value = propr;
-	elem.data = prop[i].data;
-	elem.table = prop[i].table;
-	//selectProp.appendChild(elem);
-	//ch1.appendChild(elem);
-	ch2.appendChild(elem);
-	//ch3.appendChild(elem);
-	//ch4.appendChild(elem);
-}
-for(var i = 7; i < prop.length-1; i++) {
-	var propr = prop[i].number;
-	var elem = document.createElement("option");
-	elem.textContent = prop[i].value;
-	elem.value = propr;
-	elem.data = prop[i].data;
-	elem.table = prop[i].table;
-	//selectProp.appendChild(elem);
-	//ch1.appendChild(elem);
-	//ch2.appendChild(elem);
-	ch3.appendChild(elem);
-	//ch4.appendChild(elem);
-}
-for(var i = 7; i < prop.length-1; i++) {
-	var propr = prop[i].number;
-	var elem = document.createElement("option");
-	elem.textContent = prop[i].value;
-	elem.value = propr;
-	elem.data = prop[i].data;
-	elem.table = prop[i].table;
-	//selectProp.appendChild(elem);
-	//ch1.appendChild(elem);
-	//ch2.appendChild(elem);
-	//ch3.appendChild(elem);
-	ch4.appendChild(elem);
-}
+		//console.log(properties);
+		for (var i = 6; i < properties.length; i++) {
+			if(i > 6 && i <= 36){
+				//console.log(i);
+				//console.log(prop[i].number);
+				prop[i].number = i;
+				prop[i].value = properties[i].value;
+				prop[i].data = properties[i].data;
+				prop[i].table = properties[i].table;
+			}
+		}
+		for(var i = 7; i < prop.length-1; i++) {
+			var propr = prop[i].number;
+			var elem = document.createElement("option");
+			elem.textContent = prop[i].value;
+			elem.value = propr;
+			elem.data = prop[i].data;
+			elem.table = prop[i].table;
+			selectProp.appendChild(elem);
+			//ch1.appendChild(elem);
+			//ch2.appendChild(elem);
+			//ch3.appendChild(elem);
+			//ch4.appendChild(elem);
+		}
+		for(var i = 7; i < prop.length-1; i++) {
+			var propr = prop[i].number;
+			var elem = document.createElement("option");
+			elem.textContent = prop[i].value;
+			elem.value = propr;
+			elem.data = prop[i].data;
+			elem.table = prop[i].table;
+			//selectProp.appendChild(elem);
+			ch1.appendChild(elem);
+			//ch2.appendChild(elem);
+			//ch3.appendChild(elem);
+			//ch4.appendChild(elem);
+		}
+		for(var i = 7; i < prop.length-1; i++) {
+			var propr = prop[i].number;
+			var elem = document.createElement("option");
+			elem.textContent = prop[i].value;
+			elem.value = propr;
+			elem.data = prop[i].data;
+			elem.table = prop[i].table;
+			//selectProp.appendChild(elem);
+			//ch1.appendChild(elem);
+			ch2.appendChild(elem);
+			//ch3.appendChild(elem);
+			//ch4.appendChild(elem);
+		}
+		for(var i = 7; i < prop.length-1; i++) {
+			var propr = prop[i].number;
+			var elem = document.createElement("option");
+			elem.textContent = prop[i].value;
+			elem.value = propr;
+			elem.data = prop[i].data;
+			elem.table = prop[i].table;
+			//selectProp.appendChild(elem);
+			//ch1.appendChild(elem);
+			//ch2.appendChild(elem);
+			ch3.appendChild(elem);
+			//ch4.appendChild(elem);
+		}
+		for(var i = 7; i < prop.length-1; i++) {
+			var propr = prop[i].number;
+			var elem = document.createElement("option");
+			elem.textContent = prop[i].value;
+			elem.value = propr;
+			elem.data = prop[i].data;
+			elem.table = prop[i].table;
+			//selectProp.appendChild(elem);
+			//ch1.appendChild(elem);
+			//ch2.appendChild(elem);
+			//ch3.appendChild(elem);
+			ch4.appendChild(elem);
+		}
 
-$("#selectProp").change(function(){
-	app.payload.property =  prop[this.value].data; //ex. pi_r
-	app.payload.table =  prop[this.value].table;
-	app.payload.value =  prop[this.value].value;
-});
-//change select_chart_1
-$("#select_chart_1").change(function(){
-	app.payload.chart1 =  prop[this.value].data;
-	app.payload.chart1n = prop[this.value].value;
-	//console.log("chart1: " + app.payload.chart1);
-});
-//change select_chart_2
-$("#select_chart_2").change(function(){
-	app.payload.chart2 =  prop[this.value].data;
-	app.payload.chart2n = prop[this.value].value;
-	//console.log("chart2: " + app.payload.chart2);
-});
-//change select_chart_3
-$("#select_chart_3").change(function(){
-	app.payload.chart3 =  prop[this.value].data;
-	app.payload.chart3n = prop[this.value].value;
-	//console.log("chart3: " + app.payload.chart3);
-});
-//change select_chart_4
-$("#select_chart_4").change(function(){
-	app.payload.chart4 =  prop[this.value].data;
-	app.payload.chart4n = prop[this.value].value;
-	//console.log("chart4: " + app.payload.chart4);
-});
+		$("#selectProp").change(function(){
+			app.payload.property =  prop[this.value].data; //ex. pi_r
+			app.payload.table =  prop[this.value].table;
+			app.payload.value =  prop[this.value].value;
+		});
+		//change select_chart_1
+		$("#select_chart_1").change(function(){
+			app.payload.chart1 =  prop[this.value].data;
+			app.payload.chart1n = prop[this.value].value;
+			//console.log("chart1: " + app.payload.chart1);
+		});
+		//change select_chart_2
+		$("#select_chart_2").change(function(){
+			app.payload.chart2 =  prop[this.value].data;
+			app.payload.chart2n = prop[this.value].value;
+			//console.log("chart2: " + app.payload.chart2);
+		});
+		//change select_chart_3
+		$("#select_chart_3").change(function(){
+			app.payload.chart3 =  prop[this.value].data;
+			app.payload.chart3n = prop[this.value].value;
+			//console.log("chart3: " + app.payload.chart3);
+		});
+		//change select_chart_4
+		$("#select_chart_4").change(function(){
+			app.payload.chart4 =  prop[this.value].data;
+			app.payload.chart4n = prop[this.value].value;
+			//console.log("chart4: " + app.payload.chart4);
+		});
 
-//create the autocomplete with the data
-$('#autocomplete').autocomplete({
-	lookup: properties,
-	onSelect: function (suggestion) {
-		console.log(suggestion.data + "  " + suggestion.table + "  " + suggestion.value);
-		app.payload.property = suggestion.data;
-		app.payload.table = suggestion.table;
-		app.payload.value = suggestion.value;
-	}
-});
-$('#target').on('change', setDistrict);
-});
-app.payload.district = $('#target').children("option:selected").data('district');
+		//create the autocomplete with the data
+		$('#autocomplete').autocomplete({
+			lookup: properties,
+			onSelect: function (suggestion) {
+				console.log(suggestion.data + "  " + suggestion.table + "  " + suggestion.value);
+				app.payload.property = suggestion.data;
+				app.payload.table = suggestion.table;
+				app.payload.value = suggestion.value;
+			}
+		});
+		$('#target').on('change', setDistrict);
+	});
+	app.payload.district = $('#target').children("option:selected").data('district');
 
-/*
-Si es minimo o maximo, necesitamos depth a ese punto. Si es weighted average
-no necesitamos considerar o saber depth. Tambien para median necesitamos saber.
-*/
-$("#methods").change(function(){ //0: max / 1: min / 2: median / 3: weight/
-	app.payload.depth_method = this.value;
-});
+	/*
+	Si es minimo o maximo, necesitamos depth a ese punto. Si es weighted average
+	no necesitamos considerar o saber depth. Tambien para median necesitamos saber.
+	*/
+	$("#methods").change(function(){ //0: max / 1: min / 2: median / 3: weight/
+		app.payload.depth_method = this.value;
+	});
 
 });
 
@@ -544,1333 +544,1333 @@ function getPolygons(){//this is run button
 		$(document.body).css({'cursor': 'wait'});
 		$.get('polygonHandler.php', app.payload, function(data){
 
-		if(depth < 0 || depth * 2.54 > 204 || isNaN(depth)){
-			alert("Please make sure depth is a numerical value and it is between 0 and 79 inches.");
-			hecho = true;
-		}
-		if(data.hasOwnProperty('coords')){
-			removePolygons();
-			//               0           1           2          3          4         5          6           7         8          9        10        11        12          13         14         15        16          17
-			//              GRAY,       RED,     SKY BLUE, BRIGHT GREEN, PURPLE,   ORANGE,  BRIGHT PINK,NAVY BLUE,  LILAC,     YELLOW    maroon    cyan     navygreen    peach      flesh      brown    neongreen   neonpurple
-			shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#fe9253", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D", "#8C0909", "#07FDCA", "#008C35", "FFDBA5", "#B57777", "#6D3300", "#D0FF00", "#5900FF"];
-			shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a", "8c0909", "36c9bd", "#008c35", "#ffdba5", "#B57777", "#6D3300", "#D0FF00", "#5900FF"];
-			colorSelector = 0;
-			newzIndex = 0;
-			legendText = "";
-			for(key in data.coords){
-				if(data.coords.hasOwnProperty(key)){
-					var polyCoordis = [];
-					if(app.payload.table == "chorizon_r"){
-						if(app.payload.property == "caco3_r"){ //Testing legend and logic for drawing for this specific property
-							legendText = "<img src='img/redsquare.png' height='10px'/> <= 7<br>\
-							<img src='img/skybluesquare.png' height='10px'/>  > 7 and <= 17<br>\
-							<img src='img/brightgreensquare.png' height='10px'/> > 17 and <= 36<br>\
-							<img src='img/purplesquare.png' height='10px'/> > 36 and <= 55<br>\
-							<img src='img/orangesquare.png' height='10px'/> > 55 and <= 65<br>\
-							<img src='img/graysquare.png' height='10px'/> Not rated or not available";
-							var amountIn = parseFloat(data.coords[key][app.payload.property]);
-							//console.log(amountIn);
-							//var amountIn = data.coords[key][app.payload.property];
-							//console.log(amountIn);
+			if(depth < 0 || depth * 2.54 > 204 || isNaN(depth)){
+				alert("Please make sure depth is a numerical value and it is between 0 and 79 inches.");
+				hecho = true;
+			}
+			if(data.hasOwnProperty('coords')){
+				removePolygons();
+				//               0           1           2          3          4         5          6           7         8          9        10        11        12          13         14         15        16          17
+				//              GRAY,       RED,     SKY BLUE, BRIGHT GREEN, PURPLE,   ORANGE,  BRIGHT PINK,NAVY BLUE,  LILAC,     YELLOW    maroon    cyan     navygreen    peach      flesh      brown    neongreen   neonpurple
+				shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#fe9253", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D", "#8C0909", "#07FDCA", "#008C35", "FFDBA5", "#B57777", "#6D3300", "#D0FF00", "#5900FF"];
+				shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a", "8c0909", "36c9bd", "#008c35", "#ffdba5", "#B57777", "#6D3300", "#D0FF00", "#5900FF"];
+				colorSelector = 0;
+				newzIndex = 0;
+				legendText = "";
+				for(key in data.coords){
+					if(data.coords.hasOwnProperty(key)){
+						var polyCoordis = [];
+						if(app.payload.table == "chorizon_r"){
+							if(app.payload.property == "caco3_r"){ //Testing legend and logic for drawing for this specific property
+								legendText = "<img src='img/redsquare.png' height='10px'/> <= 7<br>\
+								<img src='img/skybluesquare.png' height='10px'/>  > 7 and <= 17<br>\
+								<img src='img/brightgreensquare.png' height='10px'/> > 17 and <= 36<br>\
+								<img src='img/purplesquare.png' height='10px'/> > 36 and <= 55<br>\
+								<img src='img/orangesquare.png' height='10px'/> > 55 and <= 65<br>\
+								<img src='img/graysquare.png' height='10px'/> Not rated or not available";
+								var amountIn = parseFloat(data.coords[key][app.payload.property]);
+								//console.log(amountIn);
+								//var amountIn = data.coords[key][app.payload.property];
+								//console.log(amountIn);
+								switch (true) {
+									case (amountIn <= 7): // LESS THAN OR EQUAL TO 0
+									colorSelector = 1; //not black or gray
+									newzIndex = 1;
+									break;
+									case (amountIn > 7 && amountIn <= 17): // BETWEEN 0 AND 21
+									colorSelector = 2;
+									newzIndex = 2;
+									break;
+									case (amountIn > 17 && amountIn <= 36): // BETWEEN 21 AND 40
+									colorSelector = 3;
+									newzIndex = 3;
+									break;
+									case (amountIn > 36 && amountIn <= 55): // BETWEEN 41 AND 60
+									colorSelector = 4;
+									newzIndex = 4;
+									break;
+									case (amountIn > 55 && amountIn <= 65): // BETWEEN 61 AND 80
+									colorSelector = 5;
+									newzIndex = 5;
+									break;
+									case (amountIn > 80 && amountIn < 101): // BETWEEN 81 AND 100
+									colorSelector = 6;
+									newzIndex = 6;
+									break;
+								}
+							}
+							else if(app.payload.property == "sandtotal_r"){ //Testing legend and logic for drawing for this specific property
+								//console.log(app.payload.property);
+								//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
+								//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
+								//colorSelector = 0;
+								//newzIndex = 0;
+								legendText = "<img src='img/redsquare.png' height='10px'/> <= 11.8<br>\
+								<img src='img/skybluesquare.png' height='10px'/>  > 11.8 and <= 26.1<br>\
+								<img src='img/brightgreensquare.png' height='10px'/> > 26.1 and <= 39.3<br>\
+								<img src='img/purplesquare.png' height='10px'/> > 39.3 and <= 57.8<br>\
+								<img src='img/orangesquare.png' height='10px'/> > 57.8 and <= 90.2<br>\
+								<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
+								var amountIn = parseFloat(data.coords[key][app.payload.property]);
+								//console.log(amountIn);
+								//var amountIn = data.coords[key][app.payload.property];
+								//console.log(amountIn);
+								switch (true) {
+									case (amountIn <= 11.8): // LESS THAN OR EQUAL TO 0
+									colorSelector = 1; //not black or gray
+									newzIndex = 1;
+									break;
+									case (amountIn > 11.8 && amountIn <= 26.1): // BETWEEN 0 AND 21
+									colorSelector = 2;
+									newzIndex = 2;
+									break;
+									case (amountIn > 26.1 && amountIn <= 39.3): // BETWEEN 21 AND 40
+									colorSelector = 3;
+									newzIndex = 3;
+									break;
+									case (amountIn > 39.3 && amountIn <= 57.8): // BETWEEN 41 AND 60
+									colorSelector = 4;
+									newzIndex = 4;
+									break;
+									case (amountIn > 57.8 && amountIn <= 90.2): // BETWEEN 61 AND 80
+									colorSelector = 5;
+									newzIndex = 5;
+									break;
+									default: // BETWEEN 81 AND 100
+									colorSelector = 0;
+									newzIndex = 0;
+									break;
+								}
+							}
+							else if(app.payload.property == "gypsum_r"){ //Testing legend and logic for drawing for this specific property
+								//console.log(app.payload.property);
+								//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
+								//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
+								//colorSelector = 0;
+								//newzIndex = 0;
+								legendText = "<img src='img/redsquare.png' height='10px'/> <= 0 <br>\
+								<img src='img/skybluesquare.png' height='10px'/> > 0 and <= 1 <br>\
+								<img src='img/brightgreensquare.png' height='10px'/> > 1 and <= 2 <br>\
+								<img src='img/purplesquare.png' height='10px'/> > 2 and <= 3<br>\
+								<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
+								var a = parseFloat(data.coords[key][app.payload.property]);
+								//console.log(amountIn);
+								//var amountIn = data.coords[key][app.payload.property];
+								//console.log(amountIn);
+								switch (true) {
+									case (a <= 0): // LESS THAN OR EQUAL TO 0
+									colorSelector = 1;
+									newzIndex = 1;
+									break;
+									case (a > 0 && a <= 1): // BETWEEN 0 AND 21
+									colorSelector = 2;
+									newzIndex = 2;
+									break;
+									case (a > 1 && a <= 2): // BETWEEN 21 AND 40
+									colorSelector = 3;
+									newzIndex = 3;
+									break;
+									case (a > 2 && a <= 3): // BETWEEN 21 AND 40
+									colorSelector = 4;
+									newzIndex = 4;
+									break;
+									default: // Not rated
+									colorSelector = 0;
+									newzIndex = 0;
+									break;
+								}
+							}
+							else if(app.payload.property == "pi_r"){ //Testing legend and logic for drawing for this specific property
+								//console.log(app.payload.property);
+								//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
+								//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
+								//colorSelector = 0;
+								//newzIndex = 0;
+								legendText = "<img src='img/redsquare.png' height='10px'/> <= 9.4<br>\
+								<img src='img/skybluesquare.png' height='10px'/>  > 9.4 and <= 21.0<br>\
+								<img src='img/brightgreensquare.png' height='10px'/> > 21.0 and <= 30.6<br>\
+								<img src='img/purplesquare.png' height='10px'/> > 30.6 and <= 37.5<br>\
+								<img src='img/orangesquare.png' height='10px'/> > 37.5 and <= 54.1<br>\
+								<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
+								// GRAY, RED, SKY BLUE, BRIGHT GREEN, PURPLE, ORANGE, BRIGHT PINK, NAVY BLUE, LILAC, YELLOW
+								var amountIn = parseFloat(data.coords[key][app.payload.property]);
+								//console.log(amountIn);
+								//
+								//console.log(amountIn);
+								//var amountIn = data.coords[key][app.payload.property];
+								//console.log(amountIn);
+								switch (true) {
+									case (amountIn <= 9.4): // LESS THAN OR EQUAL TO
+									colorSelector = 1; //red
+									newzIndex = 1;
+									break;
+									case (amountIn > 9.4 && amountIn <= 21.0): // BETWEEN 0 AND 21
+									colorSelector = 2; //skybluesquare
+									newzIndex = 2
+									break;
+									case (amountIn > 21.0 && amountIn <= 30.6): // BETWEEN 21 AND 40
+									colorSelector = 3; //brightgreensquare
+									newzIndex = 3;
+									break;
+									case (amountIn > 30.6 && amountIn <= 37.5): // BETWEEN 41 AND 60
+									colorSelector = 4; //purplesquare
+									newzIndex = 4;
+									break;
+									case (amountIn > 37.5 && amountIn <= 60): // BETWEEN 41 AND 60
+									colorSelector = 5; //orangesquare
+									newzIndex = 5;
+									break;
+									default: // Not rated
+									colorSelector = 0; //gray
+									newzIndex = 0;
+									break;
+								}
+							}
+							else if(app.payload.property == "sar_r"){ //Testing legend and logic for drawing for this specific property
+								//console.log(app.payload.property);
+								//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
+								//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
+								// 								GRAY, 			RED, 			SKY BLUE, BRIGHT GREEN, PURPLE, ORANGE, 	BRIGHT PINK, NAVY BLUE, LILAC, YELLOW
+								//colorSelector = 0;
+								//newzIndex = 0;
+								legendText = "<img src='img/redsquare.png' height='10px'/> <= 0.3<br>\
+								<img src='img/skybluesquare.png' height='10px'/>  > 0.3 and <= 0.9<br>\
+								<img src='img/brightgreensquare.png' height='10px'/> > 0.9 and <= 1.8<br>\
+								<img src='img/purplesquare.png' height='10px'/> > 1.8 and <= 5.9<br>\
+								<img src='img/orangesquare.png' height='10px'/> > 5.9 and <= 17.5<br>\
+								<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
+								var amountIn = parseFloat(data.coords[key][app.payload.property]);
+								//console.log(amountIn);
+								//var amountIn = data.coords[key][app.payload.property];
+								//console.log(amountIn);
+								switch (true) {
+									case (amountIn <= 0.3): // LESS THAN OR EQUAL TO 0
+									colorSelector = 1; //not black or gray
+									newzIndex = 1;
+									break;
+									case (amountIn > 0.3 && amountIn <= 0.9): // BETWEEN 21 AND 40
+									colorSelector = 2;
+									newzIndex = 2;
+									break;
+									case (amountIn > 0.9 && amountIn <= 1.8): // BETWEEN 0 AND 21
+									colorSelector = 3;
+									newzIndex = 3;
+									break;
+									case (amountIn > 1.8 && amountIn <= 5.9): // BETWEEN 21 AND 40
+									colorSelector = 4;
+									newzIndex = 4;
+									break;
+									case (amountIn > 5.9 && amountIn <= 17.5): // BETWEEN 41 AND 60
+									colorSelector = 5;
+									newzIndex = 5;
+									break;
+									default: // Not rated
+									colorSelector = 0;
+									newzIndex = 0;
+									break;
+								}
+							}
+							else if(app.payload.property == "ksat_r"){ //Testing legend and logic for drawing for this specific property
+								//console.log(app.payload.property);
+								//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
+								//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
+								//colorSelector = 0;
+								//newzIndex = 0;
+								legendText = "<img src='img/redsquare.png' height='10px'/> Very Low (0.0 - 0.01)<br>\
+								<img src='img/skybluesquare.png' height='10px'/>  Low (0.01 - 0.1)<br>\
+								<img src='img/brightgreensquare.png' height='10px'/> Moderately Low (0.1 - 1)<br>\
+								<img src='img/purplesquare.png' height='10px'/> Moderately High (1 - 10)<br>\
+								<img src='img/orangesquare.png' height='10px'/> High (10 - 100)<br>\
+								<img src='img/brightpinksquare.png' height='10px'/> Very High (100 - 705)<br>\
+								<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
+								var amountIn = parseFloat(data.coords[key][app.payload.property]);
+								//console.log(amountIn);
+								//var amountIn = data.coords[key][app.payload.property];
+								//console.log(amountIn);
+								switch (true) {
+									case (amountIn > 0.0 && amountIn <= 0.01): // LESS THAN OR EQUAL TO 0
+									colorSelector = 1;
+									newzIndex = 1;
+									break;
+									case (amountIn > 0.01 && amountIn <= 0.1): // BETWEEN 21 AND 40
+									colorSelector = 2;
+									newzIndex = 2;
+									break;
+									case (amountIn > 0.1 && amountIn <= 1): // BETWEEN 41 AND 60
+									colorSelector = 3;
+									newzIndex = 3;
+									break;
+									case (amountIn > 1 && amountIn <= 10): // BETWEEN 41 AND 60
+									colorSelector = 4;
+									newzIndex = 4;
+									break;
+									case (amountIn > 10 && amountIn <= 100): // BETWEEN 41 AND 60
+									colorSelector = 5;
+									newzIndex = 5;
+									break;
+									case (amountIn > 100 && amountIn <= 705): // BETWEEN 41 AND 60
+									colorSelector = 6;
+									newzIndex = 6;
+									break;
+									default: // Not rated
+									colorSelector = 0;
+									newzIndex = 0;
+									break;
+								}
+							}
+							else if(app.payload.property == "sandfine_r" || app.payload.property == "sandvc_r" || app.payload.property == "sandco_r" || app.payload.property == "sandmed_r" || app.payload.property == "sandvf_r"){
+								legendText = "<img src='img/redsquare.png' height='10px'/> (0 to 5)<br>\
+								<img src='img/skybluesquare.png' height='10px'/>  (5 to 10)<br>\
+								<img src='img/brightgreensquare.png' height='10px'/>  (10 to 15)<br>\
+								<img src='img/purplesquare.png' height='10px'/> (15 to 20)<br>\
+								<img src='img/orangesquare.png' height='10px'/> (20 to 25)<br>\
+								<img src='img/brightpinksquare.png' height='10px'/>  (25 to 30)<br>\
+								<img src='img/navybluesquare.png' height='10px'/>  (30 to 35)<br>\
+								<img src='img/lilacsquare.png' height='10px'/>  (35 to 40)<br>\
+								<img src='img/yellowsquare.png' height='10px'/>  (40 to 45)<br>\
+								<img src='img/maroonsquare.png' height='10px'/> (45 to 50)<br>\
+								<img src='img/cyansquare.png' height='10px'/> (50 to 55)<br>\
+								<img src='img/navygreensquare.png' height='10px'/> (55 to 60)<br>\
+								<img src='img/peachsquare.png' height='10px'/> (60 to 65)<br>\
+								<img src='img/fleshsquare.png' height='10px'/> (65 to 70)<br>\
+								<img src='img/brownsquare.png' height='10px'/>  (70 to 75)<br>\
+								<img src='img/neongreensquare.png' height='10px'/>  (75 to 80)<br>\
+								<img src='img/neonpurplesquare.png' height='10px'/> (80 to 85)<br>\
+								<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
+								var a = parseFloat(data.coords[key][app.payload.property]);
+
+								switch (true) {
+									case (a >= 0 && a < 5): // LESS THAN OR EQUAL TO 0
+									colorSelector = 1;
+									newzIndex = 1;
+									break;
+									case (a >= 5 && a < 10): // BETWEEN 21 AND 40
+									colorSelector = 2;
+									newzIndex = 2;
+									break;
+									case (a >= 10 && a < 15): // BETWEEN 41 AND 60
+									colorSelector = 3;
+									newzIndex = 3;
+									break;
+									case (a >= 15 && a < 20): // BETWEEN 41 AND 60
+									colorSelector = 4;
+									newzIndex = 4;
+									break;
+									case (a >= 20 && a < 25): // BETWEEN 41 AND 60
+									colorSelector = 5;
+									newzIndex = 5;
+									break;
+									case (a >= 25 && a < 30): // BETWEEN 41 AND 60
+									colorSelector = 6;
+									newzIndex = 6;
+									break;
+									case (a >= 30 && a < 35): // BETWEEN 41 AND 60
+									colorSelector = 7;
+									newzIndex = 7;
+									break;
+									case (a >= 35 && a < 40): // BETWEEN 41 AND 60
+									colorSelector = 8;
+									newzIndex = 8;
+									break;
+									case (a >= 40 && a < 45): // BETWEEN 41 AND 60
+									colorSelector = 9;
+									newzIndex = 9;
+									break;
+									case (a >= 45 && a < 50): // BETWEEN 41 AND 60
+									colorSelector = 10;
+									newzIndex = 10;
+									break;
+									case (a >= 50 && a < 55): // BETWEEN 41 AND 60
+									colorSelector = 11;
+									newzIndex = 11;
+									break;
+									case (a >= 55 && a < 60): // BETWEEN 41 AND 60
+									colorSelector = 12;
+									newzIndex = 12;
+									break;
+									case (a >= 60 && a < 65): // BETWEEN 41 AND 60
+									colorSelector = 13;
+									newzIndex = 13;
+									break;
+									case (a >= 65 && a < 70): // BETWEEN 41 AND 60
+									colorSelector = 14;
+									newzIndex = 14;
+									break;
+									case (a >= 70 && a < 75): // BETWEEN 41 AND 60
+									colorSelector = 15;
+									newzIndex = 15;
+									break;
+									case (a >= 75 && a <= 80): // BETWEEN 41 AND 60
+									colorSelector = 16;
+									newzIndex = 16;
+									break;
+									default: // Not rated
+									colorSelector = 0;
+									newzIndex = 0;
+									break;
+								}
+							}
+							else if(app.payload.property == "ph1to1h2o_r"){ //Testing legend and logic for drawing for this specific property
+								//not enough colors for this propierty
+								//console.log(app.payload.property);
+								//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
+								//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
+								//colorSelector = 0;
+								//newzIndex = 0;
+								legendText = "<img src='img/redsquare.png' height='10px'/> Ultra acid (ph < 3.5)<br>\
+								<img src='img/skybluesquare.png' height='10px'/> Extremely acid (ph 3.5 - 4.4)<br>\
+								<img src='img/brightgreensquare.png' height='10px'/> Very strongly acid (ph 4.5 - 5.0)<br>\
+								<img src='img/purplesquare.png' height='10px'/> Strongly acid (ph 5.1 - 5.5)<br>\
+								<img src='img/orangesquare.png' height='10px'/> Moderately acid (ph 5.6 - 6.0)<br>\
+								<img src='img/brightpinksquare.png' height='10px'/> Slightly acid (ph 6.1 - 6.5)<br>\
+								<img src='img/navybluesquare.png' height='10px'/> Neutral (ph 6.6 - 7.3)<br>\
+								<img src='img/lilacsquare.png' height='10px'/> Slightly alkaline (ph 7.4 - 7.8)<br>\
+								<img src='img/yellowsquare.png' height='10px'/> Moderately alkaline (ph 7.9 - 8.4)<br>\
+								<img src='img/maroonsquare.png' height='10px'/> Strongly alkaline (ph 8.5 - 9.0)<br>\
+								<img src='img/navygreen.png' height='10px'/> Very strongly alkaline (ph > 9.0)<br>\
+								<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
+								var amountIn = parseFloat(data.coords[key][app.payload.property]);
+								//console.log(amountIn);
+								//var amountIn = data.coords[key][app.payload.property];
+								//console.log(amountIn);
+								switch (true) {
+									case (amountIn < 3.5): // LESS THAN OR EQUAL TO 0
+									colorSelector = 1;
+									newzIndex = 1;
+									break;
+									case (amountIn >= 3.5 && amountIn <= 4.4): // BETWEEN 21 AND 40
+									colorSelector = 2;
+									newzIndex = 2;
+									break;
+									case (amountIn >= 4.5 && amountIn <= 5.0): // BETWEEN 41 AND 60
+									colorSelector = 3;
+									newzIndex = 3;
+									break;
+									case (amountIn >= 5.1 && amountIn <= 5.5): // BETWEEN 41 AND 60
+									colorSelector = 4;
+									newzIndex = 4;
+									break;
+									case (amountIn >= 5.6 && amountIn <= 6.0): // BETWEEN 41 AND 60
+									colorSelector = 5;
+									newzIndex = 5;
+									break;
+									case (amountIn >= 6.1 && amountIn <= 6.5): // BETWEEN 41 AND 60
+									colorSelector = 6;
+									newzIndex = 6;
+									break;
+									case (amountIn >= 6.6 && amountIn <= 7.3): // BETWEEN 41 AND 60
+									colorSelector = 7;
+									newzIndex = 7;
+									break;
+									case (amountIn >= 7.4 && amountIn <= 7.8): // BETWEEN 41 AND 60
+									colorSelector = 8;
+									newzIndex = 8;
+									break;
+									case (amountIn >= 7.9 && amountIn <= 8.4): // BETWEEN 41 AND 60
+									colorSelector = 9;
+									newzIndex = 9;
+									break;
+									case (amountIn >= 8.5 && amountIn <= 9.0): // BETWEEN 41 AND 60
+									colorSelector = 10;
+									newzIndex = 10;
+									break;
+									case (amountIn > 9.0 ): // BETWEEN 41 AND 60
+									colorSelector = 11;
+									newzIndex = 11;
+									break;
+									default: // Not rated
+									colorSelector = 0;
+									newzIndex = 0;
+									break;
+								}
+							}
+							else if(app.payload.property == "aashind_r"){ //Testing legend and logic for drawing for this specific property
+								//console.log(app.payload.property);
+								//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
+								//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
+								//colorSelector = 0;
+								//newzIndex = 0;
+								legendText = "<img src='img/redsquare.png' height='10px'/> A-1 (0 to 5)<br>\
+								<img src='img/skybluesquare.png' height='10px'/> A-1-a (5 to 10)<br>\
+								<img src='img/brightgreensquare.png' height='10px'/> A-1-b (10 to 15)<br>\
+								<img src='img/purplesquare.png' height='10px'/> A-b (15 to 20)<br>\
+								<img src='img/orangesquare.png' height='10px'/> A-2 (20 to 25)<br>\
+								<img src='img/brightpinksquare.png' height='10px'/> A-2-4 (25 to 30)<br>\
+								<img src='img/navybluesquare.png' height='10px'/> A-2-5 (30 to 35)<br>\
+								<img src='img/lilacsquare.png' height='10px'/> A-2-6 (35 to 40)<br>\
+								<img src='img/yellowsquare.png' height='10px'/> A-2-7 (40 to 45)<br>\
+								<img src='img/maroonsquare.png' height='10px'/> A-3 (45 to 50)<br>\
+								<img src='img/cyansquare.png' height='10px'/> A-4 (50 to 55)<br>\
+								<img src='img/navygreensquare.png' height='10px'/> A-5 (55 to 60)<br>\
+								<img src='img/peachsquare.png' height='10px'/> A-6 (60 to 65)<br>\
+								<img src='img/fleshsquare.png' height='10px'/> A-7 (65 to 70)<br>\
+								<img src='img/brownsquare.png' height='10px'/> A-7-5 (70 to 75)<br>\
+								<img src='img/neongreensquare.png' height='10px'/> A-7-6 (75 to 80)<br>\
+								<img src='img/neonpurplesquare.png' height='10px'/> A-8 (80 to 85)<br>\
+								<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
+								var a = parseFloat(data.coords[key][app.payload.property]);
+
+								switch (true) {
+									case (a >= 0 && a < 5): // LESS THAN OR EQUAL TO 0
+									colorSelector = 1;
+									newzIndex = 1;
+									break;
+									case (a >= 5 && a < 10): // BETWEEN 21 AND 40
+									colorSelector = 2;
+									newzIndex = 2;
+									break;
+									case (a >= 10 && a < 15): // BETWEEN 41 AND 60
+									colorSelector = 3;
+									newzIndex = 3;
+									break;
+									case (a >= 15 && a < 20): // BETWEEN 41 AND 60
+									colorSelector = 4;
+									newzIndex = 4;
+									break;
+									case (a >= 20 && a < 25): // BETWEEN 41 AND 60
+									colorSelector = 5;
+									newzIndex = 5;
+									break;
+									case (a >= 25 && a < 30): // BETWEEN 41 AND 60
+									colorSelector = 6;
+									newzIndex = 6;
+									break;
+									case (a >= 30 && a < 35): // BETWEEN 41 AND 60
+									colorSelector = 7;
+									newzIndex = 7;
+									break;
+									case (a >= 35 && a < 40): // BETWEEN 41 AND 60
+									colorSelector = 8;
+									newzIndex = 8;
+									break;
+									case (a >= 40 && a < 45): // BETWEEN 41 AND 60
+									colorSelector = 9;
+									newzIndex = 9;
+									break;
+									case (a >= 45 && a < 50): // BETWEEN 41 AND 60
+									colorSelector = 10;
+									newzIndex = 10;
+									break;
+									case (a >= 50 && a < 55): // BETWEEN 41 AND 60
+									colorSelector = 11;
+									newzIndex = 11;
+									break;
+									case (a >= 55 && a < 60): // BETWEEN 41 AND 60
+									colorSelector = 12;
+									newzIndex = 12;
+									break;
+									case (a >= 60 && a < 65): // BETWEEN 41 AND 60
+									colorSelector = 13;
+									newzIndex = 13;
+									break;
+									case (a >= 65 && a < 70): // BETWEEN 41 AND 60
+									colorSelector = 14;
+									newzIndex = 14;
+									break;
+									case (a >= 70 && a < 75): // BETWEEN 41 AND 60
+									colorSelector = 15;
+									newzIndex = 15;
+									break;
+									case (a >= 75 && a <= 80): // BETWEEN 41 AND 60
+									colorSelector = 16;
+									newzIndex = 16;
+									break;
+									default: // Not rated
+									colorSelector = 0;
+									newzIndex = 0;
+									break;
+								}
+							}
+							else if(app.payload.property == "ll_r"){ //Testing legend and logic for drawing for this specific property
+								//console.log(app.payload.property);
+								//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
+								//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
+								//colorSelector = 0;
+								//newzIndex = 0;
+								legendText = "<img src='img/redsquare.png' height='10px'/> <= 27.2<br>\
+								<img src='img/skybluesquare.png' height='10px'/> > 27.2 and <= 45.8<br>\
+								<img src='img/brightgreensquare.png' height='10px'/> > 45.8 and <= 58.0<br>\
+								<img src='img/purplesquare.png' height='10px'/> > 58.0 and <= 66.0<br>\
+								<img src='img/orangesquare.png' height='10px'/> > 66.0 and <= 75.7<br>\
+								<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
+								var amountIn = parseFloat(data.coords[key][app.payload.property]);
+								//console.log(amountIn);
+								//var amountIn = data.coords[key][app.payload.property];
+								//console.log(amountIn);
+								switch (true) {
+									case (amountIn <= 27.2): // LESS THAN OR EQUAL TO 0
+									colorSelector = 1;
+									newzIndex = 1;
+									break;
+									case (amountIn > 27.2 && amountIn <= 45.8): // BETWEEN 21 AND 40
+									colorSelector = 2;
+									newzIndex = 2;
+									break;
+									case (amountIn > 45.8 && amountIn <= 58.0): // BETWEEN 41 AND 60
+									colorSelector = 3;
+									newzIndex = 3;
+									break;
+									case (amountIn > 58.0 && amountIn <= 66.0): // BETWEEN 41 AND 60
+									colorSelector = 4;
+									newzIndex = 4;
+									break;
+									case (amountIn > 66.0 && amountIn <= 75.7): // BETWEEN 41 AND 60
+									colorSelector = 5;
+									newzIndex = 5;
+									break;
+									default: // Not rated
+									colorSelector = 0;
+									newzIndex = 0;
+									break;
+								}
+							}
+							else if(app.payload.property == "kffact" || app.payload.property == "kwfact" ){ //Testing legend and logic for drawing for this specific property
+								//console.log(app.payload.property);
+								//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
+								//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
+								//colorSelector = 0;
+								//newzIndex = 0;
+								legendText = "<img src='img/redsquare.png' height='10px'/> .02<br>\
+								<img src='img/skybluesquare.png' height='10px'/> .05<br>\
+								<img src='img/brightgreensquare.png' height='10px'/> .10<br>\
+								<img src='img/purplesquare.png' height='10px'/> .15<br>\
+								<img src='img/orangesquare.png' height='10px'/> .17<br>\
+								<img src='img/brightpinksquare.png' height='10px'/> .20<br>\
+								<img src='img/navybluesquare.png' height='10px'/> .24<br>\
+								<img src='img/lilacsquare.png' height='10px'/> .28<br>\
+								<img src='img/yellowsquare.png' height='10px'/> .32<br>\
+								<img src='img/maroonsquare.png' height='10px'/> .37<br>\
+								<img src='img/cyansquare.png' height='10px'/> .43<br>\
+								<img src='img/navygreensquare.png' height='10px'/> .49<br>\
+								<img src='img/peachsquare.png' height='10px'/> .55<br>\
+								<img src='img/fleshsquare.png' height='10px'/> .64<br>\
+								<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
+								var amountIn = parseFloat(data.coords[key][app.payload.property]);
+								//console.log(amountIn);
+								//var amountIn = data.coords[key][app.payload.property];
+								//console.log(amountIn);
+								switch (true) {
+									case (amountIn <= 0.02): // LESS THAN OR EQUAL TO 0
+									colorSelector = 1;
+									newzIndex = 1;
+									break;
+									case (amountIn <= 0.05): // BETWEEN 21 AND 40
+									colorSelector = 2;
+									newzIndex = 2;
+									break;
+									case (amountIn <= .10): // BETWEEN 41 AND 60
+									colorSelector = 3;
+									newzIndex = 3;
+									break;
+									case (amountIn <= .15): // BETWEEN 41 AND 60
+									colorSelector = 4;
+									newzIndex = 4;
+									break;
+									case (amountIn <= .17): // BETWEEN 41 AND 60
+									colorSelector = 5;
+									newzIndex = 5;
+									break;
+									case (amountIn <= .20): // BETWEEN 41 AND 60
+									colorSelector = 6;
+									newzIndex = 6;
+									break;
+									case (amountIn <= .24): // BETWEEN 41 AND 60
+									colorSelector = 7;
+									newzIndex = 7;
+									break;
+									case (amountIn <= 0.28): // BETWEEN 41 AND 60
+									colorSelector = 8;
+									newzIndex = 8;
+									break;
+									case (amountIn <= 0.32): // BETWEEN 41 AND 60
+									colorSelector = 9;
+									newzIndex = 9;
+									break;
+									case (amountIn <= 0.37): // BETWEEN 41 AND 60
+									colorSelector = 10;
+									newzIndex = 10;
+									break;
+									case (amountIn <= 0.43): // BETWEEN 41 AND 60
+									colorSelector = 11;
+									newzIndex = 11;
+									break;
+									case (amountIn <= 0.49): // BETWEEN 41 AND 60
+									colorSelector = 12;
+									newzIndex = 12;
+									break;
+									case (amountIn <= 0.55): // BETWEEN 41 AND 60
+									colorSelector = 13;
+									newzIndex = 13;
+									break;
+									case (amountIn <= 0.64): // BETWEEN 41 AND 60
+									colorSelector = 14;
+									newzIndex = 14;
+									break;
+									default: // Not rated
+									colorSelector = 0;
+									newzIndex = 0;
+									break;
+								}
+							}
+							else if(app.payload.property == "ph01mcacl2_r"){ //Testing legend and logic for drawing for this specific property
+								//console.log(app.payload.property);
+								//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
+								//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
+								//colorSelector = 0;
+								//newzIndex = 0;
+								legendText = "<img src='img/redsquare.png' height='10px'/> Ultra acid (ph < 3.5)<br>\
+								<img src='img/skybluesquare.png' height='10px'/> Extremely acid (ph 3.5 - 4.4)<br>\
+								<img src='img/brightgreensquare.png' height='10px'/> Very strongly acid (ph 4.5 - 5.0)<br>\
+								<img src='img/purplesquare.png' height='10px'/> Strongly acid (ph 5.1 - 5.5)<br>\
+								<img src='img/orangesquare.png' height='10px'/> Moderately acid (ph 5.6 - 6.0)<br>\
+								<img src='img/brightpinksquare.png' height='10px'/> Slightly acid (ph 6.1 - 6.5)<br>\
+								<img src='img/navybluesquare.png' height='10px'/> Neutral (ph 6.6 - 7.3)<br>\
+								<img src='img/lilacsquare.png' height='10px'/> Slightly alkaline (ph 7.4 - 7.8)<br>\
+								<img src='img/yellowsquare.png' height='10px'/> Moderately alkaline (ph 7.9 - 8.4)<br>\
+								<img src='img/maroonsquare.png' height='10px'/> Strongly alkaline (ph 8.5 - 9.0)<br>\
+								<img src='img/navygreen.png' height='10px'/> Very strongly alkaline (ph > 9.0)<br>\
+								<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
+								var amountIn = parseFloat(data.coords[key][app.payload.property]);
+								//console.log(amountIn);
+								//var amountIn = data.coords[key][app.payload.property];
+								//console.log(amountIn);
+								switch (true) {
+									case (amountIn < 3.5): // LESS THAN OR EQUAL TO 0
+									colorSelector = 1;
+									newzIndex = 1;
+									break;
+									case (amountIn >= 3.5 && amountIn <= 4.4): // BETWEEN 21 AND 40
+									colorSelector = 2;
+									newzIndex = 2;
+									break;
+									case (amountIn >= 4.5 && amountIn <= 5.0): // BETWEEN 41 AND 60
+									colorSelector = 3;
+									newzIndex = 3;
+									break;
+									case (amountIn >= 5.1 && amountIn <= 5.5): // BETWEEN 41 AND 60
+									colorSelector = 4;
+									newzIndex = 4;
+									break;
+									case (amountIn >= 5.6 && amountIn <= 6.0): // BETWEEN 41 AND 60
+									colorSelector = 5;
+									newzIndex = 5;
+									break;
+									case (amountIn >= 6.1 && amountIn <= 6.5): // BETWEEN 41 AND 60
+									colorSelector = 6;
+									newzIndex = 6;
+									break;
+									case (amountIn >= 6.6 && amountIn <= 7.3): // BETWEEN 41 AND 60
+									colorSelector = 7;
+									newzIndex = 7;
+									break;
+									case (amountIn >= 7.4 && amountIn <= 7.8): // BETWEEN 41 AND 60
+									colorSelector = 8;
+									newzIndex = 8;
+									break;
+									case (amountIn >= 7.9 && amountIn <= 8.4): // BETWEEN 41 AND 60
+									colorSelector = 9;
+									newzIndex = 9;
+									break;
+									case (amountIn >= 8.5 && amountIn <= 9.0): // BETWEEN 41 AND 60
+									colorSelector = 10;
+									newzIndex = 10;
+									break;
+									case (amountIn > 9.0 ): // BETWEEN 41 AND 60
+									colorSelector = 11;
+									newzIndex = 11;
+									break;
+									default: // Not rated
+									colorSelector = 0;
+									newzIndex = 0;
+									break;
+								}
+							}
+							else if(app.payload.property == 'frag3to10_r'){
+								legendText = "<img src='img/redsquare.png' height='10px'/> 0 to 12.5<br>\
+								<img src='img/skybluesquare.png' height='10px'/>  12.5 to 25<br>\
+								<img src='img/brightgreensquare.png' height='10px'/> 25 to 37.5<br>\
+								<img src='img/purplesquare.png' height='10px'/> 37.5 to 50<br>\
+								<img src='img/orangesquare.png' height='10px'/> 50 to 62.5<br>\
+								<img src='img/brightpinksquare.png' height='10px'/> 62.5 to 75";
+								var a = data.coords[key][app.payload.property];
+								switch (true) {
+									case (a >= 0 && a < 12.5):
+									colorSelector = 0;
+									newzIndex = 0;
+									break;
+									case (a >= 12.5 && a < 25):
+									colorSelector = 1;
+									newzIndex = 1;
+									break;
+									case (a >= 25 && a < 37.5):
+									colorSelector = 2;
+									newzIndex = 2;
+									break;
+									case (a >= 37.5 && a < 50):
+									colorSelector = 3;
+									newzIndex = 3;
+									break;
+									case (a >= 50 && a < 62.5):
+									colorSelector = 4;
+									newzIndex = 4;
+									break;
+									case (a >= 62.5 && a <= 75):
+									colorSelector = 5;
+									newzIndex = 5;
+									break;
+								}
+							}
+							else if(app.payload.property == "om_r"){ //Testing legend and logic for drawing for this specific property
+								//console.log(app.payload.property);
+								//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
+								//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
+								//colorSelector = 0;
+								//newzIndex = 0;
+								legendText = "<img src='img/redsquare.png' height='10px'/> <= 0.75<br>\
+								<img src='img/skybluesquare.png' height='10px'/> > 0.75 and <= 1.30<br>\
+								<img src='img/brightgreensquare.png' height='10px'/> > 1.30 and <= 2.25<br>\
+								<img src='img/purplesquare.png' height='10px'/> > 2.25 and <= 3.00 <br>\
+								<img src='img/orangesquare.png' height='10px'/> > 3.00 and <= 4.50<br>\
+								<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
+								var amountIn = parseFloat(data.coords[key][app.payload.property]);
+								switch (true) {
+									case (amountIn <= 0.75): // LESS THAN OR EQUAL TO 0
+									colorSelector = 1;
+									newzIndex = 1;
+									break;
+									case (amountIn > 0.75 && amountIn <= 1.30): // BETWEEN 21 AND 40
+									colorSelector = 2;
+									newzIndex = 2;
+									break;
+									case (amountIn > 1.30 && amountIn <= 2.25): // BETWEEN 41 AND 60
+									colorSelector = 3;
+									newzIndex = 3;
+									break;
+									case (amountIn > 2.25 && amountIn <= 3.00): // BETWEEN 41 AND 60
+									colorSelector = 4;
+									newzIndex = 4;
+									break;
+									case (amountIn > 3.00 && amountIn <= 4.50): // BETWEEN 41 AND 60
+									colorSelector = 5;
+									newzIndex = 5;
+									break;
+									default: // Not rated
+									colorSelector = 0;
+									newzIndex = 0;
+									break;
+								}
+							}
+							/*else if{ //another property inside this table (chorizon_r) that handles its own colors and logic
+						}*/
+						else{ //General legend text for all unspecified propierty
+							legendText = "<img src='img/graysquare.png' height='10px'/> <= 0<br>\
+							<img src='img/redsquare.png' height='10px'/>  1 to 20<br>\
+							<img src='img/skybluesquare.png' height='10px'/> 21 to 40<br>\
+							<img src='img/brightgreensquare.png' height='10px'/> 41 to 60<br>\
+							<img src='img/purplesquare.png' height='10px'/> 61 to 80<br>\
+							<img src='img/orangesquare.png' height='10px'/> 81 to 100";
+							var amountIn = data.coords[key][app.payload.property];
 							switch (true) {
-								case (amountIn <= 7): // LESS THAN OR EQUAL TO 0
-								colorSelector = 1; //not black or gray
+								case (amountIn <= 0): // LESS THAN OR EQUAL TO 0
+								colorSelector = 0;
+								newzIndex = 0;
+								break;
+								case (amountIn > 0 && amountIn < 21): // BETWEEN 0 AND 21
+								colorSelector = 1;
 								newzIndex = 1;
 								break;
-								case (amountIn > 7 && amountIn <= 17): // BETWEEN 0 AND 21
+								case (amountIn > 20 && amountIn < 41): // BETWEEN 21 AND 40
 								colorSelector = 2;
 								newzIndex = 2;
 								break;
-								case (amountIn > 17 && amountIn <= 36): // BETWEEN 21 AND 40
+								case (amountIn > 40 && amountIn < 61): // BETWEEN 41 AND 60
 								colorSelector = 3;
 								newzIndex = 3;
 								break;
-								case (amountIn > 36 && amountIn <= 55): // BETWEEN 41 AND 60
+								case (amountIn > 60 && amountIn < 81): // BETWEEN 61 AND 80
 								colorSelector = 4;
 								newzIndex = 4;
-								break;
-								case (amountIn > 55 && amountIn <= 65): // BETWEEN 61 AND 80
-								colorSelector = 5;
-								newzIndex = 5;
 								break;
 								case (amountIn > 80 && amountIn < 101): // BETWEEN 81 AND 100
-								colorSelector = 6;
-								newzIndex = 6;
-								break;
-							}
-						}
-						else if(app.payload.property == "sandtotal_r"){ //Testing legend and logic for drawing for this specific property
-							//console.log(app.payload.property);
-							//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
-							//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
-							//colorSelector = 0;
-							//newzIndex = 0;
-							legendText = "<img src='img/redsquare.png' height='10px'/> <= 11.8<br>\
-							<img src='img/skybluesquare.png' height='10px'/>  > 11.8 and <= 26.1<br>\
-							<img src='img/brightgreensquare.png' height='10px'/> > 26.1 and <= 39.3<br>\
-							<img src='img/purplesquare.png' height='10px'/> > 39.3 and <= 57.8<br>\
-							<img src='img/orangesquare.png' height='10px'/> > 57.8 and <= 90.2<br>\
-							<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
-							var amountIn = parseFloat(data.coords[key][app.payload.property]);
-							//console.log(amountIn);
-							//var amountIn = data.coords[key][app.payload.property];
-							//console.log(amountIn);
-							switch (true) {
-								case (amountIn <= 11.8): // LESS THAN OR EQUAL TO 0
-								colorSelector = 1; //not black or gray
-								newzIndex = 1;
-								break;
-								case (amountIn > 11.8 && amountIn <= 26.1): // BETWEEN 0 AND 21
-								colorSelector = 2;
-								newzIndex = 2;
-								break;
-								case (amountIn > 26.1 && amountIn <= 39.3): // BETWEEN 21 AND 40
-								colorSelector = 3;
-								newzIndex = 3;
-								break;
-								case (amountIn > 39.3 && amountIn <= 57.8): // BETWEEN 41 AND 60
-								colorSelector = 4;
-								newzIndex = 4;
-								break;
-								case (amountIn > 57.8 && amountIn <= 90.2): // BETWEEN 61 AND 80
 								colorSelector = 5;
 								newzIndex = 5;
 								break;
-								default: // BETWEEN 81 AND 100
-								colorSelector = 0;
-								newzIndex = 0;
-								break;
-							}
+							} //end switch
+						}//end else statement that handles the general legend for unspecified properties
+					}//end the else statement that identifies the table
+					else if(app.payload.table == "chconsistence_r"){
+						var description = data.coords[key][app.payload.property];
+						if(app.payload.property == "plasticity"){
+							legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
+							<img src='img/redsquare.png' height='10px'/>  Moderately Plastic<br>\
+							<img src='img/skybluesquare.png' height='10px'/> Nonplastic<br>\
+							<img src='img/brightgreensquare.png' height='10px'/> Slightly Plastic<br>\
+							<img src='img/purplesquare.png' height='10px'/> Very Plastic";
 						}
-						else if(app.payload.property == "gypsum_r"){ //Testing legend and logic for drawing for this specific property
-							//console.log(app.payload.property);
-							//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
-							//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
-							//colorSelector = 0;
-							//newzIndex = 0;
-							legendText = "<img src='img/redsquare.png' height='10px'/> <= 0 <br>\
-							<img src='img/skybluesquare.png' height='10px'/> > 0 and <= 1 <br>\
-							<img src='img/brightgreensquare.png' height='10px'/> > 1 and <= 2 <br>\
-							<img src='img/purplesquare.png' height='10px'/> > 2 and <= 3<br>\
-							<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
-							var a = parseFloat(data.coords[key][app.payload.property]);
-							//console.log(amountIn);
-							//var amountIn = data.coords[key][app.payload.property];
-							//console.log(amountIn);
-							switch (true) {
-								case (a <= 0): // LESS THAN OR EQUAL TO 0
-								colorSelector = 1;
-								newzIndex = 1;
-								break;
-								case (a > 0 && a <= 1): // BETWEEN 0 AND 21
-								colorSelector = 2;
-								newzIndex = 2;
-								break;
-								case (a > 1 && a <= 2): // BETWEEN 21 AND 40
-								colorSelector = 3;
-								newzIndex = 3;
-								break;
-								case (a > 2 && a <= 3): // BETWEEN 21 AND 40
-								colorSelector = 4;
-								newzIndex = 4;
-								break;
-								default: // Not rated
-								colorSelector = 0;
-								newzIndex = 0;
-								break;
-							}
+						if(app.payload.property == "stickiness"){
+							legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
+							<img src='img/redsquare.png' height='10px'/>  Moderately Sticky<br>\
+							<img src='img/skybluesquare.png' height='10px'/> Non Sticky<br>\
+							<img src='img/brightgreensquare.png' height='10px'/> Slightly Sticky<br>\
+							<img src='img/purplesquare.png' height='10px'/> Very Sticky";
 						}
-					 	else if(app.payload.property == "pi_r"){ //Testing legend and logic for drawing for this specific property
-							//console.log(app.payload.property);
-							//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
-							//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
-							//colorSelector = 0;
-							//newzIndex = 0;
-							legendText = "<img src='img/redsquare.png' height='10px'/> <= 9.4<br>\
-							<img src='img/skybluesquare.png' height='10px'/>  > 9.4 and <= 21.0<br>\
-							<img src='img/brightgreensquare.png' height='10px'/> > 21.0 and <= 30.6<br>\
-							<img src='img/purplesquare.png' height='10px'/> > 30.6 and <= 37.5<br>\
-							<img src='img/orangesquare.png' height='10px'/> > 37.5 and <= 54.1<br>\
-							<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
-							// GRAY, RED, SKY BLUE, BRIGHT GREEN, PURPLE, ORANGE, BRIGHT PINK, NAVY BLUE, LILAC, YELLOW
-							var amountIn = parseFloat(data.coords[key][app.payload.property]);
-							//console.log(amountIn);
-							//
-							//console.log(amountIn);
-							//var amountIn = data.coords[key][app.payload.property];
-							//console.log(amountIn);
-							switch (true) {
-								case (amountIn <= 9.4): // LESS THAN OR EQUAL TO
-								colorSelector = 1; //red
-								newzIndex = 1;
-								break;
-								case (amountIn > 9.4 && amountIn <= 21.0): // BETWEEN 0 AND 21
-								colorSelector = 2; //skybluesquare
-								newzIndex = 2
-								break;
-								case (amountIn > 21.0 && amountIn <= 30.6): // BETWEEN 21 AND 40
-								colorSelector = 3; //brightgreensquare
-								newzIndex = 3;
-								break;
-								case (amountIn > 30.6 && amountIn <= 37.5): // BETWEEN 41 AND 60
-								colorSelector = 4; //purplesquare
-								newzIndex = 4;
-								break;
-								case (amountIn > 37.5 && amountIn <= 60): // BETWEEN 41 AND 60
-								colorSelector = 5; //orangesquare
-								newzIndex = 5;
-								break;
-								default: // Not rated
-								colorSelector = 0; //gray
-								newzIndex = 0;
-								break;
-							}
+						if(app.payload.property == "rupresplate"){
+							legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
+							<img src='img/redsquare.png' height='10px'/> Very Weak";
 						}
-						else if(app.payload.property == "sar_r"){ //Testing legend and logic for drawing for this specific property
-							//console.log(app.payload.property);
-							//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
-							//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
-							// 								GRAY, 			RED, 			SKY BLUE, BRIGHT GREEN, PURPLE, ORANGE, 	BRIGHT PINK, NAVY BLUE, LILAC, YELLOW
-							//colorSelector = 0;
-							//newzIndex = 0;
-							legendText = "<img src='img/redsquare.png' height='10px'/> <= 0.3<br>\
-							<img src='img/skybluesquare.png' height='10px'/>  > 0.3 and <= 0.9<br>\
-							<img src='img/brightgreensquare.png' height='10px'/> > 0.9 and <= 1.8<br>\
-							<img src='img/purplesquare.png' height='10px'/> > 1.8 and <= 5.9<br>\
-							<img src='img/orangesquare.png' height='10px'/> > 5.9 and <= 17.5<br>\
-							<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
-							var amountIn = parseFloat(data.coords[key][app.payload.property]);
-							//console.log(amountIn);
-							//var amountIn = data.coords[key][app.payload.property];
-							//console.log(amountIn);
-							switch (true) {
-								case (amountIn <= 0.3): // LESS THAN OR EQUAL TO 0
-								colorSelector = 1; //not black or gray
-								newzIndex = 1;
-								break;
-								case (amountIn > 0.3 && amountIn <= 0.9): // BETWEEN 21 AND 40
-								colorSelector = 2;
-								newzIndex = 2;
-								break;
-								case (amountIn > 0.9 && amountIn <= 1.8): // BETWEEN 0 AND 21
-								colorSelector = 3;
-								newzIndex = 3;
-								break;
-								case (amountIn > 1.8 && amountIn <= 5.9): // BETWEEN 21 AND 40
-								colorSelector = 4;
-								newzIndex = 4;
-								break;
-								case (amountIn > 5.9 && amountIn <= 17.5): // BETWEEN 41 AND 60
-								colorSelector = 5;
-								newzIndex = 5;
-								break;
-								default: // Not rated
-								colorSelector = 0;
-								newzIndex = 0;
-								break;
-							}
+						if(app.payload.property == "rupresblkmst"){
+							legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
+							<img src='img/redsquare.png' height='10px'/>  Extremely Firm<br>\
+							<img src='img/skybluesquare.png' height='10px'/> Firm<br>\
+							<img src='img/brightgreensquare.png' height='10px'/> Friable<br>\
+							<img src='img/purplesquare.png' height='10px'/> Loose<br>\
+							<img src='img/orangesquare.png' height='10px'/> Very Firm<br>\
+							<img src='img/brightpinksquare.png' height='10px'/> Very Friable";
 						}
-						else if(app.payload.property == "ksat_r"){ //Testing legend and logic for drawing for this specific property
-							//console.log(app.payload.property);
-							//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
-							//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
-							//colorSelector = 0;
-							//newzIndex = 0;
-							legendText = "<img src='img/redsquare.png' height='10px'/> Very Low (0.0 - 0.01)<br>\
-							<img src='img/skybluesquare.png' height='10px'/>  Low (0.01 - 0.1)<br>\
-							<img src='img/brightgreensquare.png' height='10px'/> Moderately Low (0.1 - 1)<br>\
-							<img src='img/purplesquare.png' height='10px'/> Moderately High (1 - 10)<br>\
-							<img src='img/orangesquare.png' height='10px'/> High (10 - 100)<br>\
-							<img src='img/brightpinksquare.png' height='10px'/> Very High (100 - 705)<br>\
-							<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
-							var amountIn = parseFloat(data.coords[key][app.payload.property]);
-							//console.log(amountIn);
-							//var amountIn = data.coords[key][app.payload.property];
-							//console.log(amountIn);
-							switch (true) {
-								case (amountIn > 0.0 && amountIn <= 0.01): // LESS THAN OR EQUAL TO 0
-								colorSelector = 1;
-								newzIndex = 1;
-								break;
-								case (amountIn > 0.01 && amountIn <= 0.1): // BETWEEN 21 AND 40
-								colorSelector = 2;
-								newzIndex = 2;
-								break;
-								case (amountIn > 0.1 && amountIn <= 1): // BETWEEN 41 AND 60
-								colorSelector = 3;
-								newzIndex = 3;
-								break;
-								case (amountIn > 1 && amountIn <= 10): // BETWEEN 41 AND 60
-								colorSelector = 4;
-								newzIndex = 4;
-								break;
-								case (amountIn > 10 && amountIn <= 100): // BETWEEN 41 AND 60
-								colorSelector = 5;
-								newzIndex = 5;
-								break;
-								case (amountIn > 100 && amountIn <= 705): // BETWEEN 41 AND 60
-								colorSelector = 6;
-								newzIndex = 6;
-								break;
-								default: // Not rated
-								colorSelector = 0;
-								newzIndex = 0;
-								break;
-							}
+						if(app.payload.property == "rupresblkdry"){
+							legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
+							<img src='img/redsquare.png' height='10px'/>  Extremely Hard<br>\
+							<img src='img/skybluesquare.png' height='10px'/> Hard<br>\
+							<img src='img/brightgreensquare.png' height='10px'/> Hard When Dry<br>\
+							<img src='img/purplesquare.png' height='10px'/> Loose<br>\
+							<img src='img/orangesquare.png' height='10px'/> Moderately Hard<br>\
+							<img src='img/brightpinksquare.png' height='10px'/> Rigid<br>\
+							<img src='img/navybluesquare.png' height='10px'/> Slightly Hard<br>\
+							<img src='img/lilacsquare.png' height='10px'/> Soft<br>\
+							<img src='img/yellowsquare.png' height='10px'/> Very Hard";
 						}
-						else if(app.payload.property == "sandfine_r" || app.payload.property == "sandvc_r" || app.payload.property == "sandco_r" || app.payload.property == "sandmed_r" || app.payload.property == "sandvf_r"){
-							legendText = "<img src='img/redsquare.png' height='10px'/> (0 to 5)<br>\
-							<img src='img/skybluesquare.png' height='10px'/>  (5 to 10)<br>\
-							<img src='img/brightgreensquare.png' height='10px'/>  (10 to 15)<br>\
-							<img src='img/purplesquare.png' height='10px'/> (15 to 20)<br>\
-							<img src='img/orangesquare.png' height='10px'/> (20 to 25)<br>\
-							<img src='img/brightpinksquare.png' height='10px'/>  (25 to 30)<br>\
-							<img src='img/navybluesquare.png' height='10px'/>  (30 to 35)<br>\
-							<img src='img/lilacsquare.png' height='10px'/>  (35 to 40)<br>\
-							<img src='img/yellowsquare.png' height='10px'/>  (40 to 45)<br>\
-							<img src='img/maroonsquare.png' height='10px'/> (45 to 50)<br>\
-							<img src='img/cyansquare.png' height='10px'/> (50 to 55)<br>\
-							<img src='img/navygreensquare.png' height='10px'/> (55 to 60)<br>\
-							<img src='img/peachsquare.png' height='10px'/> (60 to 65)<br>\
-							<img src='img/fleshsquare.png' height='10px'/> (65 to 70)<br>\
-							<img src='img/brownsquare.png' height='10px'/>  (70 to 75)<br>\
-							<img src='img/neongreensquare.png' height='10px'/>  (75 to 80)<br>\
-							<img src='img/neonpurplesquare.png' height='10px'/> (80 to 85)<br>\
-							<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
-							var a = parseFloat(data.coords[key][app.payload.property]);
-
-							switch (true) {
-								case (a >= 0 && a < 5): // LESS THAN OR EQUAL TO 0
-								colorSelector = 1;
-								newzIndex = 1;
-								break;
-								case (a >= 5 && a < 10): // BETWEEN 21 AND 40
-								colorSelector = 2;
-								newzIndex = 2;
-								break;
-								case (a >= 10 && a < 15): // BETWEEN 41 AND 60
-								colorSelector = 3;
-								newzIndex = 3;
-								break;
-								case (a >= 15 && a < 20): // BETWEEN 41 AND 60
-								colorSelector = 4;
-								newzIndex = 4;
-								break;
-								case (a >= 20 && a < 25): // BETWEEN 41 AND 60
-								colorSelector = 5;
-								newzIndex = 5;
-								break;
-								case (a >= 25 && a < 30): // BETWEEN 41 AND 60
-								colorSelector = 6;
-								newzIndex = 6;
-								break;
-								case (a >= 30 && a < 35): // BETWEEN 41 AND 60
-								colorSelector = 7;
-								newzIndex = 7;
-								break;
-								case (a >= 35 && a < 40): // BETWEEN 41 AND 60
-								colorSelector = 8;
-								newzIndex = 8;
-								break;
-								case (a >= 40 && a < 45): // BETWEEN 41 AND 60
-								colorSelector = 9;
-								newzIndex = 9;
-								break;
-								case (a >= 45 && a < 50): // BETWEEN 41 AND 60
-								colorSelector = 10;
-								newzIndex = 10;
-								break;
-								case (a >= 50 && a < 55): // BETWEEN 41 AND 60
-								colorSelector = 11;
-								newzIndex = 11;
-								break;
-								case (a >= 55 && a < 60): // BETWEEN 41 AND 60
-								colorSelector = 12;
-								newzIndex = 12;
-								break;
-								case (a >= 60 && a < 65): // BETWEEN 41 AND 60
-								colorSelector = 13;
-								newzIndex = 13;
-								break;
-								case (a >= 65 && a < 70): // BETWEEN 41 AND 60
-								colorSelector = 14;
-								newzIndex = 14;
-								break;
-								case (a >= 70 && a < 75): // BETWEEN 41 AND 60
-								colorSelector = 15;
-								newzIndex = 15;
-								break;
-								case (a >= 75 && a <= 80): // BETWEEN 41 AND 60
-								colorSelector = 16;
-								newzIndex = 16;
-								break;
-								default: // Not rated
-								colorSelector = 0;
-								newzIndex = 0;
-								break;
-							}
+						if(app.payload.property == "rupresblkcem"){
+							legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
+							<img src='img/redsquare.png' height='10px'/>  Extremely Weakly Cemented<br>\
+							<img src='img/skybluesquare.png' height='10px'/> Indurated<br>\
+							<img src='img/brightgreensquare.png' height='10px'/> Moderately Cemented<br>\
+							<img src='img/purplesquare.png' height='10px'/> Noncemented<br>\
+							<img src='img/orangesquare.png' height='10px'/> Strongly Cemented<br>\
+							<img src='img/brightpinksquare.png' height='10px'/> Very Strongly Cemented<br>\
+							<img src='img/navybluesquare.png' height='10px'/> Weakly Cemented";
 						}
-						else if(app.payload.property == "ph1to1h2o_r"){ //Testing legend and logic for drawing for this specific property
-							//not enough colors for this propierty
-							//console.log(app.payload.property);
-							//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
-							//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
-							//colorSelector = 0;
-							//newzIndex = 0;
-							legendText = "<img src='img/redsquare.png' height='10px'/> Ultra acid (ph < 3.5)<br>\
-							<img src='img/skybluesquare.png' height='10px'/> Extremely acid (ph 3.5 - 4.4)<br>\
-							<img src='img/brightgreensquare.png' height='10px'/> Very strongly acid (ph 4.5 - 5.0)<br>\
-							<img src='img/purplesquare.png' height='10px'/> Strongly acid (ph 5.1 - 5.5)<br>\
-							<img src='img/orangesquare.png' height='10px'/> Moderately acid (ph 5.6 - 6.0)<br>\
-							<img src='img/brightpinksquare.png' height='10px'/> Slightly acid (ph 6.1 - 6.5)<br>\
-							<img src='img/navybluesquare.png' height='10px'/> Neutral (ph 6.6 - 7.3)<br>\
-							<img src='img/lilacsquare.png' height='10px'/> Slightly alkaline (ph 7.4 - 7.8)<br>\
-							<img src='img/yellowsquare.png' height='10px'/> Moderately alkaline (ph 7.9 - 8.4)<br>\
-							<img src='img/maroonsquare.png' height='10px'/> Strongly alkaline (ph 8.5 - 9.0)<br>\
-							<img src='img/navygreen.png' height='10px'/> Very strongly alkaline (ph > 9.0)<br>\
-							<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
-							var amountIn = parseFloat(data.coords[key][app.payload.property]);
-							//console.log(amountIn);
-							//var amountIn = data.coords[key][app.payload.property];
-							//console.log(amountIn);
-							switch (true) {
-								case (amountIn < 3.5): // LESS THAN OR EQUAL TO 0
-								colorSelector = 1;
-								newzIndex = 1;
-								break;
-								case (amountIn >= 3.5 && amountIn <= 4.4): // BETWEEN 21 AND 40
-								colorSelector = 2;
-								newzIndex = 2;
-								break;
-								case (amountIn >= 4.5 && amountIn <= 5.0): // BETWEEN 41 AND 60
-								colorSelector = 3;
-								newzIndex = 3;
-								break;
-								case (amountIn >= 5.1 && amountIn <= 5.5): // BETWEEN 41 AND 60
-								colorSelector = 4;
-								newzIndex = 4;
-								break;
-								case (amountIn >= 5.6 && amountIn <= 6.0): // BETWEEN 41 AND 60
-								colorSelector = 5;
-								newzIndex = 5;
-								break;
-								case (amountIn >= 6.1 && amountIn <= 6.5): // BETWEEN 41 AND 60
-								colorSelector = 6;
-								newzIndex = 6;
-								break;
-								case (amountIn >= 6.6 && amountIn <= 7.3): // BETWEEN 41 AND 60
-								colorSelector = 7;
-								newzIndex = 7;
-								break;
-								case (amountIn >= 7.4 && amountIn <= 7.8): // BETWEEN 41 AND 60
-								colorSelector = 8;
-								newzIndex = 8;
-								break;
-								case (amountIn >= 7.9 && amountIn <= 8.4): // BETWEEN 41 AND 60
-								colorSelector = 9;
-								newzIndex = 9;
-								break;
-								case (amountIn >= 8.5 && amountIn <= 9.0): // BETWEEN 41 AND 60
-								colorSelector = 10;
-								newzIndex = 10;
-								break;
-								case (amountIn > 9.0 ): // BETWEEN 41 AND 60
-								colorSelector = 11;
-								newzIndex = 11;
-								break;
-								default: // Not rated
-								colorSelector = 0;
-								newzIndex = 0;
-								break;
-							}
+						if(app.payload.property == "mannerfailure"){
+							legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
+							<img src='img/redsquare.png' height='10px'/>  Brittle<br>\
+							<img src='img/skybluesquare.png' height='10px'/> Deformable<br>\
+							<img src='img/brightgreensquare.png' height='10px'/> Moderately Fluid<br>\
+							<img src='img/purplesquare.png' height='10px'/> Nonfluid<br>\
+							<img src='img/orangesquare.png' height='10px'/> Semideformable<br>\
+							<img src='img/brightpinksquare.png' height='10px'/> Slightly Fluid<br>\
+							<img src='img/navybluesquare.png' height='10px'/> Very Fluid";
 						}
-						else if(app.payload.property == "aashind_r"){ //Testing legend and logic for drawing for this specific property
-							//console.log(app.payload.property);
-							//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
-							//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
-							//colorSelector = 0;
-							//newzIndex = 0;
-							legendText = "<img src='img/redsquare.png' height='10px'/> A-1 (0 to 5)<br>\
-							<img src='img/skybluesquare.png' height='10px'/> A-1-a (5 to 10)<br>\
-							<img src='img/brightgreensquare.png' height='10px'/> A-1-b (10 to 15)<br>\
-							<img src='img/purplesquare.png' height='10px'/> A-b (15 to 20)<br>\
-							<img src='img/orangesquare.png' height='10px'/> A-2 (20 to 25)<br>\
-							<img src='img/brightpinksquare.png' height='10px'/> A-2-4 (25 to 30)<br>\
-							<img src='img/navybluesquare.png' height='10px'/> A-2-5 (30 to 35)<br>\
-							<img src='img/lilacsquare.png' height='10px'/> A-2-6 (35 to 40)<br>\
-							<img src='img/yellowsquare.png' height='10px'/> A-2-7 (40 to 45)<br>\
-							<img src='img/maroonsquare.png' height='10px'/> A-3 (45 to 50)<br>\
-							<img src='img/cyansquare.png' height='10px'/> A-4 (50 to 55)<br>\
-							<img src='img/navygreensquare.png' height='10px'/> A-5 (55 to 60)<br>\
-							<img src='img/peachsquare.png' height='10px'/> A-6 (60 to 65)<br>\
-							<img src='img/fleshsquare.png' height='10px'/> A-7 (65 to 70)<br>\
-							<img src='img/brownsquare.png' height='10px'/> A-7-5 (70 to 75)<br>\
-							<img src='img/neongreensquare.png' height='10px'/> A-7-6 (75 to 80)<br>\
-							<img src='img/neonpurplesquare.png' height='10px'/> A-8 (80 to 85)<br>\
-							<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
-							var a = parseFloat(data.coords[key][app.payload.property]);
-
-							switch (true) {
-								case (a >= 0 && a < 5): // LESS THAN OR EQUAL TO 0
-								colorSelector = 1;
-								newzIndex = 1;
-								break;
-								case (a >= 5 && a < 10): // BETWEEN 21 AND 40
-								colorSelector = 2;
-								newzIndex = 2;
-								break;
-								case (a >= 10 && a < 15): // BETWEEN 41 AND 60
-								colorSelector = 3;
-								newzIndex = 3;
-								break;
-								case (a >= 15 && a < 20): // BETWEEN 41 AND 60
-								colorSelector = 4;
-								newzIndex = 4;
-								break;
-								case (a >= 20 && a < 25): // BETWEEN 41 AND 60
-								colorSelector = 5;
-								newzIndex = 5;
-								break;
-								case (a >= 25 && a < 30): // BETWEEN 41 AND 60
-								colorSelector = 6;
-								newzIndex = 6;
-								break;
-								case (a >= 30 && a < 35): // BETWEEN 41 AND 60
-								colorSelector = 7;
-								newzIndex = 7;
-								break;
-								case (a >= 35 && a < 40): // BETWEEN 41 AND 60
-								colorSelector = 8;
-								newzIndex = 8;
-								break;
-								case (a >= 40 && a < 45): // BETWEEN 41 AND 60
-								colorSelector = 9;
-								newzIndex = 9;
-								break;
-								case (a >= 45 && a < 50): // BETWEEN 41 AND 60
-								colorSelector = 10;
-								newzIndex = 10;
-								break;
-								case (a >= 50 && a < 55): // BETWEEN 41 AND 60
-								colorSelector = 11;
-								newzIndex = 11;
-								break;
-								case (a >= 55 && a < 60): // BETWEEN 41 AND 60
-								colorSelector = 12;
-								newzIndex = 12;
-								break;
-								case (a >= 60 && a < 65): // BETWEEN 41 AND 60
-								colorSelector = 13;
-								newzIndex = 13;
-								break;
-								case (a >= 65 && a < 70): // BETWEEN 41 AND 60
-								colorSelector = 14;
-								newzIndex = 14;
-								break;
-								case (a >= 70 && a < 75): // BETWEEN 41 AND 60
-								colorSelector = 15;
-								newzIndex = 15;
-								break;
-								case (a >= 75 && a <= 80): // BETWEEN 41 AND 60
-								colorSelector = 16;
-								newzIndex = 16;
-								break;
-								default: // Not rated
-								colorSelector = 0;
-								newzIndex = 0;
-								break;
-							}
-						}
-						else if(app.payload.property == "ll_r"){ //Testing legend and logic for drawing for this specific property
-							//console.log(app.payload.property);
-							//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
-							//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
-							//colorSelector = 0;
-							//newzIndex = 0;
-							legendText = "<img src='img/redsquare.png' height='10px'/> <= 27.2<br>\
-							<img src='img/skybluesquare.png' height='10px'/> > 27.2 and <= 45.8<br>\
-							<img src='img/brightgreensquare.png' height='10px'/> > 45.8 and <= 58.0<br>\
-							<img src='img/purplesquare.png' height='10px'/> > 58.0 and <= 66.0<br>\
-							<img src='img/orangesquare.png' height='10px'/> > 66.0 and <= 75.7<br>\
-							<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
-							var amountIn = parseFloat(data.coords[key][app.payload.property]);
-							//console.log(amountIn);
-							//var amountIn = data.coords[key][app.payload.property];
-							//console.log(amountIn);
-							switch (true) {
-								case (amountIn <= 27.2): // LESS THAN OR EQUAL TO 0
-								colorSelector = 1;
-								newzIndex = 1;
-								break;
-								case (amountIn > 27.2 && amountIn <= 45.8): // BETWEEN 21 AND 40
-								colorSelector = 2;
-								newzIndex = 2;
-								break;
-								case (amountIn > 45.8 && amountIn <= 58.0): // BETWEEN 41 AND 60
-								colorSelector = 3;
-								newzIndex = 3;
-								break;
-								case (amountIn > 58.0 && amountIn <= 66.0): // BETWEEN 41 AND 60
-								colorSelector = 4;
-								newzIndex = 4;
-								break;
-								case (amountIn > 66.0 && amountIn <= 75.7): // BETWEEN 41 AND 60
-								colorSelector = 5;
-								newzIndex = 5;
-								break;
-								default: // Not rated
-								colorSelector = 0;
-								newzIndex = 0;
-								break;
-							}
-						}
-						else if(app.payload.property == "kffact" || app.payload.property == "kwfact" ){ //Testing legend and logic for drawing for this specific property
-							//console.log(app.payload.property);
-							//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
-							//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
-							//colorSelector = 0;
-							//newzIndex = 0;
-							legendText = "<img src='img/redsquare.png' height='10px'/> .02<br>\
-							<img src='img/skybluesquare.png' height='10px'/> .05<br>\
-							<img src='img/brightgreensquare.png' height='10px'/> .10<br>\
-							<img src='img/purplesquare.png' height='10px'/> .15<br>\
-							<img src='img/orangesquare.png' height='10px'/> .17<br>\
-							<img src='img/brightpinksquare.png' height='10px'/> .20<br>\
-							<img src='img/navybluesquare.png' height='10px'/> .24<br>\
-							<img src='img/lilacsquare.png' height='10px'/> .28<br>\
-							<img src='img/yellowsquare.png' height='10px'/> .32<br>\
-							<img src='img/maroonsquare.png' height='10px'/> .37<br>\
-							<img src='img/cyansquare.png' height='10px'/> .43<br>\
-							<img src='img/navygreensquare.png' height='10px'/> .49<br>\
-							<img src='img/peachsquare.png' height='10px'/> .55<br>\
-							<img src='img/fleshsquare.png' height='10px'/> .64<br>\
-							<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
-							var amountIn = parseFloat(data.coords[key][app.payload.property]);
-							//console.log(amountIn);
-							//var amountIn = data.coords[key][app.payload.property];
-							//console.log(amountIn);
-							switch (true) {
-								case (amountIn <= 0.02): // LESS THAN OR EQUAL TO 0
-								colorSelector = 1;
-								newzIndex = 1;
-								break;
-								case (amountIn <= 0.05): // BETWEEN 21 AND 40
-								colorSelector = 2;
-								newzIndex = 2;
-								break;
-								case (amountIn <= .10): // BETWEEN 41 AND 60
-								colorSelector = 3;
-								newzIndex = 3;
-								break;
-								case (amountIn <= .15): // BETWEEN 41 AND 60
-								colorSelector = 4;
-								newzIndex = 4;
-								break;
-								case (amountIn <= .17): // BETWEEN 41 AND 60
-								colorSelector = 5;
-								newzIndex = 5;
-								break;
-								case (amountIn <= .20): // BETWEEN 41 AND 60
-								colorSelector = 6;
-								newzIndex = 6;
-								break;
-								case (amountIn <= .24): // BETWEEN 41 AND 60
-								colorSelector = 7;
-								newzIndex = 7;
-								break;
-								case (amountIn <= 0.28): // BETWEEN 41 AND 60
-								colorSelector = 8;
-								newzIndex = 8;
-								break;
-								case (amountIn <= 0.32): // BETWEEN 41 AND 60
-								colorSelector = 9;
-								newzIndex = 9;
-								break;
-								case (amountIn <= 0.37): // BETWEEN 41 AND 60
-								colorSelector = 10;
-								newzIndex = 10;
-								break;
-								case (amountIn <= 0.43): // BETWEEN 41 AND 60
-								colorSelector = 11;
-								newzIndex = 11;
-								break;
-								case (amountIn <= 0.49): // BETWEEN 41 AND 60
-								colorSelector = 12;
-								newzIndex = 12;
-								break;
-								case (amountIn <= 0.55): // BETWEEN 41 AND 60
-								colorSelector = 13;
-								newzIndex = 13;
-								break;
-								case (amountIn <= 0.64): // BETWEEN 41 AND 60
-								colorSelector = 14;
-								newzIndex = 14;
-								break;
-								default: // Not rated
-								colorSelector = 0;
-								newzIndex = 0;
-								break;
-							}
-						}
-						else if(app.payload.property == "ph01mcacl2_r"){ //Testing legend and logic for drawing for this specific property
-							//console.log(app.payload.property);
-							//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
-							//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
-							//colorSelector = 0;
-							//newzIndex = 0;
-							legendText = "<img src='img/redsquare.png' height='10px'/> Ultra acid (ph < 3.5)<br>\
-							<img src='img/skybluesquare.png' height='10px'/> Extremely acid (ph 3.5 - 4.4)<br>\
-							<img src='img/brightgreensquare.png' height='10px'/> Very strongly acid (ph 4.5 - 5.0)<br>\
-							<img src='img/purplesquare.png' height='10px'/> Strongly acid (ph 5.1 - 5.5)<br>\
-							<img src='img/orangesquare.png' height='10px'/> Moderately acid (ph 5.6 - 6.0)<br>\
-							<img src='img/brightpinksquare.png' height='10px'/> Slightly acid (ph 6.1 - 6.5)<br>\
-							<img src='img/navybluesquare.png' height='10px'/> Neutral (ph 6.6 - 7.3)<br>\
-							<img src='img/lilacsquare.png' height='10px'/> Slightly alkaline (ph 7.4 - 7.8)<br>\
-							<img src='img/yellowsquare.png' height='10px'/> Moderately alkaline (ph 7.9 - 8.4)<br>\
-							<img src='img/maroonsquare.png' height='10px'/> Strongly alkaline (ph 8.5 - 9.0)<br>\
-							<img src='img/navygreen.png' height='10px'/> Very strongly alkaline (ph > 9.0)<br>\
-							<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
-							var amountIn = parseFloat(data.coords[key][app.payload.property]);
-							//console.log(amountIn);
-							//var amountIn = data.coords[key][app.payload.property];
-							//console.log(amountIn);
-							switch (true) {
-								case (amountIn < 3.5): // LESS THAN OR EQUAL TO 0
-								colorSelector = 1;
-								newzIndex = 1;
-								break;
-								case (amountIn >= 3.5 && amountIn <= 4.4): // BETWEEN 21 AND 40
-								colorSelector = 2;
-								newzIndex = 2;
-								break;
-								case (amountIn >= 4.5 && amountIn <= 5.0): // BETWEEN 41 AND 60
-								colorSelector = 3;
-								newzIndex = 3;
-								break;
-								case (amountIn >= 5.1 && amountIn <= 5.5): // BETWEEN 41 AND 60
-								colorSelector = 4;
-								newzIndex = 4;
-								break;
-								case (amountIn >= 5.6 && amountIn <= 6.0): // BETWEEN 41 AND 60
-								colorSelector = 5;
-								newzIndex = 5;
-								break;
-								case (amountIn >= 6.1 && amountIn <= 6.5): // BETWEEN 41 AND 60
-								colorSelector = 6;
-								newzIndex = 6;
-								break;
-								case (amountIn >= 6.6 && amountIn <= 7.3): // BETWEEN 41 AND 60
-								colorSelector = 7;
-								newzIndex = 7;
-								break;
-								case (amountIn >= 7.4 && amountIn <= 7.8): // BETWEEN 41 AND 60
-								colorSelector = 8;
-								newzIndex = 8;
-								break;
-								case (amountIn >= 7.9 && amountIn <= 8.4): // BETWEEN 41 AND 60
-								colorSelector = 9;
-								newzIndex = 9;
-								break;
-								case (amountIn >= 8.5 && amountIn <= 9.0): // BETWEEN 41 AND 60
-								colorSelector = 10;
-								newzIndex = 10;
-								break;
-								case (amountIn > 9.0 ): // BETWEEN 41 AND 60
-								colorSelector = 11;
-								newzIndex = 11;
-								break;
-								default: // Not rated
-								colorSelector = 0;
-								newzIndex = 0;
-								break;
-							}
-						}
-						else if(app.payload.property == 'frag3to10_r'){
-							legendText = "<img src='img/redsquare.png' height='10px'/> 0 to 12.5<br>\
-							<img src='img/skybluesquare.png' height='10px'/>  12.5 to 25<br>\
-							<img src='img/brightgreensquare.png' height='10px'/> 25 to 37.5<br>\
-							<img src='img/purplesquare.png' height='10px'/> 37.5 to 50<br>\
-							<img src='img/orangesquare.png' height='10px'/> 50 to 62.5<br>\
-							<img src='img/brightpinksquare.png' height='10px'/> 62.5 to 75";
-							var a = data.coords[key][app.payload.property];
-							switch (true) {
-								case (a >= 0 && a < 12.5):
-								colorSelector = 0;
-								newzIndex = 0;
-								break;
-								case (a >= 12.5 && a < 25):
-								colorSelector = 1;
-								newzIndex = 1;
-								break;
-								case (a >= 25 && a < 37.5):
-								colorSelector = 2;
-								newzIndex = 2;
-								break;
-								case (a >= 37.5 && a < 50):
-								colorSelector = 3;
-								newzIndex = 3;
-								break;
-								case (a >= 50 && a < 62.5):
-								colorSelector = 4;
-								newzIndex = 4;
-								break;
-								case (a >= 62.5 && a <= 75):
-								colorSelector = 5;
-								newzIndex = 5;
-								break;
-							}
-						}
-						else if(app.payload.property == "om_r"){ //Testing legend and logic for drawing for this specific property
-							//console.log(app.payload.property);
-							//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#f1a50c", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D"];
-							//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a"];
-							//colorSelector = 0;
-							//newzIndex = 0;
-							legendText = "<img src='img/redsquare.png' height='10px'/> <= 0.75<br>\
-							<img src='img/skybluesquare.png' height='10px'/> > 0.75 and <= 1.30<br>\
-							<img src='img/brightgreensquare.png' height='10px'/> > 1.30 and <= 2.25<br>\
-							<img src='img/purplesquare.png' height='10px'/> > 2.25 and <= 3.00 <br>\
-							<img src='img/orangesquare.png' height='10px'/> > 3.00 and <= 4.50<br>\
-							<img src='img/graysquare.png' height='10px'/> Not rated or not available ";
-							var amountIn = parseFloat(data.coords[key][app.payload.property]);
-							switch (true) {
-								case (amountIn <= 0.75): // LESS THAN OR EQUAL TO 0
-								colorSelector = 1;
-								newzIndex = 1;
-								break;
-								case (amountIn > 0.75 && amountIn <= 1.30): // BETWEEN 21 AND 40
-								colorSelector = 2;
-								newzIndex = 2;
-								break;
-								case (amountIn > 1.30 && amountIn <= 2.25): // BETWEEN 41 AND 60
-								colorSelector = 3;
-								newzIndex = 3;
-								break;
-								case (amountIn > 2.25 && amountIn <= 3.00): // BETWEEN 41 AND 60
-								colorSelector = 4;
-								newzIndex = 4;
-								break;
-								case (amountIn > 3.00 && amountIn <= 4.50): // BETWEEN 41 AND 60
-								colorSelector = 5;
-								newzIndex = 5;
-								break;
-								default: // Not rated
-								colorSelector = 0;
-								newzIndex = 0;
-								break;
-							}
-						}
-						/*else if{ //another property inside this table (chorizon_r) that handles its own colors and logic
-					}*/
-					else{ //General legend text for all unspecified propierty
-						legendText = "<img src='img/graysquare.png' height='10px'/> <= 0<br>\
-						<img src='img/redsquare.png' height='10px'/>  1 to 20<br>\
-						<img src='img/skybluesquare.png' height='10px'/> 21 to 40<br>\
-						<img src='img/brightgreensquare.png' height='10px'/> 41 to 60<br>\
-						<img src='img/purplesquare.png' height='10px'/> 61 to 80<br>\
-						<img src='img/orangesquare.png' height='10px'/> 81 to 100";
-						var amountIn = data.coords[key][app.payload.property];
 						switch (true) {
-							case (amountIn <= 0): // LESS THAN OR EQUAL TO 0
+							// All properties in chconsistence_r have empty string values, in this case it will be colored and drawn on the map
+							case (description == ""):
 							colorSelector = 0;
 							newzIndex = 0;
 							break;
-							case (amountIn > 0 && amountIn < 21): // BETWEEN 0 AND 21
+							/* Since all properties in chconsistence_r have different descriptions we will group them by colors.
+							For instance, property rupresblkmst hast the following possible values: "" (empty string), Extremely firm,
+							Extremely firm*, Firm, Friable, Loose, Very firm, Very friable. Property rupresblkcem has "" (empty string),
+							Extremely weakly cemented, Indurated, Moderately cemented, Noncemented, Strongly cemented, Very Strongly cemented,
+							and Weakly cemented. So the first (after empty string) possible value for each property will be under the same color.
+							Since we only draw one property at a time this allows us to automate this as much as possible.
+							NOTE: property rupresblkmst has two repeated values with a slight variation (an asterisk); in this case or if it WHERE
+							to occur in another possible value, then just group it within the same condition.
+							*/
+							case (description == "Extremely firm" || description == "Extremely firm*" || description == "Extremely hard" || description == "Extremely weakly cemented" || description == "Very weak" || description == "Brittle" || description == "Moderately plastic" || description == "Moderately sticky"):
 							colorSelector = 1;
 							newzIndex = 1;
 							break;
-							case (amountIn > 20 && amountIn < 41): // BETWEEN 21 AND 40
+							case (description == "Firm" || description == "Hard" || description == "Indurated" || description == "Nonsticky" || description == "Deformable" || description == "Nonplastic"):
 							colorSelector = 2;
 							newzIndex = 2;
 							break;
-							case (amountIn > 40 && amountIn < 61): // BETWEEN 41 AND 60
+							case (description == "Friable" || description == "Hard when dry" || description == "Moderately cemented" || description == "Slightly sticky" || description == "Moderately fluid" || description == "Slightly plastic"):
 							colorSelector = 3;
 							newzIndex = 3;
 							break;
-							case (amountIn > 60 && amountIn < 81): // BETWEEN 61 AND 80
+							case (description == "Loose" || description == "Loose" || description == "Noncemented" || description == "Very sticky" || description == "Nonfluid" || description == "Very plastic"):
 							colorSelector = 4;
 							newzIndex = 4;
 							break;
-							case (amountIn > 80 && amountIn < 101): // BETWEEN 81 AND 100
+							case (description == "Very firm" || description == "Moderately hard" || description == "Strongly cemented" || description == "Semideformable"):
 							colorSelector = 5;
 							newzIndex = 5;
 							break;
-						} //end switch
-					}//end else statement that handles the general legend for unspecified properties
-				}//end the else statement that identifies the table
-				else if(app.payload.table == "chconsistence_r"){
-					var description = data.coords[key][app.payload.property];
-					if(app.payload.property == "plasticity"){
-						legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
-						<img src='img/redsquare.png' height='10px'/>  Moderately Plastic<br>\
-						<img src='img/skybluesquare.png' height='10px'/> Nonplastic<br>\
-						<img src='img/brightgreensquare.png' height='10px'/> Slightly Plastic<br>\
-						<img src='img/purplesquare.png' height='10px'/> Very Plastic";
+							case (description == "Very friable" || description == "Rigid" || description == "Very strongly cemented" || description == "Slightly fluid"):
+							colorSelector = 6;
+							newzIndex = 6;
+							break;
+							case (description == "Slightly hard" || description == "Weakly cemented" || description == "Very fluid"):
+							colorSelector = 7;
+							newzIndex = 7;
+							break;
+							case (description == "Soft"):
+							colorSelector = 8;
+							newzIndex = 8;
+							break;
+							case (description == "Very hard"):
+							colorSelector = 9;
+							newzIndex = 9;
+							break;
+						}
 					}
-					if(app.payload.property == "stickiness"){
-						legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
-						<img src='img/redsquare.png' height='10px'/>  Moderately Sticky<br>\
-						<img src='img/skybluesquare.png' height='10px'/> Non Sticky<br>\
-						<img src='img/brightgreensquare.png' height='10px'/> Slightly Sticky<br>\
-						<img src='img/purplesquare.png' height='10px'/> Very Sticky";
+					else{
+						removePolygons();
 					}
-					if(app.payload.property == "rupresplate"){
-						legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
-						<img src='img/redsquare.png' height='10px'/> Very Weak";
+					temp = wktFormatter(data.coords[key]['POLYGON']);
+					for (var i = 0; i < temp.length; i++) {
+						polyCoordis.push(temp[i]);
 					}
-					if(app.payload.property == "rupresblkmst"){
-						legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
-						<img src='img/redsquare.png' height='10px'/>  Extremely Firm<br>\
-						<img src='img/skybluesquare.png' height='10px'/> Firm<br>\
-						<img src='img/brightgreensquare.png' height='10px'/> Friable<br>\
-						<img src='img/purplesquare.png' height='10px'/> Loose<br>\
-						<img src='img/orangesquare.png' height='10px'/> Very Firm<br>\
-						<img src='img/brightpinksquare.png' height='10px'/> Very Friable";
-					}
-					if(app.payload.property == "rupresblkdry"){
-						legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
-						<img src='img/redsquare.png' height='10px'/>  Extremely Hard<br>\
-						<img src='img/skybluesquare.png' height='10px'/> Hard<br>\
-						<img src='img/brightgreensquare.png' height='10px'/> Hard When Dry<br>\
-						<img src='img/purplesquare.png' height='10px'/> Loose<br>\
-						<img src='img/orangesquare.png' height='10px'/> Moderately Hard<br>\
-						<img src='img/brightpinksquare.png' height='10px'/> Rigid<br>\
-						<img src='img/navybluesquare.png' height='10px'/> Slightly Hard<br>\
-						<img src='img/lilacsquare.png' height='10px'/> Soft<br>\
-						<img src='img/yellowsquare.png' height='10px'/> Very Hard";
-					}
-					if(app.payload.property == "rupresblkcem"){
-						legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
-						<img src='img/redsquare.png' height='10px'/>  Extremely Weakly Cemented<br>\
-						<img src='img/skybluesquare.png' height='10px'/> Indurated<br>\
-						<img src='img/brightgreensquare.png' height='10px'/> Moderately Cemented<br>\
-						<img src='img/purplesquare.png' height='10px'/> Noncemented<br>\
-						<img src='img/orangesquare.png' height='10px'/> Strongly Cemented<br>\
-						<img src='img/brightpinksquare.png' height='10px'/> Very Strongly Cemented<br>\
-						<img src='img/navybluesquare.png' height='10px'/> Weakly Cemented";
-					}
-					if(app.payload.property == "mannerfailure"){
-						legendText = "<img src='img/graysquare.png' height='10px'/> 0 or NULL or Empty String<br>\
-						<img src='img/redsquare.png' height='10px'/>  Brittle<br>\
-						<img src='img/skybluesquare.png' height='10px'/> Deformable<br>\
-						<img src='img/brightgreensquare.png' height='10px'/> Moderately Fluid<br>\
-						<img src='img/purplesquare.png' height='10px'/> Nonfluid<br>\
-						<img src='img/orangesquare.png' height='10px'/> Semideformable<br>\
-						<img src='img/brightpinksquare.png' height='10px'/> Slightly Fluid<br>\
-						<img src='img/navybluesquare.png' height='10px'/> Very Fluid";
-					}
-					switch (true) {
-						// All properties in chconsistence_r have empty string values, in this case it will be colored and drawn on the map
-						case (description == ""):
-						colorSelector = 0;
-						newzIndex = 0;
-						break;
-						/* Since all properties in chconsistence_r have different descriptions we will group them by colors.
-						For instance, property rupresblkmst hast the following possible values: "" (empty string), Extremely firm,
-						Extremely firm*, Firm, Friable, Loose, Very firm, Very friable. Property rupresblkcem has "" (empty string),
-						Extremely weakly cemented, Indurated, Moderately cemented, Noncemented, Strongly cemented, Very Strongly cemented,
-						and Weakly cemented. So the first (after empty string) possible value for each property will be under the same color.
-						Since we only draw one property at a time this allows us to automate this as much as possible.
-						NOTE: property rupresblkmst has two repeated values with a slight variation (an asterisk); in this case or if it WHERE
-						to occur in another possible value, then just group it within the same condition.
-						*/
-						case (description == "Extremely firm" || description == "Extremely firm*" || description == "Extremely hard" || description == "Extremely weakly cemented" || description == "Very weak" || description == "Brittle" || description == "Moderately plastic" || description == "Moderately sticky"):
-						colorSelector = 1;
-						newzIndex = 1;
-						break;
-						case (description == "Firm" || description == "Hard" || description == "Indurated" || description == "Nonsticky" || description == "Deformable" || description == "Nonplastic"):
-						colorSelector = 2;
-						newzIndex = 2;
-						break;
-						case (description == "Friable" || description == "Hard when dry" || description == "Moderately cemented" || description == "Slightly sticky" || description == "Moderately fluid" || description == "Slightly plastic"):
-						colorSelector = 3;
-						newzIndex = 3;
-						break;
-						case (description == "Loose" || description == "Loose" || description == "Noncemented" || description == "Very sticky" || description == "Nonfluid" || description == "Very plastic"):
-						colorSelector = 4;
-						newzIndex = 4;
-						break;
-						case (description == "Very firm" || description == "Moderately hard" || description == "Strongly cemented" || description == "Semideformable"):
-						colorSelector = 5;
-						newzIndex = 5;
-						break;
-						case (description == "Very friable" || description == "Rigid" || description == "Very strongly cemented" || description == "Slightly fluid"):
-						colorSelector = 6;
-						newzIndex = 6;
-						break;
-						case (description == "Slightly hard" || description == "Weakly cemented" || description == "Very fluid"):
-						colorSelector = 7;
-						newzIndex = 7;
-						break;
-						case (description == "Soft"):
-						colorSelector = 8;
-						newzIndex = 8;
-						break;
-						case (description == "Very hard"):
-						colorSelector = 9;
-						newzIndex = 9;
-						break;
-					}
+					var polygon = new google.maps.Polygon({ //we need another value to determine the key
+						description: app.payload.value, //value that appears when you click the map
+						description_value: data.coords[key][app.payload.property],
+						paths: polyCoordis,
+						strokeColor: shapeoutline[colorSelector],
+						strokeOpacity: 0.60,
+						strokeWeight: 0.70,
+						fillColor: shapecolor[colorSelector],
+						fillOpacity: 0.60,
+						zIndex: -1
+					});
+					polygon.setOptions({ zIndex: -1 });
+					polygon.addListener('click', polyInfo);
+					app.polygons.push(polygon);
+					polygon.setMap(app.map);
 				}
-				else{
-					removePolygons();
-				}
-				temp = wktFormatter(data.coords[key]['POLYGON']);
-				for (var i = 0; i < temp.length; i++) {
-					polyCoordis.push(temp[i]);
-				}
-				var polygon = new google.maps.Polygon({ //we need another value to determine the key
-					description: app.payload.value, //value that appears when you click the map
-					description_value: data.coords[key][app.payload.property],
-					paths: polyCoordis,
-					strokeColor: shapeoutline[colorSelector],
-					strokeOpacity: 0.60,
-					strokeWeight: 0.70,
-					fillColor: shapecolor[colorSelector],
-					fillOpacity: 0.60,
-					zIndex: -1
-				});
-				polygon.setOptions({ zIndex: -1 });
-				polygon.addListener('click', polyInfo);
-				app.polygons.push(polygon);
-				polygon.setMap(app.map);
 			}
 		}
-	}
-}).done(function(data){
-	$(document.body).css({'cursor': 'auto'});
+	}).done(function(data){
+		$(document.body).css({'cursor': 'auto'});
 
-	if($('#selectProp').val() == 32){ //should have made it like this: if(app.payload.value == "gypsum"){ //but it's too late now
-	var gypsum = "Description for Gypsum: ";
-	var gypsumText = "The content of gypsum is the percent, by weight, of hydrated calcium sulfates in the fraction of the soil less than 20 millimeters in size. "; // Gypsum is partially soluble in water. Soils high in content of gypsum, such as those with more than 10 percent gypsum, may collapse if the gypsum is removed by percolating water. Gypsum is corrosive to concrete.
-	//For each soil layer, this attribute is actually recorded as three separate values in the database. A low value and a high value indicate the range of this attribute for the soil component. A \"representative\" value indicates the expected value of this attribute for the component. For this soil property, only the representative value is used.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = gypsum;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + gypsum + "</strong> <br>" + gypsumText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 27){
-	var prprty = "Description for Plasticity Index: ";
-	var prprtyText = "Plasticity index (PI) is one of the standard Atterberg limits used to indicate the plasticity characteristics of a soil. It is defined as the numerical difference between the liquid limit and plastic limit of the soil. It is the range of water content in which a soil exhibits the characteristics of a plastic solid.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 12){
-	var prprty = "Description for Total Sand: ";
-	var prprtyText = "Sand as a soil separate consists of mineral soil particles that are 0.05 millimeter to 2 millimeters in diameter. In the database, the estimated sand content of each soil layer is given as a percentage, by weight, of the soil material that is less than 2 millimeters in diameter. The content of sand, silt, and clay affects the physical behavior of a soil. Particle size is important for engineering and agronomic interpretations, for determination of soil hydrologic qualities, and for soil classification.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 34){
-	var prprty = "Description for pH H20: ";
-	var prprtyText = "Soil reaction is a measure of acidity or alkalinity. It is important in selecting crops and other plants, in evaluating soil amendments for fertility and stabilization, and in determining the risk of corrosion.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 25){
-	var prprty = "Description for Ksat: ";
-	var prprtyText = "Saturated hydraulic conductivity (Ksat) refers to the ease with which pores in a saturated soil transmit water. The estimates are expressed in terms of micrometers per second. They are based on soil characteristics observed in the field, particularly structure, porosity, and texture. ";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-/** paste prprtyText here
-*/
-else if ($('#selectProp').val() == 28){
-	var prprty = "Description for AASHTO Group Index: ";
-	var prprtyText = "AASHTO group classification is a system that classifies soils specifically for geotechnical engineering purposes that are related to highway and airfield construction. It is based on particle-size distribution and Atterberg limits, such as liquid limit and plasticity index. This classification system is covered in AASHTO Standard No. M 145-82. The classification is based on that portion of the soil that is smaller than 3 inches in diameter.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 34){
-	var prprty = "Description for ph H2O: ";
-	var prprtyText = "Soil reaction is a measure of acidity or alkalinity. It is important in selecting crops and other plants, in evaluating soil amendments for fertility and stabilization, and in determining the risk of corrosion. In general, soils that are either highly alkaline or highly acid are likely to be very corrosive to steel. The most common soil laboratory measurement of pH is the 1:1 water method.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 33){
-	var prprty = "Description for Sodium Absortion Ratio (SAR): ";
-	var prprtyText = "Sodium adsorption ratio is a measure of the amount of sodium (Na) relative to calcium (Ca) and magnesium (Mg) in the water extract from saturated soil paste. It is the ratio of the Na concentration divided by the square root of one-half of the Ca + Mg concentration. Soils that have SAR values of 13 or more may be characterized by an increased dispersion of organic matter and clay particles, reduced saturated hydraulic conductivity (Ksat) and aeration, and a general degradation of soil structure.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 30){
-	var prprty = "Description for K Factor (Rock Free): ";
-	var prprtyText = "Erosion factor K indicates the susceptibility of a soil to sheet and rill erosion by water. Factor K is one of six factors used in the Universal Soil Loss Equation (USLE) and the Revised Universal Soil Loss Equation (RUSLE) to predict the average annual rate of soil loss by sheet and rill erosion in tons per acre per year. The estimates are based primarily on percentage of silt, sand, and organic matter and on soil structure and saturated hydraulic conductivity (Ksat)." + " Values of K range from 0.02 to 0.69. Other factors being equal, the higher the value, the more susceptible the soil is to sheet and rill erosion by water. "
-	+ "Erosion factor Kf (rock free) indicates the erodibility of the fine-earth fraction, or the material less than 2 millimeters in size.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 29){
-	var prprty = "Description for K Factor (Whole Soil): ";
-	var prprtyText = "Erosion factor K indicates the susceptibility of a soil to sheet and rill erosion by water. Factor K is one of six factors used in the Universal Soil Loss Equation (USLE) and the Revised Universal Soil Loss Equation (RUSLE) to predict the average annual rate of soil loss by sheet and rill erosion in tons per acre per year. The estimates are based primarily on percentage of silt, sand, and organic matter and on soil structure and saturated hydraulic conductivity (Ksat)."+" Values of K range from 0.02 to 0.69. Other factors being equal, the higher the value, the more susceptible the soil is to sheet and rill erosion by water."
-	+ "'Erosion factor Kw (whole soil)' indicates the erodibility of the whole soil. The estimates are modified by the presence of rock fragments.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 26){
-	var prprty = "Description for Liquid Limit:  ";
-	var prprtyText = "Liquid limit (LL) is one of the standard Atterberg limits used to indicate the plasticity characteristics of a soil. It is the water content, on a percent by weight basis, of the soil (passing #40 sieve) at which the soil changes from a plastic to a liquid state. Generally, the amount of clay- and silt-size particles, the organic matter content, and the type of minerals determine the liquid limit. Soils that have a high liquid limit have the capacity to hold a lot of water while maintaining a plastic or semisolid state. Liquid limit is used in classifying soils in the Unified and AASHTO classification systems. For each soil layer, this attribute is actually recorded as three separate values in the database. A low value and a high value indicate the range of this attribute for the soil component. A 'representative' value indicates the expected value of this attribute for the component. For this soil property, only the representative value is used.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 23){
-	var prprty = "Description for Organic Matter: ";
-	var prprtyText = "Organic matter percent is the weight of decomposed plant, animal, and microbial residues exclusive of non-decomposed plant and animal residues. It is expressed as a percentage, by weight, of the soil material that is less than 2 mm in diameter.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 7){
-	var prprty = "Description for Rock 3-10: ";
-	var prprtyText = "The percent by weight of the horizon occupied by rock fragments 3 to 10 inches in size.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 8){
-	var prprty = "Description for #4 Sieve: ";
-	var prprtyText = "Soil fraction passing a number 4 sieve (4.70mm square opening) as a weight percentage of the less than 3 inch (76.4mm) fraction.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 9){
-	var prprty = "Description for #10 Sieve: ";
-	var prprtyText = "Soil fraction passing a number 10 sieve (2.00mm square opening) as a weight percentage of less than 3 inch (76.4mm) fraction.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 10){
-	var prprty = "Description for #40 Sieve: ";
-	var prprtyText = "Soil fraction passing a number 40 sieve (0.42mm square opening) as a weight percentage of less than 3 inch (76.4mm) fraction.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 11){
-	var prprty = "Description for #200 Sieve: ";
-	var prprtyText = "Soil fraction passing a number 200 sieve (0.074mm square opening) as a weight percentage of less than 3 inch (76.4mm) fraction.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 13){
-	var prprty = "Description for vcos: ";
-	var prprtyText = "Mineral particles 1.00mm to 2.0mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 14){
-	var prprty = "Description for cos: ";
-	var prprtyText = "Mineral particles 0.50mm to 1.0mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 15){
-	var prprty = "Description for ms: ";
-	var prprtyText = "Mineral particles 0.25mm to 0.5mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 16){
-	var prprty = "Description for fs: ";
-	var prprtyText = "Mineral particles 0.10mm to 0.25mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 17){
-	var prprty = "Description for vfs: ";
-	var prprtyText = "Mineral particles 0.05mm to 0.10mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 18){
-	var prprty = "Description for Total Silt: ";
-	var prprtyText = "Mineral particles ranging in size from 0.002 to 0.05mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 19){
-	var prprty = "Description for Coarse Silt: ";
-	var prprtyText = "Mineral particles ranging in size from 0.02mm to 0.05mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 20){
-	var prprty = "Description for Fine Silt: ";
-	var prprtyText = "Mineral particles ranging in size from 0.002mm to 0.02mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 21){
-	var prprty = "Description for Total Clay: ";
-	var prprtyText = "Mineral particles less than 0.002mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 22){
-	var prprty = "Description for CaCO3 Clay: ";
-	var prprtyText = "Carbonate particles less than 0.002mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 24){
-	var prprty = "Description for Part Density: ";
-	var prprtyText = "Mass per unit of volume (not including pore space) of the solid soil particle either mineral or organic. Also known as specific gravity.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 31){
-	var prprty = "Description for CaCO3: ";
-	var prprtyText = "The quantity of Carbonate (CO3)in the soil expressed as CaCO3 and as a weight percentage of the less than 2mm size fraction.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 35){
-	var prprty = "Description for ph CaCl2: ";
-	var prprtyText = "The negative logarithm to base of 10 or the hydrogen ion activity in the soil, using the 0.01M CaCl2 method, in a 1:2 soil:solution ratio. A numerical expression of the relative acidity or alkalinity of a soil sample.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else if ($('#selectProp').val() == 36){
-	var prprty = "Description for Excavation Difficulty: ";
-	var prprtyText = "An estimation of the difficulty of working an excavation into soil layers, horizons, pedons, or geologic layers. In most instances, excavation difficulty is related to and controlled by a water state."
-	var h3 = document.createElement('h3');
-	h3.innerHTML = prprty;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
-}
-else{
-	//removePolygons();
-}
-//draw the legend
-if(!hecho){
-	var div = document.createElement('div');
-	div.innerHTML = "<strong>" + app.payload.value + "</strong><br>" + legendText;
-	var legend = document.createElement('div');
-	legend = document.getElementById('legend');
-	document.getElementById('legend').style.visibility = "visible";
-	legend.appendChild(div);
-}
-else if(hecho){
-	removePolygons();
-	return;
-}
+		if($('#selectProp').val() == 32){ //should have made it like this: if(app.payload.value == "gypsum"){ //but it's too late now
+		var gypsum = "Description for Gypsum: ";
+		var gypsumText = "The content of gypsum is the percent, by weight, of hydrated calcium sulfates in the fraction of the soil less than 20 millimeters in size. "; // Gypsum is partially soluble in water. Soils high in content of gypsum, such as those with more than 10 percent gypsum, may collapse if the gypsum is removed by percolating water. Gypsum is corrosive to concrete.
+		//For each soil layer, this attribute is actually recorded as three separate values in the database. A low value and a high value indicate the range of this attribute for the soil component. A \"representative\" value indicates the expected value of this attribute for the component. For this soil property, only the representative value is used.";
+		var h3 = document.createElement('h3');
+		h3.innerHTML = gypsum;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + gypsum + "</strong> <br>" + gypsumText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 27){
+		var prprty = "Description for Plasticity Index: ";
+		var prprtyText = "Plasticity index (PI) is one of the standard Atterberg limits used to indicate the plasticity characteristics of a soil. It is defined as the numerical difference between the liquid limit and plastic limit of the soil. It is the range of water content in which a soil exhibits the characteristics of a plastic solid.";
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 12){
+		var prprty = "Description for Total Sand: ";
+		var prprtyText = "Sand as a soil separate consists of mineral soil particles that are 0.05 millimeter to 2 millimeters in diameter. In the database, the estimated sand content of each soil layer is given as a percentage, by weight, of the soil material that is less than 2 millimeters in diameter. The content of sand, silt, and clay affects the physical behavior of a soil. Particle size is important for engineering and agronomic interpretations, for determination of soil hydrologic qualities, and for soil classification.";
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 34){
+		var prprty = "Description for pH H20: ";
+		var prprtyText = "Soil reaction is a measure of acidity or alkalinity. It is important in selecting crops and other plants, in evaluating soil amendments for fertility and stabilization, and in determining the risk of corrosion.";
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 25){
+		var prprty = "Description for Ksat: ";
+		var prprtyText = "Saturated hydraulic conductivity (Ksat) refers to the ease with which pores in a saturated soil transmit water. The estimates are expressed in terms of micrometers per second. They are based on soil characteristics observed in the field, particularly structure, porosity, and texture. ";
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	/** paste prprtyText here
+	*/
+	else if ($('#selectProp').val() == 28){
+		var prprty = "Description for AASHTO Group Index: ";
+		var prprtyText = "AASHTO group classification is a system that classifies soils specifically for geotechnical engineering purposes that are related to highway and airfield construction. It is based on particle-size distribution and Atterberg limits, such as liquid limit and plasticity index. This classification system is covered in AASHTO Standard No. M 145-82. The classification is based on that portion of the soil that is smaller than 3 inches in diameter.";
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 34){
+		var prprty = "Description for ph H2O: ";
+		var prprtyText = "Soil reaction is a measure of acidity or alkalinity. It is important in selecting crops and other plants, in evaluating soil amendments for fertility and stabilization, and in determining the risk of corrosion. In general, soils that are either highly alkaline or highly acid are likely to be very corrosive to steel. The most common soil laboratory measurement of pH is the 1:1 water method.";
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 33){
+		var prprty = "Description for Sodium Absortion Ratio (SAR): ";
+		var prprtyText = "Sodium adsorption ratio is a measure of the amount of sodium (Na) relative to calcium (Ca) and magnesium (Mg) in the water extract from saturated soil paste. It is the ratio of the Na concentration divided by the square root of one-half of the Ca + Mg concentration. Soils that have SAR values of 13 or more may be characterized by an increased dispersion of organic matter and clay particles, reduced saturated hydraulic conductivity (Ksat) and aeration, and a general degradation of soil structure.";
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 30){
+		var prprty = "Description for K Factor (Rock Free): ";
+		var prprtyText = "Erosion factor K indicates the susceptibility of a soil to sheet and rill erosion by water. Factor K is one of six factors used in the Universal Soil Loss Equation (USLE) and the Revised Universal Soil Loss Equation (RUSLE) to predict the average annual rate of soil loss by sheet and rill erosion in tons per acre per year. The estimates are based primarily on percentage of silt, sand, and organic matter and on soil structure and saturated hydraulic conductivity (Ksat)." + " Values of K range from 0.02 to 0.69. Other factors being equal, the higher the value, the more susceptible the soil is to sheet and rill erosion by water. "
+		+ "Erosion factor Kf (rock free) indicates the erodibility of the fine-earth fraction, or the material less than 2 millimeters in size.";
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 29){
+		var prprty = "Description for K Factor (Whole Soil): ";
+		var prprtyText = "Erosion factor K indicates the susceptibility of a soil to sheet and rill erosion by water. Factor K is one of six factors used in the Universal Soil Loss Equation (USLE) and the Revised Universal Soil Loss Equation (RUSLE) to predict the average annual rate of soil loss by sheet and rill erosion in tons per acre per year. The estimates are based primarily on percentage of silt, sand, and organic matter and on soil structure and saturated hydraulic conductivity (Ksat)."+" Values of K range from 0.02 to 0.69. Other factors being equal, the higher the value, the more susceptible the soil is to sheet and rill erosion by water."
+		+ "'Erosion factor Kw (whole soil)' indicates the erodibility of the whole soil. The estimates are modified by the presence of rock fragments.";
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 26){
+		var prprty = "Description for Liquid Limit:  ";
+		var prprtyText = "Liquid limit (LL) is one of the standard Atterberg limits used to indicate the plasticity characteristics of a soil. It is the water content, on a percent by weight basis, of the soil (passing #40 sieve) at which the soil changes from a plastic to a liquid state. Generally, the amount of clay- and silt-size particles, the organic matter content, and the type of minerals determine the liquid limit. Soils that have a high liquid limit have the capacity to hold a lot of water while maintaining a plastic or semisolid state. Liquid limit is used in classifying soils in the Unified and AASHTO classification systems. For each soil layer, this attribute is actually recorded as three separate values in the database. A low value and a high value indicate the range of this attribute for the soil component. A 'representative' value indicates the expected value of this attribute for the component. For this soil property, only the representative value is used.";
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 23){
+		var prprty = "Description for Organic Matter: ";
+		var prprtyText = "Organic matter percent is the weight of decomposed plant, animal, and microbial residues exclusive of non-decomposed plant and animal residues. It is expressed as a percentage, by weight, of the soil material that is less than 2 mm in diameter.";
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 7){
+		var prprty = "Description for Rock 3-10: ";
+		var prprtyText = "The percent by weight of the horizon occupied by rock fragments 3 to 10 inches in size.";
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 8){
+		var prprty = "Description for #4 Sieve: ";
+		var prprtyText = "Soil fraction passing a number 4 sieve (4.70mm square opening) as a weight percentage of the less than 3 inch (76.4mm) fraction.";
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 9){
+		var prprty = "Description for #10 Sieve: ";
+		var prprtyText = "Soil fraction passing a number 10 sieve (2.00mm square opening) as a weight percentage of less than 3 inch (76.4mm) fraction.";
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 10){
+		var prprty = "Description for #40 Sieve: ";
+		var prprtyText = "Soil fraction passing a number 40 sieve (0.42mm square opening) as a weight percentage of less than 3 inch (76.4mm) fraction.";
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 11){
+		var prprty = "Description for #200 Sieve: ";
+		var prprtyText = "Soil fraction passing a number 200 sieve (0.074mm square opening) as a weight percentage of less than 3 inch (76.4mm) fraction.";
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 13){
+		var prprty = "Description for vcos: ";
+		var prprtyText = "Mineral particles 1.00mm to 2.0mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 14){
+		var prprty = "Description for cos: ";
+		var prprtyText = "Mineral particles 0.50mm to 1.0mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 15){
+		var prprty = "Description for ms: ";
+		var prprtyText = "Mineral particles 0.25mm to 0.5mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 16){
+		var prprty = "Description for fs: ";
+		var prprtyText = "Mineral particles 0.10mm to 0.25mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 17){
+		var prprty = "Description for vfs: ";
+		var prprtyText = "Mineral particles 0.05mm to 0.10mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 18){
+		var prprty = "Description for Total Silt: ";
+		var prprtyText = "Mineral particles ranging in size from 0.002 to 0.05mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 19){
+		var prprty = "Description for Coarse Silt: ";
+		var prprtyText = "Mineral particles ranging in size from 0.02mm to 0.05mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 20){
+		var prprty = "Description for Fine Silt: ";
+		var prprtyText = "Mineral particles ranging in size from 0.002mm to 0.02mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 21){
+		var prprty = "Description for Total Clay: ";
+		var prprtyText = "Mineral particles less than 0.002mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 22){
+		var prprty = "Description for CaCO3 Clay: ";
+		var prprtyText = "Carbonate particles less than 0.002mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 24){
+		var prprty = "Description for Part Density: ";
+		var prprtyText = "Mass per unit of volume (not including pore space) of the solid soil particle either mineral or organic. Also known as specific gravity.";
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 31){
+		var prprty = "Description for CaCO3: ";
+		var prprtyText = "The quantity of Carbonate (CO3)in the soil expressed as CaCO3 and as a weight percentage of the less than 2mm size fraction.";
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 35){
+		var prprty = "Description for ph CaCl2: ";
+		var prprtyText = "The negative logarithm to base of 10 or the hydrogen ion activity in the soil, using the 0.01M CaCl2 method, in a 1:2 soil:solution ratio. A numerical expression of the relative acidity or alkalinity of a soil sample.";
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else if ($('#selectProp').val() == 36){
+		var prprty = "Description for Excavation Difficulty: ";
+		var prprtyText = "An estimation of the difficulty of working an excavation into soil layers, horizons, pedons, or geologic layers. In most instances, excavation difficulty is related to and controlled by a water state."
+		var h3 = document.createElement('h3');
+		h3.innerHTML = prprty;
+		var div = document.createElement('div');
+		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+		var descriptor = document.getElementById('description');
+		descriptor.appendChild(div);
+	}
+	else{
+		//removePolygons();
+	}
+	//draw the legend
+	if(!hecho){
+		var div = document.createElement('div');
+		div.innerHTML = "<strong>" + app.payload.value + "</strong><br>" + legendText;
+		var legend = document.createElement('div');
+		legend = document.getElementById('legend');
+		document.getElementById('legend').style.visibility = "visible";
+		legend.appendChild(div);
+	}
+	else if(hecho){
+		removePolygons();
+		return;
+	}
 });
 }
 else{
@@ -1917,21 +1917,21 @@ function initMap() {
 	app.infoWindow = new google.maps.InfoWindow;
 
 	app.map.addListener('click', function(e) {
-	// console.log(e.latLng.toString());
+		// console.log(e.latLng.toString());
 	});
 
 	drawingManager = new google.maps.drawing.DrawingManager({
-    drawingControl: true,
-    drawingControlOptions: {
-      position: google.maps.ControlPosition.TOP_CENTER,
-      drawingModes: ['rectangle', 'polyline']
-    },
-    rectangleOptions: {
-      draggable: true,
-      clickable: true,
-      editable: true,
+		drawingControl: true,
+		drawingControlOptions: {
+			position: google.maps.ControlPosition.TOP_CENTER,
+			drawingModes: ['rectangle', 'polyline']
+		},
+		rectangleOptions: {
+			draggable: true,
+			clickable: true,
+			editable: true,
 			zIndex: 10
-    },
+		},
 		polylineOptions: {
 			clickable: true,
 			draggable: true,
@@ -1940,77 +1940,77 @@ function initMap() {
 			zIndex: 10,
 			strokeWeight: 6
 		}
-  });
+	});
 
-  drawingManager.setMap(app.map);
+	drawingManager.setMap(app.map);
 
 	google.maps.event.addListener(drawingManager, 'overlaycomplete', function(e) {
-    drawingManager.setDrawingMode(null);
-    drawingManager.setOptions({
-      drawingControl: true,
-      drawingControlOptions: {
-        position: google.maps.ControlPosition.TOP_CENTER,
-        drawingModes: ['']
-      }
-    });
+		drawingManager.setDrawingMode(null);
+		drawingManager.setOptions({
+			drawingControl: true,
+			drawingControlOptions: {
+				position: google.maps.ControlPosition.TOP_CENTER,
+				drawingModes: ['']
+			}
+		});
 
-    rec = e.overlay;
-    rec.type = e.type;
+		rec = e.overlay;
+		rec.type = e.type;
 		app.payload.AoI = 1;
-    setSelection(rec);
+		setSelection(rec);
 		if(rec.type == 'polyline'){
 			lineParser();
 		}
 
-    google.maps.event.addListener(rec, 'click', function() {
+		google.maps.event.addListener(rec, 'click', function() {
 			if(rec.type == 'polyline'){
 				lineParser();
-		  }
-      clickRec(rec);
+			}
+			clickRec(rec);
 			chartChecker();
 			//drawChart();
-    });
+		});
 
-    google.maps.event.addListener(rec, 'bounds_changed', function() {
-      showNewRect2(rec);
+		google.maps.event.addListener(rec, 'bounds_changed', function() {
+			showNewRect2(rec);
 			//if(rec.type == 'polyline'){
-				//lineParser();
-		  //}
-    });
+			//lineParser();
+			//}
+		});
 
 		if(rec.type == 'polyline'){
-		google.maps.event.addListener(rec, 'dragend', function() {
-      lineParser();
-    });
-	}
+			google.maps.event.addListener(rec, 'dragend', function() {
+				lineParser();
+			});
+		}
 
-  });
+	});
 
-  google.maps.event.addDomListener(document.getElementById('draw'), 'click', drawAnotherRectangle);
+	google.maps.event.addDomListener(document.getElementById('draw'), 'click', drawAnotherRectangle);
 
 	infoWindow = new google.maps.InfoWindow();
 }
 
 function drawAnotherRectangle(){
-  if (selectedRec) {
+	if (selectedRec) {
 		app.payload.lineString = null;
 		app.payload.runLine = false;
 		app.payload.runRec = false;
-    selectedRec.setMap(null);
+		selectedRec.setMap(null);
 		infoWindow.close();
-    // To show:
-    drawingManager.setOptions({
-      drawingControl: true,
-      drawingControlOptions: {
-        position: google.maps.ControlPosition.TOP_CENTER,
-        drawingModes: ['rectangle','polyline']
-      },
-      rectangleOptions: {
-        draggable: true,
-        clickable: true,
-        editable: true,
+		// To show:
+		drawingManager.setOptions({
+			drawingControl: true,
+			drawingControlOptions: {
+				position: google.maps.ControlPosition.TOP_CENTER,
+				drawingModes: ['rectangle','polyline']
+			},
+			rectangleOptions: {
+				draggable: true,
+				clickable: true,
+				editable: true,
 				zIndex: 10
-      },
+			},
 			polylineOptions: {
 				clickable: true,
 				draggable: true,
@@ -2019,33 +2019,33 @@ function drawAnotherRectangle(){
 				zIndex: 10,
 				strokeWeight: 6
 			}
-    });
-  }
+		});
+	}
 }
 
 function deleteSelectedShape() {
-  if (selectedShape) {
+	if (selectedShape) {
 		app.payload.AoI = 0;
-    selectedShape.setMap(null);
-    // To show
-    drawingManager.setOptions({
-      drawingControl: true
-    });
-  }
+		selectedShape.setMap(null);
+		// To show
+		drawingManager.setOptions({
+			drawingControl: true
+		});
+	}
 }
 
 function clearSelection() {
-  if (selectedRec) {
-    selectedRec.setEditable(false);
-    selectedRec = null;
-  }
+	if (selectedRec) {
+		selectedRec.setEditable(false);
+		selectedRec = null;
+	}
 }
 
 function setSelection(shape) {
-  clearSelection();
-  selectedRec = shape;
-  shape.setEditable(true);
-  //selectColor(shape.get('fillColor') || shape.get('strokeColor'));
+	clearSelection();
+	selectedRec = shape;
+	shape.setEditable(true);
+	//selectColor(shape.get('fillColor') || shape.get('strokeColor'));
 }
 function clickRec(shape){
 	if(shape.type == 'rectangle'){
@@ -2071,18 +2071,18 @@ function clickRec(shape){
 }
 
 function showNewRect2(shape) {
-  var ne = shape.getBounds().getNorthEast();
-  var sw = shape.getBounds().getSouthWest();
+	var ne = shape.getBounds().getNorthEast();
+	var sw = shape.getBounds().getSouthWest();
 
-  var contentString = '<b>Rectangle moved.</b><br>' +
-  'New north-east corner: ' + ne.lat() + ', ' + ne.lng() + '<br>' +
-  'New south-west corner: ' + sw.lat() + ', ' + sw.lng();
+	var contentString = '<b>Rectangle moved.</b><br>' +
+	'New north-east corner: ' + ne.lat() + ', ' + ne.lng() + '<br>' +
+	'New south-west corner: ' + sw.lat() + ', ' + sw.lng();
 
-  // Set the info window's content and position.
-  infoWindow.setContent(contentString);
-  infoWindow.setPosition(ne);
+	// Set the info window's content and position.
+	infoWindow.setContent(contentString);
+	infoWindow.setPosition(ne);
 
-  infoWindow.open(app.map);
+	infoWindow.open(app.map);
 }
 
 var chart;
@@ -2151,364 +2151,6 @@ function drawChart(x) {
 		bounds = rec.getBounds();
 		getparams.NE = bounds.getNorthEast().toJSON();
 		getparams.SW = bounds.getSouthWest().toJSON();
-			if(x == 1){
-				previous1 = app.payload.chart1;
-				previous2 = app.payload.chart2;
-				previous3 = app.payload.chart3;
-				previous4 = app.payload.chart4;
-				app.payload.chart1;
-				app.payload.chart2 = null;
-				app.payload.chart3 = null;
-				app.payload.chart4 = null;
-
-				$.get('polygonHandler.php', app.payload, function(data){
-					maxaoi = parseFloat(data.maxAOIch1);
-					minaoi = parseFloat(data.minAOIch1);
-					medaoi = parseFloat(data.medAOIch1);
-					weightedaoi = parseFloat(data.weightedAOIch1);
-					weightedaoi = parseFloat(weightedaoi).toFixed(2);
-					weightedaoi = parseFloat(weightedaoi);
-
-					var data = google.visualization.arrayToDataTable([
-						['Method', 'Value',],
-						['Maximum ', maxaoi],
-						['Minimum ', minaoi],
-						['Median ', medaoi],
-						['Weighted Avg ', weightedaoi]
-					]);
-
-					var options = {
-						title: app.payload.chart1n,
-						legend: {
-							position: 'none'
-						},
-						chartArea: {
-							width: '70%'
-						},
-						hAxis: {
-							//title: 'a',
-							minValue: 0
-						},
-						vAxis: {
-							//title: 'b'
-						}
-					};
-					chart = new google.visualization.BarChart(document.getElementById('chart_area_1'));
-					chart.draw(data, options);
-				});
-
-				var histo_array;
-				app.payload.getMode = "histogram";
-				$.get('polygonHandler.php', app.payload, function(data){
-					histo_array = data.values;
-					var data = new google.visualization.DataTable();
-					data.addColumn('string', 'Property');
-					data.addColumn('number', 'Value');
-					data.addRows(histo_array.length);
-					var max = histo_array[0];
-					for (var i = 0; i < histo_array.length; i++) {
-						data.setCell(i, 1, histo_array[i]);
-						if(max < histo_array[i]){
-							max = histo_array[i];
-						}
-					}
-					var size;
-					size = Math.sqrt(histo_array.length - 1) - 1;
-					size = Math.ceil(max/size);
-					var options = {
-						title: app.payload.chart1n,
-						legend: {
-							position: 'none'
-						},
-						histogram: {
-							bucketSize: size
-						},
-						// bar: { width: 5 },
-						hAxis: {
-							type: 'category'
-							// , viewWindow: { min: 0, max: 6 } // note min and max values are indices when type is category.
-						}
-					};
-
-					chart_histo = new google.visualization.Histogram(document.getElementById('chart_histogram_1'));
-					chart_histo.draw(data, options);
-				});
-				app.payload.getMode = "AOI";
-				app.payload.chart1 = previous1;
-				app.payload.chart2 = previous2;
-				app.payload.chart3 = previous3;
-				app.payload.chart4 = previous4;
-			}
-			else if (x == 2) {
-				previous1 = app.payload.chart1;
-				previous2 = app.payload.chart2;
-				previous3 = app.payload.chart3;
-				previous4 = app.payload.chart4;
-				app.payload.chart1 = null;
-				app.payload.chart2;
-				app.payload.chart3 = null;
-				app.payload.chart4 = null;
-				$.get('polygonHandler.php', app.payload, function(data){
-					maxaoi = parseFloat(data.maxAOIch2);
-					minaoi = parseFloat(data.minAOIch2);
-					medaoi = parseFloat(data.medAOIch2);
-					weightedaoi = parseFloat(data.weightedAOIch2);
-					weightedaoi = parseFloat(weightedaoi).toFixed(2);
-					weightedaoi = parseFloat(weightedaoi);
-
-					var data = google.visualization.arrayToDataTable([
-						['Method', 'Value',],
-						['Maximum ', maxaoi],
-						['Minimum ', minaoi],
-						['Median ', medaoi],
-						['Weighted Avg ', weightedaoi]
-					]);
-
-					var options = {
-						title: app.payload.chart2n,
-						legend: {
-							position: 'none'
-						},
-						chartArea: {
-							width: '70%'
-						},
-						hAxis: {
-							//title: 'a',
-							minValue: 0
-						},
-						vAxis: {
-							//title: 'b'
-						}
-					};
-					chart_2 = new google.visualization.BarChart(document.getElementById('chart_area_2'));
-					chart_2.draw(data, options);
-				});
-
-				var histo_array;
-				app.payload.getMode = "histogram";
-				$.get('polygonHandler.php', app.payload, function(data){
-					histo_array = data.values;
-					var data = new google.visualization.DataTable();
-					data.addColumn('string', 'Property');
-					data.addColumn('number', 'Value');
-					data.addRows(histo_array.length);
-					var max = histo_array[0];
-					for (var i = 0; i < histo_array.length; i++) {
-						data.setCell(i, 1, histo_array[i]);
-						if(max < histo_array[i]){
-							max = histo_array[i];
-						}
-					}
-					var size;
-					size = Math.sqrt(histo_array.length - 1) - 1;
-					size = Math.ceil(max/size);
-					var options = {
-						title: app.payload.chart2n,
-						legend: {
-							position: 'none'
-						},
-						histogram: {
-							bucketSize: size
-						},
-						// bar: { width: 5 },
-						hAxis: {
-							type: 'category'
-							// , viewWindow: { min: 0, max: 6 } // note min and max values are indices when type is category.
-						}
-					};
-
-					chart_histo_2 = new google.visualization.Histogram(document.getElementById('chart_histogram_2'));
-					chart_histo_2.draw(data, options);
-				});
-				app.payload.chart1 = previous1;
-				app.payload.chart2 = previous2;
-				app.payload.chart3 = previous3;
-				app.payload.chart4 = previous4;
-			}
-			else if(x == 3){
-				previous1 = app.payload.chart1;
-				previous2 = app.payload.chart2;
-				previous3 = app.payload.chart3;
-				previous4 = app.payload.chart4;
-				app.payload.chart1 = null;
-				app.payload.chart2 = null;
-				app.payload.chart3;
-				app.payload.chart4 = null;
-				$.get('polygonHandler.php', app.payload, function(data){
-					maxaoi = parseFloat(data.maxAOIch3);
-					minaoi = parseFloat(data.minAOIch3);
-					medaoi = parseFloat(data.medAOIch3);
-					weightedaoi = parseFloat(data.weightedAOIch3);
-					weightedaoi = parseFloat(weightedaoi).toFixed(2);
-					weightedaoi = parseFloat(weightedaoi);
-
-					var data = google.visualization.arrayToDataTable([
-						['Method', 'Value',],
-						['Maximum ', maxaoi],
-						['Minimum ', minaoi],
-						['Median ', medaoi],
-						['Weighted Avg ', weightedaoi]
-					]);
-
-					var options = {
-						title: app.payload.chart3n,
-						legend: {
-							position: 'none'
-						},
-						chartArea: {
-							width: '70%'
-						},
-						hAxis: {
-							//title: 'a',
-							minValue: 0
-						},
-						vAxis: {
-							//title: 'b'
-						}
-					};
-					chart_3 = new google.visualization.BarChart(document.getElementById('chart_area_3'));
-					chart_3.draw(data, options);
-				});
-
-				var histo_array;
-				app.payload.getMode = "histogram";
-				$.get('polygonHandler.php', app.payload, function(data){
-					histo_array = data.values;
-					var data = new google.visualization.DataTable();
-					data.addColumn('string', 'Property');
-					data.addColumn('number', 'Value');
-					data.addRows(histo_array.length);
-					var max = histo_array[0];
-					for (var i = 0; i < histo_array.length; i++) {
-						data.setCell(i, 1, histo_array[i]);
-						if(max < histo_array[i]){
-							max = histo_array[i];
-						}
-					}
-					var size;
-					size = Math.sqrt(histo_array.length - 1) - 1;
-					size = Math.ceil(max/size);
-					var options = {
-						title: app.payload.chart3n,
-						legend: {
-							position: 'none'
-						},
-						histogram: {
-							bucketSize: size
-						},
-						// bar: { width: 5 },
-						hAxis: {
-							type: 'category'
-							// , viewWindow: { min: 0, max: 6 } // note min and max values are indices when type is category.
-						}
-					};
-
-					chart_histo_3 = new google.visualization.Histogram(document.getElementById('chart_histogram_3'));
-					chart_histo_3.draw(data, options);
-				});
-				app.payload.chart1 = previous1;
-				app.payload.chart2 = previous2;
-				app.payload.chart3 = previous3;
-				app.payload.chart4 = previous4;
-			}
-			else if(x == 4){
-				previous1 = app.payload.chart1;
-				previous2 = app.payload.chart2;
-				previous3 = app.payload.chart3;
-				previous4 = app.payload.chart4;
-				app.payload.chart1 = null;
-				app.payload.chart2 = null;
-				app.payload.chart3 = null;
-				app.payload.chart4;
-				$.get('polygonHandler.php', app.payload, function(data){
-					maxaoi = parseFloat(data.maxAOIch4);
-					minaoi = parseFloat(data.minAOIch4);
-					medaoi = parseFloat(data.medAOIch4);
-					weightedaoi = parseFloat(data.weightedAOIch4);
-					weightedaoi = parseFloat(weightedaoi).toFixed(2);
-					weightedaoi = parseFloat(weightedaoi);
-
-					var data = google.visualization.arrayToDataTable([
-						['Method', 'Value',],
-						['Maximum ', maxaoi],
-						['Minimum ', minaoi],
-						['Median ', medaoi],
-						['Weighted Avg ', weightedaoi]
-					]);
-
-					var options = {
-						title: app.payload.chart4n,
-						legend: {
-							position: 'none'
-						},
-						chartArea: {
-							width: '70%'
-						},
-						hAxis: {
-							//title: 'a',
-							minValue: 0
-						},
-						vAxis: {
-							//title: 'b'
-						}
-					};
-					chart_4 = new google.visualization.BarChart(document.getElementById('chart_area_4'));
-					chart_4.draw(data, options);
-				});
-
-				var histo_array;
-				app.payload.getMode = "histogram";
-				$.get('polygonHandler.php', app.payload, function(data){
-					histo_array = data.values;
-					var data = new google.visualization.DataTable();
-					data.addColumn('string', 'Property');
-					data.addColumn('number', 'Value');
-					data.addRows(histo_array.length);
-					var max = histo_array[0];
-					for (var i = 0; i < histo_array.length; i++) {
-						data.setCell(i, 1, histo_array[i]);
-						if(max < histo_array[i]){
-							max = histo_array[i];
-						}
-					}
-					var size;
-					size = Math.sqrt(histo_array.length - 1) - 1;
-					size = Math.ceil(max/size);
-					var options = {
-						title: app.payload.chart4n,
-						legend: {
-							position: 'none'
-						},
-						histogram: {
-							bucketSize: size
-						},
-						// bar: { width: 5 },
-						hAxis: {
-							type: 'category'
-							// , viewWindow: { min: 0, max: 6 } // note min and max values are indices when type is category.
-						}
-					};
-
-					chart_histo_4 = new google.visualization.Histogram(document.getElementById('chart_histogram_4'));
-					chart_histo_4.draw(data, options);
-				});
-				app.payload.chart1 = previous1;
-				app.payload.chart2 = previous2;
-				app.payload.chart3 = previous3;
-				app.payload.chart4 = previous4;
-			}
-	}
-	else{
-		var maxaoi;
-		var minaoi;
-		var medaoi;
-		var weightedaoi;
-
-		app.payload.getMode = "line";
-		var getparams = app.payload;
-		var bounds = app.map.getBounds();
-		getparams.NE = bounds.getNorthEast().toJSON(); //north east corner
-		getparams.SW = bounds.getSouthWest().toJSON(); //south-west corner
 		if(x == 1){
 			previous1 = app.payload.chart1;
 			previous2 = app.payload.chart2;
@@ -2571,7 +2213,7 @@ function drawChart(x) {
 					}
 				}
 				var size;
-				size = Math.sqrt(histo_array.length - 1) - 1;
+				size = Math.ceil(Math.sqrt(histo_array.length - 1)) - 1;
 				size = Math.ceil(max/size);
 				var options = {
 					title: app.payload.chart1n,
@@ -2591,6 +2233,7 @@ function drawChart(x) {
 				chart_histo = new google.visualization.Histogram(document.getElementById('chart_histogram_1'));
 				chart_histo.draw(data, options);
 			});
+			app.payload.getMode = "AOI";
 			app.payload.chart1 = previous1;
 			app.payload.chart2 = previous2;
 			app.payload.chart3 = previous3;
@@ -2657,7 +2300,7 @@ function drawChart(x) {
 					}
 				}
 				var size;
-				size = Math.sqrt(histo_array.length - 1) - 1;
+				size = Math.ceil(Math.sqrt(histo_array.length - 1)) - 1;
 				size = Math.ceil(max/size);
 				var options = {
 					title: app.payload.chart2n,
@@ -2743,7 +2386,7 @@ function drawChart(x) {
 					}
 				}
 				var size;
-				size = Math.sqrt(histo_array.length - 1) - 1;
+				size = Math.ceil(Math.sqrt(histo_array.length - 1)) - 1;
 				size = Math.ceil(max/size);
 				var options = {
 					title: app.payload.chart3n,
@@ -2829,7 +2472,364 @@ function drawChart(x) {
 					}
 				}
 				var size;
-				size = Math.sqrt(histo_array.length - 1) - 1;
+				size = Math.ceil(Math.sqrt(histo_array.length - 1)) - 1;
+				size = Math.ceil(max/size);
+				var options = {
+					title: app.payload.chart4n,
+					legend: {
+						position: 'none'
+					},
+					histogram: {
+						bucketSize: size
+					},
+					// bar: { width: 5 },
+					hAxis: {
+						type: 'category'
+						// , viewWindow: { min: 0, max: 6 } // note min and max values are indices when type is category.
+					}
+				};
+
+				chart_histo_4 = new google.visualization.Histogram(document.getElementById('chart_histogram_4'));
+				chart_histo_4.draw(data, options);
+			});
+			app.payload.chart1 = previous1;
+			app.payload.chart2 = previous2;
+			app.payload.chart3 = previous3;
+			app.payload.chart4 = previous4;
+		}
+	}
+	else{
+		var maxaoi;
+		var minaoi;
+		var medaoi;
+		var weightedaoi;
+
+		app.payload.getMode = "line";
+		var getparams = app.payload;
+		var bounds = app.map.getBounds();
+		getparams.NE = bounds.getNorthEast().toJSON(); //north east corner
+		getparams.SW = bounds.getSouthWest().toJSON(); //south-west corner
+		if(x == 1){
+			previous1 = app.payload.chart1;
+			previous2 = app.payload.chart2;
+			previous3 = app.payload.chart3;
+			previous4 = app.payload.chart4;
+			app.payload.chart1;
+			app.payload.chart2 = null;
+			app.payload.chart3 = null;
+			app.payload.chart4 = null;
+
+			$.get('polygonHandler.php', app.payload, function(data){
+				maxaoi = parseFloat(data.maxAOIch1);
+				minaoi = parseFloat(data.minAOIch1);
+				medaoi = parseFloat(data.medAOIch1);
+				weightedaoi = parseFloat(data.weightedAOIch1);
+				weightedaoi = parseFloat(weightedaoi).toFixed(2);
+				weightedaoi = parseFloat(weightedaoi);
+
+				var data = google.visualization.arrayToDataTable([
+					['Method', 'Value',],
+					['Maximum ', maxaoi],
+					['Minimum ', minaoi],
+					['Median ', medaoi],
+					['Weighted Avg ', weightedaoi]
+				]);
+
+				var options = {
+					title: app.payload.chart1n,
+					legend: {
+						position: 'none'
+					},
+					chartArea: {
+						width: '70%'
+					},
+					hAxis: {
+						//title: 'a',
+						minValue: 0
+					},
+					vAxis: {
+						//title: 'b'
+					}
+				};
+				chart = new google.visualization.BarChart(document.getElementById('chart_area_1'));
+				chart.draw(data, options);
+			});
+
+			var histo_array;
+			app.payload.getMode = "histogram";
+			$.get('polygonHandler.php', app.payload, function(data){
+				histo_array = data.values;
+				var data = new google.visualization.DataTable();
+				data.addColumn('string', 'Property');
+				data.addColumn('number', 'Value');
+				data.addRows(histo_array.length);
+				var max = histo_array[0];
+				for (var i = 0; i < histo_array.length; i++) {
+					data.setCell(i, 1, histo_array[i]);
+					if(max < histo_array[i]){
+						max = histo_array[i];
+					}
+				}
+				var size;
+				size = Math.ceil(Math.sqrt(histo_array.length - 1)) - 1;
+				size = Math.ceil(max/size);
+				var options = {
+					title: app.payload.chart1n,
+					legend: {
+						position: 'none'
+					},
+					histogram: {
+						bucketSize: size
+					},
+					// bar: { width: 5 },
+					hAxis: {
+						type: 'category'
+						// , viewWindow: { min: 0, max: 6 } // note min and max values are indices when type is category.
+					}
+				};
+
+				chart_histo = new google.visualization.Histogram(document.getElementById('chart_histogram_1'));
+				chart_histo.draw(data, options);
+			});
+			app.payload.chart1 = previous1;
+			app.payload.chart2 = previous2;
+			app.payload.chart3 = previous3;
+			app.payload.chart4 = previous4;
+		}
+		else if (x == 2) {
+			previous1 = app.payload.chart1;
+			previous2 = app.payload.chart2;
+			previous3 = app.payload.chart3;
+			previous4 = app.payload.chart4;
+			app.payload.chart1 = null;
+			app.payload.chart2;
+			app.payload.chart3 = null;
+			app.payload.chart4 = null;
+			$.get('polygonHandler.php', app.payload, function(data){
+				maxaoi = parseFloat(data.maxAOIch2);
+				minaoi = parseFloat(data.minAOIch2);
+				medaoi = parseFloat(data.medAOIch2);
+				weightedaoi = parseFloat(data.weightedAOIch2);
+				weightedaoi = parseFloat(weightedaoi).toFixed(2);
+				weightedaoi = parseFloat(weightedaoi);
+
+				var data = google.visualization.arrayToDataTable([
+					['Method', 'Value',],
+					['Maximum ', maxaoi],
+					['Minimum ', minaoi],
+					['Median ', medaoi],
+					['Weighted Avg ', weightedaoi]
+				]);
+
+				var options = {
+					title: app.payload.chart2n,
+					legend: {
+						position: 'none'
+					},
+					chartArea: {
+						width: '70%'
+					},
+					hAxis: {
+						//title: 'a',
+						minValue: 0
+					},
+					vAxis: {
+						//title: 'b'
+					}
+				};
+				chart_2 = new google.visualization.BarChart(document.getElementById('chart_area_2'));
+				chart_2.draw(data, options);
+			});
+
+			var histo_array;
+			app.payload.getMode = "histogram";
+			$.get('polygonHandler.php', app.payload, function(data){
+				histo_array = data.values;
+				var data = new google.visualization.DataTable();
+				data.addColumn('string', 'Property');
+				data.addColumn('number', 'Value');
+				data.addRows(histo_array.length);
+				var max = histo_array[0];
+				for (var i = 0; i < histo_array.length; i++) {
+					data.setCell(i, 1, histo_array[i]);
+					if(max < histo_array[i]){
+						max = histo_array[i];
+					}
+				}
+				var size;
+				size = Math.ceil(Math.sqrt(histo_array.length - 1)) - 1;
+				size = Math.ceil(max/size);
+				var options = {
+					title: app.payload.chart2n,
+					legend: {
+						position: 'none'
+					},
+					histogram: {
+						bucketSize: size
+					},
+					// bar: { width: 5 },
+					hAxis: {
+						type: 'category'
+						// , viewWindow: { min: 0, max: 6 } // note min and max values are indices when type is category.
+					}
+				};
+
+				chart_histo_2 = new google.visualization.Histogram(document.getElementById('chart_histogram_2'));
+				chart_histo_2.draw(data, options);
+			});
+			app.payload.chart1 = previous1;
+			app.payload.chart2 = previous2;
+			app.payload.chart3 = previous3;
+			app.payload.chart4 = previous4;
+		}
+		else if(x == 3){
+			previous1 = app.payload.chart1;
+			previous2 = app.payload.chart2;
+			previous3 = app.payload.chart3;
+			previous4 = app.payload.chart4;
+			app.payload.chart1 = null;
+			app.payload.chart2 = null;
+			app.payload.chart3;
+			app.payload.chart4 = null;
+			$.get('polygonHandler.php', app.payload, function(data){
+				maxaoi = parseFloat(data.maxAOIch3);
+				minaoi = parseFloat(data.minAOIch3);
+				medaoi = parseFloat(data.medAOIch3);
+				weightedaoi = parseFloat(data.weightedAOIch3);
+				weightedaoi = parseFloat(weightedaoi).toFixed(2);
+				weightedaoi = parseFloat(weightedaoi);
+
+				var data = google.visualization.arrayToDataTable([
+					['Method', 'Value',],
+					['Maximum ', maxaoi],
+					['Minimum ', minaoi],
+					['Median ', medaoi],
+					['Weighted Avg ', weightedaoi]
+				]);
+
+				var options = {
+					title: app.payload.chart3n,
+					legend: {
+						position: 'none'
+					},
+					chartArea: {
+						width: '70%'
+					},
+					hAxis: {
+						//title: 'a',
+						minValue: 0
+					},
+					vAxis: {
+						//title: 'b'
+					}
+				};
+				chart_3 = new google.visualization.BarChart(document.getElementById('chart_area_3'));
+				chart_3.draw(data, options);
+			});
+
+			var histo_array;
+			app.payload.getMode = "histogram";
+			$.get('polygonHandler.php', app.payload, function(data){
+				histo_array = data.values;
+				var data = new google.visualization.DataTable();
+				data.addColumn('string', 'Property');
+				data.addColumn('number', 'Value');
+				data.addRows(histo_array.length);
+				var max = histo_array[0];
+				for (var i = 0; i < histo_array.length; i++) {
+					data.setCell(i, 1, histo_array[i]);
+					if(max < histo_array[i]){
+						max = histo_array[i];
+					}
+				}
+				var size;
+				size = Math.ceil(Math.sqrt(histo_array.length - 1)) - 1;
+				size = Math.ceil(max/size);
+				var options = {
+					title: app.payload.chart3n,
+					legend: {
+						position: 'none'
+					},
+					histogram: {
+						bucketSize: size
+					},
+					// bar: { width: 5 },
+					hAxis: {
+						type: 'category'
+						// , viewWindow: { min: 0, max: 6 } // note min and max values are indices when type is category.
+					}
+				};
+
+				chart_histo_3 = new google.visualization.Histogram(document.getElementById('chart_histogram_3'));
+				chart_histo_3.draw(data, options);
+			});
+			app.payload.chart1 = previous1;
+			app.payload.chart2 = previous2;
+			app.payload.chart3 = previous3;
+			app.payload.chart4 = previous4;
+		}
+		else if(x == 4){
+			previous1 = app.payload.chart1;
+			previous2 = app.payload.chart2;
+			previous3 = app.payload.chart3;
+			previous4 = app.payload.chart4;
+			app.payload.chart1 = null;
+			app.payload.chart2 = null;
+			app.payload.chart3 = null;
+			app.payload.chart4;
+			$.get('polygonHandler.php', app.payload, function(data){
+				maxaoi = parseFloat(data.maxAOIch4);
+				minaoi = parseFloat(data.minAOIch4);
+				medaoi = parseFloat(data.medAOIch4);
+				weightedaoi = parseFloat(data.weightedAOIch4);
+				weightedaoi = parseFloat(weightedaoi).toFixed(2);
+				weightedaoi = parseFloat(weightedaoi);
+
+				var data = google.visualization.arrayToDataTable([
+					['Method', 'Value',],
+					['Maximum ', maxaoi],
+					['Minimum ', minaoi],
+					['Median ', medaoi],
+					['Weighted Avg ', weightedaoi]
+				]);
+
+				var options = {
+					title: app.payload.chart4n,
+					legend: {
+						position: 'none'
+					},
+					chartArea: {
+						width: '70%'
+					},
+					hAxis: {
+						//title: 'a',
+						minValue: 0
+					},
+					vAxis: {
+						//title: 'b'
+					}
+				};
+				chart_4 = new google.visualization.BarChart(document.getElementById('chart_area_4'));
+				chart_4.draw(data, options);
+			});
+
+			var histo_array;
+			app.payload.getMode = "histogram";
+			$.get('polygonHandler.php', app.payload, function(data){
+				histo_array = data.values;
+				var data = new google.visualization.DataTable();
+				data.addColumn('string', 'Property');
+				data.addColumn('number', 'Value');
+				data.addRows(histo_array.length);
+				var max = histo_array[0];
+				for (var i = 0; i < histo_array.length; i++) {
+					data.setCell(i, 1, histo_array[i]);
+					if(max < histo_array[i]){
+						max = histo_array[i];
+					}
+				}
+				var size;
+				size = Math.ceil(Math.sqrt(histo_array.length - 1)) - 1;
 				size = Math.ceil(max/size);
 				var options = {
 					title: app.payload.chart4n,
@@ -2913,7 +2913,7 @@ function removePolygons(){
 		chart_histo_4.clearChart();
 	}
 
-	}
+}
 function printMaps() { //testing printing a map
 	var body               = $('body');
 	var mapContainer       = $('#map');
@@ -2969,40 +2969,40 @@ function wktFormatter(poly){
 
 /*
 function spawn(){ //Experimental super secret stuff
-	//document.getElementById('legend').style.visibility = "visible";
-	var labels = document.getElementById('labels').value;
-	var value = document.getElementById('value').value;
-	/*
-	var gypsum = "Description for Gypsum: ";
-	var gypsumText = "The content of gypsum is the percent, by weight, of hydrated calcium sulfates in the fraction of the soil less than 20 millimeters in size. "; // Gypsum is partially soluble in water. Soils high in content of gypsum, such as those with more than 10 percent gypsum, may collapse if the gypsum is removed by percolating water. Gypsum is corrosive to concrete.
-	//For each soil layer, this attribute is actually recorded as three separate values in the database. A low value and a high value indicate the range of this attribute for the soil component. A \"representative\" value indicates the expected value of this attribute for the component. For this soil property, only the representative value is used.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = gypsum;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + gypsum + "</strong> <br>" + gypsumText + "<br> <br>";
-	var descriptor = document.getElementById('description');
-	descriptor.appendChild(div);
+//document.getElementById('legend').style.visibility = "visible";
+var labels = document.getElementById('labels').value;
+var value = document.getElementById('value').value;
+/*
+var gypsum = "Description for Gypsum: ";
+var gypsumText = "The content of gypsum is the percent, by weight, of hydrated calcium sulfates in the fraction of the soil less than 20 millimeters in size. "; // Gypsum is partially soluble in water. Soils high in content of gypsum, such as those with more than 10 percent gypsum, may collapse if the gypsum is removed by percolating water. Gypsum is corrosive to concrete.
+//For each soil layer, this attribute is actually recorded as three separate values in the database. A low value and a high value indicate the range of this attribute for the soil component. A \"representative\" value indicates the expected value of this attribute for the component. For this soil property, only the representative value is used.";
+var h3 = document.createElement('h3');
+h3.innerHTML = gypsum;
+var div = document.createElement('div');
+div.innerHTML = "<br> <strong>" + gypsum + "</strong> <br>" + gypsumText + "<br> <br>";
+var descriptor = document.getElementById('description');
+descriptor.appendChild(div);
 
-	//console.log(labels);
-	//console.log(value);
-	if(labels == 0 || value == 0){
-		alert("Zero labels & zero value");
-	}
-	else{
-		var range = (value/labels);
-		var count = 0;
-		var cnt = 0;
-		var spawner = document.getElementById('legendSpawner');
-		var separations = [];
-		while(count<=value){
-			//console.log(count);
-			separations[cnt] =  parseFloat(count).toFixed(2);
-			count+=range;
-			cnt++;
-		}
-	}
-	//console.log(count);
-	console.log(separations);
+//console.log(labels);
+//console.log(value);
+if(labels == 0 || value == 0){
+alert("Zero labels & zero value");
+}
+else{
+var range = (value/labels);
+var count = 0;
+var cnt = 0;
+var spawner = document.getElementById('legendSpawner');
+var separations = [];
+while(count<=value){
+//console.log(count);
+separations[cnt] =  parseFloat(count).toFixed(2);
+count+=range;
+cnt++;
+}
+}
+//console.log(count);
+console.log(separations);
 }
 */
 // ***********
