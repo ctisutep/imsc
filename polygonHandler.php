@@ -53,6 +53,9 @@ class dataToQueryPolygons{
 	public $chart2;
 	public $chart3;
 	public $chart4;
+	public $runLine;
+	public $runRec;
+	public $runAOI;
 
 	public function __construct(){
 		$this->table = 'chorizon_r'; //hardcoded
@@ -69,6 +72,9 @@ class dataToQueryPolygons{
 		$this->chart2 =  $_GET['chart2'];
 		$this->chart3 =  $_GET['chart3'];
 		$this->chart4 =  $_GET['chart4'];
+		$this->runLine = $_GET['runLine'];
+		$this->runRec = $_GET['runRec'];
+		$this->runAOI = $_GET['runAOI'];
 	}
 }
 //depending on which table (for a given property) will be used in query, this will determine the appropriate key
@@ -1264,13 +1270,17 @@ function getPolygons(){
 	$data = new dataToQueryPolygons();//automatically gathers necessary data for query
 	$simplificationFactor = polygonDefinition($data);//maybe it should be changing(be variable) in the future with  more given parameters($_GET)
 	//create zoom area (AOI) polygon for further query
-	$query = "SET @geom1 = 'POLYGON(($data->lng1	$data->lat1,$data->lng1	$data->lat2,$data->lng2	$data->lat2,$data->lng2	$data->lat1,$data->lng1	$data->lat1))'";
+	if($data->runAOI == "true" && $data->runLine == "true"){
+		$query = "SET @geom1 = 'LineString($data->lineString)'";
+  }
+	else{
+		$query = "SET @geom1 = 'POLYGON(($data->lng1	$data->lat1,$data->lng1	$data->lat2,$data->lng2	$data->lat2,$data->lng2	$data->lat1,$data->lng1	$data->lat1))'";
+	}
 	$toReturn['query'] = $query;
 	$result = mysqli_query($conn, $query);
 	$key = setKey( $data->table );//appropriate key for given table
 	//actual query for retrieving desired polygons
 	//$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) AND hzdept_r <= $data->depth AND hzdepb_r >= $data->depth";
-
 	if($data->table == "chorizon_r"){
 		$query="SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
 		//$query="SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM mujoins3 NATURAL JOIN polygon AS p NATURAL JOIN chorizon_r as x WHERE x.cokey = mujoins3.cokey AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";

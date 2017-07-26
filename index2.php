@@ -229,8 +229,9 @@
 											<option value="5" id="specific_method">At Specific Depth</option>
 										</select><br>
 									</div>
-									<div class="col-md-5"><br><br>
+									<div class="col-md-5"><br>
 											<button class="btn btn-success form-control" type="button" id="run" onClick="getPolygons()">Run</button><br><br>
+											<button class="btn btn-success form-control" type="button" id="runAOI" onClick="runAOI()">Run AOI</button><br><br>
 											<button class="btn btn-warning form-control" type="button" id="clear" onClick="removePolygons()">Clear</button><br><br>
 											<button type="button" class="map-print" id="print" onClick="printMaps()">Print</button>
 									</div>
@@ -331,7 +332,7 @@
 <script src="js/properties.js"></script>
 <script>
 
-var app = {map:null, polygons:null, payload:{getMode:"polygons", property:null, district:null, depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null}}; //added value for depth method
+var app = {map:null, polygons:null, payload:{getMode:"polygons", runAOI:false, runLine:false, runRec:false, property:null, district:null, depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null}}; //added value for depth method
 var hecho = false;
 //var suggested = all the aliases of the properties, note: not all properties have an alias
 $(document).ready(function(){//esto pasa recien cargada la pagina
@@ -521,13 +522,17 @@ $("#methods").change(function(){ //0: max / 1: min / 2: median / 3: weight/
 
 });
 
+function runAOI(){
+	app.payload.runAOI = true;
+	getPolygons();
+}
+
 function getPolygons(){//this is run button
+	//console.log(app.payload.runLine);
 	app.payload.getMode="polygons";
 	hecho = false;
 	var depth = document.getElementById("depth").value;
-	//console.log(depth);
 	depth = parseFloat(depth);
-	//console.log(depth);
 
 	app.payload.depth = depth;
 	if(app.payload.property && app.payload.district && (isNaN(depth)==false)){//to make sure a property is selected
@@ -1953,6 +1958,10 @@ function initMap() {
     rec.type = e.type;
 		app.payload.AoI = 1;
     setSelection(rec);
+		if(rec.type == 'polyline'){
+			lineParser();
+		}
+
     google.maps.event.addListener(rec, 'click', function() {
 			if(rec.type == 'polyline'){
 				lineParser();
@@ -1964,7 +1973,16 @@ function initMap() {
 
     google.maps.event.addListener(rec, 'bounds_changed', function() {
       showNewRect2(rec);
+			//if(rec.type == 'polyline'){
+				//lineParser();
+		  //}
     });
+
+		if(rec.type == 'polyline'){
+		google.maps.event.addListener(rec, 'dragend', function() {
+      lineParser();
+    });
+	}
 
   });
 
@@ -1976,6 +1994,8 @@ function initMap() {
 function drawAnotherRectangle(){
   if (selectedRec) {
 		app.payload.lineString = null;
+		app.payload.runLine = false;
+		app.payload.runRec = false;
     selectedRec.setMap(null);
 		infoWindow.close();
     // To show:
@@ -2852,6 +2872,7 @@ function lineParser(){
 		}
 	}
 	app.payload.lineString = lineString;
+	app.payload.runLine = true;
 }
 
 /******************************************************************************/
@@ -2863,6 +2884,8 @@ function removePolygons(){
 	}
 	app.polygons = [];
 	app.infoWindow.close();
+	app.payload.runAOI = false;
+
 	document.getElementById('legend').style.visibility = "hidden";
 	$('#legend').find('*').not('h3').remove();
 	$('#description').find('*').not('h3').remove();
