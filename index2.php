@@ -237,10 +237,15 @@
 									</div>
 								</div>
 								<div class="row">
-									<div id="legend" style='visibility: hidden'>
-
-									</div>
+									<div class="input-group">
+										<span class="input-group-addon" id="basic-addon3"># of labels</span>
+										<input type="number" class="form-control" value="1" min="0"placeholder="...inches" id="labels" aria-describedby="basic-addon3">
 								</div>
+
+									<div id="legend" style='visibility: hidden'>
+										<!--<div id="legendSpawner"> </div>-->
+									</div>
+
 							</div>
 							<div class="row panel panel-default">
 								<center><label>Statistics</label></center>
@@ -282,7 +287,7 @@
 			</div> <!-- End main column 2 -->
 		</div>
 
-		<div class="row">
+		<!--<div class="row">
 		<div class = "col-md-5">
 
 		<div class="col-md-4">
@@ -315,7 +320,7 @@
 </div>
 </div>
 
-<p></p>
+<p></p>-->
 
 <!--Description text-->
 
@@ -565,11 +570,28 @@ function getPolygons(){//this is run button
 				colorSelector = 0;
 				newzIndex = 0;
 				legendText = "";
+				var maximum = -1;
+				for(var i = 0; i < data.coords.length; i++){
+					if(maximum < data.coords[i][app.payload.property]){
+						maximum = data.coords[i][app.payload.property];
+					}
+				}
+				//console.log(maximum);
+				var polyCoordis = [];
+				if(app.payload.table == "chorizon_r"){
+					if(app.payload.property == "caco3_r"){ //Testing legend and logic for drawing for this specific property
+						spawn(maximum);
+						//console.log(data.coords[0]['caco3_r']);
+					}
+				}
 				for(key in data.coords){
 					if(data.coords.hasOwnProperty(key)){
 						var polyCoordis = [];
 						if(app.payload.table == "chorizon_r"){
 							if(app.payload.property == "caco3_r"){ //Testing legend and logic for drawing for this specific property
+								//spawn();
+								//console.log(data.coords);
+								/*
 								legendText = "<img src='img/redsquare.png' height='10px'/> <= 7<br>\
 								<img src='img/skybluesquare.png' height='10px'/>  > 7 and <= 17<br>\
 								<img src='img/brightgreensquare.png' height='10px'/> > 17 and <= 36<br>\
@@ -605,7 +627,7 @@ function getPolygons(){//this is run button
 									colorSelector = 6;
 									newzIndex = 6;
 									break;
-								}
+								}*/
 							}
 							else if(app.payload.property == "sandtotal_r"){ //Testing legend and logic for drawing for this specific property
 								//console.log(app.payload.property);
@@ -2942,10 +2964,10 @@ function wktFormatter(poly){
 }
 
 
-function spawn(){ //Experimental super secret stuff
+function spawn(value){ //Experimental super secret stuff
 	$('#legendSpawner').find('*').not('h3').remove();
 	var labels = document.getElementById('labels').value;
-	var value = document.getElementById('value').value;
+	//var value = document.getElementById('value').value;
 
 	if(labels <= 0 || value <= 0 ){
 		alert("Zero labels & zero value; negative numbers");
@@ -2962,13 +2984,13 @@ function spawn(){ //Experimental super secret stuff
 			count+=range;
 			cnt++;
 		}
-		console.log(separations);
+		//console.log(separations);
 		for(var i = 0; i < separations.length-1; i++){
 			var div = document.createElement('div');
-			div.innerHTML = "<strong>" + app.payload.value + "</strong><br>" + 'Color #' + (i+1) + " Value: " + separations[i] + ' to ' + separations[i+1];
+			div.innerHTML = 'Color #' + (i+1) + " Value: " + separations[i] + ' to ' + separations[i+1];
 			var newLegend = document.createElement('div');
-			newLegend = document.getElementById('legendSpawner');
-			document.getElementById('legendSpawner').style.visibility = "visible";
+			newLegend = document.getElementById('legend');
+			document.getElementById('legend').style.visibility = "visible";
 			newLegend.appendChild(div);
 		}
 	}
