@@ -94,7 +94,8 @@ function tableNames(){
 	global $conn, $toReturn;
 	//this query goes to a table in the database called "properties" and gets a set containing all records that
 	//are either(OR)  LIKE  chonsistency or choriszon for property_table column
-	$sql = "SELECT * FROM properties WHERE property_table LIKE \"%chconsistence_r%\" OR property_table LIKE \"%chorizon_r%\" ";
+	//$sql = "SELECT * FROM properties WHERE property_table LIKE \"%chconsistence_r%\" OR property_table LIKE \"%chorizon_r%\" ";
+	$sql = "SELECT * FROM imsc.properties WHERE property_table = 'chorizon_r' AND property_code NOT IN ('excavdifcl') ORDER BY property_label ASC";
 	//conn.query(sql) -> from pre-established connection to data base make given query(sql)
 	$result = $conn->query($sql);
 	$toReturn['columns'] = $result->fetch_all();

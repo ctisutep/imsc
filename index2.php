@@ -392,17 +392,16 @@ $(document).ready(function(){//esto pasa recien cargada la pagina
 			//{number: 37, value: null, data: null, table: null}
 		];
 		//console.log(properties);
-		for (var i = 6; i < properties.length; i++) {
-			if(i > 6 && i <= 36){
+		for (var i = 0; i < properties.length; i++) {
 				//console.log(i);
 				//console.log(prop[i].number);
 				prop[i].number = i;
 				prop[i].value = properties[i].value;
 				prop[i].data = properties[i].data;
 				prop[i].table = properties[i].table;
-			}
+
 		}
-		for(var i = 7; i < prop.length-1; i++) {
+		for(var i = 0; i < properties.length; i++) {
 			var propr = prop[i].number;
 			var elem = document.createElement("option");
 			elem.textContent = prop[i].value;
@@ -415,7 +414,7 @@ $(document).ready(function(){//esto pasa recien cargada la pagina
 			//ch3.appendChild(elem);
 			//ch4.appendChild(elem);
 		}
-		for(var i = 7; i < prop.length-1; i++) {
+		for(var i = 0; i < properties.length; i++) {
 			var propr = prop[i].number;
 			var elem = document.createElement("option");
 			elem.textContent = prop[i].value;
@@ -428,7 +427,7 @@ $(document).ready(function(){//esto pasa recien cargada la pagina
 			//ch3.appendChild(elem);
 			//ch4.appendChild(elem);
 		}
-		for(var i = 7; i < prop.length-1; i++) {
+		for(var i = 0; i < properties.length; i++) {
 			var propr = prop[i].number;
 			var elem = document.createElement("option");
 			elem.textContent = prop[i].value;
@@ -441,7 +440,7 @@ $(document).ready(function(){//esto pasa recien cargada la pagina
 			//ch3.appendChild(elem);
 			//ch4.appendChild(elem);
 		}
-		for(var i = 7; i < prop.length-1; i++) {
+		for(var i = 0; i < properties.length; i++) {
 			var propr = prop[i].number;
 			var elem = document.createElement("option");
 			elem.textContent = prop[i].value;
@@ -454,7 +453,7 @@ $(document).ready(function(){//esto pasa recien cargada la pagina
 			ch3.appendChild(elem);
 			//ch4.appendChild(elem);
 		}
-		for(var i = 7; i < prop.length-1; i++) {
+		for(var i = 0; i < properties.length; i++) {
 			var propr = prop[i].number;
 			var elem = document.createElement("option");
 			elem.textContent = prop[i].value;
@@ -1548,7 +1547,7 @@ function getPolygons(){//this is run button
 	}).done(function(data){
 		$(document.body).css({'cursor': 'auto'});
 
-		if($('#selectProp').val() == 32){ //should have made it like this: if(app.payload.value == "gypsum"){ //but it's too late now
+		if(app.payload.property == 'gypsum_r'){ //should have made it like this: if(app.payload.value == "gypsum"){ //but it's too late now
 		var gypsum = "Description for Gypsum: ";
 		var gypsumText = "The content of gypsum is the percent, by weight, of hydrated calcium sulfates in the fraction of the soil less than 20 millimeters in size. "; // Gypsum is partially soluble in water. Soils high in content of gypsum, such as those with more than 10 percent gypsum, may collapse if the gypsum is removed by percolating water. Gypsum is corrosive to concrete.
 		//For each soil layer, this attribute is actually recorded as three separate values in the database. A low value and a high value indicate the range of this attribute for the soil component. A \"representative\" value indicates the expected value of this attribute for the component. For this soil property, only the representative value is used.";
@@ -1559,7 +1558,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 27){
+	else if (app.payload.property == 'pi_r'){
 		var prprty = "Description for Plasticity Index: ";
 		var prprtyText = "Plasticity index (PI) is one of the standard Atterberg limits used to indicate the plasticity characteristics of a soil. It is defined as the numerical difference between the liquid limit and plastic limit of the soil. It is the range of water content in which a soil exhibits the characteristics of a plastic solid.";
 		var h3 = document.createElement('h3');
@@ -1569,7 +1568,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 12){
+	else if (app.payload.property == 'sandtotal_r'){
 		var prprty = "Description for Total Sand: ";
 		var prprtyText = "Sand as a soil separate consists of mineral soil particles that are 0.05 millimeter to 2 millimeters in diameter. In the database, the estimated sand content of each soil layer is given as a percentage, by weight, of the soil material that is less than 2 millimeters in diameter. The content of sand, silt, and clay affects the physical behavior of a soil. Particle size is important for engineering and agronomic interpretations, for determination of soil hydrologic qualities, and for soil classification.";
 		var h3 = document.createElement('h3');
@@ -1579,7 +1578,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 34){
+	else if (app.payload.property == 'ph1to1h2o_r'){
 		var prprty = "Description for pH H20: ";
 		var prprtyText = "Soil reaction is a measure of acidity or alkalinity. It is important in selecting crops and other plants, in evaluating soil amendments for fertility and stabilization, and in determining the risk of corrosion.";
 		var h3 = document.createElement('h3');
@@ -1589,7 +1588,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 25){
+	else if (app.payload.property == 'ksat_r'){
 		var prprty = "Description for Ksat: ";
 		var prprtyText = "Saturated hydraulic conductivity (Ksat) refers to the ease with which pores in a saturated soil transmit water. The estimates are expressed in terms of micrometers per second. They are based on soil characteristics observed in the field, particularly structure, porosity, and texture. ";
 		var h3 = document.createElement('h3');
@@ -1601,7 +1600,7 @@ function getPolygons(){//this is run button
 	}
 	/** paste prprtyText here
 	*/
-	else if ($('#selectProp').val() == 28){
+	else if (app.payload.property == 'aashind_r'){
 		var prprty = "Description for AASHTO Group Index: ";
 		var prprtyText = "AASHTO group classification is a system that classifies soils specifically for geotechnical engineering purposes that are related to highway and airfield construction. It is based on particle-size distribution and Atterberg limits, such as liquid limit and plasticity index. This classification system is covered in AASHTO Standard No. M 145-82. The classification is based on that portion of the soil that is smaller than 3 inches in diameter.";
 		var h3 = document.createElement('h3');
@@ -1611,17 +1610,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 34){
-		var prprty = "Description for ph H2O: ";
-		var prprtyText = "Soil reaction is a measure of acidity or alkalinity. It is important in selecting crops and other plants, in evaluating soil amendments for fertility and stabilization, and in determining the risk of corrosion. In general, soils that are either highly alkaline or highly acid are likely to be very corrosive to steel. The most common soil laboratory measurement of pH is the 1:1 water method.";
-		var h3 = document.createElement('h3');
-		h3.innerHTML = prprty;
-		var div = document.createElement('div');
-		div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-		var descriptor = document.getElementById('description');
-		descriptor.appendChild(div);
-	}
-	else if ($('#selectProp').val() == 33){
+	else if (app.payload.property == 'sar_r'){
 		var prprty = "Description for Sodium Absortion Ratio (SAR): ";
 		var prprtyText = "Sodium adsorption ratio is a measure of the amount of sodium (Na) relative to calcium (Ca) and magnesium (Mg) in the water extract from saturated soil paste. It is the ratio of the Na concentration divided by the square root of one-half of the Ca + Mg concentration. Soils that have SAR values of 13 or more may be characterized by an increased dispersion of organic matter and clay particles, reduced saturated hydraulic conductivity (Ksat) and aeration, and a general degradation of soil structure.";
 		var h3 = document.createElement('h3');
@@ -1631,7 +1620,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 30){
+	else if (app.payload.property == 'kffact'){
 		var prprty = "Description for K Factor (Rock Free): ";
 		var prprtyText = "Erosion factor K indicates the susceptibility of a soil to sheet and rill erosion by water. Factor K is one of six factors used in the Universal Soil Loss Equation (USLE) and the Revised Universal Soil Loss Equation (RUSLE) to predict the average annual rate of soil loss by sheet and rill erosion in tons per acre per year. The estimates are based primarily on percentage of silt, sand, and organic matter and on soil structure and saturated hydraulic conductivity (Ksat)." + " Values of K range from 0.02 to 0.69. Other factors being equal, the higher the value, the more susceptible the soil is to sheet and rill erosion by water. "
 		+ "Erosion factor Kf (rock free) indicates the erodibility of the fine-earth fraction, or the material less than 2 millimeters in size.";
@@ -1642,7 +1631,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 29){
+	else if (app.payload.property == 'kwfact'){
 		var prprty = "Description for K Factor (Whole Soil): ";
 		var prprtyText = "Erosion factor K indicates the susceptibility of a soil to sheet and rill erosion by water. Factor K is one of six factors used in the Universal Soil Loss Equation (USLE) and the Revised Universal Soil Loss Equation (RUSLE) to predict the average annual rate of soil loss by sheet and rill erosion in tons per acre per year. The estimates are based primarily on percentage of silt, sand, and organic matter and on soil structure and saturated hydraulic conductivity (Ksat)."+" Values of K range from 0.02 to 0.69. Other factors being equal, the higher the value, the more susceptible the soil is to sheet and rill erosion by water."
 		+ "'Erosion factor Kw (whole soil)' indicates the erodibility of the whole soil. The estimates are modified by the presence of rock fragments.";
@@ -1653,7 +1642,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 26){
+	else if (app.payload.property == 'll_r'){
 		var prprty = "Description for Liquid Limit:  ";
 		var prprtyText = "Liquid limit (LL) is one of the standard Atterberg limits used to indicate the plasticity characteristics of a soil. It is the water content, on a percent by weight basis, of the soil (passing #40 sieve) at which the soil changes from a plastic to a liquid state. Generally, the amount of clay- and silt-size particles, the organic matter content, and the type of minerals determine the liquid limit. Soils that have a high liquid limit have the capacity to hold a lot of water while maintaining a plastic or semisolid state. Liquid limit is used in classifying soils in the Unified and AASHTO classification systems. For each soil layer, this attribute is actually recorded as three separate values in the database. A low value and a high value indicate the range of this attribute for the soil component. A 'representative' value indicates the expected value of this attribute for the component. For this soil property, only the representative value is used.";
 		var h3 = document.createElement('h3');
@@ -1663,7 +1652,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 23){
+	else if (app.payload.property == 'om_r'){
 		var prprty = "Description for Organic Matter: ";
 		var prprtyText = "Organic matter percent is the weight of decomposed plant, animal, and microbial residues exclusive of non-decomposed plant and animal residues. It is expressed as a percentage, by weight, of the soil material that is less than 2 mm in diameter.";
 		var h3 = document.createElement('h3');
@@ -1673,7 +1662,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 7){
+	else if (app.payload.property == 'frag3to10_r'){
 		var prprty = "Description for Rock 3-10: ";
 		var prprtyText = "The percent by weight of the horizon occupied by rock fragments 3 to 10 inches in size.";
 		var h3 = document.createElement('h3');
@@ -1683,7 +1672,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 8){
+	else if (app.payload.property == 'sieveno4_r'){
 		var prprty = "Description for #4 Sieve: ";
 		var prprtyText = "Soil fraction passing a number 4 sieve (4.70mm square opening) as a weight percentage of the less than 3 inch (76.4mm) fraction.";
 		var h3 = document.createElement('h3');
@@ -1693,7 +1682,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 9){
+	else if (app.payload.property == 'sieveno10_r'){
 		var prprty = "Description for #10 Sieve: ";
 		var prprtyText = "Soil fraction passing a number 10 sieve (2.00mm square opening) as a weight percentage of less than 3 inch (76.4mm) fraction.";
 		var h3 = document.createElement('h3');
@@ -1703,7 +1692,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 10){
+	else if (app.payload.property == 'sieveno40_r'){
 		var prprty = "Description for #40 Sieve: ";
 		var prprtyText = "Soil fraction passing a number 40 sieve (0.42mm square opening) as a weight percentage of less than 3 inch (76.4mm) fraction.";
 		var h3 = document.createElement('h3');
@@ -1713,7 +1702,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 11){
+	else if (app.payload.property == 'sieveno200_r'){
 		var prprty = "Description for #200 Sieve: ";
 		var prprtyText = "Soil fraction passing a number 200 sieve (0.074mm square opening) as a weight percentage of less than 3 inch (76.4mm) fraction.";
 		var h3 = document.createElement('h3');
@@ -1723,7 +1712,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 13){
+	else if (app.payload.property == 'sandvc_r'){
 		var prprty = "Description for vcos: ";
 		var prprtyText = "Mineral particles 1.00mm to 2.0mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
 		var h3 = document.createElement('h3');
@@ -1733,7 +1722,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 14){
+	else if (app.payload.property == 'sandco_r'){
 		var prprty = "Description for cos: ";
 		var prprtyText = "Mineral particles 0.50mm to 1.0mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
 		var h3 = document.createElement('h3');
@@ -1743,7 +1732,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 15){
+	else if (app.payload.property == 'sandmed_r'){
 		var prprty = "Description for ms: ";
 		var prprtyText = "Mineral particles 0.25mm to 0.5mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
 		var h3 = document.createElement('h3');
@@ -1753,7 +1742,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 16){
+	else if (app.payload.property == 'sandfine_r'){
 		var prprty = "Description for fs: ";
 		var prprtyText = "Mineral particles 0.10mm to 0.25mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
 		var h3 = document.createElement('h3');
@@ -1763,7 +1752,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 17){
+	else if (app.payload.property == 'sandvf_r'){
 		var prprty = "Description for vfs: ";
 		var prprtyText = "Mineral particles 0.05mm to 0.10mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
 		var h3 = document.createElement('h3');
@@ -1773,7 +1762,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 18){
+	else if (app.payload.property == 'silttotal_r'){
 		var prprty = "Description for Total Silt: ";
 		var prprtyText = "Mineral particles ranging in size from 0.002 to 0.05mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
 		var h3 = document.createElement('h3');
@@ -1783,7 +1772,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 19){
+	else if (app.payload.property == 'siltco_r'){
 		var prprty = "Description for Coarse Silt: ";
 		var prprtyText = "Mineral particles ranging in size from 0.02mm to 0.05mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
 		var h3 = document.createElement('h3');
@@ -1793,7 +1782,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 20){
+	else if (app.payload.property == 'siltfine_r'){
 		var prprty = "Description for Fine Silt: ";
 		var prprtyText = "Mineral particles ranging in size from 0.002mm to 0.02mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
 		var h3 = document.createElement('h3');
@@ -1803,7 +1792,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 21){
+	else if (app.payload.property == 'claytotal_r'){
 		var prprty = "Description for Total Clay: ";
 		var prprtyText = "Mineral particles less than 0.002mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
 		var h3 = document.createElement('h3');
@@ -1813,7 +1802,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 22){
+	else if (app.payload.property == 'claysizedcarb_r'){
 		var prprty = "Description for CaCO3 Clay: ";
 		var prprtyText = "Carbonate particles less than 0.002mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
 		var h3 = document.createElement('h3');
@@ -1823,7 +1812,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 24){
+	else if (app.payload.property == 'partdensity'){
 		var prprty = "Description for Part Density: ";
 		var prprtyText = "Mass per unit of volume (not including pore space) of the solid soil particle either mineral or organic. Also known as specific gravity.";
 		var h3 = document.createElement('h3');
@@ -1833,7 +1822,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 31){
+	else if (app.payload.property == 'caco3_r'){
 		var prprty = "Description for CaCO3: ";
 		var prprtyText = "The quantity of Carbonate (CO3)in the soil expressed as CaCO3 and as a weight percentage of the less than 2mm size fraction.";
 		var h3 = document.createElement('h3');
@@ -1843,7 +1832,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 35){
+	else if (app.payload.property == 'ph01mcacl2_r'){
 		var prprty = "Description for ph CaCl2: ";
 		var prprtyText = "The negative logarithm to base of 10 or the hydrogen ion activity in the soil, using the 0.01M CaCl2 method, in a 1:2 soil:solution ratio. A numerical expression of the relative acidity or alkalinity of a soil sample.";
 		var h3 = document.createElement('h3');
@@ -1853,7 +1842,7 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	else if ($('#selectProp').val() == 36){
+	else if (app.payload.property == 'excavdifcl'){
 		var prprty = "Description for Excavation Difficulty: ";
 		var prprtyText = "An estimation of the difficulty of working an excavation into soil layers, horizons, pedons, or geologic layers. In most instances, excavation difficulty is related to and controlled by a water state."
 		var h3 = document.createElement('h3');
@@ -2213,12 +2202,9 @@ function drawChart(x) {
 				data.addColumn('string', 'Property');
 				data.addColumn('number', 'Value');
 				data.addRows(histo_array.length);
-				var max = histo_array[0];
+				var max = Math.max(...histo_array);
 				for (var i = 0; i < histo_array.length; i++) {
 					data.setCell(i, 1, histo_array[i]);
-					if(max < histo_array[i]){
-						max = histo_array[i];
-					}
 				}
 				var size;
 				size = Math.ceil(Math.sqrt(histo_array.length - 1)) - 1;
@@ -2300,12 +2286,9 @@ function drawChart(x) {
 				data.addColumn('string', 'Property');
 				data.addColumn('number', 'Value');
 				data.addRows(histo_array.length);
-				var max = histo_array[0];
+				var max = Math.max(...histo_array);
 				for (var i = 0; i < histo_array.length; i++) {
 					data.setCell(i, 1, histo_array[i]);
-					if(max < histo_array[i]){
-						max = histo_array[i];
-					}
 				}
 				var size;
 				size = Math.ceil(Math.sqrt(histo_array.length - 1)) - 1;
@@ -2386,12 +2369,9 @@ function drawChart(x) {
 				data.addColumn('string', 'Property');
 				data.addColumn('number', 'Value');
 				data.addRows(histo_array.length);
-				var max = histo_array[0];
+				var max = Math.max(...histo_array);
 				for (var i = 0; i < histo_array.length; i++) {
 					data.setCell(i, 1, histo_array[i]);
-					if(max < histo_array[i]){
-						max = histo_array[i];
-					}
 				}
 				var size;
 				size = Math.ceil(Math.sqrt(histo_array.length - 1)) - 1;
@@ -2472,12 +2452,9 @@ function drawChart(x) {
 				data.addColumn('string', 'Property');
 				data.addColumn('number', 'Value');
 				data.addRows(histo_array.length);
-				var max = histo_array[0];
+				var max = Math.max(...histo_array);
 				for (var i = 0; i < histo_array.length; i++) {
 					data.setCell(i, 1, histo_array[i]);
-					if(max < histo_array[i]){
-						max = histo_array[i];
-					}
 				}
 				var size;
 				size = Math.ceil(Math.sqrt(histo_array.length - 1)) - 1;
@@ -2571,12 +2548,9 @@ function drawChart(x) {
 				data.addColumn('string', 'Property');
 				data.addColumn('number', 'Value');
 				data.addRows(histo_array.length);
-				var max = histo_array[0];
+				var max = Math.max(...histo_array);
 				for (var i = 0; i < histo_array.length; i++) {
 					data.setCell(i, 1, histo_array[i]);
-					if(max < histo_array[i]){
-						max = histo_array[i];
-					}
 				}
 				var size;
 				size = Math.ceil(Math.sqrt(histo_array.length - 1)) - 1;
@@ -2657,12 +2631,9 @@ function drawChart(x) {
 				data.addColumn('string', 'Property');
 				data.addColumn('number', 'Value');
 				data.addRows(histo_array.length);
-				var max = histo_array[0];
+				var max = Math.max(...histo_array);
 				for (var i = 0; i < histo_array.length; i++) {
 					data.setCell(i, 1, histo_array[i]);
-					if(max < histo_array[i]){
-						max = histo_array[i];
-					}
 				}
 				var size;
 				size = Math.ceil(Math.sqrt(histo_array.length - 1)) - 1;
@@ -2743,12 +2714,9 @@ function drawChart(x) {
 				data.addColumn('string', 'Property');
 				data.addColumn('number', 'Value');
 				data.addRows(histo_array.length);
-				var max = histo_array[0];
+				var max = Math.max(...histo_array);
 				for (var i = 0; i < histo_array.length; i++) {
 					data.setCell(i, 1, histo_array[i]);
-					if(max < histo_array[i]){
-						max = histo_array[i];
-					}
 				}
 				var size;
 				size = Math.ceil(Math.sqrt(histo_array.length - 1)) - 1;
@@ -2829,12 +2797,9 @@ function drawChart(x) {
 				data.addColumn('string', 'Property');
 				data.addColumn('number', 'Value');
 				data.addRows(histo_array.length);
-				var max = histo_array[0];
+				var max = Math.max(...histo_array);
 				for (var i = 0; i < histo_array.length; i++) {
 					data.setCell(i, 1, histo_array[i]);
-					if(max < histo_array[i]){
-						max = histo_array[i];
-					}
 				}
 				var size;
 				size = Math.ceil(Math.sqrt(histo_array.length - 1)) - 1;
