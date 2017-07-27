@@ -281,7 +281,7 @@
 				</div>
 			</div> <!-- End main column 2 -->
 		</div>
-		<!--
+
 		<div class="row">
 		<div class = "col-md-5">
 
@@ -315,7 +315,8 @@
 </div>
 </div>
 
-<p></p> -->
+<p></p>
+
 <!--Description text-->
 
 
@@ -2940,44 +2941,50 @@ function wktFormatter(poly){
 	return shape_s;
 }
 
-/*
-function spawn(){ //Experimental super secret stuff
-//document.getElementById('legend').style.visibility = "visible";
-var labels = document.getElementById('labels').value;
-var value = document.getElementById('value').value;
-/*
-var gypsum = "Description for Gypsum: ";
-var gypsumText = "The content of gypsum is the percent, by weight, of hydrated calcium sulfates in the fraction of the soil less than 20 millimeters in size. "; // Gypsum is partially soluble in water. Soils high in content of gypsum, such as those with more than 10 percent gypsum, may collapse if the gypsum is removed by percolating water. Gypsum is corrosive to concrete.
-//For each soil layer, this attribute is actually recorded as three separate values in the database. A low value and a high value indicate the range of this attribute for the soil component. A \"representative\" value indicates the expected value of this attribute for the component. For this soil property, only the representative value is used.";
-var h3 = document.createElement('h3');
-h3.innerHTML = gypsum;
-var div = document.createElement('div');
-div.innerHTML = "<br> <strong>" + gypsum + "</strong> <br>" + gypsumText + "<br> <br>";
-var descriptor = document.getElementById('description');
-descriptor.appendChild(div);
 
-//console.log(labels);
-//console.log(value);
-if(labels == 0 || value == 0){
-alert("Zero labels & zero value");
+function spawn(){ //Experimental super secret stuff
+	$('#legendSpawner').find('*').not('h3').remove();
+	var labels = document.getElementById('labels').value;
+	var value = document.getElementById('value').value;
+
+	if(labels == 0 || value == 0){
+		alert("Zero labels & zero value");
+	}
+	else{
+		var range = (value/labels);
+		var count = 0;
+		var cnt = 0;
+		var spawner = document.getElementById('legendSpawner');
+		var separations = [];
+		while(count<=value){
+			//console.log(count);
+			separations[cnt] =  parseFloat(count).toFixed(2);
+			count+=range;
+			cnt++;
+		}
+	}
+	//console.log(count);
+	console.log(separations);
+
+	/*var gypsum = "Description for Gypsum: ";
+	var gypsumText = "The content of gypsum is the percent, by weight, of hydrated calcium sulfates in the fraction of the soil less than 20 millimeters in size. "; // Gypsum is partially soluble in water. Soils high in content of gypsum, such as those with more than 10 percent gypsum, may collapse if the gypsum is removed by percolating water. Gypsum is corrosive to concrete.
+	//For each soil layer, this attribute is actually recorded as three separate values in the database. A low value and a high value indicate the range of this attribute for the soil component. A \"representative\" value indicates the expected value of this attribute for the component. For this soil property, only the representative value is used.";
+	var h3 = document.createElement('h3');
+	h3.innerHTML = gypsum;
+	var div = document.createElement('div');
+	div.innerHTML = "<br> <strong>" + gypsum + "</strong> <br>" + gypsumText + "<br> <br>";
+	var descriptor = document.getElementById('legendSpawner');
+	descriptor.appendChild(div);*/
+	for(var i = 0; i < separations.length-1; i++){
+		var div = document.createElement('div');
+		div.innerHTML = "<strong>" + app.payload.value + "</strong><br>" + 'Color #' + (i+1) + " Value: " + separations[i] + ' to ' + separations[i+1];
+		var legend = document.createElement('div');
+		legend = document.getElementById('legendSpawner');
+		document.getElementById('legend').style.visibility = "visible";
+		legend.appendChild(div);
+	}
 }
-else{
-var range = (value/labels);
-var count = 0;
-var cnt = 0;
-var spawner = document.getElementById('legendSpawner');
-var separations = [];
-while(count<=value){
-//console.log(count);
-separations[cnt] =  parseFloat(count).toFixed(2);
-count+=range;
-cnt++;
-}
-}
-//console.log(count);
-console.log(separations);
-}
-*/
+
 // ***********
 </script>
 <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCY0B3_Fr1vRpgJDdbvNmrVyXmoOOtiq64&callback=initMap"></script>-->
