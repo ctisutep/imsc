@@ -217,7 +217,7 @@
 										<label> Depth:</label>
 										<div class="input-group">
 											<span class="input-group-addon" id="basic-addon3">inches</span>
-											<input type="number" class="form-control" value="0" placeholder="...inches" id="depth" aria-describedby="basic-addon3">
+											<input type="number" class="form-control" value="0" min="0" placeholder="...inches" id="depth" aria-describedby="basic-addon3">
 										</div><br>
 										<label> Method:</label>
 										<select id="methods" class="form-control">
@@ -290,12 +290,12 @@
 		<br>
 		<div class="input-group">
 		<span class="input-group-addon" id="basic-addon3"># of labels</span>
-		<input type="number" class="form-control" value="1" placeholder="...inches" id="labels" aria-describedby="basic-addon3">
+		<input type="number" class="form-control" value="1" min="0"placeholder="...inches" id="labels" aria-describedby="basic-addon3">
 	</div>
 	<br>
 	<div class="input-group">
 	<span class="input-group-addon" id="basic-addon3">value</span>
-	<input type="number" class="form-control" value="1" placeholder="...inches" id="value" aria-describedby="basic-addon3">
+	<input type="number" class="form-control" value="1" min="0" placeholder="...inches" id="value" aria-describedby="basic-addon3">
 </div>
 </div>
 <div class="col-md-3">
@@ -2947,8 +2947,8 @@ function spawn(){ //Experimental super secret stuff
 	var labels = document.getElementById('labels').value;
 	var value = document.getElementById('value').value;
 
-	if(labels == 0 || value == 0){
-		alert("Zero labels & zero value");
+	if(labels <= 0 || value <= 0 ){
+		alert("Zero labels & zero value; negative numbers");
 	}
 	else{
 		var range = (value/labels);
@@ -2962,9 +2962,18 @@ function spawn(){ //Experimental super secret stuff
 			count+=range;
 			cnt++;
 		}
+		console.log(separations);
+		for(var i = 0; i < separations.length-1; i++){
+			var div = document.createElement('div');
+			div.innerHTML = "<strong>" + app.payload.value + "</strong><br>" + 'Color #' + (i+1) + " Value: " + separations[i] + ' to ' + separations[i+1];
+			var newLegend = document.createElement('div');
+			newLegend = document.getElementById('legendSpawner');
+			document.getElementById('legendSpawner').style.visibility = "visible";
+			newLegend.appendChild(div);
+		}
 	}
 	//console.log(count);
-	console.log(separations);
+
 
 	/*var gypsum = "Description for Gypsum: ";
 	var gypsumText = "The content of gypsum is the percent, by weight, of hydrated calcium sulfates in the fraction of the soil less than 20 millimeters in size. "; // Gypsum is partially soluble in water. Soils high in content of gypsum, such as those with more than 10 percent gypsum, may collapse if the gypsum is removed by percolating water. Gypsum is corrosive to concrete.
@@ -2975,14 +2984,7 @@ function spawn(){ //Experimental super secret stuff
 	div.innerHTML = "<br> <strong>" + gypsum + "</strong> <br>" + gypsumText + "<br> <br>";
 	var descriptor = document.getElementById('legendSpawner');
 	descriptor.appendChild(div);*/
-	for(var i = 0; i < separations.length-1; i++){
-		var div = document.createElement('div');
-		div.innerHTML = "<strong>" + app.payload.value + "</strong><br>" + 'Color #' + (i+1) + " Value: " + separations[i] + ' to ' + separations[i+1];
-		var legend = document.createElement('div');
-		legend = document.getElementById('legendSpawner');
-		document.getElementById('legend').style.visibility = "visible";
-		legend.appendChild(div);
-	}
+
 }
 
 // ***********
