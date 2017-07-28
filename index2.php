@@ -577,6 +577,12 @@ function getPolygons(){//this is run button
 						maximum = data.coords[i][app.payload.property];
 					}
 				}
+				var div = document.createElement('div');
+				div.innerHTML = "<strong>" + "Legend for " + app.payload.value + "</strong>";
+				var l = document.createElement('div');
+				l = document.getElementById('legend');
+				l.appendChild(div);
+
 				var num_labels = spawn(maximum);
 				//console.log(num_labels);
 				var polyCoordis = [];
@@ -1632,8 +1638,6 @@ function getPolygons(){//this is run button
 		var descriptor = document.getElementById('description');
 		descriptor.appendChild(div);
 	}
-	/** paste prprtyText here
-	*/
 	else if (app.payload.property == 'aashind_r'){
 		var prprty = "Description for AASHTO Group Index: ";
 		var prprtyText = "AASHTO group classification is a system that classifies soils specifically for geotechnical engineering purposes that are related to highway and airfield construction. It is based on particle-size distribution and Atterberg limits, such as liquid limit and plasticity index. This classification system is covered in AASHTO Standard No. M 145-82. The classification is based on that portion of the soil that is smaller than 3 inches in diameter.";
@@ -1892,12 +1896,11 @@ function getPolygons(){//this is run button
 	//draw the legend
 	if(!hecho){
 		var div = document.createElement('div');
-		div.innerHTML = "<strong>" + app.payload.value + "</strong><br>" + legendText;
+		div.innerHTML = "<strong>" + "</strong>" + legendText;
 		var legend = document.createElement('div');
 		legend = document.getElementById('legend');
 		document.getElementById('legend').style.visibility = "visible";
 		legend.appendChild(div);
-		//spawn(maximum);
 	}
 	else if(hecho){
 		removePolygons();
