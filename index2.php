@@ -584,6 +584,15 @@ function getPolygons(){//this is run button
 					if(data.coords.hasOwnProperty(key)){
 						var polyCoordis = [];
 						if(app.payload.table == "chorizon_r"){
+							var a = parseFloat(data.coords[key][app.payload.property]);
+							colorSelector = 0;
+							for(var i = 0; i < num_labels.length; i++){
+								if(a > num_labels[i]){
+									colorSelector = i+1;
+								}
+							}
+						}
+							/*
 							if(app.payload.property == "caco3_r"){ //Testing legend and logic for drawing for this specific property
 								var a = parseFloat(data.coords[key][app.payload.property]);
 								colorSelector = 0;
@@ -629,7 +638,7 @@ function getPolygons(){//this is run button
 									colorSelector = 6;
 									newzIndex = 6;
 									break;
-								}*/
+								}
 							}
 							else if(app.payload.property == "sandtotal_r"){ //Testing legend and logic for drawing for this specific property
 								//console.log(app.payload.property);
@@ -1393,7 +1402,7 @@ function getPolygons(){//this is run button
 								}
 							}
 							/*else if{ //another property inside this table (chorizon_r) that handles its own colors and logic
-						}*/
+						}
 						else{ //General legend text for all unspecified propierty
 							legendText = "<img src='img/graysquare.png' height='10px'/> <= 0<br>\
 							<img src='img/redsquare.png' height='10px'/>  1 to 20<br>\
@@ -1429,7 +1438,7 @@ function getPolygons(){//this is run button
 								break;
 							} //end switch
 						}//end else statement that handles the general legend for unspecified properties
-					}//end the else statement that identifies the table
+					}//end the else statement that identifies the table*/
 					else if(app.payload.table == "chconsistence_r"){
 						var description = data.coords[key][app.payload.property];
 						if(app.payload.property == "plasticity"){
