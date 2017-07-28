@@ -585,7 +585,8 @@ function getPolygons(){//this is run button
 						var polyCoordis = [];
 						if(app.payload.table == "chorizon_r"){
 							if(app.payload.property == "caco3_r"){ //Testing legend and logic for drawing for this specific property
-								var a = data.coords[key][app.payload.property];
+								var a = parseFloat(data.coords[key][app.payload.property]);
+								colorSelector = 0;
 								for(var i = 0; i < num_labels.length; i++){
 									if(a > num_labels[i]){
 										colorSelector = i+1;
