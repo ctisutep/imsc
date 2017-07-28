@@ -534,6 +534,7 @@ function runAOI(){
 
 function getPolygons(){//this is run button
 	//console.log(app.payload.runLine);
+	var maximum;
 	app.payload.getMode="polygons";
 	hecho = false;
 	var depth = document.getElementById("depth").value;
@@ -570,17 +571,17 @@ function getPolygons(){//this is run button
 				colorSelector = 0;
 				newzIndex = 0;
 				legendText = "";
-				var maximum = -1;
+				maximum = -1;
 				for(var i = 0; i < data.coords.length; i++){
-					if(maximum < data.coords[i][app.payload.property]){
+					console.log(data.coords[i][app.payload.property]);
+					if(maximum < parseFloat(data.coords[i][app.payload.property])){
 						maximum = data.coords[i][app.payload.property];
 					}
 				}
-				//console.log(maximum);
 				var polyCoordis = [];
 				if(app.payload.table == "chorizon_r"){
 					if(app.payload.property == "caco3_r"){ //Testing legend and logic for drawing for this specific property
-						spawn(maximum);
+						//spawn(maximum);
 						//console.log(data.coords[0]['caco3_r']);
 					}
 				}
@@ -1847,7 +1848,7 @@ function getPolygons(){//this is run button
 	}
 	else if (app.payload.property == 'caco3_r'){
 		var prprty = "Description for CaCO3: ";
-		var prprtyText = "The quantity of Carbonate (CO3)in the soil expressed as CaCO3 and as a weight percentage of the less than 2mm size fraction.";
+		var prprtyText = "The quantity of Carbonate (CO3) in the soil expressed as CaCO3 and as a weight percentage of the less than 2mm size fraction.";
 		var h3 = document.createElement('h3');
 		h3.innerHTML = prprty;
 		var div = document.createElement('div');
@@ -1886,6 +1887,7 @@ function getPolygons(){//this is run button
 		legend = document.getElementById('legend');
 		document.getElementById('legend').style.visibility = "visible";
 		legend.appendChild(div);
+		spawn(maximum);
 	}
 	else if(hecho){
 		removePolygons();
