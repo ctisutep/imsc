@@ -573,7 +573,6 @@ function getPolygons(){//this is run button
 				legendText = "";
 				maximum = -1;
 				for(var i = 0; i < data.coords.length; i++){
-					console.log(data.coords[i][app.payload.property]);
 					if(maximum < parseFloat(data.coords[i][app.payload.property])){
 						maximum = data.coords[i][app.payload.property];
 					}
