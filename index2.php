@@ -577,19 +577,20 @@ function getPolygons(){//this is run button
 						maximum = data.coords[i][app.payload.property];
 					}
 				}
+				var num_labels = spawn(maximum);
+				//console.log(num_labels);
 				var polyCoordis = [];
-				if(app.payload.table == "chorizon_r"){
-					if(app.payload.property == "caco3_r"){ //Testing legend and logic for drawing for this specific property
-						//spawn(maximum);
-						//console.log(data.coords[0]['caco3_r']);
-					}
-				}
 				for(key in data.coords){
 					if(data.coords.hasOwnProperty(key)){
 						var polyCoordis = [];
 						if(app.payload.table == "chorizon_r"){
 							if(app.payload.property == "caco3_r"){ //Testing legend and logic for drawing for this specific property
-								//spawn();
+								var a = data.coords[key][app.payload.property];
+								for(var i = 0; i < num_labels.length; i++){
+									if(a > num_labels[i]){
+										colorSelector = i+1;
+									}
+								}
 								//console.log(data.coords);
 								/*
 								legendText = "<img src='img/redsquare.png' height='10px'/> <= 7<br>\
@@ -1886,7 +1887,7 @@ function getPolygons(){//this is run button
 		legend = document.getElementById('legend');
 		document.getElementById('legend').style.visibility = "visible";
 		legend.appendChild(div);
-		spawn(maximum);
+		//spawn(maximum);
 	}
 	else if(hecho){
 		removePolygons();
@@ -2994,6 +2995,7 @@ function spawn(value){ //Experimental super secret stuff
 			document.getElementById('legend').style.visibility = "visible";
 			newLegend.appendChild(div);
 		}
+		return separations;
 	}
 	//console.log(count);
 
