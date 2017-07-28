@@ -2976,7 +2976,25 @@ function wktFormatter(poly){
 }
 
 
-function spawn(value){ //Experimental super secret stuff
+function spawn(value){
+	var squareboxes = ["<img src='img/redsquare.png' height='10px'/>",
+	"<img src='img/skybluesquare.png' height='10px'/>",
+	"<img src='img/brightgreensquare.png' height='10px'/>",
+	"<img src='img/purplesquare.png' height='10px'/>",
+	"<img src='img/orangesquare.png' height='10px'/>",
+	"<img src='img/brightpinksquare.png' height='10px'/>",
+	"<img src='img/navybluesquare.png' height='10px'/>",
+	"<img src='img/lilacsquare.png' height='10px'/>",
+	"<img src='img/yellowsquare.png' height='10px'/>",
+	"<img src='img/maroonsquare.png' height='10px'/>",
+	"<img src='img/cyansquare.png' height='10px'/>",
+	"<img src='img/navygreensquare.png' height='10px'/>",
+	"<img src='img/peachsquare.png' height='10px'/>",
+	"<img src='img/fleshsquare.png' height='10px'/>",
+	"<img src='img/brownsquare.png' height='10px'/>",
+	"<img src='img/neongreensquare.png' height='10px'/>",
+	"<img src='img/neonpurplesquare.png' height='10px'/>",
+	"<img src='img/graysquare.png' height='10px'/>"]
 	$('#legendSpawner').find('*').not('h3').remove();
 	var labels = document.getElementById('labels').value;
 	//var value = document.getElementById('value').value;
@@ -2997,9 +3015,11 @@ function spawn(value){ //Experimental super secret stuff
 			cnt++;
 		}
 		//console.log(separations);
+		//"<strong>" + app.payload.value + "</strong><br>"+
 		for(var i = 0; i < separations.length-1; i++){
 			var div = document.createElement('div');
-			div.innerHTML = 'Color #' + (i+1) + " Value: " + separations[i] + ' to ' + separations[i+1];
+			div.innerHTML = squareboxes[i] + " " +
+			+ separations[i] + ' to ' + separations[i+1];
 			var newLegend = document.createElement('div');
 			newLegend = document.getElementById('legend');
 			document.getElementById('legend').style.visibility = "visible";
