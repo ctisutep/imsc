@@ -522,15 +522,14 @@ function getPolygons(){//this is run button
 
 				var num_labels = spawn(maximum);
 				if(num_labels != null){
-					console.log("not null");
 
 				}
 				else{
-					console.log("null");
 					alert("Please select a feasible number of labels.");
 					$('#legend').find('*').not('h3').remove();
 					var div = document.createElement('div');
-					div.innerHTML = "<strong>" + "Legend N/A";
+					div.innerHTML = "<strong>" + "Legend N/A" + "</strong>" + "<br>" + "<img src='img/redsquare.png' height='10px'/> "
+					+ " 0 to " + maximum;
 					var l = document.createElement('div');
 					l = document.getElementById('legend');
 					l.appendChild(div);
