@@ -449,8 +449,7 @@
 				getPolygons();
 			}
 
-			function getPolygons(){//this is run button
-				//console.log(app.payload.runLine);
+			function getPolygons(){
 				var maximum;
 				app.payload.getMode="polygons";
 				hecho = false;
@@ -999,7 +998,7 @@
 				removePolygons();
 			}
 		}
-		//get polygons "run function" ends here
+
 		function setDistrict(){
 			app.payload.district = $('#target').children("option:selected").data('district');
 			var pointStr = $('#target option:selected').val();
@@ -1008,10 +1007,10 @@
 			app.map.panTo(panPoint);
 			app.map.setZoom(10);
 		}
+
 		/******************************************************************************/
 		google.charts.load('current', {'packages':['corechart', 'bar']});
 
-		// Set a callback to run when the Google Visualization API is loaded.
 		google.charts.setOnLoadCallback(initialize);
 
 		function initialize () {
