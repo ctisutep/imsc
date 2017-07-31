@@ -41,9 +41,11 @@
 	#legend {
 		font-family: Arial, sans-serif;
 		background: #fff;
-		padding: 10px;
-		margin: 10px;
+		padding: 6px;
+		margin: 30px;
 		border: 3px solid #000;
+		margin-top: 50px;
+		margin-bottom: 20px;
 	}
 	#legend h3 {
 		margin-top: 0;
@@ -237,14 +239,19 @@
 									</div>
 								</div>
 								<div class="row">
+									<div class="col-md-5 col-sm-11 col-lg-7">
 									<div class="input-group">
 										<span class="input-group-addon" id="basic-addon3"># of labels</span>
 										<input type="number" class="form-control" value="1" min="0"placeholder="...inches" id="labels" aria-describedby="basic-addon3">
-								</div>
+									</div>
 
+								</div>
+								<div class"col-md-7">
 									<div id="legend" style='visibility: hidden'>
 										<!--<div id="legendSpawner"> </div>-->
 									</div>
+								</div>
+
 
 							</div>
 							<div class="row panel panel-default">
