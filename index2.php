@@ -47,17 +47,13 @@
 </head>
 
 <body>
-	<!-- Navigation -->
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
-			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="text-center" style='font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;'>
 				<h3 style="color:#FF8000;margin-right:8%;padding-top:1%;">CENTER FOR TRANSPORTATION INFRASTRUCTURE SYSTEMS</h3>
 				<h6><i style="color:white;margin-right:8%">"Designated as a Member of National, Regional, and Tier 1 University Transportation Center."</i></h6>
 			</div>
-
 		</div>
-		<!-- /.container -->
 	</nav>
 
 	<!-- Content Row -->
@@ -237,11 +233,9 @@
 										<div id="legend" style='visibility: hidden'>
 										</div>
 									</div>
-
 								</div>
 								<div class="row panel panel-default">
 									<center><label>Statistics</label></center>
-
 									<div class="col-lg-6">
 										<label>Select parameters:</label>
 										<div class="input-group">
@@ -279,19 +273,13 @@
 				</div> <!-- End main column 2 -->
 			</div>
 
-			<!-- Bootstrap Core JavaScript -->
-
-			<!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-			<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
-
 			<script src="js/jquery.js"></script>
 			<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 			<script src="js/bootstrap.js"></script>
-
 			<script src="js/jquery.autocomplete.min.js"></script>
 			<script src="js/properties.js"></script>
-			<script>
 
+			<script>
 			var app = {map:null, polygons:null, payload:{getMode:"polygons", runAOI:false, runLine:false, runRec:false, property:null, district:null, depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null}}; //added value for depth method
 			var hecho = false;
 			//var suggested = all the aliases of the properties, note: not all properties have an alias
@@ -482,12 +470,11 @@
 							removePolygons();
 							//               0           1           2          3          4         5          6           7         8          9        10        11        12          13         14         15        16          17
 							//              GRAY,       RED,     SKY BLUE, BRIGHT GREEN, PURPLE,   ORANGE,  BRIGHT PINK,NAVY BLUE,  LILAC,     YELLOW    maroon    cyan     navygreen    peach      flesh      brown    neongreen   neonpurple
-							shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#fe9253", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D", "#8C0909", "#07FDCA", "#008C35", "FFDBA5", "#B57777", "#6D3300", "#D0FF00", "#5900FF"];
-							shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a", "8c0909", "36c9bd", "#008c35", "#ffdba5", "#B57777", "#6D3300", "#D0FF00", "#5900FF"];
+							//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#fe9253", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D", "#8C0909", "#07FDCA", "#008C35", "FFDBA5", "#B57777", "#6D3300", "#D0FF00", "#5900FF"];
+							//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a", "8c0909", "36c9bd", "#008c35", "#ffdba5", "#B57777", "#6D3300", "#D0FF00", "#5900FF"];
 
 							shapecolor = ["#84857B", "#13FF00", "#009BFF", "#EBF20D", "#fe9253", "#FF0000", "#8C0909", "#0051FF", "#AB77FF", "#EBF20D", "#8C0909", "#07FDCA", "#008C35", "FFDBA5", "#B57777", "#6D3300", "#D0FF00", "#5900FF"];
 							shapeoutline = ["#000000", "#0b9b00", "#007fd1", "#aaaf0a", "#d18f0a", "#c10000", "#8c0909", "#0037ad", "#873dff", "#aaaf0a", "8c0909", "36c9bd", "#008c35", "#ffdba5", "#B57777", "#6D3300", "#D0FF00", "#5900FF"];
-
 							colorSelector = 0;
 							newzIndex = 0;
 							legendText = "";
@@ -505,7 +492,6 @@
 
 							var num_labels = spawn(maximum);
 							if(num_labels != null){
-
 							}
 							else{
 								alert("Please select a feasible number of labels.");
@@ -518,7 +504,6 @@
 								l.appendChild(div);
 								num_labels = [];
 							}
-							//console.log(num_labels);
 							var polyCoordis = [];
 							for(key in data.coords){
 								if(data.coords.hasOwnProperty(key)){
@@ -530,7 +515,6 @@
 											colorSelector = 1;
 										}
 										for(var i = 0; i < num_labels.length; i++){
-											//console.log("a: " + a + " & num_labels[i]: " + num_labels[i]);
 											if(a > num_labels[i]){
 												colorSelector = i+1;
 											}
@@ -669,7 +653,7 @@
 					}).done(function(data){
 						$(document.body).css({'cursor': 'auto'});
 
-						if(app.payload.property == 'gypsum_r'){ //should have made it like this: if(app.payload.value == "gypsum"){ //but it's too late now
+					if(app.payload.property == 'gypsum_r'){ //should have made it like this: if(app.payload.value == "gypsum"){ //but it's too late now
 						var gypsum = "Description for Gypsum: ";
 						var gypsumText = "The content of gypsum is the percent, by weight, of hydrated calcium sulfates in the fraction of the soil less than 20 millimeters in size. "; // Gypsum is partially soluble in water. Soils high in content of gypsum, such as those with more than 10 percent gypsum, may collapse if the gypsum is removed by percolating water. Gypsum is corrosive to concrete.
 						//For each soil layer, this attribute is actually recorded as three separate values in the database. A low value and a high value indicate the range of this attribute for the soil component. A \"representative\" value indicates the expected value of this attribute for the component. For this soil property, only the representative value is used.";
@@ -973,7 +957,6 @@
 						descriptor.appendChild(div);
 					}
 					else{
-						//removePolygons();
 					}
 
 					if(!hecho){
@@ -1010,7 +993,6 @@
 
 		/******************************************************************************/
 		google.charts.load('current', {'packages':['corechart', 'bar']});
-
 		google.charts.setOnLoadCallback(initialize);
 
 		function initialize () {
@@ -1085,14 +1067,10 @@
 					}
 					clickRec(rec);
 					chartChecker();
-					//drawChart();
 				});
 
 				google.maps.event.addListener(rec, 'bounds_changed', function() {
 					showNewRect2(rec);
-					//if(rec.type == 'polyline'){
-					//lineParser();
-					//}
 				});
 
 				if(rec.type == 'polyline'){
@@ -1144,7 +1122,6 @@
 			if (selectedShape) {
 				app.payload.AoI = 0;
 				selectedShape.setMap(null);
-				// To show
 				drawingManager.setOptions({
 					drawingControl: true
 				});
@@ -1162,7 +1139,6 @@
 			clearSelection();
 			selectedRec = shape;
 			shape.setEditable(true);
-			//selectColor(shape.get('fillColor') || shape.get('strokeColor'));
 		}
 		function clickRec(shape){
 			if(shape.type == 'rectangle'){
@@ -1179,10 +1155,8 @@
 				var contentString = '<b>Rectangle clicked.</b><br><br>' + 'Area is: ' + area + ' m^2';
 				var center = shape.getBounds().getCenter();
 
-				// Set the info window's content and position.
 				infoWindow.setContent(contentString);
 				infoWindow.setPosition(center);
-
 				infoWindow.open(app.map);
 			}
 		}
@@ -1195,7 +1169,6 @@
 			'New north-east corner: ' + ne.lat() + ', ' + ne.lng() + '<br>' +
 			'New south-west corner: ' + sw.lat() + ', ' + sw.lng();
 
-			// Set the info window's content and position.
 			infoWindow.setContent(contentString);
 			infoWindow.setPosition(ne);
 
