@@ -527,7 +527,7 @@ function getPolygons(){//this is run button
 				}
 				else{
 					console.log("null");
-					alert("Please select a feasible number of label.");
+					alert("Please select a feasible number of labels.");
 					$('#legend').find('*').not('h3').remove();
 					var div = document.createElement('div');
 					div.innerHTML = "<strong>" + "Legend N/A";
@@ -544,7 +544,11 @@ function getPolygons(){//this is run button
 						if(app.payload.table == "chorizon_r"){
 							var a = parseFloat(data.coords[key][app.payload.property]);
 							colorSelector = 0;
+							if(a == 0){
+								colorSelector = 1;
+							}
 							for(var i = 0; i < num_labels.length; i++){
+								//console.log("a: " + a + " & num_labels[i]: " + num_labels[i]);
 								if(a > num_labels[i]){
 									colorSelector = i+1;
 								}
