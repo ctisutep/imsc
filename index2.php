@@ -505,6 +505,10 @@ function getPolygons(){//this is run button
 				//              GRAY,       RED,     SKY BLUE, BRIGHT GREEN, PURPLE,   ORANGE,  BRIGHT PINK,NAVY BLUE,  LILAC,     YELLOW    maroon    cyan     navygreen    peach      flesh      brown    neongreen   neonpurple
 				shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#fe9253", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D", "#8C0909", "#07FDCA", "#008C35", "FFDBA5", "#B57777", "#6D3300", "#D0FF00", "#5900FF"];
 				shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a", "8c0909", "36c9bd", "#008c35", "#ffdba5", "#B57777", "#6D3300", "#D0FF00", "#5900FF"];
+
+				shapecolor = ["#84857B", "#13FF00", "#009BFF", "#EBF20D", "#fe9253", "#FF0000", "#8C0909", "#0051FF", "#AB77FF", "#EBF20D", "#8C0909", "#07FDCA", "#008C35", "FFDBA5", "#B57777", "#6D3300", "#D0FF00", "#5900FF"];
+				shapeoutline = ["#000000", "#0b9b00", "#007fd1", "#aaaf0a", "#d18f0a", "#c10000", "#8c0909", "#0037ad", "#873dff", "#aaaf0a", "8c0909", "36c9bd", "#008c35", "#ffdba5", "#B57777", "#6D3300", "#D0FF00", "#5900FF"];
+
 				colorSelector = 0;
 				newzIndex = 0;
 				legendText = "";
@@ -528,7 +532,7 @@ function getPolygons(){//this is run button
 					alert("Please select a feasible number of labels.");
 					$('#legend').find('*').not('h3').remove();
 					var div = document.createElement('div');
-					div.innerHTML = "<strong>" + "Legend N/A" + "</strong>" + "<br>" + "<img src='img/redsquare.png' height='10px'/> "
+					div.innerHTML = "<strong>" + "Legend N/A" + "</strong>" + "<br>" + "<img src='img/brightgreensquare.png' height='10px'/> "
 					+ " 0 to " + maximum;
 					var l = document.createElement('div');
 					l = document.getElementById('legend');
@@ -2935,13 +2939,12 @@ function wktFormatter(poly){
 
 
 function spawn(value){
-	var squareboxes = ["<img src='img/redsquare.png' height='10px'/>",
+	var squareboxes = ["<img src='img/brightgreensquare.png' height='10px'/>",
 	"<img src='img/skybluesquare.png' height='10px'/>",
-	"<img src='img/brightgreensquare.png' height='10px'/>",
-	"<img src='img/purplesquare.png' height='10px'/>",
+	"<img src='img/yellowsquare.png' height='10px'/>",
 	"<img src='img/orangesquare.png' height='10px'/>",
-	"<img src='img/brightpinksquare.png' height='10px'/>",
-	"<img src='img/navybluesquare.png' height='10px'/>",
+	"<img src='img/redsquare.png' height='10px'/>",
+	"<img src='img/maroonsquare.png' height='10px'/>",
 	"<img src='img/lilacsquare.png' height='10px'/>",
 	"<img src='img/yellowsquare.png' height='10px'/>",
 	"<img src='img/maroonsquare.png' height='10px'/>",
@@ -2953,6 +2956,7 @@ function spawn(value){
 	"<img src='img/neongreensquare.png' height='10px'/>",
 	"<img src='img/neonpurplesquare.png' height='10px'/>",
 	"<img src='img/graysquare.png' height='10px'/>"]
+
 	$('#legendSpawner').find('*').not('h3').remove();
 	var labels = document.getElementById('labels').value;
 
