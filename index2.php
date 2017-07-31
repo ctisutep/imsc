@@ -287,44 +287,6 @@
 			</div> <!-- End main column 2 -->
 		</div>
 
-		<!--<div class="row">
-		<div class = "col-md-5">
-
-		<div class="col-md-4">
-		<label> Legend Definition </label>
-		<br>
-		<div class="input-group">
-		<span class="input-group-addon" id="basic-addon3"># of labels</span>
-		<input type="number" class="form-control" value="1" min="0"placeholder="...inches" id="labels" aria-describedby="basic-addon3">
-	</div>
-	<br>
-	<div class="input-group">
-	<span class="input-group-addon" id="basic-addon3">value</span>
-	<input type="number" class="form-control" value="1" min="0" placeholder="...inches" id="value" aria-describedby="basic-addon3">
-</div>
-</div>
-<div class="col-md-3">
-<br> <br>
-<button class="btn btn-default" onClick="spawn()">Get the legend</button>
-</div>
-</div>
-<div class = "col-md-5">
-<label> Legend Testing</label>
-<div class="col-md-3">
-<br>
-<div id="legendSpawner">
-
-</div>
-
-</div>
-</div>
-</div>
-
-<p></p>-->
-
-<!--Description text-->
-
-
 <!-- Bootstrap Core JavaScript -->
 
 <!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -415,10 +377,6 @@ $(document).ready(function(){//esto pasa recien cargada la pagina
 			elem.data = prop[i].data;
 			elem.table = prop[i].table;
 			selectProp.appendChild(elem);
-			//ch1.appendChild(elem);
-			//ch2.appendChild(elem);
-			//ch3.appendChild(elem);
-			//ch4.appendChild(elem);
 		}
 		for(var i = 0; i < properties.length; i++) {
 			var propr = prop[i].number;
@@ -427,11 +385,7 @@ $(document).ready(function(){//esto pasa recien cargada la pagina
 			elem.value = propr;
 			elem.data = prop[i].data;
 			elem.table = prop[i].table;
-			//selectProp.appendChild(elem);
 			ch1.appendChild(elem);
-			//ch2.appendChild(elem);
-			//ch3.appendChild(elem);
-			//ch4.appendChild(elem);
 		}
 		for(var i = 0; i < properties.length; i++) {
 			var propr = prop[i].number;
@@ -440,11 +394,7 @@ $(document).ready(function(){//esto pasa recien cargada la pagina
 			elem.value = propr;
 			elem.data = prop[i].data;
 			elem.table = prop[i].table;
-			//selectProp.appendChild(elem);
-			//ch1.appendChild(elem);
 			ch2.appendChild(elem);
-			//ch3.appendChild(elem);
-			//ch4.appendChild(elem);
 		}
 		for(var i = 0; i < properties.length; i++) {
 			var propr = prop[i].number;
@@ -453,11 +403,7 @@ $(document).ready(function(){//esto pasa recien cargada la pagina
 			elem.value = propr;
 			elem.data = prop[i].data;
 			elem.table = prop[i].table;
-			//selectProp.appendChild(elem);
-			//ch1.appendChild(elem);
-			//ch2.appendChild(elem);
 			ch3.appendChild(elem);
-			//ch4.appendChild(elem);
 		}
 		for(var i = 0; i < properties.length; i++) {
 			var propr = prop[i].number;
@@ -466,10 +412,6 @@ $(document).ready(function(){//esto pasa recien cargada la pagina
 			elem.value = propr;
 			elem.data = prop[i].data;
 			elem.table = prop[i].table;
-			//selectProp.appendChild(elem);
-			//ch1.appendChild(elem);
-			//ch2.appendChild(elem);
-			//ch3.appendChild(elem);
 			ch4.appendChild(elem);
 		}
 
@@ -478,29 +420,21 @@ $(document).ready(function(){//esto pasa recien cargada la pagina
 			app.payload.table =  prop[this.value].table;
 			app.payload.value =  prop[this.value].value;
 		});
-		//change select_chart_1
 		$("#select_chart_1").change(function(){
 			app.payload.chart1 =  prop[this.value].data;
 			app.payload.chart1n = prop[this.value].value;
-			//console.log("chart1: " + app.payload.chart1);
 		});
-		//change select_chart_2
 		$("#select_chart_2").change(function(){
 			app.payload.chart2 =  prop[this.value].data;
 			app.payload.chart2n = prop[this.value].value;
-			//console.log("chart2: " + app.payload.chart2);
 		});
-		//change select_chart_3
 		$("#select_chart_3").change(function(){
 			app.payload.chart3 =  prop[this.value].data;
 			app.payload.chart3n = prop[this.value].value;
-			//console.log("chart3: " + app.payload.chart3);
 		});
-		//change select_chart_4
 		$("#select_chart_4").change(function(){
 			app.payload.chart4 =  prop[this.value].data;
 			app.payload.chart4n = prop[this.value].value;
-			//console.log("chart4: " + app.payload.chart4);
 		});
 
 		//create the autocomplete with the data
@@ -517,14 +451,10 @@ $(document).ready(function(){//esto pasa recien cargada la pagina
 	});
 	app.payload.district = $('#target').children("option:selected").data('district');
 
-	/*
-	Si es minimo o maximo, necesitamos depth a ese punto. Si es weighted average
-	no necesitamos considerar o saber depth. Tambien para median necesitamos saber.
-	*/
+
 	$("#methods").change(function(){ //0: max / 1: min / 2: median / 3: weight/
 		app.payload.depth_method = this.value;
 	});
-
 });
 
 function runAOI(){
@@ -584,6 +514,21 @@ function getPolygons(){//this is run button
 				l.appendChild(div);
 
 				var num_labels = spawn(maximum);
+				if(num_labels != null){
+					console.log("not null");
+
+				}
+				else{
+					console.log("null");
+					alert("Please select a feasible number of label.");
+					$('#legend').find('*').not('h3').remove();
+					var div = document.createElement('div');
+					div.innerHTML = "<strong>" + "Legend N/A";
+					var l = document.createElement('div');
+					l = document.getElementById('legend');
+					l.appendChild(div);
+					num_labels = [];
+				}
 				//console.log(num_labels);
 				var polyCoordis = [];
 				for(key in data.coords){
@@ -3000,7 +2945,6 @@ function spawn(value){
 	"<img src='img/graysquare.png' height='10px'/>"]
 	$('#legendSpawner').find('*').not('h3').remove();
 	var labels = document.getElementById('labels').value;
-	//var value = document.getElementById('value').value;
 
 	if(labels <= 0 || value <= 0 ){
 		alert("Zero labels & zero value; negative numbers");
@@ -3012,13 +2956,10 @@ function spawn(value){
 		var spawner = document.getElementById('legendSpawner');
 		var separations = [];
 		while(count<=value){
-			//console.log(count);
 			separations[cnt] =  parseFloat(count).toFixed(2);
 			count+=range;
 			cnt++;
 		}
-		//console.log(separations);
-		//"<strong>" + app.payload.value + "</strong><br>"+
 		for(var i = 0; i < separations.length-1; i++){
 			var div = document.createElement('div');
 			div.innerHTML = squareboxes[i] + " " +
@@ -3030,21 +2971,7 @@ function spawn(value){
 		}
 		return separations;
 	}
-	//console.log(count);
-
-
-	/*var gypsum = "Description for Gypsum: ";
-	var gypsumText = "The content of gypsum is the percent, by weight, of hydrated calcium sulfates in the fraction of the soil less than 20 millimeters in size. "; // Gypsum is partially soluble in water. Soils high in content of gypsum, such as those with more than 10 percent gypsum, may collapse if the gypsum is removed by percolating water. Gypsum is corrosive to concrete.
-	//For each soil layer, this attribute is actually recorded as three separate values in the database. A low value and a high value indicate the range of this attribute for the soil component. A \"representative\" value indicates the expected value of this attribute for the component. For this soil property, only the representative value is used.";
-	var h3 = document.createElement('h3');
-	h3.innerHTML = gypsum;
-	var div = document.createElement('div');
-	div.innerHTML = "<br> <strong>" + gypsum + "</strong> <br>" + gypsumText + "<br> <br>";
-	var descriptor = document.getElementById('legendSpawner');
-	descriptor.appendChild(div);*/
-
 }
-
 // ***********
 </script>
 <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCY0B3_Fr1vRpgJDdbvNmrVyXmoOOtiq64&callback=initMap"></script>-->
