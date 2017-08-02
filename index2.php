@@ -323,7 +323,7 @@
 			<script src="js/properties.js"></script>
 
 			<script>
-			var app = {map:null, polygons:null, payload:{getMode:"polygons", runAOI:false, runLine:false, runRec:false, property:null, district:null, depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null, filter_prop:null, filter_prop_n:null}}; //added value for depth method
+			var app = {map:null, polygons:null, payload:{getMode:"polygons", runAOI:false, runLine:false, runRec:false, property:null, district:null, depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null, filter_prop:null, filter_prop_n:null, filter_value:null}};
 			var hecho = false;
 			//var suggested = all the aliases of the properties, note: not all properties have an alias
 			$(document).ready(function(){
@@ -470,10 +470,10 @@
 					});
 
 					$("#biggerThan").click(function(){
-						console.log(this.value);
+						filter_value = this.value;
 					});
 					$("#smallerThan").click(function(){
-						console.log(this.value);
+						filter_value = this.value;
 					});
 
 					//create the autocomplete with the data
