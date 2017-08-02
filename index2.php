@@ -192,42 +192,64 @@
 							<div class="row panel panel-default">
 								<center><label>Soil Mapping</label></center>
 								<div class="row">
+									<ul class="nav nav-tabs">
+										<li class="active"><a data-toggle="tab" href="#default" data-target="#default, #defaultbtn">Default</a></li>
+										<li><a data-toggle="tab" href="#filters" data-target="#filters, #filtersbtn">Filter</a></li>
+									</ul>
+
 									<div class="col-md-5 col-sm-11 col-lg-7">
-										<label> Soil Property:</label>
-										<div class="input-group">
-											<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
-											<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="selectProp">
-												<option value="" disabled selected>Select a ground property</option>
-											</select>
-										</div> <br>
-										<label> Depth:</label>
-										<div class="input-group">
-											<span class="input-group-addon" id="basic-addon3">inches</span>
-											<input type="number" class="form-control" value="0" min="0" placeholder="...inches" id="depth" aria-describedby="basic-addon3">
-										</div><br>
-										<label> Method:</label>
-										<select id="methods" class="form-control">
-											<option value="" disabled selected>Select method</option>
-											<option value="1" id="max_method">Max</option>
-											<option value="2" id="min_method">Min</option>
-											<option value="3" id="med_method">Median</option>
-											<option value="4" id="weight_method">Weighted average</option>
-											<option value="5" id="specific_method">At Specific Depth</option>
-										</select><br>
-									</div>
+										<div class="tab-content">
+											<div id="default" class="tab-pane fade in active">
+												<label> Soil Property:</label>
+												<div class="input-group">
+													<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+													<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="selectProp">
+														<option value="" disabled selected>Select a ground property</option>
+													</select>
+												</div> <br>
+												<label> Depth:</label>
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon3">inches</span>
+													<input type="number" class="form-control" value="0" min="0" placeholder="...inches" id="depth" aria-describedby="basic-addon3">
+												</div><br>
+												<label> Method:</label>
+												<select id="methods" class="form-control">
+													<option value="" disabled selected>Select method</option>
+													<option value="1" id="max_method">Max</option>
+													<option value="2" id="min_method">Min</option>
+													<option value="3" id="med_method">Median</option>
+													<option value="4" id="weight_method">Weighted average</option>
+													<option value="5" id="specific_method">At Specific Depth</option>
+												</select><br>
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon3"># of labels</span>
+													<input type="number" class="form-control" value="1" min="0"placeholder="...inches" id="labels" aria-describedby="basic-addon3">
+												</div>
+											</div>
+											<div id="filters" class="tab-pane fade">
+												<h1> Test </h1>
+											</div>
+										</div>
+									</div> <!--end column for selectors-->
+
 									<div class="col-md-5"><br>
-										<button class="btn btn-success form-control" type="button" id="run" onClick="getPolygons()">Run</button><br><br>
-										<button class="btn btn-success form-control" type="button" id="runAOI" onClick="runAOI()">Run AOI</button><br><br>
-										<button class="btn btn-warning form-control" type="button" id="clear" onClick="removePolygons()">Clear</button><br><br>
-										<button type="button" class="map-print" id="print" onClick="printMaps()">Print</button>
-									</div>
+										<div class="tab-content">
+											<div id="defaultbtn" class="tab-pane fade in active">
+												<button class="btn btn-success form-control" type="button" id="run" onClick="getPolygons()">Run</button><br><br>
+												<button class="btn btn-success form-control" type="button" id="runAOI" onClick="runAOI()">Run AOI</button><br><br>
+												<button class="btn btn-warning form-control" type="button" id="clear" onClick="removePolygons()">Clear</button><br><br>
+												<button type="button" class="map-print" id="print" onClick="printMaps()">Print</button>
+											</div>
+											<div id="filtersbtn" class="tab-pane fade">
+												<button class="btn btn-success form-control" type="button" id="runFilters" onClick="runFilters()">Run Filters</button><br><br>
+											</div>
+										</div>
+									</div> <!-- end column for buttons-->
+
 								</div>
 								<div class="row">
 									<div class="col-md-5 col-sm-11 col-lg-7">
-										<div class="input-group">
-											<span class="input-group-addon" id="basic-addon3"># of labels</span>
-											<input type="number" class="form-control" value="1" min="0"placeholder="...inches" id="labels" aria-describedby="basic-addon3">
-										</div>
+										<!--unused col -->
 									</div>
 									<div class"col-md-7">
 										<div id="legend" style='visibility: hidden'>
