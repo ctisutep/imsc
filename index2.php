@@ -227,7 +227,28 @@
 												</div>
 											</div>
 											<div id="filters" class="tab-pane fade">
-												<h1> Test </h1>
+												<div class="form-check">
+													<p class="form-check-label">
+														<input class="form-check-input" type="radio" name="exampleRadios" id="biggerThan" value="bigger" checked>
+														Only color those polygons that are bigger than the unit value
+													</p>
+												</div>
+												<div class="form-check">
+													<p class="form-check-label">
+														<input class="form-check-input" type="radio" name="exampleRadios" id="smallerThan" value="smaller">
+														Only color those polygons that are smaller than the unit value
+													</p>
+												</div>
+												<div class="input-group">
+													<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+													<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_prop_filters">
+														<option value="" disabled selected>Select a ground property</option>
+													</select>
+												</div> <br>
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon3">unit value</span>
+													<input type="number" class="form-control" value="1" min="0"placeholder="...units" id="filter_units" aria-describedby="basic-addon3">
+												</div>
 											</div>
 										</div>
 									</div> <!--end column for selectors-->
@@ -240,8 +261,8 @@
 												<button class="btn btn-warning form-control" type="button" id="clear" onClick="removePolygons()">Clear</button><br><br>
 												<button type="button" class="map-print" id="print" onClick="printMaps()">Print</button>
 											</div>
-											<div id="filtersbtn" class="tab-pane fade">
-												<button class="btn btn-success form-control" type="button" id="runFilters" onClick="runFilters()">Run Filters</button><br><br>
+											<div id="filtersbtn" class="tab-pane fade"><br><br><br><br>
+												<button class="btn btn-success form-control" type="button" id="runFilters" onClick="runFilters()">Run Filter</button><br><br>
 											</div>
 										</div>
 									</div> <!-- end column for buttons-->
@@ -302,7 +323,7 @@
 			<script src="js/properties.js"></script>
 
 			<script>
-			var app = {map:null, polygons:null, payload:{getMode:"polygons", runAOI:false, runLine:false, runRec:false, property:null, district:null, depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null}}; //added value for depth method
+			var app = {map:null, polygons:null, payload:{getMode:"polygons", runAOI:false, runLine:false, runRec:false, property:null, district:null, depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null, filter_prop:null, filter_prop_n:null}}; //added value for depth method
 			var hecho = false;
 			//var suggested = all the aliases of the properties, note: not all properties have an alias
 			$(document).ready(function(){
@@ -318,6 +339,7 @@
 					var ch2 = document.getElementById("select_chart_2");
 					var ch3 = document.getElementById("select_chart_3");
 					var ch4 = document.getElementById("select_chart_4");
+					var filt = document.getElementById("select_prop_filters");
 
 					var prop = [{number: 0, value: null, data: null, table: null},
 						{number: 1, value: null, data: null, table: null},
@@ -411,6 +433,15 @@
 						elem.table = prop[i].table;
 						ch4.appendChild(elem);
 					}
+					for(var i = 0; i < properties.length; i++) {
+						var propr = prop[i].number;
+						var elem = document.createElement("option");
+						elem.textContent = prop[i].value;
+						elem.value = propr;
+						elem.data = prop[i].data;
+						elem.table = prop[i].table;
+						filt.appendChild(elem);
+					}
 
 					$("#selectProp").change(function(){
 						app.payload.property =  prop[this.value].data; //ex. pi_r
@@ -432,6 +463,10 @@
 					$("#select_chart_4").change(function(){
 						app.payload.chart4 =  prop[this.value].data;
 						app.payload.chart4n = prop[this.value].value;
+					});
+					$("#select_prop_filt").change(function(){
+						app.payload.filter_prop =  prop[this.value].data;
+						app.payload.filter_prop_n = prop[this.value].value;
 					});
 
 					//create the autocomplete with the data
