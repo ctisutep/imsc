@@ -229,7 +229,7 @@
 											<div id="filters" class="tab-pane fade">
 												<div class="form-check">
 													<p class="form-check-label">
-														<input class="form-check-input" type="radio" name="exampleRadios" id="biggerThan" value="bigger" checked>
+														<input class="form-check-input" type="radio" name="exampleRadios" id="biggerThan" value="bigger">
 														Only color those polygons that are bigger than the unit value
 													</p>
 												</div>
@@ -470,10 +470,10 @@
 					});
 
 					$("#biggerThan").click(function(){
-						filter_value = this.value;
+						app.payload.filter_value = this.value;
 					});
 					$("#smallerThan").click(function(){
-						filter_value = this.value;
+						app.payload.filter_value = this.value;
 					});
 
 					//create the autocomplete with the data
@@ -499,6 +499,15 @@
 			function runAOI(){
 				app.payload.runAOI = true;
 				getPolygons();
+			}
+
+			function runFilters(){
+				if(app.payload.filter_value ==  null){
+					alert("Select criteria for filtering the result");
+				}
+				else{
+					console.log(app.payload.filter_value);
+				}
 			}
 
 			function getPolygons(){
