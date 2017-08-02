@@ -306,7 +306,7 @@
 											</select>
 										</div> <br>
 									</div>
-									<div class="col-md-5"><br><br><br><br>
+									<div class="col-md-5"><br><br><br><br><br>
 										<button type="button" class="btn btn-default form-control" id="draw" onclick="drawAnotherRectangle();">Clear AOI</button>
 									</div>
 								</div>
@@ -467,6 +467,13 @@
 					$("#select_prop_filt").change(function(){
 						app.payload.filter_prop =  prop[this.value].data;
 						app.payload.filter_prop_n = prop[this.value].value;
+					});
+
+					$("#biggerThan").click(function(){
+						console.log(this.value);
+					});
+					$("#smallerThan").click(function(){
+						console.log(this.value);
 					});
 
 					//create the autocomplete with the data
