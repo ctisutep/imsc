@@ -226,7 +226,7 @@
 													<input type="number" class="form-control" value="1" min="0"placeholder="...inches" id="labels" aria-describedby="basic-addon3">
 												</div>
 											</div>
-											<div id="filters" class="tab-pane fade">
+											<div id="filters" class="tab-pane fade"><br>
 												<div class="form-check">
 													<p class="form-check-label">
 														<input class="form-check-input" type="radio" name="exampleRadios" id="biggerThan" value="bigger">
