@@ -239,6 +239,12 @@
 														Color polygons that are smaller than the unit value
 													</p>
 												</div>
+												<div class="form-check">
+													<p class="form-check-label">
+														<input class="form-check-input" type="radio" name="exampleRadios" id="equalTo" value="equal">
+														Color polygons that are equal to the unit value
+													</p>
+												</div>
 												<div class="input-group">
 													<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
 													<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_prop_filters">
@@ -473,6 +479,9 @@
 						app.payload.filter_value = this.value;
 					});
 					$("#smallerThan").click(function(){
+						app.payload.filter_value = this.value;
+					});
+					$("#equalTo").click(function(){
 						app.payload.filter_value = this.value;
 					});
 
