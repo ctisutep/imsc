@@ -323,7 +323,7 @@
 			<script src="js/properties.js"></script>
 
 			<script>
-			var app = {map:null, polygons:null, payload:{getMode:"polygons", runAOI:false, runLine:false, runRec:false, property:null, district:null, depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null, filter_prop:null, filter_prop_n:null, filter_value:null}};
+			var app = {map:null, polygons:null, payload:{getMode:"polygons", runAOI:false, runLine:false, runRec:false, property:null, district:null, depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null, filter_prop:null, filter_prop_n:null, filter_value:null, filter_units:null}};
 			var hecho = false;
 			//var suggested = all the aliases of the properties, note: not all properties have an alias
 			$(document).ready(function(){
@@ -464,7 +464,7 @@
 						app.payload.chart4 =  prop[this.value].data;
 						app.payload.chart4n = prop[this.value].value;
 					});
-					$("#select_prop_filt").change(function(){
+					$("#select_prop_filters").change(function(){
 						app.payload.filter_prop =  prop[this.value].data;
 						app.payload.filter_prop_n = prop[this.value].value;
 					});
@@ -502,11 +502,19 @@
 			}
 
 			function runFilters(){
-				if(app.payload.filter_value ==  null){
+				var units = document.getElementById("filter_units").value;
+				if(app.payload.filter_value ==  null || app.payload.filter_prop == null){
 					alert("Select criteria for filtering the result");
 				}
+				else if(isNaN(units) == true || units < 0){
+					alert("Unit for filter has to be a non negative number");
+				}
 				else{
-					console.log(app.payload.filter_value);
+					//console.log(app.payload.filter_value);
+					//console.log(app.payload.filter_prop);
+					//console.log(app.payload.filter_prop_n);
+					//console.log(units);
+					getPolygons();
 				}
 			}
 
