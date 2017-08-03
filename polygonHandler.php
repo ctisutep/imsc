@@ -1735,7 +1735,6 @@ function getPolygons(){
 					}
 				}
 			}
-			echo $data->depth;
 			break;
 		}
 
