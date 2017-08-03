@@ -256,7 +256,7 @@
 									<div class="col-md-5"><br>
 										<div class="tab-content">
 											<div id="defaultbtn" class="tab-pane fade in active">
-												<button class="btn btn-success form-control" type="button" id="run" onClick="getPolygons()">Run</button><br><br>
+												<button class="btn btn-success form-control" type="button" id="run" onClick="getPolygonsHelper()">Run</button><br><br>
 												<button class="btn btn-success form-control" type="button" id="runAOI" onClick="runAOI()">Run AOI</button><br><br>
 												<button class="btn btn-warning form-control" type="button" id="clear" onClick="removePolygons()">Clear</button><br><br>
 												<button type="button" class="map-print" id="print" onClick="printMaps()">Print</button>
@@ -323,7 +323,7 @@
 			<script src="js/properties.js"></script>
 
 			<script>
-			var app = {map:null, polygons:null, payload:{getMode:"polygons", runAOI:false, runLine:false, runRec:false, property:null, district:null, depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null, filter_prop:null, filter_prop_n:null, filter_value:null, filter_units:null}};
+			var app = {map:null, polygons:null, payload:{getMode:"polygons", runAOI:false, runLine:false, runRec:false, runFilters:false, property:null, district:null, depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null, filter_prop:null, filter_prop_n:null, filter_value:false, filter_units:0}};
 			var hecho = false;
 			//var suggested = all the aliases of the properties, note: not all properties have an alias
 			$(document).ready(function(){
@@ -490,7 +490,6 @@
 				});
 				app.payload.district = $('#target').children("option:selected").data('district');
 
-
 				$("#methods").change(function(){ //0: max / 1: min / 2: median / 3: weight/
 					app.payload.depth_method = this.value;
 				});
@@ -498,11 +497,20 @@
 
 			function runAOI(){
 				app.payload.runAOI = true;
+				app.payload.runFilters = false;
+				/*app.payload.filter_value = null;
+				app.payload.filter_prop = null;
+				app.payload.filter_prop_n = null;
+				if(units != null || typeof units != 'undefined'){
+					units = null;
+				}*/
 				getPolygons();
 			}
 
 			function runFilters(){
 				var units = document.getElementById("filter_units").value;
+				app.payload.runFilters = true;
+				app.payload.runAOI = false;
 				if(app.payload.filter_value ==  null || app.payload.filter_prop == null){
 					alert("Select criteria for filtering the result");
 				}
@@ -514,8 +522,21 @@
 					//console.log(app.payload.filter_prop);
 					//console.log(app.payload.filter_prop_n);
 					//console.log(units);
+					app.payload.filter_units = units;
 					getPolygons();
 				}
+			}
+
+			function getPolygonsHelper(){
+				/*app.payload.filter_value = null;
+				app.payload.filter_prop = null;
+				app.payload.filter_prop_n = null;
+				if(units != null || typeof units != 'undefined'){
+					units = null;
+				}*/
+				app.payload.runFilters = false;
+				app.payload.runAOI = false;
+				getPolygons();
 			}
 
 			function getPolygons(){
