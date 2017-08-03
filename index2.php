@@ -230,13 +230,13 @@
 												<div class="form-check">
 													<p class="form-check-label">
 														<input class="form-check-input" type="radio" name="exampleRadios" id="biggerThan" value="bigger">
-														Only color those polygons that are bigger than the unit value
+														Color polygons that are bigger than the unit value
 													</p>
 												</div>
 												<div class="form-check">
 													<p class="form-check-label">
 														<input class="form-check-input" type="radio" name="exampleRadios" id="smallerThan" value="smaller">
-														Only color those polygons that are smaller than the unit value
+														Color polygons that are smaller than the unit value
 													</p>
 												</div>
 												<div class="input-group">
@@ -511,6 +511,9 @@
 				var units = document.getElementById("filter_units").value;
 				app.payload.runFilters = true;
 				app.payload.runAOI = false;
+				app.payload.property = app.payload.filter_prop;
+				app.payload.table = "chorizon_r";
+				app.payload.value = app.payload.filter_prop_n;
 				if(app.payload.filter_value ==  null || app.payload.filter_prop == null){
 					alert("Select criteria for filtering the result");
 				}
