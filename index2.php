@@ -507,12 +507,6 @@
 			function runAOI(){
 				app.payload.runAOI = true;
 				app.payload.runFilters = false;
-				/*app.payload.filter_value = null;
-				app.payload.filter_prop = null;
-				app.payload.filter_prop_n = null;
-				if(units != null || typeof units != 'undefined'){
-					units = null;
-				}*/
 				getPolygons();
 			}
 
@@ -530,22 +524,12 @@
 					alert("Unit for filter has to be a non negative number");
 				}
 				else{
-					//console.log(app.payload.filter_value);
-					//console.log(app.payload.filter_prop);
-					//console.log(app.payload.filter_prop_n);
-					//console.log(units);
 					app.payload.filter_units = units;
 					getPolygons();
 				}
 			}
 
 			function getPolygonsHelper(){
-				/*app.payload.filter_value = null;
-				app.payload.filter_prop = null;
-				app.payload.filter_prop_n = null;
-				if(units != null || typeof units != 'undefined'){
-					units = null;
-				}*/
 				app.payload.runFilters = false;
 				app.payload.runAOI = false;
 				getPolygons();
@@ -557,7 +541,6 @@
 				hecho = false;
 				var depth = document.getElementById("depth").value;
 				depth = parseFloat(depth);
-
 				app.payload.depth = depth;
 				if(app.payload.property && app.payload.district && (isNaN(depth)==false)){//to make sure a property is selected
 					if(app.payload.runAOI == true && typeof rec != 'undefined' && rec.type == 'rectangle'){
