@@ -223,7 +223,7 @@
 												</select><br>
 												<div class="input-group">
 													<span class="input-group-addon" id="basic-addon3"># of labels</span>
-													<input type="number" class="form-control" value="1" min="0"placeholder="...inches" id="labels" aria-describedby="basic-addon3">
+													<input type="number" class="form-control" value="1" min="0"placeholder="...labels" id="labels" aria-describedby="basic-addon3">
 												</div>
 											</div>
 											<div id="filters" class="tab-pane fade"><br>
