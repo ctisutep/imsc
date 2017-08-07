@@ -223,7 +223,7 @@
 												</select><br>
 												<div class="input-group">
 													<span class="input-group-addon" id="basic-addon3"># of labels</span>
-													<input type="number" class="form-control" value="1" min="0"placeholder="...labels" id="labels" aria-describedby="basic-addon3">
+													<input type="number" class="form-control" value="1" min="1"placeholder="...labels" id="labels" aria-describedby="basic-addon3">
 												</div>
 											</div>
 											<div id="filters" class="tab-pane fade"><br>
@@ -254,6 +254,10 @@
 												<div class="input-group">
 													<span class="input-group-addon" id="basic-addon3">unit value</span>
 													<input type="number" class="form-control" value="1" min="0"placeholder="...units" id="filter_units" aria-describedby="basic-addon3">
+												</div><br>
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon3"># of labels</span>
+													<input type="number" class="form-control" value="1" min="1"placeholder="...labels" id="labels_filter" aria-describedby="basic-addon3">
 												</div>
 											</div>
 										</div>
@@ -329,7 +333,7 @@
 			<script src="js/properties.js"></script>
 
 			<script>
-			var app = {map:null, polygons:null, payload:{getMode:"polygons", runAOI:false, runLine:false, runRec:false, runFilters:false, property:null, district:null, depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null, filter_prop:null, filter_prop_n:null, filter_value:false, filter_units:0}};
+			var app = {map:null, polygons:null, label:"no filter", payload:{getMode:"polygons", runAOI:false, runLine:false, runRec:false, runFilters:false, property:null, district:null, depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null, filter_prop:null, filter_prop_n:null, filter_value:false, filter_units:0}};
 			var hecho = false;
 			//var suggested = all the aliases of the properties, note: not all properties have an alias
 			$(document).ready(function(){
@@ -485,6 +489,14 @@
 						app.payload.filter_value = this.value;
 					});
 
+					//labelSelector;
+					$("#labels,#run,#default,#defaultbtn").click(function(){
+						app.label = "no filter";
+					});
+					$("#labels_filter,#filters,#filtersbtn").click(function(){
+						app.label = "filter";
+					});
+
 					//create the autocomplete with the data
 					$('#autocomplete').autocomplete({
 						lookup: properties,
@@ -518,7 +530,7 @@
 				app.payload.table = "chorizon_r";
 				app.payload.value = app.payload.filter_prop_n;
 				if(app.payload.filter_value ==  null || app.payload.filter_prop == null){
-					alert("Select criteria for filtering the result");
+					alert("Select criteria for filtering the result and ground property");
 				}
 				else if(isNaN(units) == true || units < 0){
 					alert("Unit for filter has to be a non negative number");
@@ -595,7 +607,7 @@
 								$('#legend').find('*').not('h3').remove();
 								var div = document.createElement('div');
 								div.innerHTML = "<strong>" + "Legend N/A" + "</strong>" + "<br>" + "<img src='img/brightgreensquare.png' height='10px'/> "
-								+ " 0 to " + maximum;
+								+ " 0 to 0";
 								var l = document.createElement('div');
 								l = document.getElementById('legend');
 								l.appendChild(div);
@@ -2138,13 +2150,17 @@
 			"<img src='img/brownsquare.png' height='10px'/>",
 			"<img src='img/neongreensquare.png' height='10px'/>",
 			"<img src='img/neonpurplesquare.png' height='10px'/>",
-			"<img src='img/graysquare.png' height='10px'/>"]
+			"<img src='img/graysquare.png' height='10px'/>"];
 
 			$('#legendSpawner').find('*').not('h3').remove();
-			var labels = document.getElementById('labels').value;
-
+			if(app.label == "no filter"){
+				var labels = document.getElementById('labels').value;
+			}
+			else{
+					var labels = document.getElementById('labels_filter').value;
+			}
 			if(labels <= 0 || value <= 0 ){
-				alert("Zero labels & zero value; negative numbers");
+				//alert("Zero labels & zero value; negative numbers");
 			}
 			else{
 				var range = (value/labels);
