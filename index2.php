@@ -2197,7 +2197,6 @@
 					var labels = document.getElementById('labels_filter').value;
 			}
 			if(labels <= 0 || value <= 0 ){
-
 			}
 			else{
 				var range = (value/labels);
