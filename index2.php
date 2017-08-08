@@ -224,24 +224,24 @@
 												<div class="input-group">
 													<span class="input-group-addon" id="basic-addon3"># of labels</span>
 													<input type="number" class="form-control" value="1" min="1"placeholder="...labels" id="labels" aria-describedby="basic-addon3">
-												</div>
+												</div><br>
 											</div>
 											<div id="filters" class="tab-pane fade"><br>
 												<div class="form-check">
 													<p class="form-check-label">
-														<input class="form-check-input" type="radio" name="exampleRadios" id="biggerThan" value="bigger">
+														<input class="form-check-input" type="radio" name="radios" id="biggerThan" value="bigger">
 														Color polygons that are bigger than the unit value
 													</p>
 												</div>
 												<div class="form-check">
 													<p class="form-check-label">
-														<input class="form-check-input" type="radio" name="exampleRadios" id="smallerThan" value="smaller">
+														<input class="form-check-input" type="radio" name="radios" id="smallerThan" value="smaller">
 														Color polygons that are smaller than the unit value
 													</p>
 												</div>
 												<div class="form-check">
 													<p class="form-check-label">
-														<input class="form-check-input" type="radio" name="exampleRadios" id="equalTo" value="equal">
+														<input class="form-check-input" type="radio" name="radios" id="equalTo" value="equal">
 														Color polygons that are equal to the unit value
 													</p>
 												</div>
@@ -258,7 +258,7 @@
 												<div class="input-group">
 													<span class="input-group-addon" id="basic-addon3"># of labels</span>
 													<input type="number" class="form-control" value="1" min="1"placeholder="...labels" id="labels_filter" aria-describedby="basic-addon3">
-												</div>
+												</div><br>
 											</div>
 											<div id="statistics" class="tab-pane fade"><br>
 													<label>Select parameters:</label>
