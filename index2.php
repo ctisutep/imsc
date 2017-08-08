@@ -550,7 +550,7 @@
 					if(app.payload.runAOI == true && typeof rec != 'undefined' && rec.type == 'rectangle'){
 						var getparams = app.payload;
 						var bounds = rec.getBounds();
-						getparams.NE = bounds.getNorthEast().toJSON(); //north east corner
+						getparams.NE = bounds.getNorthEast().toJSON();
 						getparams.SW = bounds.getSouthWest().toJSON();
 					}
 					else{
@@ -733,7 +733,7 @@
 									for (var i = 0; i < temp.length; i++) {
 										polyCoordis.push(temp[i]);
 									}
-									var polygon = new google.maps.Polygon({ //we need another value to determine the key
+									var polygon = new google.maps.Polygon({
 										description: app.payload.value, //value that appears when you click the map
 										description_value: data.coords[key][app.payload.property],
 										paths: polyCoordis,
@@ -754,10 +754,9 @@
 					}).done(function(data){
 						$(document.body).css({'cursor': 'auto'});
 
-					if(app.payload.property == 'gypsum_r'){ //should have made it like this: if(app.payload.value == "gypsum"){ //but it's too late now
+					if(app.payload.property == 'gypsum_r'){
 						var gypsum = "Description for Gypsum: ";
-						var gypsumText = "The content of gypsum is the percent, by weight, of hydrated calcium sulfates in the fraction of the soil less than 20 millimeters in size. "; // Gypsum is partially soluble in water. Soils high in content of gypsum, such as those with more than 10 percent gypsum, may collapse if the gypsum is removed by percolating water. Gypsum is corrosive to concrete.
-						//For each soil layer, this attribute is actually recorded as three separate values in the database. A low value and a high value indicate the range of this attribute for the soil component. A \"representative\" value indicates the expected value of this attribute for the component. For this soil property, only the representative value is used.";
+						var gypsumText = "The content of gypsum is the percent, by weight, of hydrated calcium sulfates in the fraction of the soil less than 20 millimeters in size. ";
 						var h3 = document.createElement('h3');
 						h3.innerHTML = gypsum;
 						var div = document.createElement('div');
@@ -1117,7 +1116,6 @@
 			app.infoWindow = new google.maps.InfoWindow;
 
 			app.map.addListener('click', function(e) {
-				// console.log(e.latLng.toString());
 			});
 
 			drawingManager = new google.maps.drawing.DrawingManager({
@@ -1421,7 +1419,6 @@
 							// bar: { width: 5 },
 							hAxis: {
 								type: 'category'
-								// , viewWindow: { min: 0, max: 6 } // note min and max values are indices when type is category.
 							}
 						};
 
@@ -1512,7 +1509,6 @@
 							// bar: { width: 5 },
 							hAxis: {
 								type: 'category'
-								// , viewWindow: { min: 0, max: 6 } // note min and max values are indices when type is category.
 							}
 						};
 
@@ -1602,7 +1598,6 @@
 							// bar: { width: 5 },
 							hAxis: {
 								type: 'category'
-								// , viewWindow: { min: 0, max: 6 } // note min and max values are indices when type is category.
 							}
 						};
 
@@ -1692,7 +1687,6 @@
 							// bar: { width: 5 },
 							hAxis: {
 								type: 'category'
-								// , viewWindow: { min: 0, max: 6 } // note min and max values are indices when type is category.
 							}
 						};
 
@@ -1714,8 +1708,8 @@
 				app.payload.getMode = "line";
 				var getparams = app.payload;
 				var bounds = app.map.getBounds();
-				getparams.NE = bounds.getNorthEast().toJSON(); //north east corner
-				getparams.SW = bounds.getSouthWest().toJSON(); //south-west corner
+				getparams.NE = bounds.getNorthEast().toJSON();
+				getparams.SW = bounds.getSouthWest().toJSON();
 				if(x == 1){
 					previous1 = app.payload.chart1;
 					previous2 = app.payload.chart2;
@@ -1795,7 +1789,6 @@
 							// bar: { width: 5 },
 							hAxis: {
 								type: 'category'
-								// , viewWindow: { min: 0, max: 6 } // note min and max values are indices when type is category.
 							}
 						};
 
@@ -1885,7 +1878,6 @@
 							// bar: { width: 5 },
 							hAxis: {
 								type: 'category'
-								// , viewWindow: { min: 0, max: 6 } // note min and max values are indices when type is category.
 							}
 						};
 
@@ -1975,7 +1967,6 @@
 							// bar: { width: 5 },
 							hAxis: {
 								type: 'category'
-								// , viewWindow: { min: 0, max: 6 } // note min and max values are indices when type is category.
 							}
 						};
 
@@ -2065,7 +2056,6 @@
 							// bar: { width: 5 },
 							hAxis: {
 								type: 'category'
-								// , viewWindow: { min: 0, max: 6 } // note min and max values are indices when type is category.
 							}
 						};
 
@@ -2180,7 +2170,6 @@
 			return shape_s;
 		}
 
-
 		function spawn(value){
 			var squareboxes = ["<img src='img/brightgreensquare.png' height='10px'/>",
 			"<img src='img/skybluesquare.png' height='10px'/>",
@@ -2208,7 +2197,7 @@
 					var labels = document.getElementById('labels_filter').value;
 			}
 			if(labels <= 0 || value <= 0 ){
-				//alert("Zero labels & zero value; negative numbers");
+
 			}
 			else{
 				var range = (value/labels);
@@ -2235,7 +2224,6 @@
 		}
 		// ***********
 		</script>
-		<!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCY0B3_Fr1vRpgJDdbvNmrVyXmoOOtiq64&callback=initMap"></script>-->
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCY0B3_Fr1vRpgJDdbvNmrVyXmoOOtiq64&libraries=drawing&callback=initMap"async defer></script>
 	</body>
 	</html>
