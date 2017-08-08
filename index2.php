@@ -34,7 +34,7 @@
 		padding: 6px;
 		margin: 30px;
 		border: 3px solid #000;
-		margin-top: 50px;
+		margin-top: 25px;
 		margin-bottom: 20px;
 	}
 	#legend h3 {
@@ -298,18 +298,15 @@
 												<button type="button" class="map-print" id="print" onClick="printMaps()">Print</button>
 											</div>
 											<div id="filtersbtn" class="tab-pane fade"><br><br><br><br>
-												<button class="btn btn-success form-control" type="button" id="runFilters" onClick="runFilters()">Run Filter</button><br><br>
+												<button class="btn btn-success form-control" type="button" id="runFilters" onClick="runFilters()">Run Filter</button>
 											</div>
 											<div id="statisticsbtn" class="tab-pane fade"><br><br><br><br>
-												<button type="button" class="btn btn-default form-control" id="draw" onclick="drawAnotherRectangle();">Clear AOI</button><br><br>
+												<button type="button" class="btn btn-default form-control" id="draw" onclick="drawAnotherRectangle();">Clear AOI</button>
 											</div>
 										</div>
 									</div> <!-- end column for buttons-->
 								</div>
 								<div class="row">
-									<div class="col-md-5 col-sm-11 col-lg-7">
-										<!--unused col -->
-									</div>
 									<div class"col-md-7">
 										<div id="legend" style='visibility: hidden'>
 										</div>
