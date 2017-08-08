@@ -193,10 +193,10 @@
 								<center><label>Soil Mapping</label></center>
 								<div class="row">
 									<ul class="nav nav-tabs">
-										<li class="active"><a data-toggle="tab" href="#default" data-target="#default, #defaultbtn">Default</a></li>
-										<li><a data-toggle="tab" href="#filters" data-target="#filters, #filtersbtn">Filter</a></li>
+										<li class="active"><a data-toggle="tab" href="#default,#defaultbtn" data-target="#default, #defaultbtn">Default</a></li>
+										<li><a data-toggle="tab" href="#filters,#filtersbtn" data-target="#filters, #filtersbtn">Filter</a></li>
+										<li><a data-toggle="tab" href="#statistics,#statisticsbtn" data-target="#statistics, #statisticsbtn">Statistics</a></li>
 									</ul>
-
 									<div class="col-md-5 col-sm-11 col-lg-7">
 										<div class="tab-content">
 											<div id="default" class="tab-pane fade in active">
@@ -260,9 +260,35 @@
 													<input type="number" class="form-control" value="1" min="1"placeholder="...labels" id="labels_filter" aria-describedby="basic-addon3">
 												</div>
 											</div>
+											<div id="statistics" class="tab-pane fade"><br>
+													<label>Select parameters:</label>
+													<div class="input-group">
+														<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+														<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_1">
+															<option value="" disabled selected>Select a ground property</option>
+														</select>
+													</div> <br>
+													<div class="input-group">
+														<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+														<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_2">
+															<option value="" disabled selected>Select a ground property</option>
+														</select>
+													</div> <br>
+													<div class="input-group">
+														<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+														<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_3">
+															<option value="" disabled selected>Select a ground property</option>
+														</select>
+													</div> <br>
+													<div class="input-group">
+														<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+														<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_4">
+															<option value="" disabled selected>Select a ground property</option>
+														</select>
+													</div> <br>
+											</div>
 										</div>
 									</div> <!--end column for selectors-->
-
 									<div class="col-md-5"><br>
 										<div class="tab-content">
 											<div id="defaultbtn" class="tab-pane fade in active">
@@ -274,9 +300,11 @@
 											<div id="filtersbtn" class="tab-pane fade"><br><br><br><br>
 												<button class="btn btn-success form-control" type="button" id="runFilters" onClick="runFilters()">Run Filter</button><br><br>
 											</div>
+											<div id="statisticsbtn" class="tab-pane fade"><br><br><br><br>
+												<button type="button" class="btn btn-default form-control" id="draw" onclick="drawAnotherRectangle();">Clear AOI</button><br><br>
+											</div>
 										</div>
 									</div> <!-- end column for buttons-->
-
 								</div>
 								<div class="row">
 									<div class="col-md-5 col-sm-11 col-lg-7">
@@ -285,39 +313,6 @@
 									<div class"col-md-7">
 										<div id="legend" style='visibility: hidden'>
 										</div>
-									</div>
-								</div>
-								<div class="row panel panel-default">
-									<center><label>Statistics</label></center>
-									<div class="col-lg-6">
-										<label>Select parameters:</label>
-										<div class="input-group">
-											<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
-											<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_1">
-												<option value="" disabled selected>Select a ground property</option>
-											</select>
-										</div> <br>
-										<div class="input-group">
-											<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
-											<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_2">
-												<option value="" disabled selected>Select a ground property</option>
-											</select>
-										</div> <br>
-										<div class="input-group">
-											<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
-											<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_3">
-												<option value="" disabled selected>Select a ground property</option>
-											</select>
-										</div> <br>
-										<div class="input-group">
-											<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
-											<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_4">
-												<option value="" disabled selected>Select a ground property</option>
-											</select>
-										</div> <br>
-									</div>
-									<div class="col-md-5"><br><br><br><br><br>
-										<button type="button" class="btn btn-default form-control" id="draw" onclick="drawAnotherRectangle();">Clear AOI</button>
 									</div>
 								</div>
 							</div>
