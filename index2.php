@@ -1402,11 +1402,16 @@
 						data.addRows(histo_array.length);
 						var max = Math.max(...histo_array);
 						for (var i = 0; i < histo_array.length; i++) {
-							data.setCell(i, 1, histo_array[i]);
+							data.setCell(i, 1, parseFloat(histo_array[i]));
 						}
 						var size;
 						size = Math.sqrt(histo_array.length - 1) - 1;
-						size = max/size;
+						if(size == 0){
+							size = 1;
+							size = max/size;
+						}else{
+							size = max/size;
+						}
 						size = parseFloat(size).toFixed(2);
 						var options = {
 							title: app.payload.chart1n,
@@ -1492,7 +1497,12 @@
 						}
 						var size;
 						size = Math.sqrt(histo_array.length - 1) - 1;
-						size = max/size;
+						if(size == 0){
+							size = 1;
+							size = max/size;
+						}else{
+							size = max/size;
+						}
 						size = parseFloat(size).toFixed(2);
 						var options = {
 							title: app.payload.chart2n,
@@ -1577,7 +1587,12 @@
 						}
 						var size;
 						size = Math.sqrt(histo_array.length - 1) - 1;
-						size = max/size;
+						if(size == 0){
+							size = 1;
+							size = max/size;
+						}else{
+							size = max/size;
+						}
 						size = parseFloat(size).toFixed(2);
 						var options = {
 							title: app.payload.chart3n,
@@ -1662,7 +1677,12 @@
 						}
 						var size;
 						size = Math.sqrt(histo_array.length - 1) - 1;
-						size = max/size;
+						if(size == 0){
+							size = 1;
+							size = max/size;
+						}else{
+							size = max/size;
+						}
 						size = parseFloat(size).toFixed(2);
 						var options = {
 							title: app.payload.chart4n,
@@ -1760,7 +1780,12 @@
 						}
 						var size;
 						size = Math.sqrt(histo_array.length - 1) - 1;
-						size = max/size;
+						if(size == 0){
+							size = 1;
+							size = max/size;
+						}else{
+							size = max/size;
+						}
 						size = parseFloat(size).toFixed(2);
 						var options = {
 							title: app.payload.chart1n,
@@ -1845,7 +1870,12 @@
 						}
 						var size;
 						size = Math.sqrt(histo_array.length - 1) - 1;
-						size = max/size;
+						if(size == 0){
+							size = 1;
+							size = max/size;
+						}else{
+							size = max/size;
+						}
 						size = parseFloat(size).toFixed(2);
 						var options = {
 							title: app.payload.chart2n,
@@ -1930,7 +1960,12 @@
 						}
 						var size;
 						size = Math.sqrt(histo_array.length - 1) - 1;
-						size = max/size;
+						if(size == 0){
+							size = 1;
+							size = max/size;
+						}else{
+							size = max/size;
+						}
 						size = parseFloat(size).toFixed(2);
 						var options = {
 							title: app.payload.chart3n,
@@ -2015,7 +2050,12 @@
 						}
 						var size;
 						size = Math.sqrt(histo_array.length - 1) - 1;
-						size = max/size;
+						if(size == 0){
+							size = 1;
+							size = max/size;
+						}else{
+							size = max/size;
+						}
 						size = parseFloat(size).toFixed(2);
 						var options = {
 							title: app.payload.chart4n,
