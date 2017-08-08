@@ -1400,6 +1400,7 @@
 					app.payload.getMode = "histogram";
 					$.get('polygonHandler.php', app.payload, function(data){
 						histo_array = data.values;
+						histo_array = histo_array.filter(nums => nums != "");
 						var data = new google.visualization.DataTable();
 						data.addColumn('string', 'Property');
 						data.addColumn('number', 'Value');
@@ -1409,8 +1410,9 @@
 							data.setCell(i, 1, histo_array[i]);
 						}
 						var size;
-						size = Math.ceil(Math.sqrt(histo_array.length - 1)) - 1;
-						size = Math.ceil(max/size);
+						size = Math.sqrt(histo_array.length - 1) - 1;
+						size = max/size;
+						size = parseFloat(size).toFixed(2);
 						var options = {
 							title: app.payload.chart1n,
 							legend: {
@@ -1484,6 +1486,7 @@
 					app.payload.getMode = "histogram";
 					$.get('polygonHandler.php', app.payload, function(data){
 						histo_array = data.values;
+						histo_array = histo_array.filter(nums => nums != "");
 						var data = new google.visualization.DataTable();
 						data.addColumn('string', 'Property');
 						data.addColumn('number', 'Value');
@@ -1493,8 +1496,9 @@
 							data.setCell(i, 1, histo_array[i]);
 						}
 						var size;
-						size = Math.ceil(Math.sqrt(histo_array.length - 1)) - 1;
-						size = Math.ceil(max/size);
+						size = Math.sqrt(histo_array.length - 1) - 1;
+						size = max/size;
+						size = parseFloat(size).toFixed(2);
 						var options = {
 							title: app.payload.chart2n,
 							legend: {
@@ -1567,6 +1571,7 @@
 					app.payload.getMode = "histogram";
 					$.get('polygonHandler.php', app.payload, function(data){
 						histo_array = data.values;
+						histo_array = histo_array.filter(nums => nums != "");
 						var data = new google.visualization.DataTable();
 						data.addColumn('string', 'Property');
 						data.addColumn('number', 'Value');
@@ -1576,8 +1581,9 @@
 							data.setCell(i, 1, histo_array[i]);
 						}
 						var size;
-						size = Math.ceil(Math.sqrt(histo_array.length - 1)) - 1;
-						size = Math.ceil(max/size);
+						size = Math.sqrt(histo_array.length - 1) - 1;
+						size = max/size;
+						size = parseFloat(size).toFixed(2);
 						var options = {
 							title: app.payload.chart3n,
 							legend: {
@@ -1650,6 +1656,7 @@
 					app.payload.getMode = "histogram";
 					$.get('polygonHandler.php', app.payload, function(data){
 						histo_array = data.values;
+						histo_array = histo_array.filter(nums => nums != "");
 						var data = new google.visualization.DataTable();
 						data.addColumn('string', 'Property');
 						data.addColumn('number', 'Value');
@@ -1659,8 +1666,9 @@
 							data.setCell(i, 1, histo_array[i]);
 						}
 						var size;
-						size = Math.ceil(Math.sqrt(histo_array.length - 1)) - 1;
-						size = Math.ceil(max/size);
+						size = Math.sqrt(histo_array.length - 1) - 1;
+						size = max/size;
+						size = parseFloat(size).toFixed(2);
 						var options = {
 							title: app.payload.chart4n,
 							legend: {
@@ -1746,6 +1754,7 @@
 					app.payload.getMode = "histogram";
 					$.get('polygonHandler.php', app.payload, function(data){
 						histo_array = data.values;
+						histo_array = histo_array.filter(nums => nums != "");
 						var data = new google.visualization.DataTable();
 						data.addColumn('string', 'Property');
 						data.addColumn('number', 'Value');
@@ -1755,8 +1764,9 @@
 							data.setCell(i, 1, histo_array[i]);
 						}
 						var size;
-						size = Math.ceil(Math.sqrt(histo_array.length - 1)) - 1;
-						size = Math.ceil(max/size);
+						size = Math.sqrt(histo_array.length - 1) - 1;
+						size = max/size;
+						size = parseFloat(size).toFixed(2);
 						var options = {
 							title: app.payload.chart1n,
 							legend: {
@@ -1829,6 +1839,7 @@
 					app.payload.getMode = "histogram";
 					$.get('polygonHandler.php', app.payload, function(data){
 						histo_array = data.values;
+						histo_array = histo_array.filter(nums => nums != "");
 						var data = new google.visualization.DataTable();
 						data.addColumn('string', 'Property');
 						data.addColumn('number', 'Value');
@@ -1838,8 +1849,9 @@
 							data.setCell(i, 1, histo_array[i]);
 						}
 						var size;
-						size = Math.ceil(Math.sqrt(histo_array.length - 1)) - 1;
-						size = Math.ceil(max/size);
+						size = Math.sqrt(histo_array.length - 1) - 1;
+						size = max/size;
+						size = parseFloat(size).toFixed(2);
 						var options = {
 							title: app.payload.chart2n,
 							legend: {
@@ -1912,6 +1924,7 @@
 					app.payload.getMode = "histogram";
 					$.get('polygonHandler.php', app.payload, function(data){
 						histo_array = data.values;
+						histo_array = histo_array.filter(nums => nums != "");
 						var data = new google.visualization.DataTable();
 						data.addColumn('string', 'Property');
 						data.addColumn('number', 'Value');
@@ -1921,8 +1934,9 @@
 							data.setCell(i, 1, histo_array[i]);
 						}
 						var size;
-						size = Math.ceil(Math.sqrt(histo_array.length - 1)) - 1;
-						size = Math.ceil(max/size);
+						size = Math.sqrt(histo_array.length - 1) - 1;
+						size = max/size;
+						size = parseFloat(size).toFixed(2);
 						var options = {
 							title: app.payload.chart3n,
 							legend: {
@@ -1995,6 +2009,7 @@
 					app.payload.getMode = "histogram";
 					$.get('polygonHandler.php', app.payload, function(data){
 						histo_array = data.values;
+						histo_array = histo_array.filter(nums => nums != "");
 						var data = new google.visualization.DataTable();
 						data.addColumn('string', 'Property');
 						data.addColumn('number', 'Value');
@@ -2004,8 +2019,9 @@
 							data.setCell(i, 1, histo_array[i]);
 						}
 						var size;
-						size = Math.ceil(Math.sqrt(histo_array.length - 1)) - 1;
-						size = Math.ceil(max/size);
+						size = Math.sqrt(histo_array.length - 1) - 1;
+						size = max/size;
+						size = parseFloat(size).toFixed(2);
 						var options = {
 							title: app.payload.chart4n,
 							legend: {
