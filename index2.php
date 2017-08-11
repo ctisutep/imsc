@@ -1266,20 +1266,28 @@
 					bounds = rec.getBounds();
 					getparams.NE = bounds.getNorthEast().toJSON();
 					getparams.SW = bounds.getSouthWest().toJSON();
-					previous1 = app.payload.chart1;
-					previous2 = app.payload.chart2;
-					previous3 = app.payload.chart3;
-					previous4 = app.payload.chart4;
-					var chart_divs = ['chart_area_1', 'chart_area_2','chart_area_3', 'chart_area_4'];
+
+
+					/*var chart_divs = ['chart_area_1', 'chart_area_2','chart_area_3', 'chart_area_4'];
 					var histogram_divs = ['chart_histogram_1', 'chart_histogram_2', 'chart_histogram_3', 'chart_histogram_4'];
 					var chart_ns = ['chart1n', 'chart2n', 'chart3n', 'chart4n'];
 					var data_arr = ['maxAOIch','minAOIch','medAOIch','weightedAOIch'];
+					var chars = ['chart', 'chart_2','chart_3','chart_4'];
+					var chart_histos = ['chart_histo', 'chart_histo_2','chart_histo_3','chart_histo_4'];
+
 
 					for (var i = 0; i < chart_divs.length; i++) {
-
-					}
+						//var name = chart_ns[i];
+						var name = 'app.payload.'+chart_ns[i];
+						//log = x;
+						console.log(eval(name));
+					}*/
 
 					if(x == 1){
+						previous1 = app.payload.chart1;
+						previous2 = app.payload.chart2;
+						previous3 = app.payload.chart3;
+						previous4 = app.payload.chart4;
 						app.payload.chart1;
 						app.payload.chart2 = null;
 						app.payload.chart3 = null;
@@ -1353,8 +1361,8 @@
 								}
 							};
 
-							chart = new google.visualization.Histogram(document.getElementById('chart_histogram_1'));
-							chart.draw(data, options);
+							chart_histo = new google.visualization.Histogram(document.getElementById('chart_histogram_1'));
+							chart_histo.draw(data, options);
 						});
 						app.payload.getMode = "AOI";
 						app.payload.chart1 = previous1;
@@ -1401,8 +1409,8 @@
 								vAxis: {
 								}
 							};
-							chart = new google.visualization.BarChart(document.getElementById('chart_area_2'));
-							chart.draw(data, options);
+							chart_2 = new google.visualization.BarChart(document.getElementById('chart_area_2'));
+							chart_2.draw(data, options);
 						});
 
 						var histo_array;
@@ -1440,8 +1448,8 @@
 								}
 							};
 
-							chart = new google.visualization.Histogram(document.getElementById('chart_histogram_2'));
-							chart.draw(data, options);
+							chart_histo_2 = new google.visualization.Histogram(document.getElementById('chart_histogram_2'));
+							chart_histo_2.draw(data, options);
 						});
 						app.payload.chart1 = previous1;
 						app.payload.chart2 = previous2;
