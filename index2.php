@@ -1106,7 +1106,8 @@
 							lineParser();
 						}
 						clickRec(rec);
-						chartChecker();
+						//chartChecker();
+						drawChart(5);
 					});
 
 					google.maps.event.addListener(rec, 'bounds_changed', function() {
@@ -1229,6 +1230,15 @@
 				}
 			}
 
+			function nullSelector(x){
+				for (var i = 0; i < 4; i++) {
+					if(x != i){
+						var temp = 'app.payload.chart'+(i+1)+' = null;';
+						temp = eval(temp);
+					}
+				}
+			}
+
 			function drawChart(x) {
 				if(typeof chart === 'undefined'){
 				}else{
@@ -1267,25 +1277,30 @@
 					getparams.NE = bounds.getNorthEast().toJSON();
 					getparams.SW = bounds.getSouthWest().toJSON();
 
+					console.log(chart);
+					console.log(chart_2);
+					console.log(chart_3);
+					console.log(chart_4);
+					console.log(chart_histo);
+					console.log(chart_histo_2);
+					console.log(chart_histo_3);
+					console.log(chart_histo_4);
 
 					var chart_divs = ['chart_area_1', 'chart_area_2','chart_area_3', 'chart_area_4'];
 					var histogram_divs = ['chart_histogram_1', 'chart_histogram_2', 'chart_histogram_3', 'chart_histogram_4'];
 					var chart_ns = ['chart1n', 'chart2n', 'chart3n', 'chart4n'];
 					var data_arr = ['maxAOIch','minAOIch','medAOIch','weightedAOIch'];
-					var chars = ['chart', 'chart_2','chart_3','chart_4'];
-					var chart_histos = ['chart_histo', 'chart_histo_2','chart_histo_3','chart_histo_4'];
+					var charts = [chart, chart_2, chart_3, chart_4];
+					var chart_histos = [chart_histo, chart_histo_2, chart_histo_3, chart_histo_4];
 
 					previous1 = app.payload.chart1;
 					previous2 = app.payload.chart2;
 					previous3 = app.payload.chart3;
 					previous4 = app.payload.chart4;
 
-					for (var i = 0; i < chart_divs.length; i++) {
-						//console.log(chart_divs[i]);
-						//console.log(histogram_divs[i]);
-					}
-
 					for (var i = 0; i < chart_divs.length-3; i++) {
+						(function (i){
+						console.log(i);
 						var name = 'app.payload.'+chart_ns[i];
 						name = eval(name);
 						var datos_max = 'data.'+data_arr[0]+(i+1);
@@ -1294,11 +1309,10 @@
 						var datos_avg = 'data.'+data_arr[3]+(i+1);
 						var elem_chart = chart_divs[i];
 						var elem_histo = histogram_divs[i];
+						var bar_init = charts[i];
+						var histo_init = chart_histos[i];
 
-						app.payload.chart1;//need helper function to make the corresponding instance null
-						app.payload.chart2 = null; //if i = 0, chart1 is not null, the rest is null, and so it goes
-						app.payload.chart3 = null;
-						app.payload.chart4 = null;
+						nullSelector(i);
 
 						$.get('polygonHandler.php', app.payload, function(data){
 							maxaoi = parseFloat(eval(datos_max));
@@ -1330,8 +1344,9 @@
 								vAxis: {
 								}
 							};
-							chart = new google.visualization.BarChart(document.getElementById(elem_chart));
-							chart.draw(data, options);
+							console.log(bar_init);
+							bar_init = new google.visualization.BarChart(document.getElementById(elem_chart));
+							bar_init.draw(data, options);
 						});
 
 						var histo_array;
@@ -1368,16 +1383,17 @@
 									type: 'category'
 								}
 							};
-
-							chart_histo = new google.visualization.Histogram(document.getElementById(elem_histo));
-							chart_histo.draw(data, options);
+							console.log(histo_init);
+							histo_init = new google.visualization.Histogram(document.getElementById(elem_histo));
+							histo_init.draw(data, options);
 						});
 						app.payload.getMode = "AOI";
 						app.payload.chart1 = previous1;
 						app.payload.chart2 = previous2;
 						app.payload.chart3 = previous3;
 						app.payload.chart4 = previous4;
-					}
+					})(i);
+				}
 
 
 					if(x == 5){/*
