@@ -1296,7 +1296,7 @@
 						var elem_histo = histogram_divs[i];
 
 						app.payload.chart1;//need helper function to make the corresponding instance null
-						app.payload.chart2 = null;
+						app.payload.chart2 = null; //if i = 0, chart1 is not null, the rest is null, and so it goes
 						app.payload.chart3 = null;
 						app.payload.chart4 = null;
 
