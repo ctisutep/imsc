@@ -1277,15 +1277,6 @@
 					getparams.NE = bounds.getNorthEast().toJSON();
 					getparams.SW = bounds.getSouthWest().toJSON();
 
-					console.log(chart);
-					console.log(chart_2);
-					console.log(chart_3);
-					console.log(chart_4);
-					console.log(chart_histo);
-					console.log(chart_histo_2);
-					console.log(chart_histo_3);
-					console.log(chart_histo_4);
-
 					var chart_divs = ['chart_area_1', 'chart_area_2','chart_area_3', 'chart_area_4'];
 					var histogram_divs = ['chart_histogram_1', 'chart_histogram_2', 'chart_histogram_3', 'chart_histogram_4'];
 					var chart_ns = ['chart1n', 'chart2n', 'chart3n', 'chart4n'];
@@ -1300,7 +1291,6 @@
 
 					for (var i = 0; i < chart_divs.length-3; i++) {
 						(function (i){
-						console.log(i);
 						var name = 'app.payload.'+chart_ns[i];
 						name = eval(name);
 						var datos_max = 'data.'+data_arr[0]+(i+1);
