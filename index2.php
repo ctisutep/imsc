@@ -1308,11 +1308,13 @@
 					var charts = [chart, chart_2, chart_3, chart_4];
 					var chart_histos = [chart_histo, chart_histo_2, chart_histo_3, chart_histo_4];
 					console.log(nulls);
-					/*for (var i = 0; i < nulls.length; i++) {
+					for (var i = 0; i < nulls.length; i++) {
 						var position = nulls[i];
-						chart_divs.splice(position, 1);
+						console.log(position);
+						console.log(position-1)
+						chart_divs.splice(position-1, 1);
 					}
-					console.log(chart_divs);*/
+					console.log(chart_divs);
 
 					previous1 = app.payload.chart1;
 					previous2 = app.payload.chart2;
