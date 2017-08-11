@@ -1238,6 +1238,19 @@
 					}
 				}
 			}
+			function nullChecker(){
+				var nulls = [];
+				for (var i = 0; i < 4; i++) {
+					var temp = 'app.payload.chart'+(i+1);
+					temp = eval(temp);
+					if(temp == null){
+						var n = 'app.payload.chart'+(i+1);
+						//n = eval(n);
+						nulls.push(n);
+					}
+				}
+				console.log(nulls);
+			}
 
 			function drawChart(x) {
 				if(typeof chart === 'undefined'){
@@ -1262,6 +1275,7 @@
 				}
 
 				if(rec.type == 'rectangle'){
+					nullChecker();
 					var maxaoi;
 					var minaoi;
 					var medaoi;
@@ -1291,445 +1305,98 @@
 
 					for (var i = 0; i < chart_divs.length-3; i++) {
 						(function (i){
-						var name = 'app.payload.'+chart_ns[i];
-						name = eval(name);
-						var datos_max = 'data.'+data_arr[0]+(i+1);
-						var datos_min = 'data.'+data_arr[1]+(i+1);
-						var datos_med = 'data.'+data_arr[2]+(i+1);
-						var datos_avg = 'data.'+data_arr[3]+(i+1);
-						var elem_chart = chart_divs[i];
-						var elem_histo = histogram_divs[i];
-						var bar_init = charts[i];
-						var histo_init = chart_histos[i];
+							var name = 'app.payload.'+chart_ns[i];
+							name = eval(name);
+							var datos_max = 'data.'+data_arr[0]+(i+1);
+							var datos_min = 'data.'+data_arr[1]+(i+1);
+							var datos_med = 'data.'+data_arr[2]+(i+1);
+							var datos_avg = 'data.'+data_arr[3]+(i+1);
+							var elem_chart = chart_divs[i];
+							var elem_histo = histogram_divs[i];
+							var bar_init = charts[i];
+							var histo_init = chart_histos[i];
 
-						nullSelector(i);
+							nullSelector(i);
 
-						$.get('polygonHandler.php', app.payload, function(data){
-							maxaoi = parseFloat(eval(datos_max));
-							minaoi = parseFloat(eval(datos_min));
-							medaoi = parseFloat(eval(datos_med));
-							weightedaoi = parseFloat(eval(datos_avg));
-							weightedaoi = parseFloat(weightedaoi).toFixed(2);
-							weightedaoi = parseFloat(weightedaoi);
+							$.get('polygonHandler.php', app.payload, function(data){
+								maxaoi = parseFloat(eval(datos_max));
+								minaoi = parseFloat(eval(datos_min));
+								medaoi = parseFloat(eval(datos_med));
+								weightedaoi = parseFloat(eval(datos_avg));
+								weightedaoi = parseFloat(weightedaoi).toFixed(2);
+								weightedaoi = parseFloat(weightedaoi);
 
-							var data = google.visualization.arrayToDataTable([
-								['Method', 'Value',],
-								['Maximum ', maxaoi],
-								['Minimum ', minaoi],
-								['Median ', medaoi],
-								['Weighted Avg ', weightedaoi]
-							]);
+								var data = google.visualization.arrayToDataTable([
+									['Method', 'Value',],
+									['Maximum ', maxaoi],
+									['Minimum ', minaoi],
+									['Median ', medaoi],
+									['Weighted Avg ', weightedaoi]
+								]);
 
-							var options = {
-								title: name,
-								legend: {
-									position: 'none'
-								},
-								chartArea: {
-									width: '70%'
-								},
-								hAxis: {
-									minValue: 0
-								},
-								vAxis: {
+								var options = {
+									title: name,
+									legend: {
+										position: 'none'
+									},
+									chartArea: {
+										width: '70%'
+									},
+									hAxis: {
+										minValue: 0
+									},
+									vAxis: {
+									}
+								};
+								//console.log(bar_init);
+								bar_init = new google.visualization.BarChart(document.getElementById(elem_chart));
+								bar_init.draw(data, options);
+							});
+
+							var histo_array;
+							app.payload.getMode = "histogram";
+							$.get('polygonHandler.php', app.payload, function(data){
+								histo_array = data.values;
+								histo_array = histo_array.filter(nums => nums != "");
+								var data = new google.visualization.DataTable();
+								data.addColumn('string', 'Property');
+								data.addColumn('number', 'Value');
+								data.addRows(histo_array.length);
+								var max = Math.max(...histo_array);
+								for (var i = 0; i < histo_array.length; i++) {
+									data.setCell(i, 1, parseFloat(histo_array[i]));
 								}
-							};
-							console.log(bar_init);
-							bar_init = new google.visualization.BarChart(document.getElementById(elem_chart));
-							bar_init.draw(data, options);
-						});
-
-						var histo_array;
-						app.payload.getMode = "histogram";
-						$.get('polygonHandler.php', app.payload, function(data){
-							histo_array = data.values;
-							histo_array = histo_array.filter(nums => nums != "");
-							var data = new google.visualization.DataTable();
-							data.addColumn('string', 'Property');
-							data.addColumn('number', 'Value');
-							data.addRows(histo_array.length);
-							var max = Math.max(...histo_array);
-							for (var i = 0; i < histo_array.length; i++) {
-								data.setCell(i, 1, parseFloat(histo_array[i]));
-							}
-							var size;
-							size = Math.sqrt(histo_array.length - 1) - 1;
-							if(size == 0){
-								size = 1;
-								size = max/size;
-							}else{
-								size = max/size;
-							}
-							size = parseFloat(size).toFixed(2);
-							var options = {
-								title: name,
-								legend: {
-									position: 'none'
-								},
-								histogram: {
-									bucketSize: size
-								},
-								hAxis: {
-									type: 'category'
+								var size;
+								size = Math.sqrt(histo_array.length - 1) - 1;
+								if(size == 0){
+									size = 1;
+									size = max/size;
+								}else{
+									size = max/size;
 								}
-							};
-							console.log(histo_init);
-							histo_init = new google.visualization.Histogram(document.getElementById(elem_histo));
-							histo_init.draw(data, options);
-						});
-						app.payload.getMode = "AOI";
-						app.payload.chart1 = previous1;
-						app.payload.chart2 = previous2;
-						app.payload.chart3 = previous3;
-						app.payload.chart4 = previous4;
-					})(i);
-				}
-
-
-					if(x == 5){/*
-						previous1 = app.payload.chart1;
-						previous2 = app.payload.chart2;
-						previous3 = app.payload.chart3;
-						previous4 = app.payload.chart4;
-						app.payload.chart1;
-						app.payload.chart2 = null;
-						app.payload.chart3 = null;
-						app.payload.chart4 = null;
-						$.get('polygonHandler.php', app.payload, function(data){
-							maxaoi = parseFloat(data.maxAOIch1);
-							minaoi = parseFloat(data.minAOIch1);
-							medaoi = parseFloat(data.medAOIch1);
-							weightedaoi = parseFloat(data.weightedAOIch1);
-							weightedaoi = parseFloat(weightedaoi).toFixed(2);
-							weightedaoi = parseFloat(weightedaoi);
-
-							var data = google.visualization.arrayToDataTable([
-								['Method', 'Value',],
-								['Maximum ', maxaoi],
-								['Minimum ', minaoi],
-								['Median ', medaoi],
-								['Weighted Avg ', weightedaoi]
-							]);
-
-							var options = {
-								title: app.payload.chart1n,
-								legend: {
-									position: 'none'
-								},
-								chartArea: {
-									width: '70%'
-								},
-								hAxis: {
-									minValue: 0
-								},
-								vAxis: {
-								}
-							};
-							chart = new google.visualization.BarChart(document.getElementById('chart_area_1'));
-							chart.draw(data, options);
-						});
-
-						var histo_array;
-						app.payload.getMode = "histogram";
-						$.get('polygonHandler.php', app.payload, function(data){
-							histo_array = data.values;
-							histo_array = histo_array.filter(nums => nums != "");
-							var data = new google.visualization.DataTable();
-							data.addColumn('string', 'Property');
-							data.addColumn('number', 'Value');
-							data.addRows(histo_array.length);
-							var max = Math.max(...histo_array);
-							for (var i = 0; i < histo_array.length; i++) {
-								data.setCell(i, 1, parseFloat(histo_array[i]));
-							}
-							var size;
-							size = Math.sqrt(histo_array.length - 1) - 1;
-							if(size == 0){
-								size = 1;
-								size = max/size;
-							}else{
-								size = max/size;
-							}
-							size = parseFloat(size).toFixed(2);
-							var options = {
-								title: app.payload.chart1n,
-								legend: {
-									position: 'none'
-								},
-								histogram: {
-									bucketSize: size
-								},
-								hAxis: {
-									type: 'category'
-								}
-							};
-
-							chart_histo = new google.visualization.Histogram(document.getElementById('chart_histogram_1'));
-							chart_histo.draw(data, options);
-						});
-						app.payload.getMode = "AOI";
-						app.payload.chart1 = previous1;
-						app.payload.chart2 = previous2;
-						app.payload.chart3 = previous3;
-						app.payload.chart4 = previous4;
-					}
-					else if (x == 2) {
-						previous1 = app.payload.chart1;
-						previous2 = app.payload.chart2;
-						previous3 = app.payload.chart3;
-						previous4 = app.payload.chart4;
-						app.payload.chart1 = null;
-						app.payload.chart2;
-						app.payload.chart3 = null;
-						app.payload.chart4 = null;
-						$.get('polygonHandler.php', app.payload, function(data){
-							maxaoi = parseFloat(data.maxAOIch2);
-							minaoi = parseFloat(data.minAOIch2);
-							medaoi = parseFloat(data.medAOIch2);
-							weightedaoi = parseFloat(data.weightedAOIch2);
-							weightedaoi = parseFloat(weightedaoi).toFixed(2);
-							weightedaoi = parseFloat(weightedaoi);
-
-							var data = google.visualization.arrayToDataTable([
-								['Method', 'Value',],
-								['Maximum ', maxaoi],
-								['Minimum ', minaoi],
-								['Median ', medaoi],
-								['Weighted Avg ', weightedaoi]
-							]);
-
-							var options = {
-								title: app.payload.chart2n,
-								legend: {
-									position: 'none'
-								},
-								chartArea: {
-									width: '70%'
-								},
-								hAxis: {
-									minValue: 0
-								},
-								vAxis: {
-								}
-							};
-							chart_2 = new google.visualization.BarChart(document.getElementById('chart_area_2'));
-							chart_2.draw(data, options);
-						});
-
-						var histo_array;
-						app.payload.getMode = "histogram";
-						$.get('polygonHandler.php', app.payload, function(data){
-							histo_array = data.values;
-							histo_array = histo_array.filter(nums => nums != "");
-							var data = new google.visualization.DataTable();
-							data.addColumn('string', 'Property');
-							data.addColumn('number', 'Value');
-							data.addRows(histo_array.length);
-							var max = Math.max(...histo_array);
-							for (var i = 0; i < histo_array.length; i++) {
-								data.setCell(i, 1, histo_array[i]);
-							}
-							var size;
-							size = Math.sqrt(histo_array.length - 1) - 1;
-							if(size == 0){
-								size = 1;
-								size = max/size;
-							}else{
-								size = max/size;
-							}
-							size = parseFloat(size).toFixed(2);
-							var options = {
-								title: app.payload.chart2n,
-								legend: {
-									position: 'none'
-								},
-								histogram: {
-									bucketSize: size
-								},
-								hAxis: {
-									type: 'category'
-								}
-							};
-
-							chart_histo_2 = new google.visualization.Histogram(document.getElementById('chart_histogram_2'));
-							chart_histo_2.draw(data, options);
-						});
-						app.payload.chart1 = previous1;
-						app.payload.chart2 = previous2;
-						app.payload.chart3 = previous3;
-						app.payload.chart4 = previous4;
-					}
-					else if(x == 3){
-						previous1 = app.payload.chart1;
-						previous2 = app.payload.chart2;
-						previous3 = app.payload.chart3;
-						previous4 = app.payload.chart4;
-						app.payload.chart1 = null;
-						app.payload.chart2 = null;
-						app.payload.chart3;
-						app.payload.chart4 = null;
-						$.get('polygonHandler.php', app.payload, function(data){
-							maxaoi = parseFloat(data.maxAOIch3);
-							minaoi = parseFloat(data.minAOIch3);
-							medaoi = parseFloat(data.medAOIch3);
-							weightedaoi = parseFloat(data.weightedAOIch3);
-							weightedaoi = parseFloat(weightedaoi).toFixed(2);
-							weightedaoi = parseFloat(weightedaoi);
-
-							var data = google.visualization.arrayToDataTable([
-								['Method', 'Value',],
-								['Maximum ', maxaoi],
-								['Minimum ', minaoi],
-								['Median ', medaoi],
-								['Weighted Avg ', weightedaoi]
-							]);
-
-							var options = {
-								title: app.payload.chart3n,
-								legend: {
-									position: 'none'
-								},
-								chartArea: {
-									width: '70%'
-								},
-								hAxis: {
-									minValue: 0
-								},
-								vAxis: {
-								}
-							};
-							chart_3 = new google.visualization.BarChart(document.getElementById('chart_area_3'));
-							chart_3.draw(data, options);
-						});
-
-						var histo_array;
-						app.payload.getMode = "histogram";
-						$.get('polygonHandler.php', app.payload, function(data){
-							histo_array = data.values;
-							histo_array = histo_array.filter(nums => nums != "");
-							var data = new google.visualization.DataTable();
-							data.addColumn('string', 'Property');
-							data.addColumn('number', 'Value');
-							data.addRows(histo_array.length);
-							var max = Math.max(...histo_array);
-							for (var i = 0; i < histo_array.length; i++) {
-								data.setCell(i, 1, histo_array[i]);
-							}
-							var size;
-							size = Math.sqrt(histo_array.length - 1) - 1;
-							if(size == 0){
-								size = 1;
-								size = max/size;
-							}else{
-								size = max/size;
-							}
-							size = parseFloat(size).toFixed(2);
-							var options = {
-								title: app.payload.chart3n,
-								legend: {
-									position: 'none'
-								},
-								histogram: {
-									bucketSize: size
-								},
-								hAxis: {
-									type: 'category'
-								}
-							};
-
-							chart_histo_3 = new google.visualization.Histogram(document.getElementById('chart_histogram_3'));
-							chart_histo_3.draw(data, options);
-						});
-						app.payload.chart1 = previous1;
-						app.payload.chart2 = previous2;
-						app.payload.chart3 = previous3;
-						app.payload.chart4 = previous4;
-					}
-					else if(x == 4){
-						previous1 = app.payload.chart1;
-						previous2 = app.payload.chart2;
-						previous3 = app.payload.chart3;
-						previous4 = app.payload.chart4;
-						app.payload.chart1 = null;
-						app.payload.chart2 = null;
-						app.payload.chart3 = null;
-						app.payload.chart4;
-						$.get('polygonHandler.php', app.payload, function(data){
-							maxaoi = parseFloat(data.maxAOIch4);
-							minaoi = parseFloat(data.minAOIch4);
-							medaoi = parseFloat(data.medAOIch4);
-							weightedaoi = parseFloat(data.weightedAOIch4);
-							weightedaoi = parseFloat(weightedaoi).toFixed(2);
-							weightedaoi = parseFloat(weightedaoi);
-
-							var data = google.visualization.arrayToDataTable([
-								['Method', 'Value',],
-								['Maximum ', maxaoi],
-								['Minimum ', minaoi],
-								['Median ', medaoi],
-								['Weighted Avg ', weightedaoi]
-							]);
-
-							var options = {
-								title: app.payload.chart4n,
-								legend: {
-									position: 'none'
-								},
-								chartArea: {
-									width: '70%'
-								},
-								hAxis: {
-									minValue: 0
-								},
-								vAxis: {
-								}
-							};
-							chart_4 = new google.visualization.BarChart(document.getElementById('chart_area_4'));
-							chart_4.draw(data, options);
-						});
-
-						var histo_array;
-						app.payload.getMode = "histogram";
-						$.get('polygonHandler.php', app.payload, function(data){
-							histo_array = data.values;
-							histo_array = histo_array.filter(nums => nums != "");
-							var data = new google.visualization.DataTable();
-							data.addColumn('string', 'Property');
-							data.addColumn('number', 'Value');
-							data.addRows(histo_array.length);
-							var max = Math.max(...histo_array);
-							for (var i = 0; i < histo_array.length; i++) {
-								data.setCell(i, 1, histo_array[i]);
-							}
-							var size;
-							size = Math.sqrt(histo_array.length - 1) - 1;
-							if(size == 0){
-								size = 1;
-								size = max/size;
-							}else{
-								size = max/size;
-							}
-							size = parseFloat(size).toFixed(2);
-							var options = {
-								title: app.payload.chart4n,
-								legend: {
-									position: 'none'
-								},
-								histogram: {
-									bucketSize: size
-								},
-								hAxis: {
-									type: 'category'
-								}
-							};
-
-							chart_histo_4 = new google.visualization.Histogram(document.getElementById('chart_histogram_4'));
-							chart_histo_4.draw(data, options);
-						});
-						app.payload.chart1 = previous1;
-						app.payload.chart2 = previous2;
-						app.payload.chart3 = previous3;
-						app.payload.chart4 = previous4;*/
+								size = parseFloat(size).toFixed(2);
+								var options = {
+									title: name,
+									legend: {
+										position: 'none'
+									},
+									histogram: {
+										bucketSize: size
+									},
+									hAxis: {
+										type: 'category'
+									}
+								};
+								//console.log(histo_init);
+								histo_init = new google.visualization.Histogram(document.getElementById(elem_histo));
+								histo_init.draw(data, options);
+							});
+							app.payload.getMode = "AOI";
+							app.payload.chart1 = previous1;
+							app.payload.chart2 = previous2;
+							app.payload.chart3 = previous3;
+							app.payload.chart4 = previous4;
+						})(i);
 					}
 				}//end rectangle
 				else{
