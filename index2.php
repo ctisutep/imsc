@@ -1244,12 +1244,12 @@
 					var temp = 'app.payload.chart'+(i+1);
 					temp = eval(temp);
 					if(temp == null){
-						var n = 'app.payload.chart'+(i+1);
+						var n = (i+1);
 						//n = eval(n);
 						nulls.push(n);
 					}
 				}
-				console.log(nulls);
+				return nulls;
 			}
 
 			function drawChart(x) {
@@ -1275,7 +1275,17 @@
 				}
 
 				if(rec.type == 'rectangle'){
-					nullChecker();
+					var nulls = nullChecker();
+					if(nulls.length == 4){
+						alert("No property selected.");
+						return;
+					}
+					else{
+						var not_nulls = [];
+						for(var i = 1; i <= 4; i++){
+							if(nulls.includes(i) == false){not_nulls.push(i);}
+						}
+					}
 					var maxaoi;
 					var minaoi;
 					var medaoi;
