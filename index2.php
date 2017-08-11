@@ -261,31 +261,31 @@
 												</div><br>
 											</div>
 											<div id="statistics" class="tab-pane fade"><br>
-													<label>Select parameters:</label>
-													<div class="input-group">
-														<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
-														<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_1">
-															<option value="" disabled selected>Select a ground property</option>
-														</select>
-													</div> <br>
-													<div class="input-group">
-														<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
-														<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_2">
-															<option value="" disabled selected>Select a ground property</option>
-														</select>
-													</div> <br>
-													<div class="input-group">
-														<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
-														<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_3">
-															<option value="" disabled selected>Select a ground property</option>
-														</select>
-													</div> <br>
-													<div class="input-group">
-														<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
-														<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_4">
-															<option value="" disabled selected>Select a ground property</option>
-														</select>
-													</div> <br>
+												<label>Select parameters:</label>
+												<div class="input-group">
+													<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+													<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_1">
+														<option value="" disabled selected>Select a ground property</option>
+													</select>
+												</div> <br>
+												<div class="input-group">
+													<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+													<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_2">
+														<option value="" disabled selected>Select a ground property</option>
+													</select>
+												</div> <br>
+												<div class="input-group">
+													<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+													<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_3">
+														<option value="" disabled selected>Select a ground property</option>
+													</select>
+												</div> <br>
+												<div class="input-group">
+													<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+													<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_4">
+														<option value="" disabled selected>Select a ground property</option>
+													</select>
+												</div> <br>
 											</div>
 										</div>
 									</div> <!--end column for selectors-->
@@ -327,7 +327,7 @@
 			<script>
 			var app = {map:null, polygons:null, label:"no filter", payload:{getMode:"polygons", runAOI:false, runLine:false, runRec:false, runFilters:false, property:null, district:null, depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null, filter_prop:null, filter_prop_n:null, filter_value:false, filter_units:0}};
 			var hecho = false;
-			//var suggested = all the aliases of the properties, note: not all properties have an alias
+
 			$(document).ready(function(){
 				$.post('polygonHandler.php', {'columns': true}, function(result){
 					var properties;
@@ -336,12 +336,14 @@
 							return {value: val[2], data: val[1], table: val[3]};
 						});
 					}
+					var divs = [];
 					var selectProp = document.getElementById("selectProp");
 					var ch1 = document.getElementById("select_chart_1");
 					var ch2 = document.getElementById("select_chart_2");
 					var ch3 = document.getElementById("select_chart_3");
 					var ch4 = document.getElementById("select_chart_4");
 					var filt = document.getElementById("select_prop_filters");
+					divs.push(selectProp, ch1, ch2, ch3, ch4, filt);
 
 					var prop = [{number: 0, value: null, data: null, table: null},
 						{number: 1, value: null, data: null, table: null},
@@ -388,61 +390,18 @@
 						prop[i].value = properties[i].value;
 						prop[i].data = properties[i].data;
 						prop[i].table = properties[i].table;
+					}
 
-					}
-					for(var i = 0; i < properties.length; i++) {
-						var propr = prop[i].number;
-						var elem = document.createElement("option");
-						elem.textContent = prop[i].value;
-						elem.value = propr;
-						elem.data = prop[i].data;
-						elem.table = prop[i].table;
-						selectProp.appendChild(elem);
-					}
-					for(var i = 0; i < properties.length; i++) {
-						var propr = prop[i].number;
-						var elem = document.createElement("option");
-						elem.textContent = prop[i].value;
-						elem.value = propr;
-						elem.data = prop[i].data;
-						elem.table = prop[i].table;
-						ch1.appendChild(elem);
-					}
-					for(var i = 0; i < properties.length; i++) {
-						var propr = prop[i].number;
-						var elem = document.createElement("option");
-						elem.textContent = prop[i].value;
-						elem.value = propr;
-						elem.data = prop[i].data;
-						elem.table = prop[i].table;
-						ch2.appendChild(elem);
-					}
-					for(var i = 0; i < properties.length; i++) {
-						var propr = prop[i].number;
-						var elem = document.createElement("option");
-						elem.textContent = prop[i].value;
-						elem.value = propr;
-						elem.data = prop[i].data;
-						elem.table = prop[i].table;
-						ch3.appendChild(elem);
-					}
-					for(var i = 0; i < properties.length; i++) {
-						var propr = prop[i].number;
-						var elem = document.createElement("option");
-						elem.textContent = prop[i].value;
-						elem.value = propr;
-						elem.data = prop[i].data;
-						elem.table = prop[i].table;
-						ch4.appendChild(elem);
-					}
-					for(var i = 0; i < properties.length; i++) {
-						var propr = prop[i].number;
-						var elem = document.createElement("option");
-						elem.textContent = prop[i].value;
-						elem.value = propr;
-						elem.data = prop[i].data;
-						elem.table = prop[i].table;
-						filt.appendChild(elem);
+					for (var j = 0; j < divs.length; j++) {
+						for(var i = 0; i < properties.length; i++) {
+							var propr = prop[i].number;
+							var elem = document.createElement("option");
+							elem.textContent = prop[i].value;
+							elem.value = propr;
+							elem.data = prop[i].data;
+							elem.table = prop[i].table;
+							divs[j].appendChild(elem);
+						}
 					}
 
 					$("#selectProp").change(function(){
@@ -471,17 +430,10 @@
 						app.payload.filter_prop_n = prop[this.value].value;
 					});
 
-					$("#biggerThan").click(function(){
-						app.payload.filter_value = this.value;
-					});
-					$("#smallerThan").click(function(){
-						app.payload.filter_value = this.value;
-					});
-					$("#equalTo").click(function(){
+					$("#biggerThan,#smallerThan,#equalTo").click(function(){
 						app.payload.filter_value = this.value;
 					});
 
-					//labelSelector;
 					$("#labels,#run,#default,#defaultbtn").click(function(){
 						app.label = "no filter";
 					});
@@ -489,16 +441,6 @@
 						app.label = "filter";
 					});
 
-					//create the autocomplete with the data
-					$('#autocomplete').autocomplete({
-						lookup: properties,
-						onSelect: function (suggestion) {
-							console.log(suggestion.data + "  " + suggestion.table + "  " + suggestion.value);
-							app.payload.property = suggestion.data;
-							app.payload.table = suggestion.table;
-							app.payload.value = suggestion.value;
-						}
-					});
 					$('#target').on('change', setDistrict);
 				});
 				app.payload.district = $('#target').children("option:selected").data('district');
@@ -753,451 +695,375 @@
 						}
 					}).done(function(data){
 						$(document.body).css({'cursor': 'auto'});
+						if(app.payload.property == 'gypsum_r'){
+							var gypsum = "Description for Gypsum: ";
+							var gypsumText = "The content of gypsum is the percent, by weight, of hydrated calcium sulfates in the fraction of the soil less than 20 millimeters in size. ";
+							var h3 = document.createElement('h3');
+							h3.innerHTML = gypsum;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + gypsum + "</strong> <br>" + gypsumText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'pi_r'){
+							var prprty = "Description for Plasticity Index: ";
+							var prprtyText = "Plasticity index (PI) is one of the standard Atterberg limits used to indicate the plasticity characteristics of a soil. It is defined as the numerical difference between the liquid limit and plastic limit of the soil. It is the range of water content in which a soil exhibits the characteristics of a plastic solid.";
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'sandtotal_r'){
+							var prprty = "Description for Total Sand: ";
+							var prprtyText = "Sand as a soil separate consists of mineral soil particles that are 0.05 millimeter to 2 millimeters in diameter. In the database, the estimated sand content of each soil layer is given as a percentage, by weight, of the soil material that is less than 2 millimeters in diameter. The content of sand, silt, and clay affects the physical behavior of a soil. Particle size is important for engineering and agronomic interpretations, for determination of soil hydrologic qualities, and for soil classification.";
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'ph1to1h2o_r'){
+							var prprty = "Description for pH H20: ";
+							var prprtyText = "Soil reaction is a measure of acidity or alkalinity. It is important in selecting crops and other plants, in evaluating soil amendments for fertility and stabilization, and in determining the risk of corrosion.";
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'ksat_r'){
+							var prprty = "Description for Ksat: ";
+							var prprtyText = "Saturated hydraulic conductivity (Ksat) refers to the ease with which pores in a saturated soil transmit water. The estimates are expressed in terms of micrometers per second. They are based on soil characteristics observed in the field, particularly structure, porosity, and texture. ";
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'aashind_r'){
+							var prprty = "Description for AASHTO Group Index: ";
+							var prprtyText = "AASHTO group classification is a system that classifies soils specifically for geotechnical engineering purposes that are related to highway and airfield construction. It is based on particle-size distribution and Atterberg limits, such as liquid limit and plasticity index. This classification system is covered in AASHTO Standard No. M 145-82. The classification is based on that portion of the soil that is smaller than 3 inches in diameter.";
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'sar_r'){
+							var prprty = "Description for Sodium Absortion Ratio (SAR): ";
+							var prprtyText = "Sodium adsorption ratio is a measure of the amount of sodium (Na) relative to calcium (Ca) and magnesium (Mg) in the water extract from saturated soil paste. It is the ratio of the Na concentration divided by the square root of one-half of the Ca + Mg concentration. Soils that have SAR values of 13 or more may be characterized by an increased dispersion of organic matter and clay particles, reduced saturated hydraulic conductivity (Ksat) and aeration, and a general degradation of soil structure.";
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'kffact'){
+							var prprty = "Description for K Factor (Rock Free): ";
+							var prprtyText = "Erosion factor K indicates the susceptibility of a soil to sheet and rill erosion by water. Factor K is one of six factors used in the Universal Soil Loss Equation (USLE) and the Revised Universal Soil Loss Equation (RUSLE) to predict the average annual rate of soil loss by sheet and rill erosion in tons per acre per year. The estimates are based primarily on percentage of silt, sand, and organic matter and on soil structure and saturated hydraulic conductivity (Ksat)." + " Values of K range from 0.02 to 0.69. Other factors being equal, the higher the value, the more susceptible the soil is to sheet and rill erosion by water. "
+							+ "Erosion factor Kf (rock free) indicates the erodibility of the fine-earth fraction, or the material less than 2 millimeters in size.";
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'kwfact'){
+							var prprty = "Description for K Factor (Whole Soil): ";
+							var prprtyText = "Erosion factor K indicates the susceptibility of a soil to sheet and rill erosion by water. Factor K is one of six factors used in the Universal Soil Loss Equation (USLE) and the Revised Universal Soil Loss Equation (RUSLE) to predict the average annual rate of soil loss by sheet and rill erosion in tons per acre per year. The estimates are based primarily on percentage of silt, sand, and organic matter and on soil structure and saturated hydraulic conductivity (Ksat)."+" Values of K range from 0.02 to 0.69. Other factors being equal, the higher the value, the more susceptible the soil is to sheet and rill erosion by water."
+							+ "'Erosion factor Kw (whole soil)' indicates the erodibility of the whole soil. The estimates are modified by the presence of rock fragments.";
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'll_r'){
+							var prprty = "Description for Liquid Limit:  ";
+							var prprtyText = "Liquid limit (LL) is one of the standard Atterberg limits used to indicate the plasticity characteristics of a soil. It is the water content, on a percent by weight basis, of the soil (passing #40 sieve) at which the soil changes from a plastic to a liquid state. Generally, the amount of clay- and silt-size particles, the organic matter content, and the type of minerals determine the liquid limit. Soils that have a high liquid limit have the capacity to hold a lot of water while maintaining a plastic or semisolid state. Liquid limit is used in classifying soils in the Unified and AASHTO classification systems. For each soil layer, this attribute is actually recorded as three separate values in the database. A low value and a high value indicate the range of this attribute for the soil component. A 'representative' value indicates the expected value of this attribute for the component. For this soil property, only the representative value is used.";
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'om_r'){
+							var prprty = "Description for Organic Matter: ";
+							var prprtyText = "Organic matter percent is the weight of decomposed plant, animal, and microbial residues exclusive of non-decomposed plant and animal residues. It is expressed as a percentage, by weight, of the soil material that is less than 2 mm in diameter.";
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'frag3to10_r'){
+							var prprty = "Description for Rock 3-10: ";
+							var prprtyText = "The percent by weight of the horizon occupied by rock fragments 3 to 10 inches in size.";
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'sieveno4_r'){
+							var prprty = "Description for #4 Sieve: ";
+							var prprtyText = "Soil fraction passing a number 4 sieve (4.70mm square opening) as a weight percentage of the less than 3 inch (76.4mm) fraction.";
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'sieveno10_r'){
+							var prprty = "Description for #10 Sieve: ";
+							var prprtyText = "Soil fraction passing a number 10 sieve (2.00mm square opening) as a weight percentage of less than 3 inch (76.4mm) fraction.";
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'sieveno40_r'){
+							var prprty = "Description for #40 Sieve: ";
+							var prprtyText = "Soil fraction passing a number 40 sieve (0.42mm square opening) as a weight percentage of less than 3 inch (76.4mm) fraction.";
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'sieveno200_r'){
+							var prprty = "Description for #200 Sieve: ";
+							var prprtyText = "Soil fraction passing a number 200 sieve (0.074mm square opening) as a weight percentage of less than 3 inch (76.4mm) fraction.";
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'sandvc_r'){
+							var prprty = "Description for vcos: ";
+							var prprtyText = "Mineral particles 1.00mm to 2.0mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'sandco_r'){
+							var prprty = "Description for cos: ";
+							var prprtyText = "Mineral particles 0.50mm to 1.0mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'sandmed_r'){
+							var prprty = "Description for ms: ";
+							var prprtyText = "Mineral particles 0.25mm to 0.5mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'sandfine_r'){
+							var prprty = "Description for fs: ";
+							var prprtyText = "Mineral particles 0.10mm to 0.25mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'sandvf_r'){
+							var prprty = "Description for vfs: ";
+							var prprtyText = "Mineral particles 0.05mm to 0.10mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'silttotal_r'){
+							var prprty = "Description for Total Silt: ";
+							var prprtyText = "Mineral particles ranging in size from 0.002 to 0.05mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'siltco_r'){
+							var prprty = "Description for Coarse Silt: ";
+							var prprtyText = "Mineral particles ranging in size from 0.02mm to 0.05mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'siltfine_r'){
+							var prprty = "Description for Fine Silt: ";
+							var prprtyText = "Mineral particles ranging in size from 0.002mm to 0.02mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'claytotal_r'){
+							var prprty = "Description for Total Clay: ";
+							var prprtyText = "Mineral particles less than 0.002mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'claysizedcarb_r'){
+							var prprty = "Description for CaCO3 Clay: ";
+							var prprtyText = "Carbonate particles less than 0.002mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'partdensity'){
+							var prprty = "Description for Part Density: ";
+							var prprtyText = "Mass per unit of volume (not including pore space) of the solid soil particle either mineral or organic. Also known as specific gravity.";
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'caco3_r'){
+							var prprty = "Description for CaCO3: ";
+							var prprtyText = "The quantity of Carbonate (CO3) in the soil expressed as CaCO3 and as a weight percentage of the less than 2mm size fraction.";
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'ph01mcacl2_r'){
+							var prprty = "Description for ph CaCl2: ";
+							var prprtyText = "The negative logarithm to base of 10 or the hydrogen ion activity in the soil, using the 0.01M CaCl2 method, in a 1:2 soil:solution ratio. A numerical expression of the relative acidity or alkalinity of a soil sample.";
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else if (app.payload.property == 'excavdifcl'){
+							var prprty = "Description for Excavation Difficulty: ";
+							var prprtyText = "An estimation of the difficulty of working an excavation into soil layers, horizons, pedons, or geologic layers. In most instances, excavation difficulty is related to and controlled by a water state."
+							var h3 = document.createElement('h3');
+							h3.innerHTML = prprty;
+							var div = document.createElement('div');
+							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+							var descriptor = document.getElementById('description');
+							descriptor.appendChild(div);
+						}
+						else{
+						}
 
-					if(app.payload.property == 'gypsum_r'){
-						var gypsum = "Description for Gypsum: ";
-						var gypsumText = "The content of gypsum is the percent, by weight, of hydrated calcium sulfates in the fraction of the soil less than 20 millimeters in size. ";
-						var h3 = document.createElement('h3');
-						h3.innerHTML = gypsum;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + gypsum + "</strong> <br>" + gypsumText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'pi_r'){
-						var prprty = "Description for Plasticity Index: ";
-						var prprtyText = "Plasticity index (PI) is one of the standard Atterberg limits used to indicate the plasticity characteristics of a soil. It is defined as the numerical difference between the liquid limit and plastic limit of the soil. It is the range of water content in which a soil exhibits the characteristics of a plastic solid.";
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'sandtotal_r'){
-						var prprty = "Description for Total Sand: ";
-						var prprtyText = "Sand as a soil separate consists of mineral soil particles that are 0.05 millimeter to 2 millimeters in diameter. In the database, the estimated sand content of each soil layer is given as a percentage, by weight, of the soil material that is less than 2 millimeters in diameter. The content of sand, silt, and clay affects the physical behavior of a soil. Particle size is important for engineering and agronomic interpretations, for determination of soil hydrologic qualities, and for soil classification.";
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'ph1to1h2o_r'){
-						var prprty = "Description for pH H20: ";
-						var prprtyText = "Soil reaction is a measure of acidity or alkalinity. It is important in selecting crops and other plants, in evaluating soil amendments for fertility and stabilization, and in determining the risk of corrosion.";
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'ksat_r'){
-						var prprty = "Description for Ksat: ";
-						var prprtyText = "Saturated hydraulic conductivity (Ksat) refers to the ease with which pores in a saturated soil transmit water. The estimates are expressed in terms of micrometers per second. They are based on soil characteristics observed in the field, particularly structure, porosity, and texture. ";
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'aashind_r'){
-						var prprty = "Description for AASHTO Group Index: ";
-						var prprtyText = "AASHTO group classification is a system that classifies soils specifically for geotechnical engineering purposes that are related to highway and airfield construction. It is based on particle-size distribution and Atterberg limits, such as liquid limit and plasticity index. This classification system is covered in AASHTO Standard No. M 145-82. The classification is based on that portion of the soil that is smaller than 3 inches in diameter.";
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'sar_r'){
-						var prprty = "Description for Sodium Absortion Ratio (SAR): ";
-						var prprtyText = "Sodium adsorption ratio is a measure of the amount of sodium (Na) relative to calcium (Ca) and magnesium (Mg) in the water extract from saturated soil paste. It is the ratio of the Na concentration divided by the square root of one-half of the Ca + Mg concentration. Soils that have SAR values of 13 or more may be characterized by an increased dispersion of organic matter and clay particles, reduced saturated hydraulic conductivity (Ksat) and aeration, and a general degradation of soil structure.";
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'kffact'){
-						var prprty = "Description for K Factor (Rock Free): ";
-						var prprtyText = "Erosion factor K indicates the susceptibility of a soil to sheet and rill erosion by water. Factor K is one of six factors used in the Universal Soil Loss Equation (USLE) and the Revised Universal Soil Loss Equation (RUSLE) to predict the average annual rate of soil loss by sheet and rill erosion in tons per acre per year. The estimates are based primarily on percentage of silt, sand, and organic matter and on soil structure and saturated hydraulic conductivity (Ksat)." + " Values of K range from 0.02 to 0.69. Other factors being equal, the higher the value, the more susceptible the soil is to sheet and rill erosion by water. "
-						+ "Erosion factor Kf (rock free) indicates the erodibility of the fine-earth fraction, or the material less than 2 millimeters in size.";
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'kwfact'){
-						var prprty = "Description for K Factor (Whole Soil): ";
-						var prprtyText = "Erosion factor K indicates the susceptibility of a soil to sheet and rill erosion by water. Factor K is one of six factors used in the Universal Soil Loss Equation (USLE) and the Revised Universal Soil Loss Equation (RUSLE) to predict the average annual rate of soil loss by sheet and rill erosion in tons per acre per year. The estimates are based primarily on percentage of silt, sand, and organic matter and on soil structure and saturated hydraulic conductivity (Ksat)."+" Values of K range from 0.02 to 0.69. Other factors being equal, the higher the value, the more susceptible the soil is to sheet and rill erosion by water."
-						+ "'Erosion factor Kw (whole soil)' indicates the erodibility of the whole soil. The estimates are modified by the presence of rock fragments.";
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'll_r'){
-						var prprty = "Description for Liquid Limit:  ";
-						var prprtyText = "Liquid limit (LL) is one of the standard Atterberg limits used to indicate the plasticity characteristics of a soil. It is the water content, on a percent by weight basis, of the soil (passing #40 sieve) at which the soil changes from a plastic to a liquid state. Generally, the amount of clay- and silt-size particles, the organic matter content, and the type of minerals determine the liquid limit. Soils that have a high liquid limit have the capacity to hold a lot of water while maintaining a plastic or semisolid state. Liquid limit is used in classifying soils in the Unified and AASHTO classification systems. For each soil layer, this attribute is actually recorded as three separate values in the database. A low value and a high value indicate the range of this attribute for the soil component. A 'representative' value indicates the expected value of this attribute for the component. For this soil property, only the representative value is used.";
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'om_r'){
-						var prprty = "Description for Organic Matter: ";
-						var prprtyText = "Organic matter percent is the weight of decomposed plant, animal, and microbial residues exclusive of non-decomposed plant and animal residues. It is expressed as a percentage, by weight, of the soil material that is less than 2 mm in diameter.";
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'frag3to10_r'){
-						var prprty = "Description for Rock 3-10: ";
-						var prprtyText = "The percent by weight of the horizon occupied by rock fragments 3 to 10 inches in size.";
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'sieveno4_r'){
-						var prprty = "Description for #4 Sieve: ";
-						var prprtyText = "Soil fraction passing a number 4 sieve (4.70mm square opening) as a weight percentage of the less than 3 inch (76.4mm) fraction.";
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'sieveno10_r'){
-						var prprty = "Description for #10 Sieve: ";
-						var prprtyText = "Soil fraction passing a number 10 sieve (2.00mm square opening) as a weight percentage of less than 3 inch (76.4mm) fraction.";
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'sieveno40_r'){
-						var prprty = "Description for #40 Sieve: ";
-						var prprtyText = "Soil fraction passing a number 40 sieve (0.42mm square opening) as a weight percentage of less than 3 inch (76.4mm) fraction.";
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'sieveno200_r'){
-						var prprty = "Description for #200 Sieve: ";
-						var prprtyText = "Soil fraction passing a number 200 sieve (0.074mm square opening) as a weight percentage of less than 3 inch (76.4mm) fraction.";
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'sandvc_r'){
-						var prprty = "Description for vcos: ";
-						var prprtyText = "Mineral particles 1.00mm to 2.0mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'sandco_r'){
-						var prprty = "Description for cos: ";
-						var prprtyText = "Mineral particles 0.50mm to 1.0mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'sandmed_r'){
-						var prprty = "Description for ms: ";
-						var prprtyText = "Mineral particles 0.25mm to 0.5mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'sandfine_r'){
-						var prprty = "Description for fs: ";
-						var prprtyText = "Mineral particles 0.10mm to 0.25mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'sandvf_r'){
-						var prprty = "Description for vfs: ";
-						var prprtyText = "Mineral particles 0.05mm to 0.10mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'silttotal_r'){
-						var prprty = "Description for Total Silt: ";
-						var prprtyText = "Mineral particles ranging in size from 0.002 to 0.05mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'siltco_r'){
-						var prprty = "Description for Coarse Silt: ";
-						var prprtyText = "Mineral particles ranging in size from 0.02mm to 0.05mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'siltfine_r'){
-						var prprty = "Description for Fine Silt: ";
-						var prprtyText = "Mineral particles ranging in size from 0.002mm to 0.02mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'claytotal_r'){
-						var prprty = "Description for Total Clay: ";
-						var prprtyText = "Mineral particles less than 0.002mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'claysizedcarb_r'){
-						var prprty = "Description for CaCO3 Clay: ";
-						var prprtyText = "Carbonate particles less than 0.002mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'partdensity'){
-						var prprty = "Description for Part Density: ";
-						var prprtyText = "Mass per unit of volume (not including pore space) of the solid soil particle either mineral or organic. Also known as specific gravity.";
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'caco3_r'){
-						var prprty = "Description for CaCO3: ";
-						var prprtyText = "The quantity of Carbonate (CO3) in the soil expressed as CaCO3 and as a weight percentage of the less than 2mm size fraction.";
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'ph01mcacl2_r'){
-						var prprty = "Description for ph CaCl2: ";
-						var prprtyText = "The negative logarithm to base of 10 or the hydrogen ion activity in the soil, using the 0.01M CaCl2 method, in a 1:2 soil:solution ratio. A numerical expression of the relative acidity or alkalinity of a soil sample.";
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else if (app.payload.property == 'excavdifcl'){
-						var prprty = "Description for Excavation Difficulty: ";
-						var prprtyText = "An estimation of the difficulty of working an excavation into soil layers, horizons, pedons, or geologic layers. In most instances, excavation difficulty is related to and controlled by a water state."
-						var h3 = document.createElement('h3');
-						h3.innerHTML = prprty;
-						var div = document.createElement('div');
-						div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-						var descriptor = document.getElementById('description');
-						descriptor.appendChild(div);
-					}
-					else{
-					}
-
-					if(!hecho){
-						var div = document.createElement('div');
-						div.innerHTML = "<strong>" + "</strong>" + legendText;
-						var legend = document.createElement('div');
-						legend = document.getElementById('legend');
-						document.getElementById('legend').style.visibility = "visible";
-						legend.appendChild(div);
-					}
-					else if(hecho){
-						removePolygons();
-						return;
-					}
-				});
-			}
-			else{
-				document.getElementById('legend').style.visibility = "hidden";
-				$('#legend').find('*').not('h3').remove();
-				$('#description').find('*').not('h3').remove();
-				alert("Please select a property and a district, and make sure depth is a numerical value.");
-				removePolygons();
-			}
-		}
-
-		function setDistrict(){
-			app.payload.district = $('#target').children("option:selected").data('district');
-			var pointStr = $('#target option:selected').val();
-			var coords = pointStr.split(" ");
-			panPoint = new google.maps.LatLng(parseFloat(coords[0]), parseFloat(coords[1]));
-			app.map.panTo(panPoint);
-			app.map.setZoom(10);
-		}
-
-		/******************************************************************************/
-		google.charts.load('current', {'packages':['corechart', 'bar']});
-		google.charts.setOnLoadCallback(initialize);
-
-		function initialize () {
-		}
-
-		var rec;
-		var rectangle;
-		var map;
-		var infoWindow;
-		var selectedRec;
-		var drawingManager;
-		var paths;
-
-		function initMap() {
-			app.map = new google.maps.Map(document.getElementById('map'), {
-				zoom: 5,
-				center: new google.maps.LatLng(31.31610138349565, -99.11865234375),
-				mapTypeId: 'terrain'
-			});
-
-			app.infoWindow = new google.maps.InfoWindow;
-
-			app.map.addListener('click', function(e) {
-			});
-
-			drawingManager = new google.maps.drawing.DrawingManager({
-				drawingControl: true,
-				drawingControlOptions: {
-					position: google.maps.ControlPosition.TOP_CENTER,
-					drawingModes: ['rectangle', 'polyline']
-				},
-				rectangleOptions: {
-					draggable: true,
-					clickable: true,
-					editable: true,
-					zIndex: 10
-				},
-				polylineOptions: {
-					clickable: true,
-					draggable: true,
-					editable: false,
-					geodesic: true,
-					zIndex: 10,
-					strokeWeight: 6
-				}
-			});
-
-			drawingManager.setMap(app.map);
-
-			google.maps.event.addListener(drawingManager, 'overlaycomplete', function(e) {
-				drawingManager.setDrawingMode(null);
-				drawingManager.setOptions({
-					drawingControl: true,
-					drawingControlOptions: {
-						position: google.maps.ControlPosition.TOP_CENTER,
-						drawingModes: ['']
-					}
-				});
-
-				rec = e.overlay;
-				rec.type = e.type;
-				app.payload.AoI = 1;
-				setSelection(rec);
-				if(rec.type == 'polyline'){
-					lineParser();
-				}
-
-				google.maps.event.addListener(rec, 'click', function() {
-					if(rec.type == 'polyline'){
-						lineParser();
-					}
-					clickRec(rec);
-					chartChecker();
-				});
-
-				google.maps.event.addListener(rec, 'bounds_changed', function() {
-					showNewRect2(rec);
-				});
-
-				if(rec.type == 'polyline'){
-					google.maps.event.addListener(rec, 'dragend', function() {
-						lineParser();
+						if(!hecho){
+							var div = document.createElement('div');
+							div.innerHTML = "<strong>" + "</strong>" + legendText;
+							var legend = document.createElement('div');
+							legend = document.getElementById('legend');
+							document.getElementById('legend').style.visibility = "visible";
+							legend.appendChild(div);
+						}
+						else if(hecho){
+							removePolygons();
+							return;
+						}
 					});
 				}
+				else{
+					document.getElementById('legend').style.visibility = "hidden";
+					$('#legend').find('*').not('h3').remove();
+					$('#description').find('*').not('h3').remove();
+					alert("Please select a property and a district, and make sure depth is a numerical value.");
+					removePolygons();
+				}
+			}
 
-			});
+			function setDistrict(){
+				app.payload.district = $('#target').children("option:selected").data('district');
+				var pointStr = $('#target option:selected').val();
+				var coords = pointStr.split(" ");
+				panPoint = new google.maps.LatLng(parseFloat(coords[0]), parseFloat(coords[1]));
+				app.map.panTo(panPoint);
+				app.map.setZoom(10);
+			}
 
-			google.maps.event.addDomListener(document.getElementById('draw'), 'click', drawAnotherRectangle);
+			/******************************************************************************/
+			google.charts.load('current', {'packages':['corechart', 'bar']});
+			google.charts.setOnLoadCallback(initialize);
 
-			infoWindow = new google.maps.InfoWindow();
-		}
+			function initialize () {
+			}
 
-		function drawAnotherRectangle(){
-			if (selectedRec) {
-				app.payload.lineString = null;
-				app.payload.runLine = false;
-				app.payload.runRec = false;
-				selectedRec.setMap(null);
-				infoWindow.close();
-				// To show:
-				drawingManager.setOptions({
+			var rec;
+			var rectangle;
+			var map;
+			var infoWindow;
+			var selectedRec;
+			var drawingManager;
+			var paths;
+
+			function initMap() {
+				app.map = new google.maps.Map(document.getElementById('map'), {
+					zoom: 5,
+					center: new google.maps.LatLng(31.31610138349565, -99.11865234375),
+					mapTypeId: 'terrain'
+				});
+
+				app.infoWindow = new google.maps.InfoWindow;
+
+				app.map.addListener('click', function(e) {
+				});
+
+				drawingManager = new google.maps.drawing.DrawingManager({
 					drawingControl: true,
 					drawingControlOptions: {
 						position: google.maps.ControlPosition.TOP_CENTER,
-						drawingModes: ['rectangle','polyline']
+						drawingModes: ['rectangle', 'polyline']
 					},
 					rectangleOptions: {
 						draggable: true,
@@ -1214,1015 +1080,1059 @@
 						strokeWeight: 6
 					}
 				});
-			}
-		}
 
-		function deleteSelectedShape() {
-			if (selectedShape) {
-				app.payload.AoI = 0;
-				selectedShape.setMap(null);
-				drawingManager.setOptions({
-					drawingControl: true
+				drawingManager.setMap(app.map);
+
+				google.maps.event.addListener(drawingManager, 'overlaycomplete', function(e) {
+					drawingManager.setDrawingMode(null);
+					drawingManager.setOptions({
+						drawingControl: true,
+						drawingControlOptions: {
+							position: google.maps.ControlPosition.TOP_CENTER,
+							drawingModes: ['']
+						}
+					});
+
+					rec = e.overlay;
+					rec.type = e.type;
+					app.payload.AoI = 1;
+					setSelection(rec);
+					if(rec.type == 'polyline'){
+						lineParser();
+					}
+
+					google.maps.event.addListener(rec, 'click', function() {
+						if(rec.type == 'polyline'){
+							lineParser();
+						}
+						clickRec(rec);
+						chartChecker();
+					});
+
+					google.maps.event.addListener(rec, 'bounds_changed', function() {
+						showNewRect2(rec);
+					});
+
+					if(rec.type == 'polyline'){
+						google.maps.event.addListener(rec, 'dragend', function() {
+							lineParser();
+						});
+					}
 				});
+				google.maps.event.addDomListener(document.getElementById('draw'), 'click', drawAnotherRectangle);
+				infoWindow = new google.maps.InfoWindow();
 			}
-		}
 
-		function clearSelection() {
-			if (selectedRec) {
-				selectedRec.setEditable(false);
-				selectedRec = null;
+			function drawAnotherRectangle(){
+				if (selectedRec) {
+					app.payload.lineString = null;
+					app.payload.runLine = false;
+					app.payload.runRec = false;
+					selectedRec.setMap(null);
+					infoWindow.close();
+					drawingManager.setOptions({
+						drawingControl: true,
+						drawingControlOptions: {
+							position: google.maps.ControlPosition.TOP_CENTER,
+							drawingModes: ['rectangle','polyline']
+						},
+						rectangleOptions: {
+							draggable: true,
+							clickable: true,
+							editable: true,
+							zIndex: 10
+						},
+						polylineOptions: {
+							clickable: true,
+							draggable: true,
+							editable: false,
+							geodesic: true,
+							zIndex: 10,
+							strokeWeight: 6
+						}
+					});
+				}
 			}
-		}
 
-		function setSelection(shape) {
-			clearSelection();
-			selectedRec = shape;
-			shape.setEditable(true);
-		}
-		function clickRec(shape){
-			if(shape.type == 'rectangle'){
+			function deleteSelectedShape() {
+				if (selectedShape) {
+					app.payload.AoI = 0;
+					selectedShape.setMap(null);
+					drawingManager.setOptions({
+						drawingControl: true
+					});
+				}
+			}
+			function clearSelection() {
+				if (selectedRec) {
+					selectedRec.setEditable(false);
+					selectedRec = null;
+				}
+			}
+			function setSelection(shape) {
+				clearSelection();
+				selectedRec = shape;
+				shape.setEditable(true);
+			}
+			function clickRec(shape){
+				if(shape.type == 'rectangle'){
+					var ne = shape.getBounds().getNorthEast();
+					var sw = shape.getBounds().getSouthWest();
+					var center = shape.getBounds().getCenter();
+					var southWest = new google.maps.LatLng(sw.lat(), sw.lng());
+					var northEast = new google.maps.LatLng(ne.lat(), ne.lng());
+					var southEast = new google.maps.LatLng(sw.lat(), ne.lng());
+					var northWest = new google.maps.LatLng(ne.lat(), sw.lng());
+					var area = google.maps.geometry.spherical.computeArea([northEast, northWest, southWest, southEast]);
+					area = parseInt(area);
+					area = area.toLocaleString();
+					var contentString = '<b>Rectangle clicked.</b><br><br>' + 'Area is: ' + area + ' m^2';
+					var center = shape.getBounds().getCenter();
+
+					infoWindow.setContent(contentString);
+					infoWindow.setPosition(center);
+					infoWindow.open(app.map);
+				}
+			}
+
+			function showNewRect2(shape) {
 				var ne = shape.getBounds().getNorthEast();
 				var sw = shape.getBounds().getSouthWest();
-				var center = shape.getBounds().getCenter();
-				var southWest = new google.maps.LatLng(sw.lat(), sw.lng());
-				var northEast = new google.maps.LatLng(ne.lat(), ne.lng());
-				var southEast = new google.maps.LatLng(sw.lat(), ne.lng());
-				var northWest = new google.maps.LatLng(ne.lat(), sw.lng());
-				var area = google.maps.geometry.spherical.computeArea([northEast, northWest, southWest, southEast]);
-				area = parseInt(area);
-				area = area.toLocaleString();
-				var contentString = '<b>Rectangle clicked.</b><br><br>' + 'Area is: ' + area + ' m^2';
-				var center = shape.getBounds().getCenter();
-
+				var contentString = '<b>Rectangle moved.</b><br>' +
+				'New north-east corner: ' + ne.lat() + ', ' + ne.lng() + '<br>' +
+				'New south-west corner: ' + sw.lat() + ', ' + sw.lng();
 				infoWindow.setContent(contentString);
-				infoWindow.setPosition(center);
+				infoWindow.setPosition(ne);
 				infoWindow.open(app.map);
 			}
-		}
 
-		function showNewRect2(shape) {
-			var ne = shape.getBounds().getNorthEast();
-			var sw = shape.getBounds().getSouthWest();
-
-			var contentString = '<b>Rectangle moved.</b><br>' +
-			'New north-east corner: ' + ne.lat() + ', ' + ne.lng() + '<br>' +
-			'New south-west corner: ' + sw.lat() + ', ' + sw.lng();
-
-			infoWindow.setContent(contentString);
-			infoWindow.setPosition(ne);
-
-			infoWindow.open(app.map);
-		}
-
-		var chart;
-		var chart_2;
-		var chart_3;
-		var chart_4;
-		var chart_histo;
-		var chart_histo_2;
-		var chart_histo_3;
-		var chart_histo_4;
-		function chartChecker(){
-			if(app.payload.chart1 != null){
-				drawChart(1);
+			var chart;
+			var chart_2;
+			var chart_3;
+			var chart_4;
+			var chart_histo;
+			var chart_histo_2;
+			var chart_histo_3;
+			var chart_histo_4;
+			function chartChecker(){
+				if(app.payload.chart1 != null){
+					drawChart(1);
+				}
+				if(app.payload.chart2 != null){
+					drawChart(2);
+				}
+				if(app.payload.chart3 != null){
+					drawChart(3);
+				}
+				if(app.payload.chart4 != null){
+					drawChart(4);
+				}
 			}
 
-			if(app.payload.chart2 != null){
-				drawChart(2);
-			}
+			function drawChart(x) {
+				if(typeof chart === 'undefined'){
+				}else{
+					chart.clearChart();
+					chart_histo.clearChart();
+				}
+				if(typeof chart_2 === 'undefined'){
+				}else{
+					chart_2.clearChart();
+					chart_histo_2.clearChart();
+				}
+				if(typeof chart_3 === 'undefined'){
+				}else{
+					chart_3.clearChart();
+					chart_histo_3.clearChart();
+				}
+				if(typeof chart_4 === 'undefined'){
+				}else{
+					chart_4.clearChart();
+					chart_histo_4.clearChart();
+				}
 
-			if(app.payload.chart3 != null){
-				drawChart(3);
-			}
+				if(rec.type == 'rectangle'){
+					var maxaoi;
+					var minaoi;
+					var medaoi;
+					var weightedaoi;
+					var previous1;
+					var previous2;
+					var previous3;
+					var previous4;
 
-			if(app.payload.chart4 != null){
-				drawChart(4);
-			}
-		}
-
-		function drawChart(x) {
-			if(typeof chart === 'undefined'){
-			}else{
-				chart.clearChart();
-				chart_histo.clearChart();
-			}
-
-			if(typeof chart_2 === 'undefined'){
-			}else{
-				chart_2.clearChart();
-				chart_histo_2.clearChart();
-			}
-
-			if(typeof chart_3 === 'undefined'){
-			}else{
-				chart_3.clearChart();
-				chart_histo_3.clearChart();
-			}
-
-			if(typeof chart_4 === 'undefined'){
-			}else{
-				chart_4.clearChart();
-				chart_histo_4.clearChart();
-			}
-
-			if(rec.type == 'rectangle'){
-				var maxaoi;
-				var minaoi;
-				var medaoi;
-				var weightedaoi;
-				var previous1;
-				var previous2;
-				var previous3;
-				var previous4;
-
-				app.payload.getMode = "AOI";
-				getparams = app.payload;
-				bounds = rec.getBounds();
-				getparams.NE = bounds.getNorthEast().toJSON();
-				getparams.SW = bounds.getSouthWest().toJSON();
-				if(x == 1){
-					previous1 = app.payload.chart1;
-					previous2 = app.payload.chart2;
-					previous3 = app.payload.chart3;
-					previous4 = app.payload.chart4;
-					app.payload.chart1;
-					app.payload.chart2 = null;
-					app.payload.chart3 = null;
-					app.payload.chart4 = null;
-
-					$.get('polygonHandler.php', app.payload, function(data){
-						maxaoi = parseFloat(data.maxAOIch1);
-						minaoi = parseFloat(data.minAOIch1);
-						medaoi = parseFloat(data.medAOIch1);
-						weightedaoi = parseFloat(data.weightedAOIch1);
-						weightedaoi = parseFloat(weightedaoi).toFixed(2);
-						weightedaoi = parseFloat(weightedaoi);
-
-						var data = google.visualization.arrayToDataTable([
-							['Method', 'Value',],
-							['Maximum ', maxaoi],
-							['Minimum ', minaoi],
-							['Median ', medaoi],
-							['Weighted Avg ', weightedaoi]
-						]);
-
-						var options = {
-							title: app.payload.chart1n,
-							legend: {
-								position: 'none'
-							},
-							chartArea: {
-								width: '70%'
-							},
-							hAxis: {
-								//title: 'a',
-								minValue: 0
-							},
-							vAxis: {
-								//title: 'b'
-							}
-						};
-						chart = new google.visualization.BarChart(document.getElementById('chart_area_1'));
-						chart.draw(data, options);
-					});
-
-					var histo_array;
-					app.payload.getMode = "histogram";
-					$.get('polygonHandler.php', app.payload, function(data){
-						histo_array = data.values;
-						histo_array = histo_array.filter(nums => nums != "");
-						var data = new google.visualization.DataTable();
-						data.addColumn('string', 'Property');
-						data.addColumn('number', 'Value');
-						data.addRows(histo_array.length);
-						var max = Math.max(...histo_array);
-						for (var i = 0; i < histo_array.length; i++) {
-							data.setCell(i, 1, parseFloat(histo_array[i]));
-						}
-						var size;
-						size = Math.sqrt(histo_array.length - 1) - 1;
-						if(size == 0){
-							size = 1;
-							size = max/size;
-						}else{
-							size = max/size;
-						}
-						size = parseFloat(size).toFixed(2);
-						var options = {
-							title: app.payload.chart1n,
-							legend: {
-								position: 'none'
-							},
-							histogram: {
-								bucketSize: size
-							},
-							// bar: { width: 5 },
-							hAxis: {
-								type: 'category'
-							}
-						};
-
-						chart_histo = new google.visualization.Histogram(document.getElementById('chart_histogram_1'));
-						chart_histo.draw(data, options);
-					});
 					app.payload.getMode = "AOI";
-					app.payload.chart1 = previous1;
-					app.payload.chart2 = previous2;
-					app.payload.chart3 = previous3;
-					app.payload.chart4 = previous4;
-				}
-				else if (x == 2) {
+					getparams = app.payload;
+					bounds = rec.getBounds();
+					getparams.NE = bounds.getNorthEast().toJSON();
+					getparams.SW = bounds.getSouthWest().toJSON();
 					previous1 = app.payload.chart1;
 					previous2 = app.payload.chart2;
 					previous3 = app.payload.chart3;
 					previous4 = app.payload.chart4;
-					app.payload.chart1 = null;
-					app.payload.chart2;
-					app.payload.chart3 = null;
-					app.payload.chart4 = null;
-					$.get('polygonHandler.php', app.payload, function(data){
-						maxaoi = parseFloat(data.maxAOIch2);
-						minaoi = parseFloat(data.minAOIch2);
-						medaoi = parseFloat(data.medAOIch2);
-						weightedaoi = parseFloat(data.weightedAOIch2);
-						weightedaoi = parseFloat(weightedaoi).toFixed(2);
-						weightedaoi = parseFloat(weightedaoi);
+					var chart_divs = ['chart_area_1', 'chart_area_2','chart_area_3', 'chart_area_4'];
+					var histogram_divs = ['chart_histogram_1', 'chart_histogram_2', 'chart_histogram_3', 'chart_histogram_4'];
+					var chart_ns = ['chart1n', 'chart2n', 'chart3n', 'chart4n'];
+					var data_arr = ['maxAOIch','minAOIch','medAOIch','weightedAOIch'];
 
-						var data = google.visualization.arrayToDataTable([
-							['Method', 'Value',],
-							['Maximum ', maxaoi],
-							['Minimum ', minaoi],
-							['Median ', medaoi],
-							['Weighted Avg ', weightedaoi]
-						]);
+					for (var i = 0; i < chart_divs.length; i++) {
 
-						var options = {
-							title: app.payload.chart2n,
-							legend: {
-								position: 'none'
-							},
-							chartArea: {
-								width: '70%'
-							},
-							hAxis: {
-								//title: 'a',
-								minValue: 0
-							},
-							vAxis: {
-								//title: 'b'
+					}
+
+					if(x == 1){
+						app.payload.chart1;
+						app.payload.chart2 = null;
+						app.payload.chart3 = null;
+						app.payload.chart4 = null;
+						$.get('polygonHandler.php', app.payload, function(data){
+							maxaoi = parseFloat(data.maxAOIch1);
+							minaoi = parseFloat(data.minAOIch1);
+							medaoi = parseFloat(data.medAOIch1);
+							weightedaoi = parseFloat(data.weightedAOIch1);
+							weightedaoi = parseFloat(weightedaoi).toFixed(2);
+							weightedaoi = parseFloat(weightedaoi);
+
+							var data = google.visualization.arrayToDataTable([
+								['Method', 'Value',],
+								['Maximum ', maxaoi],
+								['Minimum ', minaoi],
+								['Median ', medaoi],
+								['Weighted Avg ', weightedaoi]
+							]);
+
+							var options = {
+								title: app.payload.chart1n,
+								legend: {
+									position: 'none'
+								},
+								chartArea: {
+									width: '70%'
+								},
+								hAxis: {
+									minValue: 0
+								},
+								vAxis: {
+								}
+							};
+							chart = new google.visualization.BarChart(document.getElementById('chart_area_1'));
+							chart.draw(data, options);
+						});
+
+						var histo_array;
+						app.payload.getMode = "histogram";
+						$.get('polygonHandler.php', app.payload, function(data){
+							histo_array = data.values;
+							histo_array = histo_array.filter(nums => nums != "");
+							var data = new google.visualization.DataTable();
+							data.addColumn('string', 'Property');
+							data.addColumn('number', 'Value');
+							data.addRows(histo_array.length);
+							var max = Math.max(...histo_array);
+							for (var i = 0; i < histo_array.length; i++) {
+								data.setCell(i, 1, parseFloat(histo_array[i]));
 							}
-						};
-						chart_2 = new google.visualization.BarChart(document.getElementById('chart_area_2'));
-						chart_2.draw(data, options);
-					});
-
-					var histo_array;
-					app.payload.getMode = "histogram";
-					$.get('polygonHandler.php', app.payload, function(data){
-						histo_array = data.values;
-						histo_array = histo_array.filter(nums => nums != "");
-						var data = new google.visualization.DataTable();
-						data.addColumn('string', 'Property');
-						data.addColumn('number', 'Value');
-						data.addRows(histo_array.length);
-						var max = Math.max(...histo_array);
-						for (var i = 0; i < histo_array.length; i++) {
-							data.setCell(i, 1, histo_array[i]);
-						}
-						var size;
-						size = Math.sqrt(histo_array.length - 1) - 1;
-						if(size == 0){
-							size = 1;
-							size = max/size;
-						}else{
-							size = max/size;
-						}
-						size = parseFloat(size).toFixed(2);
-						var options = {
-							title: app.payload.chart2n,
-							legend: {
-								position: 'none'
-							},
-							histogram: {
-								bucketSize: size
-							},
-							// bar: { width: 5 },
-							hAxis: {
-								type: 'category'
+							var size;
+							size = Math.sqrt(histo_array.length - 1) - 1;
+							if(size == 0){
+								size = 1;
+								size = max/size;
+							}else{
+								size = max/size;
 							}
-						};
+							size = parseFloat(size).toFixed(2);
+							var options = {
+								title: app.payload.chart1n,
+								legend: {
+									position: 'none'
+								},
+								histogram: {
+									bucketSize: size
+								},
+								hAxis: {
+									type: 'category'
+								}
+							};
 
-						chart_histo_2 = new google.visualization.Histogram(document.getElementById('chart_histogram_2'));
-						chart_histo_2.draw(data, options);
-					});
-					app.payload.chart1 = previous1;
-					app.payload.chart2 = previous2;
-					app.payload.chart3 = previous3;
-					app.payload.chart4 = previous4;
-				}
-				else if(x == 3){
-					previous1 = app.payload.chart1;
-					previous2 = app.payload.chart2;
-					previous3 = app.payload.chart3;
-					previous4 = app.payload.chart4;
-					app.payload.chart1 = null;
-					app.payload.chart2 = null;
-					app.payload.chart3;
-					app.payload.chart4 = null;
-					$.get('polygonHandler.php', app.payload, function(data){
-						maxaoi = parseFloat(data.maxAOIch3);
-						minaoi = parseFloat(data.minAOIch3);
-						medaoi = parseFloat(data.medAOIch3);
-						weightedaoi = parseFloat(data.weightedAOIch3);
-						weightedaoi = parseFloat(weightedaoi).toFixed(2);
-						weightedaoi = parseFloat(weightedaoi);
+							chart = new google.visualization.Histogram(document.getElementById('chart_histogram_1'));
+							chart.draw(data, options);
+						});
+						app.payload.getMode = "AOI";
+						app.payload.chart1 = previous1;
+						app.payload.chart2 = previous2;
+						app.payload.chart3 = previous3;
+						app.payload.chart4 = previous4;
+					}
+					else if (x == 2) {
+						previous1 = app.payload.chart1;
+						previous2 = app.payload.chart2;
+						previous3 = app.payload.chart3;
+						previous4 = app.payload.chart4;
+						app.payload.chart1 = null;
+						app.payload.chart2;
+						app.payload.chart3 = null;
+						app.payload.chart4 = null;
+						$.get('polygonHandler.php', app.payload, function(data){
+							maxaoi = parseFloat(data.maxAOIch2);
+							minaoi = parseFloat(data.minAOIch2);
+							medaoi = parseFloat(data.medAOIch2);
+							weightedaoi = parseFloat(data.weightedAOIch2);
+							weightedaoi = parseFloat(weightedaoi).toFixed(2);
+							weightedaoi = parseFloat(weightedaoi);
 
-						var data = google.visualization.arrayToDataTable([
-							['Method', 'Value',],
-							['Maximum ', maxaoi],
-							['Minimum ', minaoi],
-							['Median ', medaoi],
-							['Weighted Avg ', weightedaoi]
-						]);
+							var data = google.visualization.arrayToDataTable([
+								['Method', 'Value',],
+								['Maximum ', maxaoi],
+								['Minimum ', minaoi],
+								['Median ', medaoi],
+								['Weighted Avg ', weightedaoi]
+							]);
 
-						var options = {
-							title: app.payload.chart3n,
-							legend: {
-								position: 'none'
-							},
-							chartArea: {
-								width: '70%'
-							},
-							hAxis: {
-								//title: 'a',
-								minValue: 0
-							},
-							vAxis: {
-								//title: 'b'
+							var options = {
+								title: app.payload.chart2n,
+								legend: {
+									position: 'none'
+								},
+								chartArea: {
+									width: '70%'
+								},
+								hAxis: {
+									minValue: 0
+								},
+								vAxis: {
+								}
+							};
+							chart = new google.visualization.BarChart(document.getElementById('chart_area_2'));
+							chart.draw(data, options);
+						});
+
+						var histo_array;
+						app.payload.getMode = "histogram";
+						$.get('polygonHandler.php', app.payload, function(data){
+							histo_array = data.values;
+							histo_array = histo_array.filter(nums => nums != "");
+							var data = new google.visualization.DataTable();
+							data.addColumn('string', 'Property');
+							data.addColumn('number', 'Value');
+							data.addRows(histo_array.length);
+							var max = Math.max(...histo_array);
+							for (var i = 0; i < histo_array.length; i++) {
+								data.setCell(i, 1, histo_array[i]);
 							}
-						};
-						chart_3 = new google.visualization.BarChart(document.getElementById('chart_area_3'));
-						chart_3.draw(data, options);
-					});
-
-					var histo_array;
-					app.payload.getMode = "histogram";
-					$.get('polygonHandler.php', app.payload, function(data){
-						histo_array = data.values;
-						histo_array = histo_array.filter(nums => nums != "");
-						var data = new google.visualization.DataTable();
-						data.addColumn('string', 'Property');
-						data.addColumn('number', 'Value');
-						data.addRows(histo_array.length);
-						var max = Math.max(...histo_array);
-						for (var i = 0; i < histo_array.length; i++) {
-							data.setCell(i, 1, histo_array[i]);
-						}
-						var size;
-						size = Math.sqrt(histo_array.length - 1) - 1;
-						if(size == 0){
-							size = 1;
-							size = max/size;
-						}else{
-							size = max/size;
-						}
-						size = parseFloat(size).toFixed(2);
-						var options = {
-							title: app.payload.chart3n,
-							legend: {
-								position: 'none'
-							},
-							histogram: {
-								bucketSize: size
-							},
-							// bar: { width: 5 },
-							hAxis: {
-								type: 'category'
+							var size;
+							size = Math.sqrt(histo_array.length - 1) - 1;
+							if(size == 0){
+								size = 1;
+								size = max/size;
+							}else{
+								size = max/size;
 							}
-						};
+							size = parseFloat(size).toFixed(2);
+							var options = {
+								title: app.payload.chart2n,
+								legend: {
+									position: 'none'
+								},
+								histogram: {
+									bucketSize: size
+								},
+								hAxis: {
+									type: 'category'
+								}
+							};
 
-						chart_histo_3 = new google.visualization.Histogram(document.getElementById('chart_histogram_3'));
-						chart_histo_3.draw(data, options);
-					});
-					app.payload.chart1 = previous1;
-					app.payload.chart2 = previous2;
-					app.payload.chart3 = previous3;
-					app.payload.chart4 = previous4;
-				}
-				else if(x == 4){
-					previous1 = app.payload.chart1;
-					previous2 = app.payload.chart2;
-					previous3 = app.payload.chart3;
-					previous4 = app.payload.chart4;
-					app.payload.chart1 = null;
-					app.payload.chart2 = null;
-					app.payload.chart3 = null;
-					app.payload.chart4;
-					$.get('polygonHandler.php', app.payload, function(data){
-						maxaoi = parseFloat(data.maxAOIch4);
-						minaoi = parseFloat(data.minAOIch4);
-						medaoi = parseFloat(data.medAOIch4);
-						weightedaoi = parseFloat(data.weightedAOIch4);
-						weightedaoi = parseFloat(weightedaoi).toFixed(2);
-						weightedaoi = parseFloat(weightedaoi);
+							chart = new google.visualization.Histogram(document.getElementById('chart_histogram_2'));
+							chart.draw(data, options);
+						});
+						app.payload.chart1 = previous1;
+						app.payload.chart2 = previous2;
+						app.payload.chart3 = previous3;
+						app.payload.chart4 = previous4;
+					}
+					else if(x == 3){
+						previous1 = app.payload.chart1;
+						previous2 = app.payload.chart2;
+						previous3 = app.payload.chart3;
+						previous4 = app.payload.chart4;
+						app.payload.chart1 = null;
+						app.payload.chart2 = null;
+						app.payload.chart3;
+						app.payload.chart4 = null;
+						$.get('polygonHandler.php', app.payload, function(data){
+							maxaoi = parseFloat(data.maxAOIch3);
+							minaoi = parseFloat(data.minAOIch3);
+							medaoi = parseFloat(data.medAOIch3);
+							weightedaoi = parseFloat(data.weightedAOIch3);
+							weightedaoi = parseFloat(weightedaoi).toFixed(2);
+							weightedaoi = parseFloat(weightedaoi);
 
-						var data = google.visualization.arrayToDataTable([
-							['Method', 'Value',],
-							['Maximum ', maxaoi],
-							['Minimum ', minaoi],
-							['Median ', medaoi],
-							['Weighted Avg ', weightedaoi]
-						]);
+							var data = google.visualization.arrayToDataTable([
+								['Method', 'Value',],
+								['Maximum ', maxaoi],
+								['Minimum ', minaoi],
+								['Median ', medaoi],
+								['Weighted Avg ', weightedaoi]
+							]);
 
-						var options = {
-							title: app.payload.chart4n,
-							legend: {
-								position: 'none'
-							},
-							chartArea: {
-								width: '70%'
-							},
-							hAxis: {
-								//title: 'a',
-								minValue: 0
-							},
-							vAxis: {
-								//title: 'b'
+							var options = {
+								title: app.payload.chart3n,
+								legend: {
+									position: 'none'
+								},
+								chartArea: {
+									width: '70%'
+								},
+								hAxis: {
+									minValue: 0
+								},
+								vAxis: {
+								}
+							};
+							chart_3 = new google.visualization.BarChart(document.getElementById('chart_area_3'));
+							chart_3.draw(data, options);
+						});
+
+						var histo_array;
+						app.payload.getMode = "histogram";
+						$.get('polygonHandler.php', app.payload, function(data){
+							histo_array = data.values;
+							histo_array = histo_array.filter(nums => nums != "");
+							var data = new google.visualization.DataTable();
+							data.addColumn('string', 'Property');
+							data.addColumn('number', 'Value');
+							data.addRows(histo_array.length);
+							var max = Math.max(...histo_array);
+							for (var i = 0; i < histo_array.length; i++) {
+								data.setCell(i, 1, histo_array[i]);
 							}
-						};
-						chart_4 = new google.visualization.BarChart(document.getElementById('chart_area_4'));
-						chart_4.draw(data, options);
-					});
-
-					var histo_array;
-					app.payload.getMode = "histogram";
-					$.get('polygonHandler.php', app.payload, function(data){
-						histo_array = data.values;
-						histo_array = histo_array.filter(nums => nums != "");
-						var data = new google.visualization.DataTable();
-						data.addColumn('string', 'Property');
-						data.addColumn('number', 'Value');
-						data.addRows(histo_array.length);
-						var max = Math.max(...histo_array);
-						for (var i = 0; i < histo_array.length; i++) {
-							data.setCell(i, 1, histo_array[i]);
-						}
-						var size;
-						size = Math.sqrt(histo_array.length - 1) - 1;
-						if(size == 0){
-							size = 1;
-							size = max/size;
-						}else{
-							size = max/size;
-						}
-						size = parseFloat(size).toFixed(2);
-						var options = {
-							title: app.payload.chart4n,
-							legend: {
-								position: 'none'
-							},
-							histogram: {
-								bucketSize: size
-							},
-							// bar: { width: 5 },
-							hAxis: {
-								type: 'category'
+							var size;
+							size = Math.sqrt(histo_array.length - 1) - 1;
+							if(size == 0){
+								size = 1;
+								size = max/size;
+							}else{
+								size = max/size;
 							}
-						};
+							size = parseFloat(size).toFixed(2);
+							var options = {
+								title: app.payload.chart3n,
+								legend: {
+									position: 'none'
+								},
+								histogram: {
+									bucketSize: size
+								},
+								hAxis: {
+									type: 'category'
+								}
+							};
 
-						chart_histo_4 = new google.visualization.Histogram(document.getElementById('chart_histogram_4'));
-						chart_histo_4.draw(data, options);
-					});
-					app.payload.chart1 = previous1;
-					app.payload.chart2 = previous2;
-					app.payload.chart3 = previous3;
-					app.payload.chart4 = previous4;
-				}
-			}
-			else{
-				var maxaoi;
-				var minaoi;
-				var medaoi;
-				var weightedaoi;
+							chart_histo_3 = new google.visualization.Histogram(document.getElementById('chart_histogram_3'));
+							chart_histo_3.draw(data, options);
+						});
+						app.payload.chart1 = previous1;
+						app.payload.chart2 = previous2;
+						app.payload.chart3 = previous3;
+						app.payload.chart4 = previous4;
+					}
+					else if(x == 4){
+						previous1 = app.payload.chart1;
+						previous2 = app.payload.chart2;
+						previous3 = app.payload.chart3;
+						previous4 = app.payload.chart4;
+						app.payload.chart1 = null;
+						app.payload.chart2 = null;
+						app.payload.chart3 = null;
+						app.payload.chart4;
+						$.get('polygonHandler.php', app.payload, function(data){
+							maxaoi = parseFloat(data.maxAOIch4);
+							minaoi = parseFloat(data.minAOIch4);
+							medaoi = parseFloat(data.medAOIch4);
+							weightedaoi = parseFloat(data.weightedAOIch4);
+							weightedaoi = parseFloat(weightedaoi).toFixed(2);
+							weightedaoi = parseFloat(weightedaoi);
 
-				app.payload.getMode = "line";
-				var getparams = app.payload;
-				var bounds = app.map.getBounds();
-				getparams.NE = bounds.getNorthEast().toJSON();
-				getparams.SW = bounds.getSouthWest().toJSON();
-				if(x == 1){
-					previous1 = app.payload.chart1;
-					previous2 = app.payload.chart2;
-					previous3 = app.payload.chart3;
-					previous4 = app.payload.chart4;
-					app.payload.chart1;
-					app.payload.chart2 = null;
-					app.payload.chart3 = null;
-					app.payload.chart4 = null;
+							var data = google.visualization.arrayToDataTable([
+								['Method', 'Value',],
+								['Maximum ', maxaoi],
+								['Minimum ', minaoi],
+								['Median ', medaoi],
+								['Weighted Avg ', weightedaoi]
+							]);
 
-					$.get('polygonHandler.php', app.payload, function(data){
-						maxaoi = parseFloat(data.maxAOIch1);
-						minaoi = parseFloat(data.minAOIch1);
-						medaoi = parseFloat(data.medAOIch1);
-						weightedaoi = parseFloat(data.weightedAOIch1);
-						weightedaoi = parseFloat(weightedaoi).toFixed(2);
-						weightedaoi = parseFloat(weightedaoi);
+							var options = {
+								title: app.payload.chart4n,
+								legend: {
+									position: 'none'
+								},
+								chartArea: {
+									width: '70%'
+								},
+								hAxis: {
+									minValue: 0
+								},
+								vAxis: {
+								}
+							};
+							chart_4 = new google.visualization.BarChart(document.getElementById('chart_area_4'));
+							chart_4.draw(data, options);
+						});
 
-						var data = google.visualization.arrayToDataTable([
-							['Method', 'Value',],
-							['Maximum ', maxaoi],
-							['Minimum ', minaoi],
-							['Median ', medaoi],
-							['Weighted Avg ', weightedaoi]
-						]);
-
-						var options = {
-							title: app.payload.chart1n,
-							legend: {
-								position: 'none'
-							},
-							chartArea: {
-								width: '70%'
-							},
-							hAxis: {
-								//title: 'a',
-								minValue: 0
-							},
-							vAxis: {
-								//title: 'b'
+						var histo_array;
+						app.payload.getMode = "histogram";
+						$.get('polygonHandler.php', app.payload, function(data){
+							histo_array = data.values;
+							histo_array = histo_array.filter(nums => nums != "");
+							var data = new google.visualization.DataTable();
+							data.addColumn('string', 'Property');
+							data.addColumn('number', 'Value');
+							data.addRows(histo_array.length);
+							var max = Math.max(...histo_array);
+							for (var i = 0; i < histo_array.length; i++) {
+								data.setCell(i, 1, histo_array[i]);
 							}
-						};
-						chart = new google.visualization.BarChart(document.getElementById('chart_area_1'));
-						chart.draw(data, options);
-					});
-
-					var histo_array;
-					app.payload.getMode = "histogram";
-					$.get('polygonHandler.php', app.payload, function(data){
-						histo_array = data.values;
-						histo_array = histo_array.filter(nums => nums != "");
-						var data = new google.visualization.DataTable();
-						data.addColumn('string', 'Property');
-						data.addColumn('number', 'Value');
-						data.addRows(histo_array.length);
-						var max = Math.max(...histo_array);
-						for (var i = 0; i < histo_array.length; i++) {
-							data.setCell(i, 1, histo_array[i]);
-						}
-						var size;
-						size = Math.sqrt(histo_array.length - 1) - 1;
-						if(size == 0){
-							size = 1;
-							size = max/size;
-						}else{
-							size = max/size;
-						}
-						size = parseFloat(size).toFixed(2);
-						var options = {
-							title: app.payload.chart1n,
-							legend: {
-								position: 'none'
-							},
-							histogram: {
-								bucketSize: size
-							},
-							// bar: { width: 5 },
-							hAxis: {
-								type: 'category'
+							var size;
+							size = Math.sqrt(histo_array.length - 1) - 1;
+							if(size == 0){
+								size = 1;
+								size = max/size;
+							}else{
+								size = max/size;
 							}
-						};
+							size = parseFloat(size).toFixed(2);
+							var options = {
+								title: app.payload.chart4n,
+								legend: {
+									position: 'none'
+								},
+								histogram: {
+									bucketSize: size
+								},
+								hAxis: {
+									type: 'category'
+								}
+							};
 
-						chart_histo = new google.visualization.Histogram(document.getElementById('chart_histogram_1'));
-						chart_histo.draw(data, options);
-					});
-					app.payload.chart1 = previous1;
-					app.payload.chart2 = previous2;
-					app.payload.chart3 = previous3;
-					app.payload.chart4 = previous4;
-				}
-				else if (x == 2) {
-					previous1 = app.payload.chart1;
-					previous2 = app.payload.chart2;
-					previous3 = app.payload.chart3;
-					previous4 = app.payload.chart4;
-					app.payload.chart1 = null;
-					app.payload.chart2;
-					app.payload.chart3 = null;
-					app.payload.chart4 = null;
-					$.get('polygonHandler.php', app.payload, function(data){
-						maxaoi = parseFloat(data.maxAOIch2);
-						minaoi = parseFloat(data.minAOIch2);
-						medaoi = parseFloat(data.medAOIch2);
-						weightedaoi = parseFloat(data.weightedAOIch2);
-						weightedaoi = parseFloat(weightedaoi).toFixed(2);
-						weightedaoi = parseFloat(weightedaoi);
-
-						var data = google.visualization.arrayToDataTable([
-							['Method', 'Value',],
-							['Maximum ', maxaoi],
-							['Minimum ', minaoi],
-							['Median ', medaoi],
-							['Weighted Avg ', weightedaoi]
-						]);
-
-						var options = {
-							title: app.payload.chart2n,
-							legend: {
-								position: 'none'
-							},
-							chartArea: {
-								width: '70%'
-							},
-							hAxis: {
-								//title: 'a',
-								minValue: 0
-							},
-							vAxis: {
-								//title: 'b'
-							}
-						};
-						chart_2 = new google.visualization.BarChart(document.getElementById('chart_area_2'));
-						chart_2.draw(data, options);
-					});
-
-					var histo_array;
-					app.payload.getMode = "histogram";
-					$.get('polygonHandler.php', app.payload, function(data){
-						histo_array = data.values;
-						histo_array = histo_array.filter(nums => nums != "");
-						var data = new google.visualization.DataTable();
-						data.addColumn('string', 'Property');
-						data.addColumn('number', 'Value');
-						data.addRows(histo_array.length);
-						var max = Math.max(...histo_array);
-						for (var i = 0; i < histo_array.length; i++) {
-							data.setCell(i, 1, histo_array[i]);
-						}
-						var size;
-						size = Math.sqrt(histo_array.length - 1) - 1;
-						if(size == 0){
-							size = 1;
-							size = max/size;
-						}else{
-							size = max/size;
-						}
-						size = parseFloat(size).toFixed(2);
-						var options = {
-							title: app.payload.chart2n,
-							legend: {
-								position: 'none'
-							},
-							histogram: {
-								bucketSize: size
-							},
-							// bar: { width: 5 },
-							hAxis: {
-								type: 'category'
-							}
-						};
-
-						chart_histo_2 = new google.visualization.Histogram(document.getElementById('chart_histogram_2'));
-						chart_histo_2.draw(data, options);
-					});
-					app.payload.chart1 = previous1;
-					app.payload.chart2 = previous2;
-					app.payload.chart3 = previous3;
-					app.payload.chart4 = previous4;
-				}
-				else if(x == 3){
-					previous1 = app.payload.chart1;
-					previous2 = app.payload.chart2;
-					previous3 = app.payload.chart3;
-					previous4 = app.payload.chart4;
-					app.payload.chart1 = null;
-					app.payload.chart2 = null;
-					app.payload.chart3;
-					app.payload.chart4 = null;
-					$.get('polygonHandler.php', app.payload, function(data){
-						maxaoi = parseFloat(data.maxAOIch3);
-						minaoi = parseFloat(data.minAOIch3);
-						medaoi = parseFloat(data.medAOIch3);
-						weightedaoi = parseFloat(data.weightedAOIch3);
-						weightedaoi = parseFloat(weightedaoi).toFixed(2);
-						weightedaoi = parseFloat(weightedaoi);
-
-						var data = google.visualization.arrayToDataTable([
-							['Method', 'Value',],
-							['Maximum ', maxaoi],
-							['Minimum ', minaoi],
-							['Median ', medaoi],
-							['Weighted Avg ', weightedaoi]
-						]);
-
-						var options = {
-							title: app.payload.chart3n,
-							legend: {
-								position: 'none'
-							},
-							chartArea: {
-								width: '70%'
-							},
-							hAxis: {
-								//title: 'a',
-								minValue: 0
-							},
-							vAxis: {
-								//title: 'b'
-							}
-						};
-						chart_3 = new google.visualization.BarChart(document.getElementById('chart_area_3'));
-						chart_3.draw(data, options);
-					});
-
-					var histo_array;
-					app.payload.getMode = "histogram";
-					$.get('polygonHandler.php', app.payload, function(data){
-						histo_array = data.values;
-						histo_array = histo_array.filter(nums => nums != "");
-						var data = new google.visualization.DataTable();
-						data.addColumn('string', 'Property');
-						data.addColumn('number', 'Value');
-						data.addRows(histo_array.length);
-						var max = Math.max(...histo_array);
-						for (var i = 0; i < histo_array.length; i++) {
-							data.setCell(i, 1, histo_array[i]);
-						}
-						var size;
-						size = Math.sqrt(histo_array.length - 1) - 1;
-						if(size == 0){
-							size = 1;
-							size = max/size;
-						}else{
-							size = max/size;
-						}
-						size = parseFloat(size).toFixed(2);
-						var options = {
-							title: app.payload.chart3n,
-							legend: {
-								position: 'none'
-							},
-							histogram: {
-								bucketSize: size
-							},
-							// bar: { width: 5 },
-							hAxis: {
-								type: 'category'
-							}
-						};
-
-						chart_histo_3 = new google.visualization.Histogram(document.getElementById('chart_histogram_3'));
-						chart_histo_3.draw(data, options);
-					});
-					app.payload.chart1 = previous1;
-					app.payload.chart2 = previous2;
-					app.payload.chart3 = previous3;
-					app.payload.chart4 = previous4;
-				}
-				else if(x == 4){
-					previous1 = app.payload.chart1;
-					previous2 = app.payload.chart2;
-					previous3 = app.payload.chart3;
-					previous4 = app.payload.chart4;
-					app.payload.chart1 = null;
-					app.payload.chart2 = null;
-					app.payload.chart3 = null;
-					app.payload.chart4;
-					$.get('polygonHandler.php', app.payload, function(data){
-						maxaoi = parseFloat(data.maxAOIch4);
-						minaoi = parseFloat(data.minAOIch4);
-						medaoi = parseFloat(data.medAOIch4);
-						weightedaoi = parseFloat(data.weightedAOIch4);
-						weightedaoi = parseFloat(weightedaoi).toFixed(2);
-						weightedaoi = parseFloat(weightedaoi);
-
-						var data = google.visualization.arrayToDataTable([
-							['Method', 'Value',],
-							['Maximum ', maxaoi],
-							['Minimum ', minaoi],
-							['Median ', medaoi],
-							['Weighted Avg ', weightedaoi]
-						]);
-
-						var options = {
-							title: app.payload.chart4n,
-							legend: {
-								position: 'none'
-							},
-							chartArea: {
-								width: '70%'
-							},
-							hAxis: {
-								//title: 'a',
-								minValue: 0
-							},
-							vAxis: {
-								//title: 'b'
-							}
-						};
-						chart_4 = new google.visualization.BarChart(document.getElementById('chart_area_4'));
-						chart_4.draw(data, options);
-					});
-
-					var histo_array;
-					app.payload.getMode = "histogram";
-					$.get('polygonHandler.php', app.payload, function(data){
-						histo_array = data.values;
-						histo_array = histo_array.filter(nums => nums != "");
-						var data = new google.visualization.DataTable();
-						data.addColumn('string', 'Property');
-						data.addColumn('number', 'Value');
-						data.addRows(histo_array.length);
-						var max = Math.max(...histo_array);
-						for (var i = 0; i < histo_array.length; i++) {
-							data.setCell(i, 1, histo_array[i]);
-						}
-						var size;
-						size = Math.sqrt(histo_array.length - 1) - 1;
-						if(size == 0){
-							size = 1;
-							size = max/size;
-						}else{
-							size = max/size;
-						}
-						size = parseFloat(size).toFixed(2);
-						var options = {
-							title: app.payload.chart4n,
-							legend: {
-								position: 'none'
-							},
-							histogram: {
-								bucketSize: size
-							},
-							// bar: { width: 5 },
-							hAxis: {
-								type: 'category'
-							}
-						};
-
-						chart_histo_4 = new google.visualization.Histogram(document.getElementById('chart_histogram_4'));
-						chart_histo_4.draw(data, options);
-					});
-					app.payload.chart1 = previous1;
-					app.payload.chart2 = previous2;
-					app.payload.chart3 = previous3;
-					app.payload.chart4 = previous4;
-				}
-			}
-		}
-
-		function lineParser(){
-			app.payload.getMode = "line";
-			var lineString = "";
-			paths = rec.getPath();
-			paths = paths.getArray();
-
-			for (var i = 0; i < paths.length; i++) {
-				if(paths.length > 1 && i < paths.length - 1){
-					lineString += paths[i].lng() + ' ' + paths[i].lat() + ',';
+							chart_histo_4 = new google.visualization.Histogram(document.getElementById('chart_histogram_4'));
+							chart_histo_4.draw(data, options);
+						});
+						app.payload.chart1 = previous1;
+						app.payload.chart2 = previous2;
+						app.payload.chart3 = previous3;
+						app.payload.chart4 = previous4;
+					}
 				}
 				else{
-					lineString += paths[i].lng() + ' ' + paths[i].lat();
+					var maxaoi;
+					var minaoi;
+					var medaoi;
+					var weightedaoi;
+
+					app.payload.getMode = "line";
+					var getparams = app.payload;
+					var bounds = app.map.getBounds();
+					getparams.NE = bounds.getNorthEast().toJSON();
+					getparams.SW = bounds.getSouthWest().toJSON();
+					if(x == 1){
+						previous1 = app.payload.chart1;
+						previous2 = app.payload.chart2;
+						previous3 = app.payload.chart3;
+						previous4 = app.payload.chart4;
+						app.payload.chart1;
+						app.payload.chart2 = null;
+						app.payload.chart3 = null;
+						app.payload.chart4 = null;
+
+						$.get('polygonHandler.php', app.payload, function(data){
+							maxaoi = parseFloat(data.maxAOIch1);
+							minaoi = parseFloat(data.minAOIch1);
+							medaoi = parseFloat(data.medAOIch1);
+							weightedaoi = parseFloat(data.weightedAOIch1);
+							weightedaoi = parseFloat(weightedaoi).toFixed(2);
+							weightedaoi = parseFloat(weightedaoi);
+
+							var data = google.visualization.arrayToDataTable([
+								['Method', 'Value',],
+								['Maximum ', maxaoi],
+								['Minimum ', minaoi],
+								['Median ', medaoi],
+								['Weighted Avg ', weightedaoi]
+							]);
+
+							var options = {
+								title: app.payload.chart1n,
+								legend: {
+									position: 'none'
+								},
+								chartArea: {
+									width: '70%'
+								},
+								hAxis: {
+									minValue: 0
+								},
+								vAxis: {
+								}
+							};
+							chart = new google.visualization.BarChart(document.getElementById('chart_area_1'));
+							chart.draw(data, options);
+						});
+
+						var histo_array;
+						app.payload.getMode = "histogram";
+						$.get('polygonHandler.php', app.payload, function(data){
+							histo_array = data.values;
+							histo_array = histo_array.filter(nums => nums != "");
+							var data = new google.visualization.DataTable();
+							data.addColumn('string', 'Property');
+							data.addColumn('number', 'Value');
+							data.addRows(histo_array.length);
+							var max = Math.max(...histo_array);
+							for (var i = 0; i < histo_array.length; i++) {
+								data.setCell(i, 1, histo_array[i]);
+							}
+							var size;
+							size = Math.sqrt(histo_array.length - 1) - 1;
+							if(size == 0){
+								size = 1;
+								size = max/size;
+							}else{
+								size = max/size;
+							}
+							size = parseFloat(size).toFixed(2);
+							var options = {
+								title: app.payload.chart1n,
+								legend: {
+									position: 'none'
+								},
+								histogram: {
+									bucketSize: size
+								},
+								hAxis: {
+									type: 'category'
+								}
+							};
+
+							chart_histo = new google.visualization.Histogram(document.getElementById('chart_histogram_1'));
+							chart_histo.draw(data, options);
+						});
+						app.payload.chart1 = previous1;
+						app.payload.chart2 = previous2;
+						app.payload.chart3 = previous3;
+						app.payload.chart4 = previous4;
+					}
+					else if (x == 2) {
+						previous1 = app.payload.chart1;
+						previous2 = app.payload.chart2;
+						previous3 = app.payload.chart3;
+						previous4 = app.payload.chart4;
+						app.payload.chart1 = null;
+						app.payload.chart2;
+						app.payload.chart3 = null;
+						app.payload.chart4 = null;
+						$.get('polygonHandler.php', app.payload, function(data){
+							maxaoi = parseFloat(data.maxAOIch2);
+							minaoi = parseFloat(data.minAOIch2);
+							medaoi = parseFloat(data.medAOIch2);
+							weightedaoi = parseFloat(data.weightedAOIch2);
+							weightedaoi = parseFloat(weightedaoi).toFixed(2);
+							weightedaoi = parseFloat(weightedaoi);
+
+							var data = google.visualization.arrayToDataTable([
+								['Method', 'Value',],
+								['Maximum ', maxaoi],
+								['Minimum ', minaoi],
+								['Median ', medaoi],
+								['Weighted Avg ', weightedaoi]
+							]);
+
+							var options = {
+								title: app.payload.chart2n,
+								legend: {
+									position: 'none'
+								},
+								chartArea: {
+									width: '70%'
+								},
+								hAxis: {
+									minValue: 0
+								},
+								vAxis: {
+								}
+							};
+							chart_2 = new google.visualization.BarChart(document.getElementById('chart_area_2'));
+							chart_2.draw(data, options);
+						});
+
+						var histo_array;
+						app.payload.getMode = "histogram";
+						$.get('polygonHandler.php', app.payload, function(data){
+							histo_array = data.values;
+							histo_array = histo_array.filter(nums => nums != "");
+							var data = new google.visualization.DataTable();
+							data.addColumn('string', 'Property');
+							data.addColumn('number', 'Value');
+							data.addRows(histo_array.length);
+							var max = Math.max(...histo_array);
+							for (var i = 0; i < histo_array.length; i++) {
+								data.setCell(i, 1, histo_array[i]);
+							}
+							var size;
+							size = Math.sqrt(histo_array.length - 1) - 1;
+							if(size == 0){
+								size = 1;
+								size = max/size;
+							}else{
+								size = max/size;
+							}
+							size = parseFloat(size).toFixed(2);
+							var options = {
+								title: app.payload.chart2n,
+								legend: {
+									position: 'none'
+								},
+								histogram: {
+									bucketSize: size
+								},
+								hAxis: {
+									type: 'category'
+								}
+							};
+
+							chart_histo_2 = new google.visualization.Histogram(document.getElementById('chart_histogram_2'));
+							chart_histo_2.draw(data, options);
+						});
+						app.payload.chart1 = previous1;
+						app.payload.chart2 = previous2;
+						app.payload.chart3 = previous3;
+						app.payload.chart4 = previous4;
+					}
+					else if(x == 3){
+						previous1 = app.payload.chart1;
+						previous2 = app.payload.chart2;
+						previous3 = app.payload.chart3;
+						previous4 = app.payload.chart4;
+						app.payload.chart1 = null;
+						app.payload.chart2 = null;
+						app.payload.chart3;
+						app.payload.chart4 = null;
+						$.get('polygonHandler.php', app.payload, function(data){
+							maxaoi = parseFloat(data.maxAOIch3);
+							minaoi = parseFloat(data.minAOIch3);
+							medaoi = parseFloat(data.medAOIch3);
+							weightedaoi = parseFloat(data.weightedAOIch3);
+							weightedaoi = parseFloat(weightedaoi).toFixed(2);
+							weightedaoi = parseFloat(weightedaoi);
+
+							var data = google.visualization.arrayToDataTable([
+								['Method', 'Value',],
+								['Maximum ', maxaoi],
+								['Minimum ', minaoi],
+								['Median ', medaoi],
+								['Weighted Avg ', weightedaoi]
+							]);
+
+							var options = {
+								title: app.payload.chart3n,
+								legend: {
+									position: 'none'
+								},
+								chartArea: {
+									width: '70%'
+								},
+								hAxis: {
+									minValue: 0
+								},
+								vAxis: {
+								}
+							};
+							chart_3 = new google.visualization.BarChart(document.getElementById('chart_area_3'));
+							chart_3.draw(data, options);
+						});
+
+						var histo_array;
+						app.payload.getMode = "histogram";
+						$.get('polygonHandler.php', app.payload, function(data){
+							histo_array = data.values;
+							histo_array = histo_array.filter(nums => nums != "");
+							var data = new google.visualization.DataTable();
+							data.addColumn('string', 'Property');
+							data.addColumn('number', 'Value');
+							data.addRows(histo_array.length);
+							var max = Math.max(...histo_array);
+							for (var i = 0; i < histo_array.length; i++) {
+								data.setCell(i, 1, histo_array[i]);
+							}
+							var size;
+							size = Math.sqrt(histo_array.length - 1) - 1;
+							if(size == 0){
+								size = 1;
+								size = max/size;
+							}else{
+								size = max/size;
+							}
+							size = parseFloat(size).toFixed(2);
+							var options = {
+								title: app.payload.chart3n,
+								legend: {
+									position: 'none'
+								},
+								histogram: {
+									bucketSize: size
+								},
+								hAxis: {
+									type: 'category'
+								}
+							};
+
+							chart_histo_3 = new google.visualization.Histogram(document.getElementById('chart_histogram_3'));
+							chart_histo_3.draw(data, options);
+						});
+						app.payload.chart1 = previous1;
+						app.payload.chart2 = previous2;
+						app.payload.chart3 = previous3;
+						app.payload.chart4 = previous4;
+					}
+					else if(x == 4){
+						previous1 = app.payload.chart1;
+						previous2 = app.payload.chart2;
+						previous3 = app.payload.chart3;
+						previous4 = app.payload.chart4;
+						app.payload.chart1 = null;
+						app.payload.chart2 = null;
+						app.payload.chart3 = null;
+						app.payload.chart4;
+						$.get('polygonHandler.php', app.payload, function(data){
+							maxaoi = parseFloat(data.maxAOIch4);
+							minaoi = parseFloat(data.minAOIch4);
+							medaoi = parseFloat(data.medAOIch4);
+							weightedaoi = parseFloat(data.weightedAOIch4);
+							weightedaoi = parseFloat(weightedaoi).toFixed(2);
+							weightedaoi = parseFloat(weightedaoi);
+
+							var data = google.visualization.arrayToDataTable([
+								['Method', 'Value',],
+								['Maximum ', maxaoi],
+								['Minimum ', minaoi],
+								['Median ', medaoi],
+								['Weighted Avg ', weightedaoi]
+							]);
+
+							var options = {
+								title: app.payload.chart4n,
+								legend: {
+									position: 'none'
+								},
+								chartArea: {
+									width: '70%'
+								},
+								hAxis: {
+									minValue: 0
+								},
+								vAxis: {
+								}
+							};
+							chart_4 = new google.visualization.BarChart(document.getElementById('chart_area_4'));
+							chart_4.draw(data, options);
+						});
+
+						var histo_array;
+						app.payload.getMode = "histogram";
+						$.get('polygonHandler.php', app.payload, function(data){
+							histo_array = data.values;
+							histo_array = histo_array.filter(nums => nums != "");
+							var data = new google.visualization.DataTable();
+							data.addColumn('string', 'Property');
+							data.addColumn('number', 'Value');
+							data.addRows(histo_array.length);
+							var max = Math.max(...histo_array);
+							for (var i = 0; i < histo_array.length; i++) {
+								data.setCell(i, 1, histo_array[i]);
+							}
+							var size;
+							size = Math.sqrt(histo_array.length - 1) - 1;
+							if(size == 0){
+								size = 1;
+								size = max/size;
+							}else{
+								size = max/size;
+							}
+							size = parseFloat(size).toFixed(2);
+							var options = {
+								title: app.payload.chart4n,
+								legend: {
+									position: 'none'
+								},
+								histogram: {
+									bucketSize: size
+								},
+								hAxis: {
+									type: 'category'
+								}
+							};
+
+							chart_histo_4 = new google.visualization.Histogram(document.getElementById('chart_histogram_4'));
+							chart_histo_4.draw(data, options);
+						});
+						app.payload.chart1 = previous1;
+						app.payload.chart2 = previous2;
+						app.payload.chart3 = previous3;
+						app.payload.chart4 = previous4;
+					}
 				}
 			}
-			app.payload.lineString = lineString;
-			app.payload.runLine = true;
-		}
-		/******************************************************************************/
 
-		function removePolygons(){
-			if(app.polygons){
-				for(var i = 0; i < app.polygons.length; i++){
-					app.polygons[i].setMap(null);
+			function lineParser(){
+				app.payload.getMode = "line";
+				var lineString = "";
+				paths = rec.getPath();
+				paths = paths.getArray();
+
+				for (var i = 0; i < paths.length; i++) {
+					if(paths.length > 1 && i < paths.length - 1){
+						lineString += paths[i].lng() + ' ' + paths[i].lat() + ',';
+					}
+					else{
+						lineString += paths[i].lng() + ' ' + paths[i].lat();
+					}
+				}
+				app.payload.lineString = lineString;
+				app.payload.runLine = true;
+			}
+			/******************************************************************************/
+
+			function removePolygons(){
+				if(app.polygons){
+					for(var i = 0; i < app.polygons.length; i++){
+						app.polygons[i].setMap(null);
+					}
+				}
+				app.polygons = [];
+				app.infoWindow.close();
+				app.payload.runAOI = false;
+
+				document.getElementById('legend').style.visibility = "hidden";
+				$('#legend').find('*').not('h3').remove();
+				$('#description').find('*').not('h3').remove();
+				if(typeof chart === 'undefined'){
+				}else{
+					chart.clearChart();
+					chart_histo.clearChart();
+				}
+
+				if(typeof chart_2 === 'undefined'){
+				}else{
+					chart_2.clearChart();
+					chart_histo_2.clearChart();
+				}
+
+				if(typeof chart_3 === 'undefined'){
+				}else{
+					chart_3.clearChart();
+					chart_histo_3.clearChart();
+				}
+
+				if(typeof chart_4 === 'undefined'){
+				}else{
+					chart_4.clearChart();
+					chart_histo_4.clearChart();
 				}
 			}
-			app.polygons = [];
-			app.infoWindow.close();
-			app.payload.runAOI = false;
+			function printMaps() {
+				var body               = $('body');
+				var mapContainer       = $('#map');
+				var mapContainerParent = mapContainer.parent();
+				var printContainer     = $('<div>');
+				printContainer.addClass('print-container').css('position', 'relative').height(mapContainer.height()).append(mapContainer).prependTo(body);
+				var content = body.children().not('script').not(printContainer).detach();
 
-			document.getElementById('legend').style.visibility = "hidden";
-			$('#legend').find('*').not('h3').remove();
-			$('#description').find('*').not('h3').remove();
-			if(typeof chart === 'undefined'){
-			}else{
-				chart.clearChart();
-				chart_histo.clearChart();
+				var patchedStyle = $('<style>')
+				.attr('media', 'print')
+				.text('img { max-width: none !important; }' +
+				'a[href]:after { content: ""; }')
+				.appendTo('head');
+				window.print();
+				body.prepend(content);
+				mapContainerParent.prepend(mapContainer);
+				printContainer.remove();
+				patchedStyle.remove();
 			}
 
-			if(typeof chart_2 === 'undefined'){
-			}else{
-				chart_2.clearChart();
-				chart_histo_2.clearChart();
+			function polyInfo(event){
+				text = this.description + ": " + this.description_value;
+				app.infoWindow.setContent(text);
+				app.infoWindow.setPosition(event.latLng);
+				app.infoWindow.open(app.map);
 			}
 
-			if(typeof chart_3 === 'undefined'){
-			}else{
-				chart_3.clearChart();
-				chart_histo_3.clearChart();
-			}
-
-			if(typeof chart_4 === 'undefined'){
-			}else{
-				chart_4.clearChart();
-				chart_histo_4.clearChart();
-			}
-		}
-		function printMaps() {
-			var body               = $('body');
-			var mapContainer       = $('#map');
-			var mapContainerParent = mapContainer.parent();
-			var printContainer     = $('<div>');
-			printContainer.addClass('print-container').css('position', 'relative').height(mapContainer.height()).append(mapContainer).prependTo(body);
-			var content = body.children().not('script').not(printContainer).detach();
-
-			var patchedStyle = $('<style>')
-			.attr('media', 'print')
-			.text('img { max-width: none !important; }' +
-			'a[href]:after { content: ""; }')
-			.appendTo('head');
-			window.print();
-			body.prepend(content);
-			mapContainerParent.prepend(mapContainer);
-			printContainer.remove();
-			patchedStyle.remove();
-		}
-
-		function polyInfo(event){
-			text = this.description + ": " + this.description_value;
-			app.infoWindow.setContent(text);
-			app.infoWindow.setPosition(event.latLng);
-			app.infoWindow.open(app.map);
-		}
-
-		function wktFormatter(poly){
-			new_poly = poly.slice(9,-2);
-			new_poly = new_poly.split("),(");
-			len = new_poly.length;
-			shape_s = [];
-			for (var j = 0; j < len; j++) {
-				polyCoordi = [];
-				polyTemp = new_poly[j].split(",");
-				for(i = 0; i<polyTemp.length; i++){
-					temp = polyTemp[i].split(" ");
-					polyCoordi.push({lat: parseFloat(temp[1]), lng: parseFloat(temp[0])});
+			function wktFormatter(poly){
+				new_poly = poly.slice(9,-2);
+				new_poly = new_poly.split("),(");
+				len = new_poly.length;
+				shape_s = [];
+				for (var j = 0; j < len; j++) {
+					polyCoordi = [];
+					polyTemp = new_poly[j].split(",");
+					for(i = 0; i<polyTemp.length; i++){
+						temp = polyTemp[i].split(" ");
+						polyCoordi.push({lat: parseFloat(temp[1]), lng: parseFloat(temp[0])});
+					}
+					shape_s[j] = polyCoordi;
 				}
-				shape_s[j] = polyCoordi;
+				return shape_s;
 			}
-			return shape_s;
-		}
 
-		function spawn(value){
-			var squareboxes = ["<img src='img/brightgreensquare.png' height='10px'/>",
-			"<img src='img/skybluesquare.png' height='10px'/>",
-			"<img src='img/yellowsquare.png' height='10px'/>",
-			"<img src='img/orangesquare.png' height='10px'/>",
-			"<img src='img/redsquare.png' height='10px'/>",
-			"<img src='img/maroonsquare.png' height='10px'/>",
-			"<img src='img/lilacsquare.png' height='10px'/>",
-			"<img src='img/yellowsquare.png' height='10px'/>",
-			"<img src='img/maroonsquare.png' height='10px'/>",
-			"<img src='img/cyansquare.png' height='10px'/>",
-			"<img src='img/navygreensquare.png' height='10px'/>",
-			"<img src='img/peachsquare.png' height='10px'/>",
-			"<img src='img/fleshsquare.png' height='10px'/>",
-			"<img src='img/brownsquare.png' height='10px'/>",
-			"<img src='img/neongreensquare.png' height='10px'/>",
-			"<img src='img/neonpurplesquare.png' height='10px'/>",
-			"<img src='img/graysquare.png' height='10px'/>"];
+			function spawn(value){
+				var squareboxes = ["<img src='img/brightgreensquare.png' height='10px'/>",
+				"<img src='img/skybluesquare.png' height='10px'/>",
+				"<img src='img/yellowsquare.png' height='10px'/>",
+				"<img src='img/orangesquare.png' height='10px'/>",
+				"<img src='img/redsquare.png' height='10px'/>",
+				"<img src='img/maroonsquare.png' height='10px'/>",
+				"<img src='img/lilacsquare.png' height='10px'/>",
+				"<img src='img/yellowsquare.png' height='10px'/>",
+				"<img src='img/maroonsquare.png' height='10px'/>",
+				"<img src='img/cyansquare.png' height='10px'/>",
+				"<img src='img/navygreensquare.png' height='10px'/>",
+				"<img src='img/peachsquare.png' height='10px'/>",
+				"<img src='img/fleshsquare.png' height='10px'/>",
+				"<img src='img/brownsquare.png' height='10px'/>",
+				"<img src='img/neongreensquare.png' height='10px'/>",
+				"<img src='img/neonpurplesquare.png' height='10px'/>",
+				"<img src='img/graysquare.png' height='10px'/>"];
 
-			$('#legendSpawner').find('*').not('h3').remove();
-			if(app.label == "no filter"){
-				var labels = document.getElementById('labels').value;
-			}
-			else{
+				$('#legendSpawner').find('*').not('h3').remove();
+				if(app.label == "no filter"){
+					var labels = document.getElementById('labels').value;
+				}
+				else{
 					var labels = document.getElementById('labels_filter').value;
-			}
-			if(labels <= 0 || value <= 0 ){
-			}
-			else{
-				var range = (value/labels);
-				var count = 0;
-				var cnt = 0;
-				var spawner = document.getElementById('legendSpawner');
-				var separations = [];
-				while(count<=value){
-					separations[cnt] =  parseFloat(count).toFixed(2);
-					count+=range;
-					cnt++;
 				}
-				for(var i = 0; i < separations.length-1; i++){
-					var div = document.createElement('div');
-					div.innerHTML = squareboxes[i] + " " +
-					+ separations[i] + ' to ' + separations[i+1];
-					var newLegend = document.createElement('div');
-					newLegend = document.getElementById('legend');
-					document.getElementById('legend').style.visibility = "visible";
-					newLegend.appendChild(div);
+				if(labels <= 0 || value <= 0 ){
 				}
-				return separations;
+				else{
+					var range = (value/labels);
+					var count = 0;
+					var cnt = 0;
+					var spawner = document.getElementById('legendSpawner');
+					var separations = [];
+					while(count<=value){
+						separations[cnt] =  parseFloat(count).toFixed(2);
+						count+=range;
+						cnt++;
+					}
+					for(var i = 0; i < separations.length-1; i++){
+						var div = document.createElement('div');
+						div.innerHTML = squareboxes[i] + " " +
+						+ separations[i] + ' to ' + separations[i+1];
+						var newLegend = document.createElement('div');
+						newLegend = document.getElementById('legend');
+						document.getElementById('legend').style.visibility = "visible";
+						newLegend.appendChild(div);
+					}
+					return separations;
+				}
 			}
-		}
-		// ***********
-		</script>
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCY0B3_Fr1vRpgJDdbvNmrVyXmoOOtiq64&libraries=drawing&callback=initMap"async defer></script>
-	</body>
-	</html>
+			// ***********
+			</script>
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCY0B3_Fr1vRpgJDdbvNmrVyXmoOOtiq64&libraries=drawing&callback=initMap"async defer></script>
+		</body>
+		</html>
