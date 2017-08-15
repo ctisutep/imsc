@@ -268,19 +268,19 @@
 														<option value="" disabled selected>Select a ground property</option>
 													</select>
 												</div> <br>
-												<div class="input-group">
+												<div class="input-group" style='visibility: hidden' id="chartAppear1">
 													<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
 													<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_2">
 														<option value="" disabled selected>Select a ground property</option>
 													</select>
 												</div> <br>
-												<div class="input-group">
+												<div class="input-group" style='visibility: hidden' id="chartAppear2">
 													<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
 													<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_3">
 														<option value="" disabled selected>Select a ground property</option>
 													</select>
 												</div> <br>
-												<div class="input-group">
+												<div class="input-group" style='visibility: hidden' id="chartAppear3">
 													<span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
 													<select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_4">
 														<option value="" disabled selected>Select a ground property</option>
@@ -410,14 +410,17 @@
 						app.payload.value =  prop[this.value].value;
 					});
 					$("#select_chart_1").change(function(){
+						document.getElementById('chartAppear1').style.visibility = "visible";
 						app.payload.chart1 =  prop[this.value].data;
 						app.payload.chart1n = prop[this.value].value;
 					});
 					$("#select_chart_2").change(function(){
+						document.getElementById('chartAppear2').style.visibility = "visible";
 						app.payload.chart2 =  prop[this.value].data;
 						app.payload.chart2n = prop[this.value].value;
 					});
 					$("#select_chart_3").change(function(){
+						document.getElementById('chartAppear3').style.visibility = "visible";
 						app.payload.chart3 =  prop[this.value].data;
 						app.payload.chart3n = prop[this.value].value;
 					});
@@ -1307,21 +1310,18 @@
 					var data_arr = ['maxAOIch','minAOIch','medAOIch','weightedAOIch'];
 					var charts = [chart, chart_2, chart_3, chart_4];
 					var chart_histos = [chart_histo, chart_histo_2, chart_histo_3, chart_histo_4];
-					console.log(nulls);
+
 					for (var i = 0; i < nulls.length; i++) {
 						var position = nulls[i];
-						console.log(position);
-						console.log(position-1)
 						chart_divs.splice(position-1, 1);
 					}
-					console.log(chart_divs);
 
 					previous1 = app.payload.chart1;
 					previous2 = app.payload.chart2;
 					previous3 = app.payload.chart3;
 					previous4 = app.payload.chart4;
 
-					for (var i = 0; i < chart_divs.length-3; i++) {
+					for (var i = 0; i < not_nulls.length; i++) {
 						(function (i){
 							var name = 'app.payload.'+chart_ns[i];
 							name = eval(name);
@@ -1366,7 +1366,6 @@
 									vAxis: {
 									}
 								};
-								//console.log(bar_init);
 								bar_init = new google.visualization.BarChart(document.getElementById(elem_chart));
 								bar_init.draw(data, options);
 							});
@@ -1405,7 +1404,6 @@
 										type: 'category'
 									}
 								};
-								//console.log(histo_init);
 								histo_init = new google.visualization.Histogram(document.getElementById(elem_histo));
 								histo_init.draw(data, options);
 							});
