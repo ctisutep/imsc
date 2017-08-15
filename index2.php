@@ -67,36 +67,36 @@
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="row">
-							<div id="chart_area_1"> </div>
+							<div class="chart" id="chart_area_1"> </div>
 						</div>
 						<div class="row">
-							<div id="chart_area_2"> </div>
+							<div class="chart" id="chart_area_2"> </div>
 						</div>
 					</div>
 					<div class="col-lg-6">
 						<div class="row">
-							<div id="chart_histogram_1"> </div>
+							<div class="chart" id="chart_histogram_1"> </div>
 						</div>
 						<div class="row">
-							<div id="chart_histogram_2"> </div>
+							<div class="chart" id="chart_histogram_2"> </div>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="row">
-							<div id="chart_area_3"> </div>
+							<div class="chart" id="chart_area_3"> </div>
 						</div>
 						<div class="row">
-							<div id="chart_area_4"> </div>
+							<div class="chart" id="chart_area_4"> </div>
 						</div>
 					</div>
 					<div class="col-lg-6">
 						<div class="row">
-							<div id="chart_histogram_3"> </div>
+							<div class="chart" id="chart_histogram_3"> </div>
 						</div>
 						<div class="row">
-							<div id="chart_histogram_4"> </div>
+							<div class="chart" id="chart_histogram_4"> </div>
 						</div>
 					</div>
 				</div>
@@ -301,7 +301,8 @@
 												<button class="btn btn-success form-control" type="button" id="runFilters" onClick="runFilters()">Run Filter</button>
 											</div>
 											<div id="statisticsbtn" class="tab-pane fade"><br><br><br><br>
-												<button type="button" class="btn btn-default form-control" id="draw" onclick="drawAnotherRectangle();">Clear AOI</button>
+												<button type="button" class="btn btn-default form-control" id="draw" onclick="drawAnotherRectangle();">Clear AOI</button><br><br>
+												<button type="button" class="btn btn-default form-control" id="clearCharts" onclick="clearCharts();">Clear Charts</button>
 											</div>
 										</div>
 									</div> <!-- end column for buttons-->
@@ -1241,34 +1242,6 @@
 			}
 
 			function drawChart() {
-				if(typeof bar_init === 'undefined'){
-				}else{
-					bar_init.clearChart();
-					histo_init.clearChart();
-				}
-
-
-				if(typeof chart === 'undefined'){
-				}else{
-					chart.clearChart();
-					chart_histo.clearChart();
-				}
-				if(typeof chart_2 === 'undefined'){
-				}else{
-					chart_2.clearChart();
-					chart_histo_2.clearChart();
-				}
-				if(typeof chart_3 === 'undefined'){
-				}else{
-					chart_3.clearChart();
-					chart_histo_3.clearChart();
-				}
-				if(typeof chart_4 === 'undefined'){
-				}else{
-					chart_4.clearChart();
-					chart_histo_4.clearChart();
-				}
-
 				var nulls = nullChecker();
 				if(nulls.length == 4){
 					alert("No property selected to run statistics.");
@@ -1417,8 +1390,6 @@
 						app.payload.chart4 = previous4;
 					})(i);
 				}
-				bar_init.clearChart();
-				histo_init.clearChart();
 			}
 
 			function lineParser(){
@@ -1439,7 +1410,9 @@
 				app.payload.runLine = true;
 			}
 			/******************************************************************************/
-		
+			function clearCharts(){
+				$(".chart").empty();
+			}
 			function removePolygons(){
 				if(app.polygons){
 					for(var i = 0; i < app.polygons.length; i++){
@@ -1449,16 +1422,9 @@
 				app.polygons = [];
 				app.infoWindow.close();
 				app.payload.runAOI = false;
-
 				document.getElementById('legend').style.visibility = "hidden";
 				$('#legend').find('*').not('h3').remove();
 				$('#description').find('*').not('h3').remove();
-
-				if(typeof bar_init === 'undefined'){
-				}else{
-					bar_init.clearChart();
-					histo_init.clearChart();
-				}
 			}
 			function printMaps() {
 				var body               = $('body');
