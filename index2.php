@@ -1362,7 +1362,7 @@
 							}else{
 								size = max/size;
 							}
-							size = parseFloat(size).toFixed(2);
+							size = parseFloat(size).toFixed(1);
 							var options = {
 								title: name,
 								legend: {
