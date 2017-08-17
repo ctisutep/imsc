@@ -7,11 +7,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<meta name="author" content="">
-
 	<title>TX-IMSC</title>
 	<!-- Interactive Map for Soil Categorization -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<!--<link rel="stylesheet" href="/resources/demos/style.css">-->
 
 	<!-- Bootstrap Core CSS -->
 	<link href="css/bootstrap.css" rel="stylesheet">
@@ -45,7 +43,6 @@
 	}
 	</style>
 </head>
-
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
@@ -55,7 +52,6 @@
 			</div>
 		</div>
 	</nav>
-
 	<!-- Content Row -->
 	<div>
 		<div class="row">
@@ -318,13 +314,11 @@
 					</div>
 				</div> <!-- End main column 2 -->
 			</div>
-
 			<script src="js/jquery.js"></script>
 			<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 			<script src="js/bootstrap.js"></script>
 			<script src="js/jquery.autocomplete.min.js"></script>
 			<script src="js/properties.js"></script>
-
 			<script>
 			var app = {map:null, polygons:null, label:"no filter", payload:{getMode:"polygons", runAOI:false, runLine:false, runRec:false, runFilters:false, property:null, district:null, depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null, filter_prop:null, filter_prop_n:null, filter_value:false, filter_units:0}};
 			var hecho = false;
@@ -699,310 +693,7 @@
 						}
 					}).done(function(data){
 						$(document.body).css({'cursor': 'auto'});
-						if(app.payload.property == 'gypsum_r'){
-							var gypsum = "Description for Gypsum: ";
-							var gypsumText = "The content of gypsum is the percent, by weight, of hydrated calcium sulfates in the fraction of the soil less than 20 millimeters in size. ";
-							var h3 = document.createElement('h3');
-							h3.innerHTML = gypsum;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + gypsum + "</strong> <br>" + gypsumText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'pi_r'){
-							var prprty = "Description for Plasticity Index: ";
-							var prprtyText = "Plasticity index (PI) is one of the standard Atterberg limits used to indicate the plasticity characteristics of a soil. It is defined as the numerical difference between the liquid limit and plastic limit of the soil. It is the range of water content in which a soil exhibits the characteristics of a plastic solid.";
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'sandtotal_r'){
-							var prprty = "Description for Total Sand: ";
-							var prprtyText = "Sand as a soil separate consists of mineral soil particles that are 0.05 millimeter to 2 millimeters in diameter. In the database, the estimated sand content of each soil layer is given as a percentage, by weight, of the soil material that is less than 2 millimeters in diameter. The content of sand, silt, and clay affects the physical behavior of a soil. Particle size is important for engineering and agronomic interpretations, for determination of soil hydrologic qualities, and for soil classification.";
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'ph1to1h2o_r'){
-							var prprty = "Description for pH H20: ";
-							var prprtyText = "Soil reaction is a measure of acidity or alkalinity. It is important in selecting crops and other plants, in evaluating soil amendments for fertility and stabilization, and in determining the risk of corrosion.";
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'ksat_r'){
-							var prprty = "Description for Ksat: ";
-							var prprtyText = "Saturated hydraulic conductivity (Ksat) refers to the ease with which pores in a saturated soil transmit water. The estimates are expressed in terms of micrometers per second. They are based on soil characteristics observed in the field, particularly structure, porosity, and texture. ";
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'aashind_r'){
-							var prprty = "Description for AASHTO Group Index: ";
-							var prprtyText = "AASHTO group classification is a system that classifies soils specifically for geotechnical engineering purposes that are related to highway and airfield construction. It is based on particle-size distribution and Atterberg limits, such as liquid limit and plasticity index. This classification system is covered in AASHTO Standard No. M 145-82. The classification is based on that portion of the soil that is smaller than 3 inches in diameter.";
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'sar_r'){
-							var prprty = "Description for Sodium Absortion Ratio (SAR): ";
-							var prprtyText = "Sodium adsorption ratio is a measure of the amount of sodium (Na) relative to calcium (Ca) and magnesium (Mg) in the water extract from saturated soil paste. It is the ratio of the Na concentration divided by the square root of one-half of the Ca + Mg concentration. Soils that have SAR values of 13 or more may be characterized by an increased dispersion of organic matter and clay particles, reduced saturated hydraulic conductivity (Ksat) and aeration, and a general degradation of soil structure.";
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'kffact'){
-							var prprty = "Description for K Factor (Rock Free): ";
-							var prprtyText = "Erosion factor K indicates the susceptibility of a soil to sheet and rill erosion by water. Factor K is one of six factors used in the Universal Soil Loss Equation (USLE) and the Revised Universal Soil Loss Equation (RUSLE) to predict the average annual rate of soil loss by sheet and rill erosion in tons per acre per year. The estimates are based primarily on percentage of silt, sand, and organic matter and on soil structure and saturated hydraulic conductivity (Ksat)." + " Values of K range from 0.02 to 0.69. Other factors being equal, the higher the value, the more susceptible the soil is to sheet and rill erosion by water. "
-							+ "Erosion factor Kf (rock free) indicates the erodibility of the fine-earth fraction, or the material less than 2 millimeters in size.";
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'kwfact'){
-							var prprty = "Description for K Factor (Whole Soil): ";
-							var prprtyText = "Erosion factor K indicates the susceptibility of a soil to sheet and rill erosion by water. Factor K is one of six factors used in the Universal Soil Loss Equation (USLE) and the Revised Universal Soil Loss Equation (RUSLE) to predict the average annual rate of soil loss by sheet and rill erosion in tons per acre per year. The estimates are based primarily on percentage of silt, sand, and organic matter and on soil structure and saturated hydraulic conductivity (Ksat)."+" Values of K range from 0.02 to 0.69. Other factors being equal, the higher the value, the more susceptible the soil is to sheet and rill erosion by water."
-							+ "'Erosion factor Kw (whole soil)' indicates the erodibility of the whole soil. The estimates are modified by the presence of rock fragments.";
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'll_r'){
-							var prprty = "Description for Liquid Limit:  ";
-							var prprtyText = "Liquid limit (LL) is one of the standard Atterberg limits used to indicate the plasticity characteristics of a soil. It is the water content, on a percent by weight basis, of the soil (passing #40 sieve) at which the soil changes from a plastic to a liquid state. Generally, the amount of clay- and silt-size particles, the organic matter content, and the type of minerals determine the liquid limit. Soils that have a high liquid limit have the capacity to hold a lot of water while maintaining a plastic or semisolid state. Liquid limit is used in classifying soils in the Unified and AASHTO classification systems. For each soil layer, this attribute is actually recorded as three separate values in the database. A low value and a high value indicate the range of this attribute for the soil component. A 'representative' value indicates the expected value of this attribute for the component. For this soil property, only the representative value is used.";
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'om_r'){
-							var prprty = "Description for Organic Matter: ";
-							var prprtyText = "Organic matter percent is the weight of decomposed plant, animal, and microbial residues exclusive of non-decomposed plant and animal residues. It is expressed as a percentage, by weight, of the soil material that is less than 2 mm in diameter.";
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'frag3to10_r'){
-							var prprty = "Description for Rock 3-10: ";
-							var prprtyText = "The percent by weight of the horizon occupied by rock fragments 3 to 10 inches in size.";
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'sieveno4_r'){
-							var prprty = "Description for #4 Sieve: ";
-							var prprtyText = "Soil fraction passing a number 4 sieve (4.70mm square opening) as a weight percentage of the less than 3 inch (76.4mm) fraction.";
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'sieveno10_r'){
-							var prprty = "Description for #10 Sieve: ";
-							var prprtyText = "Soil fraction passing a number 10 sieve (2.00mm square opening) as a weight percentage of less than 3 inch (76.4mm) fraction.";
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'sieveno40_r'){
-							var prprty = "Description for #40 Sieve: ";
-							var prprtyText = "Soil fraction passing a number 40 sieve (0.42mm square opening) as a weight percentage of less than 3 inch (76.4mm) fraction.";
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'sieveno200_r'){
-							var prprty = "Description for #200 Sieve: ";
-							var prprtyText = "Soil fraction passing a number 200 sieve (0.074mm square opening) as a weight percentage of less than 3 inch (76.4mm) fraction.";
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'sandvc_r'){
-							var prprty = "Description for vcos: ";
-							var prprtyText = "Mineral particles 1.00mm to 2.0mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'sandco_r'){
-							var prprty = "Description for cos: ";
-							var prprtyText = "Mineral particles 0.50mm to 1.0mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'sandmed_r'){
-							var prprty = "Description for ms: ";
-							var prprtyText = "Mineral particles 0.25mm to 0.5mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'sandfine_r'){
-							var prprty = "Description for fs: ";
-							var prprtyText = "Mineral particles 0.10mm to 0.25mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'sandvf_r'){
-							var prprty = "Description for vfs: ";
-							var prprtyText = "Mineral particles 0.05mm to 0.10mm in equivalent diameter as a weight percentage of the less than 2mm fraction.";
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'silttotal_r'){
-							var prprty = "Description for Total Silt: ";
-							var prprtyText = "Mineral particles ranging in size from 0.002 to 0.05mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'siltco_r'){
-							var prprty = "Description for Coarse Silt: ";
-							var prprtyText = "Mineral particles ranging in size from 0.02mm to 0.05mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'siltfine_r'){
-							var prprty = "Description for Fine Silt: ";
-							var prprtyText = "Mineral particles ranging in size from 0.002mm to 0.02mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'claytotal_r'){
-							var prprty = "Description for Total Clay: ";
-							var prprtyText = "Mineral particles less than 0.002mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'claysizedcarb_r'){
-							var prprty = "Description for CaCO3 Clay: ";
-							var prprtyText = "Carbonate particles less than 0.002mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction."
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'partdensity'){
-							var prprty = "Description for Part Density: ";
-							var prprtyText = "Mass per unit of volume (not including pore space) of the solid soil particle either mineral or organic. Also known as specific gravity.";
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'caco3_r'){
-							var prprty = "Description for CaCO3: ";
-							var prprtyText = "The quantity of Carbonate (CO3) in the soil expressed as CaCO3 and as a weight percentage of the less than 2mm size fraction.";
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'ph01mcacl2_r'){
-							var prprty = "Description for ph CaCl2: ";
-							var prprtyText = "The negative logarithm to base of 10 or the hydrogen ion activity in the soil, using the 0.01M CaCl2 method, in a 1:2 soil:solution ratio. A numerical expression of the relative acidity or alkalinity of a soil sample.";
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else if (app.payload.property == 'excavdifcl'){
-							var prprty = "Description for Excavation Difficulty: ";
-							var prprtyText = "An estimation of the difficulty of working an excavation into soil layers, horizons, pedons, or geologic layers. In most instances, excavation difficulty is related to and controlled by a water state."
-							var h3 = document.createElement('h3');
-							h3.innerHTML = prprty;
-							var div = document.createElement('div');
-							div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
-							var descriptor = document.getElementById('description');
-							descriptor.appendChild(div);
-						}
-						else{
-						}
+						descripciones(app.payload.property);
 
 						if(!hecho){
 							var div = document.createElement('div');
@@ -1025,6 +716,49 @@
 					alert("Please select a property and a district, and make sure depth is a numerical value.");
 					removePolygons();
 				}
+			}
+
+			function descripciones(pr){
+				var textos = new Map();
+				textos.set('gypsum_r', "The content of gypsum is the percent, by weight, of hydrated calcium sulfates in the fraction of the soil less than 20 millimeters in size. ");
+				textos.set('pi_r', "Plasticity index (PI) is one of the standard Atterberg limits used to indicate the plasticity characteristics of a soil. It is defined as the numerical difference between the liquid limit and plastic limit of the soil. It is the range of water content in which a soil exhibits the characteristics of a plastic solid.");
+				textos.set('sandtotal_r', "Sand as a soil separate consists of mineral soil particles that are 0.05 millimeter to 2 millimeters in diameter. In the database, the estimated sand content of each soil layer is given as a percentage, by weight, of the soil material that is less than 2 millimeters in diameter. The content of sand, silt, and clay affects the physical behavior of a soil. Particle size is important for engineering and agronomic interpretations, for determination of soil hydrologic qualities, and for soil classification.");
+				textos.set('ph1to1h2o_r', "Soil reaction is a measure of acidity or alkalinity. It is important in selecting crops and other plants, in evaluating soil amendments for fertility and stabilization, and in determining the risk of corrosion.");
+				textos.set('ksat_r', "Saturated hydraulic conductivity (Ksat) refers to the ease with which pores in a saturated soil transmit water. The estimates are expressed in terms of micrometers per second. They are based on soil characteristics observed in the field, particularly structure, porosity, and texture.");
+				textos.set('aashind_r', "AASHTO group classification is a system that classifies soils specifically for geotechnical engineering purposes that are related to highway and airfield construction. It is based on particle-size distribution and Atterberg limits, such as liquid limit and plasticity index. This classification system is covered in AASHTO Standard No. M 145-82. The classification is based on that portion of the soil that is smaller than 3 inches in diameter.");
+				textos.set('sar_r', "Sodium adsorption ratio is a measure of the amount of sodium (Na) relative to calcium (Ca) and magnesium (Mg) in the water extract from saturated soil paste. It is the ratio of the Na concentration divided by the square root of one-half of the Ca + Mg concentration. Soils that have SAR values of 13 or more may be characterized by an increased dispersion of organic matter and clay particles, reduced saturated hydraulic conductivity (Ksat) and aeration, and a general degradation of soil structure.");
+				textos.set('kffact', "Erosion factor Kf (rock free) indicates the erodibility of the fine-earth fraction, or the material less than 2 millimeters in size.");
+				textos.set('kwfact', "Erosion factor Kw (whole soil)' indicates the erodibility of the whole soil. The estimates are modified by the presence of rock fragments.");
+				textos.set('ll_r', "Liquid limit (LL) is one of the standard Atterberg limits used to indicate the plasticity characteristics of a soil. It is the water content, on a percent by weight basis, of the soil (passing #40 sieve) at which the soil changes from a plastic to a liquid state. Generally, the amount of clay- and silt-size particles, the organic matter content, and the type of minerals determine the liquid limit. Soils that have a high liquid limit have the capacity to hold a lot of water while maintaining a plastic or semisolid state. Liquid limit is used in classifying soils in the Unified and AASHTO classification systems. For each soil layer, this attribute is actually recorded as three separate values in the database. A low value and a high value indicate the range of this attribute for the soil component. A 'representative' value indicates the expected value of this attribute for the component. For this soil property, only the representative value is used.");
+				textos.set('om_r', "Organic matter percent is the weight of decomposed plant, animal, and microbial residues exclusive of non-decomposed plant and animal residues. It is expressed as a percentage, by weight, of the soil material that is less than 2 mm in diameter.");
+				textos.set('frag3to10_r', "The percent by weight of the horizon occupied by rock fragments 3 to 10 inches in size.");
+				textos.set('sieveno4_r', "Soil fraction passing a number 4 sieve (4.70mm square opening) as a weight percentage of the less than 3 inch (76.4mm) fraction.");
+				textos.set('sieveno10_r', "Soil fraction passing a number 10 sieve (2.00mm square opening) as a weight percentage of less than 3 inch (76.4mm) fraction.");
+				textos.set('sieveno40_r', "Soil fraction passing a number 40 sieve (0.42mm square opening) as a weight percentage of less than 3 inch (76.4mm) fraction.");
+				textos.set('sieveno200_r', "Soil fraction passing a number 200 sieve (0.074mm square opening) as a weight percentage of less than 3 inch (76.4mm) fraction.");
+				textos.set('sandvc_r', "Mineral particles 1.00mm to 2.0mm in equivalent diameter as a weight percentage of the less than 2mm fraction.");
+				textos.set('sandco_r', "Mineral particles 0.50mm to 1.0mm in equivalent diameter as a weight percentage of the less than 2mm fraction.");
+				textos.set('sandmed_r', "Mineral particles 0.25mm to 0.5mm in equivalent diameter as a weight percentage of the less than 2mm fraction.");
+				textos.set('sandfine_r', "Mineral particles 0.10mm to 0.25mm in equivalent diameter as a weight percentage of the less than 2mm fraction.");
+				textos.set('sandvf_r', "Mineral particles 0.05mm to 0.10mm in equivalent diameter as a weight percentage of the less than 2mm fraction.");
+				textos.set('silttotal_r', "Mineral particles ranging in size from 0.002 to 0.05mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction.");
+				textos.set('siltco_r', "Mineral particles ranging in size from 0.02mm to 0.05mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction.");
+				textos.set('siltfine_r', "Mineral particles ranging in size from 0.002mm to 0.02mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction.");
+				textos.set('claytotal_r', "Mineral particles less than 0.002mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction.");
+				textos.set('claysizedcarb_r', "Carbonate particles less than 0.002mm in equivalent diameter as a weight percentage of the less than 2.0mm fraction.");
+				textos.set('partdensity', "Mass per unit of volume (not including pore space) of the solid soil particle either mineral or organic. Also known as specific gravity.");
+				textos.set('caco3_r', "The quantity of Carbonate (CO3) in the soil expressed as CaCO3 and as a weight percentage of the less than 2mm size fraction.");
+				textos.set('ph01mcacl2_r', "The quantity of Carbonate (CO3) in the soil expressed as CaCl2 and as a weight percentage of the less than 2mm size fraction.");
+				textos.set('excavdifcl', "An estimation of the difficulty of working an excavation into soil layers, horizons, pedons, or geologic layers. In most instances, excavation difficulty is related to and controlled by a water state.");
+
+				var prprty = "Description for " + app.payload.value + " : ";
+				var prprtyText = textos.get(pr);
+				var h3 = document.createElement('h3');
+				h3.innerHTML = prprty;
+				var div = document.createElement('div');
+				div.innerHTML = "<br> <strong>" + prprty + "</strong> <br>" + prprtyText + "<br> <br>";
+				var descriptor = document.getElementById('description');
+				descriptor.appendChild(div);
 			}
 
 			function setDistrict(){
