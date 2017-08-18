@@ -340,45 +340,10 @@
 					var filt = document.getElementById("select_prop_filters");
 					divs.push(selectProp, ch1, ch2, ch3, ch4, filt);
 
-					var prop = [{number: 0, value: null, data: null, table: null},
-						{number: 1, value: null, data: null, table: null},
-						{number: 2, value: null, data: null, table: null},
-						{number: 3, value: null, data: null, table: null},
-						{number: 4, value: null, data: null, table: null},
-						{number: 5, value: null, data: null, table: null},
-						{number: 6, value: null, data: null, table: null},
-						{number: 7, value: null, data: null, table: null},
-						{number: 8, value: null, data: null, table: null},
-						{number: 9, value: null, data: null, table: null},
-						{number: 10, value: null, data: null, table: null},
-						{number: 11, value: null, data: null, table: null},
-						{number: 12, value: null, data: null, table: null},
-						{number: 13, value: null, data: null, table: null},
-						{number: 14, value: null, data: null, table: null},
-						{number: 15, value: null, data: null, table: null},
-						{number: 16, value: null, data: null, table: null},
-						{number: 17, value: null, data: null, table: null},
-						{number: 18, value: null, data: null, table: null},
-						{number: 19, value: null, data: null, table: null},
-						{number: 20, value: null, data: null, table: null},
-						{number: 21, value: null, data: null, table: null},
-						{number: 22, value: null, data: null, table: null},
-						{number: 23, value: null, data: null, table: null},
-						{number: 24, value: null, data: null, table: null},
-						{number: 25, value: null, data: null, table: null},
-						{number: 26, value: null, data: null, table: null},
-						{number: 27, value: null, data: null, table: null},
-						{number: 28, value: null, data: null, table: null},
-						{number: 29, value: null, data: null, table: null},
-						{number: 30, value: null, data: null, table: null},
-						{number: 31, value: null, data: null, table: null},
-						{number: 32, value: null, data: null, table: null},
-						{number: 33, value: null, data: null, table: null},
-						{number: 34, value: null, data: null, table: null},
-						{number: 35, value: null, data: null, table: null},
-						{number: 36, value: null, data: null, table: null}
-						//{number: 37, value: null, data: null, table: null}
-					];
+					var prop = [];
+					for(var i = 0; i < 37; i++){
+						prop.push({number: i, value: null, table: null});
+					}
 
 					for (var i = 0; i < properties.length; i++) {
 						prop[i].number = i;
