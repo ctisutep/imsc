@@ -108,81 +108,31 @@
 								<label>District:</label>
 								<select id="target" class="form-control">
 									<option value="" disabled selected>Select a district</option>
-									<option value="32.43561304116276, -100.1953125" data-district="abeline">
-										Abilene
-									</option>
-									<option value="35.764343479667176, -101.49169921875" data-district="amarillo">
-										Amarillo
-									</option>
-									<option value="32.69651010951669, -94.691162109375" data-district="atlanta">
-										Atlanta
-									</option>
-									<option value="30.25391637229704, -98.23212890625" data-district="austin">
-										Austin
-									</option>
-									<option value="30.40211367909724, -94.39453125" data-district="beaumont">
-										Beaumont
-									</option>
-									<option value="31.765537409484374, -99.140625" data-district="brownwood">
-										Brownwood
-									</option>
-									<option value="30.894611546632302, -96.30615234375" data-district="bryan">
-										Bryan
-									</option>
-									<option value="34.397844946449865, -100.37109375" data-district="childress">
-										Childress
-									</option>
-									<option value="28.110748760633534, -97.71240234375" data-district="corpus">
-										Corpus Christi
-									</option>
-									<option value="32.54681317351514, -96.85546875" data-district="dallas">
-										Dallas
-									</option>
-									<option value="31.770546, -106.504874" data-district="elPaso">
-										El Paso
-									</option>
-									<option value="32.62087018318113, -97.75634765625" data-district="fortWorth">
-										Fort Worth
-									</option>
-									<option value="29.661670115197377, -95.33935546875" data-district="houston">
-										Houston
-									</option>
-									<option value="28.613459424004418, -99.90966796875" data-district="laredo">
-										Laredo
-									</option>
-									<option value="33.43144133557529, -101.93115234375" data-district="lubbock">
-										Lubbock
-									</option>
-									<option value="31.203404950917395, -94.7021484375" data-district="lufkin">
-										Lufkin
-									</option>
-									<option value="31.203404950917395, -102.568359375" data-district="odessa">
-										Odessa
-									</option>
-									<option value="33.43144133557529, -95.625" data-district="paris">
-										Paris
-									</option>
-									<option value="26.951453083498258, -98.32763671875" data-district="pharr">
-										Pharr
-									</option>
-									<option value="31.10819929911196, -100.48095703125" data-district="sanAngelo">
-										San Angelo
-									</option>
-									<option value="29.13297013087864, -98.89892578125" data-district="sanAntonio">
-										San Antonio
-									</option>
-									<option value="32.222095840502334, -95.33935546875" data-district="tyler">
-										Tyler
-									</option>
-									<option value="31.403404950917395, -97.119140625" data-district="waco">
-										Waco
-									</option>
-									<option value="33.77914733128647, -98.37158203125" data-district="wichitaFalls">
-										Wichita Falls
-									</option>
-									<option value="29.05616970274342, -96.8115234375" data-district="yoakum">
-										Yoakum
-									</option>
+									<option value="32.43561304116276, -100.1953125" data-district="abeline">Abilene</option>
+									<option value="35.764343479667176, -101.49169921875" data-district="amarillo">Amarillo</option>
+									<option value="32.69651010951669, -94.691162109375" data-district="atlanta">Atlanta</option>
+									<option value="30.25391637229704, -98.23212890625" data-district="austin">Austin</option>
+									<option value="30.40211367909724, -94.39453125" data-district="beaumont">Beaumont</option>
+									<option value="31.765537409484374, -99.140625" data-district="brownwood">Brownwood</option>
+									<option value="30.894611546632302, -96.30615234375" data-district="bryan">Bryan</option>
+									<option value="34.397844946449865, -100.37109375" data-district="childress">Childress</option>
+									<option value="28.110748760633534, -97.71240234375" data-district="corpus">Corpus Christi</option>
+									<option value="32.54681317351514, -96.85546875" data-district="dallas">Dallas</option>
+									<option value="31.770546, -106.504874" data-district="elPaso">El Paso</option>
+									<option value="32.62087018318113, -97.75634765625" data-district="fortWorth">Fort Worth</option>
+									<option value="29.661670115197377, -95.33935546875" data-district="houston">Houston</option>
+									<option value="28.613459424004418, -99.90966796875" data-district="laredo">Laredo</option>
+									<option value="33.43144133557529, -101.93115234375" data-district="lubbock">Lubbock</option>
+									<option value="31.203404950917395, -94.7021484375" data-district="lufkin">Lufkin</option>
+									<option value="31.203404950917395, -102.568359375" data-district="odessa">Odessa</option>
+									<option value="33.43144133557529, -95.625" data-district="paris">Paris</option>
+									<option value="26.951453083498258, -98.32763671875" data-district="pharr">Pharr</option>
+									<option value="31.10819929911196, -100.48095703125" data-district="sanAngelo">San Angelo</option>
+									<option value="29.13297013087864, -98.89892578125" data-district="sanAntonio">San Antonio</option>
+									<option value="32.222095840502334, -95.33935546875" data-district="tyler">Tyler</option>
+									<option value="31.403404950917395, -97.119140625" data-district="waco">Waco</option>
+									<option value="33.77914733128647, -98.37158203125" data-district="wichitaFalls">Wichita Falls</option>
+									<option value="29.05616970274342, -96.8115234375" data-district="yoakum">Yoakum</option>
 								</select>
 							</div>
 							<div class="row panel panel-default">
