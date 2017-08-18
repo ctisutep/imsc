@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -417,7 +416,6 @@
 
 					$(document.body).css({'cursor': 'wait'});
 					$.get('polygonHandler.php', app.payload, function(data){
-
 						if(depth < 0 || depth * 2.54 > 204 || isNaN(depth)){
 							alert("Please make sure depth is a numerical value and it is between 0 and 79 inches.");
 							hecho = true;
@@ -428,7 +426,6 @@
 							//              GRAY,       RED,     SKY BLUE, BRIGHT GREEN, PURPLE,   ORANGE,  BRIGHT PINK,NAVY BLUE,  LILAC,     YELLOW    maroon    cyan     navygreen    peach      flesh      brown    neongreen   neonpurple
 							//shapecolor = ["#84857B", "#FF0000", "#009BFF", "#13FF00", "#6100FF", "#fe9253", "#F20DD6", "#0051FF", "#AB77FF", "#EBF20D", "#8C0909", "#07FDCA", "#008C35", "FFDBA5", "#B57777", "#6D3300", "#D0FF00", "#5900FF"];
 							//shapeoutline = ["#000000", "#c10000", "#007fd1", "#0b9b00", "#310082", "#d18f0a", "#bc0ba7", "#0037ad", "#873dff", "#aaaf0a", "8c0909", "36c9bd", "#008c35", "#ffdba5", "#B57777", "#6D3300", "#D0FF00", "#5900FF"];
-
 							shapecolor = ["#84857B", "#13FF00", "#009BFF", "#EBF20D", "#fe9253", "#FF0000", "#8C0909", "#0051FF", "#AB77FF", "#EBF20D", "#8C0909", "#07FDCA", "#008C35", "FFDBA5", "#B57777", "#6D3300", "#D0FF00", "#5900FF"];
 							shapeoutline = ["#000000", "#0b9b00", "#007fd1", "#aaaf0a", "#d18f0a", "#c10000", "#8c0909", "#0037ad", "#873dff", "#aaaf0a", "8c0909", "36c9bd", "#008c35", "#ffdba5", "#B57777", "#6D3300", "#D0FF00", "#5900FF"];
 							colorSelector = 0;
@@ -609,7 +606,6 @@
 					}).done(function(data){
 						$(document.body).css({'cursor': 'auto'});
 						descripciones(app.payload.property);
-
 						if(!hecho){
 							var div = document.createElement('div');
 							div.innerHTML = "<strong>" + "</strong>" + legendText;
@@ -692,14 +688,7 @@
 			function initialize () {
 			}
 
-			var rec;
-			var rectangle;
-			var map;
-			var infoWindow;
-			var selectedRec;
-			var drawingManager;
-			var paths;
-
+			var rec, rectangle, map, infoWindow, selectedRec, drawingManager, paths;
 			function initMap() {
 				app.map = new google.maps.Map(document.getElementById('map'), {
 					zoom: 5,
@@ -859,16 +848,7 @@
 				infoWindow.open(app.map);
 			}
 
-			var chart;
-			var chart_2;
-			var chart_3;
-			var chart_4;
-			var chart_histo;
-			var chart_histo_2;
-			var chart_histo_3;
-			var chart_histo_4;
-			var bar_init;
-			var histo_init;
+			var chart, chart_2, chart_3, chart_4, chart_histo, chart_histo_2, chart_histo_3, chart_histo_4, bar_init, histo_init;
 			function nullSelector(x){
 				for (var i = 0; i < 4; i++) {
 					if(x != i){
@@ -902,15 +882,7 @@
 						if(nulls.includes(i) == false){not_nulls.push(i);}
 					}
 				}
-				var maxaoi;
-				var minaoi;
-				var medaoi;
-				var weightedaoi;
-				var previous1;
-				var previous2;
-				var previous3;
-				var previous4;
-
+				var maxaoi, minaoi, medaoi, weightedaoi, previous1, previous2, previous3, previous4;
 				if(rec.type =='rectangle'){
 					app.payload.getMode = "AOI";
 					bounds = rec.getBounds();
@@ -953,9 +925,7 @@
 						var elem_histo = histogram_divs[i];
 						var bar_init = charts[i];
 						var histo_init = chart_histos[i];
-
 						nullSelector(i);
-
 						$.get('polygonHandler.php', app.payload, function(data){
 							maxaoi = parseFloat(eval(datos_max));
 							minaoi = parseFloat(eval(datos_min));
