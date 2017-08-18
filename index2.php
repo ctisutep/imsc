@@ -7,23 +7,13 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<title>TX-IMSC</title>
-	<!-- Interactive Map for Soil Categorization -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-	<!-- Bootstrap Core CSS -->
 	<link href="css/bootstrap.css" rel="stylesheet">
-
-	<!-- Custom CSS -->
 	<link href="css/custom.css" rel="stylesheet" type="text/css">
 	<link href="css/modern-business.css" rel="stylesheet">
-
-	<!-- Custom Fonts -->
 	<link href="css/font-awesome.css" rel="stylesheet" type="text/css">
-
-	<!--switches-->
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/css-toggle-switch/latest/toggle-switch.css" />
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
 	<style>
 	#legend {
 		font-family: Arial, sans-serif;
@@ -51,7 +41,6 @@
 			</div>
 		</div>
 	</nav>
-	<!-- Content Row -->
 	<div>
 		<div class="row">
 			<div class="col-md-9">
@@ -271,7 +260,6 @@
 			<script>
 			var app = {map:null, polygons:null, label:"no filter", payload:{getMode:"polygons", runAOI:false, runLine:false, runRec:false, runFilters:false, property:null, district:null, depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null, filter_prop:null, filter_prop_n:null, filter_value:false, filter_units:0}};
 			var hecho = false;
-
 			$(document).ready(function(){
 				$.post('polygonHandler.php', {'columns': true}, function(result){
 					var properties;
@@ -288,19 +276,16 @@
 					var ch4 = document.getElementById("select_chart_4");
 					var filt = document.getElementById("select_prop_filters");
 					divs.push(selectProp, ch1, ch2, ch3, ch4, filt);
-
 					var prop = [];
 					for(var i = 0; i < 37; i++){
 						prop.push({number: i, value: null, table: null});
 					}
-
 					for (var i = 0; i < properties.length; i++) {
 						prop[i].number = i;
 						prop[i].value = properties[i].value;
 						prop[i].data = properties[i].data;
 						prop[i].table = properties[i].table;
 					}
-
 					for (var j = 0; j < divs.length; j++) {
 						for(var i = 0; i < properties.length; i++) {
 							var propr = prop[i].number;
@@ -312,7 +297,6 @@
 							divs[j].appendChild(elem);
 						}
 					}
-
 					$("#selectProp").change(function(){
 						app.payload.property =  prop[this.value].data; //ex. pi_r
 						app.payload.table =  prop[this.value].table;
@@ -341,22 +325,18 @@
 						app.payload.filter_prop =  prop[this.value].data;
 						app.payload.filter_prop_n = prop[this.value].value;
 					});
-
 					$("#biggerThan,#smallerThan,#equalTo").click(function(){
 						app.payload.filter_value = this.value;
 					});
-
 					$("#labels,#run,#default,#defaultbtn").click(function(){
 						app.label = "no filter";
 					});
 					$("#labels_filter,#filters,#filtersbtn").click(function(){
 						app.label = "filter";
 					});
-
 					$('#target').on('change', setDistrict);
 				});
 				app.payload.district = $('#target').children("option:selected").data('district');
-
 				$("#methods").change(function(){ //0: max / 1: min / 2: median / 3: weight/
 					app.payload.depth_method = this.value;
 				});
@@ -413,7 +393,6 @@
 						getparams.NE = bounds.getNorthEast().toJSON(); //north east corner
 						getparams.SW = bounds.getSouthWest().toJSON(); //south-west corner
 					}
-
 					$(document.body).css({'cursor': 'wait'});
 					$.get('polygonHandler.php', app.payload, function(data){
 						if(depth < 0 || depth * 2.54 > 204 || isNaN(depth)){
@@ -661,7 +640,6 @@
 				textos.set('caco3_r', "The quantity of Carbonate (CO3) in the soil expressed as CaCO3 and as a weight percentage of the less than 2mm size fraction.");
 				textos.set('ph01mcacl2_r', "The quantity of Carbonate (CO3) in the soil expressed as CaCl2 and as a weight percentage of the less than 2mm size fraction.");
 				textos.set('excavdifcl', "An estimation of the difficulty of working an excavation into soil layers, horizons, pedons, or geologic layers. In most instances, excavation difficulty is related to and controlled by a water state.");
-
 				var prprty = "Description for " + app.payload.value + " : ";
 				var prprtyText = textos.get(pr);
 				var h3 = document.createElement('h3');
@@ -684,10 +662,8 @@
 			/******************************************************************************/
 			google.charts.load('current', {'packages':['corechart', 'bar']});
 			google.charts.setOnLoadCallback(initialize);
-
 			function initialize () {
 			}
-
 			var rec, rectangle, map, infoWindow, selectedRec, drawingManager, paths;
 			function initMap() {
 				app.map = new google.maps.Map(document.getElementById('map'), {
@@ -695,12 +671,9 @@
 					center: new google.maps.LatLng(31.31610138349565, -99.11865234375),
 					mapTypeId: 'terrain'
 				});
-
 				app.infoWindow = new google.maps.InfoWindow;
-
 				app.map.addListener('click', function(e) {
 				});
-
 				drawingManager = new google.maps.drawing.DrawingManager({
 					drawingControl: true,
 					drawingControlOptions: {
@@ -722,9 +695,7 @@
 						strokeWeight: 6
 					}
 				});
-
 				drawingManager.setMap(app.map);
-
 				google.maps.event.addListener(drawingManager, 'overlaycomplete', function(e) {
 					drawingManager.setDrawingMode(null);
 					drawingManager.setOptions({
@@ -734,7 +705,6 @@
 							drawingModes: ['']
 						}
 					});
-
 					rec = e.overlay;
 					rec.type = e.type;
 					app.payload.AoI = 1;
@@ -742,7 +712,6 @@
 					if(rec.type == 'polyline'){
 						lineParser();
 					}
-
 					google.maps.event.addListener(rec, 'click', function() {
 						if(rec.type == 'polyline'){
 							lineParser();
@@ -750,11 +719,9 @@
 						clickRec(rec);
 						drawChart();
 					});
-
 					google.maps.event.addListener(rec, 'bounds_changed', function() {
 						showNewRect2(rec);
 					});
-
 					if(rec.type == 'polyline'){
 						google.maps.event.addListener(rec, 'dragend', function() {
 							lineParser();
@@ -891,28 +858,23 @@
 					app.payload.getMode = "line";
 					var bounds = app.map.getBounds();
 				}
-
 				getparams = app.payload;
 				getparams.NE = bounds.getNorthEast().toJSON();
 				getparams.SW = bounds.getSouthWest().toJSON();
-
 				var chart_divs = ['chart_area_1', 'chart_area_2','chart_area_3', 'chart_area_4'];
 				var histogram_divs = ['chart_histogram_1', 'chart_histogram_2', 'chart_histogram_3', 'chart_histogram_4'];
 				var chart_ns = ['chart1n', 'chart2n', 'chart3n', 'chart4n'];
 				var data_arr = ['maxAOIch','minAOIch','medAOIch','weightedAOIch'];
 				var charts = [chart, chart_2, chart_3, chart_4];
 				var chart_histos = [chart_histo, chart_histo_2, chart_histo_3, chart_histo_4];
-
 				for (var i = 0; i < nulls.length; i++) {
 					var position = nulls[i];
 					chart_divs.splice(position-1, 1);
 				}
-
 				previous1 = app.payload.chart1;
 				previous2 = app.payload.chart2;
 				previous3 = app.payload.chart3;
 				previous4 = app.payload.chart4;
-
 				for (var i = 0; i < not_nulls.length; i++) {
 					(function (i){
 						var name = 'app.payload.'+chart_ns[i];
@@ -1052,7 +1014,6 @@
 				var printContainer     = $('<div>');
 				printContainer.addClass('print-container').css('position', 'relative').height(mapContainer.height()).append(mapContainer).prependTo(body);
 				var content = body.children().not('script').not(printContainer).detach();
-
 				var patchedStyle = $('<style>')
 				.attr('media', 'print')
 				.text('img { max-width: none !important; }' +
@@ -1107,7 +1068,6 @@
 				"<img src='img/neongreensquare.png' height='10px'/>",
 				"<img src='img/neonpurplesquare.png' height='10px'/>",
 				"<img src='img/graysquare.png' height='10px'/>"];
-
 				$('#legendSpawner').find('*').not('h3').remove();
 				if(app.label == "no filter"){
 					var labels = document.getElementById('labels').value;
