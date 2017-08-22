@@ -1271,7 +1271,6 @@ function getPolygons(){
 	//$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) AND hzdept_r <= $data->depth AND hzdepb_r >= $data->depth";
 	if($data->table == "chorizon_r"){
 		$method_selected = 0;
-
 		if($data->depth_method == 1){
 			//echo " On maximum ";
 			$method_selected = "Maximum";
@@ -1297,32 +1296,26 @@ function getPolygons(){
 		}
 		if($data->runFilters == "true" && $data->filter_value == "bigger"){
 			$units = (int)$data->filter_units;
-			//$data->depth = 0;
 			$method_selected = "Maximum";
 			$query="SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE x.$data->property >= $units AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
 		}
 		else if($data->runFilters == "true" && $data->filter_value == "smaller"){
 			$units = (int)$data->filter_units;
-			//echo $data->depth;
-			//$data->depth = 0;
 			$method_selected = "Maximum";
 			$query="SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE x.$data->property <= $units AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
 		}
 		else if($data->runFilters == "true" && $data->filter_value == "equal"){
 			$units = (int)$data->filter_units;
-			//$data->depth = 0;
 			$method_selected = "Maximum";
 			$query="SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE x.$data->property = $units AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
 		}
 		else{
 			$query="SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
-			//$query="SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM mujoins3 NATURAL JOIN polygon AS p NATURAL JOIN chorizon_r as x WHERE x.cokey = mujoins3.cokey AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
 		}
 		$toReturn['query2'] = $query;
 		$result = mysqli_query($conn, $query);
 		$result = fetchAll($result);
 		$polygons = array();
-
 
 		$poly_arr = array();
 		$ogr;
@@ -1731,7 +1724,6 @@ function getPolygons(){
 			}
 			break;
 		}
-
 		$toReturn['coords'] = $polygons;
 	}
 	else{
