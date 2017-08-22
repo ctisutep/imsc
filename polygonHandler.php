@@ -1272,6 +1272,7 @@ function getPolygons(){
 	if($data->table == "chorizon_r"){
 		if($data->runFilters == "true" && $data->filter_value == "bigger"){
 			$units = (int)$data->filter_units;
+			$data->depth = 203;
 			$query="SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE x.$data->property >= $units AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
 		}
 		else if($data->runFilters == "true" && $data->filter_value == "smaller"){
