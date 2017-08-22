@@ -1270,28 +1270,6 @@ function getPolygons(){
 	//actual query for retrieving desired polygons
 	//$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) AND hzdept_r <= $data->depth AND hzdepb_r >= $data->depth";
 	if($data->table == "chorizon_r"){
-		if($data->runFilters == "true" && $data->filter_value == "bigger"){
-			$units = (int)$data->filter_units;
-			$data->depth = 203;
-			$query="SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE x.$data->property >= $units AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
-		}
-		else if($data->runFilters == "true" && $data->filter_value == "smaller"){
-			$units = (int)$data->filter_units;
-			$query="SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE x.$data->property <= $units AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
-		}
-		else if($data->runFilters == "true" && $data->filter_value == "equal"){
-			$units = (int)$data->filter_units;
-			$query="SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE x.$data->property = $units AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
-		}
-		else{
-			$query="SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
-			//$query="SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM mujoins3 NATURAL JOIN polygon AS p NATURAL JOIN chorizon_r as x WHERE x.cokey = mujoins3.cokey AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
-		}
-		$toReturn['query2'] = $query;
-		$result = mysqli_query($conn, $query);
-		$result = fetchAll($result);
-		$polygons = array();
-
 		$method_selected = 0;
 
 		if($data->depth_method == 1){
@@ -1317,6 +1295,34 @@ function getPolygons(){
 		else{
 			//echo " Nothing selected ";
 		}
+		if($data->runFilters == "true" && $data->filter_value == "bigger"){
+			$units = (int)$data->filter_units;
+			//$data->depth = 0;
+			$method_selected = "Maximum";
+			$query="SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE x.$data->property >= $units AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
+		}
+		else if($data->runFilters == "true" && $data->filter_value == "smaller"){
+			$units = (int)$data->filter_units;
+			//echo $data->depth;
+			//$data->depth = 0;
+			$method_selected = "Maximum";
+			$query="SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE x.$data->property <= $units AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
+		}
+		else if($data->runFilters == "true" && $data->filter_value == "equal"){
+			$units = (int)$data->filter_units;
+			//$data->depth = 0;
+			$method_selected = "Maximum";
+			$query="SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE x.$data->property = $units AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
+		}
+		else{
+			$query="SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
+			//$query="SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data->property FROM mujoins3 NATURAL JOIN polygon AS p NATURAL JOIN chorizon_r as x WHERE x.cokey = mujoins3.cokey AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
+		}
+		$toReturn['query2'] = $query;
+		$result = mysqli_query($conn, $query);
+		$result = fetchAll($result);
+		$polygons = array();
+
 
 		$poly_arr = array();
 		$ogr;
@@ -1330,11 +1336,9 @@ function getPolygons(){
 			$counter_j = 0;
 			$ogr = $result[$i]['OGR_FID'];
 			$skip = 0;
-
 			if($entered == 1){
 				$counter_i++;
 			}
-
 			if($past_ogr == $ogr){
 				$ogr = 1;
 				$skip = 1;
@@ -1373,8 +1377,12 @@ function getPolygons(){
 				$max_value = 0;
 				$max_index_i = 0;
 				$max_index_j = 0;
-				$lo_profundo = $data->depth;
-
+				if(isset($units) && $units > 0){
+					$data->depth = 0;
+				}
+				else{
+					$lo_profundo = $data->depth;
+				}
 				if(sizeof($poly_arr[$i]) > 1 && $poly_arr[$i][sizeof($poly_arr[$i])-1][$data->property] == 0){
 					$limite =  $poly_arr[$i][sizeof($poly_arr[$i])-2]['bottom'];
 
@@ -1714,7 +1722,7 @@ function getPolygons(){
 			break;
 
 			default:
-			for ($i=0; $i < sizeof($poly_arr); $i++) { //This was the method used before. It searches, goes to the depth specified, and gives the value AT that depth.
+			for ($i=0; $i < sizeof($poly_arr); $i++) {
 				for ($j=0; $j < sizeof($poly_arr[$i]); $j++) {
 					if($data->depth >= $poly_arr[$i][$j]['top'] && $data->depth <= $poly_arr[$i][$j]['bottom']){ //discriminador de depth
 						$polygons[] = $poly_arr[$i][$j];
@@ -1752,7 +1760,6 @@ function getPolygons(){
 				array_push($unique_index, $i);
 			}
 		}
-
 
 		if(sizeof($unique_index) == 1){
 			for($i = 0; $i<sizeof($result); $i++){
