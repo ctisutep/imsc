@@ -39,26 +39,7 @@ $conn->close();
 /***************************************************/
 //no need to mess with this class, simply for refactoring( making code shorter and or modular )
 class dataToQueryPolygons{
-	public $table;
-	public $property;
-	public $district;//not in use yet
-	public $lat2;
-	public $lat1;
-	public $lng2;
-	public $lng1;
-	public $depth;
-	public $depth_method;
-	public $lineString;
-	public $chart1;
-	public $chart2;
-	public $chart3;
-	public $chart4;
-	public $runLine;
-	public $runRec;
-	public $runAOI;
-	public $runFilters;
-	public $filter_units;
-	public $filter_value;
+	public $table, $property, $district, $lat2, $lat1, $depth, $depth_method, $lineString, $chart1, $chart2, $chart3, $chart4, $runLine, $runRec, $runAOI, $runFilters, $filter_units, $filter_value;
 
 	public function __construct(){
 		$this->table = 'chorizon_r'; //hardcoded
