@@ -89,18 +89,10 @@ function districtNames(){
 }
 function getHelperHistogramAOI(){
 	$data_aoi = new dataToQueryPolygons();
-	if($data_aoi->chart1 != null){
-		getHistogramAOI(1);
-	}
-	else if($data_aoi->chart2 != null){
-		getHistogramAOI(2);
-	}
-	else if($data_aoi->chart3 != null){
-		getHistogramAOI(3);
-	}
-	else if($data_aoi->chart4 != null){
-		getHistogramAOI(4);
-	}
+	if($data_aoi->chart1 != null){ getHistogramAOI(1); }
+	else if($data_aoi->chart2 != null){ getHistogramAOI(2); }
+	else if($data_aoi->chart3 != null){ getHistogramAOI(3); }
+	else if($data_aoi->chart4 != null){ getHistogramAOI(4); }
 }
 
 function getHistogramAOI($x){
@@ -112,18 +104,10 @@ function getHistogramAOI($x){
 	$result = mysqli_query($conn, $query);
 	$data_aoi->table = 'chorizon_r';
 	$key = setKey($data_aoi->table);
-	if($x == 1){
-		$data_aoi->property = $data_aoi->chart1;
-	}
-	else if ($x == 2) {
-		$data_aoi->property = $data_aoi->chart2;
-	}
-	else if ($x == 3) {
-		$data_aoi->property = $data_aoi->chart3;
-	}
-	else if ($x == 4) {
-		$data_aoi->property = $data_aoi->chart4;
-	}
+	if($x == 1){ $data_aoi->property = $data_aoi->chart1; }
+	else if ($x == 2) { $data_aoi->property = $data_aoi->chart2; }
+	else if ($x == 3) { $data_aoi->property = $data_aoi->chart3; }
+	else if ($x == 4) { $data_aoi->property = $data_aoi->chart4; }
 
 	if($data_aoi->table == "chorizon_r"){
 		$query="SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data_aoi->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
@@ -134,17 +118,12 @@ function getHistogramAOI($x){
 		$polygons = array();
 
 		$poly_arr = array();
-		$ogr;
-		$past_ogr = 0;
-		$skip;
-		$counter_i = 0;
-		$counter_j;
-		$entered = 0;
+		$ogr; $skip; $counter_j;
+		$past_ogr = $counter_i = $entered = 0;
 
 		for ($i=0; $i < sizeof($result); $i++){
-			$counter_j = 0;
+			$counter_j = $skip = 0;
 			$ogr = $result[$i]['OGR_FID'];
-			$skip = 0;
 
 			if($entered == 1){
 				$counter_i++;
@@ -182,18 +161,10 @@ function getHistogramAOI($x){
 }
 function getHelperHistogramLine(){
 	$data_line = new dataToQueryPolygons();
-	if($data_line->chart1 != null){
-		getHistogramLine(1);
-	}
-	else if($data_line->chart2 != null){
-		getHistogramLine(2);
-	}
-	else if($data_line->chart3 != null){
-		getHistogramLine(3);
-	}
-	else if($data_line->chart4 != null){
-		getHistogramLine(4);
-	}
+	if($data_line->chart1 != null){ getHistogramLine(1); }
+	else if($data_line->chart2 != null){ getHistogramLine(2); }
+	else if($data_line->chart3 != null){ getHistogramLine(3); }
+	else if($data_line->chart4 != null){ getHistogramLine(4); }
 }
 function getHistogramLine($x){
 	global $conn, $toReturn;
@@ -218,12 +189,8 @@ function getHistogramLine($x){
 		$polygons = array();
 
 		$poly_arr = array();
-		$ogr;
-		$past_ogr = 0;
-		$skip;
-		$counter_i = 0;
-		$counter_j;
-		$entered = 0;
+		$ogr; $skip; $counter_j;
+		$past_ogr = $counter_i = $entered = 0;
 
 		for ($i=0; $i < sizeof($result); $i++){
 			$counter_j = 0;
@@ -266,18 +233,10 @@ function getHistogramLine($x){
 }
 function getHelperLine(){
 	$data_line = new dataToQueryPolygons();
-	if($data_line->chart1 != null){
-		getLine(1);
-	}
-	else if($data_line->chart2 != null){
-		getLine(2);
-	}
-	else if($data_line->chart3 != null){
-		getLine(3);
-	}
-	else if($data_line->chart4 != null){
-		getLine(4);
-	}
+	if($data_line->chart1 != null){ getLine(1); }
+	else if($data_line->chart2 != null){ getLine(2); }
+	else if($data_line->chart3 != null){ getLine(3); }
+	else if($data_line->chart4 != null){ getLine(4); }
 }
 function getLine($x){
 	global $conn, $toReturn;
@@ -344,9 +303,7 @@ function getLine($x){
 		}
 
 		for ($i=0; $i < sizeof($poly_arr); $i++) {
-			$max_value = 0;
-			$max_index_i = 0;
-			$max_index_j = 0;
+			$max_value = $max_index_i = $max_index_j = 0;
 			$lo_profundo = 203;
 
 			if(sizeof($poly_arr[$i]) > 1 && $poly_arr[$i][sizeof($poly_arr[$i])-1][$data_line->property] == 0){
@@ -704,22 +661,10 @@ function getLine($x){
 $x = 0;
 function getHelperAOI(){
 	$data_aoi = new dataToQueryPolygons();
-	if($data_aoi->chart1 != null){
-		$x=1;
-		getAOI($x);
-	}
-	else if($data_aoi->chart2 != null){
-		$x=2;
-		getAOI($x);
-	}
-	else if($data_aoi->chart3 != null){
-		$x=3;
-		getAOI($x);
-	}
-	else if($data_aoi->chart4 != null){
-		$x=4;
-		getAOI($x);
-	}
+	if($data_aoi->chart1 != null){ $x=1; getAOI($x); }
+	else if($data_aoi->chart2 != null){ $x=2; getAOI($x); }
+	else if($data_aoi->chart3 != null){ $x=3; getAOI($x); }
+	else if($data_aoi->chart4 != null){ $x=4; getAOI($x); }
 }
 function getAOI($x){
 	global $conn, $toReturn;
@@ -744,11 +689,8 @@ function getAOI($x){
 		$polygons = array();
 
 		$poly_arr = array();
-		$ogr; $skip;
-		$past_ogr = 0;
-		$counter_i = 0;
-		$counter_j;
-		$entered = 0;
+		$ogr; $skip; $counter_j;
+		$past_ogr = $counter_i = $entered = 0;
 
 		for ($i=0; $i < sizeof($result); $i++){
 			$counter_j = $skip = 0;
