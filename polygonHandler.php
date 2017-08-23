@@ -29,18 +29,13 @@ else if(isset($_GET['district'])){//*******************This is the case for reti
 else if(isset($_POST['columns'])){//**************** This is the case for retrieving table names  ***********************(3)
 	tableNames();
 }
-/**     -------------------------------------------         */
-//returns data back to javascript
+
 header('Content-Type: application/json');
 echo json_encode($toReturn);
 $conn->close();
-/****************************************************/
-//functionality ends here. BELOW CONVINIENCE UTILITY
-/***************************************************/
-//no need to mess with this class, simply for refactoring( making code shorter and or modular )
+
 class dataToQueryPolygons{
 	public $table, $property, $district, $lat2, $lat1, $depth, $depth_method, $lineString, $chart1, $chart2, $chart3, $chart4, $runLine, $runRec, $runAOI, $runFilters, $filter_units, $filter_value;
-
 	public function __construct(){
 		$this->table = 'chorizon_r'; //hardcoded
 		$this->property = $_GET['property'];
@@ -79,11 +74,7 @@ function fetchAll($result){
 }
 function tableNames(){
 	global $conn, $toReturn;
-	//this query goes to a table in the database called "properties" and gets a set containing all records that
-	//are either(OR)  LIKE  chonsistency or choriszon for property_table column
-	//$sql = "SELECT * FROM properties WHERE property_table LIKE \"%chconsistence_r%\" OR property_table LIKE \"%chorizon_r%\" ";
 	$sql = "SELECT * FROM imsc.properties WHERE property_table = 'chorizon_r' AND property_code NOT IN ('excavdifcl') ORDER BY property_label ASC";
-	//conn.query(sql) -> from pre-established connection to data base make given query(sql)
 	$result = $conn->query($sql);
 	$toReturn['columns'] = $result->fetch_all();
 }
@@ -112,7 +103,7 @@ function getHelperHistogramAOI(){
 	}
 }
 
-function getHistogramAOI($x){ //maybe I do not need a helper
+function getHistogramAOI($x){
 	global $conn, $toReturn;
 	$data_aoi = new dataToQueryPolygons();
 	$simplificationFactor = polygonDefinition($data_aoi);
@@ -184,11 +175,9 @@ function getHistogramAOI($x){ //maybe I do not need a helper
 	for ($i=0; $i < sizeof($poly_arr); $i++) {
 		for ($j=0; $j < sizeof($poly_arr[$i]); $j++) {
 			$placeholder = $poly_arr[$i][$j][$data_aoi->property];
-			//$values += "$poly_arr[$i][$j][$data_aoi->property], ";
 			array_push($values, $placeholder);
 		}
 	}
-	//var_dump($values);
 	$toReturn['values'] = $values;
 }
 function getHelperHistogramLine(){
@@ -279,11 +268,9 @@ function getHistogramLine($x){
 	for ($i=0; $i < sizeof($poly_arr); $i++) {
 		for ($j=0; $j < sizeof($poly_arr[$i]); $j++) {
 			$placeholder = $poly_arr[$i][$j][$data_line->property];
-			//$values += "$poly_arr[$i][$j][$data_aoi->property], ";
 			array_push($values, $placeholder);
 		}
 	}
-	//var_dump($values);
 	$toReturn['values'] = $values;
 }
 function getHelperLine(){
@@ -823,17 +810,15 @@ function getAOI($x){
 		$polygons = array();
 
 		$poly_arr = array();
-		$ogr;
+		$ogr; $skip;
 		$past_ogr = 0;
-		$skip;
 		$counter_i = 0;
 		$counter_j;
 		$entered = 0;
 
 		for ($i=0; $i < sizeof($result); $i++){
-			$counter_j = 0;
+			$counter_j = $skip = 0;
 			$ogr = $result[$i]['OGR_FID'];
-			$skip = 0;
 
 			if($entered == 1){
 				$counter_i++;
@@ -860,21 +845,15 @@ function getAOI($x){
 		}
 
 		/* Busca el valor MAXIMO de la lista de los polignos, dependientemente del depth que el usuario le otorgue*/
-		$max_value;
-		$max_index_i;
-		$max_index_j;
+		$max_value; $max_index_i; $max_index_j; $top; $bottom;
 		$lo_profundo = 203;
-		$top;
-		$bottom;
 
 		for ($i=0; $i < sizeof($poly_arr); $i++) { //sorting by property values ascending; had to modify query
 			array_multisort($poly_arr[$i], SORT_ASC);
 		}
 
 		for ($i=0; $i < sizeof($poly_arr); $i++) {
-			$max_value = 0;
-			$max_index_i = 0;
-			$max_index_j = 0;
+			$max_value = $max_index_i = $max_index_j = 0;
 			$lo_profundo = 203;
 
 			if(sizeof($poly_arr[$i]) > 1 && $poly_arr[$i][sizeof($poly_arr[$i])-1][$data_aoi->property] == 0){
@@ -961,15 +940,12 @@ function getAOI($x){
 
 		//MINIMUM
 		$polygons = array();
-		$min_value;
-		$min_index_i;
-		$min_index_j;
+		$min_value; $min_index_i; $min_index_j;
 		$lo_profundo = 203;
 
 		for ($i=0; $i < sizeof($poly_arr); $i++) {
 			$min_value = PHP_INT_MAX;
-			$min_index_i = 0;
-			$min_index_j = 0;
+			$min_index_i = $min_index_j = 0;
 			$lo_profundo = 203;
 
 			if(sizeof($poly_arr[$i]) > 1 && $poly_arr[$i][sizeof($poly_arr[$i])-1][$data_aoi->property] == 0){
@@ -1049,7 +1025,6 @@ function getAOI($x){
 			$polygons[] = $poly_arr[$min_index_i][$min_index_j];
 		}
 		$minimo = $polygons[0][$data_aoi->property];
-		//var_dump($polygons);
 		for ($i=0; $i < sizeof($polygons); $i++) {
 			if($minimo > $polygons[$i][$data_aoi->property]){
 				$minimo = $polygons[$i][$data_aoi->property];
@@ -1058,13 +1033,11 @@ function getAOI($x){
 
 		//MEDIAN
 		$polygons = array();
-		$med_index_i;
+		$med_index_i; $done_med;
 		$med_value = 0;
-		$done_med;
 
 		for ($j=0; $j < sizeof($poly_arr); $j++) {
-			$med_index_i = 0;
-			$done_med = 0;
+			$med_index_i = $done_med = 0;
 			if(sizeof($poly_arr[$j]) > 1 && $poly_arr[$j][sizeof($poly_arr[$j])-1][$data_aoi->property] == 0){
 				for ($i=0; $i < sizeof($poly_arr[$j])-1; $i++) {
 					if((sizeof($poly_arr[$j])-1)%2 == 1 && $done_med == 0){//odd
@@ -1103,8 +1076,6 @@ function getAOI($x){
 		array_multisort($medianos, SORT_ASC);
 		$mediano;
 		if(sizeof($polygons)%2 == 1){ //odd
-			//echo "odd";
-			//echo ceil(sizeof($medianos)/2)-1;
 			$mediano = $medianos[ceil(sizeof($medianos)/2)-1];
 		}
 		else{ //even
@@ -1114,29 +1085,13 @@ function getAOI($x){
 		//WEIGHTED
 		$polygons = array();
 		$profundo = 203;
-		$limite;
 		$n_operaciones = 0;
 		$counter = 0;
-		$top;
-		$bottom;
-		$delta;
-		$delta_depth;
-		$valor;
-		$just_one;
-		$result_weighted;
+		$top; $bottom; $delta; $delta_depth; $limite; $valor; $just_one; $result_weighted;
 
 		for ($i=0; $i < sizeof($poly_arr); $i++) {
 			$profundo = 203;
-			$limite = 0;
-			$n_operaciones = 0;
-			$counter = 0;
-			$top = 0;
-			$bottom = 0;
-			$delta = 0;
-			$delta_depth = 0;
-			$valor = 0;
-			$just_one = 0;
-			$result_weighted = 0;
+			$limite = $n_operaciones = $counter = $top = $bottom = $delta = $delta_depth = $valor = $just_one = $result_weighted = 0;
 
 			if(sizeof($poly_arr[$i]) > 1 && $poly_arr[$i][sizeof($poly_arr[$i])-1][$data_aoi->property] == 0){ //use the penultimate index
 				$limite = $poly_arr[$i][sizeof($poly_arr[$i])-2]['bottom'];//si lo $profundo es mayor que el limite, ignorar y usar el limite como lo profundo
@@ -1258,12 +1213,8 @@ function getPolygons(){
 	$data = new dataToQueryPolygons();//automatically gathers necessary data for query
 	$simplificationFactor = polygonDefinition($data);//maybe it should be changing(be variable) in the future with  more given parameters($_GET)
 	//create zoom area (AOI) polygon for further query
-	if($data->runAOI == "true" && $data->runLine == "true"){
-		$query = "SET @geom1 = 'LineString($data->lineString)'";
-  }
-	else{
-		$query = "SET @geom1 = 'POLYGON(($data->lng1	$data->lat1,$data->lng1	$data->lat2,$data->lng2	$data->lat2,$data->lng2	$data->lat1,$data->lng1	$data->lat1))'";
-	}
+	if($data->runAOI == "true" && $data->runLine == "true"){ $query = "SET @geom1 = 'LineString($data->lineString)'"; }
+	else{ $query = "SET @geom1 = 'POLYGON(($data->lng1	$data->lat1,$data->lng1	$data->lat2,$data->lng2	$data->lat2,$data->lng2	$data->lat1,$data->lng1	$data->lat1))'"; }
 	$toReturn['query'] = $query;
 	$result = mysqli_query($conn, $query);
 	$key = setKey( $data->table );//appropriate key for given table
@@ -1271,29 +1222,11 @@ function getPolygons(){
 	//$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) AND hzdept_r <= $data->depth AND hzdepb_r >= $data->depth";
 	if($data->table == "chorizon_r"){
 		$method_selected = 0;
-		if($data->depth_method == 1){
-			//echo " On maximum ";
-			$method_selected = "Maximum";
-		}
-		elseif ($data->depth_method == 2) {
-			//echo " On minimum ";
-			$method_selected = "Minimum";
-		}
-		elseif ($data->depth_method == 3) {
-			//echo " On median ";
-			$method_selected = "Median";
-		}
-		elseif ($data->depth_method == 4) {
-			//echo " On weighted ";
-			$method_selected = "Weighted";
-		}
-		elseif ($data->depth_method == 5) {
-			//echo " On weighted ";
-			$method_selected = "At";
-		}
-		else{
-			//echo " Nothing selected ";
-		}
+		if($data->depth_method == 1){ $method_selected = "Maximum"; }
+		elseif ($data->depth_method == 2) { $method_selected = "Minimum"; }
+		elseif ($data->depth_method == 3) { $method_selected = "Median"; }
+		elseif ($data->depth_method == 4) { $method_selected = "Weighted"; }
+		elseif ($data->depth_method == 5) { $method_selected = "At"; }
 		if($data->runFilters == "true" && $data->filter_value == "bigger"){
 			$units = (int)$data->filter_units;
 			$method_selected = "Maximum";
@@ -1316,7 +1249,6 @@ function getPolygons(){
 		$result = mysqli_query($conn, $query);
 		$result = fetchAll($result);
 		$polygons = array();
-
 		$poly_arr = array();
 		$ogr;
 		$past_ogr = 0;
@@ -1355,12 +1287,8 @@ function getPolygons(){
 		switch ($method_selected) {
 			case 'Maximum':
 			/* Busca el valor maximo de la lista de los polignos, dependientemente del depth que el usuario le otorgue*/
-			$max_value;
-			$max_index_i;
-			$max_index_j;
+			$max_value; $max_index_i; $max_index_j; $top; $bottom;
 			$lo_profundo = $data->depth;
-			$top;
-			$bottom;
 
 			for ($i=0; $i < sizeof($poly_arr); $i++) { //sorting by property values ascending; had to modify query
 				array_multisort($poly_arr[$i], SORT_ASC);
@@ -1455,9 +1383,7 @@ function getPolygons(){
 
 			case 'Minimum':
 			/* Busca el valor minimo de la lista de los polignos, dependientemente del depth que el usuario le otorgue*/
-			$min_value;
-			$min_index_i;
-			$min_index_j;
+			$min_value; $min_index_i; $min_index_j;
 			$lo_profundo = $data->depth;
 
 			for ($i=0; $i < sizeof($poly_arr); $i++) { //sorting by property values ascending; had to modify query
@@ -1599,16 +1525,9 @@ function getPolygons(){
 			case 'Weighted':
 			/*Depending on the depth, this method will get the average value for all the layers until that depth. */
 			$profundo = $data->depth;
-			$limite;
 			$n_operaciones = 0;
 			$counter = 0;
-			$top;
-			$bottom;
-			$delta;
-			$delta_depth;
-			$valor;
-			$just_one;
-			$result_weighted;
+			$limite; $top; $bottom; $delta; $delta_depth; $valor; $just_one; $result_weighted;
 
 			for ($i=0; $i < sizeof($poly_arr); $i++) { //sorting by property values ascending; had to modify query
 				array_multisort($poly_arr[$i], SORT_ASC);
@@ -1616,16 +1535,7 @@ function getPolygons(){
 
 			for ($i=0; $i < sizeof($poly_arr); $i++) {
 				$profundo = $data->depth;
-				$limite = 0;
-				$n_operaciones = 0;
-				$counter = 0;
-				$top = 0;
-				$bottom = 0;
-				$delta = 0;
-				$delta_depth = 0;
-				$valor = 0;
-				$just_one = 0;
-				$result_weighted = 0;
+				$limite = $n_operaciones = $counter = $top = $bottom = $delta = $delta_depth = $valor = $just_one = $result_weighted = 0;
 
 				if(sizeof($poly_arr[$i]) > 1 && $poly_arr[$i][sizeof($poly_arr[$i])-1][$data->property] == 0){ //use the penultimate index
 					$limite = $poly_arr[$i][sizeof($poly_arr[$i])-2]['bottom'];//si lo $profundo es mayor que el limite, ignorar y usar el limite como lo profundo
@@ -1634,7 +1544,7 @@ function getPolygons(){
 					}
 
 					for ($k=0; $k < sizeof($poly_arr[$i])-1; $k++) {
-						if($profundo >= $poly_arr[$i][$k]['top'] && $profundo >= $poly_arr[$i][$k]['bottom'] && $profundo <= $limite){ //we need a limit/ceiling for the bottom of this
+						if($profundo >= $poly_arr[$i][$k]['top'] && $profundo >= $poly_arr[$i][$k]['bottom'] && $profundo <= $limite){
 							$n_operaciones += 1;
 						}
 						elseif($profundo >= $poly_arr[$i][$k]['top'] && $profundo <= $poly_arr[$i][$k]['bottom'] && $profundo <= $limite){
@@ -1730,11 +1640,8 @@ function getPolygons(){
 		$query = "SELECT OGR_FID, p.mukey, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
 		$toReturn['query2'] = $query;
 		$result = mysqli_query($conn, $query);
-
 		$result = fetchAll($result);
-
 		$polygons = array();
-
 		$id_array = array();
 		$indexes_array = array();
 
@@ -1744,7 +1651,6 @@ function getPolygons(){
 
 		$unique = array();
 		$unique = array_unique($id_array, SORT_REGULAR);
-
 		$unique_index = array();
 
 		for ($i=0; $i < sizeof($result); $i++) {
@@ -1762,18 +1668,14 @@ function getPolygons(){
 		}
 		else{
 			for($i = 0; $i<sizeof($unique_index); $i++){
-				//if($data->depth >= $result[$unique_index[$i]]['top'] && $data->depth <= $result[$unique_index[$i]]['bottom']){ //discriminador de depth
 				$polygons[] = $result[$unique_index[$i]];
-				//}
 			}
 		}
-
 		$toReturn['coords'] = $polygons;//fetch all
 	}
 }
 function polygonDefinition( $data ){
 	$zoom = haversine( $data );
-	//test wis choping off everything after the 4.
 	$factor = ($zoom * 0.0000000147540984 );
 	if( $factor > 0.5 ){ return 0.5; }
 	return $factor;
