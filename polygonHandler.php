@@ -1135,7 +1135,6 @@ function getAOI($x){
 				if($profundo > $limite){
 					$profundo = $limite;
 				}
-
 				for ($k=0; $k < sizeof($poly_arr[$i]); $k++) {
 					if($profundo >= $poly_arr[$i][$k]['top'] && $profundo >= $poly_arr[$i][$k]['bottom'] && $profundo <= $limite){ //we need a limit/ceiling for the bottom of this
 						$n_operaciones += 1;
@@ -1217,8 +1216,7 @@ function getPolygons(){
 	else{ $query = "SET @geom1 = 'POLYGON(($data->lng1	$data->lat1,$data->lng1	$data->lat2,$data->lng2	$data->lat2,$data->lng2	$data->lat1,$data->lng1	$data->lat1))'"; }
 	$toReturn['query'] = $query;
 	$result = mysqli_query($conn, $query);
-	$key = setKey( $data->table );//appropriate key for given table
-	//actual query for retrieving desired polygons
+	$key = setKey( $data->table );
 	//$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) AND hzdept_r <= $data->depth AND hzdepb_r >= $data->depth";
 	if($data->table == "chorizon_r"){
 		$method_selected = 0;
@@ -1250,12 +1248,8 @@ function getPolygons(){
 		$result = fetchAll($result);
 		$polygons = array();
 		$poly_arr = array();
-		$ogr;
-		$past_ogr = 0;
-		$skip;
-		$counter_i = 0;
-		$counter_j;
-		$entered = 0;
+		$ogr; $skip; $counter_j;
+		$past_ogr = $counter_i = $entered = 0;
 
 		for ($i=0; $i < sizeof($result); $i++){
 			$counter_j = 0;
