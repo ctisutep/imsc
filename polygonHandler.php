@@ -204,19 +204,10 @@ function getHistogramLine($x){
 	$result = mysqli_query($conn, $query);
 	$data_line->table = 'chorizon_r';
 	$key = setKey($data_line->table);
-
-	if($x == 1){
-		$data_line->property = $data_line->chart1;
-	}
-	else if ($x == 2) {
-		$data_line->property = $data_line->chart2;
-	}
-	else if ($x == 3) {
-		$data_line->property = $data_line->chart3;
-	}
-	else if ($x == 4) {
-		$data_line->property = $data_line->chart4;
-	}
+	if($x == 1){ $data_line->property = $data_line->chart1; }
+	else if ($x == 2) { $data_line->property = $data_line->chart2; }
+	else if ($x == 3) { $data_line->property = $data_line->chart3; }
+	else if ($x == 4) { $data_line->property = $data_line->chart4; }
 
 	if($data_line->table == "chorizon_r"){
 		$query="SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data_line->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geomline, 1), p.SHAPE) ORDER BY OGR_FID DESC, top DESC";
@@ -298,18 +289,10 @@ function getLine($x){
 	$data_line->table = 'chorizon_r';
 	$key = setKey($data_line->table);
 
-	if($x == 1){
-		$data_line->property = $data_line->chart1;
-	}
-	else if ($x == 2) {
-		$data_line->property = $data_line->chart2;
-	}
-	else if ($x == 3) {
-		$data_line->property = $data_line->chart3;
-	}
-	else if ($x == 4) {
-		$data_line->property = $data_line->chart4;
-	}
+	if($x == 1){ $data_line->property = $data_line->chart1; }
+	else if ($x == 2) { $data_line->property = $data_line->chart2; }
+	else if ($x == 3) { $data_line->property = $data_line->chart3; }
+	else if ($x == 4) { $data_line->property = $data_line->chart4; }
 
 	if($data_line->table == "chorizon_r"){
 		$query="SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data_line->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geomline, 1), p.SHAPE) ORDER BY OGR_FID DESC, top DESC";
@@ -320,12 +303,8 @@ function getLine($x){
 		$polygons = array();
 
 		$poly_arr = array();
-		$ogr;
-		$past_ogr = 0;
-		$skip;
-		$counter_i = 0;
-		$counter_j;
-		$entered = 0;
+		$ogr; $skip; $counter_j;
+		$past_ogr = $counter_i = $entered = 0;
 
 		for ($i=0; $i < sizeof($result); $i++){
 			$counter_j = 0;
@@ -357,12 +336,8 @@ function getLine($x){
 		}
 
 		/* Busca el valor MAXIMO de la lista de los polignos, dependientemente del depth que el usuario le otorgue*/
-		$max_value;
-		$max_index_i;
-		$max_index_j;
 		$lo_profundo = 203;
-		$top;
-		$bottom;
+		$bottom; $top; $max_value; $max_index_i; $max_index_j;
 
 		for ($i=0; $i < sizeof($poly_arr); $i++) { //sorting by property values ascending; had to modify query
 			array_multisort($poly_arr[$i], SORT_ASC);
@@ -458,15 +433,12 @@ function getLine($x){
 
 		//MINIMUM
 		$polygons = array();
-		$min_value;
-		$min_index_i;
-		$min_index_j;
+		$min_value; $min_index_i; $min_index_j;
 		$lo_profundo = 203;
 
 		for ($i=0; $i < sizeof($poly_arr); $i++) {
 			$min_value = PHP_INT_MAX;
-			$min_index_i = 0;
-			$min_index_j = 0;
+			$min_index_i = $min_index_j = 0;
 			$lo_profundo = 203;
 
 			if(sizeof($poly_arr[$i]) > 1 && $poly_arr[$i][sizeof($poly_arr[$i])-1][$data_line->property] == 0){
@@ -554,25 +526,20 @@ function getLine($x){
 
 		//MEDIAN
 		$polygons = array();
-		$med_index_i;
+		$med_index_i; $done_med;
 		$med_value = 0;
-		$done_med;
 
 		for ($j=0; $j < sizeof($poly_arr); $j++) {
-			//echo "hello5";
 			$med_index_i = 0;
 			$done_med = 0;
 			if(sizeof($poly_arr[$j]) > 1 && $poly_arr[$j][sizeof($poly_arr[$j])-1][$data_line->property] == 0){
-				//echo "hello6";
 				for ($i=0; $i < sizeof($poly_arr[$j])-1; $i++) {
 					if((sizeof($poly_arr[$j])-1)%2 == 1 && $done_med == 0){//odd
-						//echo "hello3";
 						$med_index_i = ceil(sizeof($poly_arr[$j])/2); //have to subtract one from this value to get the index correctly
 						$done_med = 1;
 						$polygons[] = $poly_arr[$j][$med_index_i - 1];
 					}
 					elseif((sizeof($poly_arr[$j])-1)%2 == 0 && $done_med == 0){ //even
-						//cho "hello4";
 						$med_value = ($poly_arr[$j][(ceil((sizeof($poly_arr[$j])-1)/2)) - 1][$data_line->property] + $poly_arr[$j][(ceil((sizeof($poly_arr[$j])-1)/2))][$data_line->property]) / 2;
 						$poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1][$data_line->property] = $med_value;
 						$polygons[] = $poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1];
@@ -581,16 +548,13 @@ function getLine($x){
 				}
 			}
 			else{
-				//echo "hello7";
 				for ($i=0; $i < sizeof($poly_arr[$j]); $i++) {
 					if((sizeof($poly_arr[$j])-1)%2 == 1 && $done_med == 0){//odd
-						//echo "hello";
 						$med_index_i = ceil(sizeof($poly_arr[$j])/2); //have to subtract one from this value to get the index correctly
 						$done_med = 1;
 						$polygons[] = $poly_arr[$j][$med_index_i - 1];
 					}
 					elseif(sizeof($poly_arr[$j])%2 == 0 && $done_med == 0){ //even
-						//echo "hello2";
 						$med_value = ($poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1][$data_line->property] + $poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2))][$data_line->property]) / 2;
 						$poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1][$data_line->property] = $med_value;
 						$polygons[] = $poly_arr[$j][(ceil(sizeof($poly_arr[$j])/2)) - 1];
@@ -599,8 +563,6 @@ function getLine($x){
 				}
 			}
 		}
-		//var_dump($poly_arr);
-		//var_dump($polygons);
 		$medianos = array();
 		for ($i=0; $i < sizeof($polygons); $i++) {
 			$medianos[$i] = $polygons[$i][$data_line->property];
@@ -608,41 +570,21 @@ function getLine($x){
 		array_multisort($medianos, SORT_ASC);
 		$mediano;
 		if(sizeof($polygons)%2 == 1){ //odd
-			//echo "odd";
-			//echo ceil(sizeof($medianos)/2)-1;
 			$mediano = $medianos[ceil(sizeof($medianos)/2)-1];
 		}
 		else{ //even
-			//var_dump($medianos);
 			$mediano = ($medianos[ceil(sizeof($medianos)/2)-1] + $medianos[ceil(sizeof($medianos)/2)]) / 2;
 		}
 
 		//WEIGHTED
 		$polygons = array();
 		$profundo = 203;
-		$limite;
-		$n_operaciones = 0;
-		$counter = 0;
-		$top;
-		$bottom;
-		$delta;
-		$delta_depth;
-		$valor;
-		$just_one;
-		$result_weighted;
+		$limite; $top; $bottom; $delta; $delta_depth; $valor; $just_one; $result_weighted;
+		$n_operaciones = $counter = 0;
 
 		for ($i=0; $i < sizeof($poly_arr); $i++) {
 			$profundo = 203;
-			$limite = 0;
-			$n_operaciones = 0;
-			$counter = 0;
-			$top = 0;
-			$bottom = 0;
-			$delta = 0;
-			$delta_depth = 0;
-			$valor = 0;
-			$just_one = 0;
-			$result_weighted = 0;
+			$limite = $n_operaciones = $counter = $top = $bottom = $delta = $delta_depth = $valor = $just_one = $result_weighted = 0;
 
 			if(sizeof($poly_arr[$i]) > 1 && $poly_arr[$i][sizeof($poly_arr[$i])-1][$data_line->property] == 0){ //use the penultimate index
 				$limite = $poly_arr[$i][sizeof($poly_arr[$i])-2]['bottom'];//si lo $profundo es mayor que el limite, ignorar y usar el limite como lo profundo
@@ -788,18 +730,10 @@ function getAOI($x){
 	$result = mysqli_query($conn, $query);
 	$data_aoi->table = 'chorizon_r';
 	$key = setKey($data_aoi->table);
-	if($x == 1){
-		$data_aoi->property = $data_aoi->chart1;
-	}
-	else if ($x == 2) {
-		$data_aoi->property = $data_aoi->chart2;
-	}
-	else if ($x == 3) {
-		$data_aoi->property = $data_aoi->chart3;
-	}
-	else if ($x == 4) {
-		$data_aoi->property = $data_aoi->chart4;
-	}
+	if($x == 1){ $data_aoi->property = $data_aoi->chart1; }
+	else if ($x == 2) { $data_aoi->property = $data_aoi->chart2; }
+	else if ($x == 3) { $data_aoi->property = $data_aoi->chart3; }
+	else if ($x == 4) { $data_aoi->property = $data_aoi->chart4; }
 
 	if($data_aoi->table == "chorizon_r"){
 		$query="SELECT OGR_FID, hzdept_r AS top, hzdepb_r AS bottom, x.cokey, x.$data_aoi->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
