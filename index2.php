@@ -906,17 +906,11 @@
 
 							var options = {
 								title: name,
-								legend: {
-									position: 'none'
-								},
-								chartArea: {
-									width: '70%'
-								},
-								hAxis: {
-									minValue: 0
-								},
-								vAxis: {
-								}
+								legend: { position: 'none'},
+								animation:{ duration: 1000, easing: 'inAndOut', startup: true },
+								chartArea: { width: '70%' },
+								hAxis: { minValue: 0 },
+								vAxis: {}
 							};
 							bar_init = new google.visualization.BarChart(document.getElementById(elem_chart));
 							bar_init.draw(data, options);
@@ -946,15 +940,9 @@
 							size = parseFloat(size).toFixed(1);
 							var options = {
 								title: name,
-								legend: {
-									position: 'none'
-								},
-								histogram: {
-									bucketSize: size
-								},
-								hAxis: {
-									type: 'category'
-								}
+								legend: { position: 'none' },
+								histogram: { bucketSize: size },
+								hAxis: { type: 'category' }
 							};
 							histo_init = new google.visualization.Histogram(document.getElementById(elem_histo));
 							histo_init.draw(data, options);
