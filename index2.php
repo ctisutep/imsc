@@ -147,7 +147,7 @@
 													<input type="number" class="form-control" value="0" min="0" placeholder="...inches" id="depth" aria-describedby="basic-addon3">
 												</div><br>
 												<label> Method:</label>
-												<select id="methods" class="form-control">
+												<select data-toggle="tooltip" data-placement="top" title="Method by which the data will be gathered" id="methods" class="form-control">
 													<option value="" disabled selected>Select method</option>
 													<option value="1" id="max_method">Max</option>
 													<option value="2" id="min_method">Min</option>
@@ -156,7 +156,7 @@
 													<option value="5" id="specific_method">At Specific Depth</option>
 												</select><br>
 												<div class="input-group">
-													<span class="input-group-addon" id="basic-addon3"># of labels</span>
+													<span data-toggle="tooltip" data-placement="top" title="Number of representations for the data" class="input-group-addon" id="basic-addon3"># of labels</span>
 													<input type="number" class="form-control" value="1" min="1"placeholder="...labels" id="labels" aria-describedby="basic-addon3">
 												</div><br>
 											</div>
@@ -226,8 +226,8 @@
 									<div class="col-md-5"><br>
 										<div class="tab-content">
 											<div id="defaultbtn" class="tab-pane fade in active">
-												<button class="btn btn-success form-control" type="button" id="run" onClick="getPolygonsHelper()">Run</button><br><br>
-												<button class="btn btn-success form-control" type="button" id="runAOI" onClick="runAOI()">Run AOI</button><br><br>
+												<button data-toggle="tooltip" data-placement="top" title="Bring up the data for the whole section of the map currently displayed" class="btn btn-success form-control" type="button" id="run" onClick="getPolygonsHelper()">Run</button><br><br>
+												<button data-toggle="tooltip" data-placement="top" title="Only bring up the data touched by the Area Of Interest" class="btn btn-success form-control" type="button" id="runAOI" onClick="runAOI()">Run AOI</button><br><br>
 												<button class="btn btn-warning form-control" type="button" id="clear" onClick="removePolygons()">Clear</button><br><br>
 												<button type="button" class="map-print" id="print" onClick="printMaps()">Print</button>
 											</div>
@@ -261,6 +261,7 @@
 			var app = {map:null, polygons:null, label:"no filter", payload:{getMode:"polygons", runAOI:false, runLine:false, runRec:false, runFilters:false, property:null, district:null, depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null, filter_prop:null, filter_prop_n:null, filter_value:false, filter_units:0}};
 			var hecho = false;
 			$(document).ready(function(){
+				$('[data-toggle="tooltip"]').tooltip();
 				$.post('polygonHandler.php', {'columns': true}, function(result){
 					var properties;
 					if(result.hasOwnProperty('columns')){
