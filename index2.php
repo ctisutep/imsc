@@ -129,7 +129,9 @@
 									<ul class="nav nav-tabs">
 										<li class="active"><a data-toggle="tab" href="#default,#defaultbtn" data-target="#default, #defaultbtn">Default</a></li>
 										<li><a data-toggle="tab" href="#filters,#filtersbtn" data-target="#filters, #filtersbtn">Filter</a></li>
-										<li><a data-toggle="tab" href="#statistics,#statisticsbtn" data-target="#statistics, #statisticsbtn">Statistics</a></li>
+										<li data-toggle="tooltip" data-placement="top" title="Click your drawn Area Of Interest to display statistics">
+											<a data-toggle="tab" href="#statistics,#statisticsbtn" data-target="#statistics, #statisticsbtn">Statistics</a>
+										</li>
 									</ul>
 									<div class="col-md-5 col-sm-11 col-lg-7">
 										<div class="tab-content">
