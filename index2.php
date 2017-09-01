@@ -670,8 +670,8 @@
 			var rec, rectangle, map, infoWindow, selectedRec, drawingManager, paths;
 			function initMap() {
 				app.map = new google.maps.Map(document.getElementById('map'), {
-					zoom: 5,
-					center: new google.maps.LatLng(31.31610138349565, -99.11865234375),
+					zoom: 6,
+					center: new google.maps.LatLng(31.6929976,-98.9689529),
 					mapTypeId: 'terrain'
 				});
 				app.infoWindow = new google.maps.InfoWindow;
