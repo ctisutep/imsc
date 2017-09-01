@@ -228,7 +228,7 @@
 									<div class="col-md-5"><br>
 										<div class="tab-content">
 											<div id="defaultbtn" class="tab-pane fade in active">
-												<button data-toggle="tooltip" data-placement="top" title="Bring up the data for the whole section of the map currently displayed" class="btn btn-success form-control" type="button" id="run" onClick="getPolygonsHelper()">Run</button><br><br>
+												<button data-toggle="tooltip" data-placement="top" title="Bring up the data for the whole section currently displayed on the map" class="btn btn-success form-control" type="button" id="run" onClick="getPolygonsHelper()">Run</button><br><br>
 												<button data-toggle="tooltip" data-placement="top" title="Only bring up the data touched by the Area Of Interest" class="btn btn-success form-control" type="button" id="runAOI" onClick="runAOI()">Run AOI</button><br><br>
 												<button class="btn btn-warning form-control" type="button" id="clear" onClick="removePolygons()">Clear</button><br><br>
 												<button type="button" class="map-print" id="print" onClick="printMaps()">Print</button>
