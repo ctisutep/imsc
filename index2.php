@@ -245,7 +245,7 @@
 								</div>
 								<div class="row">
 									<div class"col-md-7">
-										<div id="legend" style='visibility: hidden'>
+										<div id="legend" style='visibility: visible'>
 										</div>
 									</div>
 								</div>
@@ -343,6 +343,7 @@
 				$("#methods").change(function(){ //0: max / 1: min / 2: median / 3: weight/
 					app.payload.depth_method = this.value;
 				});
+				$("#legend").hide();
 			});
 
 			function runAOI(){
@@ -378,6 +379,7 @@
 
 			function getPolygons(){
 				var maximum;
+				$("#legend").hide();
 				app.payload.getMode="polygons";
 				hecho = false;
 				var depth = document.getElementById("depth").value;
@@ -595,6 +597,7 @@
 							legend = document.getElementById('legend');
 							document.getElementById('legend').style.visibility = "visible";
 							legend.appendChild(div);
+							$("#legend").slideToggle("slow");
 						}
 						else if(hecho){
 							removePolygons();
