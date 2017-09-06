@@ -43,7 +43,7 @@
 	</nav>
 	<div>
 		<div class="row">
-			<div class="col-md-9">
+			<div class="col-md-6">
 				<div class="row">
 					<div id="map"></div>
 					<div id="description"></div>
@@ -86,7 +86,7 @@
 				</div>
 			</div> <!-- End main column 1 -->
 			<div class="col-md-3">
-				<div class="col-md-11">
+				<div class="col-md-13">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<center><h3 class="panel-title">Toolbar</h3></center>
@@ -158,7 +158,7 @@
 													<option value="5" id="specific_method">At Specific Depth</option>
 												</select><br>
 												<div class="input-group">
-													<span data-toggle="tooltip" data-placement="top" title="Number of representations for the data" class="input-group-addon" id="basic-addon3"># of labels</span>
+													<span data-toggle="tooltip" data-placement="top" title="Number of representations for the data" class="input-group-addon" id="basic-addon3"># labels</span>
 													<input type="number" class="form-control" value="1" min="1"placeholder="...labels" id="labels" aria-describedby="basic-addon3">
 												</div><br>
 											</div>
@@ -188,11 +188,11 @@
 													</select>
 												</div> <br>
 												<div class="input-group">
-													<span class="input-group-addon" id="basic-addon3">unit value</span>
+													<span data-toggle="tooltip" data-placement="top" title="The unit value used to compare the data values" class="input-group-addon" id="basic-addon3">unit</span>
 													<input type="number" class="form-control" value="1" min="0"placeholder="...units" id="filter_units" aria-describedby="basic-addon3">
 												</div><br>
 												<div class="input-group">
-													<span class="input-group-addon" id="basic-addon3"># of labels</span>
+													<span class="input-group-addon" id="basic-addon3"># labels</span>
 													<input type="number" class="form-control" value="1" min="1"placeholder="...labels" id="labels_filter" aria-describedby="basic-addon3">
 												</div><br>
 											</div>
