@@ -723,7 +723,7 @@
 					rec.type = e.type;
 					app.payload.AoI = 1;
 					setSelection(rec);
-					if(rec.type == 'polyline'){
+					if(rec.type == 'polyline' || rec.type == 'polygon'){
 						lineParser();
 					}
 					google.maps.event.addListener(rec, 'click', function() {
