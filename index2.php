@@ -49,7 +49,7 @@
 					<div id="description"></div>
 				</div>
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-lg-12">
 						<div class="row">
 							<div class="chart" id="chart_area_1"> </div>
 						</div>
@@ -57,17 +57,17 @@
 							<div class="chart" id="chart_area_2"> </div>
 						</div>
 					</div>
-					<div class="col-lg-6">
+					<!--<div class="col-lg-6">
 						<div class="row">
 							<div class="chart" id="chart_histogram_1"> </div>
 						</div>
 						<div class="row">
 							<div class="chart" id="chart_histogram_2"> </div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-lg-12">
 						<div class="row">
 							<div class="chart" id="chart_area_3"> </div>
 						</div>
@@ -75,14 +75,14 @@
 							<div class="chart" id="chart_area_4"> </div>
 						</div>
 					</div>
-					<div class="col-lg-6">
+					<!-- <div class="col-lg-6">
 						<div class="row">
 							<div class="chart" id="chart_histogram_3"> </div>
 						</div>
 						<div class="row">
 							<div class="chart" id="chart_histogram_4"> </div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div> <!-- End main column 1 -->
 			<div class="col-md-3">
@@ -937,9 +937,11 @@
 							};
 							bar_init = new google.visualization.BarChart(document.getElementById(elem_chart));
 							bar_init.draw(data, options);
+						}).done(function(data){
+							$(document.body).css({'cursor': 'auto'});
 						});
-
-						var histo_array;
+						/** This was the histogram **/
+						/*var histo_array;
 						app.payload.getMode = "histogram";
 						$.get('polygonHandler.php', app.payload, function(data){
 							histo_array = data.values;
@@ -971,7 +973,7 @@
 							histo_init.draw(data, options);
 						}).done(function(data){
 							$(document.body).css({'cursor': 'auto'});
-						});
+						});*/
 						if(rec.type =='rectangle'){
 							app.payload.getMode = "AOI";
 						}
