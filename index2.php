@@ -684,7 +684,7 @@
 					drawingControl: true,
 					drawingControlOptions: {
 						position: google.maps.ControlPosition.TOP_CENTER,
-						drawingModes: ['rectangle', 'polyline']
+						drawingModes: ['rectangle', 'polyline', 'polygon']
 					},
 					rectangleOptions: {
 						draggable: true,
@@ -693,6 +693,14 @@
 						zIndex: 10
 					},
 					polylineOptions: {
+						clickable: true,
+						draggable: true,
+						editable: false,
+						geodesic: true,
+						zIndex: 10,
+						strokeWeight: 6
+					},
+					polygonOptions: {
 						clickable: true,
 						draggable: true,
 						editable: false,
@@ -719,7 +727,7 @@
 						lineParser();
 					}
 					google.maps.event.addListener(rec, 'click', function() {
-						if(rec.type == 'polyline'){
+						if(rec.type == 'polyline' || rec.type == 'polygon'){
 							lineParser();
 						}
 						clickRec(rec);
@@ -728,7 +736,7 @@
 					google.maps.event.addListener(rec, 'bounds_changed', function() {
 						showNewRect2(rec);
 					});
-					if(rec.type == 'polyline'){
+					if(rec.type == 'polyline' || rec.type == 'polygon'){
 						google.maps.event.addListener(rec, 'dragend', function() {
 							lineParser();
 						});
@@ -749,7 +757,7 @@
 						drawingControl: true,
 						drawingControlOptions: {
 							position: google.maps.ControlPosition.TOP_CENTER,
-							drawingModes: ['rectangle','polyline']
+							drawingModes: ['rectangle','polyline','polygon']
 						},
 						rectangleOptions: {
 							draggable: true,
@@ -758,6 +766,14 @@
 							zIndex: 10
 						},
 						polylineOptions: {
+							clickable: true,
+							draggable: true,
+							editable: false,
+							geodesic: true,
+							zIndex: 10,
+							strokeWeight: 6
+						},
+						polygonOptions: {
 							clickable: true,
 							draggable: true,
 							editable: false,
@@ -895,6 +911,7 @@
 						var histo_init = chart_histos[i];
 						nullSelector(i);
 						$.get('polygonHandler.php', app.payload, function(data){
+							$(document.body).css({'cursor': 'wait'});
 							maxaoi = parseFloat(eval(datos_max));
 							minaoi = parseFloat(eval(datos_min));
 							medaoi = parseFloat(eval(datos_med));
@@ -952,6 +969,8 @@
 							};
 							histo_init = new google.visualization.Histogram(document.getElementById(elem_histo));
 							histo_init.draw(data, options);
+						}).done(function(data){
+							$(document.body).css({'cursor': 'auto'});
 						});
 						if(rec.type =='rectangle'){
 							app.payload.getMode = "AOI";
