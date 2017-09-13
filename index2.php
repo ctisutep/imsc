@@ -869,12 +869,14 @@
 			}
 
 			function drawChart() {
+
 				var nulls = nullChecker();
 				if(nulls.length == 4){
 					alert("No property selected to run statistics.");
 					return;
 				}
 				else{
+					$(document.body).css({'cursor': 'wait'});
 					var not_nulls = [];
 					for(var i = 1; i <= 4; i++){
 						if(nulls.includes(i) == false){not_nulls.push(i);}
@@ -920,7 +922,7 @@
 						var histo_init = chart_histos[i];
 						nullSelector(i);
 						$.get('polygonHandler.php', app.payload, function(data){
-							$(document.body).css({'cursor': 'wait'});
+
 							maxaoi = parseFloat(eval(datos_max));
 							minaoi = parseFloat(eval(datos_min));
 							medaoi = parseFloat(eval(datos_med));
