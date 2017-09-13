@@ -49,10 +49,12 @@
 					<div id="description"></div>
 				</div>
 				<div class="row">
-					<div class="col-lg-12">
+					<div class="col-lg-6">
 						<div class="row">
 							<div class="chart" id="chart_area_1"> </div>
 						</div>
+					</div>
+					<div class="col-lg-6">
 						<div class="row">
 							<div class="chart" id="chart_area_2"> </div>
 						</div>
@@ -67,10 +69,12 @@
 					</div> -->
 				</div>
 				<div class="row">
-					<div class="col-lg-12">
+					<div class="col-lg-6">
 						<div class="row">
 							<div class="chart" id="chart_area_3"> </div>
 						</div>
+					</div>
+					<div class="col-lg-6">
 						<div class="row">
 							<div class="chart" id="chart_area_4"> </div>
 						</div>
@@ -236,7 +240,8 @@
 											<div id="filtersbtn" class="tab-pane fade"><br><br><br><br>
 												<button class="btn btn-success form-control" type="button" id="runFilters" onClick="runFilters()">Run Filter</button>
 											</div>
-											<div id="statisticsbtn" class="tab-pane fade"><br><br><br><br>
+											<br>
+											<div id="statisticsbtn" class="tab-pane fade">
 												<button type="button" class="btn btn-default form-control" id="draw" onclick="drawAnotherRectangle();">Clear AOI</button><br><br>
 												<button type="button" class="btn btn-default form-control" id="clearCharts" onclick="clearCharts();">Clear Charts</button>
 											</div>
@@ -305,20 +310,26 @@
 						app.payload.table =  prop[this.value].table;
 						app.payload.value =  prop[this.value].value;
 					});
+					$("#chartAppear1").hide();
+					$("#chartAppear2").hide();
+					$("#chartAppear3").hide();
 					$("#select_chart_1").change(function(){
 						document.getElementById('chartAppear1').style.visibility = "visible";
 						app.payload.chart1 =  prop[this.value].data;
 						app.payload.chart1n = prop[this.value].value;
+						$("#chartAppear1").show();
 					});
 					$("#select_chart_2").change(function(){
 						document.getElementById('chartAppear2').style.visibility = "visible";
 						app.payload.chart2 =  prop[this.value].data;
 						app.payload.chart2n = prop[this.value].value;
+						$("#chartAppear2").show();
 					});
 					$("#select_chart_3").change(function(){
 						document.getElementById('chartAppear3').style.visibility = "visible";
 						app.payload.chart3 =  prop[this.value].data;
 						app.payload.chart3n = prop[this.value].value;
+						$("#chartAppear3").show();
 					});
 					$("#select_chart_4").change(function(){
 						app.payload.chart4 =  prop[this.value].data;
@@ -705,8 +716,7 @@
 						draggable: true,
 						editable: false,
 						geodesic: true,
-						zIndex: 10,
-						strokeWeight: 6
+						zIndex: 10
 					}
 				});
 				drawingManager.setMap(app.map);
@@ -778,8 +788,7 @@
 							draggable: true,
 							editable: false,
 							geodesic: true,
-							zIndex: 10,
-							strokeWeight: 6
+							zIndex: 10
 						}
 					});
 				}
