@@ -147,10 +147,15 @@
 														<option value="" disabled selected>Select a ground property</option>
 													</select>
 												</div> <br>
-												<label> Depth:</label>
+												<label> Depth (in inches):</label>
+												Filter by price interval: <b>€ 10</b> <input id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/> <b>€ 1000</b>
 												<div class="input-group">
-													<span class="input-group-addon" id="basic-addon3">inches</span>
-													<input type="number" class="form-control" value="0" min="0" placeholder="...inches" id="depth" aria-describedby="basic-addon3">
+													<span class="input-group-addon" id="basic-addon3">To.....</span>
+													<input type="number" class="form-control" value="0" min="0" placeholder="...inches" id="depthTo" aria-describedby="basic-addon3">
+												</div>
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon3">From</span>
+													<input type="number" class="form-control" value="0" min="0" max="77" placeholder="...inches" id="depth" aria-describedby="basic-addon3">
 												</div><br>
 												<label> Method:</label>
 												<select data-toggle="tooltip" data-placement="top" title="Method by which the data will be gathered" id="methods" class="form-control">
@@ -264,10 +269,14 @@
 			<script src="js/bootstrap.js"></script>
 			<script src="js/jquery.autocomplete.min.js"></script>
 			<script src="js/properties.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.1/bootstrap-slider.js"></script>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.1/css/bootstrap-slider.css" />
 			<script>
 			var app = {map:null, polygons:null, label:"no filter", payload:{getMode:"polygons", runAOI:false, runLine:false, runRec:false, runFilters:false, property:null, district:null, depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null, filter_prop:null, filter_prop_n:null, filter_value:false, filter_units:0}};
 			var hecho = false;
 			$(document).ready(function(){
+				$("#ex2").slider({});
+
 				$('[data-toggle="tooltip"]').tooltip();
 				$.post('polygonHandler.php', {'columns': true}, function(result){
 					var properties;
