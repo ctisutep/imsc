@@ -15,6 +15,9 @@
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/css-toggle-switch/latest/toggle-switch.css" />
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<style>
+	.slider {
+    width: 100% !important;
+	}
 	#legend {
 		font-family: Arial, sans-serif;
 		background: #fff;
@@ -147,16 +150,16 @@
 														<option value="" disabled selected>Select a ground property</option>
 													</select>
 												</div> <br>
-												<label> Depth (in inches):</label>
-												Filter by price interval: <b>€ 10</b> <input id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/> <b>€ 1000</b>
-												<div class="input-group">
+												<label> Depth:</label>
+												<input id="slide_depth" type="text" class="span2" value="" data-slider-min="0" data-slider-max="79" data-slider-step="1" data-slider-value="[0,1]"/>
+												<!---<div class="input-group">
 													<span class="input-group-addon" id="basic-addon3">To.....</span>
 													<input type="number" class="form-control" value="0" min="0" placeholder="...inches" id="depthTo" aria-describedby="basic-addon3">
 												</div>
 												<div class="input-group">
 													<span class="input-group-addon" id="basic-addon3">From</span>
 													<input type="number" class="form-control" value="0" min="0" max="77" placeholder="...inches" id="depth" aria-describedby="basic-addon3">
-												</div><br>
+												</div>--><br><br>
 												<label> Method:</label>
 												<select data-toggle="tooltip" data-placement="top" title="Method by which the data will be gathered" id="methods" class="form-control">
 													<option value="" disabled selected>Select method</option>
@@ -274,10 +277,21 @@
 			<script>
 			var app = {map:null, polygons:null, label:"no filter", payload:{getMode:"polygons", runAOI:false, runLine:false, runRec:false, runFilters:false, property:null, district:null, depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null, filter_prop:null, filter_prop_n:null, filter_value:false, filter_units:0}};
 			var hecho = false;
+			var depth;
 			$(document).ready(function(){
-				$("#ex2").slider({});
+
+				$("#slide_depth").slider({
+					formatter: function(value) {
+						return 'From: ' + value[0] + ' inches, To: ' + value[1] + ' inches';
+					}
+				});
+				$("#slide_depth").on("slide", function(e) {
+					depth = e.value[1];
+					console.log(depth);
+				});
 
 				$('[data-toggle="tooltip"]').tooltip();
+
 				$.post('polygonHandler.php', {'columns': true}, function(result){
 					var properties;
 					if(result.hasOwnProperty('columns')){
@@ -402,7 +416,8 @@
 				$("#legend").hide();
 				app.payload.getMode="polygons";
 				hecho = false;
-				var depth = document.getElementById("depth").value;
+				//var depth = document.getElementById("depth").value;
+				console.log(depth);
 				depth = parseFloat(depth);
 				app.payload.depth = depth;
 				if(app.payload.property && app.payload.district && (isNaN(depth)==false)){//to make sure a property is selected
