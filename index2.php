@@ -134,7 +134,7 @@
 								<center><label>Soil Mapping</label></center>
 								<div class="row">
 									<ul class="nav nav-tabs">
-										<li class="active"><a data-toggle="tab" href="#default,#defaultbtn" data-target="#default, #defaultbtn">Default</a></li>
+										<li class="active"><a data-toggle="tab" href="#default,#defaultbtn" data-target="#default, #defaultbtn">Tools</a></li>
 										<li><a data-toggle="tab" href="#filters,#filtersbtn" data-target="#filters, #filtersbtn">Filter</a></li>
 										<li data-toggle="tooltip" data-placement="top" title="Click your drawn Area Of Interest to display statistics">
 											<a data-toggle="tab" href="#statistics,#statisticsbtn" data-target="#statistics, #statisticsbtn">Statistics</a>
