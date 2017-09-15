@@ -415,8 +415,6 @@
 				$("#legend").hide();
 				app.payload.getMode="polygons";
 				hecho = false;
-				//var depth = document.getElementById("depth").value;
-				console.log(depth);
 				depth = parseFloat(depth);
 				app.payload.depth = depth;
 				if(app.payload.property && app.payload.district && (isNaN(depth)==false)){//to make sure a property is selected
