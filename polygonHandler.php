@@ -1089,6 +1089,7 @@ function getPolygons(){
 	$simplificationFactor = polygonDefinition($data);//maybe it should be changing(be variable) in the future with  more given parameters($_GET)
 	//create zoom area (AOI) polygon for further query
 	if($data->runAOI == "true" && $data->runLine == "true"){ $query = "SET @geom1 = 'LineString($data->lineString)'"; }
+	// ^ If the user only wants the polygons touching the AOI, and  he is using the line tool or the polygon tool, then use the LineString instead of the rectangle/map boundaries (the else statement).
 	else{ $query = "SET @geom1 = 'POLYGON(($data->lng1	$data->lat1,$data->lng1	$data->lat2,$data->lng2	$data->lat2,$data->lng2	$data->lat1,$data->lng1	$data->lat1))'"; }
 	$toReturn['query'] = $query;
 	$result = mysqli_query($conn, $query);
