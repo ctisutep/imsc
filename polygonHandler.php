@@ -1099,7 +1099,7 @@ function getPolygons(){
 	$key = setKey( $data->table );
 	//$query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, x.$data->property FROM polygon AS p JOIN mujoins AS mu ON p.mukey = CAST(mu.mukey AS UNSIGNED) JOIN $data->table AS x ON mu.$key = x.$key WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) AND hzdept_r <= $data->depth AND hzdepb_r >= $data->depth";
 	if($data->table == "chorizon_r"){
-		$method_selected = 0;
+		$method_selected = "none";
 		if($data->depth_method == 1){ $method_selected = "Maximum"; }
 		elseif ($data->depth_method == 2) { $method_selected = "Minimum"; }
 		elseif ($data->depth_method == 3) { $method_selected = "Median"; }
@@ -1200,6 +1200,7 @@ function getPolygons(){
 						for ($j=0; $j < sizeof($poly_arr[$i])-1; $j++) {
 							$top = $poly_arr[$i][$j]['top'];
 							$bottom = $poly_arr[$i][$j]['bottom'];
+							//echo "in";
 							/*echo $poly_arr[$i][$j][$data->property];
 							echo "\n top: ". $top;
 							echo "\n bottom: ". $bottom;
@@ -1207,11 +1208,13 @@ function getPolygons(){
 							echo "\n to: ". $lo_profundo;
 							echo "\n";*/
 							if($data->from_depth > $top && $data->from_depth > $bottom){
+								//echo "asd";
 								$j++;
 								$top = $poly_arr[$i][$j]['top'];
 								$bottom = $poly_arr[$i][$j]['bottom'];
 							}
-							elseif($max_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth >= $top && $lo_profundo <= $bottom)){
+							if($max_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth >= $top && $lo_profundo <= $bottom)){
+								//echo "test1";
 								//echo "test".' '.$lo_profundo.' '.$top.' '.$bottom;
 								$max_value = $poly_arr[$i][$j][$data->property];
 								//echo " maxval: ".$max_value." ";
@@ -1221,10 +1224,12 @@ function getPolygons(){
 								$max_value = $poly_arr[$i][$j][$data->property];
 								$max_index_i = $i;
 								$max_index_j = $j;
+								//echo "test2";
 							}elseif($max_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth > $top && $lo_profundo > $bottom)){
 								$max_value = $poly_arr[$i][$j][$data->property];
 								$max_index_i = $i;
 								$max_index_j = $j;
+								//echo "test3";
 							}
 							/*elseif($max_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth >= $top || $lo_profundo <= $bottom)){
 
