@@ -35,7 +35,7 @@ echo json_encode($toReturn);
 $conn->close();
 
 class dataToQueryPolygons{
-	public $table, $property, $district, $lat2, $lat1, $depth, $depth_method, $lineString, $chart1, $chart2, $chart3, $chart4, $runLine, $runRec, $runAOI, $runFilters, $filter_units, $filter_value;
+	public $table, $property, $district, $lat2, $lat1, $depth, $depth_method, $lineString, $chart1, $chart2, $chart3, $chart4, $runLine, $runRec, $runAOI, $runPoly, $runFilters, $filter_units, $filter_value;
 	public function __construct(){
 		$this->table = 'chorizon_r'; //hardcoded
 		$this->property = $_GET['property'];
@@ -54,6 +54,7 @@ class dataToQueryPolygons{
 		$this->runLine = $_GET['runLine'];
 		$this->runRec = $_GET['runRec'];
 		$this->runAOI = $_GET['runAOI'];
+		$this->runPoly = $_GET['runPoly'];
 		$this->runFilters = $_GET['runFilters'];
 		$this->filter_units = $_GET['filter_units'];
 		$this->filter_value = $_GET['filter_value'];
@@ -1090,6 +1091,7 @@ function getPolygons(){
 	//create zoom area (AOI) polygon for further query
 	if($data->runAOI == "true" && $data->runLine == "true"){ $query = "SET @geom1 = 'LineString($data->lineString)'"; }
 	// ^ If the user only wants the polygons touching the AOI, and  he is using the line tool or the polygon tool, then use the LineString instead of the rectangle/map boundaries (the else statement).
+	elseif($data->runAOI == "true" && $data->runPoly == "true"){ $query = "SET @geom1 = 'POLYGON(($data->lineString))'"; }
 	else{ $query = "SET @geom1 = 'POLYGON(($data->lng1	$data->lat1,$data->lng1	$data->lat2,$data->lng2	$data->lat2,$data->lng2	$data->lat1,$data->lng1	$data->lat1))'"; }
 	$toReturn['query'] = $query;
 	$result = mysqli_query($conn, $query);

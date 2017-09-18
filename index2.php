@@ -151,7 +151,7 @@
 													</select>
 												</div> <br>
 												<label> Depth:</label>
-												<input id="slide_depth" type="text" class="span2" value="" data-slider-min="0" data-slider-max="79" data-slider-step="1" data-slider-value="[0,1]"/>
+												<input id="slide_depth" type="text" class="span2" value="" data-slider-min="0" data-slider-max="79" data-slider-step="1" data-slider-value="[0,0]"/>
 												<!---<div class="input-group">
 													<span class="input-group-addon" id="basic-addon3">To.....</span>
 													<input type="number" class="form-control" value="0" min="0" placeholder="...inches" id="depthTo" aria-describedby="basic-addon3">
@@ -275,11 +275,10 @@
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.1/bootstrap-slider.js"></script>
 			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.1/css/bootstrap-slider.css" />
 			<script>
-			var app = {map:null, polygons:null, label:"no filter", payload:{getMode:"polygons", runAOI:false, runLine:false, runRec:false, runFilters:false, property:null, district:null, depth:0, from_depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null, filter_prop:null, filter_prop_n:null, filter_value:false, filter_units:0}};
+			var app = {map:null, polygons:null, label:"no filter", payload:{getMode:"polygons", runAOI:false, runLine:false, runPoly:false, runRec:false, runFilters:false, property:null, district:null, depth:0, from_depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null, filter_prop:null, filter_prop_n:null, filter_value:false, filter_units:0}};
 			var hecho = false;
-			var depth;
+			var depth = app.payload.depth;
 			$(document).ready(function(){
-
 				$("#slide_depth").slider({
 					formatter: function(value) {
 						return 'From: ' + value[0] + ' inches, To: ' + value[1] + ' inches';
@@ -415,7 +414,7 @@
 				$("#legend").hide();
 				app.payload.getMode="polygons";
 				hecho = false;
-				depth = parseFloat(depth);
+				//depth = parseFloat(depth);
 				app.payload.depth = depth;
 				if(app.payload.property && app.payload.district && (isNaN(depth)==false)){//to make sure a property is selected
 					if(app.payload.runAOI == true && typeof rec != 'undefined' && rec.type == 'rectangle'){
@@ -754,12 +753,18 @@
 					rec.type = e.type;
 					app.payload.AoI = 1;
 					setSelection(rec);
-					if(rec.type == 'polyline' || rec.type == 'polygon'){
+					if(rec.type == 'polyline'){
 						lineParser();
 					}
+					else if(rec.type == 'polygon'){
+						polyParser();
+					}
 					google.maps.event.addListener(rec, 'click', function() {
-						if(rec.type == 'polyline' || rec.type == 'polygon'){
+						if(rec.type == 'polyline'){
 							lineParser();
+						}
+						else if(rec.type == 'polygon'){
+							polyParser();
 						}
 						clickRec(rec);
 						drawChart();
@@ -767,10 +772,13 @@
 					google.maps.event.addListener(rec, 'bounds_changed', function() {
 						showNewRect2(rec);
 					});
-					if(rec.type == 'polyline' || rec.type == 'polygon'){
+					if(rec.type == 'polyline'){
 						google.maps.event.addListener(rec, 'dragend', function() {
 							lineParser();
 						});
+					}
+					else if(rec.type == 'polygon'){
+						google.maps.event.addListener(rec, 'dragend', function() { polyParser(); });
 					}
 				});
 				google.maps.event.addDomListener(document.getElementById('draw'), 'click', drawAnotherRectangle);
@@ -781,6 +789,7 @@
 				if (selectedRec) {
 					app.payload.lineString = null;
 					app.payload.runLine = false;
+					app.payload.runPoly = false;
 					app.payload.runRec = false;
 					selectedRec.setMap(null);
 					infoWindow.close();
@@ -1036,6 +1045,30 @@
 				}
 				app.payload.lineString = lineString;
 				app.payload.runLine = true;
+			}
+			function polyParser(){
+				app.payload.getMode = "line";
+				var lineString = "";
+				var first = "";
+				var count = 0;
+				paths = rec.getPath();
+				paths = paths.getArray();
+
+				for (var i = 0; i < paths.length; i++) {
+					if(paths.length > 1 && i < paths.length - 1){
+						lineString += paths[i].lng() + ' ' + paths[i].lat() + ',';
+						if(count == 0){
+							first = ',' + paths[i].lng() + ' ' + paths[i].lat();
+							count++;
+						}
+					}
+					else{
+						lineString += paths[i].lng() + ' ' + paths[i].lat();
+					}
+				}
+				lineString += first;
+				app.payload.lineString = lineString;
+				app.payload.runPoly = true;
 			}
 			/******************************************************************************/
 			function clearCharts(){
