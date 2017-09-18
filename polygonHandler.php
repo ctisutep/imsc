@@ -35,7 +35,7 @@ echo json_encode($toReturn);
 $conn->close();
 
 class dataToQueryPolygons{
-	public $table, $property, $district, $lat2, $lat1, $depth, $depth_method, $lineString, $chart1, $chart2, $chart3, $chart4, $runLine, $runRec, $runAOI, $runPoly, $runFilters, $filter_units, $filter_value;
+	public $table, $property, $district, $lat2, $lat1, $depth, $from_depth, $depth_method, $lineString, $chart1, $chart2, $chart3, $chart4, $runLine, $runRec, $runAOI, $runPoly, $runFilters, $filter_units, $filter_value;
 	public function __construct(){
 		$this->table = 'chorizon_r'; //hardcoded
 		$this->property = $_GET['property'];
@@ -45,6 +45,7 @@ class dataToQueryPolygons{
 		$this->lng2 = $_GET['NE']['lng'];
 		$this->lng1 = $_GET['SW']['lng'];
 		$this->depth = ($_GET['depth'] * 2.5400);
+		$this->from_depth = ($_GET['from_depth'] * 2.5400);
 		$this->depth_method = $_GET['depth_method'];
 		$this->lineString = $_GET['lineString'];
 		$this->chart1 =  $_GET['chart1'];
@@ -1177,10 +1178,9 @@ function getPolygons(){
 				else{
 					$lo_profundo = $data->depth;
 				}
-				if(sizeof($poly_arr[$i]) > 1 && $poly_arr[$i][sizeof($poly_arr[$i])-1][$data->property] == 0){
-					$limite =  $poly_arr[$i][sizeof($poly_arr[$i])-2]['bottom'];
-
-					if($lo_profundo <= $poly_arr[$i][0]['bottom']){
+				if(sizeof($poly_arr[$i]) > 1 && $poly_arr[$i][sizeof($poly_arr[$i])-1][$data->property] == 0){ //si el array de polys tiene mas de un campo, y si el ultimo valor es 0, no lo tomamos en cuenta
+					$limite =  $poly_arr[$i][sizeof($poly_arr[$i])-2]['bottom']; //el limite (bottom depth) se toma en el penultimo valor de los arrays
+					if($lo_profundo <= $poly_arr[$i][0]['bottom']){ //si el to depth (from, to) es menor o igual a el bottom depth del primer valor de la lista de poligonos
 						$max_index_i = $i;
 						$max_index_j = 0;
 					}
@@ -1200,21 +1200,45 @@ function getPolygons(){
 						for ($j=0; $j < sizeof($poly_arr[$i])-1; $j++) {
 							$top = $poly_arr[$i][$j]['top'];
 							$bottom = $poly_arr[$i][$j]['bottom'];
+							/*echo $poly_arr[$i][$j][$data->property];
+							echo "\n top: ". $top;
+							echo "\n bottom: ". $bottom;
+							echo "\n from: ". $data->from_depth;
+							echo "\n to: ". $lo_profundo;
+							echo "\n";*/
+							if($data->from_depth > $top && $data->from_depth > $bottom){
+								$j++;
+								$top = $poly_arr[$i][$j]['top'];
+								$bottom = $poly_arr[$i][$j]['bottom'];
+							}
+							elseif($max_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth >= $top && $lo_profundo <= $bottom)){
+								//echo "test".' '.$lo_profundo.' '.$top.' '.$bottom;
+								$max_value = $poly_arr[$i][$j][$data->property];
+								//echo " maxval: ".$max_value." ";
+								$max_index_i = $i;
+								$max_index_j = $j;
+							}elseif($max_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth < $top && $lo_profundo <= $bottom)){
+								$max_value = $poly_arr[$i][$j][$data->property];
+								$max_index_i = $i;
+								$max_index_j = $j;
+							}elseif($max_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth > $top && $lo_profundo > $bottom)){
+								$max_value = $poly_arr[$i][$j][$data->property];
+								$max_index_i = $i;
+								$max_index_j = $j;
+							}
+							/*elseif($max_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth >= $top || $lo_profundo <= $bottom)){
 
-							if($max_value < $poly_arr[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
+							}*/
+							/*elseif($max_value < $poly_arr[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo <= $bottom){
+								echo "correct";
 								$max_value = $poly_arr[$i][$j][$data->property];
 								$max_index_i = $i;
 								$max_index_j = $j;
-							}
-							elseif($max_value < $poly_arr[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo <= $bottom){
-								$max_value = $poly_arr[$i][$j][$data->property];
-								$max_index_i = $i;
-								$max_index_j = $j;
-							}
+							}*/
 						}
 					}
 				}
-				else{
+				else{ //el ultimo valor no es cero, y puede contener un solo poligono
 					$limite =  $poly_arr[$i][sizeof($poly_arr[$i])-1]['bottom'];
 
 					if($lo_profundo <= $poly_arr[$i][0]['bottom']){

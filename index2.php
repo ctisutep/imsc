@@ -287,6 +287,7 @@
 				});
 				$("#slide_depth").on("slide", function(e) {
 					depth = e.value[1];
+					app.payload.from_depth = e.value[0];
 				});
 
 				$('[data-toggle="tooltip"]').tooltip();
