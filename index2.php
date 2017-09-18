@@ -280,6 +280,7 @@
 			var depth = app.payload.depth;
 			$(document).ready(function(){
 				$("#slide_depth").slider({
+					natural_arrow_keys: true,
 					formatter: function(value) {
 						return 'From: ' + value[0] + ' inches, To: ' + value[1] + ' inches';
 					}
