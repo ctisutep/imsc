@@ -1163,6 +1163,7 @@ function getPolygons(){
 			/* Busca el valor maximo de la lista de los polignos, dependientemente del depth que el usuario le otorgue*/
 			$max_value; $max_index_i; $max_index_j; $top; $bottom;
 			$lo_profundo = $data->depth;
+			$not_shown = array();
 
 			for ($i=0; $i < sizeof($poly_arr); $i++) { //sorting by property values ascending; had to modify query
 				array_multisort($poly_arr[$i], SORT_ASC);
@@ -1211,7 +1212,11 @@ function getPolygons(){
 							}
 						} //echo "polygon $i \n";
 						//echo $z;
-						echo $jumps."\n"; //if the polygon jumps out of range, it should return 0
+						//echo $jumps."\n"; //if the polygon jumps out of range, it should return 0
+						if($jumps >= sizeof($poly_arr[$i])-1){
+							//echo "polygon at: $i \n";
+							array_push($not_shown, $i);
+						}
 						for ($j=$jumps; $j < sizeof($poly_arr[$i])-1; $j++) {
 							//echo "in for loop: polygon $i \n";
 							$top = $poly_arr[$i][$j]['top'];
@@ -1290,6 +1295,7 @@ function getPolygons(){
 				//echo $i;
 				//echo $max_index_i;
 				//echo $max_index_j."\n";
+				//var_dump($not_shown);
 				$polygons[] = $poly_arr[$max_index_i][$max_index_j];
 			}
 			break;
