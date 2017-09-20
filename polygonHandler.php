@@ -1170,8 +1170,8 @@ function getPolygons(){
 
 			for ($i=0; $i < sizeof($poly_arr); $i++) {
 				$max_value = 0;
-				$max_index_i = 0;
-				$max_index_j = 0;
+				$max_index_i = -1;
+				$max_index_j = -1;
 				if(isset($units) && $units > 0){
 					$data->depth = 0;
 				}
@@ -1183,63 +1183,57 @@ function getPolygons(){
 					if($lo_profundo <= $poly_arr[$i][0]['bottom']){ //si el to depth (from, to) es menor o igual a el bottom depth del primer valor de la lista de poligonos
 						$max_index_i = $i;
 						$max_index_j = 0;
+
 					}
-					elseif($lo_profundo >= $limite){
+					/*elseif($lo_profundo >= $limite){ //to_(depth) rebasa el limite puesto
 						$lo_profundo = $limite;
-						for ($j=0; $j < sizeof($poly_arr[$i])-1; $j++) {
+						/*for ($j=0; $j < sizeof($poly_arr[$i])-1; $j++) { //bug here
 							$top = $poly_arr[$i][$j]['top'];
 							$bottom = $poly_arr[$i][$j]['bottom'];
 							if($max_value < $poly_arr[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
+								echo "test";
 								$max_value = $poly_arr[$i][$j][$data->property];
 								$max_index_i = $i;
 								$max_index_j = $j;
 							}
-						}
-					}
+						}*/
+					//}
 					else{
+						$jumps = 0;
 						for ($j=0; $j < sizeof($poly_arr[$i])-1; $j++) {
 							$top = $poly_arr[$i][$j]['top'];
 							$bottom = $poly_arr[$i][$j]['bottom'];
-							//echo "in";
-							/*echo $poly_arr[$i][$j][$data->property];
-							echo "\n top: ". $top;
-							echo "\n bottom: ". $bottom;
-							echo "\n from: ". $data->from_depth;
-							echo "\n to: ". $lo_profundo;
-							echo "\n";*/
 							if($data->from_depth > $top && $data->from_depth > $bottom){
-								//echo "asd";
-								$j++;
-								$top = $poly_arr[$i][$j]['top'];
-								$bottom = $poly_arr[$i][$j]['bottom'];
+								$jumps++;
 							}
+						}
+						for ($j=$jumps; $j < sizeof($poly_arr[$i])-1; $j++) {
+							$top = $poly_arr[$i][$j]['top'];
+							$bottom = $poly_arr[$i][$j]['bottom'];
+							//echo "from: ".$data->from_depth."\n";
+							//echo "to: ".$lo_profundo."\n";
 							if($max_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth >= $top && $lo_profundo <= $bottom)){
-								//echo "test1";
-								//echo "test".' '.$lo_profundo.' '.$top.' '.$bottom;
+								//echo 1;
 								$max_value = $poly_arr[$i][$j][$data->property];
-								//echo " maxval: ".$max_value." ";
+								$max_index_i = $i;
+								$max_index_j = $j;
+							}
+							elseif($max_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth >= $top && $lo_profundo >= $bottom)){
+								//echo 2;
+								$max_value = $poly_arr[$i][$j][$data->property];
 								$max_index_i = $i;
 								$max_index_j = $j;
 							}elseif($max_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth < $top && $lo_profundo <= $bottom)){
+								//echo 3;
 								$max_value = $poly_arr[$i][$j][$data->property];
 								$max_index_i = $i;
 								$max_index_j = $j;
-								//echo "test2";
 							}elseif($max_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth > $top && $lo_profundo > $bottom)){
+								//echo 4;
 								$max_value = $poly_arr[$i][$j][$data->property];
 								$max_index_i = $i;
 								$max_index_j = $j;
-								//echo "test3";
 							}
-							/*elseif($max_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth >= $top || $lo_profundo <= $bottom)){
-
-							}*/
-							/*elseif($max_value < $poly_arr[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo <= $bottom){
-								echo "correct";
-								$max_value = $poly_arr[$i][$j][$data->property];
-								$max_index_i = $i;
-								$max_index_j = $j;
-							}*/
 						}
 					}
 				}
@@ -1279,6 +1273,12 @@ function getPolygons(){
 						}
 					}
 				}
+				if($max_index_i == -1){
+					$max_index_i = 0;
+					$max_index_j = 0;
+					$poly_arr[$max_index_i][$max_index_j][$data->property] = -99;
+				}
+
 				$polygons[] = $poly_arr[$max_index_i][$max_index_j];
 			}
 			break;

@@ -18,6 +18,15 @@
 	.slider {
     width: 100% !important;
 	}
+	/*#slide_depth .slider-selection{
+		background: yellow;
+	}
+	.slider-track-high {
+		background: green;
+	}
+	.slider-track-low {
+		background: red;
+	}*/
 	#legend {
 		font-family: Arial, sans-serif;
 		background: #fff;
@@ -281,6 +290,7 @@
 			$(document).ready(function(){
 				$("#slide_depth").slider({
 					natural_arrow_keys: true,
+					//range: true,
 					formatter: function(value) {
 						return 'From: ' + value[0] + ' inches, To: ' + value[1] + ' inches';
 					}
@@ -288,6 +298,10 @@
 				$("#slide_depth").on("slide", function(e) {
 					depth = e.value[1];
 					app.payload.from_depth = e.value[0];
+				});
+				$("#slide_depth").on("change", function(e) {
+					depth = e.value.newValue[1];
+					app.payload.from_depth = e.value.newValue[0];
 				});
 
 				$('[data-toggle="tooltip"]').tooltip();
