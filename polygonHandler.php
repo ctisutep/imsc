@@ -1170,8 +1170,8 @@ function getPolygons(){
 
 			for ($i=0; $i < sizeof($poly_arr); $i++) {
 				$max_value = 0;
-				$max_index_i = -1;
-				$max_index_j = -1;
+				$max_index_i = 0;
+				$max_index_j = 0;
 				if(isset($units) && $units > 0){
 					$data->depth = 0;
 				}
@@ -1185,9 +1185,9 @@ function getPolygons(){
 						$max_index_j = 0;
 
 					}
-					/*elseif($lo_profundo >= $limite){ //to_(depth) rebasa el limite puesto
+					elseif($lo_profundo >= $limite){ //to_(depth) rebasa el limite puesto
 						$lo_profundo = $limite;
-						/*for ($j=0; $j < sizeof($poly_arr[$i])-1; $j++) { //bug here
+						for ($j=0; $j < sizeof($poly_arr[$i])-1; $j++) { //bug here
 							$top = $poly_arr[$i][$j]['top'];
 							$bottom = $poly_arr[$i][$j]['bottom'];
 							if($max_value < $poly_arr[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
@@ -1196,8 +1196,8 @@ function getPolygons(){
 								$max_index_i = $i;
 								$max_index_j = $j;
 							}
-						}*/
-					//}
+						}
+					}
 					else{
 						$jumps = 0;
 						for ($j=0; $j < sizeof($poly_arr[$i])-1; $j++) {
@@ -1274,9 +1274,9 @@ function getPolygons(){
 					}
 				}
 				if($max_index_i == -1){
-					$max_index_i = 0;
-					$max_index_j = 0;
-					$poly_arr[$max_index_i][$max_index_j][$data->property] = -99;
+					//$max_index_i = 0;
+					//$max_index_j = 0;
+					//$poly_arr[$max_index_i][$max_index_j][$data->property] = 0;
 				}
 
 				$polygons[] = $poly_arr[$max_index_i][$max_index_j];
