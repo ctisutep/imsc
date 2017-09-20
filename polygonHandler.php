@@ -1170,7 +1170,7 @@ function getPolygons(){
 
 			for ($i=0; $i < sizeof($poly_arr); $i++) {
 				$max_value = 0;
-				$max_index_i = 0;
+				$max_index_i = $i;
 				$max_index_j = 0;
 				if(isset($units) && $units > 0){
 					$data->depth = 0;
@@ -1180,12 +1180,14 @@ function getPolygons(){
 				}
 				if(sizeof($poly_arr[$i]) > 1 && $poly_arr[$i][sizeof($poly_arr[$i])-1][$data->property] == 0){ //si el array de polys tiene mas de un campo, y si el ultimo valor es 0, no lo tomamos en cuenta
 					$limite =  $poly_arr[$i][sizeof($poly_arr[$i])-2]['bottom']; //el limite (bottom depth) se toma en el penultimo valor de los arrays
-					if($lo_profundo <= $poly_arr[$i][0]['bottom']){ //si el to depth (from, to) es menor o igual a el bottom depth del primer valor de la lista de poligonos
+					//echo "he";
+					/*if($lo_profundo <= $poly_arr[$i][0]['bottom']){ //si el to depth (from, to) es menor o igual a el bottom depth del primer valor de la lista de poligonos
 						$max_index_i = $i;
 						$max_index_j = 0;
 
-					}
-					elseif($lo_profundo >= $limite){ //to_(depth) rebasa el limite puesto
+					}*/
+
+					/*elseif($lo_profundo >= $limite){ //to_(depth) rebasa el limite puesto
 						$lo_profundo = $limite;
 						for ($j=0; $j < sizeof($poly_arr[$i])-1; $j++) { //bug here
 							$top = $poly_arr[$i][$j]['top'];
@@ -1197,8 +1199,8 @@ function getPolygons(){
 								$max_index_j = $j;
 							}
 						}
-					}
-					else{
+					}*/
+					//else{
 						$jumps = 0;
 						for ($j=0; $j < sizeof($poly_arr[$i])-1; $j++) {
 							$top = $poly_arr[$i][$j]['top'];
@@ -1235,7 +1237,7 @@ function getPolygons(){
 								$max_index_j = $j;
 							}
 						}
-					}
+					//}
 				}
 				else{ //el ultimo valor no es cero, y puede contener un solo poligono
 					$limite =  $poly_arr[$i][sizeof($poly_arr[$i])-1]['bottom'];
@@ -1278,7 +1280,9 @@ function getPolygons(){
 					//$max_index_j = 0;
 					//$poly_arr[$max_index_i][$max_index_j][$data->property] = 0;
 				}
-
+				//echo $i;
+				//echo $max_index_i;
+				//echo $max_index_j."\n";
 				$polygons[] = $poly_arr[$max_index_i][$max_index_j];
 			}
 			break;
