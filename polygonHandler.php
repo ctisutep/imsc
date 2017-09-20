@@ -1202,14 +1202,18 @@ function getPolygons(){
 					}*/
 					//else{
 						$jumps = 0;
-						for ($j=0; $j < sizeof($poly_arr[$i])-1; $j++) {
-							$top = $poly_arr[$i][$j]['top'];
-							$bottom = $poly_arr[$i][$j]['bottom'];
+						for ($z=0; $z < sizeof($poly_arr[$i])-1; $z++) {
+							//echo "polygon $i \n";
+							$top = $poly_arr[$i][$z]['top'];
+							$bottom = $poly_arr[$i][$z]['bottom'];
 							if($data->from_depth > $top && $data->from_depth > $bottom){
 								$jumps++;
 							}
-						}
+						} //echo "polygon $i \n";
+						//echo $z;
+						echo $jumps."\n"; //if the polygon jumps out of range, it should return 0
 						for ($j=$jumps; $j < sizeof($poly_arr[$i])-1; $j++) {
+							//echo "in for loop: polygon $i \n";
 							$top = $poly_arr[$i][$j]['top'];
 							$bottom = $poly_arr[$i][$j]['bottom'];
 							//echo "from: ".$data->from_depth."\n";
@@ -1235,6 +1239,9 @@ function getPolygons(){
 								$max_value = $poly_arr[$i][$j][$data->property];
 								$max_index_i = $i;
 								$max_index_j = $j;
+							}
+							else{
+								//echo "polygon $i at depth/layer $j";
 							}
 						}
 					//}
