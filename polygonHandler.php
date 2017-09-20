@@ -1221,7 +1221,7 @@ function getPolygons(){
 							$poly_arr[$i][$j][$data->property] = -99;
 						}
 						for ($j=$jumps; $j < sizeof($poly_arr[$i])-1; $j++) {
-							echo "in for loop: polygon $i \n";
+							//echo "in for loop: polygon $i \n";
 							$top = $poly_arr[$i][$j]['top'];
 							$bottom = $poly_arr[$i][$j]['bottom'];
 							//echo "from: ".$data->from_depth."\n";
