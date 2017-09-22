@@ -1257,6 +1257,8 @@ function getPolygons(){
 				$lo_profundo = $data->depth;
 
 				if(sizeof($poly_arr[$i]) > 1 && $poly_arr[$i][sizeof($poly_arr[$i])-1][$data->property] == 0){
+
+					/*
 					$limite = $poly_arr[$i][sizeof($poly_arr[$i])-2]['bottom'];
 
 					if($lo_profundo <= $poly_arr[$i][0]['bottom']){
@@ -1292,8 +1294,11 @@ function getPolygons(){
 							}
 						}
 					}
+					*/
 				}
 				else{
+
+					/*
 					$limite = $poly_arr[$i][sizeof($poly_arr[$i])-1]['bottom'];
 
 					if($lo_profundo <= $poly_arr[$i][0]['bottom']){
@@ -1329,6 +1334,7 @@ function getPolygons(){
 							}
 						}
 					}
+					*/
 				}
 				$polygons[] = $poly_arr[$min_index_i][$min_index_j];
 			}
