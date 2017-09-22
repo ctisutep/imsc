@@ -1163,150 +1163,82 @@ function getPolygons(){
 			/* Busca el valor maximo de la lista de los polignos, dependientemente del depth que el usuario le otorgue*/
 			$max_value; $max_index_i; $max_index_j; $top; $bottom;
 			$lo_profundo = $data->depth;
-			$not_shown = array();
-
+			$not_shown = array(); //used for debugging
 			for ($i=0; $i < sizeof($poly_arr); $i++) { //sorting by property values ascending; had to modify query
 				array_multisort($poly_arr[$i], SORT_ASC);
 			}
-
 			for ($i=0; $i < sizeof($poly_arr); $i++) {
 				$max_value = 0;
 				$max_index_i = $i;
 				$max_index_j = 0;
-				if(isset($units) && $units > 0){
-					$data->depth = 0;
-				}
-				else{
-					$lo_profundo = $data->depth;
-				}
+				if(isset($units) && $units > 0){ $data->depth = 0; }
+				else{ $lo_profundo = $data->depth; }
 				if(sizeof($poly_arr[$i]) > 1 && $poly_arr[$i][sizeof($poly_arr[$i])-1][$data->property] == 0){ //si el array de polys tiene mas de un campo, y si el ultimo valor es 0, no lo tomamos en cuenta
 					$limite =  $poly_arr[$i][sizeof($poly_arr[$i])-2]['bottom']; //el limite (bottom depth) se toma en el penultimo valor de los arrays
-					//echo "he";
-					/*if($lo_profundo <= $poly_arr[$i][0]['bottom']){ //si el to depth (from, to) es menor o igual a el bottom depth del primer valor de la lista de poligonos
+					$jumps = 0;
+					for ($z=0; $z < sizeof($poly_arr[$i])-1; $z++) {
+						$top = $poly_arr[$i][$z]['top'];
+						$bottom = $poly_arr[$i][$z]['bottom'];
+						if($data->from_depth > $top && $data->from_depth > $bottom){ $jumps++; }
+					}
+					if($jumps >= sizeof($poly_arr[$i])-1){ //if the requested depth does not exist in the poylgon, return -99, which will color it gray
+						//array_push($not_shown, $i); //not using this one, but useful for debugging
 						$max_index_i = $i;
 						$max_index_j = 0;
-
-					}*/
-
-					/*elseif($lo_profundo >= $limite){ //to_(depth) rebasa el limite puesto
-						$lo_profundo = $limite;
-						for ($j=0; $j < sizeof($poly_arr[$i])-1; $j++) { //bug here
-							$top = $poly_arr[$i][$j]['top'];
-							$bottom = $poly_arr[$i][$j]['bottom'];
-							if($max_value < $poly_arr[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
-								echo "test";
-								$max_value = $poly_arr[$i][$j][$data->property];
-								$max_index_i = $i;
-								$max_index_j = $j;
-							}
-						}
-					}*/
-					//else{
-						$jumps = 0;
-						for ($z=0; $z < sizeof($poly_arr[$i])-1; $z++) {
-							//echo "polygon $i \n";
-							$top = $poly_arr[$i][$z]['top'];
-							$bottom = $poly_arr[$i][$z]['bottom'];
-							if($data->from_depth > $top && $data->from_depth > $bottom){
-								$jumps++;
-							}
-						} //echo "polygon $i \n";
-						//echo $z;
-						//echo $jumps."\n"; //if the polygon jumps out of range, it should return 0
-						if($jumps >= sizeof($poly_arr[$i])-1){
-							//echo "polygon at: $i \n";
-							array_push($not_shown, $i);
+						$poly_arr[$i][0][$data->property] = -99;
+					}
+					for ($j=$jumps; $j < sizeof($poly_arr[$i])-1; $j++) {
+						$top = $poly_arr[$i][$j]['top'];
+						$bottom = $poly_arr[$i][$j]['bottom'];
+						if($max_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth >= $top && $lo_profundo <= $bottom)){
+							$max_value = $poly_arr[$i][$j][$data->property];
 							$max_index_i = $i;
-							$max_index_j = 0;
-							$poly_arr[$i][0][$data->property] = -99;
+							$max_index_j = $j;
+						}elseif($max_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth >= $top && $lo_profundo >= $bottom)){
+							$max_value = $poly_arr[$i][$j][$data->property];
+							$max_index_i = $i;
+							$max_index_j = $j;
+						}elseif($max_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth <= $top && $lo_profundo >= $bottom)){
+							$max_value = $poly_arr[$i][$j][$data->property];
+							$max_index_i = $i;
+							$max_index_j = $j;
 						}
-						for ($j=$jumps; $j < sizeof($poly_arr[$i])-1; $j++) {
-							//echo "in for loop: polygon $i \n";
-							$top = $poly_arr[$i][$j]['top'];
-							$bottom = $poly_arr[$i][$j]['bottom'];
-							//echo "from: ".$data->from_depth."\n";
-							//echo "to: ".$lo_profundo."\n";
-							if($max_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth >= $top && $lo_profundo <= $bottom)){
-								//echo 1;
-								$show = $poly_arr[$i][$j][$data->property];
-								//echo "polygon $i is $show, found at $j layer/iteration\n";
-								$max_value = $poly_arr[$i][$j][$data->property];
-								$max_index_i = $i;
-								$max_index_j = $j;
-							}
-							elseif($max_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth >= $top && $lo_profundo >= $bottom)){
-								//echo 2;
-								$max_value = $poly_arr[$i][$j][$data->property];
-								$max_index_i = $i;
-								$max_index_j = $j;
-							}elseif($max_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth < $top && $lo_profundo <= $bottom)){
-								//echo 3;
-								$max_value = $poly_arr[$i][$j][$data->property];
-								$max_index_i = $i;
-								$max_index_j = $j;
-							}elseif($max_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth > $top && $lo_profundo > $bottom)){
-								//echo 4;
-								$max_value = $poly_arr[$i][$j][$data->property];
-								$max_index_i = $i;
-								$max_index_j = $j;
-							}
-							else{
-								if($max_value < 0){
-									echo "polygon $i at depth/layer $j\n";
-									$show = $poly_arr[$i][$j][$data->property];
-									//echo "polygon $i is $show\n";
-								}
-							}
-						}
-					//}
+					}
 				}
 				else{ //el ultimo valor no es cero, y puede contener un solo poligono
-					$limite =  $poly_arr[$i][sizeof($poly_arr[$i])-1]['bottom'];
-
-					if($lo_profundo <= $poly_arr[$i][0]['bottom']){
+					$limite =  $poly_arr[$i][sizeof($poly_arr[$i])-1]['bottom']; //el limite (bottom depth) se toma en el penultimo valor de los arrays
+					$jumps = 0;
+					for ($z=0; $z < sizeof($poly_arr[$i]); $z++) {
+						$top = $poly_arr[$i][$z]['top'];
+						$bottom = $poly_arr[$i][$z]['bottom'];
+						if($data->from_depth > $top && $data->from_depth > $bottom){ $jumps++; }
+					}
+					if($jumps >= sizeof($poly_arr[$i])){ //if the requested depth does not exist in the poylgon, return -99, which will color it gray
+						//array_push($not_shown, $i); //not using this one, but useful for debugging
 						$max_index_i = $i;
 						$max_index_j = 0;
+						$poly_arr[$i][0][$data->property] = -99;
 					}
-					elseif($lo_profundo >= $limite){
-						$lo_profundo = $limite;
-						for ($j=0; $j < sizeof($poly_arr[$i]); $j++) {
-							$top = $poly_arr[$i][$j]['top'];
-							$bottom = $poly_arr[$i][$j]['bottom'];
-							if($max_value < $poly_arr[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
-								$max_value = $poly_arr[$i][$j][$data->property];
-								$max_index_i = $i;
-								$max_index_j = $j;
-							}
+					for ($j=$jumps; $j < sizeof($poly_arr[$i]); $j++) {
+						$top = $poly_arr[$i][$j]['top'];
+						$bottom = $poly_arr[$i][$j]['bottom'];
+						if($max_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth >= $top && $lo_profundo <= $bottom)){
+							$max_value = $poly_arr[$i][$j][$data->property];
+							$max_index_i = $i;
+							$max_index_j = $j;
+						}elseif($max_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth >= $top && $lo_profundo >= $bottom)){
+							$max_value = $poly_arr[$i][$j][$data->property];
+							$max_index_i = $i;
+							$max_index_j = $j;
+						}elseif($max_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth <= $top && $lo_profundo >= $bottom)){
+							$max_value = $poly_arr[$i][$j][$data->property];
+							$max_index_i = $i;
+							$max_index_j = $j;
 						}
 					}
-					else{
-						for ($j=0; $j < sizeof($poly_arr[$i]); $j++) {
-							$top = $poly_arr[$i][$j]['top'];
-							$bottom = $poly_arr[$i][$j]['bottom'];
-							if($max_value < $poly_arr[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo >= $bottom){
-								$max_value = $poly_arr[$i][$j][$data->property];
-								$max_index_i = $i;
-								$max_index_j = $j;
-							}
-							elseif($max_value < $poly_arr[$i][$j][$data->property] && $lo_profundo > $top && $lo_profundo <= $bottom){
-								$max_value = $poly_arr[$i][$j][$data->property];
-								$max_index_i = $i;
-								$max_index_j = $j;
-							}
-						}
-					}
-				}
-				if($max_index_i == -1){
-					//$max_index_i = 0;
-					//$max_index_j = 0;
-					//$poly_arr[$max_index_i][$max_index_j][$data->property] = 0;
-				}
-				//echo $i;
-				//echo $max_index_i;
-				//echo $max_index_j."\n";
-				//var_dump($not_shown);
+				} //end else
 				$polygons[] = $poly_arr[$max_index_i][$max_index_j];
-			}
+			}//end main for-loop
 			break;
 
 			case 'Minimum':
