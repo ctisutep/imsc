@@ -1218,7 +1218,7 @@ function getPolygons(){
 							array_push($not_shown, $i);
 							$max_index_i = $i;
 							$max_index_j = 0;
-							$poly_arr[$i][$j][$data->property] = -99;
+							$poly_arr[$i][0][$data->property] = -99;
 						}
 						for ($j=$jumps; $j < sizeof($poly_arr[$i])-1; $j++) {
 							//echo "in for loop: polygon $i \n";
@@ -1252,7 +1252,7 @@ function getPolygons(){
 							}
 							else{
 								if($max_value < 0){
-									//echo "polygon $i at depth/layer $j\n";
+									echo "polygon $i at depth/layer $j\n";
 									$show = $poly_arr[$i][$j][$data->property];
 									//echo "polygon $i is $show\n";
 								}
