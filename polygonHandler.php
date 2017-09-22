@@ -1228,6 +1228,8 @@ function getPolygons(){
 							//echo "to: ".$lo_profundo."\n";
 							if($max_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth >= $top && $lo_profundo <= $bottom)){
 								//echo 1;
+								$show = $poly_arr[$i][$j][$data->property];
+								//echo "polygon $i is $show, found at $j layer/iteration\n";
 								$max_value = $poly_arr[$i][$j][$data->property];
 								$max_index_i = $i;
 								$max_index_j = $j;
@@ -1249,7 +1251,11 @@ function getPolygons(){
 								$max_index_j = $j;
 							}
 							else{
-								//echo "polygon $i at depth/layer $j";
+								if($max_value < 0){
+									//echo "polygon $i at depth/layer $j\n";
+									$show = $poly_arr[$i][$j][$data->property];
+									//echo "polygon $i is $show\n";
+								}
 							}
 						}
 					//}
