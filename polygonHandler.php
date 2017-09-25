@@ -1264,13 +1264,16 @@ function getPolygons(){
 						$bottom = $poly_arr[$i][$z]['bottom'];
 						if($data->from_depth > $top && $data->from_depth > $bottom){ $jumps++; }
 					}
-					$short = 0;
+					$short =-1;
 					for ($z=0; $z < sizeof($poly_arr[$i])-1; $z++) {
 						$top = $poly_arr[$i][$z]['top'];
 						$bottom = $poly_arr[$i][$z]['bottom'];
 						if($top > $data->from_depth && $bottom > $lo_profundo){ $short++; }
 					}
-					if($short == 0){  }
+					if($short == -1){  $short++;}
+					if($short == 2){  $short++;}
+					//echo $short;
+
 					if($jumps >= sizeof($poly_arr[$i])-1){ //if the requested depth does not exist in the poylgon, return -99, which will color it gray
 						//array_push($not_shown, $i); //not using this one, but useful for debugging
 						$min_index_i = $i;
