@@ -1491,7 +1491,7 @@ function getPolygons(){
 			case 'At':
 			for ($i=0; $i < sizeof($poly_arr); $i++) { //This was the method used before. It searches, goes to the depth specified, and gives the value AT that depth.
 				for ($j=0; $j < sizeof($poly_arr[$i]); $j++) {
-					if($data->depth >= $poly_arr[$i][$j]['top'] && $data->depth <= $poly_arr[$i][$j]['bottom']){ //discriminador de depth
+					if($data->from_depth >= $poly_arr[$i][$j]['top'] && $data->depth <= $poly_arr[$i][$j]['bottom']){ //discriminador de depth
 						$polygons[] = $poly_arr[$i][$j];
 					}
 				}
