@@ -1485,7 +1485,7 @@ function getPolygons(){
 					$poly_arr[$i][0][$data->property] = round($result_weighted,1);
 					$polygons[] = $poly_arr[$i][0];
 				}
-			} //end main for loop
+			} //end main for-loop
 			break;
 
 			case 'At':
