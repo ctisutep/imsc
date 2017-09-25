@@ -1441,7 +1441,7 @@ function getPolygons(){
 							$operaciones++;
 							$diff = $bottom - $top;
 							$x = $poly_arr[$i][$j][$data->property];
-							echo "$diff diff, $delta delta, $x value\n";
+							echo "$diff diff, $delta delta, $x value/\n";
 							$weighted = ($diff/$delta) * $poly_arr[$i][$j][$data->property];
 						}
 
