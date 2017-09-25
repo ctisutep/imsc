@@ -1270,23 +1270,17 @@ function getPolygons(){
 						$bottom = $poly_arr[$i][$z]['bottom'];
 						if($top > $data->from_depth && $bottom > $lo_profundo){ $short++; }
 					}
-					if($short == -1){  $short++;}
-					if($short == 2){  $short++;}
-					//echo $short;
-
+					if($short == -1){ $short++; } //handles limits
+					if($short == sizeof($poly_arr[$i])-3){ $short++; } //as well as this one
 					if($jumps >= sizeof($poly_arr[$i])-1){ //if the requested depth does not exist in the poylgon, return -99, which will color it gray
 						//array_push($not_shown, $i); //not using this one, but useful for debugging
 						$min_index_i = $i;
 						$min_index_j = 0;
 						$poly_arr[$i][0][$data->property] = -99;
 					}
-					//echo $short;
-					//echo (sizeof($poly_arr[$i])-1)-$short;
 					for ($j=$jumps; $j < (sizeof($poly_arr[$i])-1)-$short; $j++) {
 						$top = $poly_arr[$i][$j]['top'];
 						$bottom = $poly_arr[$i][$j]['bottom'];
-						//echo "top is $top, bottom is $bottom/ \n";
-						//echo "from $data->from_depth to $lo_profundo/ \n";
 						if($min_value > $poly_arr[$i][$j][$data->property] && ($data->from_depth >= $top && $lo_profundo <= $bottom)){
 							$min_value = $poly_arr[$i][$j][$data->property];
 							$min_index_i = $i;
@@ -1307,22 +1301,28 @@ function getPolygons(){
 					}
 				}
 				else{
-
-
-					/*$limite =  $poly_arr[$i][sizeof($poly_arr[$i])-1]['bottom']; //el limite (bottom depth) se toma en el penultimo valor de los arrays
+					$limite =  $poly_arr[$i][sizeof($poly_arr[$i])-1]['bottom']; //el limite (bottom depth) se toma en el penultimo valor de los arrays
 					$jumps = 0;
 					for ($z=0; $z < sizeof($poly_arr[$i]); $z++) {
 						$top = $poly_arr[$i][$z]['top'];
 						$bottom = $poly_arr[$i][$z]['bottom'];
 						if($data->from_depth > $top && $data->from_depth > $bottom){ $jumps++; }
 					}
-					if($jumps >= sizeof($poly_arr[$i])){ //if the requested depth does not exist in the poylgon, return -99, which will color it gray
+					$short =-1;
+					for ($z=0; $z < sizeof($poly_arr[$i]); $z++) {
+						$top = $poly_arr[$i][$z]['top'];
+						$bottom = $poly_arr[$i][$z]['bottom'];
+						if($top > $data->from_depth && $bottom > $lo_profundo){ $short++; }
+					}
+					if($short == -1){ $short++; } //handles limits
+					if($short == sizeof($poly_arr[$i])-2){ $short++; } //as well as this one
+					if($jumps >= sizeof($poly_arr[$i])){ //if the requested depth does not exist in the polygon, return -99, which will color it gray
 						//array_push($not_shown, $i); //not using this one, but useful for debugging
 						$min_index_i = $i;
 						$min_index_j = 0;
 						$poly_arr[$i][0][$data->property] = -99;
 					}
-					for ($j=$jumps; $j < sizeof($poly_arr[$i]); $j++) {
+					for ($j=$jumps; $j < (sizeof($poly_arr[$i]))-$short; $j++) {
 						$top = $poly_arr[$i][$j]['top'];
 						$bottom = $poly_arr[$i][$j]['bottom'];
 						if($min_value > $poly_arr[$i][$j][$data->property] && ($data->from_depth >= $top && $lo_profundo <= $bottom)){
@@ -1337,8 +1337,12 @@ function getPolygons(){
 							$min_value = $poly_arr[$i][$j][$data->property];
 							$min_index_i = $i;
 							$min_index_j = $j;
+						}elseif($min_value > $poly_arr[$i][$j][$data->property] && ($data->from_depth <= $top && $lo_profundo <= $bottom)){
+							$min_value = $poly_arr[$i][$j][$data->property];
+							$min_index_i = $i;
+							$min_index_j = $j;
 						}
-					}*/
+					}
 				}
 				$polygons[] = $poly_arr[$min_index_i][$min_index_j];
 			}
