@@ -1305,15 +1305,15 @@ function getPolygons(){
 					for ($j=$jumps; $j < sizeof($poly_arr[$i]); $j++) {
 						$top = $poly_arr[$i][$j]['top'];
 						$bottom = $poly_arr[$i][$j]['bottom'];
-						if($min_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth >= $top && $lo_profundo <= $bottom)){
+						if($min_value > $poly_arr[$i][$j][$data->property] && ($data->from_depth >= $top && $lo_profundo <= $bottom)){
 							$min_value = $poly_arr[$i][$j][$data->property];
 							$min_index_i = $i;
 							$min_index_j = $j;
-						}elseif($min_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth >= $top && $lo_profundo >= $bottom)){
+						}elseif($min_value > $poly_arr[$i][$j][$data->property] && ($data->from_depth >= $top && $lo_profundo >= $bottom)){
 							$min_value = $poly_arr[$i][$j][$data->property];
 							$min_index_i = $i;
 							$min_index_j = $j;
-						}elseif($min_value < $poly_arr[$i][$j][$data->property] && ($data->from_depth <= $top && $lo_profundo >= $bottom)){
+						}elseif($min_value > $poly_arr[$i][$j][$data->property] && ($data->from_depth <= $top && $lo_profundo >= $bottom)){
 							$min_value = $poly_arr[$i][$j][$data->property];
 							$min_index_i = $i;
 							$min_index_j = $j;
@@ -1325,7 +1325,7 @@ function getPolygons(){
 			break;
 
 			case 'Median':
-			/*Busca el valor medio para poligonos con n layers seasen pares o impares.*/
+			/*Busca el valor medio para poligonos con n layers seasen pares o impares. No depende de depth*/
 			$med_index_i;
 			$med_value = 0;
 			$done_med;
