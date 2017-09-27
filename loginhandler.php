@@ -25,7 +25,7 @@
                 	$_SESSION['in'] = true;
                     $_SESSION['username'] = $username;
                     $_SESSION['id'] = $row['id'];
-					header('Location: index.php');
+					header('Location: index2.php');
                 }
                 else{
                     echo "Username or password incorrect";

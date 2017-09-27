@@ -4,24 +4,24 @@
     <meta charset="UTF-8">
 
 
-    <title>IMSC</title>
-    
+    <title>ISC</title>
+
     <!-- css for the form -->
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
-    
-    
-    
+
+
+
     <!-- css for animations -->
     <link rel='stylesheet prefetch' href='css/animate.min.css'>
-    
+
     <!-- css for fonts -->
 	<link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,400italic,700italic,700'>
 	<link rel='stylesheet prefetch' href='font-awesome/css/font-awesome.min.css'>
 
-    
-    
-    
+
+
+
   </head>
 
   <body>
@@ -32,7 +32,7 @@
 	    <div class='tooltip'>Register</div>
 	  </div>
 	  <div class='login'>
-	    <h2>Interactive Map for</h2>
+	    <h2>Interactive</h2>
 	    <h2>Soil Categorization</h2>
 	    <img src="img/logo.bmp" style="width: 60%; height: 60%">
 	    <form name="login" action="loginhandler.php" method="post">
@@ -58,13 +58,10 @@
 	      <input type="submit" name="register" value="Submit" />
 	    </form>
 	  </div>
-	
+
 	</div>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script src="js/bootstrap.min.js"></script>
-
-    
-
     <script>
     	$('.switch').click(function(){
 		   $(this).children('i').toggleClass('fa-pencil');
@@ -74,8 +71,8 @@
     </script>
 
 
-    
-    
-    
+
+
+
   </body>
 </html>
