@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<title>TX-IMSC</title>
+	<title>TX-ISC</title>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link href="css/custom.css" rel="stylesheet" type="text/css">
@@ -46,12 +46,10 @@
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-		<div class="container">
-			<div class="text-center" style='font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;'>
-				<h3 style="color:#FF8000;margin-right:8%;padding-top:1%;">CENTER FOR TRANSPORTATION INFRASTRUCTURE SYSTEMS</h3>
-				<h6><i style="color:white;margin-right:8%">"Designated as a Member of National, Regional, and Tier 1 University Transportation Center."</i></h6>
-			</div>
-		</div>
+				<h3 class="text-center" style="color:#FF8000;"> Interactive Soil Characterization</h3>
+				<h6 class="hidden-xs text-center"><i style="color: white;">"</i><i style="color:#FF8000;" class="text-center">CTIS </i><i class="text-center" style="color:white;">is designated as a Member of National, Regional, and Tier 1 University Transportation Center."</i></h6>
+				<p class="hidden-xs text-right" style="color: white"> Version 3 (9/27/2017)</p>
+				<p class="hidden-md-lg text-center" style="color: white"> Version 3 (9/27/2017)</p>
 	</nav>
 	<div>
 		<div class="row">
