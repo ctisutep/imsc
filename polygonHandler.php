@@ -1399,8 +1399,6 @@ function getPolygons(){
 			case 'Weighted':
 			/*Depending on the depth, this method will get the average value for all the layers until that depth. */
 			$profundo = $data->depth;
-			$n_operaciones = 0;
-			$counter = 0;
 			$limite; $top; $bottom; $delta; $delta_depth; $valor; $just_one; $result_weighted;
 
 			for ($i=0; $i < sizeof($poly_arr); $i++) { //sorting by property values ascending; had to modify query
@@ -1411,128 +1409,99 @@ function getPolygons(){
 				$profundo = $data->depth;
 				$from = $data->from_depth;
 				$limite = $n_operaciones = $counter = $top = $bottom = $delta = $delta_depth = $valor = $just_one = $result_weighted = 0;
-
 				if(sizeof($poly_arr[$i]) > 1 && $poly_arr[$i][sizeof($poly_arr[$i])-1][$data->property] == 0){ //use the penultimate index
-					$operaciones = 0;
+					$operations = 0;
+					$in_case = 0;
 					$delta = $profundo - $from;
-					$weighted = 0;
-					$diff = 0;
-					$from_delta = 0;
-					$to_delta = 0;
-
+					if($profundo > $poly_arr[$i][sizeof($poly_arr[$i])-2]['bottom']){
+						$delta = $poly_arr[$i][sizeof($poly_arr[$i])-2]['bottom'] - $from;
+					}
+					if($profundo <= $poly_arr[$i][0]['bottom']){
+						$delta = $poly_arr[$i][0]['bottom'];
+					}
+					$weighted = $diff = $from_delta = $to_delta = 0;
 					for ($j=0; $j < (sizeof($poly_arr[$i])-1); $j++) {
 						$top = $poly_arr[$i][$j]['top'];
 						$bottom = $poly_arr[$i][$j]['bottom'];
-						//echo "$top $bottom\n";
 						if($top <= $data->from_depth && $bottom >= $data->from_depth){
-							//echo " $top - $bottom:\n";
-							//echo "from /";
-							$operaciones++;
-							$weighted = 0;
+							$diff = $bottom - $data->from_depth;
+							$x = $poly_arr[$i][$j][$data->property];
+							$weighted += ($diff/$delta) * $poly_arr[$i][$j][$data->property];
+							$in_case = $x;
+							$operations++;
 						}
 						elseif($top <= $profundo && $bottom >= $profundo){
-							//echo " $top - $bottom:\n";
-							//echo "to /";
-							$operaciones++;
+							$diff = $profundo - $top;
+							$x = $poly_arr[$i][$j][$data->property];
+							$weighted += ($diff/$delta) * $poly_arr[$i][$j][$data->property];
+							$in_case = $x;
+							$operations++;
 						}
 						elseif(($top >= $data->from_depth && $bottom >= $data->from_depth) && ($top <= $profundo && $bottom <= $profundo)){
-							//echo " $top - $bottom:\n";
-							//echo "en medio /";
-							$operaciones++;
 							$diff = $bottom - $top;
 							$x = $poly_arr[$i][$j][$data->property];
-							echo "$diff diff, $delta delta, $x value/\n";
-							$weighted = ($diff/$delta) * $poly_arr[$i][$j][$data->property];
-						}
-
-						/*elseif(($profundo >= $top && $profundo <= $bottom) && ($data->from_depth <= $top && $data->from_depth <= $bottom)){
-							//echo "$top $bottom\n";
-							//echo 2;
-							$operaciones++;
-						}
-						elseif(($profundo >= $top && $profundo >= $bottom) && ($data->from_depth <= $top && $data->from_depth <= $bottom)){
-							//echo 3;
-							$operaciones++;
-						}*/
-					}
-					//echo $operaciones;
-					echo $weighted;
-					/*
-					$limite = $poly_arr[$i][sizeof($poly_arr[$i])-2]['bottom'];//si lo $profundo es mayor que el limite, ignorar y usar el limite como lo profundo
-					if($profundo > $limite){
-						$profundo = $limite;
-					}
-
-					for ($k=0; $k < sizeof($poly_arr[$i])-1; $k++) {
-						if($profundo >= $poly_arr[$i][$k]['top'] && $profundo >= $poly_arr[$i][$k]['bottom'] && $profundo <= $limite){
-							$n_operaciones += 1;
-						}
-						elseif($profundo >= $poly_arr[$i][$k]['top'] && $profundo <= $poly_arr[$i][$k]['bottom'] && $profundo <= $limite){
-							$n_operaciones += 1;
+							$weighted += ($diff/$delta) * $poly_arr[$i][$j][$data->property];
+							$in_case = $x;
+							$operations++;
 						}
 					}
-
-					for ($j=0; $j < (sizeof($poly_arr[$i])-1); $j++) {
-						$top = $poly_arr[$i][$j]['top'];
-						$bottom = $poly_arr[$i][$j]['bottom'];
-						$delta = $bottom - $top;
-						$valor = $poly_arr[$i][$j][$data->property];
-						if($n_operaciones > $j){
-							if($profundo >= $delta && $profundo >= $bottom){
-								$result_weighted += (($delta/$profundo)*$valor);
-							}
-							elseif($profundo >= $delta && $profundo <= $bottom){
-								$delta_depth = $profundo - $top;
-								$result_weighted += (($delta_depth/$profundo)*$valor);
-							}
-							elseif($profundo <= $delta && $profundo <= $bottom && $just_one == 0) {
-								$just_one = 1;
-								$result_weighted += $valor;
-							}
-						} //end if n_operations
+					if($weighted == 0){
+						$weighted = -99;
 					}
-					$poly_arr[$i][0][$data->property] = round($result_weighted,1);
-					$polygons[] = $poly_arr[$i][0];*/
+					if($operations == 1){
+						$weighted = $in_case;
+					}
+					$poly_arr[$i][0][$data->property] = round($weighted,1);
+					$polygons[] = $poly_arr[$i][0];
 				} //end if for using penultimate index
 				else{ //permissible to use the last index
-
-
-
-					/*$limite = $poly_arr[$i][sizeof($poly_arr[$i])-1]['bottom'];
-					if($profundo > $limite){
-						$profundo = $limite;
+					$operations = 0;
+					$in_case = 0;
+					$delta = $profundo - $from;
+					if($profundo > $poly_arr[$i][sizeof($poly_arr[$i])-1]['bottom']){
+						$delta = $poly_arr[$i][sizeof($poly_arr[$i])-1]['bottom'] - $from;
 					}
-
-					for ($k=0; $k < sizeof($poly_arr[$i]); $k++) {
-						if($profundo >= $poly_arr[$i][$k]['top'] && $profundo >= $poly_arr[$i][$k]['bottom'] && $profundo <= $limite){ //we need a limit/ceiling for the bottom of this
-							$n_operaciones += 1;
-						}
-						elseif($profundo >= $poly_arr[$i][$k]['top'] && $profundo <= $poly_arr[$i][$k]['bottom'] && $profundo <= $limite){
-							$n_operaciones += 1;
-						}
+					if($profundo <= $poly_arr[$i][0]['bottom']){
+						$delta = $poly_arr[$i][0]['bottom'];
 					}
-
+					$weighted = $diff = $from_delta = $to_delta = 0;
 					for ($j=0; $j < (sizeof($poly_arr[$i])); $j++) {
 						$top = $poly_arr[$i][$j]['top'];
 						$bottom = $poly_arr[$i][$j]['bottom'];
-						$delta = $bottom - $top;
-						$valor = $poly_arr[$i][$j][$data->property];
-						if($n_operaciones > $j){
-							if($profundo >= $delta && $profundo >= $bottom){
-								$result_weighted += (($delta/$profundo)*$valor);
-							}
-							elseif($profundo >= $delta && $profundo <= $bottom){
-								$delta_depth = $profundo - $top;
-								$result_weighted += (($delta_depth/$profundo)*$valor);
-							}
-							elseif($profundo <= $delta && $profundo <= $bottom && $just_one == 0) {
-								$just_one = 1;
-								$result_weighted += $valor;
-							}
+						if($top <= $data->from_depth && $bottom >= $data->from_depth){
+							$diff = $bottom - $data->from_depth;
+							$x = $poly_arr[$i][$j][$data->property];
+							$weighted += ($diff/$delta) * $x;
+							$in_case = $x;
+							$operations++;
+							//echo " we are in 'from'. diff is $diff, delta is $delta, data->prop is $x \n";
+
+						}
+						elseif($top <= $profundo && $bottom >= $profundo){
+							$diff = $profundo - $top;
+							$x = $poly_arr[$i][$j][$data->property];
+							$weighted += ($diff/$delta) * $x;
+							$in_case = $x;
+							$operations++;
+							//echo " we are in 'to'. diff is $diff, delta is $delta, data->prop is $x \n";
+						}
+						elseif(($top >= $data->from_depth && $bottom >= $data->from_depth) && ($top <= $profundo && $bottom <= $profundo)){
+							$diff = $bottom - $top;
+							$x = $poly_arr[$i][$j][$data->property];
+							$weighted += ($diff/$delta) * $x;
+							$in_case = $x;
+							$operations++;
+							//echo " we are in 'middle'. diff is $diff, delta is $delta, data->prop is $x \n";
 						}
 					}
-					$poly_arr[$i][0][$data->property] = round($result_weighted,1);
-					$polygons[] = $poly_arr[$i][0];*/
+					if($weighted == 0){
+						$weighted = -99;
+					}
+					if($operations == 1){
+						$weighted = $in_case;
+					}
+					$poly_arr[$i][0][$data->property] = round($weighted,1);
+					$polygons[] = $poly_arr[$i][0];
 				}
 			} //end main for-loop
 			break;
