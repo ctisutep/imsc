@@ -21,11 +21,11 @@
                 $salt = $row['salt'];
                 $password = $password . $salt;
                 $hash = md5($password);
-                if($hash === $row['password'] AND $row['approved'] == 1){
-                	$_SESSION['in'] = true;
+                if($hash == $row['password'] AND $row['approved'] == 1){
+                		$_SESSION['in'] = true;
                     $_SESSION['username'] = $username;
                     $_SESSION['id'] = $row['id'];
-					header('Location: index2.php');
+										header('Location: index2.php');
                 }
                 else{
                     echo "Username or password incorrect";
@@ -66,7 +66,7 @@
             }
             $email_parts = explode("@", $email);
 			if($email_parts[1] === "txdot.gov" OR $email_parts[1] === "miners.utep.edu" OR $email_parts[1] === "utep.edu"){
-				$sql = "INSERT INTO users (name, lname, username, password, salt, email, phone, approved) VALUES('$fname', '$lname', '$username', '$password', '$salt', '$email', '$phone', 1)";
+				$sql = "INSERT INTO users (name, lname, username, password, salt, email, phone, approved) VALUES('$fname', '$lname', '$username', '$password', '$salt', '$email', '$phone', 1)"; //removed a one
 			}
 			else{
 				echo "Please contact UTEP for help logging in.";
@@ -75,10 +75,10 @@
 			$result = $conn->query($sql);
 			if($result){
 				echo "created successfully";
-				header('Location: login.php');
+				header('Location: index2.php');
 			}
 			else
-				echo "There was a problem";
+				echo $sql;
 		}
 	}
 	$conn->close();

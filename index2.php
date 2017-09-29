@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!isset($_SESSION['in']) OR !$_SESSION['in']){
+  header('Location: login.php');
+  exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,9 +54,9 @@
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 				<h3 class="text-center" style="color:#FF8000;"> Interactive Soil Characterization</h3>
-				<h6 class="hidden-xs text-center"><i style="color: white;">"</i><i style="color:#FF8000;" class="text-center">CTIS </i><i class="text-center" style="color:white;">is designated as a Member of National, Regional, and Tier 1 University Transportation Center."</i></h6>
+				<h6 class="hidden-xs text-center"><i style="color: white;">"</i><strong><i style="color:#FF8000;" class="text-center">CTIS </i></strong><i class="text-center" style="color:white;">is designated as a Member of National, Regional, and Tier 1 University Transportation Center."</i></h6>
 				<p class="hidden-xs text-right" style="color: white"> Version 3 (9/27/2017)</p>
-				<p class="hidden-md-lg text-center" style="color: white"> Version 3 (9/27/2017)</p>
+				<p class="hidden-md hidden-lg text-center" style="color: white"> Version 3 (9/27/2017)</p>
 	</nav>
 	<div>
 		<div class="row">
