@@ -2,6 +2,7 @@
 //$prop = $_GET['0'];
 //$prop2 = $_GET['1'];
 $length = $_GET['length'];
+//echo $length;
 
 $string_kml = "";
 $all_poly = array();
@@ -39,26 +40,25 @@ else{ //multiple tags/polygons
       <name>Polygon.kml</name>
         <open>0</open>";
   for ($i=0; $i < $length; $i++) {
-    $string_kml += "
+    $string_kml .= "
 
     <Placemark>
-      <name>hollow box 1 </name>
+      <name>hollow box $i </name>
       <Polygon>
         <extrude>1</extrude>
         <altitudeMode>relativeToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
             <coordinates>
-              $all_poly[i]
+              $all_poly[$i]
             </coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
     </Placemark>
-
-    "
+    ";
   }
-$string_kml += "
+$string_kml .= "
   </Document>
 </kml>";
 }
@@ -86,7 +86,7 @@ else{
 }
 
 fclose( $file );
-unlink($filename);
+//unlink($filename);
 
 //echo $string_kml;
 //echo "<kml><coords>3.1516, 16545.111, 0</coords></kml>";
