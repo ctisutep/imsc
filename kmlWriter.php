@@ -33,7 +33,34 @@ if($length == 1){
   </kml>";
 }
 else{ //multiple tags/polygons
+  $string_kml = "
+  <kml>
+    <Document>
+      <name>Polygon.kml</name>
+        <open>0</open>";
+  for ($i=0; $i < $length; $i++) {
+    $string_kml += "
 
+    <Placemark>
+      <name>hollow box 1 </name>
+      <Polygon>
+        <extrude>1</extrude>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>
+              $all_poly[i]
+            </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    "
+  }
+$string_kml += "
+  </Document>
+</kml>";
 }
 $filename = "php_example.kml";
 $file = fopen( $filename, "a+" );
@@ -51,16 +78,15 @@ if(filesize($filename)>0){ //
   fwrite( $file, "\n This is a sample test \n" );
 }
 else{
-  fwrite( $file,  $string_kml);
+  fwrite($file,  $string_kml);
   fclose($file);
   $filename = "php_example.kml";
   $file = fopen( $filename, "a+" );
   $filesize = filesize( $filename );
-
 }
 
 fclose( $file );
-//unlink($filename);
+unlink($filename);
 
 //echo $string_kml;
 //echo "<kml><coords>3.1516, 16545.111, 0</coords></kml>";
