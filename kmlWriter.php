@@ -1,15 +1,12 @@
 <?php
-//$prop = $_GET['0'];
-//$prop2 = $_GET['1'];
 $length = $_GET['length'];
-//echo $length;
 
 $string_kml = "";
 $all_poly = array();
-for ($i=0; $i < $length; $i++) { //array_push($values, $placeholder); values es array
+for ($i=0; $i < $length; $i++) {
   array_push($all_poly, $_GET[$i]);
 }
-//var_dump($all_poly);
+
 if($length == 1){
   $string_kml = "
   <kml>
@@ -72,9 +69,6 @@ if( $file == false ) {
 if(filesize($filename)>0){ //
   $filesize = filesize( $filename );
   $filetext = fread( $file, $filesize );
-
-  //echo ( "File size : $filesize bytes" );
-  //echo ( "<pre>$filetext</pre>" );
   fwrite( $file, "\n This is a sample test \n" );
 }
 else{
@@ -86,8 +80,5 @@ else{
 }
 
 fclose( $file );
-//unlink($filename);
-
-//echo $string_kml;
-//echo "<kml><coords>3.1516, 16545.111, 0</coords></kml>";
+unlink($filename);
 ?>
