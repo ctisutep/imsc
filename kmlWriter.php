@@ -1,20 +1,20 @@
 <?php
-$length = $_GET['length'];
+$length = $_POST['length'];
 
 $string_kml = "";
 $all_poly = array();
 for ($i=0; $i < $length; $i++) {
-  array_push($all_poly, $_GET[$i]);
+  array_push($all_poly, $_POST[$i]);
 }
 
 if($length == 1){
   $string_kml = "
   <kml>
     <Document>
-      <name>Polygon.kml</name>
+      <name>ctis_isc_polygon.kml</name>
       <open>0</open>
       <Placemark>
-        <name>hollow box 1 </name>
+        <name>hollow polygon 0 </name>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -34,13 +34,13 @@ else{ //multiple tags/polygons
   $string_kml = "
   <kml>
     <Document>
-      <name>Polygon.kml</name>
+      <name>ctis_isc_polygon.kml</name>
         <open>0</open>";
   for ($i=0; $i < $length; $i++) {
     $string_kml .= "
 
     <Placemark>
-      <name>hollow box $i </name>
+      <name>hollow polygon $i </name>
       <Polygon>
         <extrude>1</extrude>
         <altitudeMode>relativeToGround</altitudeMode>
@@ -69,7 +69,7 @@ if( $file == false ) {
 if(filesize($filename)>0){ //
   $filesize = filesize( $filename );
   $filetext = fread( $file, $filesize );
-  fwrite( $file, "\n This is a sample test \n" );
+  //fwrite( $file, "\n This is a sample test \n" );
 }
 else{
   fwrite($file,  $string_kml);
