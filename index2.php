@@ -258,7 +258,7 @@ background: red;
               <button data-toggle="tooltip" data-placement="top" title="Only bring up the data touched by the Area Of Interest" class="btn btn-success form-control" type="button" id="runAOI" onClick="runAOI()">Run AOI</button><br><br>
               <button class="btn btn-warning form-control" type="button" id="clear" onClick="removePolygons()">Clear</button><br><br>
               <button type="button" class="map-print" id="print" onClick="printMaps()">Print</button><br><br>
-              <a href="./ctis_isc_polygon.kml" download><button type="button" class="btn btn-outline-secondary form-control" id="download_kml">KML</button></a>
+              <a href="./ctis_isc_polygon.kml" download><button type="button" class="btn btn-outline-secondary form-control" id="download_kml" onClick="clearKML()">KML</button></a>
             </div>
             <div id="filtersbtn" class="tab-pane fade"><br><br><br><br>
               <button class="btn btn-success form-control" type="button" id="runFilters" onClick="runFilters()">Run Filter</button>
@@ -402,6 +402,10 @@ $(document).ready(function(){
   $("#legend").hide();
 });
 
+function clearKML(){
+
+}
+
 function runAOI(){
   app.payload.runAOI = true;
   app.payload.runFilters = false;
@@ -434,6 +438,7 @@ function getPolygonsHelper(){
 }
 
 function getPolygons(){
+  
   var maximum;
   $("#legend").hide();
   app.payload.getMode="polygons";
