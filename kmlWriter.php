@@ -59,26 +59,32 @@ $string_kml .= "
   </Document>
 </kml>";
 }
-$filename = "php_example.kml";
+
+$filename = "ctis_isc_polygon.kml";
 $file = fopen( $filename, "a+" );
 
 if( $file == false ) {
-  echo ( "Error in opening file first" );
+  echo ( "Error opening file first" );
   exit();
 }
-if(filesize($filename)>0){ //
-  $filesize = filesize( $filename );
-  $filetext = fread( $file, $filesize );
+
+if(filesize($filename) == 0){ //
+  //echo $filename." does no exist";
+  //$filesize = filesize( $filename );
+  //$filetext = fread( $file, $filesize );
   //fwrite( $file, "\n This is a sample test \n" );
+  fwrite($file,  $string_kml);
 }
 else{
-  fwrite($file,  $string_kml);
-  fclose($file);
-  $filename = "php_example.kml";
+  unlink($filename);
+  $filename = "ctis_isc_polygon.kml";
   $file = fopen( $filename, "a+" );
-  $filesize = filesize( $filename );
+  fwrite($file,  $string_kml);
+  //fclose($file);
+  //$filename = "php_example.kml";
+  //$file = fopen( $filename, "a+" );
+  //$filesize = filesize( $filename );
 }
 
 fclose( $file );
-unlink($filename);
 ?>
