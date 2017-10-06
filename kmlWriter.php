@@ -77,9 +77,9 @@ if(filesize($filename) == 0){ //
 }
 else{
   unlink($filename);
-  $filename = "ctis_isc_polygon.kml";
-  $file = fopen( $filename, "a+" );
-  fwrite($file,  $string_kml);
+  //$filename = "ctis_isc_polygon.kml";
+  //$file = fopen( $filename, "a+" );
+  //fwrite($file,  $string_kml);
 
   //fclose($file);
   //$filename = "php_example.kml";
