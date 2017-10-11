@@ -68,28 +68,15 @@ if( $file == false ) {
   exit();
 }
 
-if(filesize($filename) == 0){ //
-  //echo $filename." does no exist";
-  //$filesize = filesize( $filename );
-  //$filetext = fread( $file, $filesize );
-  //fwrite( $file, "\n This is a sample test \n" );
+if(filesize($filename) == 0){
   fwrite($file,  $string_kml);
-  //fclose( $file );
-    //unlink($filename);
 }
 else{
   fclose( $file );
   unlink($filename);
-
   $filename = "ctis_isc_polygon.kml";
   $file = fopen( $filename, "a+" );
   fwrite($file,  $string_kml);
-
-  //fclose($file);
-  //$filename = "php_example.kml";
-  //$file = fopen( $filename, "a+" );
-  //$filesize = filesize( $filename );
 }
 fclose( $file );
-//unlink($filename);
 ?>
