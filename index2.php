@@ -438,6 +438,7 @@ function runFilters(){
 }
 
 function mpo(){
+  removePolygons();
   var getparams = app.payload;
   //app.polygons = [];
   var bounds = app.map.getBounds();
@@ -453,8 +454,8 @@ function mpo(){
         polyCoordis.push(temp[i]);
       }
       var polygon = new google.maps.Polygon({
-        description: "polygon", //value that appears when you click the map
-        description_value: "to be announced",
+        description: "b_carfrhh", //value that appears when you click the map
+        description_value: data.coords[key]['value'],
         paths: polyCoordis,
         strokeColor: 'red',
         strokeOpacity: 0.60,

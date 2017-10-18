@@ -24,7 +24,7 @@ $toReturn['query'] = $query;
 $result = mysqli_query($conn, $query);
 $toReturn['set'] = $result;
 
-$query= "SELECT astext(SHAPE) AS POLYGON FROM polygon AS p WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
+$query= "SELECT astext(SHAPE) AS POLYGON, b_carfrhh as value FROM polygon AS p WHERE b_carfrhh >= 0.25 AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
 $toReturn['query2'] = $query;
 $result = mysqli_query($conn, $query);
 $result = fetchAll($result);
