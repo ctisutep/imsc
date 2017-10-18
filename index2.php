@@ -437,6 +437,40 @@ function runFilters(){
   }
 }
 
+function mpo(){
+  var getparams = app.payload;
+  //app.polygons = [];
+  var bounds = app.map.getBounds();
+  getparams.NE = bounds.getNorthEast().toJSON(); //north east corner
+  getparams.SW = bounds.getSouthWest().toJSON(); //south-west corner
+  var to_send = {NE:getparams.NE, SW: getparams.SW};
+  $.get('mpo_handler.php', to_send, function(data){
+    for(key in data.coords){
+      //if(data.coords.hasOwnProperty(key)){
+      var polyCoordis = [];
+      temp = wktFormatter(data.coords[key]['POLYGON']);
+      for (var i = 0; i < temp.length; i++) {
+        polyCoordis.push(temp[i]);
+      }
+      var polygon = new google.maps.Polygon({
+        description: "polygon", //value that appears when you click the map
+        description_value: "to be announced",
+        paths: polyCoordis,
+        strokeColor: 'red',
+        strokeOpacity: 0.60,
+        strokeWeight: 0.70,
+        fillColor: 'grey',
+        fillOpacity: 0.60,
+        zIndex: -1
+      });
+      polygon.setOptions({ zIndex: -1 });
+      polygon.addListener('click', polyInfo);
+      app.polygons.push(polygon);
+      polygon.setMap(app.map);
+    }
+  });
+}
+
 function getPolygonsHelper(){
   app.payload.runFilters = false;
   app.payload.runAOI = false;
@@ -444,7 +478,6 @@ function getPolygonsHelper(){
 }
 
 function getPolygons(){
-
   var maximum;
   $("#legend").hide();
   app.payload.getMode="polygons";
@@ -648,6 +681,7 @@ function getPolygons(){
             });
             polygon.setOptions({ zIndex: -1 });
             polygon.addListener('click', polyInfo);
+            //console.log(app.polygons);
             app.polygons.push(polygon);
             polygon.setMap(app.map);
           }
