@@ -250,9 +250,17 @@ background: red;
                 </select>
               </div> <br>
             </div>
-          <div id="mpo" class="tab-pane fade"><br>
-            <h5> For Montana (El Paso, Tx) - Car Free</h5>
-          </div>
+            <div id="mpo" class="tab-pane fade"><br>
+              <h5> For Montana </h5>
+              <h5> El Paso, Texas </h5>
+              <label> Performance Measures:</label>
+              <div class="input-group">
+                <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+                <select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_mpo">
+                  <option value="" disabled selected>Select a performance measure</option>
+                </select>
+              </div> <br>
+            </div>
           </div>
         </div> <!--end column for selectors-->
         <div class="col-md-5"><br>
@@ -274,18 +282,18 @@ background: red;
             </div>
             <div id="mpobtn" class="tab-pane fade">
               <button type="button" class="btn btn-default form-control" id="mpo_draw" onclick="mpo();">Draw</button><br><br>
-          </div>
-        </div> <!-- end column for buttons-->
-      </div>
-      <div class="row">
-        <div class="col-sm-12">
-          <div id="legend" style='visibility: visible'>
+            </div>
+          </div> <!-- end column for buttons-->
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div id="legend" style='visibility: visible'>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </div> <!-- End main column 2 -->
 </div>
 <script src="js/jquery.js"></script>
@@ -401,17 +409,27 @@ $(document).ready(function(){
     });
     $('#target').on('change', setDistrict);
   });
+
+  var performance_measures = [
+    "A-2-3 Car Free HHs"
+  ];
+  var select_mpo = document.getElementById("select_mpo");
+  for(var i = 0; i < performance_measures.length; i++) {
+    var elem = document.createElement("option");
+    elem.textContent = performance_measures[i];
+    elem.value = "A23";
+    select_mpo.appendChild(elem);
+  }
+  $("#select_mpo").change(function(){
+    console.log(this.value);
+  });
+
   app.payload.district = $('#target').children("option:selected").data('district');
   $("#methods").change(function(){ //0: max / 1: min / 2: median / 3: weight/
     app.payload.depth_method = this.value;
   });
   $("#legend").hide();
 });
-
-function clearKML(){
-
-}
-
 function runAOI(){
   app.payload.runAOI = true;
   app.payload.runFilters = false;
@@ -709,8 +727,8 @@ function getPolygons(){
       //console.log(object_poly);
 
       //if(app.polygons.length > 1){ //still testing
-        var property = object_poly;
-        $.post("kmlWriter.php", property);
+      var property = object_poly;
+      $.post("kmlWriter.php", property);
       //}
 
       $(document.body).css({'cursor': 'auto'});
