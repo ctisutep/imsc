@@ -153,7 +153,7 @@ background: red;
               <li data-toggle="tooltip" data-placement="top" title="Click your drawn Area Of Interest to display statistics">
                 <a data-toggle="tab" href="#statistics,#statisticsbtn" data-target="#statistics, #statisticsbtn">Statistics</a>
               </li>
-              <li><a data-toggle="tab" href="#mpo,#mpobtn" data-target="#mpo, #mpobtn">MPO</a></li>
+              <!--<li><a data-toggle="tab" href="#mpo,#mpobtn" data-target="#mpo, #mpobtn">MPO</a></li> -->
             </ul>
             <div class="col-md-5 col-sm-11 col-lg-7">
               <div class="tab-content">
@@ -280,9 +280,9 @@ background: red;
               <button type="button" class="btn btn-default form-control" id="draw" onclick="drawAnotherRectangle();">Clear AOI</button><br><br>
               <button type="button" class="btn btn-default form-control" id="clearCharts" onclick="clearCharts();">Clear Charts</button>
             </div>
-            <div id="mpobtn" class="tab-pane fade">
+            <!--<div id="mpobtn" class="tab-pane fade">
               <button type="button" class="btn btn-default form-control" id="mpo_draw" onclick="mpo();">Draw</button><br><br>
-            </div>
+            </div>-->
           </div> <!-- end column for buttons-->
         </div>
         <div class="row">
