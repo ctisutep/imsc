@@ -250,7 +250,7 @@ background: red;
                 </select>
               </div> <br>
             </div>
-            <div id="mpo" class="tab-pane fade"><br>
+            <!--<div id="mpo" class="tab-pane fade"><br>
               <h5> For Montana </h5>
               <h5> El Paso, Texas </h5>
               <label> Performance Measures:</label>
@@ -260,7 +260,7 @@ background: red;
                   <option value="" disabled selected>Select a performance measure</option>
                 </select>
               </div> <br>
-            </div>
+            </div>-->
           </div>
         </div> <!--end column for selectors-->
         <div class="col-md-5"><br>
