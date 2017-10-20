@@ -410,7 +410,7 @@ $(document).ready(function(){
     $('#target').on('change', setDistrict);
   });
 
-  var performance_measures = [
+  /*var performance_measures = [
     "A-2-3 Car Free HHs"
   ];
   var select_mpo = document.getElementById("select_mpo");
@@ -422,7 +422,7 @@ $(document).ready(function(){
   }
   $("#select_mpo").change(function(){
     console.log(this.value);
-  });
+  });*/
 
   app.payload.district = $('#target').children("option:selected").data('district');
   $("#methods").change(function(){ //0: max / 1: min / 2: median / 3: weight/
