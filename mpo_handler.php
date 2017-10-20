@@ -24,11 +24,17 @@ $toReturn['query'] = $query;
 $result = mysqli_query($conn, $query);
 $toReturn['set'] = $result;
 
-$query= "SELECT astext(SHAPE) AS POLYGON, b_carfrhh as value FROM polygon AS p WHERE b_carfrhh >= 0.25 AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
+$query= "SELECT objectid, astext(SHAPE) AS POLYGON, b_carfrhh as value FROM polygon AS p WHERE b_carfrhh >= 0.25 AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE)";
 $toReturn['query2'] = $query;
 $result = mysqli_query($conn, $query);
 $result = fetchAll($result);
-$toReturn['coords'] = $result;
+
+$ids = array();
+//var_dump($result);
+$ids = array_unique($result, SORT_REGULAR);
+//var_dump($ids);
+
+$toReturn['coords'] = $ids;
 
 header('Content-Type: application/json');
 echo json_encode($toReturn);
