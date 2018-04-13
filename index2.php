@@ -253,8 +253,10 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                                 </select>
                                             </div> <br>
                                         </div>
-                                        <div id="control" class="tab-pane fade"><br><br>
+                                        <div id="control" class="tab-pane fade"><br>
                                             <h4>Control Sections</h4>
+                                            <div id="control-section-details-card-items" class="card"><br>
+                                            </div>
                                         </div>
                                         <!--<div id="mpo" class="tab-pane fade"><br>
                                           <h5> For Montana </h5>
@@ -313,6 +315,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
             <script>
                 //Components.utils.import("resource://gre/modules/osfile.jsm");
                 var polylines = [];
+                var polyClicked = -1;
                 var app = {map:null, polygons:null, label:"no filter", payload:{getMode:"polygons", runAOI:false, runLine:false, runPoly:false, runRec:false, runFilters:false, property:null, district:null, depth:0, from_depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null, filter_prop:null, filter_prop_n:null, filter_value:false, filter_units:0}};
                 var hecho = false;
                 var depth = app.payload.depth;
@@ -504,17 +507,17 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                     OID: response[i].OBJECTID
                                 });
                                 temp_polyline.setMap(app.map);
-                                // temp_polyline.addListener('click', function(){
-                                //     polylineClicked(this.index);
-                                //     this.setOptions({strokeColor: '#50f442'});
-                                //     temp_length = this.END - this.BEGIN;
-                                //     $('#control-section-details-card-items').empty();
-                                //     $('#control-section-details-card-items').append('<li class="list-group-item"><strong>Route Name: </strong>'+ this.RTE_NM +'</li>');
-                                //     $('#control-section-details-card-items').append('<li class="list-group-item"><strong>District: </strong>'+ this.DISTRICT +'</li>');
-                                //     $('#control-section-details-card-items').append('<li class="list-group-item"><strong>County: </strong>'+ this.COUNTY +'</li>');
-                                //     $('#control-section-details-card-items').append('<li class="list-group-item"><strong>Length: </strong>'+ Math.round(temp_length) +' miles </li>');
-                                //     $('#control-section-details-card-items').append('<li class="list-group-item"><strong>Object ID: </strong>'+ this.OID +'</li>');
-                                // });
+                                temp_polyline.addListener('click', function(){
+                                    polylineClicked(this.index);
+                                    this.setOptions({strokeColor: '#50f442'});
+                                    temp_length = this.END - this.BEGIN;
+                                    $('#control-section-details-card-items').empty();
+                                    $('#control-section-details-card-items').append('<li class="list-group-item"><strong>Route Name: </strong>'+ this.RTE_NM +'</li>');
+                                    $('#control-section-details-card-items').append('<li class="list-group-item"><strong>District: </strong>'+ this.DISTRICT +'</li>');
+                                    $('#control-section-details-card-items').append('<li class="list-group-item"><strong>County: </strong>'+ this.COUNTY +'</li>');
+                                    $('#control-section-details-card-items').append('<li class="list-group-item"><strong>Length: </strong>'+ Math.round(temp_length) +' miles </li>');
+                                    $('#control-section-details-card-items').append('<li class="list-group-item"><strong>Object ID: </strong>'+ this.OID +'</li>');
+                                });
                                 polylines.push(temp_polyline);
                             }
                         }
