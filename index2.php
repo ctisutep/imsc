@@ -156,6 +156,9 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                     <li>
                                         <a data-toggle="tab" href="#control,#controlbtn" data-target="#control, #controlbtn">Control</a>
                                     </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#layers, #layersbtn" data-target="#layers, #layersbtn">Layers</a>
+                                    </li>
                                     <!--<li><a data-toggle="tab" href="#mpo,#mpobtn" data-target="#mpo, #mpobtn">MPO</a></li> -->
                                 </ul>
                                 <div class="col-md-5 col-sm-11 col-lg-7">
@@ -258,6 +261,14 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                             <div id="control-section-details-card-items" class="card"><br>
                                             </div>
                                         </div>
+                                        <div id="layers" class="tab-pane fade"><br>
+<!--                                            <h4>Layers</h4>-->
+<!--                                            <div id="layers-card" class="card">-->
+<!--                                                    <div class="card-body" id="control-section-details-card-body">-->
+<!--                                                        <canvas id="canvas-soil-property" width="1200" height="800"></canvas>-->
+<!--                                                    </div>-->
+<!--                                            </div>-->
+                                        </div>
                                         <!--<div id="mpo" class="tab-pane fade"><br>
                                           <h5> For Montana </h5>
                                           <h5> El Paso, Texas </h5>
@@ -292,6 +303,10 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                             <button type="button" class="btn btn-default form-control" id="control_draw" onclick="getControlSections();">Display</button><br><br>
                                             <button type="button" class="btn btn-default form-control" id="control_remove" onclick="removeControlSections();">Remove</button><br><br>
                                         </div>
+                                        <div id="layersbtn" class="tab-pane fade">
+                                            <!--                                            <button type="button" class="btn btn-default form-control" id="control_draw" onclick="getControlSections();">Display</button><br><br>-->
+                                            <!--                                            <button type="button" class="btn btn-default form-control" id="control_remove" onclick="removeControlSections();">Remove</button><br><br>-->
+                                        </div>
                                     </div> <!-- end column for buttons-->
                                 </div>
                                 <div class="row">
@@ -305,17 +320,32 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                     </div>
                 </div> <!-- End main column 2 -->
             </div>
+
+            <div id="testingLayers" class="panel panel-default">
+                <div class="panel-body text-center">
+                    Layers - Test
+                </div>
+                <div class="panel-body" id="control-section-details-card-body">
+                    <!-- <div class="alert alert-primary text-center" role="alert">
+                      Click a Polygon to see details about it.
+                    </div> -->
+                    <canvas id="canvas-soil-property" width="400" height="200"></canvas>
+                </div>
+            </div>
+
             <script src="js/jquery.js"></script>
             <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
             <script src="js/bootstrap.js"></script>
             <script src="js/jquery.autocomplete.min.js"></script>
             <script src="js/properties.js"></script>
+            <script src="js/Chart.bundle.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.1/bootstrap-slider.js"></script>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.1/css/bootstrap-slider.css" />
             <script>
                 //Components.utils.import("resource://gre/modules/osfile.jsm");
                 var polylines = [];
                 var polyClicked = -1;
+                var ctx_soilProperty = document.getElementById("canvas-soil-property").getContext("2d");
                 var app = {map:null, polygons:null, label:"no filter", payload:{getMode:"polygons", runAOI:false, runLine:false, runPoly:false, runRec:false, runFilters:false, property:null, district:null, depth:0, from_depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null, filter_prop:null, filter_prop_n:null, filter_value:false, filter_units:0}};
                 var hecho = false;
                 var depth = app.payload.depth;
@@ -785,6 +815,8 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                             description: app.payload.value, //value that appears when you click the map
                                             description_value: data.coords[key][app.payload.property],
                                             paths: polyCoordis,
+                                            mukey: data.coords[key]['mukey'],
+                                            property: app.payload.property,
                                             strokeColor: shapeoutline[colorSelector],
                                             strokeOpacity: 0.60,
                                             strokeWeight: 0.70,
@@ -1317,7 +1349,106 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                     app.infoWindow.setContent(text);
                     app.infoWindow.setPosition(event.latLng);
                     app.infoWindow.open(app.map);
+                    let mu = this.mukey;
+                    let prop = this.property;
+                    testLayers(mu, prop);
                 }
+
+                function delete_chart_layer() {
+                    if(chart_layer) {
+                        console.log("deleting chart");
+                        chart_layer.clear();
+                        chart_layer.destroy();
+                    }else{
+                        console.log("not deleting chart");
+                    }
+                }
+
+                let chart_layer;
+                function testLayers(mu, prop) {
+                    //ajax call that will give me the correct format for the layered
+                    $("#canvas-soil-property").empty();
+                    let soilPropertyBar =  new Chart(ctx_soilProperty);
+                    soilPropertyBar.destroy();
+                    //soilPropertyBar.clear();
+                    delete_chart_layer();
+                    temp_property = prop;
+                    $.ajax({
+                        url: './soilProperties.php?soilProperty='+ temp_property +'&mukey='+mu,
+                        dataType: 'json',
+                        success: function(response){
+                            layeredChartArray = [];
+                            for (var k = 0; k < response.length; k++) {
+                                layeredChartArray.push([parseInt(response[k]['hzdept_r']), parseInt(response[k]['hzdepb_r']), response[k]['classification']]);
+                            }
+                            layeredChartData = stackedChartDataFormatter(layeredChartArray);
+
+                            soilPropertyBar = new Chart(ctx_soilProperty, {
+                                type: 'bar',
+                                data: layeredChartData ,
+                                options: {
+                                    title:{
+                                        display: false,
+                                        text: ""
+                                    },
+                                    tooltips: {
+                                        enabled: false,
+                                        mode: 'index',
+                                        intersect: false
+                                    },
+                                    responsive: true,
+                                    scales: {
+                                        xAxes: [{
+                                            stacked: true,
+                                        }],
+                                        yAxes: [{
+                                            stacked: true,
+                                            display: true,
+                                            scaleLabel: {
+                                                display: true,
+                                                labelString: 'Depth ( cm )'
+                                            }
+                                        }]
+                                    }
+                                }
+                            });
+                            chart_layer = soilPropertyBar;
+                            //soilPropertyBar.destroy();
+                            //soilPropertyBar.clear();
+                        }
+                    });
+                }
+
+                function stackedChartDataFormatter(sampleData){
+                    colors = ["rgb(212, 60, 60)",
+                        "rgb(246, 144, 37)",
+                        "rgb(250, 231, 57)",
+                        "rgb(92, 223, 52)",
+                        "rgb(21, 191, 186)",
+                        "rgb(48, 123, 166)",
+                        "rgb(77, 94, 255)",
+                        "rgb(203, 84, 227)",
+                        "rgb(133, 100, 36)",
+                        "rgb(138, 138, 138)"];
+
+                    temp_datasets = [];
+
+                    for (var i = 0; i < sampleData.length; i++) {
+                        temp_datasets.push({label: sampleData[i][2],
+                            backgroundColor: colors[i],
+                            data: [sampleData[i][0] - sampleData[i][1]]
+                        });
+                    }
+
+                    stackedChartData = {
+                        labels: ["Layers"],
+                        datasets: temp_datasets
+                    };
+
+                    return stackedChartData;
+                }
+
+
 
                 function wktFormatter(poly){
                     new_poly = poly.slice(9,-2);
