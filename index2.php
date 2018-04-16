@@ -470,6 +470,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                         app.payload.depth_method = this.value;
                     });
                     $("#legend").hide();
+                    $("#testingLayers").hide();
                 });
 
                 function polylineClicked(polyIndex){
@@ -1328,6 +1329,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                     $('#legend').find('*').not('h3').remove();
                     $('#description').find('*').not('h3').remove();
                     delete_chart_layer();
+                    $("#testingLayers").hide();
                 }
 
                 function printMaps() {
@@ -1361,11 +1363,12 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
 
                 function delete_chart_layer() {
                     if(chart_layer) {
-                        console.log("deleting chart");
+                        //console.log("deleting chart");
                         //chart_layer.clear();
                         chart_layer.destroy();
-                    }else{
-                        console.log("not deleting chart");
+                    }
+                    else{
+                        //console.log("not deleting chart");
                     }
                 }
 
@@ -1421,6 +1424,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                             //soilPropertyBar.clear();
                         }
                     });
+                    $("#testingLayers").show();
                 }
 
                 function stackedChartDataFormatter(sampleData){
