@@ -79,7 +79,7 @@ switch (true) {
     default:
         $mukey = mysqli_real_escape_string($conn, $_GET['mukey']);
         $sp = $_GET['soilProperty'];
-        $query = "SELECT hzdept_r, hzdepb_r, $sp AS classification FROM imsc.chorizon_joins WHERE mukey = $mukey";
+        $query = "SELECT hzdept_r, hzdepb_r, $sp AS classification FROM imsc.chorizon_joins WHERE mukey = $mukey ORDER BY hzdept_r ASC";
         $result = mysqli_query($conn, $query);
 
         $response = [];

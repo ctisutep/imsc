@@ -1327,6 +1327,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                     document.getElementById('legend').style.visibility = "hidden";
                     $('#legend').find('*').not('h3').remove();
                     $('#description').find('*').not('h3').remove();
+                    delete_chart_layer();
                 }
 
                 function printMaps() {
