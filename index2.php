@@ -1314,7 +1314,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                 function clearCharts(){
                     $(".chart").empty();
                 }
-                
+
                 function removePolygons(){
                     if(app.polygons){
                         for(var i = 0; i < app.polygons.length; i++){
@@ -1370,7 +1370,6 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
 
                 let chart_layer;
                 function testLayers(mu, prop) {
-                    //ajax call that will give me the correct format for the layered
                     $("#canvas-soil-property").empty();
                     let soilPropertyBar =  new Chart(ctx_soilProperty);
                     soilPropertyBar.destroy();
@@ -1451,8 +1450,6 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
 
                     return stackedChartData;
                 }
-
-
 
                 function wktFormatter(poly){
                     new_poly = poly.slice(9,-2);
