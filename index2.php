@@ -53,7 +53,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <h3 class="text-center" style="color:#FF8000;"> Interactive Soil Characterization</h3>
+    <h3 class="text-center" style="color:#FF8000;">TxDOT Interactive Soil Characterization</h3>
     <h6 class="hidden-xs text-center"><i style="color: white;">"</i><strong><i style="color:#FF8000;" class="text-center">CTIS </i></strong><i class="text-center" style="color:white;">is designated as a Member of National, Regional, and Tier 1 University Transportation Center."</i></h6>
     <p class="hidden-xs text-right" style="color: white"> Version 1.4.1 (04/16/2018)</p>
     <!--<p class="hidden-md hidden-lg text-center" style="color: white"> Version 4 (9/27/2017)</p> -->
@@ -1428,12 +1428,12 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                 }
 
                 function stackedChartDataFormatter(sampleData){
-                    colors = ["rgb(212, 60, 60)",
-                        "rgb(246, 144, 37)",
-                        "rgb(250, 231, 57)",
-                        "rgb(92, 223, 52)",
-                        "rgb(21, 191, 186)",
-                        "rgb(48, 123, 166)",
+                    colors = ["rgb(151, 60, 212)",
+                        "rgb(212, 60, 189)",
+                        "rgb(200, 234, 129)",
+                        "rgb(0, 255, 216)",
+                        "rgb(0, 11, 168)",
+                        "rgb(255, 140, 0)",
                         "rgb(77, 94, 255)",
                         "rgb(203, 84, 227)",
                         "rgb(133, 100, 36)",
