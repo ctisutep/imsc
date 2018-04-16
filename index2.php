@@ -117,31 +117,31 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                             <label>District:</label>
                             <select id="target" class="form-control">
                                 <option value="" disabled selected>Select a district</option>
-                                <option value="32.43561304116276, -100.1953125" data-district="abeline">Abilene</option>
-                                <option value="35.764343479667176, -101.49169921875" data-district="amarillo">Amarillo</option>
-                                <option value="32.69651010951669, -94.691162109375" data-district="atlanta">Atlanta</option>
-                                <option value="30.25391637229704, -98.23212890625" data-district="austin">Austin</option>
-                                <option value="30.40211367909724, -94.39453125" data-district="beaumont">Beaumont</option>
-                                <option value="31.765537409484374, -99.140625" data-district="brownwood">Brownwood</option>
-                                <option value="30.894611546632302, -96.30615234375" data-district="bryan">Bryan</option>
-                                <option value="34.397844946449865, -100.37109375" data-district="childress">Childress</option>
-                                <option value="28.110748760633534, -97.71240234375" data-district="corpus">Corpus Christi</option>
-                                <option value="32.54681317351514, -96.85546875" data-district="dallas">Dallas</option>
-                                <option value="31.770546, -106.504874" data-district="elPaso">El Paso</option>
-                                <option value="32.62087018318113, -97.75634765625" data-district="fortWorth">Fort Worth</option>
-                                <option value="29.661670115197377, -95.33935546875" data-district="houston">Houston</option>
-                                <option value="28.613459424004418, -99.90966796875" data-district="laredo">Laredo</option>
-                                <option value="33.43144133557529, -101.93115234375" data-district="lubbock">Lubbock</option>
-                                <option value="31.203404950917395, -94.7021484375" data-district="lufkin">Lufkin</option>
-                                <option value="31.203404950917395, -102.568359375" data-district="odessa">Odessa</option>
-                                <option value="33.43144133557529, -95.625" data-district="paris">Paris</option>
-                                <option value="26.951453083498258, -98.32763671875" data-district="pharr">Pharr</option>
-                                <option value="31.10819929911196, -100.48095703125" data-district="sanAngelo">San Angelo</option>
-                                <option value="29.13297013087864, -98.89892578125" data-district="sanAntonio">San Antonio</option>
-                                <option value="32.222095840502334, -95.33935546875" data-district="tyler">Tyler</option>
-                                <option value="31.403404950917395, -97.119140625" data-district="waco">Waco</option>
-                                <option value="33.77914733128647, -98.37158203125" data-district="wichitaFalls">Wichita Falls</option>
-                                <option value="29.05616970274342, -96.8115234375" data-district="yoakum">Yoakum</option>
+                                <option value="32.43561304116276, -100.1953125" data-district="Abilene">Abilene</option>
+                                <option value="35.764343479667176, -101.49169921875" data-district="Amarillo">Amarillo</option>
+                                <option value="32.69651010951669, -94.691162109375" data-district="Atlanta">Atlanta</option>
+                                <option value="30.25391637229704, -98.23212890625" data-district="Austin">Austin</option>
+                                <option value="30.40211367909724, -94.39453125" data-district="Beaumont">Beaumont</option>
+                                <option value="31.765537409484374, -99.140625" data-district="Brownwood">Brownwood</option>
+                                <option value="30.894611546632302, -96.30615234375" data-district="Bryan">Bryan</option>
+                                <option value="34.397844946449865, -100.37109375" data-district="Childress">Childress</option>
+                                <option value="28.110748760633534, -97.71240234375" data-district="Corpus Christi">Corpus Christi</option>
+                                <option value="32.54681317351514, -96.85546875" data-district="Dallas">Dallas</option>
+                                <option value="31.770546, -106.504874" data-district="El Paso">El Paso</option>
+                                <option value="32.62087018318113, -97.75634765625" data-district="Fort Worth">Fort Worth</option>
+                                <option value="29.661670115197377, -95.33935546875" data-district="Houston">Houston</option>
+                                <option value="28.613459424004418, -99.90966796875" data-district="Laredo">Laredo</option>
+                                <option value="33.43144133557529, -101.93115234375" data-district="Lubbock">Lubbock</option>
+                                <option value="31.203404950917395, -94.7021484375" data-district="Lufkin">Lufkin</option>
+                                <option value="31.203404950917395, -102.568359375" data-district="Odessa">Odessa</option>
+                                <option value="33.43144133557529, -95.625" data-district="Paris">Paris</option>
+                                <option value="26.951453083498258, -98.32763671875" data-district="Pharr">Pharr</option>
+                                <option value="31.10819929911196, -100.48095703125" data-district="San Angelo">San Angelo</option>
+                                <option value="29.13297013087864, -98.89892578125" data-district="San Antonio">San Antonio</option>
+                                <option value="32.222095840502334, -95.33935546875" data-district="Tyler">Tyler</option>
+                                <option value="31.403404950917395, -97.119140625" data-district="Waco">Waco</option>
+                                <option value="33.77914733128647, -98.37158203125" data-district="Wichita Falls">Wichita Falls</option>
+                                <option value="29.05616970274342, -96.8115234375" data-district="Yoakum">Yoakum</option>
                             </select>
                         </div>
                         <div class="row panel panel-default">
@@ -156,9 +156,9 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                     <li>
                                         <a data-toggle="tab" href="#control,#controlbtn" data-target="#control, #controlbtn">Control</a>
                                     </li>
-                                    <li>
-                                        <a data-toggle="tab" href="#layers, #layersbtn" data-target="#layers, #layersbtn">Layers</a>
-                                    </li>
+<!--                                    <li>-->
+<!--                                        <a data-toggle="tab" href="#layers, #layersbtn" data-target="#layers, #layersbtn">Layers</a>-->
+<!--                                    </li>-->
                                     <!--<li><a data-toggle="tab" href="#mpo,#mpobtn" data-target="#mpo, #mpobtn">MPO</a></li> -->
                                 </ul>
                                 <div class="col-md-5 col-sm-11 col-lg-7">
@@ -324,7 +324,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
 
             <div id="testingLayers" class="panel panel-default">
                 <div class="panel-body text-center">
-                    Layers - Test
+<!--                    Layers - Test-->
                 </div>
                 <div class="panel-body" id="control-section-details-card-body">
                     <!-- <div class="alert alert-primary text-center" role="alert">
@@ -519,7 +519,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                         //url: 'php/controlSections.php?request=sections&district='+district,
                         //url: 'controlSections.php?request=sections&district=El Paso',
                         //url: 'php/controlSections.php?request=sections&district='+district+'&county='+county,
-                        url: 'controlSections.php?request=sections&district=El Paso'+'&county=All',
+                        url: 'controlSections.php?request=sections&district='+district+'&county=All',
                         dataType: 'json',
                         success: function(response){
                             for (var i = 0; i < response.length; i++) {
