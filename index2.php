@@ -55,7 +55,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <h3 class="text-center" style="color:#FF8000;"> Interactive Soil Characterization</h3>
     <h6 class="hidden-xs text-center"><i style="color: white;">"</i><strong><i style="color:#FF8000;" class="text-center">CTIS </i></strong><i class="text-center" style="color:white;">is designated as a Member of National, Regional, and Tier 1 University Transportation Center."</i></h6>
-    <p class="hidden-xs text-right" style="color: white"> Version 4 (10/18/2017)</p>
+    <p class="hidden-xs text-right" style="color: white"> Version 1.4.1 (04/16/2018)</p>
     <!--<p class="hidden-md hidden-lg text-center" style="color: white"> Version 4 (9/27/2017)</p> -->
 </nav>
 <div>
@@ -258,10 +258,11 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                         </div>
                                         <div id="control" class="tab-pane fade"><br>
                                             <h4>Control Sections</h4>
-                                            <div id="control-section-details-card-items" class="card"><br>
-                                            </div>
+                                            <div id="control-section-details-card-items" class="card">
+                                            </div><br>
                                         </div>
                                         <div id="layers" class="tab-pane fade"><br>
+                                            <p>Testing feature.</p>
 <!--                                            <h4>Layers</h4>-->
 <!--                                            <div id="layers-card" class="card">-->
 <!--                                                    <div class="card-body" id="control-section-details-card-body">-->
@@ -299,7 +300,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                             <button type="button" class="btn btn-default form-control" id="draw" onclick="drawAnotherRectangle();">Clear AOI</button><br><br>
                                             <button type="button" class="btn btn-default form-control" id="clearCharts" onclick="clearCharts();">Clear Charts</button>
                                         </div>
-                                        <div id="controlbtn" class="tab-pane fade">
+                                        <div id="controlbtn" class="tab-pane fade"><br><br>
                                             <button type="button" class="btn btn-default form-control" id="control_draw" onclick="getControlSections();">Display</button><br><br>
                                             <button type="button" class="btn btn-default form-control" id="control_remove" onclick="removeControlSections();">Remove</button><br><br>
                                         </div>
@@ -506,6 +507,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                         //}
                     }
                     polylines = [];
+                    $("#control-section-details-card-items").empty();
                 }
 
                 function getControlSections(){
@@ -1312,6 +1314,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                 function clearCharts(){
                     $(".chart").empty();
                 }
+                
                 function removePolygons(){
                     if(app.polygons){
                         for(var i = 0; i < app.polygons.length; i++){
@@ -1325,6 +1328,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                     $('#legend').find('*').not('h3').remove();
                     $('#description').find('*').not('h3').remove();
                 }
+
                 function printMaps() {
                     var body               = $('body');
                     var mapContainer       = $('#map');
@@ -1357,7 +1361,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                 function delete_chart_layer() {
                     if(chart_layer) {
                         console.log("deleting chart");
-                        chart_layer.clear();
+                        //chart_layer.clear();
                         chart_layer.destroy();
                     }else{
                         console.log("not deleting chart");
