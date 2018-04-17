@@ -55,10 +55,10 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 
     <div class="row">
-        <div class="col-lg-6">
-            <h3 class="text-right" style="color:#FF8000;">TxDOT Interactive Soil Characterization</h3>
+        <div class="col-lg-10">
+            <h3 class="text-center" style="color:#FF8000;">&nbsp; &nbsp; TxDOT Interactive Soil Characterization</h3>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-2">
             <div class="text-right"><img src="./img/ctis_transparent_2017.png" height="50" width="50"></div>
         </div>
     </div>
