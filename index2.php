@@ -55,11 +55,11 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 
     <div class="row">
-        <div class="col-lg-10">
+        <div class="col-lg-10-offset-2">
             <h3 class="text-center" style="color:#FF8000;">&nbsp; &nbsp; TxDOT Interactive Soil Characterization</h3>
         </div>
         <div class="col-lg-2">
-            <div class="text-right"><img src="./img/ctis_transparent_2017.png" height="50" width="50"></div>
+<!--            <div class="text-right"><img src="./img/ctis_transparent_2017.png" height="50" width="50"></div>-->
         </div>
     </div>
     <h6 class="hidden-xs text-center"><i style="color: white;">"</i><strong><i style="color:#FF8000;" class="text-center">CTIS </i></strong><i class="text-center" style="color:white;">is designated as a Member of National, Regional, and Tier 1 University Transportation Center."</i></h6>
