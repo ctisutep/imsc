@@ -53,16 +53,11 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-
     <div class="row">
-
-        <div class="col-lg-10-offset-2">
-            <h3 class="text-center" style="color:#FF8000;">&nbsp; &nbsp; TxDOT Interactive Soil Characterization</h3>
-        </div>
-        <div class="col-lg-2">
-<!--            <div class="text-right"><img src="./img/ctis_transparent_2017.png" height="50" width="50"></div>-->
-        </div>
-
+        <h3 class="text-center" style="padding-left: 95px; color: #FF8000">TxDOT Interactive Soil Characterization
+            <img style="float:right" src="./img/ctis_transparent_white_2017.png" height="50" width="50">
+            <img style="float:right" src="./img/txdotnewlogo.png" height="50" width="50">
+        </h3>
     </div>
     <h6 class="hidden-xs text-center"><i style="color: white;">"</i><strong><i style="color:#FF8000;" class="text-center">CTIS </i></strong><i class="text-center" style="color:white;">is designated as a Member of National, Regional, and Tier 1 University Transportation Center."</i></h6>
     <p class="hidden-xs text-right" style="color: white"> Version 1.4.1 (04/16/2018)</p>
@@ -166,9 +161,9 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                     <li>
                                         <a data-toggle="tab" href="#control,#controlbtn" data-target="#control, #controlbtn">Control</a>
                                     </li>
-<!--                                    <li>-->
-<!--                                        <a data-toggle="tab" href="#layers, #layersbtn" data-target="#layers, #layersbtn">Layers</a>-->
-<!--                                    </li>-->
+                                    <!--                                    <li>-->
+                                    <!--                                        <a data-toggle="tab" href="#layers, #layersbtn" data-target="#layers, #layersbtn">Layers</a>-->
+                                    <!--                                    </li>-->
                                     <!--<li><a data-toggle="tab" href="#mpo,#mpobtn" data-target="#mpo, #mpobtn">MPO</a></li> -->
                                 </ul>
                                 <div class="col-md-5 col-sm-11 col-lg-7">
@@ -273,12 +268,12 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                         </div>
                                         <div id="layers" class="tab-pane fade"><br>
                                             <p>Testing feature.</p>
-<!--                                            <h4>Layers</h4>-->
-<!--                                            <div id="layers-card" class="card">-->
-<!--                                                    <div class="card-body" id="control-section-details-card-body">-->
-<!--                                                        <canvas id="canvas-soil-property" width="1200" height="800"></canvas>-->
-<!--                                                    </div>-->
-<!--                                            </div>-->
+                                            <!--                                            <h4>Layers</h4>-->
+                                            <!--                                            <div id="layers-card" class="card">-->
+                                            <!--                                                    <div class="card-body" id="control-section-details-card-body">-->
+                                            <!--                                                        <canvas id="canvas-soil-property" width="1200" height="800"></canvas>-->
+                                            <!--                                                    </div>-->
+                                            <!--                                            </div>-->
                                         </div>
                                         <!--<div id="mpo" class="tab-pane fade"><br>
                                           <h5> For Montana </h5>
@@ -334,7 +329,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
 
             <div id="testingLayers" class="panel panel-default">
                 <div class="panel-body text-center">
-<!--                    Layers - Test-->
+                    <!--                    Layers - Test-->
                 </div>
                 <div class="panel-body" id="control-section-details-card-body">
                     <!-- <div class="alert alert-primary text-center" role="alert">
