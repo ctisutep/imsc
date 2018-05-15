@@ -681,7 +681,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                 if(num_labels != null){
                                 }
                                 else{
-                                    alert("Please select a feasible number of labels.");
+                                    //alert("Please select a feasible number of labels.");
                                     $('#legend').find('*').not('h3').remove();
                                     var div = document.createElement('div');
                                     div.innerHTML = "<strong>" + "Legend N/A" + "</strong>" + "<br>" + "<img src='img/brightgreensquare.png' height='10px'/> "
