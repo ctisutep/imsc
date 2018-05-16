@@ -35,7 +35,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
         </h3>
     </div>
     <h6 class="hidden-xs text-center"><i style="color: white;">"</i><strong><i style="color:#FF8000;" class="text-center">CTIS </i></strong><i class="text-center" style="color:white;">is designated as a Member of National, Regional, and Tier 1 University Transportation Center."</i></h6>
-    <p class="hidden-xs text-right" style="color: white"> Version 1.4.1 (04/16/2018)</p>
+    <p class="hidden-xs text-right" style="color: white"> Version 1.4.2 (05/16/2018)</p>
     <!--<p class="hidden-md hidden-lg text-center" style="color: white"> Version 4 (9/27/2017)</p> -->
 </nav><br><br>
 
