@@ -159,7 +159,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                         <a data-toggle="tab" href="#statistics,#statisticsbtn" data-target="#statistics, #statisticsbtn">Statistics</a>
                                     </li>
                                     <li>
-                                        <a data-toggle="tab" href="#control,#controlbtn" data-target="#control, #controlbtn">Control</a>
+                                        <a data-toggle="tab" href="#tutorial,#tutorialbtn" data-target="#tutorial, #tutorialbtn">Tutorial</a>
                                     </li>
                                     <!--                                    <li>-->
                                     <!--                                        <a data-toggle="tab" href="#layers, #layersbtn" data-target="#layers, #layersbtn">Layers</a>-->
@@ -261,31 +261,10 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                                 </select>
                                             </div> <br>
                                         </div>
-                                        <div id="control" class="tab-pane fade"><br>
-                                            <h4>Control Sections</h4>
-                                            <div id="control-section-details-card-items" class="card">
-                                            </div><br>
+                                        <div id="tutorial" class="tab-pane fade center-block text-center"><br>
+                                            <h4>Watch a brief tutorial on how to use TX-ISC</h4>
+                                            <br>
                                         </div>
-                                        <div id="layers" class="tab-pane fade"><br>
-                                            <p>Testing feature.</p>
-                                            <!--                                            <h4>Layers</h4>-->
-                                            <!--                                            <div id="layers-card" class="card">-->
-                                            <!--                                                    <div class="card-body" id="control-section-details-card-body">-->
-                                            <!--                                                        <canvas id="canvas-soil-property" width="1200" height="800"></canvas>-->
-                                            <!--                                                    </div>-->
-                                            <!--                                            </div>-->
-                                        </div>
-                                        <!--<div id="mpo" class="tab-pane fade"><br>
-                                          <h5> For Montana </h5>
-                                          <h5> El Paso, Texas </h5>
-                                          <label> Performance Measures:</label>
-                                          <div class="input-group">
-                                            <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
-                                            <select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_mpo">
-                                              <option value="" disabled selected>Select a performance measure</option>
-                                            </select>
-                                          </div> <br>
-                                        </div>-->
                                     </div>
                                 </div> <!--end column for selectors-->
                                 <div class="col-md-5"><br>
@@ -305,13 +284,10 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                             <button type="button" class="btn btn-default form-control" id="draw" onclick="drawAnotherRectangle();">Clear AOI</button><br><br>
                                             <button type="button" class="btn btn-default form-control" id="clearCharts" onclick="clearCharts();">Clear Charts</button>
                                         </div>
-                                        <div id="controlbtn" class="tab-pane fade"><br><br>
-                                            <button type="button" class="btn btn-default form-control" id="control_draw" onclick="getControlSections();">Display</button><br><br>
-                                            <button type="button" class="btn btn-default form-control" id="control_remove" onclick="removeControlSections();">Remove</button><br><br>
-                                        </div>
-                                        <div id="layersbtn" class="tab-pane fade">
-                                            <!--                                            <button type="button" class="btn btn-default form-control" id="control_draw" onclick="getControlSections();">Display</button><br><br>-->
-                                            <!--                                            <button type="button" class="btn btn-default form-control" id="control_remove" onclick="removeControlSections();">Remove</button><br><br>-->
+                                        <div id="tutorialbtn" class="tab-pane fade">
+                                            <button type="button" class="btn btn-default form-control" id="control_draw" onclick="window.open('./tutorial.php','_blank');">
+                                                Go to Tutorial
+                                            </button><br>
                                         </div>
                                     </div> <!-- end column for buttons-->
                                 </div>
