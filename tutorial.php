@@ -59,15 +59,24 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                         <div class="panel-body">
                             <ul> Skip to these times to watch an specific topic covered by the video tutorial.</ul>
                             <ul><b>00:00 - </b> Start </ul>
-                            <ul><b>00:07 - </b> Explanation for Corridor, Planning Block, Performance Measure dropdown boxes. </ul>
-                            <ul><b>01:00 - </b> Display Tool (Municipalities, Sections, Boundary dropdown boxes inside the Display tab). </ul>
-                            <ul><b>02:40 - </b> Explanation for Summary, Corridor Level Analysis, Section Level Analysis </ul>
-                            <ul><b>03:14 - </b> Timeline Tool </ul>
-                            <ul><b>04:00 - </b> Filter Tool </ul>
-                            <ul><b>05:00 - </b> AOI Tool </ul>
-                            <ul><b>05:40 - </b> Print Utility </ul>
-                            <ul><b>06:20 - </b> Multiple Performance Measures </ul>
-                            <ul><b>07:40 - </b> Finish </ul>
+                            <ul><b>00:17 - </b> Selecting a district. </ul>
+                            <ul><b>00:33 - </b> Selecting a soil property</ul>
+                            <ul><b>00:42 - </b> Displaying soil properties on map</ul>
+                            <ul><b>00:48 - </b> Legend and description for soil property</ul>
+                            <ul><b>00:56 - </b> Selecting labels for legend </ul>
+                            <ul><b>01:06 - </b> Selecting a method to display data </ul>
+                            <ul><b>01:21 - </b> Selecting a range for the depth </ul>
+                            <ul><b>01:48 - </b> Looking at polygon depth and values</ul>
+                            <ul><b>02:15 - </b> Drawing an Area of Interest (AOI)</ul>
+                            <ul><b>02:23 - </b> Displaying only the AOI </ul>
+                            <ul><b>02:50 - </b> Clearing the AOI region</ul>
+                            <ul><b>03:07 - </b> Printing map to PDF</ul>
+                            <ul><b>03:40 - </b> KML</ul>
+                            <ul><b>04:04 - </b> Filtering data to display</ul>
+                            <ul><b>04:50 - </b> Displaying statistics</ul>
+                            <ul><b>05:56 - </b> Tutorial tab</ul>
+                            <ul><b>06:03 - </b> Clearing map, charts, AOI</ul>
+                            <ul><b>06:15 - </b> Finish</ul>
                             <ul><b></b></ul>
                         </div>
                     </div>
