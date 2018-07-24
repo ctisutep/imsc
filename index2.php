@@ -64,254 +64,9 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
     <!--<p class="hidden-md hidden-lg text-center"  style="color: white"> Version 4 (9/27/2017)</p> -->
 </nav><br><br>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="row">
             <div id="map"></div>
-            <div id="description"></div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="row">
-                    <div class="chart" id="chart_area_1"> </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="row">
-                    <div class="chart" id="chart_area_2"> </div>
-                </div>
-            </div>
-            <!--<div class="col-lg-6">
-            <div class="row">
-            <div class="chart" id="chart_histogram_1"> </div>
-          </div>
-          <div class="row">
-          <div class="chart" id="chart_histogram_2"> </div>
-        </div>
-      </div> -->
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="row">
-                    <div class="chart" id="chart_area_3"> </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="row">
-                    <div class="chart" id="chart_area_4"> </div>
-                </div>
-            </div>
-            <!-- <div class="col-lg-6">
-            <div class="row">
-            <div class="chart" id="chart_histogram_3"> </div>
-          </div>
-          <div class="row">
-          <div class="chart" id="chart_histogram_4"> </div>
-        </div>
-        </div> -->
-        </div>
-    </div> <!-- End main column 1 -->
-    <div class="col-md-3">
-        <div class="col-md-13">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <center><h3 class="panel-title">Toolbar</h3></center>
-                </div>
-                <div class="panel-body">
-                    <div class="row panel panel-default">
-                        <label>District:</label>
-                        <select id="target" class="form-control">
-                            <option value="" disabled selected>Select a district</option>
-                            <option value="32.43561304116276, -100.1953125" data-district="Abilene">Abilene</option>
-                            <option value="35.764343479667176, -101.49169921875" data-district="Amarillo">Amarillo</option>
-                            <option value="32.69651010951669, -94.691162109375" data-district="Atlanta">Atlanta</option>
-                            <option value="30.25391637229704, -98.23212890625" data-district="Austin">Austin</option>
-                            <option value="30.40211367909724, -94.39453125" data-district="Beaumont">Beaumont</option>
-                            <option value="31.765537409484374, -99.140625" data-district="Brownwood">Brownwood</option>
-                            <option value="30.894611546632302, -96.30615234375" data-district="Bryan">Bryan</option>
-                            <option value="34.397844946449865, -100.37109375" data-district="Childress">Childress</option>
-                            <option value="28.110748760633534, -97.71240234375" data-district="Corpus Christi">Corpus Christi</option>
-                            <option value="32.54681317351514, -96.85546875" data-district="Dallas">Dallas</option>
-                            <option value="31.770546, -106.504874" data-district="El Paso">El Paso</option>
-                            <option value="32.62087018318113, -97.75634765625" data-district="Fort Worth">Fort Worth</option>
-                            <option value="29.661670115197377, -95.33935546875" data-district="Houston">Houston</option>
-                            <option value="28.613459424004418, -99.90966796875" data-district="Laredo">Laredo</option>
-                            <option value="33.43144133557529, -101.93115234375" data-district="Lubbock">Lubbock</option>
-                            <option value="31.203404950917395, -94.7021484375" data-district="Lufkin">Lufkin</option>
-                            <option value="31.203404950917395, -102.568359375" data-district="Odessa">Odessa</option>
-                            <option value="33.43144133557529, -95.625" data-district="Paris">Paris</option>
-                            <option value="26.951453083498258, -98.32763671875" data-district="Pharr">Pharr</option>
-                            <option value="31.10819929911196, -100.48095703125" data-district="San Angelo">San Angelo</option>
-                            <option value="29.13297013087864, -98.89892578125" data-district="San Antonio">San Antonio</option>
-                            <option value="32.222095840502334, -95.33935546875" data-district="Tyler">Tyler</option>
-                            <option value="31.403404950917395, -97.119140625" data-district="Waco">Waco</option>
-                            <option value="33.77914733128647, -98.37158203125" data-district="Wichita Falls">Wichita Falls</option>
-                            <option value="29.05616970274342, -96.8115234375" data-district="Yoakum">Yoakum</option>
-                        </select>
-                    </div>
-                    <div class="row panel panel-default">
-                        <center><label>Soil Mapping</label></center>
-                        <div class="row">
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#default,#defaultbtn" data-target="#default, #defaultbtn">Tools</a></li>
-                                <li><a data-toggle="tab" href="#filters,#filtersbtn" data-target="#filters, #filtersbtn">Filter</a></li>
-                                <li data-toggle="tooltip" data-placement="top" title="Click your drawn Area Of Interest to display statistics">
-                                    <a data-toggle="tab" href="#statistics,#statisticsbtn" data-target="#statistics, #statisticsbtn">Statistics</a>
-                                </li>
-                                <li>
-                                    <a data-toggle="tab" href="#tutorial,#tutorialbtn" data-target="#tutorial, #tutorialbtn">Tutorial</a>
-                                </li>
-                                <!--                                    <li>-->
-                                <!--                                        <a data-toggle="tab" href="#layers, #layersbtn" data-target="#layers, #layersbtn">Layers</a>-->
-                                <!--                                    </li>-->
-                                <!--<li><a data-toggle="tab" href="#mpo,#mpobtn" data-target="#mpo, #mpobtn">MPO</a></li> -->
-                            </ul>
-                            <div class="col-md-5 col-sm-11 col-lg-7">
-                                <div class="tab-content">
-                                    <div id="default" class="tab-pane fade in active">
-                                        <label> Soil Property:</label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
-                                            <select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="selectProp">
-                                                <option value="" disabled selected>Select a ground property</option>
-                                            </select>
-                                        </div> <br>
-                                        <label> Depth:</label>
-                                        <input id="slide_depth" type="text" class="span2" value="" data-slider-min="0" data-slider-max="79" data-slider-step="1" data-slider-value="[0,0]"/>
-                                        <!---<div class="input-group">
-                                        <span class="input-group-addon" id="basic-addon3">To.....</span>
-                                        <input type="number" class="form-control" value="0" min="0" placeholder="...inches" id="depthTo" aria-describedby="basic-addon3">
-                                      </div>
-                                      <div class="input-group">
-                                      <span class="input-group-addon" id="basic-addon3">From</span>
-                                      <input type="number" class="form-control" value="0" min="0" max="77" placeholder="...inches" id="depth" aria-describedby="basic-addon3">
-                                    </div>--><br><br>
-                                        <label> Method:</label>
-                                        <select data-toggle="tooltip" data-placement="top" title="Method by which the data will be gathered" id="methods" class="form-control">
-                                            <option value="" disabled selected>Select method</option>
-                                            <option value="1" id="max_method">Max</option>
-                                            <option value="2" id="min_method">Min</option>
-                                            <option value="3" id="med_method">Median</option>
-                                            <option value="4" id="weight_method">Weighted average</option>
-                                            <option value="5" id="specific_method">At Specific Depth</option>
-                                        </select><br>
-                                        <div class="input-group">
-                                            <span data-toggle="tooltip" data-placement="top" title="Number of representations for the data" class="input-group-addon" id="basic-addon3"># labels</span>
-                                            <input type="number" class="form-control" value="1" min="1"placeholder="...labels" id="labels" aria-describedby="basic-addon3">
-                                        </div><br>
-                                    </div>
-                                    <div id="filters" class="tab-pane fade"><br>
-                                        <div class="form-check">
-                                            <p class="form-check-label">
-                                                <input class="form-check-input" type="radio" name="radios" id="biggerThan" value="bigger">
-                                                Color polygons that are bigger than the unit value
-                                            </p>
-                                        </div>
-                                        <div class="form-check">
-                                            <p class="form-check-label">
-                                                <input class="form-check-input" type="radio" name="radios" id="smallerThan" value="smaller">
-                                                Color polygons that are smaller than the unit value
-                                            </p>
-                                        </div>
-                                        <div class="form-check">
-                                            <p class="form-check-label">
-                                                <input class="form-check-input" type="radio" name="radios" id="equalTo" value="equal">
-                                                Color polygons that are equal to the unit value
-                                            </p>
-                                        </div>
-                                        <div class="input-group">
-                                            <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
-                                            <select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_prop_filters">
-                                                <option value="" disabled selected>Select a ground property</option>
-                                            </select>
-                                        </div> <br>
-                                        <div class="input-group">
-                                            <span data-toggle="tooltip" data-placement="top" title="The unit value used to compare the data values" class="input-group-addon" id="basic-addon3">unit</span>
-                                            <input type="number" class="form-control" value="1" min="0"placeholder="...units" id="filter_units" aria-describedby="basic-addon3">
-                                        </div><br>
-                                        <div class="input-group">
-                                            <span class="input-group-addon" id="basic-addon3"># labels</span>
-                                            <input type="number" class="form-control" value="1" min="1"placeholder="...labels" id="labels_filter" aria-describedby="basic-addon3">
-                                        </div><br>
-                                    </div>
-                                    <div id="statistics" class="tab-pane fade"><br>
-                                        <label>Select parameters:</label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
-                                            <select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_1">
-                                                <option value="" disabled selected>Select a ground property</option>
-                                            </select>
-                                        </div> <br>
-                                        <div class="input-group" style='visibility: hidden' id="chartAppear1">
-                                            <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
-                                            <select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_2">
-                                                <option value="" disabled selected>Select a ground property</option>
-                                            </select>
-                                        </div> <br>
-                                        <div class="input-group" style='visibility: hidden' id="chartAppear2">
-                                            <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
-                                            <select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_3">
-                                                <option value="" disabled selected>Select a ground property</option>
-                                            </select>
-                                        </div> <br>
-                                        <div class="input-group" style='visibility: hidden' id="chartAppear3">
-                                            <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
-                                            <select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_4">
-                                                <option value="" disabled selected>Select a ground property</option>
-                                            </select>
-                                        </div> <br>
-                                    </div>
-                                    <div id="tutorial" class="tab-pane fade center-block text-center"><br>
-                                        <h4>Watch a brief tutorial on how to use TX-ISC</h4>
-                                        <br>
-                                    </div>
-                                </div>
-                            </div> <!--end column for selectors-->
-                            <div class="col-md-5"><br>
-                                <div class="tab-content">
-                                    <div id="defaultbtn" class="tab-pane fade in active">
-                                        <button data-toggle="tooltip" data-placement="top" title="Bring up the data for the whole section currently displayed on the map" class="btn btn-success form-control" type="button" id="run" onClick="getPolygonsHelper()">Run</button><br><br>
-                                        <button data-toggle="tooltip" data-placement="top" title="Only bring up the data touched by the Area Of Interest" class="btn btn-success form-control" type="button" id="runAOI" onClick="runAOI()">Run AOI</button><br><br>
-                                        <button class="btn btn-warning form-control" type="button" id="clear" onClick="removePolygons()">Clear</button><br><br>
-                                        <button type="button" class="map-print" id="print" onClick="printMaps()">Print</button><br><br>
-                                        <a href="./ctis_isc_polygon.kml" download><button type="button" class="btn btn-outline-secondary form-control" id="download_kml" onClick="clearKML()">KML</button></a>
-                                    </div>
-                                    <div id="filtersbtn" class="tab-pane fade"><br><br><br><br>
-                                        <button class="btn btn-success form-control" type="button" id="runFilters" onClick="runFilters()">Run Filter</button>
-                                    </div>
-                                    <br>
-                                    <div id="statisticsbtn" class="tab-pane fade">
-                                        <button type="button" class="btn btn-default form-control" id="draw" onclick="drawAnotherRectangle();">Clear AOI</button><br><br>
-                                        <button type="button" class="btn btn-default form-control" id="clearCharts" onclick="clearCharts();">Clear Charts</button>
-                                    </div>
-                                    <div id="tutorialbtn" class="tab-pane fade">
-                                        <button type="button" class="btn btn-default form-control" id="control_draw" onclick="window.open('./tutorial.php','_blank');">
-                                            Go to Tutorial
-                                        </button><br>
-                                    </div>
-                                </div> <!-- end column for buttons-->
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div id="legend" style='visibility: visible'>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- End main column 2 -->
-        </div>
-
-        <div id="testingLayers" class="panel panel-default">
-            <div class="panel-body text-center">
-                <!--                    Layers - Test-->
-            </div>
-            <div class="panel-body" id="control-section-details-card-body">
-                <!-- <div class="alert alert-primary text-center" role="alert">
-                  Click a Polygon to see details about it.
-                </div> -->
-                <canvas id="canvas-soil-property" width="400" height="200"></canvas>
-            </div>
         </div>
     </div>
 </div>
@@ -325,6 +80,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                         Toolbar
                         <i class="fa fa-caret-down pull-right" aria-hidden="true"></i>
                     </button>
+
                     <div id="county_select" class="panel-collapse collapse" role="tabpanel" aria-labelledby="county_select_content">
                         <div class="card-body">
                             <div class="row panel panel-body">
@@ -357,6 +113,192 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                     <option value="33.77914733128647, -98.37158203125" data-district="Wichita Falls">Wichita Falls</option>
                                     <option value="29.05616970274342, -96.8115234375" data-district="Yoakum">Yoakum</option>
                                 </select>
+                            </div>
+                            <div class="row panel panel-body">
+                                <center><label>Soil Mapping</label></center>
+                                <div class="row">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a data-toggle="tab" href="#default,#defaultbtn" data-target="#default, #defaultbtn">Tools</a></li>
+                                        <li><a data-toggle="tab" href="#filters,#filtersbtn" data-target="#filters, #filtersbtn">Filter</a></li>
+                                        <li data-toggle="tooltip" data-placement="top" title="Click your drawn Area Of Interest to display statistics">
+                                            <a data-toggle="tab" href="#statistics,#statisticsbtn" data-target="#statistics, #statisticsbtn">Statistics</a>
+                                        </li>
+                                        <li>
+                                            <a data-toggle="tab" href="#tutorial,#tutorialbtn" data-target="#tutorial, #tutorialbtn">Tutorial</a>
+                                        </li>
+                                    </ul>
+                                    <div class="col-md-5 col-sm-11 col-lg-7">
+                                        <div class="tab-content">
+                                            <div id="default" class="tab-pane fade in active">
+                                                <label> Soil Property:</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+                                                    <select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="selectProp">
+                                                        <option value="" disabled selected>Select a ground property</option>
+                                                    </select>
+                                                </div> <br>
+                                                <label> Depth:</label>
+                                                <input id="slide_depth" type="text" class="span2" value="" data-slider-min="0" data-slider-max="79" data-slider-step="1" data-slider-value="[0,0]"/>
+                                                <br><br>
+                                                <label> Method:</label>
+                                                <select data-toggle="tooltip" data-placement="top" title="Method by which the data will be gathered" id="methods" class="form-control">
+                                                    <option value="" disabled selected>Select method</option>
+                                                    <option value="1" id="max_method">Max</option>
+                                                    <option value="2" id="min_method">Min</option>
+                                                    <option value="3" id="med_method">Median</option>
+                                                    <option value="4" id="weight_method">Weighted average</option>
+                                                    <option value="5" id="specific_method">At Specific Depth</option>
+                                                </select><br>
+                                                <div class="input-group">
+                                                    <span data-toggle="tooltip" data-placement="top" title="Number of representations for the data" class="input-group-addon" id="basic-addon3"># labels</span>
+                                                    <input type="number" class="form-control" value="1" min="1"placeholder="...labels" id="labels" aria-describedby="basic-addon3">
+                                                </div><br>
+                                            </div>
+                                            <div id="filters" class="tab-pane fade"><br>
+                                                <div class="form-check">
+                                                    <p class="form-check-label">
+                                                        <input class="form-check-input" type="radio" name="radios" id="biggerThan" value="bigger">
+                                                        Color polygons that are bigger than the unit value
+                                                    </p>
+                                                </div>
+                                                <div class="form-check">
+                                                    <p class="form-check-label">
+                                                        <input class="form-check-input" type="radio" name="radios" id="smallerThan" value="smaller">
+                                                        Color polygons that are smaller than the unit value
+                                                    </p>
+                                                </div>
+                                                <div class="form-check">
+                                                    <p class="form-check-label">
+                                                        <input class="form-check-input" type="radio" name="radios" id="equalTo" value="equal">
+                                                        Color polygons that are equal to the unit value
+                                                    </p>
+                                                </div>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+                                                    <select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_prop_filters">
+                                                        <option value="" disabled selected>Select a ground property</option>
+                                                    </select>
+                                                </div> <br>
+                                                <div class="input-group">
+                                                    <span data-toggle="tooltip" data-placement="top" title="The unit value used to compare the data values" class="input-group-addon" id="basic-addon3">unit</span>
+                                                    <input type="number" class="form-control" value="1" min="0"placeholder="...units" id="filter_units" aria-describedby="basic-addon3">
+                                                </div><br>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="basic-addon3"># labels</span>
+                                                    <input type="number" class="form-control" value="1" min="1"placeholder="...labels" id="labels_filter" aria-describedby="basic-addon3">
+                                                </div><br>
+                                            </div>
+                                            <div id="statistics" class="tab-pane fade"><br>
+                                                <label>Select parameters:</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+                                                    <select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_1">
+                                                        <option value="" disabled selected>Select a ground property</option>
+                                                    </select>
+                                                </div> <br>
+                                                <div class="input-group" style='visibility: hidden' id="chartAppear1">
+                                                    <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+                                                    <select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_2">
+                                                        <option value="" disabled selected>Select a ground property</option>
+                                                    </select>
+                                                </div> <br>
+                                                <div class="input-group" style='visibility: hidden' id="chartAppear2">
+                                                    <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+                                                    <select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_3">
+                                                        <option value="" disabled selected>Select a ground property</option>
+                                                    </select>
+                                                </div> <br>
+                                                <div class="input-group" style='visibility: hidden' id="chartAppear3">
+                                                    <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon"></span>
+                                                    <select type="text" class="form-control" placeholder="Ground Property" aria-describedby="basic-addon" id="select_chart_4">
+                                                        <option value="" disabled selected>Select a ground property</option>
+                                                    </select>
+                                                </div> <br>
+                                            </div>
+                                            <div id="tutorial" class="tab-pane fade center-block text-center"><br>
+                                                <h4>Watch a brief tutorial on how to use TX-ISC</h4>
+                                                <br>
+                                            </div>
+                                        </div>
+                                    </div> <!--end column for selectors-->
+                                    <div class="col-md-5"><br>
+                                        <div class="tab-content">
+                                            <div id="defaultbtn" class="tab-pane fade in active">
+                                                <button data-toggle="tooltip" data-placement="top" title="Bring up the data for the whole section currently displayed on the map" class="btn btn-success form-control" type="button" id="run" onClick="getPolygonsHelper()">Run</button><br><br>
+                                                <button data-toggle="tooltip" data-placement="top" title="Only bring up the data touched by the Area Of Interest" class="btn btn-success form-control" type="button" id="runAOI" onClick="runAOI()">Run AOI</button><br><br>
+                                                <button class="btn btn-warning form-control" type="button" id="clear" onClick="removePolygons()">Clear</button><br><br>
+                                                <button type="button" class="map-print" id="print" onClick="printMaps()">Print</button><br><br>
+                                                <a href="./ctis_isc_polygon.kml" download><button type="button" class="btn btn-outline-secondary form-control" id="download_kml" onClick="clearKML()">KML</button></a>
+                                            </div>
+                                            <div id="filtersbtn" class="tab-pane fade"><br><br><br><br>
+                                                <button class="btn btn-success form-control" type="button" id="runFilters" onClick="runFilters()">Run Filter</button>
+                                            </div>
+                                            <br>
+                                            <div id="statisticsbtn" class="tab-pane fade">
+                                                <button type="button" class="btn btn-default form-control" id="draw" onclick="drawAnotherRectangle();">Clear AOI</button><br><br>
+                                                <button type="button" class="btn btn-default form-control" id="clearCharts" onclick="clearCharts();">Clear Charts</button>
+                                            </div>
+                                            <div id="tutorialbtn" class="tab-pane fade">
+                                                <button type="button" class="btn btn-default form-control" id="control_draw" onclick="window.open('./tutorial.php','_blank');">
+                                                    Go to Tutorial
+                                                </button><br>
+                                            </div>
+                                        </div> <!-- end column for buttons-->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div id="legend" style='visibility: visible'>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" id="other"><br>
+                        <button class="btn btn-outline-secondary btn-block" role="button" data-toggle="collapse" data-parent="#another" href="#another" aria-expanded="true" aria-controls="another">
+                            Charts
+                            <i class="fa fa-caret-down pull-right" aria-hidden="true"></i>
+                        </button>
+
+                        <div id="another" class="panel-collapse collapse" role="tabpanel" aria-labelledby="another">
+                            <div class="card-body">
+                                <div class="row panel panel-body">
+                                    <div id="description"></div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <div class="chart" id="chart_area_1"> </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <div class="chart" id="chart_area_2"> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <div class="chart" id="chart_area_3"> </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <div class="chart" id="chart_area_4"> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="testingLayers" class="panel panel-default">
+                                        <div class="panel-body text-center">
+                                        </div>
+                                        <div class="panel-body" id="control-section-details-card-body">
+                                            <canvas id="canvas-soil-property" width="400" height="200"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
