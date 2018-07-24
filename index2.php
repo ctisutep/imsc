@@ -22,6 +22,22 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/css-toggle-switch/latest/toggle-switch.css" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
+        #map {
+            height: 97%;
+            width: 100%;
+            left: 0;
+            position: relative;
+            top: -2%;
+        }
+
+        #over{
+            position: absolute;
+            top: 500px;
+            left: 10px;
+            z-index: 99;
+            width: auto;
+
+        }
         .slider {
             width: 100% !important;
         }
@@ -63,15 +79,16 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
     <p class="hidden-xs text-right" style="color: white"> Version 1.4.2 (05/16/2018) Nice UI</p>
     <!--<p class="hidden-md hidden-lg text-center"  style="color: white"> Version 4 (9/27/2017)</p> -->
 </nav><br><br>
-<div class="row">
-    <div class="col-md-12">
-        <div class="row">
-            <div id="map"></div>
-        </div>
-    </div>
-</div>
+<div id="map" class="mt-5"></div>
+<!--<div class="row">-->
+<!--    <div class="col-md-12">-->
+<!--        <div class="row">-->
+<!--            <div id="map" class="mt-5"></div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
-<div class="container">
+<div class="container" id="over">
     <div class="row">
         <div class="col-lg-12 mt-5">
             <div id="accordion">
