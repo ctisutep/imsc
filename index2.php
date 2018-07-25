@@ -32,7 +32,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
 
         #over{
             position: absolute;
-            top: 500px;
+            top: 200px;
             left: 10px;
             z-index: 99;
             width: auto;
@@ -93,7 +93,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
         <div class="col-lg-12 mt-5">
             <div id="accordion">
                 <div class="card">
-                    <button class="btn btn-outline-secondary btn-block" role="button" data-toggle="collapse" data-parent="#accordion" href="#county_select" aria-expanded="true" aria-controls="county_select">
+                    <button class="btn btn-warning btn-block" role="button" data-toggle="collapse" data-parent="#accordion" href="#county_select" aria-expanded="true" aria-controls="county_select">
                         Toolbar
                         <i class="fa fa-caret-down pull-right" aria-hidden="true"></i>
                     </button>
@@ -275,7 +275,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                     </div>
 
                     <div class="card" id="other"><br>
-                        <button class="btn btn-outline-secondary btn-block" role="button" data-toggle="collapse" data-parent="#another" href="#another" aria-expanded="true" aria-controls="another">
+                        <button class="btn btn-warning btn-block" role="button" data-toggle="collapse" data-parent="#another" href="#another" aria-expanded="true" aria-controls="another">
                             Charts
                             <i class="fa fa-caret-down pull-right" aria-hidden="true"></i>
                         </button>
