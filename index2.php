@@ -23,7 +23,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
         #map {
-            height: 97%;
+            height: 200%;
             width: 100%;
             left: 0;
             position: relative;
@@ -88,9 +88,9 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
 <!--    </div>-->
 <!--</div>-->
 
-<div class="container" id="over">
+<div class="container" id="over" style="width: 460px;">
     <div class="row">
-        <div class="col-lg-12 mt-5">
+        <div class="col-lg-12">
             <div id="accordion">
                 <div class="card">
                     <button class="btn btn-warning btn-block" role="button" data-toggle="collapse" data-parent="#accordion" href="#county_select" aria-expanded="true" aria-controls="county_select">
@@ -98,7 +98,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                         <i class="fa fa-caret-down pull-right" aria-hidden="true"></i>
                     </button>
 
-                    <div id="county_select" class="panel-collapse collapse" role="tabpanel" aria-labelledby="county_select_content">
+                    <div id="county_select" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="county_select_content">
                         <div class="card-body">
                             <div class="row panel panel-body">
                                 <label>District:</label>
