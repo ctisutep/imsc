@@ -70,7 +70,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="row">
-        <h3 class="text-center" style="padding-left: 95px; color: #FF8000">TxDOT Interactive Soil Characterization
+        <h3 class="text-center" style="padding-left: 95px; color: #FF8000">Interactive Soil Characterization Map for Texas
             <img style="float:right" src="./img/ctis_transparent_white_2017.png" height="50" width="50">
             <img style="float:right" src="./img/txdotnewlogo.png" height="50" width="50">
         </h3>
@@ -107,7 +107,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                     <option value="32.43561304116276, -100.1953125" data-district="Abilene">Abilene</option>
                                     <option value="35.764343479667176, -101.49169921875" data-district="Amarillo">Amarillo</option>
                                     <option value="32.69651010951669, -94.691162109375" data-district="Atlanta">Atlanta</option>
-                                    <option value="30.25391637229704, -98.23212890625" data-district="Austin">Austin</option>
+                                    <option value="30.1958348, -97.7066074" data-district="Austin">Austin</option>
                                     <option value="30.40211367909724, -94.39453125" data-district="Beaumont">Beaumont</option>
                                     <option value="31.765537409484374, -99.140625" data-district="Brownwood">Brownwood</option>
                                     <option value="30.894611546632302, -96.30615234375" data-district="Bryan">Bryan</option>
@@ -926,7 +926,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
         var coords = pointStr.split(" ");
         panPoint = new google.maps.LatLng(parseFloat(coords[0]), parseFloat(coords[1]));
         app.map.panTo(panPoint);
-        app.map.setZoom(10);
+        app.map.setZoom(13);
     }
 
     /******************************************************************************/
@@ -938,7 +938,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
     function initMap() {
         app.map = new google.maps.Map(document.getElementById('map'), {
             zoom: 6,
-            center: new google.maps.LatLng(31.6929976,-98.9689529),
+            center: new google.maps.LatLng(22,-98.9689529),
             mapTypeId: 'terrain'
         });
         app.infoWindow = new google.maps.InfoWindow;
