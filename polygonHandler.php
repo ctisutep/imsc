@@ -1096,10 +1096,12 @@ function getPolygons(){
     $key = setKey( $data->table );
 
     if($data->table == "chorizon_r") {
-        $query="SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r
+        $query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.mukey, x.cokey, x.pi_r FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE p.areasymbol = 'TX453' and hzdept_r = 0 and ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
+
+        /*$query="SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r
         AS bottom, x.mukey, x.cokey, x.$data->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE 
         p.areasymbol = 'TX453' and hzdept_r = 0 and 
-        ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
+        ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";*/
 
         /*$query="SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r
         AS bottom, x.mukey, x.cokey, x.$data->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE 
