@@ -1085,7 +1085,29 @@ function getAOI($x){
 		}
 	}
 }
+
 function getPolygons(){
+    global $conn, $toReturn;
+    $data = new dataToQueryPolygons();//automatically gathers necessary data for query
+    $simplificationFactor = polygonDefinition($data);//maybe it should be changing(be variable) in the future with  more given parameters($_GET)
+    $query = "SET @geom1 = 'POLYGON(($data->lng1	$data->lat1,$data->lng1	$data->lat2,$data->lng2	$data->lat2,$data->lng2	$data->lat1,$data->lng1	$data->lat1))'";
+    $toReturn['query'] = $query;
+    $result = mysqli_query($conn, $query);
+    $key = setKey( $data->table );
+
+    if($data->table == "chorizon_r") {
+        $query="SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r 
+        AS bottom, x.mukey, x.cokey, x.$data->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE 
+        hzdept_r = 0 and p.areasymbol = 'TX453' and 
+        ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
+        $toReturn['query2'] = $query;
+        $result = mysqli_query($conn, $query);
+        $result = fetchAll($result);
+        $toReturn['coords'] = $result;
+    }
+}
+
+function getPolygonsReal(){
 	global $conn, $toReturn;
 	$data = new dataToQueryPolygons();//automatically gathers necessary data for query
 	$simplificationFactor = polygonDefinition($data);//maybe it should be changing(be variable) in the future with  more given parameters($_GET)
