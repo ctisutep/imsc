@@ -1105,7 +1105,7 @@ function getPolygons(){
             else{
                 $query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, 
                       hzdepb_r AS bottom, x.mukey, x.cokey, x.pi_r FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE 
-                      hzdept_r = 0 ORDER BY OGR_FID DESC";
+                      hzdept_r = 0 and ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
 
             }
         }
@@ -1118,7 +1118,7 @@ function getPolygons(){
             else{
                 $query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, 
                       hzdepb_r AS bottom, x.mukey, x.cokey, x.pi_r FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE 
-                      hzdept_r = 0 ORDER BY OGR_FID DESC";
+                      hzdept_r = 0 and ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
             }
         }
 
