@@ -1096,7 +1096,6 @@ function getPolygons(){
     $key = setKey( $data->table );
 
     if($data->table == "chorizon_r") {
-        echo $data->district;
         if($simplificationFactor > 0.0010260474777866){
             if($data->district == "Austin"){
                 $query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, 
