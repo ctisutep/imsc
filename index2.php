@@ -130,6 +130,23 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                     <option value="33.77914733128647, -98.37158203125" data-district="Wichita Falls">Wichita Falls</option>
                                     <option value="29.05616970274342, -96.8115234375" data-district="Yoakum">Yoakum</option>
                                 </select>
+
+<!--                                <label>County:</label>-->
+<!--                                <select id="target" class="form-control">-->
+<!--                                    <option value="" disabled selected>Select a district</option>-->
+<!--                                    <option value="TX021" data-district="">Bastrop</option>-->
+<!--                                    <option value="TX031" data-district="">Blanco</option>-->
+<!--                                    <option value="TX053" data-district="">Burnet</option>-->
+<!--                                    <option value="TX055" data-district="">Caldwell</option>-->
+<!--                                    <option value="TX171" data-district="">Gillespie</option>-->
+<!--                                    <option value="TX209" data-district="">Hays</option>-->
+<!--                                    <option value="TX287" data-district="">Lee</option>-->
+<!--                                    <option value="TX299" data-district="">Llano</option>-->
+<!--                                    <option value="TX319" data-district="">Mason</option>-->
+<!--                                    <option value="TX453" data-district="" selected>Travis</option>-->
+<!--                                    <option value="TX491" data-district="">Williamson</option>-->
+<!--                                </select>-->
+
                             </div>
                             <div class="row panel panel-body">
                                 <center><label>Soil Mapping</label></center>
