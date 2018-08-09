@@ -131,7 +131,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                     <option value="29.05616970274342, -96.8115234375" data-district="Yoakum">Yoakum</option>
                                 </select>
 
-<!--                                <label>County:</label>-->
+<!--                                <label>County for Austin:</label>-->
 <!--                                <select id="target" class="form-control">-->
 <!--                                    <option value="" disabled selected>Select a district</option>-->
 <!--                                    <option value="TX021" data-district="">Bastrop</option>-->
@@ -384,6 +384,26 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
     var app = {map:null, polygons:null, label:"no filter", payload:{getMode:"polygons", runAOI:false, runLine:false, runPoly:false, runRec:false, runFilters:false, property:null, district:null, depth:0, from_depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null, filter_prop:null, filter_prop_n:null, filter_value:false, filter_units:0}};
     var hecho = false;
     var depth = app.payload.depth;
+    let counties = {
+        "Abilene": {
+         "Borden": "TX033",
+         "Howard": "TX227",
+         "Kent": "TX263",
+         "Scurry": "TX415",
+         "Mitchell": "TX335",
+         "Stonewall": "TX433",
+         "Fisher": "TX151",
+         "Nolan": "TX353",
+         "Haskell": "TX207",
+         "Jones": "TX253",
+         "Taylor": "TX441",
+         "Shackelford": "TX417",
+         "Callaham": "TX059"
+        },
+        "Amarillo": {
+
+        }
+    };
     $(document).ready(function(){
         $("#slide_depth").slider({
             natural_arrow_keys: true,
