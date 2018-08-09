@@ -385,26 +385,30 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
     var hecho = false;
     var depth = app.payload.depth;
     let counties = {
-        "Abilene": {
-         "Borden": "TX033",
-         "Howard": "TX227",
-         "Kent": "TX263",
-         "Scurry": "TX415",
-         "Mitchell": "TX335",
-         "Stonewall": "TX433",
-         "Fisher": "TX151",
-         "Nolan": "TX353",
-         "Haskell": "TX207",
-         "Jones": "TX253",
-         "Taylor": "TX441",
-         "Shackelford": "TX417",
-         "Callaham": "TX059"
+        "Abilene": { "Borden": "TX033", "Howard": "TX227", "Kent": "TX263", "Scurry": "TX415", "Mitchell": "TX335",
+            "Stonewall": "TX433", "Fisher": "TX151", "Nolan": "TX353", "Haskell": "TX207", "Jones": "TX253",
+            "Taylor": "TX441", "Shackelford": "TX417", "Callaham": "TX059"
         },
-        "Amarillo": {
-
+        "Amarillo": { "Dallam": "TX111", "Hartley": "TX205", "Oldham": "TX359", "Deaf Smith": "TX117", "Sherman": "TX421",
+            "Moore": "TX341", "Potter": "TX375", "Randall": "TX381", "Hansford": "TX195", "Hutchinson": "TX233",
+            "Carson": "TX065", "Armstrong": "TX011", "Ochiltree": "TX357", "Roberts": "TX393", "Gray": "TX179",
+            "Lipscomb": "TX295", "Hemphill": "TX211"
+        },
+        "Atlanta": {
+            "": "",
+            "": "",
+            "": "",
+            "": "",
+            "": "",
+            "": "",
+            "": "",
+            "": "",
+            "": ""
         }
     };
     $(document).ready(function(){
+        // console.log(counties.Abilene.Borden);
+        // console.log(counties["Abilene"]["Borden"]);
         $("#slide_depth").slider({
             natural_arrow_keys: true,
             //range: true,
