@@ -436,6 +436,16 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
             "Hale": "TX189", "Floyd": "TX153", "Cochran": "TX079", "Hockley": "TX219", "Lubbock": "TX303",
             "Crosby": "TX107", "Yoakum": "TX501", "Terry": "TX445", "Lynn": "TX305", "Garza": "TX169",
             "Gaines": "TX165", "Dawson": "TX115"
+        },
+        "Lufkin": { "Shelby": "TX419", "Nacogdoches": "TX347", "San Augustine": "TX405", "Sabine": "TX403",
+            "Angelina": "TX005", "Houston": "TX225", "Trinity": "TX455", "Polk": "TX373", "San Jacinto": "TX407"
+        },
+        "Odessa": { "Andrews": "TX003", "Martin": "TX317", "Loving": "TX301", "Winkler": "TX495", "Ector": "TX135",
+            "Midland": "TX329", "Ward": "TX475", "Crane": "TX103", "Upton": "TX461", "Reeves": "TX389",
+            "Pecos": "TX371", "Terrell": "TX443"
+        },
+        "Paris": { "Grayson": "TX181", "Fannin": "TX147", "Lamar": "TX277", "Red River": "TX387", "Delta": "TX119",
+            "Hunt": "TX231", "Hopkins": "TX223", "Franklin": "TX159", "Rains": "TX379"
         }
     };
     $(document).ready(function(){
