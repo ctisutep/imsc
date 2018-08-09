@@ -423,8 +423,19 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
         "El Paso": { "El Paso": "TX141", "Hudspeth": "TX229", "Culberson": "TX109", "Jeff Davis": "TX243",
             "Presidio": "TX377", "Brewster": "TX043"
         },
-        "Fort Worth":{ "Jack": "TX237", "Wise": "TX497", "Palo Pinto": "TX363", "Parker": "TX367", "Tarrant": "TX439",
+        "Fort Worth": { "Jack": "TX237", "Wise": "TX497", "Palo Pinto": "TX363", "Parker": "TX367", "Tarrant": "TX439",
             "Erath": "TX143", "Hood": "TX221", "Johnson": "TX251", "Somervell": "TX425"
+        },
+        "Houston": { "Montgomery": "TX339", "Waller": "TX473", "Harris": "TX201", "Fort Bend": "TX157",
+            "Galveston": "TX167", "Brazoria": "TX039"
+        },
+        "Laredo": { "Val Verde": "TX465", "Kinney": "TX271", "Maverick": "TX323", "Zavala": "TX507", "Dimmit": "TX127",
+            "La Salle": "TX283", "Webb": "TX479", "Duval": "TX131"
+        },
+        "Lubbock": { "Parmer": "TX369", "Castro": "TX069", "Swisher": "TX437", "Bailey": "TX017", "Lamb": "TX279",
+            "Hale": "TX189", "Floyd": "TX153", "Cochran": "TX079", "Hockley": "TX219", "Lubbock": "TX303",
+            "Crosby": "TX107", "Yoakum": "TX501", "Terry": "TX445", "Lynn": "TX305", "Garza": "TX169",
+            "Gaines": "TX165", "Dawson": "TX115"
         }
     };
     $(document).ready(function(){
