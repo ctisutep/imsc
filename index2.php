@@ -147,6 +147,31 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
 <!--                                    <option value="TX491" data-district="">Williamson</option>-->
 <!--                                </select>-->
 
+                                <!--
+                                Abilene:
+                                    - Borden = tx033
+                                    - Howard = tx227
+                                    - Kent = tx263
+                                    - Scurry = tx415
+                                    - Mitchell = tx335
+                                    - Stonewall = tx433
+                                    - Fisher = tx151
+                                    - Nolan = tx353
+                                    - Haskell = tx207
+                                    - Jones = tx253
+                                    - Taylor = tx441
+                                    - Shackelford = tx417
+                                    - Callaham = tx059
+
+                                Amarillo:
+                                    - Dallam = tx111
+                                    - Hartley = 205
+                                    -
+
+
+
+                                -->
+
                             </div>
                             <div class="row panel panel-body">
                                 <center><label>Soil Mapping</label></center>
