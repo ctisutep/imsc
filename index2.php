@@ -448,17 +448,17 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
             "Hunt": "TX231", "Hopkins": "TX223", "Franklin": "TX159", "Rains": "TX379"
         },
         "Pharr": {
-            "Zapata": "TX",
-            "Jim Hogg": "TX",
-            "Starr": "TX",
-            "Brooks": "TX",
-            "Hidalgo": "TX",
-            "Kenedy": "TX",
-            "Willacy": "TX",
-            "Cameron": "TX"
+            "Zapata": "TX505",
+            "Jim Hogg": "TX247",
+            "Starr": "TX427",
+            "Brooks": "TX047",
+            "Hidalgo": "TX215",
+            "Kenedy": "TX261",
+            "Willacy": "TX489",
+            "Cameron": "TX061"
         },
         "San Angelo": {
-            "Glasscock": "TX",
+            "Glasscock": "TX173",
             "Sterling": "TX",
             "Coke": "TX",
             "Runnels": "TX",
