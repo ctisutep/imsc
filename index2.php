@@ -446,6 +446,91 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
         },
         "Paris": { "Grayson": "TX181", "Fannin": "TX147", "Lamar": "TX277", "Red River": "TX387", "Delta": "TX119",
             "Hunt": "TX231", "Hopkins": "TX223", "Franklin": "TX159", "Rains": "TX379"
+        },
+        "Pharr": {
+            "Zapata": "TX",
+            "Jim Hogg": "TX",
+            "Starr": "TX",
+            "Brooks": "TX",
+            "Hidalgo": "TX",
+            "Kenedy": "TX",
+            "Willacy": "TX",
+            "Cameron": "TX"
+        },
+        "San Angelo": {
+            "Glasscock": "TX",
+            "Sterling": "TX",
+            "Coke": "TX",
+            "Runnels": "TX",
+            "Reagan": "TX",
+            "Irion": "TX",
+            "Tom Green": "TX",
+            "Concho": "TX",
+            "Crockett": "TX",
+            "Schleicher": "TX",
+            "Menard": "TX",
+            "Sutton": "TX",
+            "Kimble": "TX",
+            "Edwards": "TX",
+            "Real": "TX"
+        },
+        "San Antonio": {
+            "Kerr": "TX",
+            "Kendall": "TX",
+            "Bandera": "TX",
+            "Comal": "TX",
+            "Uvalde": "TX",
+            "Medina": "TX",
+            "Bexar": "TX",
+            "Guadalupe": "TX",
+            "Frio": "TX",
+            "Alascosa": "TX",
+            "McMullen": "TX",
+            "Wilson": "TX"
+        },
+        "Tyler": {
+            "Anderson": "TX",
+            "Cherokee": "TX",
+            "Rusk": "TX",
+            "Henderson": "TX",
+            "Smith": "TX",
+            "Gregg": "TX",
+            "Van Zandt": "TX",
+            "Wood": "TX"
+        },
+        "Waco": {
+            "Hamilton": "TX",
+            "Bosque": "TX",
+            "Hill": "TX",
+            "Coryell": "TX",
+            "McLennan": "TX",
+            "Limestone": "TX",
+            "Bell": "TX",
+            "Falls": "TX"
+        },
+        "Wichita Falls": {
+            "Archer": "TX",
+            "Baylor": "TX",
+            "Clay": "TX",
+            "Cooke": "TX",
+            "Montague": "TX",
+            "Throckmorton": "TX",
+            "Wichita": "TX",
+            "Wilbarger": "TX",
+            "Young": "TX"
+        },
+        "Yoakum": {
+            "Austin": "TX",
+            "Calhoun": "TX",
+            "Colorado": "TX",
+            "DeWitt": "TX",
+            "Fayette": "TX",
+            "Gonzales": "TX",
+            "Jackson": "TX",
+            "Lavaca": "TX",
+            "Matagorda": "TX",
+            "Victoria": "TX",
+            "Wharton": "TX"
         }
     };
     $(document).ready(function(){
