@@ -409,20 +409,22 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
         "Bryan": { "Freestone": "TX161", "Leon": "TX289", "Robertson": "TX395", "Milam": "TX331", "Madison": "TX313",
             "Brazos": "TX041", "Burleson": "TX051", "Walker": "TX471", "Grimes": "TX185", "Washington": "TX477"
         }
-        "Childress": {
-            "Wheeler": "TX483",
-            "": "TX",
-            "": "TX",
-            "": "TX",
-            "": "TX",
-            "": "TX",
-            "": "TX",
-            "": "TX",
-            "": "TX",
-            "": "TX",
-            "": "TX",
-            "": "TX",
-            "": "TX"
+        "Childress": { "Wheeler": "TX483", "Donley": "TX129", "Collingsworth": "TX087", "Briscoe": "TX045",
+            "Hall": "TX191", "Childress": "TX075", "Motley": "TX345", "Cottle": "TX101", "Hardeman": "TX197",
+            "Foard": "TX155", "Dickens": "TX125", "King": "TX269", "Knox": "TX275"
+        },
+        "Corpus Christi": { "Karnes": "TX255", "Live Oak": "TX297", "Jim Wells": "TX249", "Goliad": "TX175",
+            "Bee": "TX025", "San Patricio": "TX409", "Nueces": "TX355", "Kleberg": "TX273", "Refugio": "TX391",
+            "Aransas": "TX007"
+        },
+        "Dallas": { "Denton": "TX121", "Collin": "TX085", "Dallas": "TX113", "Rockwall": "TX397", "Kaufman": "TX257",
+            "Ellis": "TX139", "Navarro": "TX349"
+        },
+        "El Paso": { "El Paso": "TX141", "Hudspeth": "TX229", "Culberson": "TX109", "Jeff Davis": "TX243",
+            "Presidio": "TX377", "Brewster": "TX043"
+        },
+        "Fort Worth":{ "Jack": "TX237", "Wise": "TX497", "Palo Pinto": "TX363", "Parker": "TX367", "Tarrant": "TX439",
+            "Erath": "TX143", "Hood": "TX221", "Johnson": "TX251", "Somervell": "TX425"
         }
     };
     $(document).ready(function(){
