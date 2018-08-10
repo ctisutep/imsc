@@ -564,10 +564,15 @@
     });
 
     function populateCounties(d){
-        console.log(d);
-        for (let i = 0; i < counties[d].length; i++){
-            console.log("District " + d + " has "+ i + "counties");
+        let i = 0;
+        for (let c in counties[d]){
+            let county = c;
+            let area = counties[d][county];
+            console.log(county + " - " + area);
+            
+            i++;
         }
+        console.log("District of " + d + " has "+ i + " counties");
     }
 
     function polylineClicked(polyIndex){
