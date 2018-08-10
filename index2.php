@@ -447,89 +447,29 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
         "Paris": { "Grayson": "TX181", "Fannin": "TX147", "Lamar": "TX277", "Red River": "TX387", "Delta": "TX119",
             "Hunt": "TX231", "Hopkins": "TX223", "Franklin": "TX159", "Rains": "TX379"
         },
-        "Pharr": {
-            "Zapata": "TX505",
-            "Jim Hogg": "TX247",
-            "Starr": "TX427",
-            "Brooks": "TX047",
-            "Hidalgo": "TX215",
-            "Kenedy": "TX261",
-            "Willacy": "TX489",
-            "Cameron": "TX061"
+        "Pharr": { "Zapata": "TX505", "Jim Hogg": "TX247", "Starr": "TX427", "Brooks": "TX047", "Hidalgo": "TX215",
+            "Kenedy": "TX261", "Willacy": "TX489", "Cameron": "TX061"
         },
-        "San Angelo": {
-            "Glasscock": "TX173",
-            "Sterling": "TX431",
-            "Coke": "TX081",
-            "Runnels": "TX399",
-            "Reagan": "TX383",
-            "Irion": "TX235",
-            "Tom Green": "TX451",
-            "Concho": "TX095",
-            "Crockett": "TX105",
-            "Schleicher": "TX413",
-            "Menard": "TX327",
-            "Sutton": "TX435",
-            "Kimble": "TX267",
-            "Edwards": "TX137",
+        "San Angelo": { "Glasscock": "TX173", "Sterling": "TX431", "Coke": "TX081", "Runnels": "TX399",
+            "Reagan": "TX383", "Irion": "TX235", "Tom Green": "TX451", "Concho": "TX095", "Crockett": "TX105",
+            "Schleicher": "TX413", "Menard": "TX327", "Sutton": "TX435", "Kimble": "TX267", "Edwards": "TX137",
             "Real": "TX385"
         },
-        "San Antonio": {
-            "Kerr": "TX265",
-            "Kendall": "TX259",
-            "Bandera": "TX019",
-            "Comal": "TX091",
-            "Uvalde": "TX463",
-            "Medina": "TX325",
-            "Bexar": "TX029",
-            "Guadalupe": "TX187",
-            "Frio": "TX163",
-            "Atascosa": "TX013",
-            "McMullen": "TX311",
-            "Wilson": "TX493"
+        "San Antonio": { "Kerr": "TX265", "Kendall": "TX259", "Bandera": "TX019", "Comal": "TX091", "Uvalde": "TX463",
+            "Medina": "TX325", "Bexar": "TX029", "Guadalupe": "TX187", "Frio": "TX163", "Atascosa": "TX013",
+            "McMullen": "TX311", "Wilson": "TX493"
         },
-        "Tyler": {
-            "Anderson": "TX001",
-            "Cherokee": "TX073",
-            "Rusk": "TX401",
-            "Henderson": "TX213",
-            "Smith": "TX423",
-            "Gregg": "TX183",
-            "Van Zandt": "TX467",
-            "Wood": "TX499"
+        "Tyler": { "Anderson": "TX001", "Cherokee": "TX073", "Rusk": "TX401", "Henderson": "TX213", "Smith": "TX423",
+            "Gregg": "TX183", "Van Zandt": "TX467", "Wood": "TX499"
         },
-        "Waco": {
-            "Hamilton": "TX193",
-            "Bosque": "TX035",
-            "Hill": "TX217",
-            "Coryell": "TX099",
-            "McLennan": "TX309",
-            "Limestone": "TX293",
-            "Bell": "TX027",
-            "Falls": "TX145"
+        "Waco": { "Hamilton": "TX193", "Bosque": "TX035", "Hill": "TX217", "Coryell": "TX099", "McLennan": "TX309",
+            "Limestone": "TX293", "Bell": "TX027", "Falls": "TX145"
         },
-        "Wichita Falls": {
-            "Archer": "TX009",
-            "Baylor": "TX023",
-            "Clay": "TX077",
-            "Cooke": "TX097",
-            "Montague": "TX337",
-            "Throckmorton": "TX447",
-            "Wichita": "TX485",
-            "Wilbarger": "TX487",
-            "Young": "TX503"
+        "Wichita Falls": { "Archer": "TX009", "Baylor": "TX023", "Clay": "TX077", "Cooke": "TX097", "Montague": "TX337",
+            "Throckmorton": "TX447", "Wichita": "TX485", "Wilbarger": "TX487", "Young": "TX503"
         },
-        "Yoakum": {
-            "Austin": "TX015",
-            "Calhoun": "TX057",
-            "Colorado": "TX089",
-            "DeWitt": "TX123",
-            "Fayette": "TX149",
-            "Gonzales": "TX177",
-            "Jackson": "TX239",
-            "Lavaca": "TX285",
-            "Matagorda": "TX321",
-            "Victoria": "TX469",
+        "Yoakum": { "Austin": "TX015", "Calhoun": "TX057", "Colorado": "TX089", "DeWitt": "TX123", "Fayette": "TX149",
+            "Gonzales": "TX177", "Jackson": "TX239", "Lavaca": "TX285", "Matagorda": "TX321", "Victoria": "TX469",
             "Wharton": "TX481"
         }
     };
