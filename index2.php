@@ -564,15 +564,16 @@
     });
 
     function populateCounties(d){
-        let i = 0;
+        $("#counties_dropdown").empty();
+        let box = document.getElementById("counties_dropdown");
         for (let c in counties[d]){
             let county = c;
             let area = counties[d][county];
-            console.log(county + " - " + area);
-            
-            i++;
+            let option = document.createElement("option");
+            option.textContent = county;
+            option.value = area;
+            box.appendChild(option);
         }
-        console.log("District of " + d + " has "+ i + " counties");
     }
 
     function polylineClicked(polyIndex){
