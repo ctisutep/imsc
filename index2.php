@@ -372,7 +372,7 @@
         },
         "Bryan": { "Freestone": "TX161", "Leon": "TX289", "Robertson": "TX395", "Milam": "TX331", "Madison": "TX313",
             "Brazos": "TX041", "Burleson": "TX051", "Walker": "TX471", "Grimes": "TX185", "Washington": "TX477"
-        }
+        },
         "Childress": { "Wheeler": "TX483", "Donley": "TX129", "Collingsworth": "TX087", "Briscoe": "TX045",
             "Hall": "TX191", "Childress": "TX075", "Motley": "TX345", "Cottle": "TX101", "Hardeman": "TX197",
             "Foard": "TX155", "Dickens": "TX125", "King": "TX269", "Knox": "TX275"
@@ -440,6 +440,7 @@
     $(document).ready(function(){
         // console.log(counties.Abilene.Borden);
         // console.log(counties["Abilene"]["Borden"]);
+
         $("#slide_depth").slider({
             natural_arrow_keys: true,
             //range: true,
@@ -561,6 +562,10 @@
         $("#legend").hide();
         $("#testingLayers").hide();
     });
+
+    function populateCounties(d){
+        console.log(d);
+    }
 
     function polylineClicked(polyIndex){
         if(polyClicked > -1){
@@ -1019,6 +1024,8 @@
 
     function setDistrict(){
         app.payload.district = $('#target').children("option:selected").data('district');
+        let d = app.payload.district;
+        populateCounties(d);
         var pointStr = $('#target option:selected').val();
         var coords = pointStr.split(" ");
         panPoint = new google.maps.LatLng(parseFloat(coords[0]), parseFloat(coords[1]));
