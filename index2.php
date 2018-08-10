@@ -565,6 +565,9 @@
 
     function populateCounties(d){
         console.log(d);
+        for (let i = 0; i < counties[d].length; i++){
+            console.log("District " + d + " has "+ i + "counties");
+        }
     }
 
     function polylineClicked(polyIndex){
