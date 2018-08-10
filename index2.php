@@ -1,10 +1,10 @@
 <?php
-session_start();
-if(!isset($_SESSION['in']) OR !$_SESSION['in']){
-    header('Location: login.php');
-    exit();
-}
-?>
+//session_start();
+//if(!isset($_SESSION['in']) OR !$_SESSION['in']){
+//    header('Location: login.php');
+//    exit();
+//}
+//?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -130,48 +130,12 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                     <option value="33.77914733128647, -98.37158203125" data-district="Wichita Falls">Wichita Falls</option>
                                     <option value="29.05616970274342, -96.8115234375" data-district="Yoakum">Yoakum</option>
                                 </select>
-
-<!--                                <label>County for Austin:</label>-->
-<!--                                <select id="target" class="form-control">-->
-<!--                                    <option value="" disabled selected>Select a district</option>-->
-<!--                                    <option value="TX021" data-district="">Bastrop</option>-->
-<!--                                    <option value="TX031" data-district="">Blanco</option>-->
-<!--                                    <option value="TX053" data-district="">Burnet</option>-->
-<!--                                    <option value="TX055" data-district="">Caldwell</option>-->
-<!--                                    <option value="TX171" data-district="">Gillespie</option>-->
-<!--                                    <option value="TX209" data-district="">Hays</option>-->
-<!--                                    <option value="TX287" data-district="">Lee</option>-->
-<!--                                    <option value="TX299" data-district="">Llano</option>-->
-<!--                                    <option value="TX319" data-district="">Mason</option>-->
-<!--                                    <option value="TX453" data-district="" selected>Travis</option>-->
-<!--                                    <option value="TX491" data-district="">Williamson</option>-->
-<!--                                </select>-->
-
-                                <!--
-                                Abilene:
-                                    - Borden = tx033
-                                    - Howard = tx227
-                                    - Kent = tx263
-                                    - Scurry = tx415
-                                    - Mitchell = tx335
-                                    - Stonewall = tx433
-                                    - Fisher = tx151
-                                    - Nolan = tx353
-                                    - Haskell = tx207
-                                    - Jones = tx253
-                                    - Taylor = tx441
-                                    - Shackelford = tx417
-                                    - Callaham = tx059
-
-                                Amarillo:
-                                    - Dallam = tx111
-                                    - Hartley = 205
-                                    -
-
-
-
-                                -->
-
+                                <div id="counties_box">
+                                    <label>Counties:</label>
+                                    <select id="counties_dropdown" class="form-control">
+                                        <option value="" disabled selected>Select a district</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="row panel panel-body">
                                 <center><label>Soil Mapping</label></center>
