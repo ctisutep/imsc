@@ -35,7 +35,7 @@ echo json_encode($toReturn);
 $conn->close();
 
 class dataToQueryPolygons{
-	public $table, $property, $district, $lat2, $lat1, $depth, $from_depth, $depth_method, $lineString, $chart1, $chart2, $chart3, $chart4, $runLine, $runRec, $runAOI, $runPoly, $runFilters, $filter_units, $filter_value;
+	public $table, $property, $district, $lat2, $lat1, $depth, $from_depth, $depth_method, $lineString, $chart1, $chart2, $chart3, $chart4, $runLine, $runRec, $runAOI, $runPoly, $runFilters, $filter_units, $filter_value, $county;
 	public function __construct(){
 		$this->table = 'chorizon_r'; //hardcoded
 		$this->property = $_GET['property'];
@@ -59,6 +59,7 @@ class dataToQueryPolygons{
 		$this->runFilters = $_GET['runFilters'];
 		$this->filter_units = $_GET['filter_units'];
 		$this->filter_value = $_GET['filter_value'];
+		$this->county = $_GET['county'];
 	}
 }
 //depending on which table (for a given property) will be used in query, this will determine the appropriate key
@@ -1106,18 +1107,19 @@ function getPolygons(){
     $toReturn['query'] = $query;
     $result = mysqli_query($conn, $query);
     $key = setKey( $data->table );
+    $county = $data->county;
 
     if($data->table == "chorizon_r") {
         if($simplificationFactor > 0.0010260474777866){
-            if($data->district == "Austin"){
+            if($data->district){
                 if($area == 1){
                     $query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, 
                       hzdepb_r AS bottom, x.mukey, x.cokey, x.pi_r FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE 
-                      p.areasymbol = 'TX453' and hzdept_r = 0 and ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
+                      p.areasymbol = '$county' and hzdept_r = 0 and ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
                 }else{
                     $query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, 
                       hzdepb_r AS bottom, x.mukey, x.cokey, x.pi_r FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE 
-                      p.areasymbol = 'TX453' and hzdept_r = 0 ORDER BY OGR_FID DESC";
+                      p.areasymbol = '$county' and hzdept_r = 0 ORDER BY OGR_FID DESC";
                 }
             }
             else{
@@ -1131,7 +1133,7 @@ function getPolygons(){
             if($data->district == "Austin"){
                 $query= "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, hzdepb_r
                       AS bottom, x.mukey, x.cokey, x.$data->property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE 
-                      hzdept_r = 0 and p.areasymbol = 'TX453' and ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
+                      hzdept_r = 0 and p.areasymbol = '$county' and ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
             }
             else{
                 $query = "SELECT OGR_FID, ASTEXT(ST_SIMPLIFY(SHAPE, $simplificationFactor)) AS POLYGON, hzdept_r AS top, 

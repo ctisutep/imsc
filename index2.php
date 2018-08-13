@@ -345,7 +345,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
     var polylines = [];
     var polyClicked = -1;
     var ctx_soilProperty = document.getElementById("canvas-soil-property").getContext("2d");
-    var app = {map:null, polygons:null, label:"no filter", payload:{getMode:"polygons", runAOI:false, runLine:false, runPoly:false, runRec:false, runFilters:false, property:null, district:null, depth:0, from_depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null, filter_prop:null, filter_prop_n:null, filter_value:false, filter_units:0}};
+    var app = {map:null, polygons:null, label:"no filter", payload:{getMode:"polygons", runAOI:false, runLine:false, runPoly:false, runRec:false, runFilters:false, property:null, district:null, depth:0, from_depth:0, depth_method:null, AoI:null, lineString:null, chart1:null, chart1n:null, chart2:null, chart2n:null, chart3:null, chart3n:null, chart4:null, chart4n:null, filter_prop:null, filter_prop_n:null, filter_value:false, filter_units:0, county: null}};
     var hecho = false;
     var depth = app.payload.depth;
     let counties = {
@@ -539,6 +539,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                 app.label = "filter";
             });
             $('#target').on('change', setDistrict);
+            $('#counties_dropdown').on('change', setCounty);
         });
 
         /*var performance_measures = [
@@ -562,6 +563,11 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
         $("#legend").hide();
         $("#testingLayers").hide();
     });
+
+    function setCounty(){
+        app.payload.county = $('#counties_dropdown').children("option:selected").val();
+        console.log(app.payload.county);
+    }
 
     function populateCounties(d){
         $("#counties_dropdown").empty();
@@ -1035,6 +1041,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
         app.payload.district = $('#target').children("option:selected").data('district');
         let d = app.payload.district;
         populateCounties(d);
+        setCounty();
         var pointStr = $('#target option:selected').val();
         var coords = pointStr.split(" ");
         panPoint = new google.maps.LatLng(parseFloat(coords[0]), parseFloat(coords[1]));
