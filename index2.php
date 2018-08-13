@@ -566,7 +566,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
 
     function setCounty(){
         app.payload.county = $('#counties_dropdown').children("option:selected").val();
-        console.log(app.payload.county);
+        // console.log(app.payload.county);
     }
 
     function populateCounties(d){
