@@ -282,7 +282,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
 
                     <div class="card" id="other"><br>
                         <button class="btn btn-warning btn-block" role="button" data-toggle="collapse" data-parent="#another" href="#another" aria-expanded="true" aria-controls="another">
-                            Charts
+                            Charts & Info
                             <i class="fa fa-caret-down pull-right" aria-hidden="true"></i>
                         </button>
 
@@ -361,8 +361,8 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
         "Atlanta": { "Titus": "TX449", "Camp": "TX063", "Upshur": "TX459", "Morris": "TX343", "Bowie": "TX037",
             "Cass": "TX067", "Marion": "TX315", "Harrison": "TX203", "Panola": "TX365"
         },
-        "Austin": { "Mason": "TX319", "Gillespie": "TX171", "Llano": "TX299", "Blanco": "TX601", "Burnet": "TX601",
-            "Williamson": "TX491", "Travis": "TX453", "Hays": "TX604", "Lee": "TX287", "Bastrop": "TX021", "Caldwell": "TX055"
+        "Austin": { "Travis": "TX453", "Mason": "TX319", "Gillespie": "TX171", "Llano": "TX299", "Blanco": "TX601",
+            "Burnet": "TX601", "Williamson": "TX491", "Hays": "TX604", "Lee": "TX287", "Bastrop": "TX021", "Caldwell": "TX055"
         },
         "Beaumont": { "Tyler": "TX457", "Jasper": "TX241", "Newton": "TX351", "Liberty": "TX291", "Chambers": "TX071",
             "Hardin": "TX199", "Jefferson": "TX245", "Orange": "TX361"
