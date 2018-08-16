@@ -133,7 +133,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                 <div id="counties_box">
                                     <label>Counties:</label>
                                     <select id="counties_dropdown" class="form-control">
-                                        <option value="" disabled selected>Select a district</option>
+                                        <option value="" disabled selected>Select a county</option>
                                     </select>
                                 </div>
                             </div>
@@ -174,7 +174,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                                 </select><br>
                                                 <div class="input-group">
                                                     <span data-toggle="tooltip" data-placement="top" title="Number of representations for the data" class="input-group-addon" id="basic-addon3"># labels</span>
-                                                    <input type="number" class="form-control" value="1" min="1"placeholder="...labels" id="labels" aria-describedby="basic-addon3">
+                                                    <input type="number" class="form-control" value="5" min="1" placeholder="...labels" id="labels" aria-describedby="basic-addon3">
                                                 </div><br>
                                             </div>
                                             <div id="filters" class="tab-pane fade"><br>
