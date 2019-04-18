@@ -1088,6 +1088,7 @@ function getAOI($x){
 }
 
 function getPolygons(){
+	// echo "hello 0";
     global $conn, $toReturn;
     $data = new dataToQueryPolygons();//automatically gathers necessary data for query
     $simplificationFactor = polygonDefinition($data);//maybe it should be changing(be variable) in the future with  more given parameters($_GET)
@@ -1108,22 +1109,25 @@ function getPolygons(){
     $result = mysqli_query($conn, $query);
     $key = setKey( $data->table );
     $county = $data->county;
+    $property = $data->property;
+    $property = "x.".$property;
+    // echo "$property\n";
 
     if($data->table == "chorizon_r") {
         if($simplificationFactor > 0.0010260474777866) {
             if ($area == 1) {
                 $query = "SELECT OGR_FID, ASTEXT(SHAPE) AS POLYGON, hzdept_r AS top, 
-                      hzdepb_r AS bottom, x.mukey, x.cokey, x.pi_r FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE 
+                      hzdepb_r AS bottom, x.mukey, x.cokey, $property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE 
                       hzdept_r = 0 and ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
             } else {
                 $query = "SELECT OGR_FID, ASTEXT(SHAPE) AS POLYGON, hzdept_r AS top, 
-                      hzdepb_r AS bottom, x.mukey, x.cokey, x.pi_r FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE 
+                      hzdepb_r AS bottom, x.mukey, x.cokey, $property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE 
                       p.areasymbol = '$county' and hzdept_r = 0 ORDER BY OGR_FID DESC";
             }
         }
         else{
                 $query = "SELECT OGR_FID, ASTEXT(SHAPE) AS POLYGON, hzdept_r AS top, 
-                      hzdepb_r AS bottom, x.mukey, x.cokey, x.pi_r FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE 
+                      hzdepb_r AS bottom, x.mukey, x.cokey, $property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE 
                       hzdept_r = 0 and ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
         }
 
@@ -1135,6 +1139,7 @@ function getPolygons(){
 }
 
 function getPolygonsReal(){
+	// echo "hello";
 	global $conn, $toReturn;
 	$data = new dataToQueryPolygons();//automatically gathers necessary data for query
 	$simplificationFactor = polygonDefinition($data);//maybe it should be changing(be variable) in the future with  more given parameters($_GET)

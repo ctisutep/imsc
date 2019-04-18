@@ -770,6 +770,11 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                     newzIndex = 0;
                     legendText = "";
                     maximum = -1;
+                    // console.log(data.coords.length);
+                    // console.log(app.payload.property);
+                    // console.log(parseFloat(data.coords[0][app.payload.property]));
+                    // console.log(data.coords[0][app.payload.property]);
+                    // console.log(maximum);
                     for(var i = 0; i < data.coords.length; i++){
                         if(maximum < parseFloat(data.coords[i][app.payload.property])){
                             maximum = data.coords[i][app.payload.property];
@@ -782,6 +787,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                     l.appendChild(div);
 
                     var num_labels = spawn(maximum);
+                    // console.log(num_labels);
                     if(num_labels != null){
                     }
                     else{
@@ -1586,6 +1592,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
     }
 
     function spawn(value){
+        // console.log(value);
         var squareboxes = ["<img src='img/brightgreensquare.png' height='10px'/>",
             "<img src='img/skybluesquare.png' height='10px'/>",
             "<img src='img/yellowsquare.png' height='10px'/>",
