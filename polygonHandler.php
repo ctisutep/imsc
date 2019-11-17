@@ -1111,6 +1111,7 @@ function getPolygons(){
     $county = $data->county;
     $property = $data->property;
     $property = "x.".$property;
+    $district = $data->district;
     // echo "$property\n";
 
     if($data->table == "chorizon_r") {
@@ -1126,9 +1127,13 @@ function getPolygons(){
             }
         }
         else{
-                $query = "SELECT OGR_FID, ASTEXT(SHAPE) AS POLYGON, hzdept_r AS top, 
-                      hzdepb_r AS bottom, x.mukey, x.cokey, $property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE 
-                      hzdept_r = 0 and ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
+
+        	if ($district == "Everything") {
+                $query = "SELECT OGR_FID, ASTEXT(SHAPE) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.mukey, x.cokey, $property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE hzdept_r = 0 ORDER BY OGR_FID DESC;";
+        	}
+        	else {
+                $query = "SELECT OGR_FID, ASTEXT(SHAPE) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.mukey, x.cokey, $property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE hzdept_r = 0 and ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
+        	}
         }
 
         $toReturn['query2'] = $query;
