@@ -1,7 +1,9 @@
 <?php
 //init specifications
+set_time_limit(0);
 ini_set('memory_limit', '-1');
-ini_set('max_execution_time', 30000); //300 seconds = 5 minutes
+ini_set('display_errors', 0); // just for testing
+error_reporting(E_ERROR | E_WARNING | E_PARSE); // just for testing
 //conection to utep database
 $conn = mysqli_connect('ctis.utep.edu', 'ctis', '19691963', 'imsc');
 //global array that will return requested data
