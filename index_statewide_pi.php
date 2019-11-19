@@ -563,7 +563,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
         $("#legend").hide();
         $("#testingLayers").hide();
 
-        app.payload.district = "Everything";
+        app.payload.district = "EverythingA";
         app.payload.property = "pi_r";
         app.payload.depth = "60";
         app.payload.from_depth = "0";

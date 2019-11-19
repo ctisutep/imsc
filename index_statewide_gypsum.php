@@ -562,7 +562,17 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
         });
         $("#legend").hide();
         $("#testingLayers").hide();
-    });
+
+        app.payload.district = "EverythingB";
+        app.payload.property = "gypsum_r";
+        app.payload.depth = "60";
+        app.payload.from_depth = "0";
+        app.payload.county = "TX624";
+        app.payload.table = "chorizon_r";
+        depth = "60";
+        getPolygons();
+
+    }); // end document.onload
 
     function setCounty(){
         app.payload.county = $('#counties_dropdown').children("option:selected").val();
@@ -748,9 +758,9 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
             }
             else{
                 var getparams = app.payload;
-                var bounds = app.map.getBounds();
-                getparams.NE = bounds.getNorthEast().toJSON(); //north east corner
-                getparams.SW = bounds.getSouthWest().toJSON(); //south-west corner
+                // var bounds = app.map.getBounds();
+                // getparams.NE = bounds.getNorthEast().toJSON(); //north east corner
+                // getparams.SW = bounds.getSouthWest().toJSON(); //south-west corner
             }
             $(document.body).css({'cursor': 'wait'});
             $.get('polygonHandler.php', app.payload, function(data){
@@ -923,7 +933,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                 }
                             }
                             else{
-                                removePolygons();
+                                // removePolygons();
                             }
                             temp = wktFormatter(data.coords[key]['POLYGON']);
                             for (var i = 0; i < temp.length; i++) {
@@ -987,7 +997,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                     $("#legend").slideToggle("slow");
                 }
                 else if(hecho){
-                    removePolygons();
+                    // removePolygons();
                     return;
                 }
             });
@@ -997,7 +1007,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
             $('#legend').find('*').not('h3').remove();
             $('#description').find('*').not('h3').remove();
             alert("Please select a property and a district, and make sure depth is a numerical value.");
-            removePolygons();
+            // removePolygons();
         }
     }
 
