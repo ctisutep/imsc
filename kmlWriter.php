@@ -2,24 +2,41 @@
 ini_set('memory_limit', '-1');
 ini_set('max_execution_time', -1);
 
+// $length = $_POST["length"];
+// $name = $_POST["name"];
+
 $json = file_get_contents('php://input');
 $data = json_decode($json);
 
 $string_kml = "";
 $all_poly = array();
+// for ($i=0; $i < $length; $i++) {
+//   array_push($all_poly, $_POST[$i]);
+// }
+
 for ($i=0; $i < $data->length; $i++) {
   array_push($all_poly, $data->$i);
 }
 
 $all_values = array();
+// for ($i=0; $i < $length; $i++) {
+//   $v = $i.'value';
+//   $value = $_POST[$v];
+//   array_push($all_values, $value);
+// }
+
 for ($i=0; $i < $data->length; $i++) {
   $v = $i.'value';
   $value = $data->$v;
   array_push($all_values, $value);
 }
 
+// echo "$data->length \n";
+
+// return;
+
 if($length == 1){
-  $name = $data->name;
+  // $name = $data->name;
   $string_kml = "
   <kml>
     <Document>
@@ -54,6 +71,7 @@ else{ //multiple tags/polygons
       <name>ctis_isc_polygon.kml</name>
         <open>0</open>";
   for ($i=0; $i < $data->length; $i++) {
+  // for ($i=0; $i < $length; $i++) {        
     $name = $data->name;
     $string_kml .= "
 

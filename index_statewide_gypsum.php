@@ -565,6 +565,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
 
         app.payload.district = "EverythingB";
         app.payload.property = "gypsum_r";
+        app.payload.value = "Gypsum";
         app.payload.depth = "60";
         app.payload.from_depth = "0";
         app.payload.county = "TX624";
@@ -984,12 +985,13 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                 var property = object_poly;
                 // $.post("kmlWriter.php", property);
                 fetch("kmlWriter.php", {
-                    method: 'POST',
+                    method: 'PUT',
                     headers: {
-                      'Accept': 'application/json',
+                      // 'Accept': 'application/json',
                       'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(property)
+                    body: JSON.stringify(property),
+                    mode: 'cors'
                 });
                 //}
 
