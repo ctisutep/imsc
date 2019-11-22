@@ -982,7 +982,15 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
 
                 //if(app.polygons.length > 1){ //still testing
                 var property = object_poly;
-                $.post("kmlWriter.php", property);
+                // $.post("kmlWriter.php", property);
+                fetch("kmlWriter.php", {
+                    method: 'POST',
+                    headers: {
+                      'Accept': 'application/json',
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(property)
+                });
                 //}
 
                 $(document.body).css({'cursor': 'auto'});
