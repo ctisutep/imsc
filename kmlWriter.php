@@ -120,4 +120,5 @@ else{
   fwrite($file,  $string_kml);
 }
 fclose( $file );
+
 ?>
