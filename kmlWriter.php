@@ -1,13 +1,25 @@
 <?php
-$length = $_POST['length'];
+ini_set('memory_limit', '-1');
+ini_set('max_execution_time', -1);
+
+$json = file_get_contents('php://input');
+$data = json_decode($json);
 
 $string_kml = "";
 $all_poly = array();
-for ($i=0; $i < $length; $i++) {
-  array_push($all_poly, $_POST[$i]);
+for ($i=0; $i < $data->length; $i++) {
+  array_push($all_poly, $data->$i);
+}
+
+$all_values = array();
+for ($i=0; $i < $data->length; $i++) {
+  $v = $i.'value';
+  $value = $data->$v;
+  array_push($all_values, $value);
 }
 
 if($length == 1){
+  $name = $data->name;
   $string_kml = "
   <kml>
     <Document>
@@ -15,6 +27,11 @@ if($length == 1){
       <open>0</open>
       <Placemark>
         <name>hollow polygon 0 </name>
+        <ExtendedData>
+          <Data name=\"$name\">
+            <value>$all_values[0]</value>
+          </Data>
+        </ExtendedData>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -36,11 +53,17 @@ else{ //multiple tags/polygons
     <Document>
       <name>ctis_isc_polygon.kml</name>
         <open>0</open>";
-  for ($i=0; $i < $length; $i++) {
+  for ($i=0; $i < $data->length; $i++) {
+    $name = $data->name;
     $string_kml .= "
 
     <Placemark>
       <name>hollow polygon $i </name>
+      <ExtendedData>
+      <Data name=\"$name\">
+        <value>$all_values[$i]</value>
+      </Data>
+      </ExtendedData>
       <Polygon>
         <extrude>1</extrude>
         <altitudeMode>relativeToGround</altitudeMode>
@@ -60,8 +83,8 @@ $string_kml .= "
 </kml>";
 }
 
-$filename = "ctis_isc_polygon.kml";
-$file = fopen( $filename, "a+" );
+$filename = "./ctis_isc_polygon.kml";
+$file = fopen( "$filename", "w+" );
 
 if( $file == false ) {
   echo ( "Error opening file first" );
@@ -74,8 +97,8 @@ if(filesize($filename) == 0){
 else{
   fclose( $file );
   unlink($filename);
-  $filename = "ctis_isc_polygon.kml";
-  $file = fopen( $filename, "a+" );
+  $filename = "./ctis_isc_polygon.kml";
+  $file = fopen( $filename, "w+" );
   fwrite($file,  $string_kml);
 }
 fclose( $file );
