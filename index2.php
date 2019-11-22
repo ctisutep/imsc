@@ -974,12 +974,13 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                 var property = object_poly;
                 // $.post("kmlWriter.php", property);
                 fetch("kmlWriter.php", {
-                    method: 'POST',
+                    method: 'PUT',
                     headers: {
-                      'Accept': 'application/json',
+                      // 'Accept': 'application/json',
                       'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(property)
+                    body: JSON.stringify(property),
+                    mode: 'cors'
                 });
                 //}
 
