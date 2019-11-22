@@ -37,11 +37,12 @@ for ($i=0; $i < $data->length; $i++) {
 
 if($length == 1){
   // $name = $data->name;
-  $string_kml = "
-  <kml>
+  $string_kml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<kml xmlns=\"http://www.opengis.net/kml/2.2\">
     <Document>
       <name>ctis_isc_polygon.kml</name>
-      <open>0</open>
+      <Style id=\"thickLine\"><LineStyle><width>2.5</width></LineStyle></Style>
+<Style id=\"transparent50Poly\"><PolyStyle><color>7fffffff</color></PolyStyle></Style>
       <Placemark>
         <name>hollow polygon 0 </name>
         <ExtendedData>
@@ -50,8 +51,6 @@ if($length == 1){
           </Data>
         </ExtendedData>
         <Polygon>
-          <extrude>1</extrude>
-          <altitudeMode>relativeToGround</altitudeMode>
           <outerBoundaryIs>
             <LinearRing>
               <coordinates>
@@ -60,16 +59,18 @@ if($length == 1){
             </LinearRing>
           </outerBoundaryIs>
         </Polygon>
+        <styleUrl>#transparent50Poly</styleUrl>
       </Placemark>
     </Document>
   </kml>";
 }
 else{ //multiple tags/polygons
-  $string_kml = "
-  <kml>
+  $string_kml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+  <kml xmlns=\"http://www.opengis.net/kml/2.2\">
     <Document>
       <name>ctis_isc_polygon.kml</name>
-        <open>0</open>";
+      <Style id=\"thickLine\"><LineStyle><width>2.5</width></LineStyle></Style>
+<Style id=\"transparent50Poly\"><PolyStyle><color>7fffffff</color></PolyStyle></Style>";
   for ($i=0; $i < $data->length; $i++) {
   // for ($i=0; $i < $length; $i++) {        
     $name = $data->name;
@@ -78,13 +79,11 @@ else{ //multiple tags/polygons
     <Placemark>
       <name>hollow polygon $i </name>
       <ExtendedData>
-      <Data name=\"$name\">
-        <value>$all_values[$i]</value>
-      </Data>
+        <Data name=\"$name\">
+          <value>$all_values[$i]</value>
+        </Data>
       </ExtendedData>
       <Polygon>
-        <extrude>1</extrude>
-        <altitudeMode>relativeToGround</altitudeMode>
         <outerBoundaryIs>
           <LinearRing>
             <coordinates>
@@ -93,6 +92,7 @@ else{ //multiple tags/polygons
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
+      <styleUrl>#transparent50Poly</styleUrl>
     </Placemark>
     ";
   }

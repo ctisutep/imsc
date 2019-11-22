@@ -959,8 +959,8 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                     whole_poly = "";
                     for (var j = 0; j < path.getLength(); j++) {
                         var xy = path.getAt(j);
-                        whole_poly += xy.lng() + ", ";
-                        whole_poly += xy.lat() + ", 0 ";
+                        whole_poly += xy.lng() + ",";
+                        whole_poly += xy.lat() + ",0 \n";
                     }
                     object_poly[i] = whole_poly;
                     object_poly[i+"value"] = app.polygons[i].description_value;
