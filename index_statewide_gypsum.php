@@ -980,7 +980,6 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                 object_poly["length"] = app.polygons.length;
                 object_poly["name"] =  app.payload.value;
 
-
                 //if(app.polygons.length > 1){ //still testing
                 var property = object_poly;
                 // $.post("kmlWriter.php", property);
