@@ -765,6 +765,8 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
             }
             $(document.body).css({'cursor': 'wait'});
             $.get('polygonHandler.php', app.payload, function(data){
+            // $.get('./jsons/all_pi_42.json', function(data){
+                // console.log(data);
                 if(depth < 0 || depth * 2.54 > 204 || isNaN(depth)){
                     alert("Please make sure depth is a numerical value and it is between 0 and 79 inches.");
                     hecho = true;
@@ -781,7 +783,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                     newzIndex = 0;
                     legendText = "";
                     maximum = -1;
-                    // console.log(data.coords.length);
+                    console.log(data.coords.length);
                     // console.log(app.payload.property);
                     // console.log(parseFloat(data.coords[0][app.payload.property]));
                     // console.log(data.coords[0][app.payload.property]);
@@ -964,6 +966,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
             }).done(function(data){
                 var whole_poly = "";
                 var object_poly = {}; //to send to the ajax call
+                console.log(app.polygons.length);
                 for (var i = 0; i < app.polygons.length; i++) {
                     var path = app.polygons[i].getPath();
                     //whole_poly += "begin polygon " + i + "\n";
