@@ -1136,7 +1136,7 @@ function getPolygons(){
 			// SELECT * from imsc.all_gypsum where top > 0 and bottom <= 15.24 ORDER BY OGR_FID DESC;
 
         	if ($district == "EverythingA") {
-                $query = "SELECT * from imsc.all_pi_48 ORDER BY OGR_FID DESC;";
+                $query = "SELECT * from imsc.all_pi_36 ORDER BY OGR_FID DESC;";
                 // get file
                 $json = file_get_contents('./jsons/all_pi_36.json');
 				$result = json_decode($json);
@@ -1147,7 +1147,7 @@ function getPolygons(){
 				exit();
         	}
         	elseif ($district == "EverythingB") {
-        		$query = "SELECT * from imsc.all_gypsum_48 ORDER BY OGR_FID DESC;";
+        		$query = "SELECT * from imsc.all_gypsum_36 ORDER BY OGR_FID DESC;";
         		// get file
         		$json = file_get_contents('./jsons/all_gypsum_36.json');
 				$result = json_decode($json);

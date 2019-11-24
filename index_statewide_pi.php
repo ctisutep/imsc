@@ -955,8 +955,8 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                 fillOpacity: 0.60,
                                 zIndex: -1
                             });
-                            polygon.setOptions({ zIndex: -1 });
-                            polygon.addListener('click', polyInfo);
+                            // polygon.setOptions({ zIndex: -1 });
+                            // polygon.addListener('click', polyInfo);
                             //console.log(app.polygons);
                             app.polygons.push(polygon);
                             // polygon.setMap(app.map);
@@ -983,36 +983,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
 
                 object_poly["length"] = app.polygons.length;
                 object_poly["name"] =  app.payload.value;
-
-                //if(app.polygons.length > 1){ //still testing
-                var fd = new FormData();
-                // fd.append(696969, 'cumtown');
-                for (let i in object_poly) {
-                    // console.log(i);
-                    // console.log(object_poly);
-                    // console.log(object_poly[i]);
-                    // fd.append(i, object_poly[i]);
-                    // fd.append(i+"value", object_poly[i+"value"]);
-                    if (i == 2) {
-                        // app.polygons.length = 3;
-                        // break;
-                    }
-                    // console.log(fd);
-                    // break;
-                    // fd.append(i+"value", object_poly[i+"value"] )
-                }
-
-                fd.append("length", app.polygons.length);
-                fd.append("name", app.payload.value);
-                // console.log(app.payload.value);
-
-                // Display the key/value pairs
-                // for(var pair of fd.entries()) {
-                //    console.log(pair[0]+ ', '+ pair[1]); 
-                // }
-
-                // fd.append();
-                // console.log(fd);
+                
                 var property = object_poly;
                 // $.post("kmlWriter.php", property);
                 fetch("kmlWriter.php", {
