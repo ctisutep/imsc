@@ -1151,6 +1151,7 @@ function getPolygons(){
         		$json = file_get_contents('./jsons/all_gypsum_42.json');
 				$result = json_decode($json);
 				$toReturn['coords'] = $result;
+				header('Content-Type: application/json');
 				echo json_encode($toReturn);
 				$conn->close();
 				exit();
