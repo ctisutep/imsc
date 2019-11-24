@@ -1129,15 +1129,16 @@ function getPolygons(){
         }
         else{
         	// every 6 inches, up to 48 inches
+        	//    6      12     18    24     30    36      42      48
             // 15.24, 30.48, 45.72, 60.96, 76.2, 91.44, 106.68, 121.92
-            //   x      x      x      x      
+            //												x		x      
    			// SELECT * from imsc.all_pi where top > 0 and bottom <= 15.24 ORDER BY OGR_FID DESC;
 			// SELECT * from imsc.all_gypsum where top > 0 and bottom <= 15.24 ORDER BY OGR_FID DESC;
 
         	if ($district == "EverythingA") {
                 $query = "SELECT * from imsc.all_pi_48 ORDER BY OGR_FID DESC;";
                 // get file
-                $json = file_get_contents('./jsons/all_pi_42.json');
+                $json = file_get_contents('./jsons/all_pi_36.json');
 				$result = json_decode($json);
 				$toReturn['coords'] = $result;
 				header('Content-Type: application/json');
@@ -1148,7 +1149,7 @@ function getPolygons(){
         	elseif ($district == "EverythingB") {
         		$query = "SELECT * from imsc.all_gypsum_48 ORDER BY OGR_FID DESC;";
         		// get file
-        		$json = file_get_contents('./jsons/all_gypsum_42.json');
+        		$json = file_get_contents('./jsons/all_gypsum_36.json');
 				$result = json_decode($json);
 				$toReturn['coords'] = $result;
 				header('Content-Type: application/json');
