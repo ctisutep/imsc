@@ -955,11 +955,11 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                 fillOpacity: 0.60,
                                 zIndex: -1
                             });
-                            // polygon.setOptions({ zIndex: -1 });
-                            // polygon.addListener('click', polyInfo);
-                            //console.log(app.polygons);
+                            polygon.setOptions({ zIndex: -1 });
+                            polygon.addListener('click', polyInfo);
+                            // console.log(app.polygons);
                             app.polygons.push(polygon);
-                            // polygon.setMap(app.map);
+                            polygon.setMap(app.map);
                         }
                     }
                 }
