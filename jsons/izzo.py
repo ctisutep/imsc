@@ -23,6 +23,7 @@ kml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?> \
 <Style id=\"transparent50Poly\"><PolyStyle><color>7fffffff</color></PolyStyle></Style>"
 
 for i in range(len(data)):
+	print("Working on outer loop. " + str(i) + " of " + str(len(data)))
 	value = str(data[i][soil_val])
 	kml += "<Placemark>\
 	<name>hollow polygon " + str(i) + " </name>\
@@ -37,6 +38,8 @@ for i in range(len(data)):
 	<coordinates>"
 	parsed = parse_c(data[i]["POLYGON"])
 	for j in range(len(parsed)):
+		print("Working on outer loop. " + str(i) + " of " + str(len(data)))
+		print("Working on inner loop. " + str(j) + " of " + str(len(parsed)))
 		kml += parsed[j]
 	kml += "</coordinates>\
 	</LinearRing>\
@@ -44,6 +47,7 @@ for i in range(len(data)):
 	</Polygon>\
 	<styleUrl>#transparent50Poly</styleUrl>\
 	</Placemark>"
+	print("Working on outer loop. " + str(i) + " of " + str(len(data)))
 
 kml += "</Document></kml>"
 
