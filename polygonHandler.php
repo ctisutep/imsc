@@ -1136,26 +1136,26 @@ function getPolygons(){
 			// SELECT * from imsc.all_gypsum where top > 0 and bottom <= 15.24 ORDER BY OGR_FID DESC;
 
         	if ($district == "EverythingA") {
-                $query = "SELECT * from imsc.all_pi_36 ORDER BY OGR_FID DESC;";
+                $query = "SELECT * from imsc.all_pi_48 ORDER BY OGR_FID DESC;";
                 // get file
-                $json = file_get_contents('./jsons/all_pi_36.json');
-				$result = json_decode($json);
-				$toReturn['coords'] = $result;
-				header('Content-Type: application/json');
-				echo json_encode($toReturn);
-				$conn->close();
-				exit();
+    			// $json = file_get_contents('./jsons/all_pi_36.json');
+				// $result = json_decode($json);
+				// $toReturn['coords'] = $result;
+				// header('Content-Type: application/json');
+				// echo json_encode($toReturn);
+				// $conn->close();
+				// exit();
         	}
         	elseif ($district == "EverythingB") {
-        		$query = "SELECT * from imsc.all_gypsum_36 ORDER BY OGR_FID DESC;";
+        		$query = "SELECT * from imsc.all_gypsum_48 ORDER BY OGR_FID DESC;";
         		// get file
-        		$json = file_get_contents('./jsons/all_gypsum_36.json');
-				$result = json_decode($json);
-				$toReturn['coords'] = $result;
-				header('Content-Type: application/json');
-				echo json_encode($toReturn);
-				$conn->close();
-				exit();
+    			// $json = file_get_contents('./jsons/all_gypsum_36.json');
+				// $result = json_decode($json);
+				// $toReturn['coords'] = $result;
+				// header('Content-Type: application/json');
+				// echo json_encode($toReturn);
+				// $conn->close();
+				// exit();
         	}
         	else {
                 $query = "SELECT OGR_FID, ASTEXT(SHAPE) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.mukey, x.cokey, $property FROM polygon AS p NATURAL JOIN chorizon_joins as x WHERE hzdept_r = 0 and ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE) ORDER BY OGR_FID DESC";
