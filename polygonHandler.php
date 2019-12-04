@@ -1135,6 +1135,15 @@ function getPolygons(){
    			// SELECT * from imsc.all_pi where top > 0 and bottom <= 15.24 ORDER BY OGR_FID DESC;
 			// SELECT * from imsc.all_gypsum where top > 0 and bottom <= 15.24 ORDER BY OGR_FID DESC;
 
+			// SELECT * FROM imsc.districts;
+			// SET @geom1 = (select ST_ASTEXT(SHAPE) from imsc.districts where txdot_di_2 = "El Paso");
+
+			// SELECT OGR_FID, ASTEXT(SHAPE) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.mukey, x.cokey, pi_r 
+			// FROM imsc.polygon AS p NATURAL JOIN imsc.chorizon_joins as x WHERE hzdept_r = 0 AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE);
+
+			// SELECT OGR_FID, ASTEXT(SHAPE) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.mukey, x.cokey, pi_r 
+			// FROM imsc.polygon AS p NATURAL JOIN imsc.chorizon_joins as x WHERE hzdept_r = 0 AND ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE);
+
         	if ($district == "EverythingA") {
                 $query = "SELECT * from imsc.all_pi_48 ORDER BY OGR_FID DESC;";
                 // get file
