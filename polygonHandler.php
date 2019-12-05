@@ -1142,11 +1142,11 @@ function getPolygons(){
 			// FROM imsc.polygon AS p NATURAL JOIN imsc.chorizon_joins as x WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE);
 
         	if ($district == "EverythingA") {
-        		$query = "select ST_ASTEXT(SHAPE) from imsc.districts where txdot_di_2 = \"Abilene\";";
+        		$query = "select ST_ASTEXT(SHAPE) from imsc.districts where txdot_di_2 = \"Beaumont\";";
 				$result = mysqli_query($conn, $query);
 				$result = fetchAll($result);
 				$toReturn['district'] = $result;
-                $query = "SELECT * from imsc.abilene_pi_gypsum where top <= 15.24 and bottom >= 15.24 or top <= 45.72 and bottom >= 45.72 limit 50000;";
+                $query = "SELECT * from imsc.Beaumont_pi_gypsum where top <= 15.24 and bottom >= 15.24 or top <= 45.72 and bottom >= 45.72 limit 50000;";
                 // $query = "SELECT count(*) from imsc.elpaso_pi_gypsum;";
                 // get file
     			// $json = file_get_contents('./jsons/all_pi_36.json');
@@ -1158,11 +1158,11 @@ function getPolygons(){
 				// exit();
         	}
         	elseif ($district == "EverythingB") {
-        		$query = "select ST_ASTEXT(SHAPE) from imsc.districts where txdot_di_2 = \"Abilene\";";
+        		$query = "select ST_ASTEXT(SHAPE) from imsc.districts where txdot_di_2 = \"Beaumont\";";
 				$result = mysqli_query($conn, $query);
 				$result = fetchAll($result);
 				$toReturn['district'] = $result;
-                $query = "SELECT * from imsc.abilene_pi_gypsum where top <= 15.24 and bottom >= 15.24 or top <= 45.72 and bottom >= 45.72 limit 50000;";
+                $query = "SELECT * from imsc.Beaumont_pi_gypsum where top <= 15.24 and bottom >= 15.24 or top <= 45.72 and bottom >= 45.72 limit 50000;";
 				// get file
     			// $json = file_get_contents('./jsons/all_gypsum_36.json');
 				// $result = json_decode($json);

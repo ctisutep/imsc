@@ -986,7 +986,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
             }).done(function(data){
                 var whole_poly = "";
                 var object_poly = {}; //to send to the ajax call
-                console.log(app.polygons.length);
+                console.log("fin. "+app.polygons.length);
                 // for (var i = 0; i < app.polygons.length; i++) {
                 //     var path = app.polygons[i].getPath();
                 //     //whole_poly += "begin polygon " + i + "\n";
