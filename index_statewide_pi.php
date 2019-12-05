@@ -814,7 +814,27 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                         l.appendChild(div);
                         num_labels = [];
                     }
-                    var polyCoordis = [];
+
+                    var polyCoordis_district = [];
+
+                    temp_district = wktFormatter(data.district[0]['ST_ASTEXT(SHAPE)']);
+                    for (var i = 0; i < temp_district.length; i++) {
+                        polyCoordis_district.push(temp_district[i]);
+                    }
+                    var polygon = new google.maps.Polygon({
+                        paths: polyCoordis_district,
+                        strokeColor: 'black',
+                        strokeOpacity: 1.00,
+                        strokeWeight: 1.00,
+                        fillColor: 'white',
+                        fillOpacity: 0.00,
+                        zIndex: -1
+                    });
+                    polygon.setOptions({ zIndex: -1 });
+                    // console.log(app.polygons);
+                    app.polygons.push(polygon);
+                    polygon.setMap(app.map);
+
                     for(key in data.coords){
                         if(data.coords.hasOwnProperty(key)){
                             var polyCoordis = [];
@@ -967,36 +987,36 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                 var whole_poly = "";
                 var object_poly = {}; //to send to the ajax call
                 console.log(app.polygons.length);
-                for (var i = 0; i < app.polygons.length; i++) {
-                    var path = app.polygons[i].getPath();
-                    //whole_poly += "begin polygon " + i + "\n";
-                    whole_poly = "";
-                    for (var j = 0; j < path.getLength(); j++) {
-                        var xy = path.getAt(j);
-                        whole_poly += xy.lng() + ",";
-                        whole_poly += xy.lat() + ",0 \n";
-                    }
-                    object_poly[i] = whole_poly;
-                    object_poly[i+"value"] = app.polygons[i].description_value;
-                    //whole_poly += "end polygon " + i + "\n";
-                }
+                // for (var i = 0; i < app.polygons.length; i++) {
+                //     var path = app.polygons[i].getPath();
+                //     //whole_poly += "begin polygon " + i + "\n";
+                //     whole_poly = "";
+                //     for (var j = 0; j < path.getLength(); j++) {
+                //         var xy = path.getAt(j);
+                //         whole_poly += xy.lng() + ",";
+                //         whole_poly += xy.lat() + ",0 \n";
+                //     }
+                //     object_poly[i] = whole_poly;
+                //     object_poly[i+"value"] = app.polygons[i].description_value;
+                //     //whole_poly += "end polygon " + i + "\n";
+                // }
 
-                object_poly["length"] = app.polygons.length;
-                object_poly["name"] =  app.payload.value;
+                // object_poly["length"] = app.polygons.length;
+                // object_poly["name"] =  app.payload.value;
                 
-                var property = object_poly;
-                // $.post("kmlWriter.php", property);
-                fetch("kmlWriter.php", {
-                    // method: 'POST',
-                    method: 'PUT',
-                    headers: {
-                      // 'Accept': 'application/json',
-                      'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(property),
-                    // body: fd,
-                    mode: 'cors'
-                });
+                // var property = object_poly;
+                // // $.post("kmlWriter.php", property);
+                // fetch("kmlWriter.php", {
+                //     // method: 'POST',
+                //     method: 'PUT',
+                //     headers: {
+                //       // 'Accept': 'application/json',
+                //       'Content-Type': 'application/json'
+                //     },
+                //     body: JSON.stringify(property),
+                //     // body: fd,
+                //     mode: 'cors'
+                // });
                 //}
 
                 $(document.body).css({'cursor': 'auto'});
