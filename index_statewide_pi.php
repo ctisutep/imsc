@@ -1107,7 +1107,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
     var rec, rectangle, map, infoWindow, selectedRec, drawingManager, paths;
     function initMap() {
         app.map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 6,
+            zoom: 5,
             center: new google.maps.LatLng(22,-98.9689529),
             mapTypeId: 'terrain'
         });
