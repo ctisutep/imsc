@@ -1140,13 +1140,39 @@ function getPolygons(){
 
 			// create table imsc.elpaso_pi_gypsum SELECT OGR_FID, ST_ASTEXT(SHAPE) AS POLYGON, hzdept_r AS top, hzdepb_r AS bottom, x.mukey, x.cokey, pi_r, gypsum_r 
 			// FROM imsc.polygon AS p NATURAL JOIN imsc.chorizon_joins as x WHERE ST_INTERSECTS(ST_GEOMFROMTEXT(@geom1, 1), p.SHAPE);
+        	$tables = ["Abilene"=>"abilene_pi_gypsum",
+        				"Amarillo"=>"Amarillo_pi_gypsum",
+        				"Atlanta"=>"Atlanta_pi_gypsum",
+        				"Austin"=>"Austin_pi_gypsum",
+        				"Beaumont"=>"Beaumont_pi_gypsum",
+        				"Brownwood"=>"Brownwood_pi_gypsum",
+        				"Bryan"=>"Bryan_pi_gypsum",
+        				"Childress"=>"Childress_pi_gypsum",
+        				"Corpus Christi"=>"CorpusChristi_pi_gypsum",
+        				"Dallas"=>"Dallas_pi_gypsum",
+        				"El Paso"=>"ElPaso_pi_gypsum",
+        				"Fort Worth"=>"FortWorth_pi_gypsum",
+        				"Houston"=>"Houston_pi_gypsum",
+        				"Laredo"=>"Laredo_pi_gypsum",
+        				"Lubbock"=>"Lubbock_pi_gypsum",
+        				"Lufkin"=>"Lufkin_pi_gypsum",
+        				"Odessa"=>"Odessa_pi_gypsum",
+        				"Paris"=>"Paris_pi_gypsum",
+        				"Pharr"=>"Pharr_pi_gypsum",
+        				"San Angelo"=>"SanAngelo_pi_gypsum",
+        				"San Antonio"=>"SanAntonio_pi_gypsum",
+        				"Tyler"=>"Tyler_pi_gypsum",
+        				"Waco"=>"Waco_pi_gypsum",
+        				"Wichita Falls"=>"WichitaFalls_pi_gypsum",
+        				"Yoakum"=>"Yoakum_pi_gypsum"];
 
-        	if ($district == "EverythingA") {
-        		$query = "select ST_ASTEXT(SHAPE) from imsc.districts where txdot_di_2 = \"Lubbock\";";
+        	if ($county == "EverythingA") {
+        		$query = "select ST_ASTEXT(SHAPE) from imsc.districts where txdot_di_2 = \"$district\";";
 				$result = mysqli_query($conn, $query);
 				$result = fetchAll($result);
 				$toReturn['district'] = $result;
-                $query = "SELECT * from imsc.lubbock_pi_gypsum where top <= 15.24 and bottom >= 15.24 or top <= 45.72 and bottom >= 45.72;";
+				$table = $tables[$district];
+                $query = "SELECT * from imsc.$table where top <= 15.24 and bottom >= 15.24 or top <= 45.72 and bottom >= 45.72 limit 100000;";
                 // $query = "SELECT count(*) from imsc.elpaso_pi_gypsum;";
                 // get file
     			// $json = file_get_contents('./jsons/all_pi_36.json');
@@ -1157,12 +1183,13 @@ function getPolygons(){
 				// $conn->close();
 				// exit();
         	}
-        	elseif ($district == "EverythingB") {
-        		$query = "select ST_ASTEXT(SHAPE) from imsc.districts where txdot_di_2 = \"Lubbock\";";
+        	elseif ($county == "EverythingB") {
+        		$query = "select ST_ASTEXT(SHAPE) from imsc.districts where txdot_di_2 = \"$district\";";
 				$result = mysqli_query($conn, $query);
 				$result = fetchAll($result);
 				$toReturn['district'] = $result;
-                $query = "SELECT * from imsc.lubbock_pi_gypsum where top <= 15.24 and bottom >= 15.24 or top <= 45.72 and bottom >= 45.72;";
+				$table = $tables[$district];
+                $query = "SELECT * from imsc.$table where top <= 15.24 and bottom >= 15.24 or top <= 45.72 and bottom >= 45.72 limit 100000;";
 				// get file
     			// $json = file_get_contents('./jsons/all_gypsum_36.json');
 				// $result = json_decode($json);

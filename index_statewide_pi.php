@@ -130,7 +130,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                     <option value="33.77914733128647, -98.37158203125" data-district="Wichita Falls">Wichita Falls</option>
                                     <option value="29.05616970274342, -96.8115234375" data-district="Yoakum">Yoakum</option>
                                 </select>
-                                <div id="counties_box">
+                                <div id="counties_box" class="hide">
                                     <label>Counties:</label>
                                     <select id="counties_dropdown" class="form-control">
                                         <option value="" disabled selected>Select a county</option>
@@ -140,7 +140,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                             <div class="row panel panel-body">
                                 <center><label>Soil Mapping</label></center>
                                 <div class="row">
-                                    <ul class="nav nav-tabs">
+                                    <ul class="nav nav-tabs hide">
                                         <li class="active"><a data-toggle="tab" href="#default,#defaultbtn" data-target="#default, #defaultbtn">Tools</a></li>
                                         <li><a data-toggle="tab" href="#filters,#filtersbtn" data-target="#filters, #filtersbtn">Filter</a></li>
                                         <li data-toggle="tooltip" data-placement="top" title="Click your drawn Area Of Interest to display statistics">
@@ -151,7 +151,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                         </li>
                                     </ul>
                                     <div class="col-md-5 col-sm-11 col-lg-7">
-                                        <div class="tab-content">
+                                        <div class="tab-content hide">
                                             <div id="default" class="tab-pane fade in active">
                                                 <label> Soil Property:</label>
                                                 <div class="input-group">
@@ -247,22 +247,22 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                                     <div class="col-md-5"><br>
                                         <div class="tab-content">
                                             <div id="defaultbtn" class="tab-pane fade in active">
-                                                <button data-toggle="tooltip" data-placement="top" title="Bring up the data for the whole section currently displayed on the map" class="btn btn-success form-control" type="button" id="run" onClick="getPolygonsHelper()">Run</button><br><br>
-                                                <button data-toggle="tooltip" data-placement="top" title="Only bring up the data touched by the Area Of Interest" class="btn btn-success form-control" type="button" id="runAOI" onClick="runAOI()">Run AOI</button><br><br>
-                                                <button class="btn btn-warning form-control" type="button" id="clear" onClick="removePolygons()">Clear</button><br><br>
-                                                <button type="button" class="map-print" id="print" onClick="printMaps()">Print</button><br><br>
-                                                <a href="./ctis_isc_polygon.kml" download><button type="button" class="btn btn-outline-secondary form-control" id="download_kml" onClick="">KML</button></a>
+                                                <button data-toggle="tooltip" data-placement="top" title="Bring up the data for the whole section currently displayed on the map" class="btn btn-success form-control" type="button" id="run" onClick="getPolygons()">Run</button><br><br>
+                                                <button data-toggle="tooltip" data-placement="top" title="Only bring up the data touched by the Area Of Interest" class="hide btn btn-success form-control" type="button" id="runAOI" onClick="runAOI()">Run AOI</button><br><br>
+                                                <button class="hide btn btn-warning form-control" type="button" id="clear" onClick="removePolygons()">Clear</button><br><br>
+                                                <button type="button" class="hide map-print" id="print" onClick="printMaps()">Print</button><br><br>
+                                                <a href="./ctis_isc_polygon.kml" download><button type="button" class="hide btn btn-outline-secondary form-control" id="download_kml" onClick="">KML</button></a>
                                             </div>
-                                            <div id="filtersbtn" class="tab-pane fade"><br><br><br><br>
-                                                <button class="btn btn-success form-control" type="button" id="runFilters" onClick="runFilters()">Run Filter</button>
+                                            <div id="filtersbtn" class="hide tab-pane fade"><br><br><br><br>
+                                                <button class="hide btn btn-success form-control" type="button" id="runFilters" onClick="runFilters()">Run Filter</button>
                                             </div>
                                             <br>
-                                            <div id="statisticsbtn" class="tab-pane fade">
-                                                <button type="button" class="btn btn-default form-control" id="draw" onclick="drawAnotherRectangle();">Clear AOI</button><br><br>
-                                                <button type="button" class="btn btn-default form-control" id="clearCharts" onclick="clearCharts();">Clear Charts</button>
+                                            <div id="statisticsbtn" class="hide tab-pane fade">
+                                                <button type="button" class="hide btn btn-default form-control" id="draw" onclick="drawAnotherRectangle();">Clear AOI</button><br><br>
+                                                <button type="button" class="hide btn btn-default form-control" id="clearCharts" onclick="clearCharts();">Clear Charts</button>
                                             </div>
-                                            <div id="tutorialbtn" class="tab-pane fade">
-                                                <button type="button" class="btn btn-default form-control" id="control_draw" onclick="window.open('./tutorial.php','_blank');">
+                                            <div id="tutorialbtn" class="hide tab-pane fade">
+                                                <button type="button" class="hide btn btn-default form-control" id="control_draw" onclick="window.open('./tutorial.php','_blank');">
                                                     Go to Tutorial
                                                 </button><br>
                                             </div>
@@ -280,7 +280,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
                         </div>
                     </div>
 
-                    <div class="card" id="other"><br>
+                    <div class="card hide" id="other"><br>
                         <button class="btn btn-warning btn-block" role="button" data-toggle="collapse" data-parent="#another" href="#another" aria-expanded="true" aria-controls="another">
                             Charts & Info
                             <i class="fa fa-caret-down pull-right" aria-hidden="true"></i>
@@ -571,7 +571,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
         app.payload.county = "TX624";
         app.payload.table = "chorizon_r";
         depth = "60";
-        getPolygons();
+        // getPolygons();
 
     }); // end document.onload
 
@@ -750,6 +750,7 @@ if(!isset($_SESSION['in']) OR !$_SESSION['in']){
         hecho = false;
         //depth = parseFloat(depth);
         app.payload.depth = depth;
+        app.payload.county = "EverythingA";
         if(app.payload.property && app.payload.district && (isNaN(depth)==false)){//to make sure a property is selected
             if(app.payload.runAOI == true && typeof rec != 'undefined' && rec.type == 'rectangle'){
                 var getparams = app.payload;
